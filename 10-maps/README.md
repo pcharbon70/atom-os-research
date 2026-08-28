@@ -29,6 +29,9 @@ should explain why its links belong together rather than merely list files.
 
 ### Documents
 
+- [AtomVM foundation](atomvm-foundation.md) — curates the architecture,
+  evidence, measurements, community priorities, and open questions around
+  AtomVM as an OS nucleus.
 - [Atom OS Research](home.md) — the selective entry point to the archive.
 
 ## Maintaining this index
