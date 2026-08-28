@@ -30,7 +30,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
-- None yet.
+- [AtomVM as an operating-system foundation](atomvm-as-an-operating-system-foundation.md) — assesses the
+  current runtime boundary, empirical limits, missing OS responsibilities, and
+  a proposed minimal-substrate architecture.
 
 ## Maintaining this index
 
