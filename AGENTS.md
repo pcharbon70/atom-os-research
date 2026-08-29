@@ -9,21 +9,26 @@ use these conventions for every document and organizational change.
 
 ## Project goal
 
-This project researches how `atom-vm` can serve as the actual foundation for a
-new operating-system design, rather than merely running as an application on
-top of an existing operating system.
+This project researches and develops a new kernel and operating system based on
+the principles embodied by Erlang/OTP and the BEAM virtual machine. It is not
+tied to a particular BEAM implementation or intended merely to run an existing
+runtime as an application on top of another operating system.
 
-Keep research and implementation work oriented toward making `atom-vm` the
-system's foundational execution environment. Relevant areas include boot and
-bring-up, hardware abstraction and drivers, scheduling, memory management,
-isolation and capabilities, persistence, networking, tooling, and the path from
-a research prototype to a bootable system.
+Keep research and implementation work oriented toward carrying principles such
+as lightweight isolated processes, message passing, supervision, fault
+containment, responsiveness, and distribution into the kernel and the wider
+system architecture. Relevant areas include boot and bring-up, hardware
+abstraction and drivers, scheduling, memory management, isolation and
+capabilities, persistence, networking, tooling, and the path from a research
+prototype to a bootable system.
 
 Distinguish clearly among:
 
-- behavior already provided by `atom-vm`;
-- behavior inherited from a host operating system or platform port;
-- behavior an `atom-vm`-based operating system would need to own;
+- principles inherited from OTP and the BEAM model;
+- behavior specific to existing OTP or BEAM implementations;
+- behavior inherited by a prototype from a host operating system or platform
+  port;
+- behavior the new kernel and operating system would need to own;
 - evidence demonstrated by an experiment; and
 - proposed architecture that remains unverified.
 
@@ -222,6 +227,14 @@ Before reporting archive work complete:
 4. verify newly introduced external citations against primary sources;
 5. run `git diff --check` when this is a Git worktree; and
 6. review the complete change for stale paths and accidental rewrites.
+
+Whenever the user asks for a URL to a document or other content on GitHub,
+include the complete, visible, absolute `https://github.com/...` URL in the
+response. Do not provide only linked display text, a local filesystem path, a
+relative path, or shorthand such as a pull-request number. Resolve and verify
+the repository, revision or branch, and path before presenting the URL. If the
+content has not been pushed and therefore has no online GitHub URL, say so
+explicitly instead of inventing one.
 
 Do not commit, push, open a pull request, or publish unless the user asks. In
 the final handoff, summarize documents created or changed, indexes updated,

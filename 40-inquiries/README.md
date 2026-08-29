@@ -33,6 +33,9 @@ resolution criteria here. Promote independently useful conclusions to
 - [Can AtomVM serve as the kernel-facing runtime of a new embedded operating system?](can-atomvm-serve-as-a-kernel-facing-runtime.md) — defines
   falsifiable boot, substrate, resource, fault, trust, and lifecycle criteria
   and the next experiments.
+- [Which BEAM, ERTS, and OTP principles belong in a new kernel?](which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
+  defines layer-placement criteria, compares compatibility strategies, and
+  specifies the minimum experiments needed to choose among them.
 
 ## Maintaining this index
 

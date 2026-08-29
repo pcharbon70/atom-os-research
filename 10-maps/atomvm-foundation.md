@@ -21,8 +21,14 @@ operating system: what the runtime already owns, what its platform ports and
 vendor SDKs currently supply, what empirical work says about its limits, and
 which system responsibilities still need design and experimental evidence.
 
+It is a concrete implementation case within the broader [BEAM, ERTS, and OTP
+research](beam-erts-and-otp.md), not the repository's prescribed foundation.
+
 ## Start here
 
+- [BEAM, ERTS, and OTP](beam-erts-and-otp.md) provides the principle-first
+  context and alternative implementation strategies against which AtomVM
+  should be compared.
 - [AtomVM as an operating-system foundation](../20-notes/atomvm-as-an-operating-system-foundation.md)
   gives the current synthesis and proposed system boundary.
 - [Can AtomVM serve as the kernel-facing runtime of a new embedded operating

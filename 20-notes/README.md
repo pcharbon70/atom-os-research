@@ -33,6 +33,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 - [AtomVM as an operating-system foundation](atomvm-as-an-operating-system-foundation.md) — assesses the
   current runtime boundary, empirical limits, missing OS responsibilities, and
   a proposed minimal-substrate architecture.
+- [BEAM, ERTS, and OTP principles for a new operating system](beam-erts-and-otp-principles-for-a-new-operating-system.md) —
+  separates the three layers, extracts durable principles, identifies needed
+  security and resource-control changes, and proposes a layered architecture.
 
 ## Maintaining this index
 

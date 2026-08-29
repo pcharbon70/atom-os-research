@@ -1,8 +1,11 @@
 # Atom OS Research Archive
 
-This repository researches how `atom-vm` could become the foundational
-execution environment for a new operating system, rather than an application
-hosted by an existing OS.
+This repository researches and develops a new kernel and operating system
+informed by the principles of Erlang/OTP and the BEAM virtual machine. The goal
+is to carry ideas such as cheap isolated processes, asynchronous messaging,
+supervision, fault containment, responsiveness, and distribution into the
+system architecture without tying the project to one existing BEAM
+implementation.
 
 Start at the [home map](10-maps/home.md). Repository-wide authoring and
 maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
@@ -25,14 +28,19 @@ selective conceptual paths.
 
 ## Research boundary
 
-The central test is whether `atom-vm` can own the responsibilities required of
-the system foundation: boot and bring-up, hardware abstraction, execution and
-scheduling, memory and resource management, isolation, persistence, drivers,
-networking, and system tooling.
+The central question is which BEAM and OTP principles belong in the kernel,
+which belong in a managed runtime or system-service layer, and which existing
+implementation choices should be replaced. Research covers boot and bring-up,
+hardware abstraction, execution and scheduling, memory and resource
+management, isolation and capabilities, persistence, drivers, networking,
+updates, distribution, and system tooling.
 
-Research should make host dependencies visible. A result demonstrated inside
-Linux, macOS, or another host is evidence about a hosted port unless it also
-shows which services can be replaced or moved beneath `atom-vm`.
+Research must distinguish a principle from a particular implementation. A
+result demonstrated inside Linux, macOS, an RTOS, or another host is evidence
+about a hosted arrangement unless it also identifies the services supplied by
+that host. Existing systems such as Erlang/OTP, AtomVM, GRiSP, LING, or newer
+bare-metal experiments are evidence and design material, not predetermined
+foundations.
 
 ## Frontmatter
 
