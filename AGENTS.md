@@ -228,6 +228,14 @@ Before reporting archive work complete:
 5. run `git diff --check` when this is a Git worktree; and
 6. review the complete change for stale paths and accidental rewrites.
 
+Whenever the user asks for a URL to a document or other content on GitHub,
+include the complete, visible, absolute `https://github.com/...` URL in the
+response. Do not provide only linked display text, a local filesystem path, a
+relative path, or shorthand such as a pull-request number. Resolve and verify
+the repository, revision or branch, and path before presenting the URL. If the
+content has not been pushed and therefore has no online GitHub URL, say so
+explicitly instead of inventing one.
+
 Do not commit, push, open a pull request, or publish unless the user asks. In
 the final handoff, summarize documents created or changed, indexes updated,
 validation performed, and whether changes remain uncommitted.
