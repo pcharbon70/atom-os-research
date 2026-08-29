@@ -33,6 +33,9 @@ notes.
 - [2026-08-28 AtomVM deep dive](2026-08-28-atomvm-deep-dive.md) — records the
   pinned source audit, release check, literature and community search, host
   environment, and failed prerequisite-limited build attempt.
+- [2026-08-28 BEAM, ERTS, and OTP deep dive](2026-08-28-beam-erts-and-otp-deep-dive.md) —
+  records the pinned OTP 29.0.5 audit, paper acquisition, web and practitioner
+  search, evidence boundaries, and follow-up experiments.
 
 ## Maintaining this index
 

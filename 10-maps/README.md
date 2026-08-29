@@ -31,7 +31,9 @@ should explain why its links belong together rather than merely list files.
 
 - [AtomVM foundation](atomvm-foundation.md) — curates the architecture,
   evidence, measurements, community priorities, and open questions around
-  AtomVM as an OS nucleus.
+  AtomVM as one possible OS execution nucleus.
+- [BEAM, ERTS, and OTP](beam-erts-and-otp.md) — separates the instruction
+  machine, runtime, and OTP policy and connects them to the new kernel design.
 - [Atom OS Research](home.md) — the selective entry point to the archive.
 
 ## Maintaining this index

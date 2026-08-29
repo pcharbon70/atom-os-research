@@ -30,6 +30,12 @@ work. Incidental mentions can remain citations in the document using them.
 
 ### Documents
 
+- [Making reliable distributed systems in the presence of software errors](armstrong-2003-making-reliable-distributed-systems.md) —
+  develops the original isolation, failure-detection, supervision, upgrade,
+  and stable-storage argument.
+- [A History of Erlang](armstrong-2007-history-of-erlang.md) — records the
+  concurrency model's origin and candid lessons about isolation, foreign code,
+  atoms, protocols, and distributed security.
 - [AtomVM source tree at `0220c78e`](atomvm-project-2026-source-tree.md) — pins and audits the current
   runtime, platform seam, MCU entry points, native trust boundary, and build
   attempt.
@@ -49,6 +55,28 @@ work. Incidental mentions can remain citations in the document using them.
 - [Measuring Erlang-Based Scalability and Fault Tolerance on the Edge](ferenczi-ruda-toth-2025-measuring-erlang-scalability.md) — records
   open-access process, supervision, mailbox, LoRa, memory, and power
   measurements on ESP32-S3.
+- [Erlang/OTP 29.0.5 system documentation](erlang-otp-team-2026-otp-29-documentation.md) —
+  records current process, signal, scheduler, memory, code-loading,
+  supervision, release, distribution, and security contracts.
+- [Erlang/OTP source tree at 5cf5f9725452](erlang-otp-team-2026-otp-29-source-tree.md) —
+  pins and audits current ERTS internals, constants, code publication, native
+  boundaries, and host-OS dependencies.
+- [The Road to the JIT](gustavsson-2020-road-to-the-jit.md) — traces Erlang
+  execution engines and the whole-system trade-offs behind BeamAsm.
+- [A brief introduction to BEAM](hogberg-2020-brief-introduction-to-beam.md) —
+  establishes the official distinction between BEAM instructions and ERTS
+  runtime facilities.
+- [Efficient memory management for concurrent programs that use message passing](sagonas-wilhelmsson-2006-efficient-memory-management.md) —
+  compares local, communal, and hybrid heaps and evaluates incremental
+  collection trade-offs.
+- [The BEAM Book](stenman-2025-beam-book.md) — provides a detailed secondary
+  guide to compiler and ERTS internals, used with current primary checks.
+- [Scaling Reliably](trinder-et-al-2017-scaling-reliably.md) — evaluates VM and
+  distributed-actor scaling and shows the costs of global topology,
+  namespaces, and recovery data.
+- [Characterizing the scalability of Erlang VM on many-core processors](zhang-2011-erlang-vm-many-core-scalability.md) —
+  provides historical evidence about hidden runtime synchronization beneath a
+  share-nothing programming model.
 
 ## Maintaining this index
 
