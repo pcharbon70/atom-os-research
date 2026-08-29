@@ -36,6 +36,10 @@ notes.
 - [2026-08-28 BEAM, ERTS, and OTP deep dive](2026-08-28-beam-erts-and-otp-deep-dive.md) —
   records the pinned OTP 29.0.5 audit, paper acquisition, web and practitioner
   search, evidence boundaries, and follow-up experiments.
+- [2026-08-29 hardware and architecture support deep dive](2026-08-29-hardware-and-architecture-support-deep-dive.md) —
+  records specification revisions, scientific-paper and article coverage,
+  architecture comparison, host limitations, synthesis method, and the
+  unperformed boot and fault-injection work.
 
 ## Maintaining this index
 

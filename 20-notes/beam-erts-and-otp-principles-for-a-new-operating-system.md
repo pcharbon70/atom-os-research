@@ -14,6 +14,7 @@ tags:
   - otp
   - scheduling
   - systems-architecture
+  - zig
 aliases:
   - "BEAM and OTP operating-system synthesis"
   - "OTP-inspired kernel architecture"
@@ -50,6 +51,13 @@ faults. An ERTS-like managed layer provides very cheap actors and memory-safe
 execution inside those domains. OTP-like supervisors and behaviours remain
 ordinary services and libraries because restart strategy is policy, not a
 privileged kernel mechanism.
+
+The privileged kernel and new project-owned native system components will be
+implemented in Zig. That [language decision](zig-as-the-kernel-implementation-language.md)
+is settled independently of the still-open choice among upstream ERTS, selected
+BEAM compatibility, or a clean-slate managed runtime. Existing C runtime code
+may cross an explicit compatibility boundary; it does not change the language
+of the new kernel.
 
 This conclusion is a design synthesis, not an implementation result. The
 evidence supports the primitives and exposes known failure surfaces, but it
@@ -370,15 +378,28 @@ it.
 
 ## Proposed system decomposition
 
-The following is a hypothesis to test, not a settled design:
+The layer placement below is a hypothesis to test, not a settled design. Its
+implementation language is not part of that uncertainty: the hardware support,
+minimal privileged kernel, and new project-owned native runtime or driver code
+are Zig, with only narrow assembly and imported C exceptions described in the
+[language decision](zig-as-the-kernel-implementation-language.md).
 
 | Layer | Responsibilities | Failure boundary |
 | --- | --- | --- |
-| Hardware and architecture support | Reset, privilege modes, MMU/MPU/PMP, interrupt controller, timers, cores, DMA, persistent media | Physical machine or board |
+| Hardware and architecture support | Reset and firmware handoff; privilege, traps, discovery, MMU/MPU/PMP, interrupts, time, CPU lifecycle and ordering, cache and code publication, FPU/SIMD/vector state, DMA/IOMMU, device resources, power/reset, security roots, debug, and RAS evidence | Architecture mechanism failure can remain system-wide; a device or CPU should be reset, offlined, or quarantined when isolation is uncertain |
 | Minimal privileged kernel | Protection domains, capability tables, address-space setup, physical memory, interrupt and timer routing, bounded IPC endpoints, domain scheduling and quotas, monotonic time, crash capture, boot and recovery primitives | Kernel failure remains system-wide; keep this layer small and mechanically testable |
 | Managed actor runtime | Term representation, very lightweight actors, process heaps and GC, reduction accounting, signal protocols, mailbox implementation, loader and safe points, runtime tracing | One protected runtime domain; ordinary actor failures contained within it |
 | OTP-like system services | Supervisors, behaviours, device-service policy, naming, storage, networking, update orchestration, metrics, configuration | Supervision tree or service domain; replaceable without kernel change |
 | Applications | Domain protocols and state machines, organized as supervised trees with declared capabilities and budgets | Application subtree or protected application domain |
+
+The first row is itself decomposed in [Hardware and architecture support for
+the Zig kernel](hardware-and-architecture-support-for-the-zig-kernel.md).
+That synthesis recommends a staged RV64 QEMU `virt` bootstrap and protection
+profile, followed by an AArch64 `virt` portability profile. It treats firmware
+parsing, address-space changes, interrupt routing, CPU lifecycle, executable
+code publication, and device assignment as explicit transactions. The exact
+profiles and physical target remain open until their [acceptance
+tests](../40-inquiries/which-hardware-contract-should-the-kernel-adopt.md) run.
 
 This shape intentionally has both kernel scheduling and runtime scheduling. The
 kernel schedules protected domains and enforces hard resource limits; the
@@ -408,7 +429,9 @@ or to recover the machine before ordinary services can run.
 ### Port unmodified or lightly modified ERTS
 
 Build enough of a kernel compatibility layer to run upstream ERTS and reuse the
-Erlang and OTP ecosystem.
+Erlang and OTP ecosystem. The compatibility layer and new kernel mechanisms are
+Zig; upstream ERTS remains a C component on the other side of a documented
+boundary.
 
 **Advantages:** the best semantic compatibility, mature tooling, extensive test
 suites, and a strong reference implementation.
@@ -425,7 +448,7 @@ and reproduction.
 ### Implement BEAM compatibility over a new runtime
 
 Write a runtime that accepts a chosen BEAM profile and maps its semantics onto
-new kernel primitives.
+new kernel primitives. New native runtime and kernel code in this path is Zig.
 
 **Advantages:** access to existing compilers and some libraries while allowing
 the runtime and kernel boundary to be redesigned.
@@ -442,7 +465,9 @@ suite, not a claim that “BEAM support” is one feature.
 
 Design a new managed instruction or language layer around cheap actors,
 capabilities, supervision-friendly failure, bounded messages, and versioned
-services, without promising BEAM compatibility.
+services, without promising BEAM compatibility. Its native substrate and
+runtime implementation are Zig unless a component is itself managed code above
+that boundary.
 
 **Advantages:** the system can make security, overload, persistence, and native
 isolation first-class rather than retrofit them. Kernel and runtime mechanisms
@@ -483,11 +508,15 @@ make the compatibility, complexity, and performance costs concrete.
 10. **Measure semantics, not slogans.** “Soft real time,” “let it crash,”
     “share nothing,” and “hot upgrade” are hypotheses with failure conditions,
     not completed features.
+11. **Use one native implementation center.** New kernel and project-owned
+    native system code is Zig. Assembly and imported C remain narrow, named,
+    audited boundaries rather than alternate implementation paths.
 
 ## Research program
 
 The next experiments should compare mechanisms rather than begin with a broad
-OS implementation:
+OS implementation. All new kernel and project-owned native experiment code in
+this program uses Zig:
 
 1. **Bounded actor endpoint.** Implement a mailbox with byte and message
    limits, capability-scoped send rights, credits, cancellation, and queue
@@ -535,7 +564,9 @@ No kernel code, ERTS port, BEAM-compatible runtime, target boot, fault-injection
 campaign, or comparative benchmark was produced in this research pass. Blog,
 book, project, mailing-list, and forum sources were used to find terminology,
 failure reports, and implementation leads; self-reported claims were not
-treated as proof.
+treated as proof. The absence of implementation evidence limits architectural
+claims but does not make the separately recorded Zig project decision
+provisional.
 
 ## Connections
 
@@ -550,6 +581,17 @@ treated as proof.
 - [AtomVM as an operating-system
   foundation](atomvm-as-an-operating-system-foundation.md) supplies one compact
   implementation case to compare with the broader model.
+- [Zig is the kernel implementation
+  language](zig-as-the-kernel-implementation-language.md) fixes the native
+  implementation constraint across every strategy considered here.
+- [Hardware and architecture support for the Zig
+  kernel](hardware-and-architecture-support-for-the-zig-kernel.md) decomposes
+  the lowest layer into typed mechanism components and compares the initial
+  RV64, AArch64, x86-64, and constrained-system choices.
+- [Hardware and architecture support
+  map](../10-maps/hardware-and-architecture-support.md) connects that synthesis
+  to the architecture specifications, scientific papers, research journal, and
+  open target-profile inquiry.
 
 ## Sources
 
@@ -563,3 +605,4 @@ treated as proof.
 - [Efficient memory management for concurrent programs that use message passing](../30-sources/sagonas-wilhelmsson-2006-efficient-memory-management.md)
 - [Characterizing the scalability of Erlang VM on many-core processors](../30-sources/zhang-2011-erlang-vm-many-core-scalability.md)
 - [Scaling Reliably](../30-sources/trinder-et-al-2017-scaling-reliably.md)
+- [Zig 0.16.0 language documentation](../30-sources/zig-project-2026-language-documentation.md)

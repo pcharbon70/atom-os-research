@@ -36,6 +36,13 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 - [BEAM, ERTS, and OTP principles for a new operating system](beam-erts-and-otp-principles-for-a-new-operating-system.md) —
   separates the three layers, extracts durable principles, identifies needed
   security and resource-control changes, and proposes a layered architecture.
+- [Hardware and architecture support for the Zig kernel](hardware-and-architecture-support-for-the-zig-kernel.md) —
+  decomposes reset-to-driver hardware support, compares RV64, AArch64, x86-64,
+  and constrained profiles, and defines the components, transactions, target
+  sequence, and verification program.
+- [Zig is the kernel implementation language](zig-as-the-kernel-implementation-language.md) — records the
+  settled language choice, its scope and exceptions, the reasons it fits the
+  architecture, accepted costs, and immediate implementation obligations.
 
 ## Maintaining this index
 

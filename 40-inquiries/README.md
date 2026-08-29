@@ -31,11 +31,16 @@ resolution criteria here. Promote independently useful conclusions to
 ### Documents
 
 - [Can AtomVM serve as the kernel-facing runtime of a new embedded operating system?](can-atomvm-serve-as-a-kernel-facing-runtime.md) — defines
-  falsifiable boot, substrate, resource, fault, trust, and lifecycle criteria
-  and the next experiments.
+  falsifiable boot, Zig-substrate, resource, fault, trust, and lifecycle
+  criteria and the next experiments.
+- [Which hardware contract should the kernel adopt?](which-hardware-contract-should-the-kernel-adopt.md) —
+  defines the staged RV64 and AArch64 target hypotheses, architecture-neutral
+  contract criteria, protected-I/O requirements, physical-target gate, and
+  experiments needed to resolve them.
 - [Which BEAM, ERTS, and OTP principles belong in a new kernel?](which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
-  defines layer-placement criteria, compares compatibility strategies, and
-  specifies the minimum experiments needed to choose among them.
+  defines layer-placement criteria under the fixed Zig implementation choice,
+  compares compatibility strategies, and specifies the minimum experiments
+  needed to choose among them.
 
 ## Maintaining this index
 

@@ -4,8 +4,11 @@ kind: map
 created: "2026-08-28"
 tags:
   - beam
+  - hardware-architecture
   - operating-systems
   - otp
+  - risc-v
+  - zig
 aliases:
   - "Home"
 ---
@@ -23,8 +26,21 @@ distribution principles should shape the kernel and wider system, then
 establish a credible path from research prototypes to a bootable system. The
 project is not committed to BEAM bytecode compatibility or to any existing VM.
 
+## Settled implementation decision
+
+- [Zig is the kernel implementation
+  language](../20-notes/zig-as-the-kernel-implementation-language.md) — fixes
+  Zig as the base language for new kernel and native system code, defines the
+  narrow assembly and C exceptions, and records the costs the project accepts.
+  This is a project constraint rather than an open language comparison.
+
 ## Active inquiries
 
+- [Which hardware contract should the kernel
+  adopt?](../40-inquiries/which-hardware-contract-should-the-kernel-adopt.md) —
+  defines acceptance tests for the proposed two-stage RV64 QEMU `virt`
+  bootstrap/protection path, AArch64 portability pass, constrained profile, and
+  eventual physical-target gate.
 - [Which BEAM, ERTS, and OTP principles belong in a new
   kernel?](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
   compares compatibility and clean-slate paths and defines the experiments
@@ -36,6 +52,10 @@ project is not committed to BEAM bytecode compatibility or to any existing VM.
 
 ## Topic maps
 
+- [Hardware and architecture support](hardware-and-architecture-support.md) —
+  routes through firmware, architecture, interrupt, memory-order, IOMMU,
+  driver-isolation, and OS-structure evidence and explains how the mechanism
+  components must interact.
 - [BEAM, ERTS, and OTP](beam-erts-and-otp.md) — separates the instruction
   machine, runtime mechanisms, and OTP policy, then routes through current
   documentation, source, foundational papers, scalability evidence, and the OS
@@ -46,6 +66,15 @@ project is not committed to BEAM bytecode compatibility or to any existing VM.
 
 ## Recently developed
 
+- [Hardware and architecture support for the Zig
+  kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md) —
+  decomposes the lowest system layer into thirteen responsibility families,
+  compares architecture choices, specifies transactions between them, and
+  recommends staged RV64 and AArch64 profiles.
+- [2026-08-29 hardware and architecture support deep
+  dive](../50-journal/2026-08-29-hardware-and-architecture-support-deep-dive.md) —
+  records specification revisions, scientific-paper coverage, environment
+  limitations, synthesis method, and experiments still needed.
 - [BEAM, ERTS, and OTP principles for a new operating
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md) —
   proposes a layered design that adopts actor-friendly kernel mechanisms,
@@ -62,6 +91,12 @@ project is not committed to BEAM bytecode compatibility or to any existing VM.
 
 ## Unsettled threads
 
+- Pin the Zig toolchain, exact RV64 R0/R1 emulator and firmware versions, ISA
+  extensions, build modes, panic contract, freestanding ABI, and C-integration
+  policy without reopening the language choice.
+- Validate the architecture-neutral contracts on AArch64, then select a
+  physical target through documentation, debug, reset, protected-DMA, and
+  failure-observability evidence rather than availability alone.
 - Decide whether the first prototype should run unmodified ERTS, execute BEAM
   bytecode in a new runtime, or adopt only the architectural principles.
 - Define kernel-level capability, quota, mailbox-pressure, and failure-domain

@@ -13,6 +13,7 @@ tags:
   - scheduling
   - systems-architecture
   - virtual-machines
+  - zig
 aliases:
   - "AtomVM deep dive"
   - "AtomVM operating-system assessment"
@@ -46,6 +47,12 @@ unikernel-style appliance than to a POSIX general-purpose OS. The distinction
 is useful: it keeps AtomVM's actor and supervision model central without
 pretending that language-level process separation supplies hardware privilege,
 memory protection, a secure boot chain, or crash-safe device drivers.
+
+The new privileged substrate in this architecture is implemented in Zig under
+the project's settled [kernel-language
+decision](zig-as-the-kernel-implementation-language.md). AtomVM's existing C
+core remains an upstream compatibility component behind an explicit Zig/C
+boundary; it is not a reason to write new kernel mechanisms in C.
 
 ## Evidence boundary and version discipline
 

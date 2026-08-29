@@ -11,6 +11,7 @@ tags:
   - operating-systems
   - otp
   - systems-architecture
+  - zig
 aliases:
   - "Kernel placement of BEAM and OTP principles"
 ---
@@ -31,12 +32,19 @@ managed actor runtime can implement cheaply, and what OTP-like services should
 decide in user space. That choice also determines whether compatibility with
 upstream BEAM modules and OTP applications is central, partial, or unnecessary.
 
+The base implementation language is no longer part of this inquiry. New kernel
+and project-owned native code is Zig under the settled [language
+decision](../20-notes/zig-as-the-kernel-implementation-language.md). The
+inquiry may change layer placement, compatibility strategy, or mechanism design;
+it does not compare implementation languages.
+
 ## Operational question
 
 For each candidate mechanism—process identity, message delivery, scheduling,
 memory ownership, failure notification, supervision, code loading,
 distribution, drivers, persistence, and observability—determine the least
-privileged layer that can implement it while meeting all of these criteria:
+privileged layer that can implement it in the Zig-based system while meeting
+all of these criteria:
 
 1. **Containment:** a faulty or malicious component cannot read, modify, or
    indefinitely block resources outside its declared authority.
@@ -126,11 +134,14 @@ better foundation.
 
 | Path | First artifact | Evidence needed before preference |
 | --- | --- | --- |
-| Upstream ERTS port | Minimal kernel/compatibility substrate that boots a pinned OTP release | Complete host-contract inventory, trusted-code size, driver isolation, dual-scheduler behavior, memory floor, OTP test-suite results |
-| Selected BEAM compatibility | Loader and actor runtime for a declared opcode/BIF/OTP profile | Versioned compatibility matrix, negative tests, exception and signal semantics, hot-loading behavior, tooling and library coverage |
-| Principles-first runtime | Bounded actors, capabilities, supervision-friendly failures, and versioned services with no BEAM promise | Compiler/tool path, process and message economics, diagnostics, service libraries, comparison against equivalent OTP workload |
+| Upstream ERTS port | Minimal Zig kernel/compatibility substrate that boots a pinned OTP release and contains upstream C ERTS behind an explicit boundary | Complete host-contract inventory, trusted-code size, C ABI and build census, driver isolation, dual-scheduler behavior, memory floor, OTP test-suite results |
+| Selected BEAM compatibility | Zig loader and native actor runtime for a declared opcode/BIF/OTP profile | Versioned compatibility matrix, negative tests, exception and signal semantics, hot-loading behavior, tooling and library coverage |
+| Principles-first runtime | Zig substrate for bounded actors, capabilities, supervision-friendly failures, and versioned services with no BEAM promise | Compiler/tool path, process and message economics, diagnostics, service libraries, comparison against equivalent OTP workload |
 
 ### Minimum experiments
+
+All new kernel and project-owned native code in these experiments is Zig. C is
+limited to named upstream, vendor, or compatibility components.
 
 1. Implement a bounded endpoint with send and receive capabilities, byte and
    message quotas, credits, revocable reply authority, and structured drop or
@@ -166,6 +177,10 @@ better foundation.
 - Derive protocol tests from OTP links, monitors, aliases, selective receive,
   supervisor intensity, and code-version transitions without assuming their
   exact APIs.
+- Pin the Zig toolchain and test its freestanding ABI, C integration, generated
+  code, safety modes, and scalar/FPU/SIMD context assumptions on the first
+  target. These tests refine the implementation policy rather than reopen the
+  language choice.
 
 ## Findings
 
@@ -187,11 +202,14 @@ supports the working hypotheses but does not resolve them:
   failures.
 - No prototype in this archive yet measures the proposed two-level scheduler,
   bounded capability endpoint, driver domain, or transactional update path.
+- Zig is now the fixed base language for implementing those prototypes; this is
+  a project decision rather than a result claimed by the BEAM/OTP evidence.
 
 ## Outcome
 
 Open. The present preferred direction is a small capability kernel, an
 ERTS-inspired managed actor layer, and OTP-inspired user-space services, with
-BEAM compatibility treated as an experimental choice. The first bounded
-endpoint and failure-containment prototypes should be allowed to overturn that
-decomposition.
+BEAM compatibility treated as an experimental choice. The kernel and new
+native components are implemented in Zig. The first bounded endpoint and
+failure-containment prototypes should be allowed to overturn the proposed
+decomposition, but not silently substitute another base language.
