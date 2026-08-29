@@ -42,6 +42,20 @@ that host. Existing systems such as Erlang/OTP, AtomVM, GRiSP, LING, or newer
 bare-metal experiments are evidence and design material, not predetermined
 foundations.
 
+## Implementation language
+
+Zig is the settled base implementation language for the new kernel and native
+operating-system substrate. New project-owned kernel, architecture, memory,
+scheduling, capability, IPC, and native driver code will be written in Zig.
+Minimal assembly remains acceptable where the hardware requires it, and
+existing C components may cross explicit compatibility boundaries without
+making C the language for new kernel development.
+
+This choice is independent of the language or bytecode used by managed actors
+and OTP-like services. The rationale, scope, accepted costs, and enforcement
+rules are recorded in [Zig is the kernel implementation
+language](20-notes/zig-as-the-kernel-implementation-language.md).
+
 ## Frontmatter
 
 Every completed knowledge document begins with YAML frontmatter:

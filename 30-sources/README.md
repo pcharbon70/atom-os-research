@@ -77,6 +77,76 @@ work. Incidental mentions can remain citations in the document using them.
 - [Characterizing the scalability of Erlang VM on many-core processors](zhang-2011-erlang-vm-many-core-scalability.md) —
   provides historical evidence about hidden runtime synchronization beneath a
   share-nothing programming model.
+- [UEFI Specification 2.11](uefi-forum-2024-uefi-2-11.md) — defines the boot
+  and runtime service boundary, memory-map handoff, configuration tables, and
+  authenticated-boot mechanisms used by standards-based platform entry.
+- [ACPI Specification 6.6](uefi-forum-2025-acpi-6-6.md) — defines table and
+  namespace mechanisms for discovery, topology, interrupts, timers, power, and
+  platform configuration.
+- [Devicetree Specification 0.4](devicetree-org-2023-devicetree-0-4.md) —
+  defines the flattened hardware-description and boot contract proposed for
+  the first RISC-V profile.
+- [RISC-V privileged and unprivileged architecture specifications](risc-v-international-2026-privileged-architecture.md) —
+  records privilege, traps, translation, PMP, fences, counters, extension
+  discovery, and RVWMO obligations.
+- [RISC-V Supervisor Binary Interface Specification 3.0](risc-v-international-2025-sbi-3-0.md) —
+  defines the provisional supervisor-to-firmware interface for timers, IPIs,
+  hart lifecycle, reset, and related platform operations.
+- [RISC-V Advanced Interrupt Architecture 1.0](risc-v-international-2023-advanced-interrupt-architecture.md) —
+  defines APLIC, IMSIC, message-signaled interrupts, and per-hart interrupt
+  state for the protected RV64 profile.
+- [RISC-V IOMMU Architecture Specification 1.0.1](risc-v-international-2026-iommu-1-0-1.md) —
+  defines device contexts, translation, invalidation, queues, fault reporting,
+  and MSI remapping for DMA isolation.
+- [Arm A-profile system architecture documentation](arm-2026-a-profile-system-architecture-documentation.md) —
+  routes through the architecture, GIC, SMMUv3, PSCI, generic timer, and cache
+  publication material needed by the second-ISA profile.
+- [Intel 64 system programming and VT-d documentation](intel-2026-system-programming-documentation.md) —
+  records the x86-64 privilege, paging, APIC, extended-state, virtualization,
+  and DMA-remapping comparison surface.
+- [QEMU Arm and RISC-V virt platform documentation](qemu-project-2026-virt-platform-documentation.md) —
+  records the emulator machine, discovery, interrupt, IOMMU, and version-pinning
+  boundaries for the proposed target sequence.
+- [The Multikernel](baumann-et-al-2009-multikernel.md) — motivates explicit
+  per-core state and message-mediated coordination across heterogeneous,
+  non-uniform multicore hardware.
+- [Comprehensive formal verification of an OS microkernel](klein-et-al-2014-comprehensive-sel4-verification.md) —
+  demonstrates a small precisely specified isolation core and documents the
+  assumptions outside the verified boundary.
+- [A least-privilege memory protection model for modern hardware](achermann-et-al-2019-least-privilege-memory-protection.md) —
+  models translation structures and memory mappings as delegated authority.
+- [Arrakis: The operating system is the control plane](peter-et-al-2014-arrakis.md) —
+  evaluates protected direct I/O and separation of control-plane policy from
+  data-plane device access.
+- [CleanQ](haecki-et-al-2019-cleanq.md) — formalizes queue operations as
+  ownership transfer across software and hardware boundaries.
+- [Thunderclap](markettos-et-al-2019-thunderclap.md) — demonstrates DMA attacks
+  against systems where IOMMU protection is absent, bypassed, or too
+  permissive.
+- [Multiprogramming a 64 kB computer safely and efficiently](levy-et-al-2017-tock.md) —
+  presents an MPU-oriented embedded isolation design and its constrained-system
+  trade-offs.
+- [Improving the reliability of commodity operating systems](swift-et-al-2003-nooks.md) —
+  supplies historical evidence about isolating and recovering faulty drivers
+  inside a shared-kernel architecture.
+- [x86-TSO](sewell-et-al-2010-x86-tso.md) — gives a rigorous model for x86
+  multiprocessor ordering and qualifies the notion of a simply “strong” ISA.
+- [Modelling the ARMv8 architecture, operationally](flur-et-al-2016-armv8-concurrency.md) —
+  provides formal and experimental evidence about weakly ordered Arm
+  concurrency behavior.
+- [Relaxed virtual memory in Armv8-A](simner-et-al-2022-relaxed-virtual-memory.md) —
+  analyzes interactions among weak memory, page-table updates, translation,
+  and invalidation.
+- [LazyFP](stecklina-prescher-2018-lazyfp.md) — shows how lazy FPU and SIMD
+  switching can leak architectural state across protection domains.
+- [Platform Firmware Resiliency Guidelines](regenscheid-2018-platform-firmware-resiliency.md) —
+  separates firmware protection, detection, and recovery requirements.
+- [CHERI Instruction-Set Architecture, version 9](watson-et-al-2023-cheri-v9.md) —
+  defines a capability-hardware design retained as an optional research profile
+  rather than a baseline portability assumption.
+- [Zig 0.16.0 language documentation](zig-project-2026-language-documentation.md) — records the
+  official execution, allocation, C-interoperability, cross-target, and SIMD
+  semantics used to qualify the project's Zig implementation decision.
 
 ## Maintaining this index
 

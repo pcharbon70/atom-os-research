@@ -8,6 +8,7 @@ tags:
   - embedded-systems
   - operating-systems
   - systems-architecture
+  - zig
 aliases:
   - "AtomVM research map"
 ---
@@ -23,6 +24,10 @@ which system responsibilities still need design and experimental evidence.
 
 It is a concrete implementation case within the broader [BEAM, ERTS, and OTP
 research](beam-erts-and-otp.md), not the repository's prescribed foundation.
+Under the project-wide [language
+decision](../20-notes/zig-as-the-kernel-implementation-language.md), any new
+kernel or substrate built around this case is Zig; AtomVM's existing C core is
+an imported runtime boundary.
 
 ## Start here
 
@@ -73,8 +78,9 @@ research](beam-erts-and-otp.md), not the repository's prescribed foundation.
 
 ## Open questions
 
-- What is the smallest explicit substrate beneath `libAtomVM` that can replace
-  implicit libc, allocator, boot, interrupt, timer, and vendor-SDK services?
+- What is the smallest explicit Zig substrate beneath `libAtomVM` that can
+  replace implicit libc, allocator, boot, interrupt, timer, and vendor-SDK
+  services?
 - Should the first system promise only single-tenant firmware isolation, or
   must it provide MPU/PMP-backed protection between applications and native
   drivers?
