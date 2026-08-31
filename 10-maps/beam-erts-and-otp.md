@@ -10,7 +10,6 @@ tags:
   - operating-systems
   - otp
   - virtual-machines
-  - zig
 aliases:
   - "BEAM and OTP"
   - "Erlang runtime architecture"
@@ -32,28 +31,17 @@ This map separates three layers that are often compressed into the word
   releases, and operational conventions on top of the runtime mechanisms.
 
 The distinction prevents an implementation detail in current Erlang/OTP from
-being mistaken for a kernel requirement. Compatibility with BEAM bytecode is
-one possible strategy, not the research goal.
-
-The implementation-language question is separate and settled: the new kernel
-and project-owned native system components are written in Zig. Existing C
-implementations such as ERTS remain evidence or compatibility components, not
-an instruction to make C the new kernel's base language.
+being mistaken for a kernel requirement. Running compiled BEAM code is now a
+platform requirement, including automatic process-local tracing collection.
+The BEAM instruction set remains a managed-runtime contract rather than the
+kernel ABI, and the project is not committed to one existing VM implementation.
 
 ## Start here
 
-- [Zig is the kernel implementation
-  language](../20-notes/zig-as-the-kernel-implementation-language.md) — the
-  fixed implementation constraint shared by every compatibility and
-  clean-slate path on this map.
 - [BEAM, ERTS, and OTP principles for a new operating
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md) —
-  the current synthesis, proposed layering, design rules, risks, and research
-  program.
-- [Hardware and architecture support for the Zig
-  kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md) —
-  expands the mechanism layer that must provide real protection, time, event,
-  DMA, and recovery boundaries beneath managed actors.
+  the current synthesis, required compiled-BEAM and process-local-GC contract,
+  proposed layering, design rules, risks, and research program.
 - [Which BEAM, ERTS, and OTP principles belong in a new
   kernel?](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
   the open decision and its falsifiable evaluation criteria.
@@ -117,27 +105,26 @@ an instruction to make C the new kernel's base language.
   leads surveyed in the journal. Their claims remain contextual until pinned,
   audited, and reproduced locally.
 
-### Hardware boundary beneath the actor system
+### Kernel mechanism boundary
 
-- [Hardware and architecture
-  support](hardware-and-architecture-support.md) — the focused map for reset,
-  privilege, discovery, memory protection, interrupts, time, multicore,
-  ordering, DMA, driver resources, power, and retained error evidence.
-- [Which hardware contract should the kernel
-  adopt?](../40-inquiries/which-hardware-contract-should-the-kernel-adopt.md) —
-  keeps the proposed RV64 and AArch64 target sequence tied to falsifiable boot,
-  isolation, SMP, IOMMU, and portability experiments.
-
-The relationship is asymmetric: BEAM/ERTS/OTP principles inform the service
-semantics wanted above the kernel, but architecture manuals and protection
-research determine which low-level mechanisms can actually enforce them.
+- [Kernel hardware and architecture
+  support](kernel-hardware-and-architecture-support.md) refines the lowest
+  layer of the proposed operating-system decomposition. It defines the
+  privileged entry, context, translation, ordering, event, time, CPU, DMA, and
+  fault contracts that a managed actor runtime would consume without turning
+  BEAM or OTP policy into architecture code.
 
 ## Open questions
 
+- [What contract should the kernel hardware and architecture layer
+  provide?](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
 - [Which BEAM, ERTS, and OTP principles belong in a new
   kernel?](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)
 - Can reduction-like accounting provide predictable scheduling once interrupts,
   drivers, garbage collection, and multicore contention are included?
+- Which pinned BEAM/OTP profile defines initial compatibility, and can a new
+  runtime match its allocation, root-liveness, process-local collection,
+  message, exception, code-loading, and observability behavior?
 - Should mailboxes be bounded kernel objects, credit-controlled channels, or a
   runtime abstraction over lower-level capability endpoints?
 - What is the smallest protection boundary that contains a faulty native

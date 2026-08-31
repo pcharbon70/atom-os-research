@@ -1,7 +1,7 @@
 ---
 title: "A least-privilege memory protection model for modern hardware"
 kind: source
-created: "2026-08-29"
+created: "2026-08-30"
 authors:
   - "Reto Achermann"
   - "Nora Hossle"
@@ -16,7 +16,7 @@ edition: null
 isbn: null
 doi: "10.48550/arXiv.1908.08707"
 url: "https://arxiv.org/abs/1908.08707"
-accessed: "2026-08-29"
+accessed: "2026-08-30"
 tags:
   - capabilities
   - hardware-heterogeneity
@@ -37,43 +37,43 @@ Hardware.” CoRR abs/1908.08707, 2019. DOI
 
 ## Research question or contribution
 
-How can an OS represent authorization when CPUs, IOMMUs, accelerators, secure
-cores, and interconnects see different address spaces and independently
-configurable translation paths?
+How can an OS represent authority when CPUs, IOMMUs, accelerators, and other
+translation nodes see different address spaces and can independently configure
+paths through them?
 
 ## Method
 
-The authors refine a formal model of address-space networks into an executable
-capability specification, implement it in Barrelfish, and compare operations
-with Linux virtual-memory management.
+The authors refine a formal address-space-network model into an executable
+capability specification, implement it in Barrelfish, and compare selected
+operations with Linux virtual-memory management.
 
 ## Findings
 
-- The familiar single global physical address-space model does not accurately
-  describe many SoCs. Devices and heterogeneous cores can reach memory through
-  different translation and protection nodes.
+- A single global physical-address-space abstraction does not accurately model
+  many modern systems. Different initiators can reach memory through different
+  translation and protection paths.
 - Authority to access memory and authority to configure a translation are
-  distinct. Both must be represented to enforce least privilege.
-- The model expresses decentralized, partitioned capability authority and was
-  implemented with performance comparable in the reported experiments to the
-  Linux operations used for comparison.
-- Correct CPU page tables alone do not imply system-wide isolation when other
-  bus masters or translation units retain access.
+  distinct and both must be represented for least privilege.
+- The implementation expresses decentralized, partitioned capability authority
+  and reports comparable performance for the evaluated operations.
+- Correct CPU page tables do not establish system-wide isolation if an IOMMU,
+  device, or other translation node retains a path to the memory.
 
 ## Relevance
 
-The proposed kernel resource graph should model address spaces and
-translations explicitly. A memory grant is not complete until CPU mappings,
-DMA mappings, device ownership, caches, and in-flight operations agree; revoke
-is correspondingly a transaction rather than one page-table write.
+The translation component should represent CPU and DMA address spaces as typed
+objects connected by authorized mappings, not pass raw physical addresses as
+ambient authority. Revocation must close every relevant translation path and
+wait for cached or in-flight use before declaring memory reusable.
 
 ## Limits
 
-This is a research model and prototype, not evidence for every SoC or a
-complete production driver stack. The performance comparison does not prove
-zero cost under all workloads, and the paper predates current IOMMU revisions.
+This is a research model and prototype, not evidence for every architecture or
+a complete production driver stack. The comparison covers selected operations
+and predates current architecture revisions.
 
 ## Derived work
 
-- [Hardware and architecture support for the Zig kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md)
-- [Reference hardware-contract inquiry](../40-inquiries/which-hardware-contract-should-the-kernel-adopt.md)
+- [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
+- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
+- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)

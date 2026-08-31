@@ -14,7 +14,6 @@ tags:
   - otp
   - scheduling
   - systems-architecture
-  - zig
 aliases:
   - "BEAM and OTP operating-system synthesis"
   - "OTP-inspired kernel architecture"
@@ -47,22 +46,16 @@ distribution, crash-consistent persistence, and secure update and rollback.
 The resulting architecture is layered. A small privileged kernel provides
 protection domains, capability-checked endpoints, interrupt and timer delivery,
 resource accounting, and the minimum mechanisms needed to contain native
-faults. An ERTS-like managed layer provides very cheap actors and memory-safe
-execution inside those domains. OTP-like supervisors and behaviours remain
+faults. A BEAM-compatible managed layer provides very cheap actors, executes
+compiled BEAM modules, and performs automatic process-local tracing garbage
+collection inside those domains. OTP-like supervisors and behaviours remain
 ordinary services and libraries because restart strategy is policy, not a
 privileged kernel mechanism.
-
-The privileged kernel and new project-owned native system components will be
-implemented in Zig. That [language decision](zig-as-the-kernel-implementation-language.md)
-is settled independently of the still-open choice among upstream ERTS, selected
-BEAM compatibility, or a clean-slate managed runtime. Existing C runtime code
-may cross an explicit compatibility boundary; it does not change the language
-of the new kernel.
 
 This conclusion is a design synthesis, not an implementation result. The
 evidence supports the primitives and exposes known failure surfaces, but it
 does not yet show that this particular decomposition will boot, meet a latency
-target, or retain BEAM/OTP compatibility.
+target, or satisfy the required versioned BEAM/OTP compatibility profile.
 
 ## Separate the three layers
 
@@ -76,7 +69,7 @@ built on ERTS process and signal mechanisms.
 
 | Layer | Existing Erlang/OTP role | Potential value to this project | Do not assume |
 | --- | --- | --- | --- |
-| BEAM | Register instruction set, compiled module format, loader input, interpreter or BeamAsm translation | Portable managed code, validation and loading boundary, explicit liveness information, safe points, inspectable artifacts | That the current instruction set must be the kernel ABI or that BEAM compatibility is required |
+| BEAM | Register instruction set, compiled module format, loader input, interpreter or BeamAsm translation | Required compiled-code compatibility, portable managed code, validation and loading boundary, explicit liveness information, safe points, inspectable artifacts | That the instruction set must be the kernel ABI or that one existing VM implementation must be reused |
 | ERTS | Processes, signals, mailboxes, scheduling, heaps and GC, timers, ports/NIFs, ETS, distribution, code loading | Cheap concurrency, failure observation, process-local reclamation, responsive managed execution, versioned code activation | That language-process isolation equals a security boundary or that current hosted internals fit a kernel unchanged |
 | OTP | Behaviours, supervision trees, applications, releases, upgrade orchestration, system messages | Uniform service lifecycle, explicit recovery policy, hierarchical failure domains, operations as part of design | That every supervisor policy belongs in privileged code or that restart repairs persistent/correlated faults |
 
@@ -84,7 +77,7 @@ This separation also clarifies what AtomVM contributed to the archive's first
 deep dive. AtomVM is one compact implementation of a useful subset of the
 combined model. It remains valuable evidence, but the project can compare it
 with unmodified ERTS, other BEAM implementations, or a clean-slate runtime
-without changing its goal.
+that also implements the required BEAM contract without changing its goal.
 
 ## The durable principles
 
@@ -238,6 +231,52 @@ For every allocation class, the design must answer:
 This is stronger than relying on garbage collection alone. It turns memory
 pressure into an explicit protocol and containment decision.
 
+#### Adopted compatibility rule: automatic process-local tracing collection
+
+The platform will follow BEAM's managed-memory contract for ordinary BEAM
+processes. A process may allocate immutable terms without explicit
+deallocation, and unreachable terms must be reclaimed automatically while the
+process remains alive. A process-lifetime arena with reclamation only at exit
+does not satisfy this requirement: long-running servers and allocation loops
+would exhaust their budgets even after discarding old state.
+
+The required baseline is therefore:
+
+- each ordinary BEAM process has private logical heap state and a traceable
+  root set;
+- the runtime honors allocation checks, safe points, and live-value metadata in
+  compiled BEAM code;
+- tracing and reclamation are process-local so collecting one ordinary process
+  does not become a whole-system stop-the-world operation;
+- process termination still bulk-reclaims all remaining private heap and
+  runtime state;
+- shared binaries, literals, code, messages, native resources, and interned
+  data retain explicit non-heap lifetime and accounting rules; and
+- heap limits and collection failure produce defined BEAM-compatible process
+  behavior plus resource evidence for supervision.
+
+“BEAM-compatible” constrains observable allocation, liveness, exception,
+message, process-information, explicit collection-request, and resource
+lifetime behavior. It does not require copying exactly one ERTS collector
+implementation. A new runtime may use a different process-local tracing
+algorithm only if the declared compatibility suite and pause/resource budgets
+continue to pass.
+
+This rule applies to the managed runtime, not the privileged kernel. The
+kernel allocates and accounts for pages or larger extents owned by a protected
+runtime domain; it does not trace BEAM terms, scan process roots, or schedule a
+collection. Ordinary term allocation and most collections must not require a
+page-table change, TLB shootdown, global kernel allocation, or privilege
+transition. Runtime allocators should obtain memory in batches and perform the
+high-frequency heap operations inside their domain.
+
+Many BEAM processes should still share one hardware-protected runtime domain.
+Giving every BEAM process an MMU address space would replace cheap process
+switches with page-table, translation-cache, and kernel-scheduler costs. Use
+separate protected domains for trust boundaries, native services, drivers, or
+resource containment—not as the default representation of every lightweight
+BEAM process.
+
 ### Failure observation is mechanism; restart is policy
 
 Links and monitors let a process observe another process's termination. OTP
@@ -378,28 +417,15 @@ it.
 
 ## Proposed system decomposition
 
-The layer placement below is a hypothesis to test, not a settled design. Its
-implementation language is not part of that uncertainty: the hardware support,
-minimal privileged kernel, and new project-owned native runtime or driver code
-are Zig, with only narrow assembly and imported C exceptions described in the
-[language decision](zig-as-the-kernel-implementation-language.md).
+The following is a hypothesis to test, not a settled design:
 
 | Layer | Responsibilities | Failure boundary |
 | --- | --- | --- |
-| Hardware and architecture support | Reset and firmware handoff; privilege, traps, discovery, MMU/MPU/PMP, interrupts, time, CPU lifecycle and ordering, cache and code publication, FPU/SIMD/vector state, DMA/IOMMU, device resources, power/reset, security roots, debug, and RAS evidence | Architecture mechanism failure can remain system-wide; a device or CPU should be reset, offlined, or quarantined when isolation is uncertain |
+| [Kernel hardware and architecture support](kernel-hardware-and-architecture-support-layer.md) | Privileged entry and context, protection transitions, ordering and code publication, interrupt events, raw time, logical-CPU coordination, protected I/O, and architecture faults | Architecture and privilege boundary; port-specific mechanism without board bring-up or device policy |
 | Minimal privileged kernel | Protection domains, capability tables, address-space setup, physical memory, interrupt and timer routing, bounded IPC endpoints, domain scheduling and quotas, monotonic time, crash capture, boot and recovery primitives | Kernel failure remains system-wide; keep this layer small and mechanically testable |
 | Managed actor runtime | Term representation, very lightweight actors, process heaps and GC, reduction accounting, signal protocols, mailbox implementation, loader and safe points, runtime tracing | One protected runtime domain; ordinary actor failures contained within it |
 | OTP-like system services | Supervisors, behaviours, device-service policy, naming, storage, networking, update orchestration, metrics, configuration | Supervision tree or service domain; replaceable without kernel change |
 | Applications | Domain protocols and state machines, organized as supervised trees with declared capabilities and budgets | Application subtree or protected application domain |
-
-The first row is itself decomposed in [Hardware and architecture support for
-the Zig kernel](hardware-and-architecture-support-for-the-zig-kernel.md).
-That synthesis recommends a staged RV64 QEMU `virt` bootstrap and protection
-profile, followed by an AArch64 `virt` portability profile. It treats firmware
-parsing, address-space changes, interrupt routing, CPU lifecycle, executable
-code publication, and device assignment as explicit transactions. The exact
-profiles and physical target remain open until their [acceptance
-tests](../40-inquiries/which-hardware-contract-should-the-kernel-adopt.md) run.
 
 This shape intentionally has both kernel scheduling and runtime scheduling. The
 kernel schedules protected domains and enforces hard resource limits; the
@@ -424,14 +450,12 @@ belongs in the kernel only when it is required to enforce isolation or resource
 ownership across mutually distrustful components, to control hardware safely,
 or to recover the machine before ordinary services can run.
 
-## Three implementation strategies
+## Implementation strategies under the compatibility requirement
 
 ### Port unmodified or lightly modified ERTS
 
 Build enough of a kernel compatibility layer to run upstream ERTS and reuse the
-Erlang and OTP ecosystem. The compatibility layer and new kernel mechanisms are
-Zig; upstream ERTS remains a C component on the other side of a documented
-boundary.
+Erlang and OTP ecosystem.
 
 **Advantages:** the best semantic compatibility, mature tooling, extensive test
 suites, and a strong reference implementation.
@@ -440,7 +464,8 @@ suites, and a strong reference implementation.
 ERTS scheduling and kernel scheduling, and inherited assumptions about trusted
 code, distribution, files, dynamic loading, and native extensions.
 
-This is a valuable control experiment even if it is not the final architecture.
+This is a candidate implementation strategy and a valuable control experiment
+even if it is not the final architecture.
 Contemporary projects such as Tyn and embedded platforms such as GRiSP make the
 porting path a concrete research lead, but their claims need independent audit
 and reproduction.
@@ -448,7 +473,7 @@ and reproduction.
 ### Implement BEAM compatibility over a new runtime
 
 Write a runtime that accepts a chosen BEAM profile and maps its semantics onto
-new kernel primitives. New native runtime and kernel code in this path is Zig.
+new kernel primitives.
 
 **Advantages:** access to existing compilers and some libraries while allowing
 the runtime and kernel boundary to be redesigned.
@@ -459,15 +484,15 @@ can execute BEAM modules yet still fail to support the OTP behavior users
 expect.
 
 This path should begin with an explicit compatibility matrix and conformance
-suite, not a claim that “BEAM support” is one feature.
+suite, not a claim that “BEAM support” is one feature. The matrix must include
+process-local tracing collection and long-lived allocation/reclamation
+behavior, not only opcode decoding.
 
-### Build a clean-slate runtime from the principles
+### Build a principles-only clean-slate runtime
 
 Design a new managed instruction or language layer around cheap actors,
 capabilities, supervision-friendly failure, bounded messages, and versioned
-services, without promising BEAM compatibility. Its native substrate and
-runtime implementation are Zig unless a component is itself managed code above
-that boundary.
+services, without promising BEAM compatibility.
 
 **Advantages:** the system can make security, overload, persistence, and native
 isolation first-class rather than retrofit them. Kernel and runtime mechanisms
@@ -478,10 +503,16 @@ compiler, debugger, tracing model, libraries, protocols, packaging, and
 operational culture. Recreating syntax without the tooling and runtime
 semantics would miss much of OTP's value.
 
-This synthesis provisionally favors the clean-slate strategy for the project's
-architectural center, with an ERTS port and a narrow BEAM-compatible prototype
-as comparison points. That preference remains open until measured prototypes
-make the compatibility, complexity, and performance costs concrete.
+This strategy no longer satisfies the platform goal and cannot be the primary
+runtime. It remains useful only as a research comparison or as an optional
+non-BEAM service environment.
+
+The open implementation decision is now between porting a pinned ERTS and
+building a new runtime that implements a declared, progressively expanding
+BEAM/OTP compatibility profile. Both must retain automatic process-local
+tracing collection. Measurements may choose between those implementations;
+they may not silently replace the compatibility requirement with a
+principles-only runtime.
 
 ## Design rules carried forward
 
@@ -508,15 +539,11 @@ make the compatibility, complexity, and performance costs concrete.
 10. **Measure semantics, not slogans.** “Soft real time,” “let it crash,”
     “share nothing,” and “hot upgrade” are hypotheses with failure conditions,
     not completed features.
-11. **Use one native implementation center.** New kernel and project-owned
-    native system code is Zig. Assembly and imported C remain narrow, named,
-    audited boundaries rather than alternate implementation paths.
 
 ## Research program
 
 The next experiments should compare mechanisms rather than begin with a broad
-OS implementation. All new kernel and project-owned native experiment code in
-this program uses Zig:
+OS implementation:
 
 1. **Bounded actor endpoint.** Implement a mailbox with byte and message
    limits, capability-scoped send rights, credits, cancellation, and queue
@@ -537,8 +564,11 @@ this program uses Zig:
    identities and delegated service capabilities. Test partition, replay,
    duplication, node compromise, backpressure, and loss of recovery state.
 6. **Compatibility comparison.** Run the same actor/supervision workload on
-   upstream OTP 29, AtomVM, a narrow BEAM prototype, and the clean-slate runtime
-   where feasible. Record semantic differences separately from performance.
+   upstream OTP 29, AtomVM, and the candidate BEAM-compatible runtime, with a
+   principles-only runtime as an optional research control. Include long-lived
+   allocation, minor/full collection, mailbox, shared-binary, code-loading,
+   exception, and process-information behavior. Record semantic differences
+   separately from performance.
 7. **Boot proof.** On a named emulator or board, trace reset to the first
    managed actor and inventory every inherited firmware, bootloader, libc,
    allocator, interrupt, clock, storage, and network dependency.
@@ -564,9 +594,7 @@ No kernel code, ERTS port, BEAM-compatible runtime, target boot, fault-injection
 campaign, or comparative benchmark was produced in this research pass. Blog,
 book, project, mailing-list, and forum sources were used to find terminology,
 failure reports, and implementation leads; self-reported claims were not
-treated as proof. The absence of implementation evidence limits architectural
-claims but does not make the separately recorded Zig project decision
-provisional.
+treated as proof.
 
 ## Connections
 
@@ -581,17 +609,6 @@ provisional.
 - [AtomVM as an operating-system
   foundation](atomvm-as-an-operating-system-foundation.md) supplies one compact
   implementation case to compare with the broader model.
-- [Zig is the kernel implementation
-  language](zig-as-the-kernel-implementation-language.md) fixes the native
-  implementation constraint across every strategy considered here.
-- [Hardware and architecture support for the Zig
-  kernel](hardware-and-architecture-support-for-the-zig-kernel.md) decomposes
-  the lowest layer into typed mechanism components and compares the initial
-  RV64, AArch64, x86-64, and constrained-system choices.
-- [Hardware and architecture support
-  map](../10-maps/hardware-and-architecture-support.md) connects that synthesis
-  to the architecture specifications, scientific papers, research journal, and
-  open target-profile inquiry.
 
 ## Sources
 
@@ -605,4 +622,3 @@ provisional.
 - [Efficient memory management for concurrent programs that use message passing](../30-sources/sagonas-wilhelmsson-2006-efficient-memory-management.md)
 - [Characterizing the scalability of Erlang VM on many-core processors](../30-sources/zhang-2011-erlang-vm-many-core-scalability.md)
 - [Scaling Reliably](../30-sources/trinder-et-al-2017-scaling-reliably.md)
-- [Zig 0.16.0 language documentation](../30-sources/zig-project-2026-language-documentation.md)

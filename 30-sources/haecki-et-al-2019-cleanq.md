@@ -1,7 +1,7 @@
 ---
 title: "CleanQ: A lightweight, uniform, formally specified interface for intra-machine data transfer"
 kind: source
-created: "2026-08-29"
+created: "2026-08-30"
 authors:
   - "Roni Haecki"
   - "Lukas Humbel"
@@ -16,7 +16,7 @@ edition: null
 isbn: null
 doi: "10.48550/arXiv.1911.08773"
 url: "https://arxiv.org/abs/1911.08773"
-accessed: "2026-08-29"
+accessed: "2026-08-30"
 tags:
   - dma
   - formal-methods
@@ -44,36 +44,38 @@ reduced to a precise ownership-transfer contract without losing performance?
 ## Method
 
 The work defines and verifies queue semantics, implements composable C
-interfaces for multiple transfer mechanisms, and compares operation and
+interfaces for several transfer mechanisms, and compares operation and
 end-to-end costs with Virtio and DPDK paths.
 
 ## Findings
 
-- Descriptor rings are ownership protocols over buffers, not merely circular
-  arrays. Enqueue transfers an explicitly described region and dequeue returns
-  it under precise obligations.
-- A uniform contract can hide weak memory and non-coherent implementation
-  details from clients while leaving them explicit in each queue backend.
-- The paper reports tens-of-cycles operation overhead and comparable tested
-  end-to-end performance, challenging the assumption that a formal interface
-  must be heavyweight.
-- Queue creation, authorization, quotas, reset, and device control remain
-  outside CleanQ's data-plane contract.
+- Descriptor rings are ownership protocols over memory regions, not merely
+  circular arrays. Enqueue and dequeue change which endpoint may access each
+  region and under what obligation.
+- A uniform contract can hide weak-memory and non-coherent implementation
+  details from clients while requiring each backend to implement them
+  correctly.
+- The paper reports operation overhead in the tens of cycles and comparable
+  tested end-to-end performance, showing that a precise interface need not be
+  heavyweight.
+- Queue creation, authentication, quota, reset, and device control are outside
+  the data-transfer contract and must be supplied by surrounding components.
 
 ## Relevance
 
-DMA buffers and actor/service queues should use a common ownership state
-machine where possible: `owned`, `offered`, `in-flight`, `returned`,
-`quarantined`. Cache synchronization and barriers belong in the backend, but
-the API must expose when ownership has actually changed.
+DMA and cross-domain queues should share an explicit ownership vocabulary such
+as `owned`, `offered`, `in-flight`, `returned`, and `quarantined`. Cache
+maintenance and barriers belong in the backend, while the facade must state
+when ownership has actually transferred and when memory may be reused.
 
 ## Limits
 
-This is a research implementation and formal model, not direct verification of
-this project's future Zig code or arbitrary hardware. It does not solve
-malicious-device access beyond the authorized buffers.
+CleanQ is a research implementation and formal model, not verification of
+arbitrary devices or this future kernel. It does not contain malicious devices
+that can misuse intentionally shared buffers or lie through their protocol.
 
 ## Derived work
 
-- [Hardware and architecture support for the Zig kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md)
-- [Hardware and architecture support map](../10-maps/hardware-and-architecture-support.md)
+- [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
+- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
+- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)

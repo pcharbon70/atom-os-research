@@ -14,6 +14,13 @@ the principles embodied by Erlang/OTP and the BEAM virtual machine. It is not
 tied to a particular BEAM implementation or intended merely to run an existing
 runtime as an application on top of another operating system.
 
+Running compiled BEAM code is a platform requirement. Preserve BEAM's managed
+execution contract, including automatic process-local tracing garbage
+collection, while keeping the collector and ordinary BEAM processes outside
+the privileged kernel. Compatibility does not make the BEAM instruction set a
+kernel ABI or require one particular VM implementation; record the exact BEAM
+and OTP compatibility profile and verify it with conformance tests.
+
 Keep research and implementation work oriented toward carrying principles such
 as lightweight isolated processes, message passing, supervision, fault
 containment, responsiveness, and distribution into the kernel and the wider
@@ -31,34 +38,6 @@ Distinguish clearly among:
 - behavior the new kernel and operating system would need to own;
 - evidence demonstrated by an experiment; and
 - proposed architecture that remains unverified.
-
-## Implementation language decision
-
-Zig is the project's settled base implementation language for the new kernel
-and operating-system substrate. Treat this as a fixed project constraint, not
-as an open Rust-versus-Zig comparison or a provisional recommendation.
-
-- Write new privileged kernel code, architecture support, hardware abstraction,
-  memory and scheduling mechanisms, IPC and capability mechanisms, native
-  runtime support, and project-owned native drivers in Zig.
-- Use only the minimum assembly required for architectural entry, register or
-  context manipulation, and instructions that Zig cannot express correctly.
-- Existing C code, C headers, vendor components, and C-based runtime experiments
-  may be incorporated through explicit, audited Zig/C ABI and build boundaries.
-  Their presence does not make C the default language for new kernel code.
-- Put unavoidable C++ components behind a C ABI or another narrow boundary;
-  do not make a C++ ABI part of the kernel interface.
-- The decision does not require managed actors, OTP-like services, or
-  applications to be written in Zig. Their language and bytecode model remain
-  separate architectural questions.
-- Host-side research and validation tooling may use the language appropriate to
-  the tool; this rule governs target-system implementation.
-
-Other implementation languages and kernels remain valid research evidence and
-comparison cases, but do not present them as co-equal implementation candidates
-for this project. Change this decision only when the user explicitly directs a
-new project-level choice, and update the canonical language-decision note and
-all project entry points in the same change.
 
 ## Archive principles
 
