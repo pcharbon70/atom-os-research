@@ -1,7 +1,7 @@
 ---
 title: "Thunderclap: Exploring vulnerabilities in operating system IOMMU protection via DMA from untrustworthy peripherals"
 kind: source
-created: "2026-08-29"
+created: "2026-08-30"
 authors:
   - "A. Theodore Markettos"
   - "Colin Rothwell"
@@ -14,10 +14,10 @@ published: 2019
 citation_key: "markettos-et-al-2019-thunderclap"
 container: "Network and Distributed System Security Symposium 2019"
 edition: null
-isbn: null
+isbn: "1-891562-55-X"
 doi: "10.14722/ndss.2019.23194"
 url: "https://thunderclap.io/wp-content/uploads/2024/01/thunderclap-paper-ndss2019.pdf"
-accessed: "2026-08-29"
+accessed: "2026-08-30"
 tags:
   - dma
   - iommu
@@ -45,35 +45,42 @@ buffers?
 
 ## Method
 
-The authors built an FPGA-based malicious peripheral platform, exercised
-macOS, FreeBSD, Linux, and Windows, and developed attacks through excessive or
-incorrect mappings and trusted shared-memory protocols.
+The authors built a programmable malicious-peripheral platform, examined
+macOS, FreeBSD, Linux, and Windows, and exercised excessive mappings, spatial
+and temporal exposure, and trusted shared-memory protocols.
 
 ## Findings
 
-- Presence or nominal use of an IOMMU does not establish DMA isolation. Broad
-  identity mappings, delayed enablement, permissive shared buffers, and driver
-  protocol assumptions can restore a useful attack surface.
-- A device can exploit intentionally shared communication memory without
-  violating the IOMMU's address checks.
-- Boot-time DMA, hot-plug, device reset, and transition windows are part of the
-  security lifecycle, not exceptional setup details.
-- The work led to mitigations, but its central lesson is architectural: the
-  IOMMU must be integrated with least-privilege buffer and device ownership.
+- IOMMU presence or nominal enablement does not establish DMA isolation. The
+  operating system must constrain each mapping and every transition in its
+  lifetime.
+- A device can exploit intentionally shared descriptor and payload memory
+  without violating address translation. The DMA interface is a bidirectional,
+  concurrent security protocol comparable in importance to a system-call
+  interface.
+- Broad mappings, sub-page sharing, delayed unmapping, allocator reuse, device
+  reset, and early enablement create spatial or temporal exposure.
+- Stronger isolation can increase mapping and invalidation costs; the security
+  and performance policy must be explicit rather than silently bypassing the
+  IOMMU.
 
 ## Relevance
 
-The project should start DMA-denied, map only descriptor and payload regions
-needed for a bounded operation, separate control from data, scrub returned
-buffers, and make assignment/revocation a state machine with audit evidence.
+The protected-I/O layer should begin DMA-denied, map only charged buffers for a
+bounded operation, separate control from data, quiesce and invalidate before
+reuse, scrub returned memory where required, and quarantine a device after
+protocol or reset failure. IOMMU programming alone is not a completed
+ownership transition.
 
 ## Limits
 
-The tested OS versions and interfaces are historical. The work does not imply
-that all IOMMU designs are broken, nor does an FPGA peripheral model every
-device or coherent interconnect.
+The tested OS releases and hardware are historical, and the platform does not
+model every coherent interconnect or device. The paper does not imply that all
+IOMMU implementations fail; it shows why OS lifecycle and shared-memory
+semantics determine the protection actually achieved.
 
 ## Derived work
 
-- [Hardware and architecture support for the Zig kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md)
-- [Reference hardware-contract inquiry](../40-inquiries/which-hardware-contract-should-the-kernel-adopt.md)
+- [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
+- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
+- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)

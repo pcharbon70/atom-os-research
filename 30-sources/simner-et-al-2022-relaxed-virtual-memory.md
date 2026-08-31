@@ -1,7 +1,7 @@
 ---
 title: "Relaxed virtual memory in Armv8-A"
 kind: source
-created: "2026-08-29"
+created: "2026-08-30"
 authors:
   - "Ben Simner"
   - "Alasdair Armstrong"
@@ -16,7 +16,7 @@ edition: null
 isbn: "978-3-030-99336-8"
 doi: "10.1007/978-3-030-99336-8_6"
 url: "https://www.cl.cam.ac.uk/~pes20/RelaxedVM-Arm/"
-accessed: "2026-08-29"
+accessed: "2026-08-30"
 tags:
   - aarch64
   - concurrency
@@ -34,47 +34,48 @@ aliases:
 Ben Simner et al. “Relaxed Virtual Memory in Armv8-A.” *ESOP 2022*, pages
 143–173. DOI
 [10.1007/978-3-030-99336-8_6](https://doi.org/10.1007/978-3-030-99336-8_6).
-[Authors' project page, paper, models, and tests](https://www.cl.cam.ac.uk/~pes20/RelaxedVM-Arm/).
+[Authors' project page, models, and tests](https://www.cl.cam.ac.uk/~pes20/RelaxedVM-Arm/).
 
 ## Research question or contribution
 
-How do weak memory, page-table walks, TLB maintenance, multiple translation
-stages, and concurrent page-table modification interact at the hardware/
-software boundary?
+How do weak memory, concurrent page-table walks, TLB maintenance, multiple
+translation stages, and page-table mutation interact at the privileged
+hardware/software boundary?
 
 ## Method
 
-The work develops models and bare-metal litmus tests in consultation with Arm
-and pKVM developers, connects them to full instruction semantics, and tests a
-defined subset on hardware.
+The authors develop axiomatic models and bare-metal litmus tests in discussion
+with Arm and pKVM developers, integrate the model with instruction semantics,
+and test a defined subset on hardware.
 
 ## Findings
 
-- Virtual-memory updates are concurrent publication protocols. Writing a PTE,
-  invalidating cached translations, issuing barriers, and allowing reuse are
-  not one atomic operation.
-- Previously used informal assumptions were too simple for verification of
-  real page-table and hypervisor behavior.
-- Safe break-before-make, stage interaction, and TLB invalidation depend on a
-  stable configuration and an exact ordered sequence.
-- Even this extensive work has explicit non-goals and incomplete cases,
-  illustrating why a kernel should centralize rather than duplicate the
-  protocol.
+- A mapping change is a publication and revocation protocol. Writing a page
+  table entry, ordering that write, invalidating cached translations, waiting
+  for remote observers, and reusing memory are not one atomic action.
+- Informal “the TLB was flushed” assumptions omit concurrent walks, multiple
+  cores, translation stages, and relaxed ordering needed for real verification.
+- Safe break-before-make and invalidation sequences depend on exact
+  architectural preconditions and a stable configuration.
+- The paper states open cases and modeling limits, demonstrating that even a
+  carefully formalized architecture contract must keep a claim ledger.
 
 ## Relevance
 
-All mapping mutations should pass through one transaction engine with page-
-table locks or ownership, release publication, local and remote invalidation,
-acknowledgement, deferred physical reuse, and traceable generations. An actor
-or driver must never edit a hardware page table directly.
+All mapping mutations should pass through one transaction engine with
+authority checks, page-table ownership or locking, release publication, local
+and remote invalidation, acknowledgements, generations, and deferred physical
+reuse. A driver or managed runtime must never directly edit live hardware page
+tables without an equivalent protected delegation protocol.
 
 ## Limits
 
-The model targets Armv8-A and does not claim authoritative coverage of every
-feature, side channel, access/dirty-bit behavior, instruction-fetch
-interaction, or TLBI form. Other ISAs need their own proofs and tests.
+The model targets Armv8-A and does not claim coverage of every architecture
+feature, side channel, dirty/access-bit behavior, instruction-fetch interaction,
+or invalidation form. Other ISAs need their own conformance evidence.
 
 ## Derived work
 
-- [Hardware and architecture support for the Zig kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md)
-- [Reference hardware-contract inquiry](../40-inquiries/which-hardware-contract-should-the-kernel-adopt.md)
+- [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
+- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
+- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)

@@ -11,7 +11,6 @@ tags:
   - operating-systems
   - otp
   - systems-architecture
-  - zig
 aliases:
   - "Kernel placement of BEAM and OTP principles"
 ---
@@ -29,22 +28,17 @@ recovery foundation.
 
 The project needs a principled rule for what the kernel must enforce, what a
 managed actor runtime can implement cheaply, and what OTP-like services should
-decide in user space. That choice also determines whether compatibility with
-upstream BEAM modules and OTP applications is central, partial, or unnecessary.
-
-The base implementation language is no longer part of this inquiry. New kernel
-and project-owned native code is Zig under the settled [language
-decision](../20-notes/zig-as-the-kernel-implementation-language.md). The
-inquiry may change layer placement, compatibility strategy, or mechanism design;
-it does not compare implementation languages.
+decide in user space. Running compiled BEAM code is now a fixed platform
+requirement. The remaining compatibility questions concern the pinned initial
+profile, OTP coverage, implementation strategy, and how the kernel supports it
+without absorbing managed-runtime policy.
 
 ## Operational question
 
 For each candidate mechanism—process identity, message delivery, scheduling,
 memory ownership, failure notification, supervision, code loading,
 distribution, drivers, persistence, and observability—determine the least
-privileged layer that can implement it in the Zig-based system while meeting
-all of these criteria:
+privileged layer that can implement it while meeting all of these criteria:
 
 1. **Containment:** a faulty or malicious component cannot read, modify, or
    indefinitely block resources outside its declared authority.
@@ -117,16 +111,20 @@ Falsifier: if service indirection and quiescence impose unacceptable latency or
 cannot survive power loss under the selected storage model, the update unit or
 publication boundary must change.
 
-### H5: principles-first is the architectural center
+### H5: BEAM compatibility belongs in the managed runtime
 
-The clean-slate system should not make BEAM bytecode compatibility a kernel
-requirement. A port of upstream ERTS and a narrow BEAM-compatible runtime are
-comparison prototypes that quantify ecosystem reuse and compatibility costs.
+The platform must execute compiled BEAM code with automatic process-local
+tracing collection, but the BEAM instruction set and term heap should remain a
+managed-runtime contract rather than a kernel ABI. The kernel should provision
+and account for runtime-domain memory in batches, while the runtime performs
+ordinary term allocation, root tracing, reclamation, and process scheduling
+without a privilege transition.
 
-Falsifier: if reusing ERTS produces a sufficiently small, auditable substrate
-and meets protection, recovery, and timing requirements with materially less
-total complexity than a new runtime, an ERTS-centered architecture may be the
-better foundation.
+Falsifier: if conformance or resource evidence shows that a required memory or
+execution invariant cannot be enforced without a new kernel primitive, add the
+smallest policy-neutral primitive. Do not move BEAM heap tracing or collector
+policy into privileged code merely because one runtime implementation expects
+host services.
 
 ## Paths to explore
 
@@ -134,21 +132,20 @@ better foundation.
 
 | Path | First artifact | Evidence needed before preference |
 | --- | --- | --- |
-| Upstream ERTS port | Minimal Zig kernel/compatibility substrate that boots a pinned OTP release and contains upstream C ERTS behind an explicit boundary | Complete host-contract inventory, trusted-code size, C ABI and build census, driver isolation, dual-scheduler behavior, memory floor, OTP test-suite results |
-| Selected BEAM compatibility | Zig loader and native actor runtime for a declared opcode/BIF/OTP profile | Versioned compatibility matrix, negative tests, exception and signal semantics, hot-loading behavior, tooling and library coverage |
-| Principles-first runtime | Zig substrate for bounded actors, capabilities, supervision-friendly failures, and versioned services with no BEAM promise | Compiler/tool path, process and message economics, diagnostics, service libraries, comparison against equivalent OTP workload |
+| Upstream ERTS port | Minimal kernel/compatibility substrate that boots a pinned OTP release | Complete host-contract inventory, trusted-code size, driver isolation, dual-scheduler behavior, memory floor, OTP test-suite results |
+| New BEAM-compatible runtime | Loader and actor runtime for a declared opcode/BIF/OTP profile | Versioned compatibility matrix, allocation and GC conformance, negative tests, exception and signal semantics, hot-loading behavior, tooling and library coverage |
+| Principles-only runtime control | Bounded actors, capabilities, supervision-friendly failures, and versioned services with no BEAM promise | Research comparison only; it cannot satisfy the platform compatibility requirement |
 
 ### Minimum experiments
-
-All new kernel and project-owned native code in these experiments is Zig. C is
-limited to named upstream, vendor, or compatibility components.
 
 1. Implement a bounded endpoint with send and receive capabilities, byte and
    message quotas, credits, revocable reply authority, and structured drop or
    refusal evidence.
 2. Run reduction-accounted actors inside a kernel-scheduled protection domain.
    Measure throughput and tail latency under timer, interrupt, garbage
-   collection, native worker, and priority stress.
+   collection, native worker, and priority stress. Verify that process-local
+   collection does not require a kernel transition or stop unrelated runtime
+   processes.
 3. Crash ordinary actors, the actor runtime, and an isolated driver. Confirm
    cleanup of memory, capabilities, endpoints, interrupt subscriptions, and DMA
    buffers, and preserve the exit reason outside the failed domain.
@@ -161,9 +158,11 @@ limited to named upstream, vendor, or compatibility components.
 6. Trace reset to the first managed actor on one emulator and one physical
    target. Inventory firmware, privilege state, memory maps, clocks, allocator,
    interrupts, storage, console, and network dependencies.
-7. Port one identical supervision workload to pinned OTP 29, AtomVM, a narrow
-   compatible runtime, and the principles-first runtime. Record semantic gaps
-   before comparing performance.
+7. Port one identical supervision workload to pinned OTP 29, AtomVM, and the
+   candidate compatible runtime. Exercise long-lived allocation and
+   reclamation, explicit collection requests, process memory reporting,
+   messages, shared binaries, exceptions, and code loading before comparing
+   performance. A principles-only runtime may remain a research control.
 
 ### Source and implementation follow-up
 
@@ -177,10 +176,6 @@ limited to named upstream, vendor, or compatibility components.
 - Derive protocol tests from OTP links, monitors, aliases, selective receive,
   supervisor intensity, and code-version transitions without assuming their
   exact APIs.
-- Pin the Zig toolchain and test its freestanding ABI, C integration, generated
-  code, safety modes, and scalar/FPU/SIMD context assumptions on the first
-  target. These tests refine the implementation policy rather than reopen the
-  language choice.
 
 ## Findings
 
@@ -191,6 +186,10 @@ supports the working hypotheses but does not resolve them:
   runtime and recovery libraries, supporting a layered kernel design.
 - ERTS demonstrates cheap processes, process-local collection, reduction-based
   pre-emption, explicit failure signals, and non-blocking version publication.
+- A process-exit-only arena cannot run general long-lived compiled BEAM code
+  within bounded memory because BEAM code does not explicitly free unreachable
+  terms. Automatic process-local tracing collection is therefore an adopted
+  compatibility constraint, not an optional optimization.
 - Official security guidance confirms that loaded code, native extensions, and
   connected nodes are trusted; ordinary process isolation is not a hostile-code
   boundary.
@@ -202,14 +201,13 @@ supports the working hypotheses but does not resolve them:
   failures.
 - No prototype in this archive yet measures the proposed two-level scheduler,
   bounded capability endpoint, driver domain, or transactional update path.
-- Zig is now the fixed base language for implementing those prototypes; this is
-  a project decision rather than a result claimed by the BEAM/OTP evidence.
 
 ## Outcome
 
-Open. The present preferred direction is a small capability kernel, an
-ERTS-inspired managed actor layer, and OTP-inspired user-space services, with
-BEAM compatibility treated as an experimental choice. The kernel and new
-native components are implemented in Zig. The first bounded endpoint and
-failure-containment prototypes should be allowed to overturn the proposed
-decomposition, but not silently substitute another base language.
+Open. The present direction is a small capability kernel, a BEAM-compatible
+managed actor layer with automatic process-local tracing collection, and
+OTP-inspired user-space services. Compatibility is fixed; the exact initial
+BEAM/OTP profile and the choice between a pinned ERTS port and a new compatible
+runtime remain experimental. The first bounded endpoint, collector, and
+failure-containment prototypes may revise layer interfaces but may not be
+reported as compatible without conformance evidence.

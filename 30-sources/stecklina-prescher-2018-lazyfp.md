@@ -1,7 +1,7 @@
 ---
 title: "LazyFP: Leaking FPU register state using microarchitectural side-channels"
 kind: source
-created: "2026-08-29"
+created: "2026-08-30"
 authors:
   - "Julian Stecklina"
   - "Thomas Prescher"
@@ -12,7 +12,7 @@ edition: null
 isbn: null
 doi: "10.48550/arXiv.1806.07480"
 url: "https://arxiv.org/abs/1806.07480"
-accessed: "2026-08-29"
+accessed: "2026-08-30"
 tags:
   - context-switching
   - fpu
@@ -30,45 +30,45 @@ aliases:
 Julian Stecklina and Thomas Prescher. “LazyFP: Leaking FPU Register State
 Using Microarchitectural Side-Channels.” CoRR abs/1806.07480, 2018. DOI
 [10.48550/arXiv.1806.07480](https://doi.org/10.48550/arXiv.1806.07480).
-Intel's corresponding [security advisory](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00145.html)
-was used to check the mitigation guidance.
 
 ## Research question or contribution
 
-Can speculative execution expose a previous task's floating-point and SIMD
-registers when an OS defers restoring extended state until first use?
+Can speculative execution expose a previous protection domain's floating-point
+and SIMD registers when an OS defers restoring extended state until first use?
 
 ## Method
 
-The authors analyze lazy FPU switching and demonstrate recovery of register
-state through transient execution and cache side effects on affected Intel
-processors.
+The authors analyze lazy FPU switching and demonstrate reconstruction of
+register contents through transient execution and cache side effects on
+affected processors.
 
 ## Findings
 
-- Lazy restore can leave another protection domain's FPU/SIMD values resident
-  and transiently observable after a context switch.
-- Intel recommended eager restore for relevant state on affected systems.
-- The optimization's benefit depends on workloads not using extended state;
-  compilers increasingly use SIMD even for ordinary memory operations, making
-  that premise fragile.
-- Extended register state is part of the security context, not an optional
-  performance attachment once enabled for a domain.
+- Lazy restore deliberately leaves previous-domain FPU and SIMD values in the
+  architectural register file and relies on a fault before ordinary use.
+- On affected processors, transient execution can pass that fault and encode
+  the stale values in cache state, breaking the intended isolation.
+- The optimization assumes many tasks avoid extended state. Modern compilers
+  increasingly use SIMD for ordinary work, making that premise less reliable.
+- Once a domain may use it, extended register state is security context, not an
+  optional scheduler attachment.
 
 ## Relevance
 
-The safe default is eager, ownership-tracked save/restore at kernel protection-
-domain switches, with no floating-point or SIMD use in interrupt/trap code.
-Managed actors inside one runtime domain need not each own architectural vector
-state if the runtime reaches a safe point before actor scheduling.
+The initial context component should eagerly save and restore all enabled
+cross-domain state, use explicit per-CPU ownership, keep FPU/vector use out of
+trap code, and refuse features whose state size or save protocol is unknown.
+Lazy switching should require later target-specific evidence and a threat-model
+review, not be the default optimization.
 
 ## Limits
 
-The demonstrated vulnerability is processor- and speculation-specific. Eager
-switching does not remove all timing or microarchitectural channels, and future
-vector, matrix, or accelerator states require separate inventory.
+The demonstrated leak depends on particular speculative behavior. Eager
+switching does not solve every timing or microarchitectural channel, and newer
+vector, matrix, debug, and accelerator state needs separate inventory.
 
 ## Derived work
 
-- [Hardware and architecture support for the Zig kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md)
-- [Hardware and architecture support map](../10-maps/hardware-and-architecture-support.md)
+- [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
+- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
+- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)

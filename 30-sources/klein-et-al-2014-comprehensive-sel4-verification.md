@@ -1,7 +1,7 @@
 ---
 title: "Comprehensive formal verification of an OS microkernel"
 kind: source
-created: "2026-08-29"
+created: "2026-08-30"
 authors:
   - "Gerwin Klein"
   - "June Andronick"
@@ -17,7 +17,7 @@ edition: null
 isbn: null
 doi: "10.1145/2560537"
 url: "https://sel4.systems/Research/pdfs/comprehensive-formal-verification-os-microkernel.pdf"
-accessed: "2026-08-29"
+accessed: "2026-08-30"
 tags:
   - capabilities
   - formal-verification
@@ -34,54 +34,53 @@ aliases:
 
 Gerwin Klein et al. “Comprehensive Formal Verification of an OS Microkernel.”
 *ACM Transactions on Computer Systems* 32(1), Article 2, February 2014. DOI
-[10.1145/2560537](https://doi.org/10.1145/2560537). [Open PDF](https://sel4.systems/Research/pdfs/comprehensive-formal-verification-os-microkernel.pdf).
-
-Current IRQ semantics were cross-checked against the [seL4 interrupt
-tutorial](https://docs.sel4.systems/Tutorials/interrupts) and [API
-reference](https://docs.sel4.systems/projects/sel4/api-doc.html).
+[10.1145/2560537](https://doi.org/10.1145/2560537).
+[Open PDF](https://sel4.systems/Research/pdfs/comprehensive-formal-verification-os-microkernel.pdf).
 
 ## Research question or contribution
 
-Can a practical capability microkernel be designed so its implementation,
-abstract behavior, access control, information flow, and binary translation
-are amenable to machine-checked end-to-end reasoning?
+How far can a practical capability microkernel's implementation and security
+properties be connected through machine-checked refinement, and what remains
+in the trusted assumptions?
 
 ## Method
 
-The paper consolidates seL4's refinement proofs and security analyses, explains
-the event-based kernel design and verification boundaries, and reports proof
-engineering and maintenance experience.
+The article consolidates seL4's specification, C refinement, binary
+translation, access-control, integrity, and information-flow work and explains
+the kernel design and proof boundaries that make those results possible.
 
 ## Findings
 
-- A small privileged mechanism set with explicit kernel objects and
-  capabilities can support strong reasoning without moving drivers and policy
-  into the kernel.
-- Verification tractability is an architecture input: uncontrolled
-  concurrency, hidden allocation, and complex shared state increase the proof
-  surface.
-- Current seL4 represents IRQ authority with capabilities and delivers
-  interrupts through notification objects; an IRQ remains masked until the
-  handler acknowledges it. This is a concrete event-channel pattern, not proof
-  that the same API is optimal here.
-- The proofs rely on stated hardware, compiler, configuration, and threat
-  assumptions. They do not automatically cover devices, DMA, firmware, or
-  timing channels.
+- A small privileged mechanism set with explicit objects and capabilities can
+  support strong reasoning while keeping ordinary drivers and policy out of
+  the kernel.
+- Verification tractability is a design concern: hidden allocation,
+  uncontrolled concurrency, complex shared state, and unnecessary assembly
+  enlarge both the implementation and proof surface.
+- Interrupt authority can be represented explicitly and delivery can be
+  mediated through notification objects rather than exposing controller state
+  to every client.
+- The proof stack rests on declared assumptions. Hardware, boot code, some
+  assembly, cache management, devices, DMA, configuration, and timing or
+  microarchitectural channels are not automatically covered by a functional
+  correctness theorem.
 
 ## Relevance
 
-The hardware layer should expose a small, auditable mechanism vocabulary and
-keep raw interrupt, page-table, and device-controller state behind it. Typed
-capabilities and explicit acknowledgement align naturally with actor-facing
-notifications while preserving a privilege boundary.
+Raw control registers, page-table encodings, interrupt-controller state, and
+DMA translation roots should remain behind a small auditable layer. Typed
+capabilities should authorize higher-level use. Every verification claim for a
+port must name the architecture model, compiler path, assembly, cache and TLB
+protocols, firmware handoff, devices, and timing assumptions it excludes.
 
 ## Limits
 
-seL4's guarantees apply to supported configurations and explicit assumptions;
-the project cannot inherit them by copying its architecture. The article does
-not evaluate an OTP-style managed runtime or this project's Zig toolchain.
+seL4's guarantees apply to its supported configurations and explicit proof
+assumptions. This project cannot inherit them by adopting similar terminology
+or interfaces, and the work does not evaluate a managed actor runtime.
 
 ## Derived work
 
-- [Hardware and architecture support for the Zig kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md)
-- [Hardware and architecture support map](../10-maps/hardware-and-architecture-support.md)
+- [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
+- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
+- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)

@@ -5,7 +5,9 @@ informed by the principles of Erlang/OTP and the BEAM virtual machine. The goal
 is to carry ideas such as cheap isolated processes, asynchronous messaging,
 supervision, fault containment, responsiveness, and distribution into the
 system architecture without tying the project to one existing BEAM
-implementation.
+implementation. The platform is required to run compiled BEAM code and retain
+automatic process-local tracing garbage collection; the exact compatible
+runtime and versioned OTP profile remain implementation questions.
 
 Start at the [home map](10-maps/home.md). Repository-wide authoring and
 maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
@@ -41,20 +43,6 @@ about a hosted arrangement unless it also identifies the services supplied by
 that host. Existing systems such as Erlang/OTP, AtomVM, GRiSP, LING, or newer
 bare-metal experiments are evidence and design material, not predetermined
 foundations.
-
-## Implementation language
-
-Zig is the settled base implementation language for the new kernel and native
-operating-system substrate. New project-owned kernel, architecture, memory,
-scheduling, capability, IPC, and native driver code will be written in Zig.
-Minimal assembly remains acceptable where the hardware requires it, and
-existing C components may cross explicit compatibility boundaries without
-making C the language for new kernel development.
-
-This choice is independent of the language or bytecode used by managed actors
-and OTP-like services. The rationale, scope, accepted costs, and enforcement
-rules are recorded in [Zig is the kernel implementation
-language](20-notes/zig-as-the-kernel-implementation-language.md).
 
 ## Frontmatter
 

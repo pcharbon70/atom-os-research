@@ -9,7 +9,6 @@ tags:
   - operating-systems
   - research-program
   - systems-architecture
-  - zig
 aliases:
   - "AtomVM foundational-runtime inquiry"
 ---
@@ -28,12 +27,6 @@ The idea fails, however, if hidden host dependencies remain large, overload
 cannot be bounded, native drivers erase the promised fault isolation, or a
 credible boot/update/security lifecycle costs more than the runtime saves.
 
-The substrate language is fixed by the project-wide [Zig
-decision](../20-notes/zig-as-the-kernel-implementation-language.md). This
-inquiry tests whether the existing C runtime can sit above a small Zig kernel
-and compatibility boundary; it does not leave the language of new substrate
-code open.
-
 ## Operational question
 
 For a named MCU and trust model, can a pinned AtomVM revision:
@@ -41,8 +34,8 @@ For a named MCU and trust model, can a pinned AtomVM revision:
 1. cold-boot from reset into a packaged BEAM system without a general-purpose
    host OS, with every remaining boot ROM, HAL, SDK, libc, allocator, and
    native-driver dependency enumerated;
-2. use a small versioned Zig substrate contract that is implemented on at least
-   two materially different targets, with every Zig/C boundary identified;
+2. use a small versioned substrate contract that is implemented on at least
+   two materially different targets;
 3. meet declared memory and scheduling bounds under process, mailbox, timer,
    binary, storage, and driver pressure;
 4. recover ordinary BEAM service failures without rebooting the VM and state
@@ -86,8 +79,6 @@ AtomVM for every embedded design.
   load, and the first BEAM instruction.
 - Use link maps, undefined-symbol lists, and call tracing to inventory the
   actual substrate rather than inferring it only from `sys.h`.
-- Implement new substrate and adapter code in Zig, using the AtomVM C sources
-  as an imported component rather than extending the kernel in C.
 
 ### Resource and timing experiments
 

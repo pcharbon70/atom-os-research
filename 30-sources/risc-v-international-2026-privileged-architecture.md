@@ -1,89 +1,86 @@
 ---
-title: "RISC-V privileged and unprivileged architecture specifications"
+title: "The RISC-V instruction set manual, privileged architecture"
 kind: source
-created: "2026-08-29"
+created: "2026-08-30"
 authors:
   - "RISC-V International"
 published: 2026
-citation_key: "risc-v-international-2026-architecture"
-container: "RISC-V Ratified Specifications Library"
-edition: "Release v20260120; privileged architecture 1.13"
+citation_key: "risc-v-international-2026-privileged-architecture"
+container: "RISC-V Technical Specifications"
+edition: "Ratified specifications, release 20260120"
 isbn: null
 doi: null
-url: "https://docs.riscv.org/reference/home/index.html"
-accessed: "2026-08-29"
+url: "https://docs.riscv.org/reference/isa/priv/priv-index.html"
+accessed: "2026-08-30"
 tags:
-  - memory-models
-  - memory-protection
-  - operating-systems
+  - cpu-architecture
+  - interrupts
+  - memory-ordering
   - privilege
   - risc-v
   - virtual-memory
 aliases:
-  - "RISC-V privileged architecture 1.13"
-  - "RVWMO specification"
+  - "RISC-V privileged ISA"
 ---
 
-# RISC-V privileged and unprivileged architecture specifications
+# The RISC-V instruction set manual, privileged architecture
 
 ## Reference
 
-RISC-V International. *The RISC-V Instruction Set Manual*, unprivileged and
-privileged architecture release v20260120, January 2026; privileged
-architecture version 1.13. [Ratified library](https://docs.riscv.org/reference/home/index.html),
-[privileged PDF](https://docs.riscv.org/reference/isa/_attachments/riscv-privileged.pdf),
-and [RVWMO chapter](https://docs.riscv.org/reference/isa/unpriv/rvwmo.html).
-Accessed 2026-08-29.
+RISC-V International. *The RISC-V Instruction Set Manual, Volume II:
+Privileged Architecture*, ratified specifications release 20260120.
+[Official privileged-architecture index](https://docs.riscv.org/reference/isa/priv/priv-index.html).
+See also the [official specification library](https://docs.riscv.org/reference/home/index.html).
 
 ## Research question or contribution
 
-What exact CPU contract would an RV64 kernel own for traps, privilege,
-translation, protection, counters, atomics, memory ordering, instruction
-publication, and multicore coordination?
+Which ratified RISC-V privilege, translation, interrupt, ordering, time, and
+state mechanisms must a supervisor-kernel architecture backend normalize?
 
 ## Method
 
-The reading covered M/S/U privilege, delegation, CSRs and trap entry, PMP and
-Smepmp, Sv39 translation, ASIDs, `SFENCE.VMA`, counter access, supervisor timer
-extensions, RVWMO, atomics and fences, and `FENCE.I`.
+The ratified privileged architecture and referenced ISA chapters were used as
+the normative base. Optional platform interfaces are treated as discovered
+dependencies, not assumed parts of the base ISA.
 
 ## Findings
 
-- RISC-V separates an open unprivileged ISA from a conventional optional
-  privileged architecture. An OS must select and probe an explicit extension
-  profile rather than infer one monolithic "RISC-V" machine.
-- Supervisor mode plus Sv39 provides a conventional 64-bit kernel/user split;
-  machine mode can remain firmware-owned through SBI. PMP protects physical
-  regions below S-mode but has finite entries and different semantics from
-  page-based virtual memory.
-- Address-translation updates have explicit ordering and invalidation rules.
-  `SFENCE.VMA` is local, so remote shootdown is a protocol involving IPIs,
-  acknowledgements, and the architecture's memory-order guarantees.
-- RVWMO permits other harts to observe operations in orders that differ from
-  program order unless preserved by dependencies, acquire/release operations,
-  atomics, or fences. Correct code must state a language-to-ISA ordering
-  contract.
-- `FENCE.I` only synchronizes instruction fetch on the executing hart. Publishing
-  generated or loaded native code across harts needs data ordering, remote
-  instruction synchronization, and a migration-safe kernel interface.
+- Machine, supervisor, and user privilege modes plus delegation registers
+  determine which traps a supervisor kernel receives and which functionality
+  still depends on a higher-privilege execution environment.
+- `satp`, the Sv translation schemes, ASIDs, and `SFENCE.VMA` define address-
+  translation state and local ordering. Remote-hart invalidation requires an
+  explicit coordination mechanism beyond the local instruction.
+- RVWMO is a relaxed memory model. `FENCE`, acquire/release atomics, and I/O
+  ordering fields must be selected from the source-level synchronization and
+  device contract, not inferred from another ISA's defaults.
+- `FENCE.I` synchronizes a hart's later instruction fetches with earlier local
+  stores; publishing code to other harts requires a remote synchronization
+  protocol.
+- Counter/timer facilities and timer-interrupt extensions can supply raw time
+  and deadlines, while the supervisor's access and programming path depends on
+  the implemented privilege and execution-environment profile.
+- Floating-point, vector, and other extension state is optional and visible
+  through architectural status. Context management must be parameterized by
+  discovered extensions.
 
 ## Relevance
 
-The specifications make RV64 a useful first architecture: its contracts are
-open and decomposed, and QEMU exposes both simple and modern platform options.
-They also show why the architecture port must expose typed operations for
-barriers, translation synchronization, and code publication instead of
-scattered inline assembly.
+RISC-V is a strong test of whether the proposed contract is semantic rather
+than x86-shaped: local versus remote completion, delegated versus retained
+privilege, and optional extensions all need explicit representation. A port
+should declare its execution-environment assumptions rather than burying them
+inside generic calls.
 
 ## Limits
 
-The ISA does not define a complete board. Interrupt controllers, firmware,
-IOMMUs, buses, cache topology, discovery, and platform quality are separate.
-The RVWMO chapter explicitly leaves some interactions with I/O, instruction
-fetch, and page-table walks outside its formalized core.
+The privileged ISA alone is not a complete platform contract. Interrupt
+controllers, IOMMUs, CPU-start services, discovery data, and firmware calls are
+specified separately and may be absent. This note makes no board or physical
+platform recommendation.
 
 ## Derived work
 
-- [Hardware and architecture support for the Zig kernel](../20-notes/hardware-and-architecture-support-for-the-zig-kernel.md)
-- [Reference hardware-contract inquiry](../40-inquiries/which-hardware-contract-should-the-kernel-adopt.md)
-- [Hardware and architecture support map](../10-maps/hardware-and-architecture-support.md)
+- [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
+- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
+- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
