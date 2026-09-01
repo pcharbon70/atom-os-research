@@ -422,7 +422,7 @@ The following is a hypothesis to test, not a settled design:
 | Layer | Responsibilities | Failure boundary |
 | --- | --- | --- |
 | [Kernel hardware and architecture support](kernel-hardware-and-architecture-support-layer.md) | Privileged entry and context, protection transitions, ordering and code publication, interrupt events, raw time, logical-CPU coordination, protected I/O, and architecture faults | Architecture and privilege boundary; port-specific mechanism without board bring-up or device policy |
-| Minimal privileged kernel | Protection domains, capability tables, address-space setup, physical memory, interrupt and timer routing, bounded IPC endpoints, domain scheduling and quotas, monotonic time, crash capture, boot and recovery primitives | Kernel failure remains system-wide; keep this layer small and mechanically testable |
+| [Minimal privileged kernel](minimal-privileged-kernel-layer.md) | Typed capability spaces, explicit kernel-object memory, first-class protection domains, address spaces and mappings, bounded invocation, scheduling-context budgets, authorized IRQ/timer/DMA bindings, structured faults, and quiescence-gated reaping | A domain provides coordinated execution stop and lifecycle isolation; shared state, device reset, and external effects may have larger recovery boundaries; kernel failure remains system-wide |
 | Managed actor runtime | Term representation, very lightweight actors, process heaps and GC, reduction accounting, signal protocols, mailbox implementation, loader and safe points, runtime tracing | One protected runtime domain; ordinary actor failures contained within it |
 | OTP-like system services | Supervisors, behaviours, device-service policy, naming, storage, networking, update orchestration, metrics, configuration | Supervision tree or service domain; replaceable without kernel change |
 | Applications | Domain protocols and state machines, organized as supervised trees with declared capabilities and budgets | Application subtree or protected application domain |
@@ -435,15 +435,31 @@ measured rather than assumed. The two-level design preserves cheap concurrency
 without asking every actor context switch or mailbox operation to cross a
 privilege boundary.
 
-An actor-facing kernel interface could start with only:
+The runtime- and service-facing kernel interface could start with only:
 
-- create and terminate a protected domain;
-- create a bounded endpoint and delegate send/receive capabilities;
-- map, lend, and revoke memory under explicit ownership;
-- subscribe an endpoint to an interrupt, timer, or domain-exit event;
-- charge CPU, memory, endpoint capacity, and device use to a resource account;
-- publish a versioned service endpoint atomically; and
-- retrieve structured termination and boot-recovery evidence.
+- create, start, suspend, terminate, and reap a protected domain with a
+  distinct kernel object identity; user space separately assigns any logical
+  service epoch;
+- create typed kernel objects from explicit, charged memory;
+- derive, attenuate, transfer, delete, and revoke capabilities without ambient
+  namespaces;
+- invoke a bounded endpoint, transfer one-shot reply authority, cancel a call,
+  and signal a coalescing notification;
+- map, lend, revoke, and reclaim memory only after CPU and device-visible
+  quiescence;
+- bind scheduling contexts, budgets, interrupts, timers, and DMA authority;
+- charge CPU, memory, capability slots, calls, teardown work, and device use to
+  resource accounts; and
+- retrieve structured fault, termination, quarantine, and boot-recovery
+  evidence.
+
+Service naming and atomic publication remain unprivileged policy over these
+mechanisms. A BEAM PID is routing identity rather than kernel authority, and an
+ordinary BEAM process is not a kernel thread or protection domain. The managed
+runtime multiplexes many actors over a small number of kernel-scheduled threads
+and mediates opaque actor-level resource references. A compromised runtime,
+JIT, native helper, or driver is contained only at the surrounding kernel
+domain boundary.
 
 Everything else must justify privileged placement. A useful rule is: a feature
 belongs in the kernel only when it is required to enforce isolation or resource
@@ -600,6 +616,12 @@ treated as proof.
 
 - [BEAM, ERTS, and OTP map](../10-maps/beam-erts-and-otp.md) is the selective
   route through this research bundle.
+- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) refines
+  the capability, domain, IPC, scheduling, fault, teardown, and recovery
+  contract immediately below the managed runtime.
+- [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
+  connects that proposal to its protection, IPC, failure, driver, and assurance
+  evidence.
 - [Which principles belong in the
   kernel?](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)
   keeps the architectural placement decision open.

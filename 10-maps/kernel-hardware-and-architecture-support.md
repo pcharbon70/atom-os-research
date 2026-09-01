@@ -120,6 +120,9 @@ backend must declare them as dependencies.
 
 ### Connection to the larger operating-system model
 
+- [Minimal privileged kernel](minimal-privileged-kernel.md) is the immediate
+  upper layer. It authorizes and accounts for these mechanisms through typed
+  capabilities, domains, IPC, CPU budgets, faults, and safe teardown.
 - [BEAM, ERTS, and OTP principles for a new operating
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
   places this mechanism layer beneath protected domains, a managed actor
@@ -140,3 +143,8 @@ Additional gaps include architecture-version and errata pinning for a concrete
 backend, a formal method that spans language/CPU/translation/DMA ordering, and
 experimental latency budgets derived from the managed runtime rather than
 assumed in advance.
+
+The upper-layer [minimal privileged-kernel contract
+inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)
+tracks how these completion primitives become authorized domain and recovery
+semantics.

@@ -129,6 +129,7 @@ are not public compatibility guarantees.
 ## Derived work
 
 - [BEAM, ERTS, and OTP principles for a new operating system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
+- [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
 - [BEAM, ERTS, and OTP map](../10-maps/beam-erts-and-otp.md)
 - [Kernel-placement inquiry](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)
 - [2026-08-28 research journal](../50-journal/2026-08-28-beam-erts-and-otp-deep-dive.md)

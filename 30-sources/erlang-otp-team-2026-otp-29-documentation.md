@@ -184,3 +184,6 @@ security-certification, or kernel-suitability results.
 - [BEAM, ERTS, and OTP map](../10-maps/beam-erts-and-otp.md)
 - [Kernel-placement inquiry](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)
 - [2026-08-28 research journal](../50-journal/2026-08-28-beam-erts-and-otp-deep-dive.md)
+- [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
+- [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
+- [Minimal privileged-kernel contract inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)

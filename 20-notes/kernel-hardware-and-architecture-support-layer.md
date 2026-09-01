@@ -1470,16 +1470,24 @@ run startup callbacks backward blindly.
 
 ### Driver or device failure
 
-1. Revoke new queue submissions and mask/quarantine interrupt sources.
-2. Mark all relevant DMA leases `Quiescing`; do not reuse their frames.
-3. Ask the device-specific service to stop and drain.
-4. If supported and authorized, reset the smallest isolation unit.
-5. Invalidate device mappings and await IOMMU/device quiescence.
-6. Increment endpoint/domain generations before rebuilding service state.
-7. Return buffers or report them permanently quarantined.
+1. Publish closure of new queue submissions and mark relevant DMA leases
+   `Quiescing`; do not reuse their frames.
+2. Execute the device binding's declared quiescence plan. It determines whether
+   interrupts are masked or retained for drain notification, whether normal
+   drain or reset comes first, and which buffers and mappings remain pinned.
+3. Perform the plan's device fence, reset, IOMMU invalidation, IOTLB completion,
+   interrupt drainage, and buffer-release transitions in their declared order.
+4. Invalidate old queue, mapping, interrupt, and endpoint binding identities;
+   a replacement protection domain receives a distinct kernel object identity.
+5. Rebuild service state and advance any logical-service epoch in user space,
+   not in this architecture layer.
+6. Return only quiescent buffers; otherwise transfer a precisely bounded
+   quarantine set to recovery infrastructure or escalate to node reset.
 
-If the hardware cannot prove quiescence, recovery may require keeping memory
-unreused until machine reset. Supervision cannot safely shorten that lifetime.
+There is no universal reset/drain/unmap order. If the hardware cannot prove
+quiescence or confine a remaining effect to a quarantine set, recovery may
+require keeping memory unreused until machine reset. Supervision cannot safely
+shorten that lifetime.
 
 ## Concurrency and lock-order discipline
 
@@ -1896,6 +1904,10 @@ These remain active in the linked
 
 ## Connections
 
+- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) is the
+  immediate consumer of this facade. It turns architecture entry, translation,
+  time, event, CPU, and DMA completion into capability-checked domains,
+  budgets, IPC, faults, and quiescence-gated reaping.
 - [BEAM, ERTS, and OTP principles for a new operating
   system](beam-erts-and-otp-principles-for-a-new-operating-system.md) supplies
   the broader system decomposition. This note refines only its lowest

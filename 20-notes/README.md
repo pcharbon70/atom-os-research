@@ -41,6 +41,10 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   develops the kernel-level contracts for privileged entry, execution context,
   translation, ordering and code publication, interrupts, time, logical CPUs,
   protected I/O, faults, and a portable typed facade.
+- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) —
+  proposes a capability microkernel with explicit object memory, first-class
+  execution-stop domains, bounded IPC and CPU budgets, revocation anchors,
+  structured fault routes, and quiescence- or quarantine-gated recovery.
 
 ## Maintaining this index
 

@@ -39,6 +39,10 @@ notes.
 - [2026-08-30 kernel hardware and architecture support deep dive](2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md) —
   records the kernel-level scope, primary literature and official architecture
   sources, synthesis method, and explicit lack of implementation evidence.
+- [2026-08-31 minimal privileged-kernel deep dive](2026-08-31-minimal-privileged-kernel-deep-dive.md) —
+  records the capability, IPC, scheduling, failure-containment, recovery, and
+  assurance literature search, synthesis checks, and lack of implementation
+  evidence.
 
 ## Maintaining this index
 

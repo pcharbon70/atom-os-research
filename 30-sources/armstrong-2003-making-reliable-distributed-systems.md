@@ -101,3 +101,6 @@ durable filesystems, secure updates, or a kernel on modern machines.
 - [BEAM, ERTS, and OTP principles for a new operating system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
 - [BEAM, ERTS, and OTP map](../10-maps/beam-erts-and-otp.md)
 - [Kernel-placement inquiry](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)
+- [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
+- [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
+- [Minimal privileged-kernel contract inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)

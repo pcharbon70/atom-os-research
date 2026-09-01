@@ -36,6 +36,9 @@ resolution criteria here. Promote independently useful conclusions to
 - [What contract should the kernel hardware and architecture layer provide?](what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) —
   defines authority, completion, isolation, ordering, portability, recovery,
   and performance criteria for the privileged architecture boundary.
+- [What contract should the minimal privileged kernel provide?](what-contract-should-the-minimal-privileged-kernel-provide.md) —
+  defines falsifiable capability, domain, IPC, temporal-isolation, fault,
+  teardown, recovery-independence, BEAM-compatibility, and assurance criteria.
 - [Which BEAM, ERTS, and OTP principles belong in a new kernel?](which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
   defines layer-placement criteria for required BEAM compatibility, compares
   a pinned ERTS port with a new compatible runtime, and specifies the minimum

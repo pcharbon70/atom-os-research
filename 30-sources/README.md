@@ -33,6 +33,9 @@ work. Incidental mentions can remain citations in the document using them.
 - [A least-privilege memory protection model for modern hardware](achermann-et-al-2019-least-privilege-memory-protection.md) —
   separates authority to configure address translation from authority to
   access the translated memory across CPUs and devices.
+- [Scheduler Activations](anderson-et-al-1992-scheduler-activations.md) —
+  separates kernel processor allocation from fine-grained user-level thread
+  scheduling and evaluates the costs and complexity of activation upcalls.
 - [Arm A-profile system architecture documentation](arm-2026-a-profile-system-architecture-documentation.md) —
   records current AArch64 exception, translation, ordering, cache, timer, and
   feature-state semantics relevant to a kernel backend.
@@ -59,9 +62,31 @@ work. Incidental mentions can remain citations in the document using them.
   for heterogeneous multicore systems.
 - [Dune](belay-et-al-2012-dune.md) — demonstrates controlled user-level access
   to selected privileged CPU features behind second-level protection.
+- [Timing Analysis of a Protected Operating System Kernel](blackham-et-al-2011-timing-analysis-protected-kernel.md) —
+  applies binary-level worst-case execution-time analysis to a protected
+  microkernel and exposes configuration and hardware assumptions behind bounds.
+- [Tolerating Malicious Device Drivers in Linux](boyd-wickizer-zeldovich-2010-malicious-device-drivers.md) —
+  evaluates IOMMU and PCIe confinement, controlled device access, and
+  user-process execution against an adversarial driver rather than accidental
+  faults alone.
 - [Functional Programming for the Internet of Things](branch-weinstock-2024-functional-programming-iot.md) —
   summarizes a 2024 AtomVM/Elixir versus C++ LoRa–MQTT gateway comparison and
   its reproducibility limits.
+- [Microreboot—A Technique for Cheap Recovery](candea-et-al-2004-microreboot.md) —
+  evaluates fine-grained component restart and makes state placement,
+  dependency, retry, and application-visible recovery costs explicit.
+- [Unreliable Failure Detectors for Reliable Distributed Systems](chandra-toueg-1996-failure-detectors.md) —
+  formalizes the distinction between crash fact and liveness suspicion under
+  timing assumptions.
+- [Hive: Fault Containment for Shared-Memory Multiprocessors](chapin-et-al-1995-hive.md) —
+  studies fault containment regions and correlated shared-memory failure on
+  multiprocessors.
+- [CuriOS: Improving Reliability through Operating System Structure](david-et-al-2008-curios.md) —
+  isolates services and client-associated state to support recovery with less
+  cross-client disruption.
+- [Kernel Design for Isolation and Assurance of Physical Memory](elkaduwe-et-al-2008-kernel-memory-isolation.md) —
+  connects explicit kernel-object memory, capabilities, and retyping to
+  isolation and tractable assurance.
 - [From L3 to seL4](elphinstone-heiser-2013-l4-lessons.md) — reviews durable
   microkernel lessons about minimal mechanism, capabilities, asynchronous
   interrupts, address spaces, portability, and assembly boundaries.
@@ -83,6 +108,9 @@ work. Incidental mentions can remain citations in the document using them.
 - [The Flux OSKit](ford-et-al-1997-flux-oskit.md) — provides evidence about
   semantic component interfaces, dependency glue, architecture exposure, and
   component granularity in kernel construction.
+- [Time Protection: The Missing OS Abstraction](ge-et-al-2019-time-protection.md) —
+  distinguishes CPU-budget isolation from microarchitectural timing-channel
+  protection and evaluates partitioning, flushing, and padding mechanisms.
 - [CertiKOS](gu-et-al-2016-certikos.md) — develops layered observable
   specifications and contextual refinement for concurrent kernels while
   documenting important model exclusions.
@@ -90,6 +118,12 @@ work. Incidental mentions can remain citations in the document using them.
   execution engines and the whole-system trade-offs behind BeamAsm.
 - [CleanQ](haecki-et-al-2019-cleanq.md) — formalizes device queues as explicit
   buffer-ownership transfer and evaluates a lightweight common interface.
+- [seL4 Design Principles](heiser-2020-sel4-design-principles.md) — records a
+  practitioner account of functional minimality, explicit authority, bounded
+  kernel work, and proof-oriented interface design.
+- [Construction of a Highly Dependable Operating System](herder-et-al-2006-dependable-operating-system.md) —
+  describes the MINIX 3 restructuring of drivers and services as isolated,
+  restartable user-space processes and its recovery limits.
 - [A brief introduction to BEAM](hogberg-2020-brief-introduction-to-beam.md) —
   establishes the official distinction between BEAM instructions and ERTS
   runtime facilities.
@@ -99,27 +133,57 @@ work. Incidental mentions can remain citations in the document using them.
 - [Comprehensive formal verification of an OS microkernel](klein-et-al-2014-comprehensive-sel4-verification.md) —
   connects explicit capabilities and objects to a small verified TCB and makes
   hardware, boot, assembly, cache, device, DMA, and timing assumptions visible.
+- [On Micro-Kernel Construction](liedtke-1995-microkernel-construction.md) —
+  derives functionally minimal protected mechanisms and analyzes why careful
+  IPC and architecture-specific critical paths matter.
 - [Linux kernel low-level core API documentation](linux-kernel-community-2026-low-level-core-apis.md) —
   compares current entry, interrupt-flow, time, ordering, cache/TLB,
   logical-CPU lifecycle, and DMA contracts.
+- [Scheduling-Context Capabilities: A Principled, Light-Weight Operating-System Mechanism for Managing Time](lyons-et-al-2018-scheduling-context-capabilities.md) —
+  makes CPU budgets capability-mediated, supports passive-server donation, and
+  evaluates temporal-isolation costs.
 - [Thunderclap](markettos-et-al-2019-thunderclap.md) — demonstrates why IOMMU
   remapping alone does not secure shared DMA protocols, transition windows,
   revocation, or reset.
+- [Capability Myths Demolished](miller-et-al-2003-capability-myths.md) —
+  distinguishes object capabilities from access-control lookalikes and
+  analyzes designation, delegation, confinement, and revocation by indirection.
+- [seL4: From General Purpose to a Proof of Information Flow Enforcement](murray-et-al-2013-sel4-information-flow.md) —
+  connects configured capability flows to a machine-checked information-flow
+  result and states its hardware, DMA, and timing assumptions.
 - [Arrakis](peter-et-al-2014-arrakis.md) — separates a kernel control plane from
   delegated application I/O data paths and reports workload-specific latency
   and throughput gains.
+- [For a Microkernel, a Big Lock Is Fine](peters-et-al-2015-big-lock-microkernel.md) —
+  compares coarse, fine-grained, and transactional kernel synchronization and
+  argues for measuring contention before accepting assurance complexity.
 - [Simplifying Arm concurrency](pulte-et-al-2018-simplifying-arm-concurrency.md) —
   gives rigorous multicopy-atomic axiomatic and operational models for the
   relaxed Armv8 memory model.
 - [The RISC-V privileged architecture](risc-v-international-2026-privileged-architecture.md) —
   records current ratified RISC-V privilege, trap, translation, ordering,
   instruction-fetch, counter, and extension-state semantics.
+- [Design and Verification of Secure Systems](rushby-1981-design-verification-secure-systems.md) —
+  develops a separation-kernel abstract machine and a verification argument
+  for configured information-flow boundaries.
 - [Efficient memory management for concurrent programs that use message passing](sagonas-wilhelmsson-2006-efficient-memory-management.md) —
   compares local, communal, and hybrid heaps and evaluates incremental
   collection trade-offs.
+- [The Protection of Information in Computer Systems](saltzer-schroeder-1975-protection-information.md) —
+  develops reference-monitor and least-privilege principles used to review the
+  kernel's authority boundary.
+- [seL4 Reference Manual, version 16.0.0](sel4-foundation-2026-reference-manual.md) —
+  documents current capability spaces, explicit object memory, IPC,
+  scheduling-context, fault, interrupt, virtual-memory, and boot mechanisms.
 - [x86-TSO](sewell-et-al-2010-x86-tso.md) — supplies a rigorous usable model for
   x86 multiprocessor memory behavior and clearly bounds what that model does
   not cover.
+- [Vulnerabilities in Synchronous IPC Designs](shapiro-2003-synchronous-ipc-vulnerabilities.md) —
+  analyzes dependency, priority, resource-retention, and denial-of-service
+  hazards in synchronous invocation designs.
+- [EROS: A Fast Capability System](shapiro-et-al-1999-eros.md) — demonstrates a
+  pure capability object system, fast invocation, and transparent persistence,
+  with trade-offs for driver and recovery boundaries.
 - [Arm instruction-fetch semantics](simner-et-al-2020-arm-instruction-fetch.md) —
   models cache, barrier, and cross-core obligations for executable-code
   publication on Armv8-A.
@@ -131,9 +195,18 @@ work. Incidental mentions can remain citations in the document using them.
   of all enabled extended state.
 - [The BEAM Book](stenman-2025-beam-book.md) — provides a detailed secondary
   guide to compiler and ERTS internals, used with current primary checks.
+- [Improving the Reliability of Commodity Operating Systems](swift-et-al-2003-nooks.md) —
+  evaluates wrapper-mediated isolation, typed resource tracking, and recovery
+  for legacy in-kernel extensions while exposing its partial protection.
+- [Recovering Device Drivers](swift-et-al-2004-recovering-device-drivers.md) —
+  evaluates shadow drivers, request tracking, restart, and the indeterminate
+  state left by device operations interrupted by failure.
 - [Scaling Reliably](trinder-et-al-2017-scaling-reliably.md) — evaluates VM and
   distributed-actor scaling and shows the costs of global topology,
   namespaces, and recovery data.
+- [Capsicum: Practical Capabilities for UNIX](watson-et-al-2010-capsicum.md) —
+  demonstrates capability mode, rights-limited descriptors, and incremental
+  application compartmentalization in a Unix kernel.
 - [Characterizing the scalability of Erlang VM on many-core processors](zhang-2011-erlang-vm-many-core-scalability.md) —
   provides historical evidence about hidden runtime synchronization beneath a
   share-nothing programming model.
