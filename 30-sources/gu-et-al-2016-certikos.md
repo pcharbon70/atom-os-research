@@ -83,3 +83,6 @@ not a proof of this project's proposed interfaces.
 - [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
 - [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
 - [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+- [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
+- [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
+- [Minimal privileged-kernel contract inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)

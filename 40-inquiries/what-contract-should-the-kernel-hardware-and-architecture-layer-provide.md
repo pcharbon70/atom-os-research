@@ -150,6 +150,14 @@ Evidence currently supports these constraints:
 - CleanQ and Thunderclap show that protected I/O needs an ownership/lifetime
   protocol in addition to address remapping.
 
+The immediate consumer is now developed in [Minimal privileged kernel
+layer](../20-notes/minimal-privileged-kernel-layer.md). Its capability and
+failure-boundary design makes several lower-layer completions non-optional:
+cross-core domain stop, completed TLB invalidation, interrupt-source drainage,
+IOTLB/DMA quiescence, and safe zero-before-reuse. The corresponding [minimal
+kernel inquiry](what-contract-should-the-minimal-privileged-kernel-provide.md)
+keeps those cross-layer obligations testable.
+
 No source proves that the proposed eleven-component boundary is minimal, that it
 will meet performance goals, or that one contract can support this project's
 eventual targets. Those are experimental questions.

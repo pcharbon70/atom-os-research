@@ -107,6 +107,9 @@ kernel ABI, and the project is not committed to one existing VM implementation.
 
 ### Kernel mechanism boundary
 
+- [Minimal privileged kernel](minimal-privileged-kernel.md) covers the
+  capability, protection-domain, bounded-IPC, scheduling-budget, fault, and
+  teardown mechanisms between architecture support and the managed runtime.
 - [Kernel hardware and architecture
   support](kernel-hardware-and-architecture-support.md) refines the lowest
   layer of the proposed operating-system decomposition. It defines the
@@ -116,6 +119,8 @@ kernel ABI, and the project is not committed to one existing VM implementation.
 
 ## Open questions
 
+- [What contract should the minimal privileged kernel
+  provide?](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)
 - [What contract should the kernel hardware and architecture layer
   provide?](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
 - [Which BEAM, ERTS, and OTP principles belong in a new
