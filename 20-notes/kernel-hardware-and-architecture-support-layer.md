@@ -84,11 +84,14 @@ A satisfactory answer must do more than enumerate CPU features. It must:
 | Normalized architecture faults and crash-safe capture | Machine-check, SError, RAS, and reset mechanisms | Recovery, degradation, restart, and panic policy | Hardware repair and fleet operations |
 | Boot-information validation and feature profiles | Bootloader/firmware-provided description | Global boot orchestration and service startup | Firmware implementation and board bring-up |
 
-The layer may consume a normalized `BootInfo` containing memory extents,
-logical CPUs, controller descriptors, firmware-call gates, and immutable
-platform facts. Parsing a particular firmware format can be an adjacent
-platform adapter. Designing firmware, choosing a board, or bringing up a
-vendor-specific peripheral is not part of this layer.
+At the provider boundary, component 0 consumes a bounded, relocatable
+`BootEnvelope` produced by a format-specific adapter. After validating, copying,
+and reconciling that input and terminating the provider contract, it publishes a
+sealed kernel-owned `BootSnapshot` containing memory extents, logical-CPU
+candidates, controller descriptors, firmware-call gates, feature evidence, and
+immutable platform facts. All later components consume the `BootSnapshot`, not
+the borrowed envelope or parser internals. Designing firmware, choosing a board,
+or bringing up a vendor-specific peripheral is not part of this layer.
 
 ## Why this is not one opaque HAL
 
@@ -151,11 +154,15 @@ Raw interrupt numbers, physical addresses, CPU indexes, and page-table pointers
 are ambient authority. The common interface should instead accept typed,
 generation-checked handles created by an authority-bearing service:
 
-- `AddressSpace`, `MappingLease`, and `FrameAuthority`;
-- `InterruptSource`, `InterruptBinding`, and `EventSink`;
-- `CpuHandle` and `CpuLifecycleToken`;
+- `AddressSpace`, `Mapping`, `MappingTransaction`, and `FrameAuthority`;
+- `ExecutableImage` and its `CodeWriteLease`, `SealedCode`, and
+  `PublishedCode` authority views;
+- the minimal kernel's accounted `IRQBinding` aggregate, exposed as typed
+  `InterruptSource`, `InterruptRoute`, and `InterruptBinding` views, plus its
+  `EventSink`;
+- `CpuHandle` and the authorizing `CpuLifecycleAuthority`;
 - `TimerChannel` and `DeadlineToken`; and
-- `DmaDomain`, `DeviceEndpoint`, and `DmaLease`.
+- `DmaAddressSpace`, `DmaMapping`, `DeviceQueueLease`, and `DeviceEndpoint`.
 
 Capabilities authorize an operation; they do not prove that its asynchronous
 effects have completed. Completion tokens or epochs carry that second fact.
@@ -188,7 +195,15 @@ The components form a directed set of contracts rather than a stack in which
 every call simply moves downward:
 
 ```text
-                normalized BootInfo + architecture feature profile
+           firmware / monitor / bootloader / hypervisor
+                                   |
+                         format-specific adapter
+                                   |
+                              BootEnvelope
+                                   |
+                 component 0 validates, copies, reconciles
+                                   |
+                sealed BootSnapshot (including feature profile)
                                    |
                        architecture primitives capsule
                          /         |          \
@@ -208,6 +223,15 @@ every call simply moves downward:
 The arrows are dependencies, not permission to bypass ownership. For example,
 the DMA component can depend on mapping and ordering primitives, but it cannot
 invent a `FrameAuthority`; the memory manager must delegate one.
+
+Each component now has an independent implementation deep dive, linked from
+the [kernel hardware and architecture support
+map](../10-maps/kernel-hardware-and-architecture-support.md#component-implementation-deep-dives).
+Those notes refine the compact responsibilities below into operational
+standards, object and state-machine proposals, cross-ISA realizations, failure
+analysis, verification plans, and staged implementations. They remain
+proposals pending the executable and two-ISA evidence required by the
+[contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md).
 
 ## Component 0: normalized boot handoff and feature discovery
 
@@ -251,11 +275,14 @@ systems.
 
 ### Boundary and alternatives
 
-A kernel can either parse every platform format directly or require an
-external loader to produce a single native `BootInfo`. The former improves
-standalone reach but enlarges fragile early code. The latter simplifies the
-kernel but trusts a larger pre-kernel chain. A practical initial design is a
-versioned native `BootInfo` plus small, separately testable adapters. Board
+A kernel can host each format-specific adapter in discardable early code or
+require an external loader to produce the single native `BootEnvelope`. The
+former improves standalone reach but enlarges fragile early code. The latter
+simplifies the kernel but trusts a larger pre-kernel chain. In both cases the
+same bounded envelope enters the protocol-independent normalizer, and only its
+sealed kernel-owned `BootSnapshot` crosses the second boundary into later
+components. A practical initial design is a versioned native `BootEnvelope`,
+small separately testable adapters, and one deterministic normalizer. Board
 bring-up remains outside both the common architecture layer and this research.
 
 ## Component 1: unsafe architecture-primitives capsule
@@ -273,11 +300,17 @@ This is the layer's unsafe leaf, not its public interface.
 - halt, wait, wake, and speculation-control primitives;
 - architecture atomics and compiler fences;
 - CPU-memory, device-I/O, and DMA barrier primitives;
-- local cache and translation-maintenance instructions;
+- scope-typed local cache and translation-maintenance leaves, while component
+  3 owns lifecycle-aware remote target-set proof and completion;
 - port/MMIO access primitives where the ISA requires them;
 - cycle/counter reads and local deadline writes;
 - bootstrap stack/vector helpers; and
-- narrowly bounded assembly entry/return stubs.
+- compiled, narrowly bounded assembly entry/return/fatal leaves.
+
+Component 1 owns those compiled unsafe leaf symbols and their clobber/effect
+contracts. Component 2 installs vector-table entries, selects and invokes a
+leaf, supplies its prevalidated stack and CPU-local operands, and owns entry,
+nesting, raw-frame, dispatch, and recovery state.
 
 ### Contract and invariants
 
@@ -319,12 +352,15 @@ between protection domains or affect privilege.
 
 ### Internal sublayers
 
-#### Vector and assembly entry
+#### Vector configuration and compiled-leaf invocation
 
-The first instructions must cope with architecture-defined partial state. They
-select or verify a safe stack, preserve registers that will be overwritten,
-record the raw cause, constrain speculation where required, and establish the
-calling convention for low-level code.
+Component 2 configures the vectors and exceptional stacks and invokes the
+component-1-owned compiled leaf selected for the entry class. The first
+instructions must cope with architecture-defined partial state: they select or
+verify the component-2-owned safe stack, preserve registers that will be
+overwritten, record the raw cause, constrain speculation where required, and
+establish the calling convention for low-level code. Owning the leaf code does
+not give component 1 ownership of these objects or the resulting dispatch.
 
 #### Entry-state transition
 
@@ -339,14 +375,20 @@ unsafe.
 
 A `RawArchFrame` remains backend-private. It is decoded into one of:
 
-- `UserTrapFrame`, containing user-visible registers and a validated return
-  envelope;
+- `EntryFrame::UserCallFrame` or `EntryFrame::UserFaultFrame`, containing a
+  validated `UserReturnEnvelope` plus the appropriate normalized payload;
 - `KernelFaultFrame`, containing enough internal state to diagnose or recover;
-- `InterruptFrame`, optimized for bounded event delivery; or
+- `ArchitectureFaultFrame`, carrying a bounded view for a semantic machine/RAS
+  fault before component 9 captures source-specific state;
+- `InterruptFrame`, optimized for bounded event delivery;
+- `NmiFrame`, for a diagnostic NMI-like event that is not itself a machine
+  fault; or
 - `FatalFrame`, stored in preallocated crash state.
 
 The types prevent a handler from returning a machine-check frame through the
-ordinary user-return path.
+ordinary user-return path. An NMI-delivered machine error remains an
+`ArchitectureFaultFrame` under `NmiContext`; uncertainty alone does not turn it
+into `FatalFrame`.
 
 #### Dispatch and deferred work
 
@@ -365,9 +407,13 @@ accept a forged privilege level.
 #### Extended-state ownership
 
 FP, SIMD, vector, matrix, debug, performance-monitoring, protection-key, and
-similar state is described by a feature-dependent `ContextShape`. Ownership is
-explicitly one of `Disabled`, `CpuOwned(context, generation)`, `Saved`, or
-`ScrubRequired`.
+similar state is described by a feature-dependent `ContextShape`. A per-CPU
+`CpuExtendedUnitState` records whether that hardware unit is disabled, clean,
+resident for exactly one context/residency generation, scrub-required, or
+failed. Each context independently owns a `ContextExtendedState` that is
+disabled, uninitialized, saved in its charged buffer, resident on exactly one
+CPU generation, discarded, or failed. A resident CPU state and context state
+must form one generation-matched pair; many other contexts may remain saved.
 
 ### Invariants
 
@@ -378,8 +424,12 @@ explicitly one of `Disabled`, `CpuOwned(context, generation)`, `Saved`, or
   context; handlers do not infer it from mutable global state.
 - Hard-entry code is bounded and uses only operations declared safe for that
   context.
+- `NmiContext` and `FatalCaptureContext` are non-widening effect subsets of
+  `HardEntryContext`; `CrashContext` begins only after terminal evidence is
+  sealed.
 - Nesting depth is bounded or fails into a crash-safe path.
-- A context cannot migrate while unsaved CPU-owned extended state exists.
+- A context cannot migrate while its extended state is paired with a resident
+  CPU unit.
 
 ### Eager versus lazy extended state
 
@@ -410,7 +460,10 @@ fictional identical register frame.
 Turn authorized changes to address-space objects into architecturally complete
 protection changes. It owns page-table/region encoding, translation-context
 identifiers, invalidation, remote shootdown, and safe reclamation. It does not
-choose eviction, heap layout, or which client deserves memory.
+choose eviction, heap layout, or which client deserves memory, and it exposes no
+public execute-grant operation. Component 4 alone orchestrates public
+executable-code publication through component 3's private prepared mapping
+effects.
 
 ### Internal subcomponents
 
@@ -447,6 +500,9 @@ An additive map may have a shorter safe path than permission reduction,
 replacement, or unmap. The transaction class records which postcondition is
 needed. A returned `Published` result does not imply that a removed mapping is
 safe to reclaim; callers needing reuse await `TranslationQuiescent`.
+Admission errors are returned only before the first mutation. Once accepted,
+the operation owns its frozen CPU targets and resource pins until success,
+drained cancellation, or an explicit incomplete/quarantine terminal record.
 
 ### Invariants
 
@@ -509,7 +565,9 @@ Provide the common vocabulary that turns the implementation language's memory
 operations into correct CPU, compiler, cache, device, and DMA effects. This is
 a separate component because ordering errors cross almost every other boundary
 and because architecture manuals give different primitives similar names with
-different scopes.
+different scopes. It is also the sole public orchestrator from `SealedCode` to
+`PublishedCode`; accepted publication owns its frozen target set and resources
+until an explicit terminal result.
 
 ### Internal subcomponents
 
@@ -560,12 +618,22 @@ Loading or generating code is modeled as a lifecycle:
 WritableOwned
   -> SealedNoMoreWrites
   -> DataVisible
+  -> WritableTranslationClosed
+  -> ExecutableMappedButUnreachable
   -> InstructionStateInvalidated
   -> RemoteFetchSynchronized(cpu_set, generation)
-  -> ExecutablePublished
+  -> PublishedCode
   -> Retired
   -> Reclaimable
 ```
+
+`ExecutableImage` is the minimal kernel's single accounting and lifetime
+aggregate over existing authoritative `Frame` and `Mapping` objects plus
+component 4's exclusively referenced private `CodePublicationState`.
+`CodeWriteLease`, `SealedCode`, and `PublishedCode` are attenuated lifecycle
+views, not additional storage owners. Destruction waits for writer closure,
+publication and retirement operation drainage, execution quiescence, mapping/TLB
+completion, and diagnostic or unwind references before releasing dependencies.
 
 The loader supplies bytes and policy; this component makes the transition
 architecturally effective. The Arm instruction-fetch work demonstrates why
@@ -583,8 +651,9 @@ architectural errata belong in this protocol. RISC-V similarly separates local
   stronger backend's accidental behavior.
 - Executable publication and retirement are serialized with address-space and
   scheduler state so a task cannot migrate to a CPU that missed publication.
-- Cache maintenance failures or unsupported aliasing constraints surface as
-  explicit errors or feature limitations.
+- Unsupported cache or alias semantics reject publication before mutation;
+  failures after acceptance surface only as explicit incomplete, quarantine,
+  or fatal terminal states with retained-resource ownership.
 
 ### Why memory-model papers are necessary but insufficient
 
@@ -601,28 +670,36 @@ coherent” is not evidence for translation, code-fetch, or DMA completion.
 
 Control interrupt sources and routes, preserve controller-specific flow
 semantics, and turn a privileged hardware event into a bounded, typed,
-capability-authorized kernel event. Device-service policy remains outside the
-hard interrupt path.
+capability-authorized kernel event. The minimal kernel owns the accounted
+`IRQBinding` aggregate, hard-path budgets and thresholds, refill/recovery
+authority, and escalation policy; this component exposes typed source, route,
+and binding views over that aggregate and executes only admitted bounded
+controller transitions. Device-service policy remains outside the hard
+interrupt path.
 
 ### Internal subcomponents
 
 1. **Controller backend.** Discovers capabilities and provides source-local
    mask, unmask, acknowledge, EOI/deactivate, priority, routing, and pending
    operations.
-2. **Source descriptor.** Gives a source stable identity, trigger/polarity or
-   message semantics, controller ownership, affinity constraints, and a
-   generation.
+2. **Source record.** Gives a typed view over the `IRQBinding` aggregate's
+   stable source identity, trigger/polarity or message semantics, controller
+   ownership, affinity constraints, and generation.
 3. **Flow handler.** Implements the state sequence for edge, level, fast-EOI,
    per-CPU, message-signaled, and non-maskable classes. This follows the useful
    Linux split between generic flow and controller “chip” operations.
-4. **Binding registry.** Associates an authorized source with an `EventSink`,
-   quota, delivery mode, and revocation generation.
+4. **Binding registry.** Maintains generational route/binding records inside
+   the accounted aggregate, associating an authorized source view with an
+   `EventSink`, a kernel-admitted debit plan, delivery mode, and revocation
+   generation.
 5. **Hard-path queue.** Uses preallocated CPU-local records to post a compact
    event without invoking arbitrary receiver code.
 6. **Completion gate.** Coordinates device-service completion with controller
    unmask/EOI rules where the flow requires it.
-7. **Storm detector and quarantine.** Counts unhandled, repeated, or
-   rate-violating events and can mask a source while preserving evidence.
+7. **Bounded debit and quarantine executor.** Applies a prevalidated
+   kernel-owned account debit, executes its closed-set keep-armed, mask, or
+   quarantine result, and publishes counters. It cannot select thresholds,
+   refill accounts, or approve recovery.
 8. **IPI backend.** Uses the same typed-event vocabulary for kernel-owned
    cross-CPU requests but a separate authority class from devices.
 
@@ -661,6 +738,10 @@ differences belong in named flow handlers rather than per-driver folklore.
   reliable message queue.
 - Exhausted receiver capacity cannot make the hard path block. The binding
   defines coalescing, counter saturation, source masking, or quarantine.
+- The minimal kernel owns interrupt budgets, thresholds, refill rules,
+  recovery authority, and escalation policy. This component applies only a
+  generation-current bounded debit or recovery transition admitted by that
+  owner and reports its counters.
 
 ### Interrupts as OTP-like signals, with limits
 
@@ -693,11 +774,14 @@ quantum, civil time, NTP-like discipline, and timeout policy stay above it.
    frequency, width, per-CPU/global scope, invariance, suspend behavior, read
    cost, and synchronization quality.
 2. **Conversion state.** Converts counts to duration with overflow-safe fixed-
-   point parameters and a generation for recalibration.
+   point parameters and a snapshot generation for recalibration.
 3. **Monotonic synthesizer.** Maintains a non-decreasing time value across
-   source changes, wrap, CPU migration, and suspend/resume where supported.
-4. **Deadline channel.** Programs, cancels, and acknowledges a one-shot event,
-   usually per CPU, and reports minimum lead time, maximum range, and lateness.
+   source changes, wrap, CPU migration, and suspend/resume where supported; a
+   separate `ClockEra` advances only when continuity cannot be proved.
+4. **Timer channel (`TimerChannel`).** Programs and cancels a one-shot
+   comparator, usually per CPU, and records token completion, minimum lead time,
+   maximum range, and lateness. There is no second public deadline-channel
+   object. Component 5 owns the timer interrupt source and controller flow.
 5. **Early delay source.** Supplies bounded boot-time delays only where no
    event-driven alternative exists; it is not the general time API.
 6. **Quality monitor.** Detects backward steps, impossible deltas, drift against
@@ -711,14 +795,36 @@ one device.
 
 - `now()` is monotonic within its declared domain. If global comparability is
   not established, the type is CPU-local and cannot be used as a global order.
-- Conversion parameters and counter source changes are published atomically
-  with a generation; readers cannot mix old and new halves.
-- A deadline is either armed with a token, fired/cancelled for that token, or
-  reported too close/out of range. Reprogramming invalidates the old token.
+- Conversion parameters and continuity-preserving source changes publish a new
+  snapshot generation atomically; readers cannot mix old and new halves, and
+  long-lived instants retain their `ClockEra` across ordinary recalibration.
+- Admission rejects before mutation or reserves a terminal slot and accepts a
+  `DeadlineToken`. Each accepted token receives exactly one of `Fired`,
+  `Cancelled`, `Rebased`, `RebaseFailed`, `EraDiscontinuity`, or
+  `ChannelFailed`.
+- Every terminal record is preallocated, exactly-once, and sticky until explicit
+  consumption even if the bounded interrupt-event sink is full; notification
+  may coalesce but completion may not disappear.
+- A conversion rebase is one exact atomic replacement: fire, cancel, and rebase
+  arbitrate on the old token; success seals `Rebased(new_token, ...)` and
+  exposes one distinct replacement, while failure seals `RebaseFailed` and
+  exposes none. The old token remains pollable.
+- `ClockEra` discontinuity seals `EraDiscontinuity` only for still-open old-era
+  tokens and never overwrites an already sealed fire, cancellation, or rebase
+  result.
 - The handler records actual observed time so lateness and lost deadlines are
   measurable.
 - Wall-clock time and trust in an external real-time source are separate from
   monotonic duration.
+
+The replacement is externally atomic even though hardware programming takes
+steps: component 6 prepares the new compare/token/terminal slot before mutation,
+claims the old `Armed` state against fire and cancellation, quiesces the old
+generation, publishes replacement software state before enabling the compare,
+and commits the new channel state together with the old token's `Rebased`
+terminal record. A post-claim failure commits `RebaseFailed` plus an explicit
+idle-or-failed channel state. Polling repeats the same terminal generation until
+the consumer acknowledges it; notification is never consumption.
 
 ### Architecture examples
 
@@ -753,7 +859,9 @@ logical CPU state, not physical power circuitry.
   before a CPU becomes visible.
 - **Startup backend:** invokes an architecture/platform start primitive and
   transfers the CPU into a common secondary-entry protocol.
-- **Lifecycle coordinator:** drives state transitions and rollback.
+- **Lifecycle coordinator:** consumes `CpuLifecycleAuthority` to drive state
+  transitions and rollback, and publishes their observed generation as
+  `CpuLifecycleEpoch`.
 - **IPI/request mailbox:** sends typed invalidation, reschedule, quiescence,
   publication, capture, and stop requests with sequence numbers.
 - **Quiescence tracker:** proves the CPU no longer holds a mapping, context,
@@ -786,14 +894,26 @@ then `Online`.
 ### Invariants
 
 - A CPU is not an interrupt or task target before `Online` is published.
+- All membership masks are one immutable generation; requestable,
+  scheduler-eligible, and interrupt-target sets are subsets of `online` at
+  every observable publication.
 - Startup uses only memory and mappings already safe for that CPU's initial
   translation state.
+- Secondary entry atomically claims the exact accepted start transaction before
+  activating ordinary kernel state; a late arrival after timeout parks/stops
+  instead of joining with a still-pinned cookie.
 - Quiescence drains or migrates tasks, extended-state ownership, timers,
   interrupt routes, IPI requests, translation acknowledgements, and reusable
   CPU-local memory.
 - Cross-CPU requests return a completion set or explicit failed/missing CPUs;
   they never silently turn a timeout into global completion.
 - CPU IDs and request sequence numbers are generation-safe.
+- `CpuLifecycleAuthority` authorizes lifecycle mutation;
+  `CpuLifecycleEpoch` is immutable observation/completion evidence and never
+  authorizes a transition.
+- Offline uses a protected `Pending | Abort | Commit` handoff after local
+  quiescence, so the target neither self-stops before coordinator commit nor
+  resumes after it.
 - A CPU with a missing mandatory feature cannot join the kernel profile; an
   optional asymmetry is represented in scheduling eligibility, not hidden.
 
@@ -825,12 +945,18 @@ revocation mechanisms. Device protocols and driver policy remain outside.
 
 ### Internal subcomponents
 
-#### Device-endpoint authority
+#### Independent hardware-scope authority
 
-A `DeviceEndpoint` identifies a function or protected access unit, not merely a
-bus address. Its authority can include selected MMIO ranges, port ranges,
-interrupt sources, DMA request identities, reset controls, and feature limits.
-These rights can be delegated separately when the hardware permits.
+Validated component-0 descriptors become independent `RequesterSet`,
+`DeviceEndpoint`, `InterruptSourceSet`, and `ResetDomain` scope records. An
+`InterruptSourceSet` contains borrowed `InterruptBinding` views over existing
+minimal-kernel `IRQBinding` aggregates; it is not another interrupt-authority
+owner. An `EndpointBinding` composes the records without assuming that IOMMU
+attachment, driver-visible function, interrupt containment, and reset
+collateral have the same boundary. Ordinary reset/profile effects require a
+scoped operation facet plus the active manager's sealed current
+`ResetLease.Use`. Independently held `ResetControl` only fences an obsolete
+manager epoch and installs precommitted successor authority.
 
 #### MMIO/PIO mapping and access
 
@@ -839,28 +965,34 @@ appropriate privilege, and non-executable permissions. Accessors encode width,
 alignment, endianness, volatile semantics, and ordering. Mapping a register
 window does not grant DMA or interrupt authority automatically.
 
-#### DMA domain manager
+#### DMA address-space manager
 
-A `DmaDomain` owns an IOMMU/device-remapping context, requester bindings, I/O
-virtual address allocation, page-table state, and invalidation generation. If
-no IOMMU is available, the profile says so explicitly and substitutes a more
-restricted trust/copy/bounce-buffer model; software naming alone cannot create
-hardware isolation.
+A `DmaAddressSpace` owns an IOMMU/device-remapping context, immutable requester
+attachment set, I/O virtual address allocation, page-table state, and
+invalidation generation. If no IOMMU is available, the profile says so
+explicitly and substitutes a more restricted trust/copy/bounce-buffer model;
+software naming alone cannot create hardware isolation.
 
-#### DMA mapping leases
+#### DMA mappings
 
-A `DmaLease` binds frame authority, device direction, accessible range,
-permissions, lifetime, ownership state, and domain generation. It distinguishes
-CPU virtual, CPU physical, and device-visible addresses, following the useful
-discipline of mature DMA APIs.
+A `DmaMapping` binds both a per-range `BufferAccessEpoch` and the minimal
+kernel's global frame-authority epoch, plus device direction, accessible range,
+permissions, lifetime, ownership state, and `DmaAddressSpace` attachment
+generation. It distinguishes CPU virtual, CPU physical, and device-visible
+addresses, following the useful discipline of mature DMA APIs.
 
 #### Queue ownership protocol
 
 CleanQ shows that many device queues can be understood as ownership transfer
-over buffer identifiers. A generic queue contract can enforce disjoint sets
-such as `ClientOwned`, `Offered`, `DeviceOwned`, `Returned`, and `Revoking`.
-Device-specific descriptor formats remain in a driver library; ownership and
-visibility transitions can still be common and formally testable.
+over buffer identifiers. A `DeviceQueueLease` lends bounded submit/doorbell
+authority without transferring the queue object. A generic queue contract can
+enforce disjoint sets such as `ClientOwned`, `Offered`, `DeviceOwned`,
+`Returned`, and `Revoking`. Rejection occurs before descriptor, tail, or
+doorbell mutation; acceptance moves the buffer token into a protected operation
+record with explicit poll/cancel and sticky success, cancellation, incomplete,
+quarantine, or fatal results. Device-specific descriptor formats remain in a
+driver library; ownership and visibility transitions can still be common and
+formally testable.
 
 #### Invalidation and quiescence
 
@@ -874,24 +1006,29 @@ before memory is reclaimable.
 Reset is treated as a capability and state transition, not a universal cleanup
 primitive. A reset backend declares which function, queues, requester IDs, and
 in-flight operations it actually covers. The caller must rebuild bindings and
-generations after reset.
+generations after reset. The scoped `Reset`/`Quarantine` facet and current
+`ResetLease.Use` authorize the transition; `ResetControl` is reserved for
+manager takeover and cannot substitute for either ordinary credential.
 
 ### DMA lifecycle
 
 ```text
 Denied
-  -> DomainBound(device_generation)
-  -> MappedCpuOwned(lease_generation)
-  -> PublishedToDevice
-  -> DeviceOwned/InFlight
-  -> Quiescing
-  -> DeviceStopped
-  -> IommuInvalidationPending
-  -> IommuQuiescent(completion_epoch)
-  -> CpuOwned
-  -> Unmapped
-  -> Reclaimable
+  -> DomainBound(binding_generation)
+  -> Active
+  -> Revoking(validated dependency plan)
+     -> Reclaimable(all applicable completion nodes)
+     -> QuarantinedPinned(missing or uncertain nodes)
+
+CpuOwned -> CpuClosing -> CpuAccessClosed -> Offered -> DeviceOwned
+DeviceOwned -> Returned(attested completion) -> CpuReacquiring -> CpuOwned
 ```
+
+The revocation plan is a validated dependency DAG, not one universal order:
+some devices must retain mappings while draining, others need early deny-all,
+and a management interrupt/polling route may have to survive until completion.
+No direct queue, MMIO/doorbell, CPU-translation, IOMMU, cache, or transport
+obligation can be skipped merely because a logical token changed state.
 
 Not every device exposes enough control to prove `DeviceStopped`. Such a device
 cannot support strong in-place revocation; the admissible designs are to keep
@@ -904,12 +1041,20 @@ exclude it from the relevant protection profile.
   not automatically DMA permission.
 - Direction and ownership determine which side may read or write a buffer at
   each point.
+- For an untrusted native driver, the strict profile enforces that ownership by
+  first advancing a per-range access gate, then revoking CPU/MMIO/queue aliases
+  to remote-translation completion and quiescing or revoking device issue before
+  CPU reacquisition. Retained aliases are labeled trusted typestate or coherent
+  sharing, not strict isolation.
 - A buffer is not reused for a new principal until device, interconnect,
   remapper, and software queue state are quiescent under the declared profile.
-- IOMMU domains and requester bindings carry generations; reset or reassignment
-  invalidates old leases.
+- `DmaAddressSpace` attachment sets and requester bindings carry generations;
+  reset or reassignment invalidates old `DmaMapping` authority.
 - Interrupt completion is correlated with queue/lease generation when a stale
   device interrupt could otherwise act on reused state.
+- Driver-reported completion is only a hint; CPU ownership requires protected
+  hardware evidence or a one-shot attestation from a separately trusted,
+  current manager facet.
 - Resource accounting includes pinned frames, I/O virtual addresses, mappings,
   outstanding descriptors, and invalidation work.
 
@@ -960,20 +1105,27 @@ policy a trustworthy description of what is and is not recoverable.
 
 ### Internal subcomponents
 
-1. **Minimal capture stub.** Uses a dedicated stack and preallocated CPU-local
-   record, disables unsafe instrumentation, and captures raw status before it
-   is overwritten.
+1. **Bounded capture routine.** Component 2 enters on its dedicated stack and
+   passes an `ArchitectureFaultFrame` plus `HardEntryContext`, `NmiContext`, or
+   `FatalCaptureContext`. Unless a pinned `FatalPreclassificationProof` permits
+   direct terminal capture, this component reserves a preallocated CPU-local
+   staging slot and captures fault-specific raw status before destructive
+   acknowledgement.
 2. **Fault decoder.** Converts raw architecture registers into a versioned
-   `FaultRecord` while retaining the original values.
-3. **Containment classifier.** Records affected CPU, address-space, memory
-   extent, device/domain, and whether execution can safely resume according to
-   the backend contract.
-4. **Crash-safe sink.** Writes bounded records to reserved memory or another
-   explicitly verified sink without depending on filesystems or ordinary
-   allocation.
+   `ArchitectureFaultRecord` while retaining the original values.
+3. **Containment classifier and promotion.** Records affected CPU,
+   address-space, memory extent, device/domain, and selects asynchronous
+   non-disruptive reporting, `LocalResumePostcondition`,
+   `ContainmentRequirement`, or terminal disposition. Terminal disposition
+   atomically claims and publishes the first-fatal slot from sealed staging;
+   severity is not guessed before capture.
+4. **Crash-safe sink.** After terminal evidence is sealed, a `CrashContext`
+   writes bounded records to reserved memory or another explicitly verified
+   sink without depending on filesystems or ordinary allocation.
 5. **Escalation channel.** Delivers a typed event to recovery policy when
    ordinary kernel operation remains valid.
-6. **Double-fault guard.** Detects recursive capture and falls back to a smaller
+6. **Double-fault guard.** Detects recursive capture, supplies the pinned direct-
+   terminal proof and `FatalCaptureContext`, and falls back to a smaller
    terminal record/reset path.
 
 ### Invariants
@@ -981,7 +1133,12 @@ policy a trustworthy description of what is and is not recoverable.
 - Raw architecture state is preserved alongside normalized fields so decoding
   can be revised after a crash.
 - A fault is never labeled recoverable solely because a handler returned.
-  Resume requires an architecture- and containment-specific postcondition.
+  Synchronous resume requires `LocalResumePostcondition`; remote or policy work
+  produces `ContainmentRequirement` and later
+  `CoordinatedContainmentCompletion`, never a substitute local token.
+- Operational-versus-terminal storage is selected only after bounded raw
+  capture and classification, except under a sealed pinned
+  `FatalPreclassificationProof`.
 - Fatal capture does not acquire ordinary locks, allocate, or depend on another
   CPU responding.
 - Records contain CPU/lifecycle generation, address-space generation, active
@@ -1011,14 +1168,14 @@ interfaces. The facade is where portability is judged.
 
 | Family | Representative objects | Representative operations | Completion result |
 | --- | --- | --- | --- |
-| Execution | `UserContext`, `ContextShape`, `TrapEvent` | initialize, sanitize, activate, capture | local state transferred or explicit failure |
-| Translation | `AddressSpace`, `MappingTxn`, `MappingLease` | map, protect, unmap, activate | publication or quiescent epoch |
-| Code | `CodeRegion`, `PublicationSet` | seal, publish, retire | CPUs synchronized at generation |
-| Interrupts | `InterruptSource`, `InterruptBinding`, `EventSink` | bind, route, arm, complete, quarantine | binding/event generation |
-| Time | `ClockDomain`, `TimerChannel`, `DeadlineToken` | read, arm, cancel | fired/cancelled token and observed time |
-| CPUs | `CpuHandle`, `CpuSet`, `CpuRequest` | start, send, quiesce, offline | acknowledged/failed CPU set |
-| I/O | `DeviceEndpoint`, `DmaDomain`, `DmaLease` | bind, map, publish, revoke, reset | device/IOMMU quiescent epoch |
-| Faults | `FaultRecord`, `CrashSink` | capture, classify, persist | recorded/escalated/terminal status |
+| Execution | `UserContext`, `ContextShape`, `EntryFrame` | initialize, sanitize, activate, capture | local state transferred or explicit failure |
+| Translation | `AddressSpace`, `MappingTransaction`, `Mapping` | map, protect, unmap, activate | publication or quiescent epoch |
+| Code | `ExecutableImage`, `PublicationSet` | seal, publish, retire | CPUs synchronized at generation |
+| Interrupts | accounted `IRQBinding`; typed `InterruptSource`, `InterruptRoute`, and `InterruptBinding` views; `EventSink` | bind, route, arm, complete, quarantine | binding/event generation |
+| Time | `ClockDomain`, `ClockEra`, `TimerChannel`, `DeadlineToken`, `DeadlineTerminal` | read, arm, poll, cancel, consume | exactly one sticky fired/cancelled/rebased/rebase-failed/era-discontinuity/channel-failed result per token |
+| CPUs | `CpuHandle`, `CpuSet`, `CpuRequest`, `CpuLifecycleEpoch` | start/quiesce/offline under `CpuLifecycleAuthority`; send typed requests under their operation authority | acknowledged/failed CPU set at a lifecycle epoch |
+| I/O | `DeviceEndpoint`, `DmaAddressSpace`, `DmaMapping`, `DeviceQueueLease` | bind, map, publish, revoke, reset | device/IOMMU quiescent epoch |
+| Faults | `ArchitectureFaultRecord`, `LocalResumePostcondition`, `ContainmentRequirement`, `CrashSink` | stage, classify, promote, coordinate, persist | local resume, coordinated completion, or terminal status |
 
 These names are design vocabulary, not a settled language API. The important
 properties are type separation, ownership, generation, scope, context safety,
@@ -1240,7 +1397,7 @@ firmware interfaces, and errata must be pinned by a concrete port.
 | Raw time | TSC and deadline timer when invariant/synchronized features hold | Architectural generic counter/timer | `time` counters and timer paths dependent on extensions/environment | Quality-described monotonic domain and one-shot channel |
 | CPU start/stop | Architecture plus platform/firmware mechanisms | Commonly an external firmware interface such as PSCI | Commonly an execution-environment interface such as SBI HSM | Logical lifecycle; backend start gate is an explicit dependency |
 | Extended context | XSAVE-discovered state including SIMD and optional features | FP/SIMD, SVE/SME, debug and optional state | Optional F/V and other extensions with status tracking | Feature-shaped context, explicit ownership, eager-safe baseline |
-| Protected DMA | VT-d-class remapping on supporting platforms | SMMU-class remapping on supporting platforms | RISC-V IOMMU only where separately implemented | `DmaDomain` and truthful isolation profile; restricted fallback |
+| Protected DMA | VT-d-class remapping on supporting platforms | SMMU-class remapping on supporting platforms | RISC-V IOMMU only where separately implemented | `DmaAddressSpace` and truthful isolation profile; restricted fallback |
 | Virtualization | VMX/EPT-like optional mechanisms | EL2/stage-2 optional mechanisms | H extension/two-stage translation optional | Optional delegation/isolation profile, not baseline requirement |
 
 ### Implications of the comparison
@@ -1408,12 +1565,22 @@ ownership and lock/order rules.
 ### Address-space activation and task migration
 
 1. The scheduler selects a task but cannot directly write a translation root.
-2. Translation validates the `AddressSpace` and returns its current generation.
+2. Translation validates the `AddressSpace` and reads an even stable mutation
+   generation.
 3. Context activation saves all CPU-owned extended state and marks the task
    non-migratable during the local transition.
-4. The backend installs the translation context with the required ordering.
-5. The CPU's active-address-space set and generation become visible.
-6. Return validation activates the sanitized user frame.
+4. Before loading the translation root, the CPU publishes itself as entering
+   that address-space generation, rereads the mutation generation, and retries
+   in kernel state if it changed or became odd.
+5. The CPU joins the active set, rereads once more to close the snapshot race,
+   and performs any catch-up invalidation required by its observed generation.
+6. Only then does the backend install the translation context with the required
+   ordering and allow return validation to activate the sanitized user frame.
+7. Component 2 retains the CPU-affine `ActivationGuard` across user execution,
+   re-entry, and any return to the same address space.
+8. Before switching away, component 2 installs a context that cannot use the
+   old address space; component 3 consumes the guard only after publishing
+   active-set departure and the CPU's observed generation.
 
 An unmap uses the published active-CPU set to request invalidation. CPU
 quiescence and task migration update that set through the same generation
@@ -1439,15 +1606,24 @@ have transferred.
 
 1. The loader creates a non-executable writable region under frame authority.
 2. It writes and validates the code image and metadata.
-3. Translation removes write authority or changes to the port's safe
-   publication arrangement.
-4. Code publication performs data visibility, instruction-state invalidation,
-   and remote synchronization for every eligible execution CPU.
-5. Only the resulting `ExecutablePublished(generation)` can enter a process's
+3. Code publication closes the writer lease and completes data-cache visibility
+   through the staging aliases.
+4. Translation removes every writable alias to a
+   `TranslationQuiescent(generation)` postcondition, then installs an RX mapping
+   that remains unreachable by runtime dispatch.
+5. Code publication invalidates instruction state over the executable aliases
+   and completes the required local and remote fetch synchronization for the
+   frozen eligible-CPU set.
+6. Only the resulting `PublishedCode(generation)` can enter a process's
    code index.
-6. Upgrade changes the code index atomically at a runtime safe point.
-7. Retirement waits for runtime references, CPU fetch state, translations, and
+7. Upgrade changes that runtime-owned code index atomically at a safe point.
+8. Retirement waits for runtime references, CPU fetch state, translations, and
    any native unwind/diagnostic references before frame reclamation.
+
+A backend may combine or omit internal maintenance steps only when its pinned
+alias/coherence profile proves these postconditions. It may not invalidate an
+as-yet nonexistent executable alias or create a reachable executable mapping
+while a writable alias survives.
 
 This provides a kernel mechanism that can support BEAM-like atomic code
 replacement without placing BEAM loading policy in the architecture layer.
@@ -1458,7 +1634,7 @@ replacement without placing BEAM loading policy in the architecture layer.
    timer, and publication targets.
 2. The scheduler migrates or terminates runnable work.
 3. Context transfers or scrubs extended state.
-4. Interrupt routes and deadline channels move or shut down.
+4. Interrupt routes and `TimerChannel` instances move or shut down.
 5. Translation and code-publication coordinators resolve outstanding epochs.
 6. Per-CPU events/IPIs drain; the CPU acknowledges a final quiescence epoch.
 7. A backend stop operation executes, after which CPU-local memory becomes
@@ -1795,9 +1971,9 @@ authority, context, failure, and completion documentation.
 
 ### Phase 1: one ISA, one logical CPU, virtual target
 
-- Implement early entry, normalized `BootInfo`, architecture primitives,
-  exception/syscall return, raw time, one-shot deadlines, and a minimal
-  translation backend.
+- Implement early entry, native `BootEnvelope` validation, sealed
+  `BootSnapshot` publication, architecture primitives, exception/syscall
+  return, raw time, one-shot deadlines, and a minimal translation backend.
 - Keep interrupts masked except for one controlled timer/event path.
 - Use eager context isolation for every enabled state component.
 

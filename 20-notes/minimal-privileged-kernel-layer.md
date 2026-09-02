@@ -314,6 +314,7 @@ operations.
 | `RevocationAnchor` | Accounted, stable logical-close point shared by a bounded capability lineage | `DeriveBelow`, `Close`, `Inspect` | One-way close; backing survives until every protected anchor reference and admitted operation record is drained |
 | `AddressSpace` | Translation root and mapping ledger exclusively attached to one baseline domain | `Map`, `Inspect` | Root reuse waits for all mapping and remote TLB completion |
 | `Mapping` | Generation-safe relation among one address space, virtual range, frame, admitted frame-authority epoch, rights, and completion epoch | `Protect`, `Unmap`, `Inspect` | Replacement at the same address is a distinct object and waits for old TLB completion; an old frame epoch permits teardown but no new access |
+| `ExecutableImage` | Accounted aggregate over existing `Frame` and `Mapping` identities plus one exclusively referenced private `CodePublicationState`; it does not create a second owner for their storage | Attenuated `Write`, `Seal`, `Publish`, `Execute`, `Retire`, `Inspect` facets, with no baseline facet combining write and execute | One `ResourceAccount` pays for the aggregate and one `LifetimeGroup` owns it; destruction waits for writer closure, every publication/retirement ticket, execution quiescence, mapping/TLB completion, and diagnostic or unwind references before releasing the underlying objects |
 | `ProtectionDomain` | Coordinated execution-stop and lifecycle anchor | `Inspect`, `Suspend`, `Resume`, `Terminate`, `Reap` | A replacement is a distinct domain object; external effects are tracked separately |
 | `Thread` | Kernel-scheduled execution context within a domain, with an optional immutable trusted cancellation-profile binding fixed before start | `Configure`, `Start`, scoped `SelfManage`, scoped `RecoverySuspend`/`RecoveryResume`/`RecoveryTerminate`/`RecoveryReap`, `SetFaultRoutes` | Internal management facets close with the domain gate; every external recovery mutation additionally requires the current sealed domain recovery lease, and removal waits for execution, call, fault-token, and scheduling-binding drainage |
 | `Endpoint` | Bounded synchronous invocation rendezvous | `Send`, `Receive`, `Grant`, `Manage`, `Close` | Logical close selects explicit outcomes for blocked calls; caller-funded acceptance additionally requires a bounded admission object |
@@ -329,7 +330,8 @@ operations.
 | `RecoveryLease` | Epoch-fenced holder authority jointly required for state-changing domain recovery | `Use`, `Release`, `InspectEpoch` | Exactly one non-copyable current `Use` facet can authorize each supervisor-initiated domain recovery mutation, including suspend, resume, terminate, and reap |
 | `RecoveryEscrow` | Precommitted attenuated domain-lifecycle, replacement-resource, and protected destination-slot authority for a successor supervisor | `DepositBeforeStart`, `IssueToCurrent`, `Inspect` | Populated without amplification before start and kept outside both the supervised domain and ordinary supervisor subtree |
 | `RecoveryControl` | Independent authority to fence a failed recovery holder and issue an escrowed successor authority set | `Install`, `RevokeAndAdvance`, `Inspect` | Kept with the final recovery controller, separately from the current supervisor lease |
-| `IRQBinding` and `TimerBinding` | Authorized event-source connection | `Bind`, `Mask`, `Arm`, `Acknowledge`, `Revoke` | Reap waits for late events and controller quiescence |
+| `IRQBinding` | Accounted interrupt aggregate containing the source-generation ledger, current route/binding records, sink reference, preallocated event state, and exclusive link to private controller state | Attenuated `Bind`, `Route`, `Mask`, `Arm`, `Acknowledge`, `Inspect`, `Recover`, `Revoke` facets exposed through typed source, route, and binding views | Views cannot outlive or be reclaimed separately from the aggregate; destruction closes admission, masks/stabilizes delivery, drains late events, hard-path/deferred references and completion facets, then releases sink, CPU-route, device/remapping, and controller-state dependencies |
+| `TimerBinding` | Authorized timer-source connection | `Bind`, `Arm`, `Acknowledge`, `Revoke` | Reap waits for late events and timer-channel quiescence |
 | `DeviceProfile` | Immutable trusted drain/reset dependency graph and admissible completion evidence for one device class/version | `BindFunction`, `Inspect` | Installed through the trusted boot/hardware manifest; a driver cannot create or alter it |
 | `DeviceFunction` | MMIO, configuration, function ownership, and independently resourced management-fault route | `MapMmio`, `Configure`, `BindQueue`, `Inspect` | Closing one function does not imply a shared device reset completed |
 | `DmaAddressSpace` | IOMMU translation root for one immutable atomic requester/trust attachment set, with compatible profile authority and management-fault route | `Map`, `Recover`, `Inspect` | Mapping authority covers the whole attachment set; reassignment requires quiescence and a newly created root/generation |
@@ -343,6 +345,30 @@ operations.
 | `LifetimeGroup` | Ownership/revocation root used to enumerate objects for cleanup | `Attach`, `Close`, `Revoke`, `Reclaim` | Shared or client-owned objects may outlive a failed domain and use another group |
 | `ReapToken` | Progress and completion for split-phase cleanup | `Advance`, `Wait`, `Inspect` | Completes once; records quarantined resources separately |
 | `DebugAuthority` | Access to extended register and diagnostic state | `ReadContext`, `Trace`, `ReadCrashData` | Separated from ordinary recovery and service authority |
+
+### Aggregate architecture-facing objects
+
+`ExecutableImage` is an authority and lifetime aggregate, not another copy of
+code storage. Its frame and mapping references keep the ordinary `Frame` and
+`Mapping` objects authoritative for bytes and translations, while its private
+`CodePublicationState` records write/publication generations, target-set
+progress, and retirement. `CodeWriteLease`, `SealedCode`, and `PublishedCode`
+are state-constrained views of this one aggregate. Creating the image charges
+its records and pinned dependencies to one `ResourceAccount`; moving that
+charge follows the normal two-account protocol. Closing the image cannot
+bypass any dependency named in the table, and failed publication keeps the
+underlying storage pinned or explicitly quarantined.
+
+Likewise, `InterruptSource`, `InterruptRoute`, and `InterruptBinding` are
+typed public views over one existing `IRQBinding` aggregate and its source and
+route records. They are not independently allocated authority objects, cannot
+mint rights the aggregate lacks, and share its resource account, lifetime
+group, source incarnation, and teardown epoch. A route replacement creates a
+new generational record inside the aggregate; a binding view additionally
+fixes the destination and completion generation. The management route and its
+reserve may belong to a longer-lived supervisor group, but it remains an
+explicit destruction dependency rather than an authority hidden in the
+driver-owned view.
 
 Files, sockets, BEAM actors, PIDs, service names, mailboxes, supervisor trees,
 and wall-clock calendars are deliberately absent. They are user-space
@@ -1770,16 +1796,23 @@ kernel object, not a writable user frame that bypasses mapping checks.
 ### IRQ and timer bindings
 
 Raw interrupt numbers and timer registers are not user APIs. An authorized
-control service creates a binding from a typed source to a notification and,
-where required, a designated acknowledgement authority. The kernel records
-source generation, destination generation, trigger/flow semantics, CPU route,
-mask state, teardown epoch, and an independently resourced device-management
-fault route outside the ordinary driver subtree.
+control service configures an accounted `IRQBinding` aggregate and receives
+attenuated `InterruptSource`, `InterruptRoute`, or `InterruptBinding` views
+over its source/route records; those views are not separately allocated
+authority. Binding connects the typed source view to a notification and, where
+required, a designated acknowledgement authority. The aggregate records source
+generation, destination generation, trigger/flow semantics, CPU route, mask
+state, teardown epoch, and an independently resourced device-management fault
+route outside the ordinary driver subtree.
 
 The hard interrupt path does bounded work: validate the binding generation,
-mask or acknowledge according to the lower-layer flow contract, set a
-notification bit, charge/account the event, and return. Device-specific
-register access and protocol recovery occur in the driver domain.
+mask or acknowledge according to the lower-layer flow contract, apply one
+prevalidated debit to the kernel-owned hard-path account, execute its already
+selected mask/quarantine transition if a threshold is crossed, set a
+notification bit, publish the resulting counters, and return. The architecture
+mechanism does not choose the budget, threshold, refill rule, or recovery
+policy. Device-specific register access and protocol recovery occur in the
+driver domain.
 
 That path uses IRQ-safe atomics and preallocated per-CPU/source records, or a
 locally masked nonblocking lock whose maximum acquisition/hold cost is part of
@@ -1789,17 +1822,22 @@ If detailed deferred state is full, it sets the sticky/coalesced condition and
 returns. Binding teardown publishes a new epoch, lets deferred work drain, and
 waits for every per-CPU reference before reclaiming the binding.
 
-Each source also has a privileged hard-path budget or rate window. Exhaustion
-automatically masks a maskable source, coalesces a typed `InterruptStorm`
-event on that management route, and leaves a sticky inspectable storm flag in
-the binding even if delivery is full. Replenishment and re-enable require the
-manager's separate authority and any `DeviceProfile` recovery preconditions;
-when that manager is replaceable or the source belongs to a `ResetDomain`, the
-operation additionally validates current `ResetLease.Use` or a narrow manager
-session beneath its closable epoch anchor. The failed driver or a stale manager
-cannot re-enable itself. The route, its bounded record, and
-the manager's scheduling reserve are outside the driver lifetime/resource
-subtree. A source that cannot be masked or isolated has a larger declared
+Each source also has a kernel-owned privileged hard-path account and rate
+window. The minimal kernel owns its budget, threshold, refill schedule,
+escalation choice, and the authority that can approve recovery. At admission it
+passes the architecture fabric only a bounded debit-and-transition plan. A
+threshold crossing under that plan automatically masks a maskable source,
+coalesces a typed `InterruptStorm` event on the management route, and leaves a
+sticky inspectable storm flag in the aggregate even if delivery is full.
+Replenishment and re-enable require the manager's separate authority and any
+`DeviceProfile` recovery preconditions; when that manager is replaceable or
+the source belongs to a `ResetDomain`, the operation additionally validates
+current `ResetLease.Use` or a narrow manager session beneath its closable epoch
+anchor. Only after this policy-side validation does the architecture fabric
+execute a preselected unmask/re-arm mechanism. The failed driver or a stale
+manager cannot re-enable itself. The route, its bounded record, and the
+manager's scheduling reserve are outside the driver lifetime/resource subtree.
+A source that cannot be masked or isolated has a larger declared
 reset/escalation boundary; repeated delivery can force device, CPU, or node
 quarantine. Charging interrupts without an enforced threshold would let a
 faulty device consume CPU outside the driver's scheduling context.

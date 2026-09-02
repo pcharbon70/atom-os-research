@@ -36,6 +36,76 @@ backend must declare them as dependencies.
 - [Research session: kernel hardware and architecture support deep
   dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md)
   records search scope, method, and the limit of this literature-only evidence.
+- [Research session: component implementation deep
+  dives](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md)
+  records the expanded source search, shared review questions, resulting
+  implementation recommendations, and the continuing lack of prototype
+  evidence.
+
+## Component implementation deep dives
+
+The layer is decomposed into eleven components numbered 0 through 10. Each
+deep dive recommends an implementation while preserving the same capability-
+microkernel and managed-runtime boundary.
+
+### Bootstrap and execution
+
+- [0. Normalized boot handoff and feature
+  discovery](../20-notes/normalized-boot-handoff-and-feature-discovery.md) —
+  treats boot inputs as untrusted claims and seals validated, bounded,
+  provenance-carrying facts into an immutable snapshot.
+- [1. Unsafe architecture-primitives
+  capsule](../20-notes/unsafe-architecture-primitives-capsule.md) — confines
+  privileged instructions, inline assembly, and raw architecture
+  representations behind reviewed safety contracts.
+- [2. Privileged entry, exit, and execution
+  context](../20-notes/privileged-entry-exit-and-execution-context.md) —
+  develops generated frame layouts, dedicated exceptional stacks, eager state
+  isolation, and hostile return-frame validation.
+
+### Translation, publication, and events
+
+- [3. Address translation and protection
+  transitions](../20-notes/address-translation-and-protection-transitions.md) —
+  develops typed mapping transactions, centralized publication, generation-
+  safe address-space tags, and explicit quiescence.
+- [4. Ordering, coherence, and code
+  publication](../20-notes/ordering-coherence-and-code-publication.md) — keeps
+  compiler, memory, device, DMA, translation, and instruction-fetch ordering
+  distinct and gives executable code an explicit lifecycle.
+- [5. Interrupt event fabric](../20-notes/interrupt-event-fabric.md) — models
+  each interrupt source with flow-specific, generation-bound delivery,
+  completion, rebinding, overflow, and quarantine states.
+
+### Time, CPUs, and protected I/O
+
+- [6. Raw time and deadline
+  programming](../20-notes/raw-time-and-deadline-programming.md) — separates
+  monotonic continuity eras and conversion snapshots from one-shot hardware
+  deadlines, timer queues, scheduling policy, and civil time; fired records
+  remain sticky across event-sink pressure.
+- [7. Logical-CPU coordination and
+  lifecycle](../20-notes/logical-cpu-coordination-and-lifecycle.md) — develops
+  stable CPU identity, exact start-transaction claims, immutable membership,
+  an explicit stop commit/abort handshake, acknowledged request sets, and
+  quarantine after incomplete removal.
+- [8. Protected I/O and DMA
+  ownership](../20-notes/protected-io-and-dma-ownership.md) — keeps requester,
+  endpoint, interrupt, and reset scopes independent while composing
+  frame-epoch-bound buffers, mappings, queues, completion attestation, and
+  quiescence into an enforced revocable protocol.
+
+### Failure evidence and common interface
+
+- [9. Architecture faults and
+  diagnostics](../20-notes/architecture-faults-and-diagnostics.md) — proposes a
+  preallocated staging/terminal capture plane plus a typed decoding and
+  recovery-policy plane, with synchronous return gated by a local-resume proof
+  and coordinated containment kept split-phase.
+- [10. Typed kernel-facing architecture
+  facade](../20-notes/typed-kernel-facing-architecture-facade.md) — exposes the
+  components through sealed generational objects, context requirements,
+  split-phase tokens, explicit feature profiles, and conformance tests.
 
 ## Trails
 

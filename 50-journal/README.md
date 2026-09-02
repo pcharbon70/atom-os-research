@@ -43,6 +43,10 @@ notes.
   records the capability, IPC, scheduling, failure-containment, recovery, and
   assurance literature search, synthesis checks, and lack of implementation
   evidence.
+- [2026-09-02 kernel architecture components deep dive](2026-09-02-kernel-architecture-components-deep-dive.md) —
+  records the expanded research across all eleven architecture components,
+  shared review questions, implementation synthesis, source families, and
+  explicit lack of executable or hardware evidence.
 
 ## Maintaining this index
 
