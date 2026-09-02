@@ -78,6 +78,15 @@ one existing VM implementation the kernel foundation.
   layer](../20-notes/kernel-hardware-and-architecture-support-layer.md) —
   proposes eleven semantic components, explicit authority and quiescence
   lifecycles, a cross-architecture comparison, and a phased verification plan.
+- [Kernel hardware and architecture component deep
+  dives](kernel-hardware-and-architecture-support.md#component-implementation-deep-dives) —
+  develops one evidence-backed implementation recommendation for each of the
+  eleven components while preserving the capability-kernel and managed-runtime
+  boundaries.
+- [2026-09-02 component implementation research
+  session](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md) —
+  records the expanded source review, cross-component synthesis method, and
+  explicit absence of prototype evidence.
 - [2026-08-30 kernel hardware and architecture support deep
   dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md) —
   records the literature search, exact kernel-level scope, primary sources,

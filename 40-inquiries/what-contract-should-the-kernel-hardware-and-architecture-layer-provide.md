@@ -132,6 +132,17 @@ layer](../20-notes/kernel-hardware-and-architecture-support-layer.md), with
 source trails in the [topic
 map](../10-maps/kernel-hardware-and-architecture-support.md).
 
+The [2026-09-02 component implementation deep
+dives](../10-maps/kernel-hardware-and-architecture-support.md#component-implementation-deep-dives)
+now give each of the eleven components its own operational standard, proposed
+object and state-machine design, cross-ISA implementation strategy, failure
+analysis, verification plan, and staged implementation. Across the independent
+passes, the recommendations converge on static backend composition, immutable
+prepared work, sealed generational ownership, explicit acceptance and terminal
+completion, acknowledged/missing target sets, and quarantine whenever
+quiescence cannot be proven. This strengthens the provisional contract but does
+not supply the executable or two-ISA evidence required to resolve the inquiry.
+
 Evidence currently supports these constraints:
 
 - L4 history and OSKit support a small architecture-specific surface with

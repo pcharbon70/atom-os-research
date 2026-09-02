@@ -169,6 +169,10 @@ plus links or tags expresses the same work.
 - Use relative Markdown links for local documents and assets.
 - Before moving a file, find and repair every incoming link.
 
+## Markdown viewing
+
+Open Markdown documents for interactive viewing with the MarkText utility.
+
 ## Producing research
 
 Before creating a durable document, read this file, the root README, the

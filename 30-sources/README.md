@@ -210,6 +210,97 @@ work. Incidental mentions can remain citations in the document using them.
 - [Characterizing the scalability of Erlang VM on many-core processors](zhang-2011-erlang-vm-many-core-scalability.md) —
   provides historical evidence about hidden runtime synchronization beneath a
   share-nothing programming model.
+- [Concurrency in the Linux kernel](alglave-et-al-2018-linux-kernel-concurrency.md) —
+  develops and tests the Linux Kernel Memory Model and supports keeping
+  executable litmus tests beside architecture-ordering protocols.
+- [Optimizing the TLB shootdown algorithm with page access tracking](amit-2017-optimizing-tlb-shootdown.md) —
+  evaluates selective invalidation using observed page access and bounds the
+  optimization behind a conservative acknowledged-shootdown baseline.
+- [Arm CoreLink GICv3 and GICv4 software overview](arm-2019-gicv3-v4-software-overview.md) —
+  documents flow-specific interrupt acknowledgement, priority, routing, EOI,
+  deactivation, affinity, and virtualization behavior.
+- [Caches and self-modifying code: Working with threads](bramley-2025-arm-self-modifying-code-threads.md) —
+  gives current Arm engineering guidance for cross-thread instruction
+  publication and motivates immutable code versions as the safe baseline.
+- [Secure Virtual Architecture](criswell-et-al-2007-secure-virtual-architecture.md) —
+  evaluates a typed low-level execution and privileged-operation interface for
+  a minimally changed commodity kernel.
+- [Devicetree specification, release 0.4](devicetree-org-2023-devicetree-specification-0-4.md) —
+  defines the flattened device-tree handoff format, cells, nodes, properties,
+  reservations, and version rules consumed by a bounded boot adapter.
+- [Think](fassino-et-al-2002-think.md) — demonstrates strongly typed kernel
+  components and explicit bindings, including separate hardware-abstraction
+  components, without requiring one fixed kernel architecture.
+- [Scalable and effective page-table and TLB management on NUMA systems](gao-et-al-2024-scalable-page-table-tlb.md) —
+  evaluates page-table placement and shootdown approaches while supporting a
+  stable mapping contract above replaceable optimization policy.
+- [Kdump](goyal-et-al-2005-kdump.md) — prepares reserved memory, processor
+  metadata, and an independent capture kernel before failure so bulk crash
+  evidence need not depend on the failed kernel's ordinary services.
+- [Spectre attacks](kocher-et-al-2019-spectre.md) — demonstrates speculative
+  execution attacks that make entry and return mitigation a pinned machine
+  profile rather than an assumed property of privilege checks.
+- [The Limine boot protocol](limine-project-2026-limine-boot-protocol.md) —
+  provides a current versioned loader protocol case and evidence for a narrow
+  adapter into an owned normalized boot snapshot.
+- [Linux reliability, availability, and serviceability documentation](linux-kernel-community-2026-ras-documentation.md) —
+  distinguishes hardware-error origin, correction, severity, reporting, and
+  containment while retaining raw source-specific evidence.
+- [Meltdown](lipp-et-al-2018-meltdown.md) — demonstrates transient user access
+  to privileged mappings on affected processors and motivates explicit
+  entry/return mitigation and mapping profiles.
+- [Serval](nelson-et-al-2019-serval.md) — evaluates scalable symbolic execution
+  for systems code and supports making the unsafe primitive capsule a small,
+  modelled, binary-checked unit.
+- [BootStomp](redini-et-al-2017-bootstomp.md) — finds exploitable early-boot
+  parsing flaws and supports treating privileged handoff parsing as hostile-
+  input processing with strict bounds.
+- [The RISC-V advanced interrupt architecture](risc-v-international-2023-advanced-interrupt-architecture.md) —
+  documents IMSIC/APLIC interrupt identity, routing, priority, delivery, and
+  completion mechanisms for a declared RISC-V event profile.
+- [RISC-V platform-level interrupt controller specification](risc-v-international-2023-platform-level-interrupt-controller.md) —
+  defines priority, enable, threshold, non-idempotent claim, and context-bound
+  completion semantics for the legacy RISC-V PLIC flow.
+- [RISC-V supervisor binary interface specification](risc-v-international-2025-supervisor-binary-interface.md) —
+  defines firmware-mediated timer, IPI, remote-fence, and hart-lifecycle calls
+  whose dependency and completion assumptions a backend must declare.
+- [The RISC-V unprivileged architecture](risc-v-international-2026-unprivileged-architecture.md) —
+  supplies normative ordinary-memory, I/O-ordering, instruction-fetch, atomic,
+  and fence semantics below the architecture facade.
+- [Translation validation for a verified OS kernel](sewell-et-al-2013-translation-validation.md) —
+  validates generated kernel binary against source-level assumptions and shows
+  why assembly and privileged-register code need more than source inspection.
+- [Design of Tock kernel hardware interface layers](tock-project-2026-hil-design.md) —
+  gives maintainer rules for typed split-phase interfaces, acceptance,
+  completion, error, callback, virtualization, and buffer ownership.
+- [Unified Extensible Firmware Interface specification, version 2.11](uefi-forum-2024-uefi-2-11.md) —
+  defines boot-service lifetime, memory-map, system-table, image, and exit
+  semantics needed by a UEFI handoff adapter.
+- [Advanced Configuration and Power Interface specification, version 6.6](uefi-forum-2025-acpi-6-6.md) —
+  defines static platform-description and error-record tables while exposing
+  the complexity and trust cost of early AML evaluation.
+- [When poll is better than interrupt](yang-et-al-2012-when-poll-is-better-than-interrupt.md) —
+  evaluates adaptive polling for high-rate devices and motivates a funded,
+  capability-controlled polling lease rather than an automatic interrupt
+  fast-path policy.
+- [Arm Power State Coordination Interface, version 1.3](arm-2024-power-state-coordination-interface.md) —
+  defines firmware-mediated CPU start, suspend, and off operations that must
+  remain fallible steps inside a richer logical-CPU lifecycle transaction.
+- [Arm SMMUv3 architecture specification](arm-2025-smmuv3-architecture.md) —
+  defines stream/requester attachment, translation, command queues, faults,
+  invalidation, and completion needed by the Arm protected-DMA backend.
+- [Intel VT-d architecture specification](intel-2024-vt-d-architecture.md) —
+  defines requester remapping, queued invalidation, interrupt remapping, faults,
+  and completion rules needed by the x86-64 protected-I/O backend.
+- [Timecounters](kamp-2002-timecounters.md) — develops an efficient SMP
+  timecounter model using counter masks and generation-published conversion
+  state while keeping raw counting separate from time policy.
+- [RISC-V IOMMU architecture specification](risc-v-international-2026-iommu-architecture.md) —
+  defines device contexts, translation, fault records, invalidation, and
+  `IOFENCE.C` completion for a RISC-V DMA-domain backend.
+- [Efficient design of high-resolution timekeeping in real-time operating systems](terraneo-cattaneo-2026-high-resolution-timekeeping.md) —
+  evaluates high-resolution timekeeping with a globally qualified counter and
+  CPU-local deadlines while exposing scheduler- and hardware-specific limits.
 
 ## Maintaining this index
 
