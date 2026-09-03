@@ -60,8 +60,11 @@ changing the archive’s separately pinned OTP 29.0.5 source-tree audit.
 The patch record and rendered manuals were checked on 2026-09-02. Public
 reference and system documentation was treated as contract evidence. Pages
 labeled internal documentation, source files, configuration defaults, and
-engineering explanations were treated as implementation evidence only. Where
-some subsystem pages still displayed 29.0.5/ERTS 17.0.5 during rollout, no
+engineering explanations were treated as implementation evidence only. The
+purge behavior was cross-checked against the exact OTP-29.0.6 tag at commit
+[`e07fd07837e5aa845657f5fa340637121e451d47`](https://github.com/erlang/otp/tree/e07fd07837e5aa845657f5fa340637121e451d47),
+including `erts_code_purger.erl`, `beam_bif_load.c`, and `erl_fun.c`. Where some
+subsystem pages still displayed 29.0.5/ERTS 17.0.5 during rollout, no
 patch-specific change was inferred without the patch record or matching
 source.
 
@@ -96,6 +99,12 @@ source.
   overtakes an earlier ordinary message signal in signal delivery, but the
   resulting priority message can be inserted ahead of the earlier ordinary
   message in the combined mailbox.
+- `Dest ! Msg` and `erlang:send/2` return `Msg`; `erlang:send/3` returns only
+  `ok`, `nosuspend`, or `noconnect`. None is a delivery-completion result.
+- External remote PIDs encode node, identifier, serial, and node creation;
+  references likewise carry node creation and identifier words. Transport
+  reconnect does not itself create a new term identity, while broken links and
+  monitors still report connection loss and are not automatically restored.
 - Normal scheduling is pre-emptive at reduction-budget boundaries. The current
   default maximum slice is 4,000 reductions, but weights, slice size, queue
   topology, balancing, and affinity are implementation details rather than
@@ -117,11 +126,27 @@ source.
 - ETS is explicit node-local shared term storage with owners, access rights,
   heirs, and copy-in/out behavior. It is not an ordinary shared actor heap and
   does not promise general transactions or snapshot traversal.
+- ETS owner-death behavior distinguishes `{heir, Pid}` (silent transfer),
+  `{heir, Pid, HeirData}` (transfer plus `ETS-TRANSFER`), and no live heir
+  (destruction). Successful `give_away/3` always sends `ETS-TRANSFER` and does
+  not change the table's configured heir.
 
 ### Code, time, tracing, and native work
 
 - A module can have current and old executable versions. Loading a third
   version requires old-code purge and can terminate actors still executing it.
+- In OTP 29.0.6, `check_process_code/3` and `code:soft_purge/1` treat only
+  direct process references to old executable code as lingering. Indirect
+  references through local funs are ignored and raise an exception if invoked
+  after successful purge; literal references are handled by later copying.
+  Fun-only and literal-only holders therefore neither fail a soft purge nor,
+  by themselves, cause termination during a hard purge.
+- The tagged implementation scans the process instruction pointer, saved
+  native-call state, and stack continuation pointers. It marks old fun entries
+  pending/unloaded during purge, removes executable code on completion, and
+  queues the old literal area for a separate per-process copy and thread-progress
+  reclamation protocol. Logical purge eligibility and final physical retention
+  are consequently distinct implementation states.
 - Code preparation and validation precede an atomic publication step; internal
   code indexes and thread-progress machinery are not language-visible module
   versions.
@@ -134,6 +159,13 @@ source.
 - Linked drivers and NIFs execute within the VM’s native trust boundary. Dirty
   scheduling protects normal scheduler availability, not memory safety; native
   corruption can still compromise the whole runtime.
+- NIF scheduling class is declared per `ErlNifFunc` name/arity entry, not once
+  for a whole module. `enif_schedule_nif` can also reschedule and reclassify
+  alternating CPU- and I/O-bound work.
+- Process exit reasons can be arbitrary Erlang terms. Compatible exit, link,
+  and monitor paths preserve those terms except for the transformations the
+  process semantics explicitly document, such as an untrappable explicit
+  `kill` causing the receiver to terminate with `killed`.
 
 ## Relevance
 

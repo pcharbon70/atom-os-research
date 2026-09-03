@@ -70,9 +70,10 @@ An initial implementation meets the standard when:
    never a mixture.
 5. Public current/old semantics match the pinned profile independently of
    internal snapshot count.
-6. Old code is reclaimed only after stacks, continuations, funs, literals,
-   trace state, native resources, and diagnostic readers release the
-   generation.
+6. Purge eligibility uses only the OTP-defined direct process references.
+   After logical purge commits, old local funs are uncallable and final
+   physical reclamation may wait for literal copying, internal readers, and a
+   safe epoch without changing the purge result.
 7. Loader/compiler failure before publication leaves the old active view
    unchanged.
 8. A module with `-on_load` remains pending and non-current while its fresh
@@ -198,22 +199,27 @@ it traps/resumes or moves to an isolated lane.
 
 ## Code generation and publication state machine
 
-```text
-Absent
-  -> Prepared(W,NX)
-  -> Emitted
-  -> Relocated
-  -> Validated
-  -> CacheSynchronized
-  -> WritersRevoked
-  -> Sealed(X,RO)
-  -> StagedInRuntimeIndex
-       -> Active                              # module without on_load
-       -> PendingOnLoad -> OnLoadOk -> Active
-                        -> OnLoadFailed -> Reclaimed
-  -> Old
-  -> Retiring
-  -> Reclaimed
+```mermaid
+flowchart TD
+  cgp_absent["Absent"] --> cgp_prepared["Prepared(W, NX)"]
+  cgp_prepared --> cgp_emitted["Emitted"]
+  cgp_emitted --> cgp_relocated["Relocated"]
+  cgp_relocated --> cgp_validated["Validated"]
+  cgp_validated --> cgp_cache["Cache synchronized"]
+  cgp_cache --> cgp_writers["Writers revoked"]
+  cgp_writers --> cgp_sealed["Sealed(X, RO)"]
+  cgp_sealed --> cgp_staged["Staged in runtime index"]
+
+  cgp_staged -->|"module has no on_load"| cgp_active["Active"]
+  cgp_staged -->|"module declares on_load"| cgp_pending["Pending on_load"]
+  cgp_pending -->|"returns ok"| cgp_onload_ok["on_load ok"]
+  cgp_onload_ok --> cgp_active
+  cgp_pending -->|"fails or raises"| cgp_onload_failed["on_load failed"]
+  cgp_onload_failed --> cgp_reclaimed["Reclaimed"]
+
+  cgp_active -->|"superseded"| cgp_old["Old"]
+  cgp_old --> cgp_retiring["Retiring"]
+  cgp_retiring --> cgp_reclaimed
 ```
 
 ### Prepare and emit
@@ -276,27 +282,57 @@ and failure evidence preserves any indeterminate operation phase.
 The compatible module model admits current and old code as defined by the
 pinned profile. Fully qualified external calls enter current code; existing
 frames/continuations may remain in old code. Loading a third language-visible
-generation requires old-code purge under the reference rules and may terminate
-actors that still execute it.
+generation requires old-code purge under the reference rules. A hard purge may
+terminate actors with direct references to old code; it does not terminate an
+actor merely because the actor holds an old local fun or a literal from the old
+module.
 
 Runtime internals may keep three or more snapshot indexes to stage and retire
 without stopping all schedulers. Those snapshots do not create additional
 language-visible module versions.
 
-An `OldCodeGeneration` remains pinned by:
+### Logical purge eligibility
 
-- actor frames and continuations;
-- fun/closure references;
-- literal terms and match contexts;
-- trace breakpoints and profiling state;
-- native resources/NIF code tied to the module;
-- diagnostic/crash readers; and
-- in-flight service or code-load callbacks explicitly carrying the generation.
+The version-specific [OTP 29.0.6 `check_process_code/3`
+documentation](https://www.erlang.org/doc/apps/erts/erlang.html#check_process_code/3)
+and [`code:soft_purge/1`
+documentation](https://www.erlang.org/doc/apps/kernel/code.html#soft_purge/1)
+make purge eligibility narrower than general reachability: a process is
+lingering only when it has a **direct reference** to old executable code. The
+tagged implementation checks the current instruction pointer, saved native-call
+state, and continuation pointers on the stack in
+[`beam_bif_load.c`](https://github.com/erlang/otp/blob/e07fd07837e5aa845657f5fa340637121e451d47/erts/emulator/beam/beam_bif_load.c#L1149-L1217).
+[`erts_code_purger.erl`](https://github.com/erlang/otp/blob/e07fd07837e5aa845657f5fa340637121e451d47/erts/preloaded/src/erts_code_purger.erl#L120-L152)
+aborts a soft purge on such a result; a hard purge terminates the reported
+processes before completing.
 
-Retirement scans or tracks these references, waits for a safe epoch, then
-unmaps executable pages and releases literals. Forced purge follows the
-declared actor-termination behavior and records which actors/references caused
-it.
+Indirect references through local funs are ignored for this decision. Purge
+temporarily marks their dispatch entries and, on success, leaves them unloaded;
+invoking such a fun after purge raises an exception. References to literals
+also do not block purge: ERTS copies them out of the retired literal area in a
+later collection stage. Therefore neither a fun-only nor a literal-only holder
+causes `soft_purge/1` to return `false`, and neither alone selects an actor for
+hard-purge termination.
+
+### Physical retirement and reclamation
+
+Logical purge completion is distinct from final freeing. A committed generation
+must immediately cease to be language-visible or callable, but an implementation
+may conservatively retain inaccessible executable pages or metadata while
+thread-progress epochs, trace/profiling readers, native teardown, diagnostic
+readers, and in-flight runtime callbacks drain. These are physical reclamation
+guards, not logical purge blockers, and cannot change the `soft_purge/1` result
+or preserve an indirect fun's ability to enter old code.
+
+Literal storage has its own delayed lifetime. The OTP 29.0.6 source removes old
+code and then queues its literal area; the literal-area collector asks processes
+to copy surviving literals and waits for thread progress before releasing the
+area, as documented in
+[`beam_bif_load.c`](https://github.com/erlang/otp/blob/e07fd07837e5aa845657f5fa340637121e451d47/erts/emulator/beam/beam_bif_load.c#L1465-L1522).
+This runtime should likewise report direct process blockers separately from
+conservative physical retainers, unmap executable pages once its physical
+safety guards clear, and release literal storage only after its independent
+copy/reclamation protocol completes.
 
 OTP application state transformation, release handling, rollback, and restart
 policy live above this mechanism. Publishing code does not transform an
@@ -336,8 +372,9 @@ for unbounded time.
   fall back to interpreter rather than evict live code unsafely.
 - **Optimizer semantic bug:** run interpreter/native differential tests and
   retain per-module interpreter override.
-- **Old-code retention attack:** expose pins and age, cap generations, and use
-  documented purge/actor termination policy.
+- **Old-code retention attack:** expose direct logical blockers separately from
+  physical reclamation guards, cap retained storage, and use the documented
+  direct-reference purge and actor-termination policy.
 
 ## Implementation program
 
@@ -378,6 +415,11 @@ for unbounded time.
 - Differentially run values, exceptions, stack traces, tail calls, GC at every
   allocation, receive markers, funs, tracing, and current/old code on
   interpreter and native tiers.
+- Exercise soft and hard purge with separate actors holding a direct
+  continuation, an old local fun, or an old literal. Only the direct holder may
+  block soft purge or be killed by hard purge; invoking the fun after successful
+  purge must fail, while the literal remains valid through deferred copying and
+  release.
 - Load/replace/purge continuously under multicore traffic; detect mixed export,
   literal, fun, and code-range views.
 - Run `-on_load` success, non-`ok`, exception, stall, and NIF/service cases on
@@ -398,9 +440,9 @@ for unbounded time.
 
 Evidence supports interpreter-first development, a simple whole-module
 load-time lowering tier, explicit safe-point metadata, W^X publication,
-atomic index switching, and generation-pinned retirement. It does not establish
-that a JIT improves every workload or that an adaptive tier is worth its trust
-and latency cost.
+atomic index switching, and logical purge followed by conservatively staged
+physical reclamation. It does not establish that a JIT improves every workload
+or that an adaptive tier is worth its trust and latency cost.
 
 Open decisions include the native IR/template language, per-target validator,
 patchpoint strategy, epoch implementation, code/literal accounting, AOT

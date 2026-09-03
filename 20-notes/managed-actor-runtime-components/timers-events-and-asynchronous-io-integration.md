@@ -231,18 +231,33 @@ the channel binding and all old queue generations.
 
 ## Timer state machine
 
-```text
-Free(g)
-  -> Reserved(g)
-  -> Armed(g, destination, deadline, location)
-  -> TargetSuspended(g, remaining) -> ArmedAfterResume(g, deadline, location)
-  -> ExpiryClaimed(g)
-       -> PidTargetValidated(g) -> TimeoutSignalPublished(g)
-       -> NameResolvedAtExpiry(g) -> TimeoutSignalPublishedOrDropped(g)
-  -> AutoCancelledTargetExit(g)
-  -> CancelClaimed(g) -> Cancelled(g)
-  -> EraFailed(g)
-  -> Retired(g+1)
+```mermaid
+flowchart TD
+  ttl_free["Free(g)"] --> ttl_reserved["Reserved(g)"]
+  ttl_reserved --> ttl_armed["Armed(g, destination, deadline, location)"]
+
+  ttl_armed -->|"target suspends"| ttl_suspended["Target suspended(g, remaining)"]
+  ttl_suspended -->|"target resumes"| ttl_rearmed["Armed after resume(g, deadline, location)"]
+  ttl_armed -->|"deadline wins"| ttl_expiry["Expiry claimed(g)"]
+  ttl_rearmed -->|"deadline wins"| ttl_expiry
+  ttl_expiry -->|"PID target"| ttl_pid["PID target validated(g)"]
+  ttl_pid --> ttl_published["Timeout signal published(g)"]
+  ttl_expiry -->|"registered-name target"| ttl_name["Name resolved at expiry(g)"]
+  ttl_name --> ttl_named_outcome["Timeout signal published or dropped(g)"]
+
+  ttl_armed -->|"target exits"| ttl_auto_cancel["Auto-cancelled on target exit(g)"]
+  ttl_rearmed -->|"target exits"| ttl_auto_cancel
+  ttl_armed -->|"cancel wins"| ttl_cancel_claimed["Cancel claimed(g)"]
+  ttl_rearmed -->|"cancel wins"| ttl_cancel_claimed
+  ttl_cancel_claimed --> ttl_cancelled["Cancelled(g)"]
+  ttl_armed -->|"clock era fails"| ttl_era_failed["Era failed(g)"]
+  ttl_rearmed -->|"clock era fails"| ttl_era_failed
+
+  ttl_published --> ttl_retired["Retired(g+1)"]
+  ttl_named_outcome --> ttl_retired
+  ttl_auto_cancel --> ttl_retired
+  ttl_cancelled --> ttl_retired
+  ttl_era_failed --> ttl_retired
 ```
 
 Expiry and cancel compete for one terminal record. A strong internal cancel
@@ -323,14 +338,24 @@ completion.
 
 ### Completion state machine
 
-```text
-New
-  -> ResourcesReserved
-  -> Submitted(service_incarnation, operation_generation)
-  -> Completing | CancelRequested
-  -> Completed(result) | CancelledBeforeEffect | Indeterminate(reason)
-  -> SignalPublishedOrActorGone
-  -> ResourcesReleased
+```mermaid
+flowchart TD
+  tio_new["New"] --> tio_reserved["Resources reserved"]
+  tio_reserved --> tio_submitted["Submitted(service_incarnation, operation_generation)"]
+  tio_submitted -->|"completion starts"| tio_completing["Completing"]
+  tio_submitted -->|"cancel requested"| tio_cancel_requested["Cancel requested"]
+
+  tio_completing -->|"result known"| tio_completed["Completed(result)"]
+  tio_completing -->|"cancel wins before effect"| tio_cancelled["Cancelled before effect"]
+  tio_completing -->|"effect cannot be classified"| tio_indeterminate["Indeterminate(reason)"]
+  tio_cancel_requested -->|"completion wins"| tio_completed
+  tio_cancel_requested -->|"cancel wins before effect"| tio_cancelled
+  tio_cancel_requested -->|"effect cannot be classified"| tio_indeterminate
+
+  tio_completed --> tio_signal["Signal published or actor gone"]
+  tio_cancelled --> tio_signal
+  tio_indeterminate --> tio_signal
+  tio_signal --> tio_released["Resources released"]
 ```
 
 Cancel and original completion may arrive in either order. Both address the

@@ -268,39 +268,53 @@ baseline.
 
 ### Publication state machine
 
-```text
-Allocated
-   -> WritableOwned(write_generation)
-   -> Sealing(no_new_writers)
-   -> Sealed
-      +-- admission rejection --> Rejected(CodePublishError, SealedCode)
-      +-- fully reserved ------> PublicationAccepted(
-                                  CodePublicationOperation,
-                                  frozen_publication_set,
-                                  owned_resources)
-          -> DataVisible(cache_scope)
-          -> WritableTranslationClosed(tlb_epoch)
-          -> ExecutableMappedButUnreachable(mapping_generation)
-          -> InstructionStateInvalidated(cache_scope)
-          -> RemoteFetchPending(frozen_publication_set, version)
-          -> RemoteFetchSynchronized(completed_cpu_set, version)
-          -> PublishedCode(version, publication_epoch)
-             +-- retirement rejection --> PublishedCode
-             +-- fully reserved -------> RetirementAccepted(
-                                          CodeRetirementOperation,
-                                          frozen_executor_set,
-                                          owned_resources)
-                    -> Retiring(retirement_epoch)
-                    -> ExecutionQuiescent
-                    -> ReclaimableExecutableImage
+```mermaid
+flowchart TD
+  allocated["Allocated"] -->|"open write generation"| writable["WritableOwned<br/>(write generation)"]
+  writable -->|"seal final writer"| sealing["Sealing<br/>(no new writers)"]
+  sealing -->|"admitted stores drain"| sealed["Sealed"]
 
-PublicationAccepted/Pending + selectable cancellation
-   -> Cancelling -> Cancelled only after translation/fetch effects drain
-Any accepted publication + unproved completion
-   -> Incomplete(acked, missing, Quarantine<ExecutableImage>)
-Any accepted publication + unsafe backend failure
-   -> Quarantined(reason, Quarantine<ExecutableImage>)
-PublishedCode -> never WritableOwned for the same version
+  sealed -->|"admission rejection"| rejected["Rejected<br/>(CodePublishError, SealedCode)"]
+  sealed -->|"fully reserved"| accepted["PublicationAccepted<br/>(operation, frozen publication set,<br/>owned resources)"]
+  accepted -->|"make data visible"| visible["DataVisible<br/>(cache scope)"]
+  visible -->|"close writable translation"| writeClosed["WritableTranslationClosed<br/>(TLB epoch)"]
+  writeClosed -->|"create unreachable RX mapping"| mapped["ExecutableMappedButUnreachable<br/>(mapping generation)"]
+  mapped -->|"invalidate instruction state"| invalidated["InstructionStateInvalidated<br/>(cache scope)"]
+  invalidated -->|"request CPU fetch sync"| fetchPending["RemoteFetchPending<br/>(frozen publication set, version)"]
+  fetchPending -->|"target CPUs acknowledge"| fetchDone["RemoteFetchSynchronized<br/>(completed CPU set, version)"]
+  fetchDone -->|"commit published version"| published["PublishedCode<br/>(version, publication epoch)"]
+
+  published -->|"retirement rejected"| published
+  published -->|"fully reserved"| retirementAccepted["RetirementAccepted<br/>(operation, frozen executor set,<br/>owned resources)"]
+  retirementAccepted -->|"remove executable reachability"| retiring["Retiring<br/>(retirement epoch)"]
+  retiring -->|"wait for executor quiescence"| executionQuiet["ExecutionQuiescent"]
+  executionQuiet -->|"complete teardown ledger"| reclaimable["ReclaimableExecutableImage"]
+
+  accepted -.->|"selectable cancellation"| cancelling["Cancelling"]
+  visible -.->|"selectable cancellation"| cancelling
+  writeClosed -.->|"selectable cancellation"| cancelling
+  mapped -.->|"selectable cancellation"| cancelling
+  invalidated -.->|"selectable cancellation"| cancelling
+  fetchPending -.->|"selectable cancellation"| cancelling
+  fetchDone -.->|"selectable cancellation"| cancelling
+  cancelling -->|"started effects drain"| cancelled["Cancelled only after translation<br/>and fetch effects drain"]
+
+  accepted -.->|"completion unproved"| incomplete["Incomplete<br/>(acked, missing, quarantined image)"]
+  visible -.->|"completion unproved"| incomplete
+  writeClosed -.->|"completion unproved"| incomplete
+  mapped -.->|"completion unproved"| incomplete
+  invalidated -.->|"completion unproved"| incomplete
+  fetchPending -.->|"completion unproved"| incomplete
+  fetchDone -.->|"completion unproved"| incomplete
+
+  accepted -.->|"unsafe backend failure"| quarantined["Quarantined<br/>(reason, image)"]
+  visible -.->|"unsafe backend failure"| quarantined
+  writeClosed -.->|"unsafe backend failure"| quarantined
+  mapped -.->|"unsafe backend failure"| quarantined
+  invalidated -.->|"unsafe backend failure"| quarantined
+  fetchPending -.->|"unsafe backend failure"| quarantined
+  fetchDone -.->|"unsafe backend failure"| quarantined
+  published -.->|"invariant"| noRewrite["Same version never returns to WritableOwned"]
 ```
 
 The logical close in `Sealing` prevents further writers while the backend

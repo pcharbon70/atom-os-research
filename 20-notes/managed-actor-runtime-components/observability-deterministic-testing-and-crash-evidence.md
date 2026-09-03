@@ -149,12 +149,19 @@ Each scheduler writes a single-producer ring or another bounded local structure
 without taking a global trace lock on the hot path. A charged drain service
 merges streams only when a consumer requests a view.
 
-```text
-Disabled
-  -> Active(buffer_generation, filter, quota)
-  -> Saturated(loss_epoch)
-  -> Draining
-  -> Closed
+```mermaid
+flowchart TD
+  obs_trace_disabled["Disabled"]
+  obs_trace_active["Active(buffer_generation, filter, quota)"]
+  obs_trace_saturated["Saturated(loss_epoch)"]
+  obs_trace_draining["Draining"]
+  obs_trace_closed["Closed"]
+
+  obs_trace_disabled -->|"enable with buffer, filter, and quota"| obs_trace_active
+  obs_trace_active -->|"buffer or quota saturates"| obs_trace_saturated
+  obs_trace_active -->|"disable or close requested"| obs_trace_draining
+  obs_trace_saturated -->|"record loss and apply declared drain policy"| obs_trace_draining
+  obs_trace_draining -->|"retained records drained or sealed"| obs_trace_closed
 ```
 
 On saturation, the declared mode either overwrites oldest records, drops new
@@ -223,12 +230,25 @@ Choice {
 Replay checks the enabled-set digest before applying the choice. A mismatch
 freezes with a divergence record; it never silently selects a different actor.
 
-```text
-Created
-  -> InputsVerified
-  -> Executing
-  -> Passed | Failed | Diverged
-  -> Frozen
+```mermaid
+flowchart TD
+  obs_replay_created["Created"]
+  obs_replay_inputs_verified["InputsVerified"]
+  obs_replay_executing["Executing"]
+  obs_replay_passed["Passed"]
+  obs_replay_failed["Failed"]
+  obs_replay_diverged["Diverged"]
+  obs_replay_frozen["Frozen"]
+
+  obs_replay_created -->|"manifest and inputs match"| obs_replay_inputs_verified
+  obs_replay_created -->|"manifest or input identity mismatches"| obs_replay_diverged
+  obs_replay_inputs_verified -->|"begin controlled execution"| obs_replay_executing
+  obs_replay_executing -->|"property holds"| obs_replay_passed
+  obs_replay_executing -->|"property fails"| obs_replay_failed
+  obs_replay_executing -->|"enabled set or state mismatches"| obs_replay_diverged
+  obs_replay_passed -->|"seal successful evidence"| obs_replay_frozen
+  obs_replay_failed -->|"seal failing schedule"| obs_replay_frozen
+  obs_replay_diverged -->|"seal divergence record"| obs_replay_frozen
 ```
 
 A replay manifest binds runtime/OTP profile, module/code hashes, native/service
@@ -248,14 +268,26 @@ The kernel reserves a small immutable crash header and grants an outer evidence
 service read-only access to selected frozen mappings. The runtime pre-registers
 bounded descriptor pages while healthy. On fault:
 
-```text
-Armed
-  -> FaultObserved
-  -> DomainFrozen
-  -> KernelHeaderSealed
-  -> OptionalRuntimeSectionsCaptured
-  -> ManifestSealed
-  -> ExportedOrExpired
+```mermaid
+flowchart TD
+  obs_crash_armed["Armed"]
+  obs_crash_fault_observed["FaultObserved"]
+  obs_crash_domain_frozen["DomainFrozen"]
+  obs_crash_kernel_header_sealed["KernelHeaderSealed"]
+  obs_crash_optional_sections["OptionalRuntimeSectionsCaptured"]
+  obs_crash_manifest_sealed["ManifestSealed"]
+  obs_crash_exported["Exported"]
+  obs_crash_expired["Expired"]
+
+  obs_crash_armed -->|"kernel or outer service observes fault"| obs_crash_fault_observed
+  obs_crash_fault_observed -->|"freeze succeeds"| obs_crash_domain_frozen
+  obs_crash_fault_observed -->|"freeze unavailable; seal teardown evidence"| obs_crash_kernel_header_sealed
+  obs_crash_domain_frozen -->|"seal mandatory kernel minimum"| obs_crash_kernel_header_sealed
+  obs_crash_kernel_header_sealed -->|"valid runtime sections are available"| obs_crash_optional_sections
+  obs_crash_kernel_header_sealed -->|"sections absent, invalid, or capture fails"| obs_crash_manifest_sealed
+  obs_crash_optional_sections -->|"finalize checksums and missing-section bitmap"| obs_crash_manifest_sealed
+  obs_crash_manifest_sealed -->|"authorized export completes"| obs_crash_exported
+  obs_crash_manifest_sealed -->|"retention deadline expires"| obs_crash_expired
 ```
 
 The kernel header includes domain identity/epoch, fault class, architecture

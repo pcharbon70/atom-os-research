@@ -166,16 +166,16 @@ property.
 
 ## Staged loading pipeline
 
-```text
-UntrustedBytes
-  -> FramedContainer
-  -> ParsedPrivateModule
-  -> StructurallyValidModule
-  -> ProfileValidModule
-  -> AuthorizedModule
-  -> ImmutableRuntimeImage
-  -> SealedGeneration
-  -> PublishedGeneration
+```mermaid
+flowchart LR
+  cmb_untrusted["Untrusted bytes"] --> cmb_framed["Framed container"]
+  cmb_framed --> cmb_parsed["Parsed private module"]
+  cmb_parsed --> cmb_structural["Structurally valid module"]
+  cmb_structural --> cmb_profile["Profile-valid module"]
+  cmb_profile --> cmb_authorized["Authorized module"]
+  cmb_authorized --> cmb_image["Immutable runtime image"]
+  cmb_image --> cmb_sealed["Sealed generation"]
+  cmb_sealed --> cmb_published["Published generation"]
 ```
 
 ### 1. Framing
@@ -257,12 +257,14 @@ root pointer atomically through the code-publication protocol.
 
 A module with `-on_load` follows a gated transaction:
 
-```text
-SealedCandidate
-  -> PendingOnLoad
-  -> OnLoadRunning(fresh_actor, candidate_only)
-  -> OnLoadReturnedOk -> PublishedCurrent
-  -> OnLoadFailedOrRaised -> CandidateUnloaded
+```mermaid
+flowchart TD
+  cmo_sealed["Sealed candidate"] --> cmo_pending["Pending on_load"]
+  cmo_pending --> cmo_running["on_load running: fresh actor, candidate only"]
+  cmo_running -->|"returns ok"| cmo_ok["on_load returned ok"]
+  cmo_ok --> cmo_published["Published current"]
+  cmo_running -->|"fails or raises"| cmo_failed["on_load failed or raised"]
+  cmo_failed --> cmo_unloaded["Candidate unloaded"]
 ```
 
 The initialization function runs in a freshly spawned actor that terminates

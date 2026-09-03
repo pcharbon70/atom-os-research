@@ -72,8 +72,9 @@ The baseline passes only if:
 5. Ordinary admitted local messages are not silently discarded by quota logic.
 6. Control, cleanup, collection, and crash evidence have a capped reserve that
    ordinary work cannot consume.
-7. Bulk table, cleanup, receive-scan, and reconciliation work yields in bounded
-   slices.
+7. Bulk table, cleanup, receive-scan, and reconciliation work executes in
+   bounded internal slices without exposing partial effects for operations
+   whose compatibility contract is atomic.
 
 ## Evidence, synthesis, and proposal
 
@@ -119,15 +120,24 @@ interpreter unless every slow path and native fragment is instrumented.
 
 ## Accounting hierarchy
 
-```text
-kernel domain account
-  └─ runtime domain ledger
-       ├─ recovery/system reserve
-       ├─ application or supervision-group account
-       │    └─ actor account
-       ├─ shared-object pools
-       ├─ native-service/gateway routes
-       └─ runtime-global metadata
+```mermaid
+flowchart TD
+    accountingKernelDomain["Kernel domain account"]
+    accountingRuntimeLedger["Runtime domain ledger"]
+    accountingRecoveryReserve["Recovery/system reserve"]
+    accountingApplication["Application or supervision-group account"]
+    accountingActor["Actor account"]
+    accountingSharedPools["Shared-object pools"]
+    accountingNativeRoutes["Native-service/gateway routes"]
+    accountingRuntimeMetadata["Runtime-global metadata"]
+
+    accountingKernelDomain -->|"bounds"| accountingRuntimeLedger
+    accountingRuntimeLedger -->|"partitions"| accountingRecoveryReserve
+    accountingRuntimeLedger -->|"partitions"| accountingApplication
+    accountingApplication -->|"contains"| accountingActor
+    accountingRuntimeLedger -->|"partitions"| accountingSharedPools
+    accountingRuntimeLedger -->|"partitions"| accountingNativeRoutes
+    accountingRuntimeLedger -->|"partitions"| accountingRuntimeMetadata
 ```
 
 The runtime ledger is an auditable semantic partition beneath the hard kernel
@@ -155,17 +165,28 @@ a BEAM term.
 
 ## Reservation protocol
 
-```text
-Proposed(amount, class)
-  -> AncestorsChecked
-  -> Reserved
-  -> Materialized
-  -> Published
-  -> Committed
+```mermaid
+flowchart LR
+    reservationProposed["Proposed (amount, class)"]
+    reservationAncestorsChecked["AncestorsChecked"]
+    reservationReserved["Reserved"]
+    reservationMaterialized["Materialized"]
+    reservationPublished["Published"]
+    reservationCommitted["Committed"]
+    reservationRejected["RejectedOrCancelled"]
+    reservationRolledBack["RolledBack"]
 
-Proposed | Reserved | Materialized
-  -> RejectedOrCancelled
-  -> RolledBack
+    reservationProposed -->|"check the full ancestor path"| reservationAncestorsChecked
+    reservationAncestorsChecked -->|"all required accounts accept"| reservationReserved
+    reservationReserved -->|"materialize the object or work"| reservationMaterialized
+    reservationMaterialized -->|"publish the actor-visible result"| reservationPublished
+    reservationPublished -->|"commit the charge"| reservationCommitted
+
+    reservationProposed -->|"reject or cancel before reservation"| reservationRejected
+    reservationAncestorsChecked -->|"an ancestor refuses the reservation"| reservationRejected
+    reservationReserved -->|"cancel after reservation"| reservationRejected
+    reservationMaterialized -->|"publication fails or is cancelled"| reservationRejected
+    reservationRejected -->|"release reservation and materialization"| reservationRolledBack
 ```
 
 Publication is the linearization point for an actor-visible object. If physical
@@ -187,7 +208,7 @@ At minimum, the ledger distinguishes:
 | Private memory | Heap, stack, heap fragments, collector reserve | Old-generation retention and failed GC |
 | Mailbox/signals | Envelope count, payload/fragment bytes, oldest age | Skipped selective-receive candidates |
 | Shared binary | Allocated bytes and references/slices | Tiny slice retaining a large parent |
-| Code/literals | Module generation and mapped bytes | Old code pinned by stacks/funs/literals |
+| Code/literals | Module generation, mapped bytes, and deferred-copy work | Direct old-code execution blocks logical purge; fun invalidation and later literal copying remain charged reclamation work |
 | Atoms/global IDs | Entry and byte count | Permanent admission from external input |
 | Timers/relations | Object count and delivery/cleanup work | Cancel/exit races and large fan-out |
 | Tables | Metadata, buckets/tree nodes, entries, payloads | Owner death, heir transfer, snapshots |
@@ -248,14 +269,19 @@ an unlimited sink.
 
 ## Pressure and overload states
 
-```text
-Normal
-  -> SoftPressure
-  -> AdmissionClosed
-  -> RecoveryReserveOnly
-  -> QuarantinedOrTerminating
+```mermaid
+flowchart LR
+    pressureNormal["Normal"]
+    pressureSoft["SoftPressure"]
+    pressureAdmissionClosed["AdmissionClosed"]
+    pressureRecoveryOnly["RecoveryReserveOnly"]
+    pressureQuarantined["QuarantinedOrTerminating"]
 
-SoftPressure -> Normal only below a lower hysteresis threshold
+    pressureNormal -->|"soft-pressure threshold crossed"| pressureSoft
+    pressureSoft -->|"admission must close"| pressureAdmissionClosed
+    pressureAdmissionClosed -->|"ordinary work cannot proceed"| pressureRecoveryOnly
+    pressureRecoveryOnly -->|"integrity or progress cannot be guaranteed"| pressureQuarantined
+    pressureSoft -->|"below the lower hysteresis threshold"| pressureNormal
 ```
 
 - `SoftPressure` increases telemetry, asks OTP-like policy to shed work, and
@@ -284,6 +310,10 @@ For each operation, the profile states the hard action:
 | Native/remote request | `NotAccepted` and rollback | Terminal result or `Indeterminate` according to protocol |
 | Trace event | Follow declared lossy/lossless observability mode | Loss is counted explicitly; ordinary actors do not pay unbounded trace debt |
 
+`NotAccepted` and `Indeterminate` in this table are internal service/gateway
+outcomes or results of an explicit Atom OS extension. They are not additional
+return values from compatible Erlang send operations.
+
 Where OTP leaves behavior implementation-dependent, Atom OS still documents
 and tests its choice. Resource refusal is not allowed to corrupt an object or
 create a half-visible relation.
@@ -297,7 +327,8 @@ Table {
   type,
   access_profile,
   owner,
-  heir?,
+  heir: None | Silent(actor_incarnation)
+             | Notify(actor_incarnation, heir_data),
   ledger_account,
   implementation_generation,
   snapshot_epoch?,
@@ -306,14 +337,42 @@ Table {
 
 Lifecycle:
 
-```text
-Reserved -> Owned
-Owned -> Transferring -> Owned(new_owner)
-Owned -> Destroying -> Retired
+```mermaid
+flowchart TD
+    tableReserved["Reserved"]
+    tableOwned["Owned"]
+    tableHeirTransferring["HeirTransferring"]
+    tableOwnedByLiveHeir["Owned (live heir)"]
+    tableGiveAwayTransferring["GiveAwayTransferring"]
+    tableOwnedByNewOwner["Owned (new owner)"]
+    tableDestroying["Destroying"]
+    tableRetired["Retired"]
+
+    tableReserved -->|"creation commits"| tableOwned
+    tableOwned -->|"owner death selects a live heir"| tableHeirTransferring
+    tableHeirTransferring -->|"heir transfer commits"| tableOwnedByLiveHeir
+    tableOwnedByLiveHeir -->|"the heir becomes the current owner"| tableOwned
+    tableOwned -->|"give_away/3 selects a live target"| tableGiveAwayTransferring
+    tableGiveAwayTransferring -->|"transfer and notification commit"| tableOwnedByNewOwner
+    tableOwnedByNewOwner -->|"the target becomes the current owner"| tableOwned
+    tableOwned -->|"owner death has no live heir"| tableDestroying
+    tableDestroying -->|"retire the table generation"| tableRetired
 ```
 
-Owner death chooses exactly one generation-correct transfer or destruction.
-No actor can observe a table under both owners or mutate a retired generation.
+Owner death chooses exactly one generation-correct heir transfer or
+destruction. `None`, or an heir that is no longer a live local actor at the
+linearization point, destroys the table. `Silent` corresponds to OTP's
+two-element `{heir, Pid}` option and transfers without an `ETS-TRANSFER`
+message. `Notify` corresponds to `{heir, Pid, HeirData}` and publishes
+`{'ETS-TRANSFER', Table, FromPid, HeirData}` to the new owner. The notification
+is ordinary actor-visible signal work and is reserved and charged with the
+transfer.
+
+Explicit `give_away/3` is a separate transition. It requires a live local
+non-owner target, always publishes
+`{'ETS-TRANSFER', Table, FromPid, GiftData}`, and leaves the table's stored heir
+setting unchanged. The new owner may subsequently change that setting. No
+actor can observe the table under both owners or mutate a retired generation.
 
 The compatibility floor preserves every atomicity and isolation guarantee that
 the selected OTP profile documents. That includes single-object/key operations
@@ -401,6 +460,8 @@ credit APIs or a declared receiver/domain terminal action.
 ### Stage 3: tables and policy profiles
 
 - Implement bounded ETS-like operations and generation-correct heir transfer.
+- Preserve the distinct two-tuple heir, three-tuple heir-data, and
+  `give_away/3` notification contracts.
 - Compare data structures and overload policies with representative services.
 
 ## Verification and measurements
@@ -412,6 +473,10 @@ credit APIs or a declared receiver/domain terminal action.
   pages under randomized allocation/collection and intentional fragmentation.
 - Fan out large binaries, retain tiny slices, transfer table ownership, and
   hold native/DMA requests after caller exit; verify charges remain visible.
+- Exercise owner death with no heir, a dead heir, a silent two-tuple heir, and
+  a notifying three-tuple heir; verify exactly the documented transfer message
+  behavior. Race `give_away/3` with owner/target exit, verify it always notifies
+  on success, and verify the stored heir setting is unchanged.
 - Cross every soft/hard threshold concurrently; prove each operation is either
   rejected before publication or committed exactly once.
 - Benchmark table types across read/write/scan mixes, hot keys, ownership

@@ -153,16 +153,18 @@ one kernel object per actor.
 
 ## Actor ownership state machine
 
-```text
-Waiting(reason)
-  -> WakePending
-  -> Runnable(queue_owner, migration_generation)
-  -> Running(scheduler, activation)
-  -> Runnable | Waiting | Suspended | Exiting
+```mermaid
+flowchart TD
+  rse_waiting["Waiting(reason)"] --> rse_wake["Wake pending"]
+  rse_wake --> rse_runnable["Runnable(queue_owner, migration_generation)"]
+  rse_runnable --> rse_running["Running(scheduler, activation)"]
+  rse_running -->|"remains ready"| rse_runnable
+  rse_running -->|"waits"| rse_waiting
+  rse_running -->|"is suspended"| rse_suspended["Suspended"]
+  rse_running -->|"begins exit"| rse_exiting["Exiting"]
 
-Runnable(source)
-  -> MigrationClaimed(source, destination, next_generation)
-  -> Runnable(destination, next_generation)
+  rsm_source["Runnable(source)"] --> rsm_claimed["Migration claimed(source, destination, next_generation)"]
+  rsm_claimed --> rsm_destination["Runnable(destination, next_generation)"]
 ```
 
 One atomic state/queue protocol establishes ownership. A wake that observes
@@ -301,9 +303,14 @@ wake selection only after binding succeeds.
 
 ### Graceful revoke
 
-```text
-Online -> DrainRequested -> ActorReleased -> QueuesTransferred
-       -> EpochPublished -> ContextReturned -> Offline
+```mermaid
+flowchart LR
+  rso_online["Online"] --> rso_drain["Drain requested"]
+  rso_drain --> rso_actor["Actor released"]
+  rso_actor --> rso_queues["Queues transferred"]
+  rso_queues --> rso_epoch["Epoch published"]
+  rso_epoch --> rso_context["Context returned"]
+  rso_context --> rso_offline["Offline"]
 ```
 
 No new actors are assigned after `DrainRequested`. The current actor reaches a

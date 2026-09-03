@@ -252,33 +252,68 @@ CPU; a remote request is delivered through the CPU-request mechanism. State is
 preallocated and protected by local interrupt exclusion or a small proven
 atomic protocol:
 
-```text
-TimerChannelState:
-  Idle(channel_generation)
-    -> Armed(token, absolute_target)
-    -> DuePending(token, observed_time)
-    -> Idle(next_generation)
+```mermaid
+flowchart TB
+  timer_idle_current["Idle(channel_generation)"]
+  timer_armed_target["Armed(token, absolute_target)"]
+  timer_due_pending["DuePending(token, observed_time)"]
+  timer_idle_next["Idle(next_generation)"]
 
-  Armed(old_token)
-    -> RebaseClaimed(old_token, prepared_new_token)
-       -> Armed(new_token) | DuePending(new_token) | Idle | Failed
+  timer_idle_current --> timer_armed_target
+  timer_armed_target --> timer_due_pending
+  timer_due_pending --> timer_idle_next
 
-  Armed(token)
-    -> CancelClaimed(token) -> Idle | Failed
+  timer_armed_old["Armed(old_token)"]
+  timer_rebase_claimed["RebaseClaimed(old_token, prepared_new_token)"]
+  timer_armed_new["Armed(new_token)"]
+  timer_due_new["DuePending(new_token)"]
 
-  Idle/Armed/DuePending/RebaseClaimed/CancelClaimed
-    -> Failed(reason) -> Disabled(next_generation)
+  timer_armed_old --> timer_rebase_claimed
+  timer_rebase_claimed --> timer_armed_new
+  timer_rebase_claimed --> timer_due_new
+  timer_rebase_claimed --> timer_idle_next
 
-DeadlineTokenState:
-  Open(token)
-    -> Terminal(
-         Fired(observed_time, late_by)
-       | Cancelled
-       | Rebased(new_token, effective_target, conversion_generation)
-       | RebaseFailed(reason, channel_post_state)
-       | EraDiscontinuity(old_era, new_era, evidence)
-       | ChannelFailed(reason, channel_post_state))
-    -> Consumed(terminal_generation)
+  timer_armed_cancel["Armed(token)"]
+  timer_cancel_claimed["CancelClaimed(token)"]
+
+  timer_armed_cancel --> timer_cancel_claimed
+  timer_cancel_claimed --> timer_idle_next
+
+  timer_any_state["Idle / Armed / DuePending /<br/>RebaseClaimed / CancelClaimed"]
+  timer_failed["Failed(reason)"]
+  timer_disabled["Disabled(next_generation)"]
+
+  timer_rebase_claimed --> timer_failed
+  timer_cancel_claimed --> timer_failed
+  timer_any_state --> timer_failed
+  timer_failed --> timer_disabled
+```
+
+The accepted deadline token has a separate state machine:
+
+```mermaid
+flowchart TB
+  deadline_open["Open(token)"]
+  deadline_fired["Terminal: Fired(observed_time, late_by)"]
+  deadline_cancelled["Terminal: Cancelled"]
+  deadline_rebased["Terminal: Rebased(new_token, effective_target,<br/>conversion_generation)"]
+  deadline_rebase_failed["Terminal: RebaseFailed(reason, channel_post_state)"]
+  deadline_era_discontinuity["Terminal: EraDiscontinuity(old_era, new_era, evidence)"]
+  deadline_channel_failed["Terminal: ChannelFailed(reason, channel_post_state)"]
+  deadline_consumed["Consumed(terminal_generation)"]
+
+  deadline_open --> deadline_fired
+  deadline_open --> deadline_cancelled
+  deadline_open --> deadline_rebased
+  deadline_open --> deadline_rebase_failed
+  deadline_open --> deadline_era_discontinuity
+  deadline_open --> deadline_channel_failed
+  deadline_fired --> deadline_consumed
+  deadline_cancelled --> deadline_consumed
+  deadline_rebased --> deadline_consumed
+  deadline_rebase_failed --> deadline_consumed
+  deadline_era_discontinuity --> deadline_consumed
+  deadline_channel_failed --> deadline_consumed
 ```
 
 Channel health and accepted-token evidence are separate. Every accepted token

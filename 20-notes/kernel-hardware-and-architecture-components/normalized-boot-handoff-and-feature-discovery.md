@@ -135,20 +135,24 @@ The result is a project design, not experimental evidence.
 
 ## Recommended architecture
 
-```text
-firmware / monitor / bootloader
-        |
-        | format-specific state and borrowed records
-        v
-early entry shim -> protocol adapter -> BootEnvelope
-                                         |
-                                 bounded validation
-                                 copy + reconciliation
-                                         |
-                                         v
-                                sealed BootSnapshot
-                                  /      |       \
-                           allocator  CPU join  backend binding
+```mermaid
+flowchart TB
+  boot_provider["Firmware / monitor / bootloader"]
+  boot_entry_shim["Early entry shim"]
+  boot_protocol_adapter["Protocol adapter"]
+  boot_envelope["BootEnvelope"]
+  boot_snapshot["Sealed BootSnapshot"]
+  boot_allocator["Allocator"]
+  boot_cpu_join["CPU join"]
+  boot_backend_binding["Backend binding"]
+
+  boot_provider -->|"Format-specific state and borrowed records"| boot_entry_shim
+  boot_entry_shim --> boot_protocol_adapter
+  boot_protocol_adapter --> boot_envelope
+  boot_envelope -->|"Bounded validation<br/>copy + reconciliation"| boot_snapshot
+  boot_snapshot --> boot_allocator
+  boot_snapshot --> boot_cpu_join
+  boot_snapshot --> boot_backend_binding
 ```
 
 ### Boundary A: terminate the provider contract
@@ -247,12 +251,18 @@ normalizer rejects arithmetic wrap and constructs a sweep over all endpoints.
 Each resulting non-overlapping segment retains all claims that cover it and is
 classified by a conservative lattice:
 
-```text
-Bad/Unaddressable
-    > FirmwareRuntime/Device/Reserved
-    > KernelImage/Module/BootSnapshot/PinnedProvider
-    > ReclaimableAfter(condition)
-    > Usable
+```mermaid
+flowchart TB
+  memory_bad["Bad / Unaddressable"]
+  memory_firmware["FirmwareRuntime / Device / Reserved"]
+  memory_kernel["KernelImage / Module / BootSnapshot / PinnedProvider"]
+  memory_reclaimable["ReclaimableAfter(condition)"]
+  memory_usable["Usable"]
+
+  memory_bad -->|"more restrictive than"| memory_firmware
+  memory_firmware -->|"more restrictive than"| memory_kernel
+  memory_kernel -->|"more restrictive than"| memory_reclaimable
+  memory_reclaimable -->|"more restrictive than"| memory_usable
 ```
 
 “Greater” means more restrictive. Conflicting claims never resolve downward to
@@ -310,9 +320,13 @@ CpuFeatureEvidence<CpuIncarnation> {
 
 For the boot CPU, each feature passes through:
 
-```text
-Reported -> ArchitecturallyConfirmed -> PolicyAccepted
-         -> Enabled -> SelfTested -> Sealed
+```mermaid
+flowchart LR
+  feature_reported["Reported"] --> feature_confirmed["ArchitecturallyConfirmed"]
+  feature_confirmed --> feature_policy_accepted["PolicyAccepted"]
+  feature_policy_accepted --> feature_enabled["Enabled"]
+  feature_enabled --> feature_self_tested["SelfTested"]
+  feature_self_tested --> feature_sealed["Sealed"]
 ```
 
 Failure at `ArchitecturallyConfirmed`, `Enabled`, or `SelfTested` either selects
@@ -359,18 +373,35 @@ timeout, and trust status. There is no generic “call firmware” pointer.
 
 ## Lifecycle and state machine
 
-```text
-ProviderEntry
-  -> EntryStateEstablished
-  -> TransportValidated
-  -> RawInputsPinnedOrCopied
-  -> ProviderContractTerminated
-  -> FactsNormalized
-  -> FeatureProfileSealed
-  -> SnapshotPublished
-  -> BorrowedRangesReleased
+```mermaid
+flowchart TB
+  lifecycle_provider_entry["ProviderEntry"]
+  lifecycle_entry_state["EntryStateEstablished"]
+  lifecycle_transport_validated["TransportValidated"]
+  lifecycle_inputs_owned["RawInputsPinnedOrCopied"]
+  lifecycle_provider_terminated["ProviderContractTerminated"]
+  lifecycle_facts_normalized["FactsNormalized"]
+  lifecycle_profile_sealed["FeatureProfileSealed"]
+  lifecycle_snapshot_published["SnapshotPublished"]
+  lifecycle_ranges_released["BorrowedRangesReleased"]
+  lifecycle_failed["Failed(reason, raw_evidence_digest)"]
 
-Any state before publication -> Failed(reason, raw_evidence_digest)
+  lifecycle_provider_entry --> lifecycle_entry_state
+  lifecycle_entry_state --> lifecycle_transport_validated
+  lifecycle_transport_validated --> lifecycle_inputs_owned
+  lifecycle_inputs_owned --> lifecycle_provider_terminated
+  lifecycle_provider_terminated --> lifecycle_facts_normalized
+  lifecycle_facts_normalized --> lifecycle_profile_sealed
+  lifecycle_profile_sealed --> lifecycle_snapshot_published
+  lifecycle_snapshot_published --> lifecycle_ranges_released
+
+  lifecycle_provider_entry -.->|"Failure before publication"| lifecycle_failed
+  lifecycle_entry_state -.->|"Failure before publication"| lifecycle_failed
+  lifecycle_transport_validated -.->|"Failure before publication"| lifecycle_failed
+  lifecycle_inputs_owned -.->|"Failure before publication"| lifecycle_failed
+  lifecycle_provider_terminated -.->|"Failure before publication"| lifecycle_failed
+  lifecycle_facts_normalized -.->|"Failure before publication"| lifecycle_failed
+  lifecycle_profile_sealed -.->|"Failure before publication"| lifecycle_failed
 ```
 
 Publication is a one-way transition. The snapshot is mapped read-only after

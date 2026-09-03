@@ -103,8 +103,9 @@ runtime, capability-kernel, and OTP-policy boundaries.
   native code to an explicitly trusted compatibility profile.
 - [9. Distribution gateway and remote actor
   semantics](../20-notes/managed-actor-runtime-components/distribution-gateway-and-remote-actor-semantics.md) —
-  defines authenticated, attenuated, credit-bound session epochs without
-  fabricating global order or exactly-once effects.
+  defines authenticated, attenuated, credit-bound transport session epochs
+  while keeping them distinct from OTP node-incarnation PID/reference identity
+  and without fabricating global order or exactly-once effects.
 - [10. Failure translation and the OTP
   boundary](../20-notes/managed-actor-runtime-components/failure-translation-and-the-otp-boundary.md) —
   separates typed observations and bounded cleanup from OTP restart policy and

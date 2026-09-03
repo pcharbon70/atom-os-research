@@ -59,8 +59,9 @@ A credible implementation must guarantee:
 2. Directly observable resources are disposed or transferred before the
    corresponding exit or `DOWN` observation is published, as required by the
    selected compatibility profile.
-3. Failure reason and provenance are sealed; later translation may add context
-   but cannot silently rewrite the originating evidence.
+3. In the compatible profile, an arbitrary Erlang exit-reason term is preserved
+   exactly after only the documented OTP transformations; provenance and
+   diagnostics may add context but cannot replace or silently rewrite it.
 4. Failure suspicion is represented separately from confirmed termination.
 5. Runtime, native-service, gateway, and actor incarnations prevent stale
    events from being attached to successors.
@@ -81,9 +82,13 @@ safe for durable effects.
 The official [OTP 29.0.6 managed-runtime
 documentation](../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md)
 provides the compatibility floor: an exiting process runs no more Erlang code;
-links and monitors translate termination into signals; trapping exits changes
-signal handling; and exit/`DOWN` publication follows release of directly
-visible Erlang resources. Heap-held and dirty-native resources can remain
+an exit reason can be any Erlang term; links and monitors propagate that reason;
+trapping exits changes signal handling; and exit/`DOWN` publication follows
+release of directly visible Erlang resources. The documented transformations
+include run-time errors terminating with `{Reason, Stack}`, an explicit
+untrappable `kill` signal terminating its receiver with `killed`, trapped exit
+signals becoming `{'EXIT', From, Reason}`, and relation setup/loss producing
+`noproc` or `noconnection`. Heap-held and dirty-native resources can remain
 afterward, so publication is not proof that every byte or native effect has
 vanished.
 
@@ -129,6 +134,7 @@ FailureEvent {
   observer_identity,
   evidence_class,
   reason,
+  reason_digest?,
   operation_phase?,
   last_confirmed_progress?,
   resource_disposition?,
@@ -140,37 +146,61 @@ FailureEvent {
 `evidence_class` distinguishes a local runtime decision, authenticated kernel
 fault, service protocol terminal result, transport closure, timeout-based
 suspicion, and administrator action. Unknown fields stay unknown. A compatibility
-adapter may turn several records into an OTP-shaped reason such as `noconnection`,
-but the structured evidence remains available to privileged diagnostics and
-new APIs.
+adapter may turn a non-actor event into a documented OTP-shaped reason such as
+`noconnection`, but the structured evidence remains available to privileged
+diagnostics and new APIs.
 
-Reasons are data, not authority. Terms supplied by an actor are copied and
-bounded before becoming a failure reason; a reason cannot embed a raw kernel
-capability or an unbounded crash dump.
+### Exact compatibility reason
+
+In the compatible profile, `reason` is the exact arbitrary managed term chosen
+by OTP semantics. The runtime may seal, pin, share internally, or incrementally
+copy its representation, but actor-visible link, trapped-exit, and `DOWN`
+projections reproduce that term exactly after the documented transformation;
+they do not substitute a digest, truncated preview, typed summary, or richer
+failure record. Actor memory accounting bounds the source graph as a resource
+without changing its value, and recovery-owned lifetime keeps it available
+after the exiting actor's heap is reclaimed.
+
+`reason_digest` is an optional diagnostic index only. A deliberately restricted
+profile may redact, truncate, or digest a reason under an explicit
+non-compatible contract, but that value must not be presented as an OTP exit
+reason or used on an API claiming the compatible profile. Reasons are data, not
+authority: an actor term can name an opaque application object but cannot forge
+a kernel capability merely by appearing in the reason.
 
 ## Actor termination protocol
 
-```text
-Alive
-  -> ExitSelected(reason, provenance)
-  -> Exiting
-  -> ReleasingVisibleResources
-  -> PublishingRelations
-  -> ReleasingPrivateAndDeferredState
-  -> Reclaimed
+```mermaid
+flowchart LR
+    actorAlive["Alive"]
+    actorExitSelected["ExitSelected (reason, provenance)"]
+    actorExiting["Exiting"]
+    actorReleasingVisible["ReleasingVisibleResources"]
+    actorPublishingRelations["PublishingRelations"]
+    actorReleasingDeferred["ReleasingPrivateAndDeferredState"]
+    actorReclaimed["Reclaimed"]
+
+    actorAlive -->|"one exit reason wins"| actorExitSelected
+    actorExitSelected -->|"seal the outcome"| actorExiting
+    actorExiting -->|"begin bounded cleanup"| actorReleasingVisible
+    actorReleasingVisible -->|"dispose or transfer visible resources"| actorPublishingRelations
+    actorPublishingRelations -->|"publish relation observations"| actorReleasingDeferred
+    actorReleasingDeferred -->|"drain permitted deferred state"| actorReclaimed
 ```
 
 The linearization point is `ExitSelected`: exactly one reason wins according
-to the compatibility rules. Subsequent exit requests may be recorded as
-diagnostic context but cannot change the actor's sealed outcome.
+to the compatibility rules, and the selected post-transformation term is
+sealed exactly. Subsequent exit requests may be recorded as diagnostic context
+but cannot change the actor's sealed outcome.
 
 `ReleasingVisibleResources` includes registered names, owned tables or their
-heir transfer, aliases, timers, ports/service handles, and any object whose
-continued public visibility would contradict the death signal. Each object has
-its own generation-aware disposition. The actor's private heap, shared-binary
-references, late native completions, and other deferred state can drain after
-relation publication only when the profile permits it and no successor can
-observe them as still owned by the dead actor.
+heir transfer, aliases, timers whose destination is this actor PID,
+ports/service handles, and any object whose continued public visibility would
+contradict the death signal. It does **not** include timers merely because this
+actor created them. Each object has its own generation-aware disposition. The
+actor's private heap, shared-binary references, late native completions, and
+other deferred state can drain after relation publication only when the profile
+permits it and no successor can observe them as still owned by the dead actor.
 
 Cleanup uses bounded continuation records:
 
@@ -186,6 +216,25 @@ CleanupCursor {
 
 Every slice revalidates the actor generation. Scheduler or domain restart can
 resume or conservatively reclaim a cursor without executing actor code.
+
+### Timer cleanup is destination-based
+
+The compatible `start_timer`/`send_after` lifetime rule follows the destination,
+not the creator:
+
+- for a PID destination, the runtime automatically cancels the timer when that
+  exact PID is already dead or exits; the timer index is keyed by destination
+  PID generation, so PID-slot reuse cannot inherit it;
+- for an atom/name destination, the timer survives the creator's exit and the
+  exit of any process previously registered under that name, resolves the
+  local registered name only at expiry, and silently sends nowhere when the
+  name is then unregistered; and
+- explicit cancellation uses the timer reference and races with expiry under
+  the separately specified timer contract.
+
+Creator exit has no automatic effect unless the creator is also the PID
+destination. Whole-runtime teardown may still invalidate every old timer as a
+domain-epoch action; that is distinct from actor cleanup.
 
 ## Link, monitor, and supervision boundary
 
@@ -215,14 +264,27 @@ policy is to start a signed initial service or report that bootstrap failed.
 
 ## Runtime-domain failure and restart
 
-```text
-DomainHealthy(epoch n)
-  -> Suspected | Faulted
-  -> AdmissionsClosed
-  -> FrozenOrKilled
-  -> EvidenceSealed
-  -> ResourcesReclaimed
-  -> Started(epoch n+1) | Stopped
+```mermaid
+flowchart TD
+    domainHealthy["DomainHealthy (epoch n)"]
+    domainSuspected["Suspected"]
+    domainFaulted["Faulted"]
+    domainAdmissionsClosed["AdmissionsClosed"]
+    domainFrozenOrKilled["FrozenOrKilled"]
+    domainEvidenceSealed["EvidenceSealed"]
+    domainResourcesReclaimed["ResourcesReclaimed"]
+    domainStarted["Started (epoch n + 1)"]
+    domainStopped["Stopped"]
+
+    domainHealthy -->|"missed progress"| domainSuspected
+    domainHealthy -->|"authenticated synchronous kernel fault"| domainFaulted
+    domainSuspected -->|"outer policy closes admission"| domainAdmissionsClosed
+    domainFaulted -->|"outer policy closes admission"| domainAdmissionsClosed
+    domainAdmissionsClosed -->|"freeze or kill under policy"| domainFrozenOrKilled
+    domainFrozenOrKilled -->|"seal final evidence"| domainEvidenceSealed
+    domainEvidenceSealed -->|"authoritative teardown"| domainResourcesReclaimed
+    domainResourcesReclaimed -->|"restart in a new epoch"| domainStarted
+    domainResourcesReclaimed -->|"do not restart"| domainStopped
 ```
 
 An outer service owns this state machine. On an authenticated synchronous
@@ -287,8 +349,11 @@ down the domain rather than run unbounded recovery code.
   final truth; freeze first and let kernel/outer services collect evidence.
 - **Ambiguous effect:** expose uncertainty and require application idempotency
   or reconciliation.
-- **Reason bomb:** bound term depth/bytes and use a summary hash plus external
-  evidence reference.
+- **Reason pressure:** charge the original reason graph to the actor, move its
+  exact compatible projection into recovery-owned lifetime with bounded cleanup
+  slices, and keep any summary hash or external evidence reference diagnostic
+  only. If exact projection cannot be sustained, report a runtime/resource
+  failure rather than silently claim OTP-compatible reason delivery.
 
 ## Alternatives and trade-offs
 
@@ -328,6 +393,8 @@ reconstructs state through explicit durable services.
 
 - Implement sealed reasons, transactional relation handling, bounded cleanup,
   visible-resource ordering, and recovery-reserve accounting.
+- Index timers by destination PID generation while leaving name-target timers
+  independent of creator and current registrant lifetime.
 - Differentially test actor-visible results against OTP 29.0.6.
 
 ### Stage 2: service and gateway translation
@@ -348,6 +415,13 @@ reconstructs state through explicit durable services.
   registration, table transfer, timer fire, and PID reuse with tiny spaces.
 - Differentially test exit signals, trapping, links, monitors, and ordering
   against the pinned OTP profile.
+- Exercise atoms, tuples, maps, binaries, references, PIDs, and nested compound
+  exit reasons; verify exact term-equality preservation plus only the
+  documented run-time-error, `kill`/`killed`, trapped-exit, `noproc`, and
+  `noconnection` transformations.
+- For both `start_timer` and `send_after`, exit the creator, PID destination,
+  and current name registrant independently; verify PID-target cancellation,
+  name lookup at expiry, name-target survival, and no creator-ownership rule.
 - Exit actors with up to millions of relations and resources; publish maximum
   cleanup slice, total recovery time, scheduler delay, and reserve usage.
 - Crash runtime, native service, gateway, and device service at every operation

@@ -209,9 +209,11 @@ The component research adds a common implementation discipline:
 
 - every externally visible object follows reserve, private preparation,
   generation-checked publication, terminal disposition, and rollback rules;
-- every asynchronous request binds actor, runtime, service/gateway, and object
-  incarnations, and reports `Indeterminate` when loss occurs after acceptance
-  without stronger completion evidence;
+- every Atom OS native/gateway request binds actor, runtime, service/gateway,
+  and object incarnations, and its internal protocol reports `Indeterminate`
+  when loss occurs after acceptance without stronger completion evidence;
+  compatible Erlang sends retain their documented return values and do not
+  acquire a delivery-completion result;
 - resource accounting follows deferred work through actor, application, domain,
   and kernel levels and reserves bounded cleanup/collection/evidence progress;
 - actor exit and runtime mechanics are distinct from OTP supervisor policy,

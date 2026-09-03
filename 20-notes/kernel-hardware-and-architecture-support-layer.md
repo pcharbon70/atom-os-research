@@ -194,30 +194,45 @@ identical features, uniformly cheap shared memory, or permanent online status.
 The components form a directed set of contracts rather than a stack in which
 every call simply moves downward:
 
-```text
-           firmware / monitor / bootloader / hypervisor
-                                   |
-                         format-specific adapter
-                                   |
-                              BootEnvelope
-                                   |
-                 component 0 validates, copies, reconciles
-                                   |
-                sealed BootSnapshot (including feature profile)
-                                   |
-                       architecture primitives capsule
-                         /         |          \
-              entry/context   ordering       raw time
-                   |          /    |   \          |
-             interrupt events   mapping   code   deadlines
-                   |              |       publication
-                   +------- CPU coordination ------+
-                                  |
-                         protected I/O + DMA
-                                  |
-                        normalized fault records
+```mermaid
+flowchart TB
+  platform["Firmware / monitor / bootloader / hypervisor"]
+  adapter["Format-specific adapter"]
+  envelope["BootEnvelope"]
+  validate["Component 0 validates, copies, and reconciles"]
+  snapshot["Sealed BootSnapshot<br/>(including feature profile)"]
+  capsule["Architecture primitives capsule"]
+  entry["Entry and context"]
+  ordering["Ordering"]
+  time["Raw time"]
+  interrupts["Interrupt events"]
+  mapping["Mapping"]
+  code["Code publication"]
+  deadlines["Deadlines"]
+  cpu["CPU coordination"]
+  io["Protected I/O and DMA"]
+  faults["Normalized fault records"]
+  facade["Typed facade exposes authorized objects, state, and completion"]
 
-        typed facade exposes authorized objects, state, and completion
+  platform -->|"supply native handoff"| adapter
+  adapter -->|"produce bounded native form"| envelope
+  envelope -->|"submit for normalization"| validate
+  validate -->|"publish immutable facts"| snapshot
+  snapshot -->|"select profiled mechanisms"| capsule
+  capsule -->|"supply entry leaves"| entry
+  capsule -->|"supply ordering leaves"| ordering
+  capsule -->|"supply counter and timer leaves"| time
+  entry -->|"normalize interrupt entry"| interrupts
+  ordering -->|"order controller transitions"| interrupts
+  ordering -->|"order translation changes"| mapping
+  ordering -->|"order executable publication"| code
+  time -->|"drive one-shot programming"| deadlines
+  interrupts -->|"deliver cross-CPU requests"| cpu
+  mapping -->|"request shootdown coordination"| cpu
+  code -->|"request fetch synchronization"| cpu
+  deadlines -->|"provide per-CPU timing"| cpu
+  cpu -->|"provide lifecycle state"| io
+  io -->|"report protected-I/O failures"| faults
 ```
 
 The arrows are dependencies, not permission to bypass ownership. For example,
@@ -488,12 +503,12 @@ effects.
 
 ### Mapping lifecycle
 
-```text
-Prepared
-   -> Published
-   -> InvalidationPending(local_cpu_set, generation)
-   -> TranslationQuiescent(completion_epoch)
-   -> Reclaimable
+```mermaid
+flowchart LR
+  prepared["Prepared"] -->|"publish mapping"| published["Published"]
+  published -->|"begin reduction, replacement, or unmap"| pending["InvalidationPending<br/>(local CPU set, generation)"]
+  pending -->|"complete required invalidation"| quiescent["TranslationQuiescent<br/>(completion epoch)"]
+  quiescent -->|"authorize reuse"| reclaimable["Reclaimable"]
 ```
 
 An additive map may have a shorter safe path than permission reduction,
@@ -614,17 +629,17 @@ and instruction sequences remain backend facts.
 
 Loading or generating code is modeled as a lifecycle:
 
-```text
-WritableOwned
-  -> SealedNoMoreWrites
-  -> DataVisible
-  -> WritableTranslationClosed
-  -> ExecutableMappedButUnreachable
-  -> InstructionStateInvalidated
-  -> RemoteFetchSynchronized(cpu_set, generation)
-  -> PublishedCode
-  -> Retired
-  -> Reclaimable
+```mermaid
+flowchart LR
+  writable["WritableOwned"] -->|"close all writers"| sealed["SealedNoMoreWrites"]
+  sealed -->|"make data visible"| visible["DataVisible"]
+  visible -->|"close writable translation"| writeClosed["WritableTranslationClosed"]
+  writeClosed -->|"install unreachable executable mapping"| mapped["ExecutableMappedButUnreachable"]
+  mapped -->|"invalidate instruction state"| invalidated["InstructionStateInvalidated"]
+  invalidated -->|"synchronize target CPUs"| synchronized["RemoteFetchSynchronized<br/>(CPU set, generation)"]
+  synchronized -->|"publish reachability"| published["PublishedCode"]
+  published -->|"retire generation"| retired["Retired"]
+  retired -->|"complete reclamation gates"| reclaimable["Reclaimable"]
 ```
 
 `ExecutableImage` is the minimal kernel's single accounting and lifetime
@@ -705,16 +720,22 @@ interrupt path.
 
 ### Source lifecycle
 
-```text
-Unbound
-  -> BoundMasked(binding_generation)
-  -> Armed
-  -> Pending
-  -> Delivered(event_generation)
-  -> Completed
-  -> Armed
+```mermaid
+flowchart LR
+  unbound["Unbound"] -->|"bind while masked"| bound["BoundMasked<br/>(binding generation)"]
+  bound -->|"arm source"| armed["Armed"]
+  armed -->|"observe pending event"| pending["Pending"]
+  pending -->|"deliver typed event"| delivered["Delivered<br/>(event generation)"]
+  delivered -->|"complete controller flow"| completed["Completed"]
+  completed -->|"re-arm source"| armed
 
-Any active state -> Quarantined -> BoundMasked or Unbound
+  bound -.->|"binding fault"| quarantined["Quarantined"]
+  armed -.->|"armed-state fault"| quarantined
+  pending -.->|"pending-state fault"| quarantined
+  delivered -.->|"delivery fault"| quarantined
+  completed -.->|"completion fault"| quarantined
+  quarantined -->|"recover masked binding"| bound
+  quarantined -->|"release binding"| unbound
 ```
 
 Edge and level flows can traverse internal substates differently. For example,
@@ -873,16 +894,19 @@ logical CPU state, not physical power circuitry.
 
 ### Lifecycle
 
-```text
-Absent
-  -> PresentOffline
-  -> Prepared
-  -> Starting
-  -> Online
-  -> Quiescing
-  -> PresentOffline
+```mermaid
+flowchart LR
+  absent["Absent"] -->|"discover CPU"| offline["PresentOffline"]
+  offline -->|"prepare per-CPU state"| prepared["Prepared"]
+  prepared -->|"accept start transaction"| starting["Starting"]
+  starting -->|"publish admitted CPU"| online["Online"]
+  online -->|"begin offline protocol"| quiescing["Quiescing"]
+  quiescing -->|"commit offline"| offline
 
-Starting or Online or Quiescing -> Failed -> Quarantined
+  starting -.->|"startup failure"| failed["Failed"]
+  online -.->|"online failure"| failed
+  quiescing -.->|"quiescence failure"| failed
+  failed -->|"retain unsafe state"| quarantined["Quarantined"]
 ```
 
 Linux CPU-hotplug precedent is valuable because it treats online/offline as an
@@ -1012,16 +1036,25 @@ manager takeover and cannot substitute for either ordinary credential.
 
 ### DMA lifecycle
 
-```text
-Denied
-  -> DomainBound(binding_generation)
-  -> Active
-  -> Revoking(validated dependency plan)
-     -> Reclaimable(all applicable completion nodes)
-     -> QuarantinedPinned(missing or uncertain nodes)
+```mermaid
+flowchart LR
+  subgraph control["DMA-domain control lifecycle"]
+    denied["Denied"] -->|"bind authorized domain"| domainBound["DomainBound<br/>(binding generation)"]
+    domainBound -->|"activate binding"| active["Active"]
+    active -->|"start validated revocation"| revoking["Revoking<br/>(validated dependency plan)"]
+    revoking -->|"complete every applicable node"| reclaimable["Reclaimable<br/>(all applicable completion nodes)"]
+    revoking -->|"miss or distrust a node"| quarantined["QuarantinedPinned<br/>(missing or uncertain nodes)"]
+  end
 
-CpuOwned -> CpuClosing -> CpuAccessClosed -> Offered -> DeviceOwned
-DeviceOwned -> Returned(attested completion) -> CpuReacquiring -> CpuOwned
+  subgraph ownership["Buffer ownership lifecycle"]
+    cpuOwned["CpuOwned"] -->|"begin offer"| cpuClosing["CpuClosing"]
+    cpuClosing -->|"revoke CPU access"| cpuClosed["CpuAccessClosed"]
+    cpuClosed -->|"publish offer"| offered["Offered"]
+    offered -->|"accept descriptor"| deviceOwned["DeviceOwned"]
+    deviceOwned -->|"attest completion"| returned["Returned<br/>(attested completion)"]
+    returned -->|"begin protected reacquisition"| reacquiring["CpuReacquiring"]
+    reacquiring -->|"complete device quiescence"| cpuOwned
+  end
 ```
 
 The revocation plan is a validated dependency DAG, not one universal order:
@@ -1458,10 +1491,14 @@ an external monitor. The result type must preserve that difference.
 
 CPU translation and IOMMU translation also compose rather than substitute:
 
-```text
-service virtual address
-    --CPU address space--> physical frame authority
-    --DMA lease/IOMMU domain--> device-visible I/O address
+```mermaid
+flowchart LR
+  virtual["Service virtual address"]
+  physical["Physical frame authority"]
+  device["Device-visible I/O address"]
+
+  virtual -->|"CPU address space"| physical
+  physical -->|"DMA lease / IOMMU domain"| device
 ```
 
 Sharing the frame requires authority at both transitions. Quiescence of one

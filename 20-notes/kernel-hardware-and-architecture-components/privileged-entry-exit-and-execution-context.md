@@ -144,24 +144,24 @@ project proposals awaiting model, emulator, and hardware evidence.
 
 ## Trust boundary and ownership
 
-```text
-less-privileged execution
-       |
-       | architecture event / syscall / interrupt
-       v
-ISA vector stub                   raw, bounded, non-instrumented
-       |
-entry-state transition           CPU-local state becomes coherent
-       |
-typed frame normalization        architecture facts retained
-       |
-bounded dispatch / typed event   policy invoked only in safe context
-       |
-return preparation + validation  one semantic gate
-       |
-ISA restore and return
-       v
-less-privileged execution
+```mermaid
+flowchart TB
+  entry_less_privileged_before["Less-privileged execution"]
+  entry_vector_stub["ISA vector stub<br/>raw, bounded, non-instrumented"]
+  entry_state_transition["Entry-state transition<br/>CPU-local state becomes coherent"]
+  entry_frame_normalization["Typed frame normalization<br/>architecture facts retained"]
+  entry_bounded_dispatch["Bounded dispatch / typed event<br/>policy invoked only in safe context"]
+  entry_return_validation["Return preparation + validation<br/>one semantic gate"]
+  entry_isa_return["ISA restore and return"]
+  entry_less_privileged_after["Less-privileged execution"]
+
+  entry_less_privileged_before -->|"Architecture event / syscall / interrupt"| entry_vector_stub
+  entry_vector_stub --> entry_state_transition
+  entry_state_transition --> entry_frame_normalization
+  entry_frame_normalization --> entry_bounded_dispatch
+  entry_bounded_dispatch --> entry_return_validation
+  entry_return_validation --> entry_isa_return
+  entry_isa_return --> entry_less_privileged_after
 ```
 
 The protected kernel owns entry stacks, raw and normalized frames, saved
@@ -258,22 +258,48 @@ The semantic entry classes are:
 
 The full transition is:
 
-```text
-HardwareEntry
-  -> SafeStackEstablished
-  -> RawStateCaptured
-  -> KernelAddressingEstablished
-  -> BookkeepingEstablished
-  -> FrameNormalized
-  -> Dispatched
-  -> ReturnPrepared
-  -> ReturnValidated
-  -> ArchitecturalStateRestored
-  -> LessPrivileged
+```mermaid
+flowchart TB
+  transition_hardware_entry["HardwareEntry"]
+  transition_safe_stack["SafeStackEstablished"]
+  transition_raw_state["RawStateCaptured"]
+  transition_kernel_addressing["KernelAddressingEstablished"]
+  transition_bookkeeping["BookkeepingEstablished"]
+  transition_frame_normalized["FrameNormalized"]
+  transition_dispatched["Dispatched"]
+  transition_return_prepared["ReturnPrepared"]
+  transition_return_validated["ReturnValidated"]
+  transition_arch_state_restored["ArchitecturalStateRestored"]
+  transition_less_privileged["LessPrivileged"]
+  transition_fatal_capture["FatalCapture"]
+  transition_terminal_action["TerminalAction"]
+  transition_blocked_switched["BlockedOrSwitched"]
+  transition_user_fault["UserFault"]
+  transition_fault_posted["FaultEventPosted"]
 
-Any pre-dispatch state -> FatalCapture -> TerminalAction
-Dispatched -> BlockedOrSwitched -> later ReturnPrepared
-UserFault -> FaultEventPosted -> BlockedOrSwitched
+  transition_hardware_entry --> transition_safe_stack
+  transition_safe_stack --> transition_raw_state
+  transition_raw_state --> transition_kernel_addressing
+  transition_kernel_addressing --> transition_bookkeeping
+  transition_bookkeeping --> transition_frame_normalized
+  transition_frame_normalized --> transition_dispatched
+  transition_dispatched --> transition_return_prepared
+  transition_return_prepared --> transition_return_validated
+  transition_return_validated --> transition_arch_state_restored
+  transition_arch_state_restored --> transition_less_privileged
+
+  transition_hardware_entry -.->|"Fatal before dispatch"| transition_fatal_capture
+  transition_safe_stack -.->|"Fatal before dispatch"| transition_fatal_capture
+  transition_raw_state -.->|"Fatal before dispatch"| transition_fatal_capture
+  transition_kernel_addressing -.->|"Fatal before dispatch"| transition_fatal_capture
+  transition_bookkeeping -.->|"Fatal before dispatch"| transition_fatal_capture
+  transition_frame_normalized -.->|"Fatal before dispatch"| transition_fatal_capture
+  transition_fatal_capture --> transition_terminal_action
+
+  transition_dispatched --> transition_blocked_switched
+  transition_blocked_switched -->|"Later"| transition_return_prepared
+  transition_user_fault --> transition_fault_posted
+  transition_fault_posted --> transition_blocked_switched
 ```
 
 Each arrow has an allowed-instrumentation, interrupt, allocation, lock, and
@@ -496,13 +522,21 @@ from `Saved`, `Uninitialized`, or `Disabled`; a terminated context reaches
 A legal eager cross-domain switch commits the paired transitions under the
 CPU-local switch guard:
 
-```text
-(CPU Resident(old, r), old ResidentOn(cpu, r))
-  -> save:    (CPU Clean-or-ScrubRequired, old Saved(new_contents_generation))
-     or drop: (CPU Clean-or-ScrubRequired, old Discarded) [only if terminated]
-  -> scrub when required: CPU Clean
-  -> restore or initialize new context
-  -> (CPU Resident(new, r+1), new ResidentOn(cpu, r+1))
+```mermaid
+flowchart TB
+  switch_old_pair["CPU Resident(old, r)<br/>old ResidentOn(cpu, r)"]
+  switch_saved["CPU Clean-or-ScrubRequired<br/>old Saved(new_contents_generation)"]
+  switch_discarded["CPU Clean-or-ScrubRequired<br/>old Discarded"]
+  switch_cpu_clean["CPU Clean"]
+  switch_restore_new["Restore or initialize new context"]
+  switch_new_pair["CPU Resident(new, r+1)<br/>new ResidentOn(cpu, r+1)"]
+
+  switch_old_pair -->|"Save"| switch_saved
+  switch_old_pair -->|"Drop — only if terminated"| switch_discarded
+  switch_saved -->|"Scrub when required; otherwise already clean"| switch_cpu_clean
+  switch_discarded -->|"Scrub when required; otherwise already clean"| switch_cpu_clean
+  switch_cpu_clean --> switch_restore_new
+  switch_restore_new --> switch_new_pair
 ```
 
 A fault before the paired save/drop commit leaves the old pair authoritative.

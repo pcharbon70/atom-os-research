@@ -106,23 +106,31 @@ The portable part should manipulate semantic objects and plans. Only the
 backend should construct page-table entries, select invalidation instructions,
 or encode architecture-specific attributes.
 
-```text
-capability kernel / memory service
-        |
-        | authorized MapRequest, ProtectRequest, UnmapRequest
-        v
-mapping validator ---- mapping ledger ---- frame-authority epoch
-        |
-        v
-mapping transaction + active-CPU snapshot
-        |
-        +---- page-table encoder/backend
-        +---- page-table ordering backend
-        +---- shootdown coordinator/IPI or firmware gate
-        +---- reclamation gate
-        |
-        v
-Usable or TranslationQuiescent completion
+```mermaid
+flowchart TB
+  translation_authority["Capability kernel / memory service"]
+  translation_validator["Mapping validator"]
+  translation_ledger["Mapping ledger"]
+  translation_frame_epoch["Frame-authority epoch"]
+  translation_transaction["Mapping transaction + active-CPU snapshot"]
+  translation_encoder["Page-table encoder / backend"]
+  translation_ordering["Page-table ordering backend"]
+  translation_shootdown["Shootdown coordinator / IPI or firmware gate"]
+  translation_reclamation["Reclamation gate"]
+  translation_completion["Usable or TranslationQuiescent completion"]
+
+  translation_authority -->|"Authorized MapRequest, ProtectRequest, UnmapRequest"| translation_validator
+  translation_validator --- translation_ledger
+  translation_ledger --- translation_frame_epoch
+  translation_validator --> translation_transaction
+  translation_transaction --> translation_encoder
+  translation_transaction --> translation_ordering
+  translation_transaction --> translation_shootdown
+  translation_transaction --> translation_reclamation
+  translation_encoder --> translation_completion
+  translation_ordering --> translation_completion
+  translation_shootdown --> translation_completion
+  translation_reclamation --> translation_completion
 ```
 
 Drivers, BEAM schedulers, native extensions, and memory servers never receive
@@ -186,11 +194,16 @@ cached translation that could reach it is quiescent.
 Hardware commonly sees only a bounded numeric ASID or PCID; software attaches
 an unbounded generation. Reuse follows this rule:
 
-```text
-Allocated(tag, generation)
-  -> Retiring(target_cpu_set)
-  -> GloballyInvalidated(completion_epoch)
-  -> ReusableAs(tag, generation + 1)
+```mermaid
+flowchart LR
+  tag_allocated["Allocated(tag, generation)"]
+  tag_retiring["Retiring(target_cpu_set)"]
+  tag_invalidated["GloballyInvalidated(completion_epoch)"]
+  tag_reusable["ReusableAs(tag, generation + 1)"]
+
+  tag_allocated --> tag_retiring
+  tag_retiring --> tag_invalidated
+  tag_invalidated --> tag_reusable
 ```
 
 If a backend cannot invalidate one tag reliably, rollover flushes the required
@@ -234,46 +247,47 @@ completion epoch.
 
 ## Transaction state machine
 
-```text
-Prepared(authority_snapshot, old_generation)
-   |
-   | validate range, frame epoch, rights, aliases, quotas, backend attributes
-   v
-Staged(private_entries, invalidation_plan)
-   |
-   +-- reject before mutation --> Rejected(MappingError, returned_resources)
-   |
-   | reserve completion capacity; acquire mutation sequence; freeze target CPU
-   | identities/incarnations; move all affected resources into the operation
-   v
-Accepted(TranslationOperation, frozen_target_set, owned_resources)
-   |
-   | first externally visible mutation; MappingError is no longer possible
-   v
-OldAccessClosed(new_mutation_sequence)              [restrictive classes]
-   |
-   | publish break/unmap/restriction with required page-table ordering
-   v
-InvalidationPending(target_cpu_set, mapping_generation)
-   |
-   | each target executes local plan and acknowledges after architectural completion
-   v
-TranslationQuiescent(completion_epoch)
-   |
-   | optionally publish replacement or upgraded entry and establish usability
-   v
-Committed(mapping_generation, completion_epoch)
-   |
-   | after code, DMA, pins, and walkers are also quiescent
-   v
-Reclaimable
+```mermaid
+flowchart TB
+  transaction_prepared["Prepared(authority_snapshot, old_generation)"]
+  transaction_staged["Staged(private_entries, invalidation_plan)"]
+  transaction_rejected["Rejected(MappingError, returned_resources)"]
+  transaction_accepted["Accepted(TranslationOperation,<br/>frozen_target_set, owned_resources)"]
+  transaction_access_closed["OldAccessClosed(new_mutation_sequence)<br/>restrictive classes"]
+  transaction_invalidation_pending["InvalidationPending(target_cpu_set,<br/>mapping_generation)"]
+  transaction_quiescent["TranslationQuiescent(completion_epoch)"]
+  transaction_committed["Committed(mapping_generation, completion_epoch)"]
+  transaction_reclaimable["Reclaimable"]
 
-Accepted/Pending + selectable cancellation -> Cancelling -> Cancelled
-  only after every started effect is drained and resource ownership is explicit
-Any accepted state + unproved completion
-  -> Incomplete(acked, missing, Quarantine<TranslationResources>)
-Any accepted state + unsafe backend failure
-  -> Quarantined(effect_id, retained_resources, evidence)
+  transaction_prepared -->|"Validate range, frame epoch, rights, aliases, quotas, backend attributes"| transaction_staged
+  transaction_staged -->|"Reject before mutation"| transaction_rejected
+  transaction_staged -->|"Reserve completion capacity; acquire mutation sequence;<br/>freeze target CPU identities/incarnations;<br/>move all affected resources into the operation"| transaction_accepted
+  transaction_accepted -->|"First externally visible mutation;<br/>MappingError is no longer possible"| transaction_access_closed
+  transaction_accepted -->|"Additive class: OldAccessClosed omitted"| transaction_invalidation_pending
+  transaction_access_closed -->|"Publish break / unmap / restriction<br/>with required page-table ordering"| transaction_invalidation_pending
+  transaction_invalidation_pending -->|"Each target executes its local plan and acknowledges<br/>after architectural completion"| transaction_quiescent
+  transaction_quiescent -->|"Optionally publish replacement or upgraded entry<br/>and establish usability"| transaction_committed
+  transaction_committed -->|"After code, DMA, pins, and walkers are also quiescent"| transaction_reclaimable
+
+  transaction_cancellable["Accepted / Pending<br/>with selectable cancellation"]
+  transaction_cancelling["Cancelling"]
+  transaction_cancelled["Cancelled"]
+  transaction_any_accepted["Any accepted state"]
+  transaction_incomplete["Incomplete(acked, missing,<br/>Quarantine&lt;TranslationResources&gt;)"]
+  transaction_quarantined["Quarantined(effect_id,<br/>retained_resources, evidence)"]
+
+  transaction_accepted -.-> transaction_cancellable
+  transaction_access_closed -.-> transaction_cancellable
+  transaction_invalidation_pending -.-> transaction_cancellable
+  transaction_quiescent -.-> transaction_cancellable
+  transaction_cancellable --> transaction_cancelling
+  transaction_cancelling -->|"Every started effect drained;<br/>resource ownership explicit"| transaction_cancelled
+  transaction_accepted -.-> transaction_any_accepted
+  transaction_access_closed -.-> transaction_any_accepted
+  transaction_invalidation_pending -.-> transaction_any_accepted
+  transaction_quiescent -.-> transaction_any_accepted
+  transaction_any_accepted -->|"Unproved completion"| transaction_incomplete
+  transaction_any_accepted -->|"Unsafe backend failure"| transaction_quarantined
 ```
 
 An additive mapping can omit `OldAccessClosed`. A restrictive transition

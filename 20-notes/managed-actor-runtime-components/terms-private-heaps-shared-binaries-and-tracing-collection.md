@@ -190,17 +190,20 @@ memory.
 
 ## Collector state machine
 
-```text
-Mutating
-  -> CollectionRequested(kind, reason)
-  -> ActorStoppedAtSafePoint
-  -> ReserveConfirmed
-  -> RootsCaptured
-  -> CopyingYoung | CopyingFull
-  -> SharedReferencesReconciled
-  -> NewHeapCommitted
-  -> OldSpaceReleased
-  -> Mutating | Exiting
+```mermaid
+flowchart TD
+  tgc_mutating["Mutating"] --> tgc_requested["Collection requested(kind, reason)"]
+  tgc_requested --> tgc_stopped["Actor stopped at safe point"]
+  tgc_stopped --> tgc_reserved["Reserve confirmed"]
+  tgc_reserved --> tgc_roots["Roots captured"]
+  tgc_roots -->|"young collection"| tgc_young["Copying young"]
+  tgc_roots -->|"full collection"| tgc_full["Copying full"]
+  tgc_young --> tgc_shared["Shared references reconciled"]
+  tgc_full --> tgc_shared
+  tgc_shared --> tgc_committed["New heap committed"]
+  tgc_committed --> tgc_released["Old space released"]
+  tgc_released -->|"resume"| tgc_mutating
+  tgc_released -->|"exit"| tgc_exiting["Exiting"]
 ```
 
 ### Root set

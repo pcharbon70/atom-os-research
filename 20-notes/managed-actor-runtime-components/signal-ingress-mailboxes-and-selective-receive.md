@@ -150,18 +150,20 @@ and priority rules.
 
 ## Atomic send protocol
 
-```text
-Created
-  -> RouteResolved
-  -> ResourcesReserved
-  -> PayloadPrepared
-  -> Published
-  -> Drained
-  -> VisibleOrApplied
-  -> Consumed
+```mermaid
+flowchart TD
+  sim_created["Created"] --> sim_route["Route resolved"]
+  sim_route --> sim_reserved["Resources reserved"]
+  sim_reserved --> sim_payload["Payload prepared"]
+  sim_payload --> sim_published["Published"]
+  sim_published -->|"receiver drains"| sim_drained["Drained"]
+  sim_drained --> sim_visible["Visible or applied"]
+  sim_visible --> sim_consumed["Consumed"]
 
-Created|RouteResolved|ResourcesReserved -> RejectedAndReleased
-Published -> CleanupOwnedByReceiverGeneration
+  sim_created -->|"rejected"| sim_rejected["Rejected and released"]
+  sim_route -->|"rejected"| sim_rejected
+  sim_reserved -->|"rejected"| sim_rejected
+  sim_published -->|"receiver generation owns cleanup"| sim_cleanup["Cleanup owned by receiver generation"]
 ```
 
 1. Resolve the destination table entry and pin/revalidate its generation.
@@ -199,12 +201,12 @@ set. Each sender maps stably by sender identity and destination generation.
 
 Transition needs an explicit barrier:
 
-```text
-Single(g)
-  -> Expanding(g, g+1, cutover_sequence)
-  -> Striped(g+1)
-  -> Contracting(g+1, g+2, drain_barrier)
-  -> Single(g+2)
+```mermaid
+flowchart LR
+  sis_single_g["Single(g)"] --> sis_expanding["Expanding(g, g+1, cutover_sequence)"]
+  sis_expanding --> sis_striped["Striped(g+1)"]
+  sis_striped --> sis_contracting["Contracting(g+1, g+2, drain_barrier)"]
+  sis_contracting --> sis_single_next["Single(g+2)"]
 ```
 
 Senders that observed the old generation either finish there or retry before
@@ -298,9 +300,13 @@ request was canceled at the service or that no external effect occurred.
 
 ### Compatible local messaging
 
-```text
-Normal -> SoftPressure -> AdmissionCritical -> ReceiverTerminating|DomainFailure
-SoftPressure -> Normal                  // with hysteresis
+```mermaid
+flowchart TD
+  sip_normal["Normal"] --> sip_soft["Soft pressure"]
+  sip_soft --> sip_critical["Admission critical"]
+  sip_critical -->|"terminate receiver"| sip_terminating["Receiver terminating"]
+  sip_critical -->|"escalate"| sip_domain["Domain failure"]
+  sip_soft -->|"recovered with hysteresis"| sip_normal
 ```
 
 - Soft thresholds emit queue count/bytes, oldest age, drain/arrival rates, and
