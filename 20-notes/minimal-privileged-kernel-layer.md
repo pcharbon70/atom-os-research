@@ -25,19 +25,31 @@ make failure containment and recovery *possible and auditable* without placing
 BEAM actors, mailboxes, garbage collection, service naming, device policy, or
 OTP supervision policy in privileged code.
 
-The proposed design has eleven cooperating components:
+The proposed design has eleven cooperating components, each developed in a
+separate implementation-research note:
 
-1. bootstrap and root-authority handoff;
-2. typed kernel-object storage and explicit memory accounting;
-3. capability spaces, derivation, transfer, and revocation;
-4. protection domains, threads, and address-space attachment;
-5. bounded invocation, notification, and shared-memory transport;
-6. scheduling contexts, budgets, and timeout delivery;
-7. memory mappings and architecture-resource bindings;
-8. fault capture and containment;
-9. failure boundaries and recovery control;
-10. split-phase teardown, quiescence, and reclamation; and
-11. bounded observability and crash evidence.
+1. [bootstrap and root-authority
+   handoff](minimal-privileged-kernel-components/bootstrap-and-root-authority-handoff.md);
+2. [typed kernel-object storage and explicit memory
+   accounting](minimal-privileged-kernel-components/typed-object-storage-and-explicit-memory.md);
+3. [capability spaces, derivation, transfer, and
+   revocation](minimal-privileged-kernel-components/capability-spaces-and-authority.md);
+4. [protection domains, threads, and address-space
+   attachment](minimal-privileged-kernel-components/protection-domains-threads-and-address-spaces.md);
+5. [bounded invocation, notification, and shared-memory
+   transport](minimal-privileged-kernel-components/bounded-invocation-and-transport.md);
+6. [scheduling contexts, budgets, and timeout
+   delivery](minimal-privileged-kernel-components/scheduling-contexts-and-temporal-authority.md);
+7. [memory mappings and architecture-resource
+   bindings](minimal-privileged-kernel-components/memory-mappings-and-architecture-resource-bindings.md);
+8. [fault capture and
+   containment](minimal-privileged-kernel-components/fault-capture-and-containment.md);
+9. [failure boundaries and recovery
+   control](minimal-privileged-kernel-components/failure-boundaries-and-recovery-topology.md);
+10. [split-phase teardown, quiescence, and
+    reclamation](minimal-privileged-kernel-components/teardown-revocation-and-safe-reclamation.md); and
+11. [bounded observability and crash
+    evidence](minimal-privileged-kernel-components/observability-and-crash-evidence.md).
 
 This is an architecture proposal derived from literature, not an implemented
 kernel or a transferred correctness claim. The cited systems demonstrate
@@ -389,7 +401,7 @@ Files, sockets, BEAM actors, PIDs, service names, mailboxes, supervisor trees,
 and wall-clock calendars are deliberately absent. They are user-space
 abstractions over these objects.
 
-## Component 0: bootstrap and root-authority handoff
+## [Component 0: bootstrap and root-authority handoff](minimal-privileged-kernel-components/bootstrap-and-root-authority-handoff.md)
 
 ### Responsibility
 
@@ -438,7 +450,7 @@ Creation, inspection, suspension, termination, debug access, device reset, and
 service publication can be split among distinct authorities. This applies the
 separation-of-privilege principle and makes recovery configurations auditable.
 
-## Component 1: typed object storage and explicit memory
+## [Component 1: typed object storage and explicit memory](minimal-privileged-kernel-components/typed-object-storage-and-explicit-memory.md)
 
 ### Responsibility
 
@@ -508,7 +520,7 @@ translations, waiters, reply tokens, event bindings, or DMA effects. The bytes
 are then zeroed before reassignment across a confidentiality boundary and the
 object generation advances.
 
-## Component 2: capability spaces and authority
+## [Component 2: capability spaces and authority](minimal-privileged-kernel-components/capability-spaces-and-authority.md)
 
 ### Representation
 
@@ -740,7 +752,7 @@ model.
 6. **No ambient namespace:** names and PIDs may locate a broker, but they never
    substitute for possession of operation authority.
 
-## Component 3: protection domains, threads, and address spaces
+## [Component 3: protection domains, threads, and address spaces](minimal-privileged-kernel-components/protection-domains-threads-and-address-spaces.md)
 
 ### Why `ProtectionDomain` is first-class
 
@@ -1170,7 +1182,7 @@ kernel activation retained a lock, reference, or partial operation. A timeout
 is evidence that stop completion is unavailable, not permission to assume the
 old execution ended.
 
-## Component 4: bounded invocation and transport
+## [Component 4: bounded invocation and transport](minimal-privileged-kernel-components/bounded-invocation-and-transport.md)
 
 ### Synchronous endpoints
 
@@ -1616,7 +1628,7 @@ claim. Exactly-once effects require durable intent, idempotency keys,
 deduplication, transactions, or reconciliation with the device or remote peer.
 The kernel cannot manufacture exactly-once semantics from IPC delivery alone.
 
-## Component 5: scheduling contexts and temporal authority
+## [Component 5: scheduling contexts and temporal authority](minimal-privileged-kernel-components/scheduling-contexts-and-temporal-authority.md)
 
 Spatial capabilities do not prevent a domain from consuming all CPU time.
 The kernel should make CPU budget a first-class, delegable object following the
@@ -1802,7 +1814,7 @@ noninterference. A later high-security profile may request explicit partition,
 flush, and padded-switch operations from the architecture layer and must state
 which hardware channels remain uncontrolled.
 
-## Component 6: memory mappings and architecture-resource bindings
+## [Component 6: memory mappings and architecture-resource bindings](minimal-privileged-kernel-components/memory-mappings-and-architecture-resource-bindings.md)
 
 ### Address spaces and mappings
 
@@ -2165,7 +2177,7 @@ The kernel enforces authority and lifecycle. A user-level driver supervisor
 knows whether device reset loses configuration, whether requests can be
 replayed, and how clients should reconcile indeterminate operations.
 
-## Component 7: fault capture and containment
+## [Component 7: fault capture and containment](minimal-privileged-kernel-components/fault-capture-and-containment.md)
 
 ### Fault taxonomy
 
@@ -2272,7 +2284,7 @@ work](../30-sources/candea-et-al-2004-microreboot.md) supports fine-grained,
 fast component replacement when state and dependencies are designed for it,
 but it does not justify automatic restart of arbitrary stateful services.
 
-## Component 8: failure boundaries and recovery topology
+## [Component 8: failure boundaries and recovery topology](minimal-privileged-kernel-components/failure-boundaries-and-recovery-topology.md)
 
 ### Boundary hierarchy
 
@@ -2438,7 +2450,7 @@ suspicion never creates two roots. If an escrow, protected destination path, or
 end-to-end fenced recovery service is unavailable, the next boundary is
 controlled node reset and external orchestration.
 
-## Component 9: teardown, revocation, and safe reclamation
+## [Component 9: teardown, revocation, and safe reclamation](minimal-privileged-kernel-components/teardown-revocation-and-safe-reclamation.md)
 
 Teardown is where capability correctness, failure containment, the architecture
 contract, and driver recovery meet. The domain states are the single
@@ -2562,7 +2574,7 @@ the architecture layer can prove the effect is confined to that set. Otherwise
 the failure escalates to CPU, partition, or node reset. In neither case may the
 affected memory be optimistically reused for a new principal.
 
-## Component 10: observability and crash evidence
+## [Component 10: observability and crash evidence](minimal-privileged-kernel-components/observability-and-crash-evidence.md)
 
 Observability belongs in the kernel only where user space cannot reconstruct
 state after a fault. The kernel should expose bounded snapshots of:
@@ -2583,10 +2595,15 @@ on an exceptional path. Sensitive register, address, capability-graph, and
 cross-domain data requires `DebugAuthority` distinct from ordinary health
 inspection.
 
-For a kernel invariant failure, a preallocated crash capsule records the
-minimum architecture state, last bounded events, boot and kernel identity, and
-reason before reset. Continuing normal execution after corruption of the
-reference monitor is outside the baseline failure model.
+For a kernel invariant failure, this layer supplies a typed reason and bounded
+preallocated kernel snapshots to the lower [architecture-faults and diagnostics
+component](kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics.md).
+That component remains the sole owner of raw capture, first-fatal and recursive
+slots, terminal sealing, `CrashContext`, and `CrashSink`; its post-seal sink may
+append the kernel identity, lifecycle epochs, and last bounded events as
+individually committed higher-level sections before reset. Continuing normal
+execution after corruption of the reference monitor is outside the baseline
+failure model.
 
 ## System-call and ABI shape
 
@@ -3142,6 +3159,9 @@ inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-prov
 
 ## Connections
 
+- [Minimal privileged kernel component
+  index](minimal-privileged-kernel-components/README.md) inventories the eleven
+  detailed evidence, implementation, state-machine, and verification reports.
 - [Kernel hardware and architecture support
   layer](kernel-hardware-and-architecture-support-layer.md) provides the lower
   mechanisms and completion semantics this layer authorizes and composes.
@@ -3155,6 +3175,10 @@ inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-prov
 - [Minimal privileged-kernel deep-dive
   journal](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md)
   records the research method and evidence boundary for this synthesis.
+- [Minimal privileged kernel component research
+  journal](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md)
+  records the expanded source review, common component standard, falsifiers,
+  and explicit absence of prototype evidence.
 
 ## Sources
 
@@ -3167,6 +3191,9 @@ inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-prov
 - [From L3 to seL4](../30-sources/elphinstone-heiser-2013-l4-lessons.md)
 - [seL4 reference manual, version
   16.0.0](../30-sources/sel4-foundation-2026-reference-manual.md)
+- [capDL](../30-sources/kuz-et-al-2010-capdl.md)
+- [Formally verified system
+  initialisation](../30-sources/boyton-et-al-2013-verified-system-initialisation.md)
 - [EROS: A fast capability system](../30-sources/shapiro-et-al-1999-eros.md)
 - [Capability myths demolished](../30-sources/miller-et-al-2003-capability-myths.md)
 - [Capsicum](../30-sources/watson-et-al-2010-capsicum.md)
@@ -3208,6 +3235,18 @@ inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-prov
   detectors](../30-sources/chandra-toueg-1996-failure-detectors.md)
 - [Tolerating malicious device drivers in
   Linux](../30-sources/boyd-wickizer-zeldovich-2010-malicious-device-drivers.md)
+
+### Reclamation and crash evidence
+
+- [Read-copy update](../30-sources/mckenney-slingwine-1998-read-copy-update.md)
+- [Hazard pointers](../30-sources/michael-2004-hazard-pointers.md)
+- [Kdump](../30-sources/goyal-et-al-2005-kdump.md)
+- [Dynamic instrumentation of production
+  systems](../30-sources/cantrill-et-al-2004-dtrace.md)
+- [Linux lockless tracing ring-buffer
+  design](../30-sources/rostedt-2009-lockless-ring-buffer-design.md)
+- [Linux RAS
+  documentation](../30-sources/linux-kernel-community-2026-ras-documentation.md)
 
 ### Adjacent architecture and runtime evidence
 

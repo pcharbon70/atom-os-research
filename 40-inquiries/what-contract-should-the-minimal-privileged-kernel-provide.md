@@ -275,9 +275,43 @@ budgets, structured fault delivery, and split-phase reaping. It places BEAM
 actors and OTP recovery policy above the privileged boundary.
 
 The main evidence trails are curated by the [minimal privileged kernel
-map](../10-maps/minimal-privileged-kernel.md). The [research
+map](../10-maps/minimal-privileged-kernel.md). The original [layer research
 journal](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md)
-records how the sources were selected and the limits of this pass.
+records how the baseline sources were selected, while the [component research
+journal](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md)
+records the expanded evidence review, common implementation standard,
+falsifiers, and limits of the eleven-report pass.
+
+### Component deep-dive refinement
+
+The [component index](../20-notes/minimal-privileged-kernel-components/README.md)
+now expands every numbered component into an independent report. Together they
+refine the hypotheses into a staged implementation and verification program:
+
+- [bootstrap](../20-notes/minimal-privileged-kernel-components/bootstrap-and-root-authority-handoff.md),
+  [explicit object storage](../20-notes/minimal-privileged-kernel-components/typed-object-storage-and-explicit-memory.md),
+  and [capability authority](../20-notes/minimal-privileged-kernel-components/capability-spaces-and-authority.md)
+  define how authority and resources become protected state;
+- [domains](../20-notes/minimal-privileged-kernel-components/protection-domains-threads-and-address-spaces.md),
+  [bounded invocation](../20-notes/minimal-privileged-kernel-components/bounded-invocation-and-transport.md),
+  and [temporal authority](../20-notes/minimal-privileged-kernel-components/scheduling-contexts-and-temporal-authority.md)
+  define how work is admitted, funded, stopped, and given an honest terminal
+  outcome;
+- [architecture-resource bindings](../20-notes/minimal-privileged-kernel-components/memory-mappings-and-architecture-resource-bindings.md)
+  and [fault containment](../20-notes/minimal-privileged-kernel-components/fault-capture-and-containment.md)
+  carry generations, completion evidence, certainty, and quarantine across the
+  lower hardware contract; and
+- [recovery topology](../20-notes/minimal-privileged-kernel-components/failure-boundaries-and-recovery-topology.md),
+  [safe reclamation](../20-notes/minimal-privileged-kernel-components/teardown-revocation-and-safe-reclamation.md),
+  and [crash evidence](../20-notes/minimal-privileged-kernel-components/observability-and-crash-evidence.md)
+  define independent takeover, split-phase cleanup, and bounded evidence when
+  ordinary services cannot continue.
+
+The reports strengthen the inquiry's operational standard but do not satisfy
+it. In particular, fixed-depth revocation anchors, product-lineage inheritance,
+whole-domain SMP stop, exact scheduling-context unwind, recovery escrow, unified
+quiescence ledgers, and cross-layer crash-evidence survival remain Atom OS
+proposals rather than transferred results from the cited systems.
 
 ### Important negative findings
 
@@ -301,10 +335,12 @@ records how the sources were selected and the limits of this pass.
 ### Evidence gaps
 
 No kernel implementation, executable model, hardware experiment, benchmark,
-or BEAM runtime integration was produced during the literature pass. The
-specific object vocabulary, rights, generation widths, revocation data
-structure, call-depth bound, recovery ledger, and device-quiescence profile
-remain proposals.
+or BEAM runtime integration was produced during either literature pass. The
+specific object vocabulary, rights, generation widths, revocation-anchor depth,
+product-lineage algebra, call-depth and replenishment bounds, stop/checkpoint
+latency, recovery ledger, device-quiescence profile, quarantine proof, and
+crash-evidence schema remain proposals. The new component reports identify
+tests for each gap but do not provide their results.
 
 ## Outcome
 

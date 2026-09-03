@@ -75,12 +75,20 @@ work. Incidental mentions can remain citations in the document using them.
   evaluates IOMMU and PCIe confinement, controlled device access, and
   user-process execution against an adversarial driver rather than accidental
   faults alone.
+- [Formally verified system initialisation](boyton-et-al-2013-verified-system-initialisation.md) —
+  proves a model-level connection from a declarative capDL configuration to
+  the state reached by an automatic seL4 system initialiser while preserving
+  its implementation boundary.
 - [Functional Programming for the Internet of Things](branch-weinstock-2024-functional-programming-iot.md) —
   summarizes a 2024 AtomVM/Elixir versus C++ LoRa–MQTT gateway comparison and
   its reproducibility limits.
 - [Microreboot—A Technique for Cheap Recovery](candea-et-al-2004-microreboot.md) —
   evaluates fine-grained component restart and makes state placement,
   dependency, retry, and application-visible recovery costs explicit.
+- [Dynamic instrumentation of production systems](cantrill-et-al-2004-dtrace.md) —
+  develops DTrace's typed dynamic probes, safe execution, per-consumer state,
+  aggregation, and disabled-probe discipline while exposing its larger trust
+  and timing surface.
 - [Unreliable Failure Detectors for Reliable Distributed Systems](chandra-toueg-1996-failure-detectors.md) —
   formalizes the distinction between crash fact and liveness suspicion under
   timing assumptions.
@@ -152,6 +160,10 @@ work. Incidental mentions can remain citations in the document using them.
 - [Comprehensive formal verification of an OS microkernel](klein-et-al-2014-comprehensive-sel4-verification.md) —
   connects explicit capabilities and objects to a small verified TCB and makes
   hardware, boot, assembly, cache, device, DMA, and timing assumptions visible.
+- [capDL: A language for describing capability-based systems](kuz-et-al-2010-capdl.md) —
+  makes kernel objects and capability distributions explicit data so an
+  installed authority graph can be connected to isolation and information-flow
+  reasoning.
 - [On Micro-Kernel Construction](liedtke-1995-microkernel-construction.md) —
   derives functionally minimal protected mechanisms and analyzes why careful
   IPC and architecture-specific critical paths matter.
@@ -164,6 +176,12 @@ work. Incidental mentions can remain citations in the document using them.
 - [Thunderclap](markettos-et-al-2019-thunderclap.md) — demonstrates why IOMMU
   remapping alone does not secure shared DMA protocols, transition windows,
   revocation, or reset.
+- [Read-copy update](mckenney-slingwine-1998-read-copy-update.md) — separates
+  removal from reclamation and uses observed execution quiescence to defer
+  reuse until pre-existing software readers have completed.
+- [Hazard pointers](michael-2004-hazard-pointers.md) — provides bounded explicit
+  reference publication for safe lock-free node reclamation while leaving CPU,
+  translation, interrupt, and device quiescence outside its scope.
 - [Capability Myths Demolished](miller-et-al-2003-capability-myths.md) —
   distinguishes object capabilities from access-control lookalikes and
   analyzes designation, delegation, confinement, and revocation by indirection.
@@ -182,6 +200,9 @@ work. Incidental mentions can remain citations in the document using them.
 - [The RISC-V privileged architecture](risc-v-international-2026-privileged-architecture.md) —
   records current ratified RISC-V privilege, trap, translation, ordering,
   instruction-fetch, counter, and extension-state semantics.
+- [Lockless ring buffer design](rostedt-2009-lockless-ring-buffer-design.md) —
+  specifies Linux tracing's per-CPU page ring, nested-writer commit order,
+  reader exchange, and explicit overwrite versus producer/consumer modes.
 - [Design and Verification of Secure Systems](rushby-1981-design-verification-secure-systems.md) —
   develops a separation-kernel abstract machine and a verification argument
   for configured information-flow boundaries.

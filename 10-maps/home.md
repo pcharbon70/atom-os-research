@@ -74,6 +74,16 @@ one existing VM implementation the kernel foundation.
 
 ## Recently developed
 
+- [Minimal privileged kernel component deep
+  dives](minimal-privileged-kernel.md#component-implementation-deep-dives) —
+  develops one evidence-backed implementation recommendation for each of the
+  eleven capability-microkernel components while preserving the hardware,
+  managed-runtime, and OTP-policy boundaries.
+- [2026-09-03 minimal privileged kernel component research
+  session](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md) —
+  records the expanded primary-source review, common lifecycle and authority
+  method, proposed state machines, falsifiers, and explicit absence of
+  prototype evidence.
 - [Managed actor runtime component deep
   dives](managed-actor-runtime.md#component-implementation-deep-dives) —
   develops one evidence-backed implementation recommendation for each of the

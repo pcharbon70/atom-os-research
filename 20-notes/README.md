@@ -32,6 +32,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 - [Managed actor runtime components](managed-actor-runtime-components/README.md) —
   contains the thirteen detailed component-level implementation syntheses for
   the managed actor runtime layer.
+- [Minimal privileged kernel components](minimal-privileged-kernel-components/README.md) —
+  contains the eleven detailed component-level implementation syntheses for
+  the capability-microkernel layer.
 
 ### Documents
 
@@ -53,7 +56,8 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 - [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) —
   proposes a capability microkernel with explicit object memory, first-class
   execution-stop domains, bounded IPC and CPU budgets, revocation anchors,
-  structured fault routes, and quiescence- or quarantine-gated recovery.
+  structured fault routes, and quiescence- or quarantine-gated recovery, with
+  each component linked to its detailed evidence and implementation report.
 
 ## Maintaining this index
 
