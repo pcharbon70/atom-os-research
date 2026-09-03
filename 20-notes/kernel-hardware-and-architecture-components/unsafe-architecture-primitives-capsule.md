@@ -25,7 +25,7 @@ privilege, an ISA instruction, a control register, compiler behavior, an ABI,
 or an exact assembly sequence.
 
 This is component 1 of the [kernel hardware and architecture support
-layer](kernel-hardware-and-architecture-support-layer.md). It supplies the
+layer](../kernel-hardware-and-architecture-support-layer.md). It supplies the
 mechanism leaves used by entry, translation, ordering, interrupt, time, CPU,
 I/O, and fault components. It never decides whether a caller has authority and
 never upgrades a local instruction into a claim of global completion.
@@ -72,11 +72,11 @@ A satisfactory capsule must meet this operational standard:
 ### Architecture specifications
 
 The [Intel system-programming
-documentation](../30-sources/intel-2026-system-programming-documentation.md),
+documentation](../../30-sources/intel-2026-system-programming-documentation.md),
 [Arm A-profile architecture
-documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md),
+documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md),
 and [RISC-V privileged
-architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
+architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)
 define instructions with visibly different privilege, fault, ordering, and
 scope semantics. They support small, precise backends. They do not support a
 portable API named only after approximately similar mnemonics.
@@ -90,28 +90,28 @@ in contracts that callers can inspect.
 ### Kernel engineering and microkernel evidence
 
 The [Linux low-level API
-documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
 is useful engineering precedent for explicit entry ordering, generic barrier
 semantics, cache/TLB effects, and architecture-specific implementations. It is
 not evidence that this project should reproduce Linux macros or its broad
 compatibility surface.
 
-The [L4 retrospective](../30-sources/elphinstone-heiser-2013-l4-lessons.md)
+The [L4 retrospective](../../30-sources/elphinstone-heiser-2013-l4-lessons.md)
 reports a long-term move away from whole-kernel assembly and unusual private
 calling conventions toward small assembly paths plus architecture-neutral
 kernel code. The [comprehensive seL4 verification
-paper](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+paper](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
 demonstrates the value of a small mechanism set while explicitly naming
 hardware, boot, assembly, caches, and devices among proof assumptions or
 boundaries. Similar design does not transfer those proofs to this project.
 
 ### Verification evidence
 
-[Serval](../30-sources/nelson-et-al-2019-serval.md) demonstrates that executable
+[Serval](../../30-sources/nelson-et-al-2019-serval.md) demonstrates that executable
 instruction interpreters and symbolic evaluation can verify bounded systems
 binaries and find real bugs, but makes the ISA model itself a trusted artifact.
 [Translation validation for
-seL4](../30-sources/sewell-et-al-2013-translation-validation.md) connected
+seL4](../../30-sources/sewell-et-al-2013-translation-validation.md) connected
 verified C to its optimized binary while explicitly omitting assembly and
 volatile hardware accesses in the reported boundary. Together they support
 making the residual leaf visible and small; neither paper proves this proposed
@@ -698,7 +698,7 @@ unsupervisable trusted surface.
 ## Connections
 
 - [Kernel hardware and architecture support
-  layer](kernel-hardware-and-architecture-support-layer.md) defines the
+  layer](../kernel-hardware-and-architecture-support-layer.md) defines the
   semantic components that exclusively consume these leaves.
 - [Normalized boot handoff and feature
   discovery](normalized-boot-handoff-and-feature-discovery.md) creates the
@@ -706,28 +706,28 @@ unsupervisable trusted surface.
 - [Privileged entry, exit, and execution
   context](privileged-entry-exit-and-execution-context.md) owns the state
   machine around the capsule's entry and final-return fragments.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) supplies
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md) supplies
   the authority and object-lifecycle checks that must occur before a raw
   mechanism is invoked.
 - [Kernel hardware-contract
-  inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+  inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
   tracks whether this boundary remains small on real ports.
 
 ## Sources
 
 - [Intel 64 and IA-32 system programming
-  documentation](../30-sources/intel-2026-system-programming-documentation.md)
+  documentation](../../30-sources/intel-2026-system-programming-documentation.md)
 - [Arm A-profile system architecture
-  documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+  documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
 - [The RISC-V privileged
-  architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
+  architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)
 - [Linux kernel low-level core API
-  documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+  documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
 - [From L3 to seL4: What have we learnt in 20 years of L4
-  microkernels?](../30-sources/elphinstone-heiser-2013-l4-lessons.md)
+  microkernels?](../../30-sources/elphinstone-heiser-2013-l4-lessons.md)
 - [Comprehensive formal verification of an OS
-  microkernel](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+  microkernel](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
 - [Scaling symbolic evaluation for automated verification of systems code with
-  Serval](../30-sources/nelson-et-al-2019-serval.md)
+  Serval](../../30-sources/nelson-et-al-2019-serval.md)
 - [Translation validation for a verified OS
-  kernel](../30-sources/sewell-et-al-2013-translation-validation.md)
+  kernel](../../30-sources/sewell-et-al-2013-translation-validation.md)

@@ -74,4 +74,4 @@ modeling work.
 
 ## Derived work
 
-- [Unsafe architecture-primitives capsule](../20-notes/unsafe-architecture-primitives-capsule.md)
+- [Unsafe architecture-primitives capsule](../20-notes/kernel-hardware-and-architecture-components/unsafe-architecture-primitives-capsule.md)

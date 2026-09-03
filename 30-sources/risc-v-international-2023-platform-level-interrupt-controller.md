@@ -71,4 +71,4 @@ and requires a different flow plan.
 
 ## Derived work
 
-- [Interrupt event fabric](../20-notes/interrupt-event-fabric.md)
+- [Interrupt event fabric](../20-notes/kernel-hardware-and-architecture-components/interrupt-event-fabric.md)

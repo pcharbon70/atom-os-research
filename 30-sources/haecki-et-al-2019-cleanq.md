@@ -76,6 +76,7 @@ that can misuse intentionally shared buffers or lie through their protocol.
 
 ## Derived work
 
+- [Native work, ports, and drivers](../20-notes/managed-actor-runtime-components/native-work-ports-and-drivers.md)
 - [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
 - [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
 - [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)

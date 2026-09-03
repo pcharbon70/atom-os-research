@@ -197,6 +197,13 @@ frame.
   context, translation, interrupt, timer, CPU, I/O, DMA, and fault mechanisms.
 - [BEAM, ERTS, and OTP](beam-erts-and-otp.md) covers the required managed actor
   semantics and the policy that must remain outside privilege.
+- [Managed actor runtime](managed-actor-runtime.md) develops the immediate
+  unprivileged client of the kernel, including two-level scheduling, copied
+  actor terms, bounded gateways, native service domains, and runtime failure
+  translation.
+- [Managed actor runtime
+  layer](../20-notes/managed-actor-runtime-layer.md) proposes the complete
+  runtime contract and tests against the kernel mechanisms defined here.
 - [BEAM, ERTS, and OTP principles for a new operating
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
   places this layer within the complete platform decomposition.

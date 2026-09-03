@@ -82,5 +82,5 @@ correctness.
 
 ## Derived work
 
-- [Typed kernel-facing architecture facade](../20-notes/typed-kernel-facing-architecture-facade.md)
-- [Unsafe architecture-primitives capsule](../20-notes/unsafe-architecture-primitives-capsule.md)
+- [Typed kernel-facing architecture facade](../20-notes/kernel-hardware-and-architecture-components/typed-kernel-facing-architecture-facade.md)
+- [Unsafe architecture-primitives capsule](../20-notes/kernel-hardware-and-architecture-components/unsafe-architecture-primitives-capsule.md)

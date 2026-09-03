@@ -74,4 +74,4 @@ reproducible build.
 
 ## Derived work
 
-- [Normalized boot handoff and feature discovery](../20-notes/normalized-boot-handoff-and-feature-discovery.md)
+- [Normalized boot handoff and feature discovery](../20-notes/kernel-hardware-and-architecture-components/normalized-boot-handoff-and-feature-discovery.md)

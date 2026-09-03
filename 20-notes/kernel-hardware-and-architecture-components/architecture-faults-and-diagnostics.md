@@ -112,23 +112,23 @@ The boundary is the distinction between **evidence and mechanism** below and
 
 Current x86-64, Arm A-profile, and RISC-V manuals show that trap state, error
 reporting, precision, and optional extensions differ materially. The [Linux RAS
-documentation](../30-sources/linux-kernel-community-2026-ras-documentation.md)
+documentation](../../30-sources/linux-kernel-community-2026-ras-documentation.md)
 shows why source, severity, latching, correction, and containment should not be
 collapsed into one exception number. It also shows the practical value of
 preserving both standardized and vendor-specific evidence.
 
-[Kdump](../30-sources/goyal-et-al-2005-kdump.md) demonstrates a useful
+[Kdump](../../30-sources/goyal-et-al-2005-kdump.md) demonstrates a useful
 independence principle: prepare memory, metadata, and an alternate capture
 environment before failure, then avoid depending on the failed kernel for bulk
 collection. Its limits are equally important. A second kernel still assumes
 that enough CPU, memory, firmware, and device state survives and that
 outstanding DMA cannot corrupt its reservation.
 
-The [seL4 verification](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
-and [CertiKOS](../30-sources/gu-et-al-2016-certikos.md) work support explicit
+The [seL4 verification](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+and [CertiKOS](../../30-sources/gu-et-al-2016-certikos.md) work support explicit
 state and narrow trusted mechanisms, while their documented hardware, boot,
 device, DMA, timing, and fault assumptions prevent treating a functional proof
-as a machine-failure proof. [Chandra and Toueg](../30-sources/chandra-toueg-1996-failure-detectors.md)
+as a machine-failure proof. [Chandra and Toueg](../../30-sources/chandra-toueg-1996-failure-detectors.md)
 supplies the crucial conceptual distinction between observed failure evidence
 and suspicion caused by missing progress.
 
@@ -393,7 +393,7 @@ scope or force terminal handling, but cannot silently narrow it.
 The upper recovery service receives `ArchitectureFaultRecord` plus a capability
 to act on a preauthorized failure scope. It does not receive authority merely
 because an identifier appeared in the record. This preserves the capability
-design in the [minimal privileged kernel](minimal-privileged-kernel-layer.md).
+design in the [minimal privileged kernel](../minimal-privileged-kernel-layer.md).
 
 ## Cross-architecture implementation
 
@@ -637,27 +637,27 @@ Open questions remain:
 
 ## Connections
 
-- [Kernel hardware and architecture support layer](kernel-hardware-and-architecture-support-layer.md) —
+- [Kernel hardware and architecture support layer](../kernel-hardware-and-architecture-support-layer.md) —
   defines component 9 in the full architecture decomposition.
 - [Typed kernel-facing architecture facade](typed-kernel-facing-architecture-facade.md) —
   exposes `ArchitectureFaultRecord`, `CrashSink`, and their completion
   semantics to the minimal privileged kernel.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) — turns
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md) — turns
   proven containment facts into authorized domain, CPU, device, and recovery
   actions.
-- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md) —
+- [Kernel hardware and architecture support map](../../10-maps/kernel-hardware-and-architecture-support.md) —
   places the component in the wider evidence trail.
-- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) —
+- [Kernel hardware-contract inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) —
   retains cross-ISA and fault-injection criteria as open work.
 
 ## Sources
 
-- [Linux reliability, availability, and serviceability documentation](../30-sources/linux-kernel-community-2026-ras-documentation.md)
-- [Kdump](../30-sources/goyal-et-al-2005-kdump.md)
-- [Intel 64 and IA-32 system programming documentation](../30-sources/intel-2026-system-programming-documentation.md)
-- [Arm A-profile system architecture documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
-- [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
-- [Linux low-level core API documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
-- [Comprehensive formal verification of an OS microkernel](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
-- [CertiKOS](../30-sources/gu-et-al-2016-certikos.md)
-- [Unreliable failure detectors for reliable distributed systems](../30-sources/chandra-toueg-1996-failure-detectors.md)
+- [Linux reliability, availability, and serviceability documentation](../../30-sources/linux-kernel-community-2026-ras-documentation.md)
+- [Kdump](../../30-sources/goyal-et-al-2005-kdump.md)
+- [Intel 64 and IA-32 system programming documentation](../../30-sources/intel-2026-system-programming-documentation.md)
+- [Arm A-profile system architecture documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+- [RISC-V privileged architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)
+- [Linux low-level core API documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+- [Comprehensive formal verification of an OS microkernel](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+- [CertiKOS](../../30-sources/gu-et-al-2016-certikos.md)
+- [Unreliable failure detectors for reliable distributed systems](../../30-sources/chandra-toueg-1996-failure-detectors.md)

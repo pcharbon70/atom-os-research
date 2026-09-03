@@ -27,6 +27,11 @@ one existing VM implementation the kernel foundation.
 
 ## Active inquiries
 
+- [What contract should the managed actor runtime
+  provide?](../40-inquiries/what-contract-should-the-managed-actor-runtime-provide.md) —
+  defines falsifiable compatibility, actor-memory, signal, scheduling,
+  resource, native-isolation, distribution, and replay criteria for the third
+  system layer.
 - [What contract should the minimal privileged kernel
   provide?](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md) —
   defines falsifiable capability, domain, IPC, CPU-budget, fault, teardown,
@@ -46,6 +51,10 @@ one existing VM implementation the kernel foundation.
 
 ## Topic maps
 
+- [Managed actor runtime](managed-actor-runtime.md) — routes through compiled
+  BEAM compatibility, private heaps and collection, signal and mailbox design,
+  two-level scheduling, code publication, native boundaries, distribution,
+  testing, and evaluation.
 - [Minimal privileged kernel](minimal-privileged-kernel.md) — routes through
   the capability, protected-domain, bounded-IPC, temporal-authority, failure,
   driver-containment, teardown, and assurance evidence for the layer above
@@ -65,6 +74,24 @@ one existing VM implementation the kernel foundation.
 
 ## Recently developed
 
+- [Managed actor runtime component deep
+  dives](managed-actor-runtime.md#component-implementation-deep-dives) —
+  develops one evidence-backed implementation recommendation for each of the
+  thirteen runtime components while preserving the capability-kernel and
+  OTP-policy boundaries.
+- [2026-09-03 managed actor runtime component research
+  session](../50-journal/2026-09-03-managed-actor-runtime-components-deep-dive.md) —
+  records the expanded primary-source review, cross-component method, proposed
+  state machines, and explicit absence of prototype evidence.
+- [Managed actor runtime
+  layer](../20-notes/managed-actor-runtime-layer.md) — proposes an unprivileged
+  BEAM-compatible runtime with thirteen components, explicit critical paths,
+  private tracing heaps, sender-ordered signals, kernel-time reconciliation,
+  isolated native services, and a staged conformance program.
+- [2026-09-02 managed actor runtime deep
+  dive](../50-journal/2026-09-02-managed-actor-runtime-deep-dive.md) — records
+  the OTP 29.0.6 baseline, papers and engineering articles reviewed,
+  comparative-runtime assumptions, and absence of implementation evidence.
 - [Minimal privileged kernel
   layer](../20-notes/minimal-privileged-kernel-layer.md) — proposes a capability
   microkernel with explicit object resources, coordinated execution-stop
@@ -121,6 +148,11 @@ one existing VM implementation the kernel foundation.
 - Decide whether the first compatibility prototype should port a pinned ERTS
   or execute a declared BEAM/OTP profile in a new runtime; a principles-only
   runtime no longer satisfies the platform goal.
+- Define the exact OTP 29.0.6 compatibility profile, mailbox-limit behavior,
+  shared-binary charging, and native boundary before calling the managed layer
+  compatible.
+- Turn the thirteen managed-runtime component state machines and falsifiers
+  into executable models, conformance fixtures, and measured prototypes.
 - Validate the proposed capability, quota, bounded-transport, and
   failure-domain semantics against a BEAM runtime without making each actor a
   kernel object.

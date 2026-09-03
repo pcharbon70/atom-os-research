@@ -100,6 +100,11 @@ historical solution rather than a mandatory modern mechanism.
 
 ## Derived work
 
+- [Managed actor runtime layer](../20-notes/managed-actor-runtime-layer.md)
+- [Runtime-domain bootstrap and kernel adapter](../20-notes/managed-actor-runtime-components/runtime-domain-bootstrap-and-kernel-adapter.md)
+- [Reduction scheduler and kernel scheduling contexts](../20-notes/managed-actor-runtime-components/reduction-scheduler-and-kernel-scheduling-contexts.md)
+- [Managed actor runtime map](../10-maps/managed-actor-runtime.md)
+- [Managed-runtime contract inquiry](../40-inquiries/what-contract-should-the-managed-actor-runtime-provide.md)
 - [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
 - [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
 - [Minimal privileged-kernel contract inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)

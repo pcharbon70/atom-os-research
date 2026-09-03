@@ -105,28 +105,28 @@ operation, but it does not invent or delegate user-visible authority.
 
 ## Evidence and synthesis
 
-The [Flux OSKit](../30-sources/ford-et-al-1997-flux-oskit.md) shows the value of
+The [Flux OSKit](../../30-sources/ford-et-al-1997-flux-oskit.md) shows the value of
 semantic components, explicit environmental dependencies, and intentional
 architecture escape hatches; it also shows that function tables alone do not
-provide isolation or correct modern concurrency semantics. [Think](../30-sources/fassino-et-al-2002-think.md)
+provide isolation or correct modern concurrency semantics. [Think](../../30-sources/fassino-et-al-2002-think.md)
 demonstrates strongly typed component interfaces and explicit bindings without
 requiring one kernel architecture.
 
-[Secure Virtual Architecture](../30-sources/criswell-et-al-2007-secure-virtual-architecture.md)
+[Secure Virtual Architecture](../../30-sources/criswell-et-al-2007-secure-virtual-architecture.md)
 demonstrates that privileged operations can be concentrated behind a typed
 low-level interface while leaving most machine-independent kernel code alone.
 Its virtual instruction set is not proposed here, but its small privileged
 surface and checker boundary are instructive.
 
-The current [Tock HIL design](../30-sources/tock-project-2026-hil-design.md) is
+The current [Tock HIL design](../../30-sources/tock-project-2026-hil-design.md) is
 particularly useful engineering evidence for split-phase APIs: submission
 acceptance must determine whether completion will occur, callbacks must not be
 synchronous surprises, and buffers must return with terminal results. Atom OS
 uses bounded events rather than callback-stack reentry, but adopts the explicit
 ownership rule.
 
-[CertiKOS](../30-sources/gu-et-al-2016-certikos.md) supports observable layer
-specifications and refinement. [seL4](../30-sources/sel4-foundation-2026-reference-manual.md)
+[CertiKOS](../../30-sources/gu-et-al-2016-certikos.md) supports observable layer
+specifications and refinement. [seL4](../../30-sources/sel4-foundation-2026-reference-manual.md)
 supports explicit objects, capabilities, and architecture-specific ports while
 also showing that a compact API is not a substitute for recording hardware and
 DMA assumptions. The current architecture manuals and Linux low-level
@@ -507,7 +507,7 @@ interface.
 
 ## Capability and resource composition
 
-The facade does not replace the [minimal privileged kernel's](minimal-privileged-kernel-layer.md)
+The facade does not replace the [minimal privileged kernel's](../minimal-privileged-kernel-layer.md)
 capability model.
 
 1. A caller invokes a kernel operation using a typed capability.
@@ -746,7 +746,7 @@ Open questions include:
 
 ## Connections
 
-- [Kernel hardware and architecture support layer](kernel-hardware-and-architecture-support-layer.md) —
+- [Kernel hardware and architecture support layer](../kernel-hardware-and-architecture-support-layer.md) —
   defines the complete eleven-component decomposition and the initial facade
   vocabulary.
 - [Architecture faults and diagnostics](architecture-faults-and-diagnostics.md) —
@@ -758,24 +758,24 @@ Open questions include:
   supplies explicit ordering domains and executable-code lifecycle.
 - [Interrupt event fabric](interrupt-event-fabric.md) — supplies flow-specific,
   generation-safe event and completion semantics.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) — owns
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md) — owns
   user-visible capabilities, resource budgets, domains, invocation, and
   recovery authority above the facade.
-- [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md) —
+- [Kernel hardware and architecture support map](../../10-maps/kernel-hardware-and-architecture-support.md) —
   connects all component evidence and deep dives.
-- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) —
+- [Kernel hardware-contract inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) —
   keeps the two-ISA portability claim and profile choices open.
 
 ## Sources
 
-- [The Flux OSKit](../30-sources/ford-et-al-1997-flux-oskit.md)
-- [Think](../30-sources/fassino-et-al-2002-think.md)
-- [Secure Virtual Architecture](../30-sources/criswell-et-al-2007-secure-virtual-architecture.md)
-- [Design of Tock kernel hardware interface layers](../30-sources/tock-project-2026-hil-design.md)
-- [CertiKOS](../30-sources/gu-et-al-2016-certikos.md)
-- [seL4 reference manual](../30-sources/sel4-foundation-2026-reference-manual.md)
-- [Comprehensive formal verification of an OS microkernel](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
-- [Linux low-level core API documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
-- [Intel system programming documentation](../30-sources/intel-2026-system-programming-documentation.md)
-- [Arm A-profile system architecture documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
-- [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
+- [The Flux OSKit](../../30-sources/ford-et-al-1997-flux-oskit.md)
+- [Think](../../30-sources/fassino-et-al-2002-think.md)
+- [Secure Virtual Architecture](../../30-sources/criswell-et-al-2007-secure-virtual-architecture.md)
+- [Design of Tock kernel hardware interface layers](../../30-sources/tock-project-2026-hil-design.md)
+- [CertiKOS](../../30-sources/gu-et-al-2016-certikos.md)
+- [seL4 reference manual](../../30-sources/sel4-foundation-2026-reference-manual.md)
+- [Comprehensive formal verification of an OS microkernel](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+- [Linux low-level core API documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+- [Intel system programming documentation](../../30-sources/intel-2026-system-programming-documentation.md)
+- [Arm A-profile system architecture documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+- [RISC-V privileged architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)

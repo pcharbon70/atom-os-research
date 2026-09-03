@@ -79,4 +79,4 @@ side channels.
 
 ## Derived work
 
-- [Privileged entry, exit, and execution context](../20-notes/privileged-entry-exit-and-execution-context.md)
+- [Privileged entry, exit, and execution context](../20-notes/kernel-hardware-and-architecture-components/privileged-entry-exit-and-execution-context.md)

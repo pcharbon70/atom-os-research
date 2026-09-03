@@ -85,4 +85,4 @@ the reset and bus-quiescence mechanisms needed for full device revocation.
 
 ## Derived work
 
-- [Protected I/O and DMA ownership](../20-notes/protected-io-and-dma-ownership.md)
+- [Protected I/O and DMA ownership](../20-notes/kernel-hardware-and-architecture-components/protected-io-and-dma-ownership.md)

@@ -74,4 +74,4 @@ use the older PLIC or another controller instead.
 
 ## Derived work
 
-- [Interrupt event fabric](../20-notes/interrupt-event-fabric.md)
+- [Interrupt event fabric](../20-notes/kernel-hardware-and-architecture-components/interrupt-event-fabric.md)

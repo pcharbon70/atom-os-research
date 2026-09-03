@@ -1104,7 +1104,7 @@ least-privilege isolation.
 
 ## Connections
 
-- [Kernel hardware and architecture support layer](kernel-hardware-and-architecture-support-layer.md)
+- [Kernel hardware and architecture support layer](../kernel-hardware-and-architecture-support-layer.md)
 - [Typed kernel-facing architecture facade](typed-kernel-facing-architecture-facade.md)
 - [Unsafe architecture-primitives capsule](unsafe-architecture-primitives-capsule.md)
 - [Address translation and protection transitions](address-translation-and-protection-transitions.md)
@@ -1112,25 +1112,25 @@ least-privilege isolation.
 - [Interrupt event fabric](interrupt-event-fabric.md)
 - [Architecture faults and diagnostics](architecture-faults-and-diagnostics.md)
 - [Logical-CPU coordination and lifecycle](logical-cpu-coordination-and-lifecycle.md)
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md)
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md)
 
 ## Sources
 
 ### Architecture specifications and implementation contracts
 
-- [Arm System Memory Management Unit Architecture Specification, SMMUv3](../30-sources/arm-2025-smmuv3-architecture.md)
-- [Intel Virtualization Technology for Directed I/O Architecture Specification](../30-sources/intel-2024-vt-d-architecture.md)
-- [RISC-V IOMMU Architecture Specification](../30-sources/risc-v-international-2026-iommu-architecture.md)
-- [Linux kernel low-level core APIs](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+- [Arm System Memory Management Unit Architecture Specification, SMMUv3](../../30-sources/arm-2025-smmuv3-architecture.md)
+- [Intel Virtualization Technology for Directed I/O Architecture Specification](../../30-sources/intel-2024-vt-d-architecture.md)
+- [RISC-V IOMMU Architecture Specification](../../30-sources/risc-v-international-2026-iommu-architecture.md)
+- [Linux kernel low-level core APIs](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
 
 ### Research evidence
 
-- [CleanQ: a lightweight, uniform, formally specified interface for intra-machine data transfer](../30-sources/haecki-et-al-2019-cleanq.md)
-- [Thunderclap: exploring vulnerabilities in operating system IOMMU protection via DMA from untrustworthy peripherals](../30-sources/markettos-et-al-2019-thunderclap.md)
-- [Tolerating malicious device drivers in Linux](../30-sources/boyd-wickizer-zeldovich-2010-malicious-device-drivers.md)
-- [Arrakis: the operating system is the control plane](../30-sources/peter-et-al-2014-arrakis.md)
-- [A least-privilege memory protection model for modern hardware](../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md)
-- [Recovering device drivers](../30-sources/swift-et-al-2004-recovering-device-drivers.md)
+- [CleanQ: a lightweight, uniform, formally specified interface for intra-machine data transfer](../../30-sources/haecki-et-al-2019-cleanq.md)
+- [Thunderclap: exploring vulnerabilities in operating system IOMMU protection via DMA from untrustworthy peripherals](../../30-sources/markettos-et-al-2019-thunderclap.md)
+- [Tolerating malicious device drivers in Linux](../../30-sources/boyd-wickizer-zeldovich-2010-malicious-device-drivers.md)
+- [Arrakis: the operating system is the control plane](../../30-sources/peter-et-al-2014-arrakis.md)
+- [A least-privilege memory protection model for modern hardware](../../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md)
+- [Recovering device drivers](../../30-sources/swift-et-al-2004-recovering-device-drivers.md)
 
 ## Current conclusion
 

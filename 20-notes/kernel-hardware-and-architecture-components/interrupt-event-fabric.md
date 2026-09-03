@@ -34,7 +34,7 @@ remain distinct state machines behind one event vocabulary.
 
 This note proposes an implementation for component 5 of [Kernel hardware and
 architecture support
-layer](kernel-hardware-and-architecture-support-layer.md). Source literature
+layer](../kernel-hardware-and-architecture-support-layer.md). Source literature
 supports the constraints and precedents; no current experiment verifies the
 complete fabric.
 
@@ -96,14 +96,14 @@ The first implementation is adequate only when it demonstrates:
 
 | Evidence | Supported conclusion | What remains unproved |
 | --- | --- | --- |
-| [Linux generic interrupt handling](../30-sources/linux-kernel-community-2026-low-level-core-apis.md) | Separating generic edge, level, fast-EOI, simple, and per-CPU flow from controller-chip operations reduces duplicated and unsafe folklore | Linux's descriptor model and broad compatibility surface are not a minimal API for this kernel |
-| [Arm GICv3/v4 overview](../30-sources/arm-2019-gicv3-v4-software-overview.md) | Pending, active, active-and-pending, acknowledgement, priority drop, deactivation, trigger mode, and routing are observable controller state | The guide covers a selected configuration and does not define this capability lifecycle |
-| [RISC-V AIA](../30-sources/risc-v-international-2023-advanced-interrupt-architecture.md) and [PLIC](../30-sources/risc-v-international-2023-platform-level-interrupt-controller.md) | Wired PLIC/APLIC paths, per-hart MSI interrupt files, privilege contexts, claim/completion, identities, and eventual state visibility cannot be reduced to one global IRQ integer | A concrete platform topology, driver protocol, or implementation correctness |
-| [Intel system programming manual](../30-sources/intel-2026-system-programming-documentation.md) | Local APIC, IPI, IOAPIC, and MSI-like mechanisms have distinct delivery and routing roles | A portable flow model or device-side correctness |
-| [L4 lessons](../30-sources/elphinstone-heiser-2013-l4-lessons.md) | Interrupts can become asynchronous notifications to user-level services while a small privileged mechanism retains controller control | This project's accounting, restart, and generation scheme |
-| [seL4 reference manual](../30-sources/sel4-foundation-2026-reference-manual.md) and [verification overview](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md) | Interrupt authority can be capability-mediated and delivery can use bounded notification objects | Similar objects do not transfer seL4's proofs; notification coalescing is not a general lossless queue |
-| [When poll is better than interrupt](../30-sources/yang-et-al-2012-when-poll-is-better-than-interrupt.md) | For selected very low-latency I/O, budgeted polling can outperform interrupts | Polling is not universally better and does not remove source-control or recovery obligations |
-| [Time protection](../30-sources/ge-et-al-2019-time-protection.md) | Interrupt routing and partitioning affect timing-channel isolation, not only availability | The baseline fabric does not by itself close all timing channels |
+| [Linux generic interrupt handling](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) | Separating generic edge, level, fast-EOI, simple, and per-CPU flow from controller-chip operations reduces duplicated and unsafe folklore | Linux's descriptor model and broad compatibility surface are not a minimal API for this kernel |
+| [Arm GICv3/v4 overview](../../30-sources/arm-2019-gicv3-v4-software-overview.md) | Pending, active, active-and-pending, acknowledgement, priority drop, deactivation, trigger mode, and routing are observable controller state | The guide covers a selected configuration and does not define this capability lifecycle |
+| [RISC-V AIA](../../30-sources/risc-v-international-2023-advanced-interrupt-architecture.md) and [PLIC](../../30-sources/risc-v-international-2023-platform-level-interrupt-controller.md) | Wired PLIC/APLIC paths, per-hart MSI interrupt files, privilege contexts, claim/completion, identities, and eventual state visibility cannot be reduced to one global IRQ integer | A concrete platform topology, driver protocol, or implementation correctness |
+| [Intel system programming manual](../../30-sources/intel-2026-system-programming-documentation.md) | Local APIC, IPI, IOAPIC, and MSI-like mechanisms have distinct delivery and routing roles | A portable flow model or device-side correctness |
+| [L4 lessons](../../30-sources/elphinstone-heiser-2013-l4-lessons.md) | Interrupts can become asynchronous notifications to user-level services while a small privileged mechanism retains controller control | This project's accounting, restart, and generation scheme |
+| [seL4 reference manual](../../30-sources/sel4-foundation-2026-reference-manual.md) and [verification overview](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md) | Interrupt authority can be capability-mediated and delivery can use bounded notification objects | Similar objects do not transfer seL4's proofs; notification coalescing is not a general lossless queue |
+| [When poll is better than interrupt](../../30-sources/yang-et-al-2012-when-poll-is-better-than-interrupt.md) | For selected very low-latency I/O, budgeted polling can outperform interrupts | Polling is not universally better and does not remove source-control or recovery obligations |
+| [Time protection](../../30-sources/ge-et-al-2019-time-protection.md) | Interrupt routing and partitioning affect timing-channel isolation, not only availability | The baseline fabric does not by itself close all timing channels |
 
 The useful synthesis is narrower than copying any one system: retain Linux's
 flow/backend split, L4/seL4's notification boundary and authority mediation,
@@ -529,7 +529,7 @@ never writes a raw EOI register or assumes that claim clears pending state.
 
 ## Interaction with the capability microkernel
 
-The [minimal privileged kernel](minimal-privileged-kernel-layer.md) already
+The [minimal privileged kernel](../minimal-privileged-kernel-layer.md) already
 requires typed IRQ bindings, bounded notifications, hard-path accounting, a
 separate management fault route, generation-safe teardown, and quarantine.
 This component realizes the controller side of that design.
@@ -823,7 +823,7 @@ through a masked reconfiguration lifecycle.
 ## Connections
 
 - [Kernel hardware and architecture support
-  layer](kernel-hardware-and-architecture-support-layer.md) defines the
+  layer](../kernel-hardware-and-architecture-support-layer.md) defines the
   component boundary and its dependencies on entry, CPU lifecycle, time, and
   protected I/O.
 - [Address translation and protection
@@ -833,29 +833,29 @@ through a masked reconfiguration lifecycle.
 - [Ordering, coherence, and code
   publication](ordering-coherence-and-code-publication.md) supplies IRQ-safe
   atomic publication, typed MMIO ordering, and remote code-sync requests.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md)
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md)
   supplies IRQ capabilities, bounded notifications, scheduling charges,
   reset authority, teardown generations, and quarantine.
 - [BEAM, ERTS, and OTP principles for a new operating
-  system](beam-erts-and-otp-principles-for-a-new-operating-system.md) explains
+  system](../beam-erts-and-otp-principles-for-a-new-operating-system.md) explains
   how supervised services and ordinary actor messages remain above this
   bounded hardware-notice boundary.
 - [Kernel hardware-contract
-  inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+  inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
   retains the experiments needed before this proposed fabric can be treated as
   adequate.
 
 ## Sources
 
-- [Linux kernel low-level core APIs](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
-- [Arm CoreLink GICv3 and GICv4 software overview](../30-sources/arm-2019-gicv3-v4-software-overview.md)
-- [RISC-V advanced interrupt architecture](../30-sources/risc-v-international-2023-advanced-interrupt-architecture.md)
-- [RISC-V platform-level interrupt controller](../30-sources/risc-v-international-2023-platform-level-interrupt-controller.md)
-- [Arm A-profile system architecture documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
-- [Intel 64 and IA-32 system programming documentation](../30-sources/intel-2026-system-programming-documentation.md)
-- [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
-- [From L3 to seL4](../30-sources/elphinstone-heiser-2013-l4-lessons.md)
-- [seL4 reference manual](../30-sources/sel4-foundation-2026-reference-manual.md)
-- [Comprehensive formal verification of an OS microkernel](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
-- [When poll is better than interrupt](../30-sources/yang-et-al-2012-when-poll-is-better-than-interrupt.md)
-- [Time protection](../30-sources/ge-et-al-2019-time-protection.md)
+- [Linux kernel low-level core APIs](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+- [Arm CoreLink GICv3 and GICv4 software overview](../../30-sources/arm-2019-gicv3-v4-software-overview.md)
+- [RISC-V advanced interrupt architecture](../../30-sources/risc-v-international-2023-advanced-interrupt-architecture.md)
+- [RISC-V platform-level interrupt controller](../../30-sources/risc-v-international-2023-platform-level-interrupt-controller.md)
+- [Arm A-profile system architecture documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+- [Intel 64 and IA-32 system programming documentation](../../30-sources/intel-2026-system-programming-documentation.md)
+- [RISC-V privileged architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)
+- [From L3 to seL4](../../30-sources/elphinstone-heiser-2013-l4-lessons.md)
+- [seL4 reference manual](../../30-sources/sel4-foundation-2026-reference-manual.md)
+- [Comprehensive formal verification of an OS microkernel](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+- [When poll is better than interrupt](../../30-sources/yang-et-al-2012-when-poll-is-better-than-interrupt.md)
+- [Time protection](../../30-sources/ge-et-al-2019-time-protection.md)

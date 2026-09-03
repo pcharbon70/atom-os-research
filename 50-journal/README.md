@@ -47,6 +47,14 @@ notes.
   records the expanded research across all eleven architecture components,
   shared review questions, implementation synthesis, source families, and
   explicit lack of executable or hardware evidence.
+- [2026-09-02 managed actor runtime deep dive](2026-09-02-managed-actor-runtime-deep-dive.md) —
+  records the current OTP/ERTS baseline, scientific and engineering source
+  review, comparative-runtime assumptions, synthesis method, and explicit
+  lack of runtime or hardware experiments.
+- [2026-09-03 managed actor runtime components deep dive](2026-09-03-managed-actor-runtime-components-deep-dive.md) —
+  records the expanded research across all thirteen runtime components, shared
+  implementation criteria, new primary sources, cross-component synthesis,
+  and explicit lack of prototype evidence.
 
 ## Maintaining this index
 

@@ -79,5 +79,5 @@ justified for the first kernel.
 
 ## Derived work
 
-- [Typed kernel-facing architecture facade](../20-notes/typed-kernel-facing-architecture-facade.md)
+- [Typed kernel-facing architecture facade](../20-notes/kernel-hardware-and-architecture-components/typed-kernel-facing-architecture-facade.md)
 - [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)

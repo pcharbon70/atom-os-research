@@ -123,6 +123,10 @@ requirements for a new kernel.
 
 ## Derived work
 
+- [Managed actor runtime layer](../20-notes/managed-actor-runtime-layer.md)
+- [Distribution gateway and remote actor semantics](../20-notes/managed-actor-runtime-components/distribution-gateway-and-remote-actor-semantics.md)
+- [Managed actor runtime map](../10-maps/managed-actor-runtime.md)
+- [Managed-runtime contract inquiry](../40-inquiries/what-contract-should-the-managed-actor-runtime-provide.md)
 - [BEAM, ERTS, and OTP principles for a new operating system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
 - [BEAM, ERTS, and OTP map](../10-maps/beam-erts-and-otp.md)
 - [Kernel-placement inquiry](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)

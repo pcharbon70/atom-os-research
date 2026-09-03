@@ -146,26 +146,26 @@ not substitute for target implementation or hardware qualification.
 
 #### Bootstrap and execution
 
-- [Normalized boot handoff and feature discovery](../20-notes/normalized-boot-handoff-and-feature-discovery.md)
-- [Unsafe architecture-primitives capsule](../20-notes/unsafe-architecture-primitives-capsule.md)
-- [Privileged entry, exit, and execution context](../20-notes/privileged-entry-exit-and-execution-context.md)
+- [Normalized boot handoff and feature discovery](../20-notes/kernel-hardware-and-architecture-components/normalized-boot-handoff-and-feature-discovery.md)
+- [Unsafe architecture-primitives capsule](../20-notes/kernel-hardware-and-architecture-components/unsafe-architecture-primitives-capsule.md)
+- [Privileged entry, exit, and execution context](../20-notes/kernel-hardware-and-architecture-components/privileged-entry-exit-and-execution-context.md)
 
 #### Memory, publication, and events
 
-- [Address translation and protection transitions](../20-notes/address-translation-and-protection-transitions.md)
-- [Ordering, coherence, and code publication](../20-notes/ordering-coherence-and-code-publication.md)
-- [Interrupt event fabric](../20-notes/interrupt-event-fabric.md)
+- [Address translation and protection transitions](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions.md)
+- [Ordering, coherence, and code publication](../20-notes/kernel-hardware-and-architecture-components/ordering-coherence-and-code-publication.md)
+- [Interrupt event fabric](../20-notes/kernel-hardware-and-architecture-components/interrupt-event-fabric.md)
 
 #### Time, CPUs, and I/O
 
-- [Raw time and deadline programming](../20-notes/raw-time-and-deadline-programming.md)
-- [Logical-CPU coordination and lifecycle](../20-notes/logical-cpu-coordination-and-lifecycle.md)
-- [Protected I/O and DMA ownership](../20-notes/protected-io-and-dma-ownership.md)
+- [Raw time and deadline programming](../20-notes/kernel-hardware-and-architecture-components/raw-time-and-deadline-programming.md)
+- [Logical-CPU coordination and lifecycle](../20-notes/kernel-hardware-and-architecture-components/logical-cpu-coordination-and-lifecycle.md)
+- [Protected I/O and DMA ownership](../20-notes/kernel-hardware-and-architecture-components/protected-io-and-dma-ownership.md)
 
 #### Failure evidence and common interface
 
-- [Architecture faults and diagnostics](../20-notes/architecture-faults-and-diagnostics.md)
-- [Typed kernel-facing architecture facade](../20-notes/typed-kernel-facing-architecture-facade.md)
+- [Architecture faults and diagnostics](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics.md)
+- [Typed kernel-facing architecture facade](../20-notes/kernel-hardware-and-architecture-components/typed-kernel-facing-architecture-facade.md)
 
 ### Source families
 

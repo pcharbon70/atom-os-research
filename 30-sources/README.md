@@ -33,6 +33,9 @@ work. Incidental mentions can remain citations in the document using them.
 - [A least-privilege memory protection model for modern hardware](achermann-et-al-2019-least-privilege-memory-protection.md) —
   separates authority to configure address translation from authority to
   access the translated memory across CPUs and devices.
+- [A scalability benchmark suite for Erlang/OTP](aronis-et-al-2012-scalability-benchmark-suite-erlang-otp.md) —
+  defines multidimensional Erlang scalability measurement across resources and
+  workloads instead of relying on one throughput point.
 - [Scheduler Activations](anderson-et-al-1992-scheduler-activations.md) —
   separates kernel processor allocation from fine-grained user-level thread
   scheduling and evaluates the costs and complexity of activation upcalls.
@@ -57,6 +60,9 @@ work. Incidental mentions can remain citations in the document using them.
 - [Announcing AtomVM v0.7.0-alpha.0](atomvm-project-2026-v0-7-alpha0.md) —
   captures the official prerelease feature and stability boundary after the
   v0.6 line.
+- [Work-Stealing, Locality-Aware Actor Scheduling](barghi-karsten-2018-locality-aware-actor-scheduling.md) —
+  compares actor work-stealing policies on NUMA machines and shows both the
+  gains and tail-latency risks of locality and affinity mechanisms.
 - [The Multikernel](baumann-et-al-2009-multikernel.md) — motivates explicit
   cross-core messages, replicated local state, and hardware-neutral structure
   for heterogeneous multicore systems.
@@ -78,6 +84,12 @@ work. Incidental mentions can remain citations in the document using them.
 - [Unreliable Failure Detectors for Reliable Distributed Systems](chandra-toueg-1996-failure-detectors.md) —
   formalizes the distinction between crash fact and liveness suspicion under
   timing assumptions.
+- [Finding Race Conditions in Erlang with QuickCheck and PULSE](claessen-et-al-2009-quickcheck-pulse.md) —
+  combines property generation, controlled scheduling, shrinking, and trace
+  visualization to reproduce Erlang concurrency faults.
+- [Orca: GC and Type System Co-Design for Actor Languages](clebsch-et-al-2017-orca.md) —
+  demonstrates concurrent actor collection and zero-copy sharing under Pony’s
+  stronger reference-capability assumptions.
 - [Hive: Fault Containment for Shared-Memory Multiprocessors](chapin-et-al-1995-hive.md) —
   studies fault containment regions and correlated shared-memory failure on
   multiprocessors.
@@ -94,11 +106,15 @@ work. Incidental mentions can remain citations in the document using them.
   resource protection from application-level management and analyzes secure
   binding and revocation.
 - [Erlang/OTP 29.0.5 system documentation](erlang-otp-team-2026-otp-29-documentation.md) —
-  records current process, signal, scheduler, memory, code-loading,
-  supervision, release, distribution, and security contracts.
+  records the process, signal, scheduler, memory, code-loading, supervision,
+  release, distribution, and security baseline aligned with the pinned 29.0.5
+  source audit.
+- [Erlang/OTP 29.0.6 managed-runtime documentation](erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md) —
+  records the current compatibility, actor, signal, scheduler, collection,
+  code, timer, table, tracing, port, and native-extension behavior.
 - [Erlang/OTP source tree at 5cf5f9725452](erlang-otp-team-2026-otp-29-source-tree.md) —
-  pins and audits current ERTS internals, constants, code publication, native
-  boundaries, and host-OS dependencies.
+  pins and audits OTP 29.0.5/ERTS 17.0.5 internals, constants, code
+  publication, native boundaries, and host-OS dependencies.
 - [Evaluating AtomVM for Fault-Tolerant ESP32-Based Systems](ferenczi-ruda-toth-2025-evaluating-atomvm.md) —
   records abstract-level evidence about redundant hardware and remote-node
   monitoring.
@@ -127,6 +143,9 @@ work. Incidental mentions can remain citations in the document using them.
 - [A brief introduction to BEAM](hogberg-2020-brief-introduction-to-beam.md) —
   establishes the official distinction between BEAM instructions and ERTS
   runtime facilities.
+- [A few notes on message passing](hogberg-2021-message-passing.md) — explains
+  per-sender signal order, message copying, signal/message queue separation,
+  and the cost and optimization limits of selective receive.
 - [Intel 64 and IA-32 system programming documentation](intel-2026-system-programming-documentation.md) —
   records current x86 privilege, entry, translation, interrupt, time,
   extended-state, and optional virtualization mechanisms.
@@ -210,6 +229,9 @@ work. Incidental mentions can remain citations in the document using them.
 - [Characterizing the scalability of Erlang VM on many-core processors](zhang-2011-erlang-vm-many-core-scalability.md) —
   provides historical evidence about hidden runtime synchronization beneath a
   share-nothing programming model.
+- [The Many-to-One Parallel Signal Sending Optimization](winblad-2021-parallel-signal-sending.md) —
+  explains adaptive sender-striped ingress and bounds its extreme
+  many-to-one microbenchmark result.
 - [Concurrency in the Linux kernel](alglave-et-al-2018-linux-kernel-concurrency.md) —
   develops and tests the Linux Kernel Memory Model and supports keeping
   executable litmus tests beside architecture-ordering protocols.
@@ -301,6 +323,58 @@ work. Incidental mentions can remain citations in the document using them.
 - [Efficient design of high-resolution timekeeping in real-time operating systems](terraneo-cattaneo-2026-high-resolution-timekeeping.md) —
   evaluates high-resolution timekeeping with a globally qualified counter and
   CPU-local deadlines while exposing scheduler- and hardware-specific limits.
+- [Proof-carrying code](necula-1997-proof-carrying-code.md) — develops
+  producer-supplied safety proofs checked by a small consumer and exposes the
+  proof-policy and toolchain obligations behind that trust reduction.
+- [Simple, fast, and practical concurrent queue algorithms](michael-scott-1996-concurrent-queue-algorithms.md) —
+  supplies linearizable blocking and non-blocking queue algorithms while
+  leaving actor-level ordering, reclamation, wakeup, and overload unspecified.
+- [Scheduling multithreaded computations by work stealing](blumofe-leiserson-1999-work-stealing.md) —
+  proves work-stealing bounds for fully strict computations and makes clear why
+  those bounds do not transfer directly to long-lived communicating actors.
+- [Hashed and hierarchical timing wheels: Data structures for the efficient implementation of a timer facility](varghese-lauck-1987-timing-wheels.md) —
+  develops efficient bounded-range and extended timer structures while
+  exposing granularity, cascade, bucket-burst, and cancellation trade-offs.
+- [HiPErJiT](kallas-sagonas-2018-hiperjit.md) — evaluates a profile-driven
+  tracing JIT for Erlang and records warmup, compilation, code-size, and
+  workload-dependence limits relevant to an interpreter-first runtime.
+- [Resource containers](banga-et-al-1999-resource-containers.md) — separates
+  resource principals from execution threads and supports causal attribution
+  across asynchronous server work.
+- [A contention adapting approach to concurrent ordered sets](sagonas-winblad-2018-contention-adapting-ordered-sets.md) —
+  adapts ordered-set structure to measured contention and supplies one
+  workload-sensitive candidate for ETS-like tables.
+- [Systematic testing for detecting concurrency errors in Erlang programs](christakis-et-al-2013-concuerror.md) —
+  explores Erlang process schedules to reproduce concurrency errors while
+  documenting the supported-runtime boundary of systematic exploration.
+- [Efficient and deterministic record and replay for actor languages](aumayr-et-al-2018-actor-record-replay.md) —
+  records actor-level nondeterministic ordering rather than every instruction
+  and motivates a separate deterministic runtime test profile.
+- [Orleans](bernstein-et-al-2014-orleans.md) — develops distributed virtual
+  actors with platform-managed activation and stable logical identity, a useful
+  service-layer contrast to incarnation-specific BEAM PIDs.
+- [Crash-only software](candea-fox-2003-crash-only-software.md) — argues for
+  externally coordinated component restart and state separation while making
+  retry safety and durable-state assumptions explicit.
+- [A NUMA-aware runtime environment for the actor model](francesquini-et-al-2013-numa-aware-actor-runtime.md) —
+  evaluates topology-aware actor placement and hierarchical work stealing and
+  bounds its conclusions to the measured VM, machines, and workloads.
+- [PARTISAN](meiklejohn-et-al-2019-partisan.md) — evaluates replaceable
+  distributed-actor topologies, parallel channels, and channel affinity instead
+  of treating one full mesh as actor semantics.
+- [Special delivery: Programming with mailbox types](fowler-et-al-2023-mailbox-types.md) —
+  develops static mailbox protocols that prevent classes of actor mismatch and
+  deadlock, supporting an optional typed profile rather than a BEAM baseline.
+- [On the scalability of the Erlang Term Storage](klaftenegger-et-al-2013-ets-scalability.md) —
+  measures ETS contention and concurrency options and motivates explicit,
+  workload-sensitive shared-table implementations.
+- [Implementing remote procedure calls](birrell-nelson-1984-remote-procedure-calls.md) —
+  develops request identifiers, retransmission, acknowledgements, and duplicate
+  suppression while preserving the ambiguity of failures after remote effects.
+- [A high performance Erlang system](johansson-et-al-2000-high-performance-erlang.md) —
+  integrates native Erlang compilation with runtime stacks, roots, garbage
+  collection, exceptions, and services, exposing conventions a safe-point-aware
+  execution engine must preserve.
 
 ## Maintaining this index
 

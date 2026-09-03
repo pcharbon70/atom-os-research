@@ -78,4 +78,4 @@ systems, MPU-only targets, or this project's capability object model.
 
 ## Derived work
 
-- [Address translation and protection transitions](../20-notes/address-translation-and-protection-transitions.md)
+- [Address translation and protection transitions](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions.md)

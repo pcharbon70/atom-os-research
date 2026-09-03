@@ -32,7 +32,7 @@ switches use eager save/restore or initialization/scrubbing as the baseline.
 The kernel does not use FP, SIMD, vector, or matrix state in hard-entry code.
 
 This is component 2 of the [kernel hardware and architecture support
-layer](kernel-hardware-and-architecture-support-layer.md). It implements the
+layer](../kernel-hardware-and-architecture-support-layer.md). It implements the
 mechanism of entry, frame ownership, dispatch boundaries, context transfer, and
 return. System-call policy, scheduling, actor reductions, and restart policy
 remain above it.
@@ -77,15 +77,15 @@ The component is acceptable only when tests and review establish that:
 ### Normative architecture evidence
 
 The [Intel system-programming
-documentation](../30-sources/intel-2026-system-programming-documentation.md)
+documentation](../../30-sources/intel-2026-system-programming-documentation.md)
 defines IDT-based events, privilege-stack transitions, syscall/return
 mechanisms, IRET frames, control state, and CPUID/XSAVE-discovered extended
 state. The [Arm A-profile
-documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
 defines exception levels, vector classes, saved program state, exception link
 and syndrome registers, `ERET`, and feature-dependent FP/SIMD/SVE/SME state.
 The [RISC-V privileged
-architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
+architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)
 defines delegated traps, `stvec`, supervisor cause/value/PC/status state,
 `SRET`, and optional extension status including floating-point and vector
 state.
@@ -97,32 +97,32 @@ different vector classes, and exposes different return hazards.
 ### Engineering evidence
 
 The [Linux entry/exit
-documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
 treats entry as ordered state transitions and marks windows in which
 instrumentation is unsafe; NMI-like handling has distinct nesting behavior.
 This is useful precedent for a visible protocol and tool-enforced
 non-instrumentable sections. Linux's exact RCU, tracing, audit, compatibility,
 and task-work ordering is not this kernel's required design.
 
-The [L4 retrospective](../30-sources/elphinstone-heiser-2013-l4-lessons.md)
+The [L4 retrospective](../../30-sources/elphinstone-heiser-2013-l4-lessons.md)
 supports small architecture-specific entry paths and optimization based on
 measurement. The [seL4 verification
-work](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+work](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
 shows how a small explicit kernel state aids reasoning while also making clear
 that assembly, hardware, caches, and timing require separate assumptions.
 
 ### Security evidence
 
-[LazyFP](../30-sources/stecklina-prescher-2018-lazyfp.md) demonstrated that
+[LazyFP](../../30-sources/stecklina-prescher-2018-lazyfp.md) demonstrated that
 fault-based lazy floating-point restore left prior-domain FP/SIMD values
 transiently observable on affected processors. It directly supports rejecting
 that class of lazy cross-domain ownership for the safe baseline; it does not
 prove all lazy schemes or all ISAs insecure.
 
-[Meltdown](../30-sources/lipp-et-al-2018-meltdown.md) demonstrated that, on
+[Meltdown](../../30-sources/lipp-et-al-2018-meltdown.md) demonstrated that, on
 affected machines, supervisor-only mappings could be read through transient
 execution and that removing most kernel mappings from the user page table
-impeded the attack. [Spectre](../30-sources/kocher-et-al-2019-spectre.md)
+impeded the attack. [Spectre](../../30-sources/kocher-et-al-2019-spectre.md)
 demonstrated a broader class in which mistrained speculative execution leaves
 observable microarchitectural effects across software isolation boundaries.
 The justified conclusion is not one universal barrier: entry and return need a
@@ -927,7 +927,7 @@ failure, not an actor crash that a supervisor can safely restart.
 ## Connections
 
 - [Kernel hardware and architecture support
-  layer](kernel-hardware-and-architecture-support-layer.md) defines the wider
+  layer](../kernel-hardware-and-architecture-support-layer.md) defines the wider
   architecture boundary and consumers of entry state.
 - [Unsafe architecture-primitives
   capsule](unsafe-architecture-primitives-capsule.md) contains the small vector,
@@ -936,34 +936,34 @@ failure, not an actor crash that a supervisor can safely restart.
   discovery](normalized-boot-handoff-and-feature-discovery.md) seals the CPU
   feature, privilege dependency, and mitigation profile that determines
   `ContextShape`.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) supplies
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md) supplies
   capabilities, protection domains, execution-stop, bounded IPC, scheduling
   contexts, faults, and lifecycle generations around this mechanism.
 - [BEAM, ERTS, and OTP principles for a new operating
-  system](beam-erts-and-otp-principles-for-a-new-operating-system.md) explains
+  system](../beam-erts-and-otp-principles-for-a-new-operating-system.md) explains
   why language-process scheduling and garbage collection remain outside this
   privileged execution-context boundary.
 - [Kernel hardware-contract
-  inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+  inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
   tracks the unverified port and performance questions.
 
 ## Sources
 
 - [Intel 64 and IA-32 system programming
-  documentation](../30-sources/intel-2026-system-programming-documentation.md)
+  documentation](../../30-sources/intel-2026-system-programming-documentation.md)
 - [Arm A-profile system architecture
-  documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+  documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
 - [The RISC-V privileged
-  architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
+  architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)
 - [Linux kernel low-level core API
-  documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+  documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
 - [From L3 to seL4: What have we learnt in 20 years of L4
-  microkernels?](../30-sources/elphinstone-heiser-2013-l4-lessons.md)
+  microkernels?](../../30-sources/elphinstone-heiser-2013-l4-lessons.md)
 - [Comprehensive formal verification of an OS
-  microkernel](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+  microkernel](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
 - [LazyFP: Leaking FPU register state using microarchitectural side-
-  channels](../30-sources/stecklina-prescher-2018-lazyfp.md)
+  channels](../../30-sources/stecklina-prescher-2018-lazyfp.md)
 - [Meltdown: Reading kernel memory from user
-  space](../30-sources/lipp-et-al-2018-meltdown.md)
+  space](../../30-sources/lipp-et-al-2018-meltdown.md)
 - [Spectre attacks: Exploiting speculative
-  execution](../30-sources/kocher-et-al-2019-spectre.md)
+  execution](../../30-sources/kocher-et-al-2019-spectre.md)

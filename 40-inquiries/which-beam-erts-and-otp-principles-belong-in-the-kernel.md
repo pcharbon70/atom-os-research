@@ -202,6 +202,21 @@ supports the working hypotheses but does not resolve them:
 - No prototype in this archive yet measures the proposed two-level scheduler,
   bounded capability endpoint, driver domain, or transactional update path.
 
+The focused [managed actor runtime
+research](../20-notes/managed-actor-runtime-layer.md) strengthens the third-layer
+placement and opens a dedicated [runtime contract
+inquiry](what-contract-should-the-managed-actor-runtime-provide.md):
+
+- the runtime, not the kernel, should own the compatibility manifest, BEAM
+  loader, actor state, term heaps, tracing collector, signal/mailbox semantics,
+  reductions, tables, timers, code versions, and actor-level tracing;
+- kernel time and domain accounts enforce real CPU and memory authority while
+  reductions distribute admitted time among actors;
+- scientific alternatives such as Orca zero-copy collection depend on stronger
+  type-system guarantees than ordinary BEAM provides; and
+- ports or protected service domains are the default native boundary because
+  dirty NIF scheduling does not contain memory corruption.
+
 ## Outcome
 
 Open. The present direction is a small capability kernel, a BEAM-compatible

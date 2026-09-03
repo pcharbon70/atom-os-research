@@ -722,21 +722,21 @@ integration. None should weaken the baseline correctness clock.
 
 ## Connections
 
-- [Kernel hardware and architecture support layer](kernel-hardware-and-architecture-support-layer.md) — defines this component's place between raw architecture mechanisms and timer/scheduler policy.
+- [Kernel hardware and architecture support layer](../kernel-hardware-and-architecture-support-layer.md) — defines this component's place between raw architecture mechanisms and timer/scheduler policy.
 - [Typed kernel-facing architecture facade](typed-kernel-facing-architecture-facade.md) — supplies the typed object and split-phase completion vocabulary used here.
 - [Logical-CPU coordination and lifecycle](logical-cpu-coordination-and-lifecycle.md) — owns channel creation, transfer, and failure during CPU start and removal.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) — consumes deadlines for budgets, bounded IPC, recovery, and fault handling.
-- [BEAM, ERTS, and OTP principles for a new operating system](beam-erts-and-otp-principles-for-a-new-operating-system.md) — keeps actor timers, reductions, and supervision above raw hardware time.
-- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) — remains open until these semantics and bounds are exercised on real ports.
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md) — consumes deadlines for budgets, bounded IPC, recovery, and fault handling.
+- [BEAM, ERTS, and OTP principles for a new operating system](../beam-erts-and-otp-principles-for-a-new-operating-system.md) — keeps actor timers, reductions, and supervision above raw hardware time.
+- [Kernel hardware-contract inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) — remains open until these semantics and bounds are exercised on real ports.
 
 ## Sources
 
-- [Timecounters: Efficient and precise timekeeping in SMP kernels](../30-sources/kamp-2002-timecounters.md) — generation-published conversion state, wrap constraints, and source switching.
-- [Efficient design of high-resolution timekeeping in real-time operating systems](../30-sources/terraneo-cattaneo-2026-high-resolution-timekeeping.md) — current evidence for global-time/per-CPU-deadline separation and tickless tradeoffs.
-- [Linux kernel low-level core API documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — mature separation of clock sources, clock events, scheduler clocks, and delay timers.
-- [Intel 64 and IA-32 system programming documentation](../30-sources/intel-2026-system-programming-documentation.md) — TSC discovery, invariance constraints, and TSC-deadline mechanism.
-- [Arm A-profile system architecture documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md) — architectural generic counter and timer semantics.
-- [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md) — `time`, supervisor timer, and privilege/environment dependencies.
-- [RISC-V supervisor binary interface](../30-sources/risc-v-international-2025-supervisor-binary-interface.md) — the higher-privilege TIME boundary plus fallible HSM, IPI, and remote-fence services in the underlying specification.
-- [Scheduling-context capabilities](../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md) — shows how a deadline mechanism is consumed by explicit CPU-budget authority rather than becoming scheduling policy itself.
-- [Time protection: The missing OS abstraction](../30-sources/ge-et-al-2019-time-protection.md) — bounds claims about clocks, budgets, and timing-channel isolation.
+- [Timecounters: Efficient and precise timekeeping in SMP kernels](../../30-sources/kamp-2002-timecounters.md) — generation-published conversion state, wrap constraints, and source switching.
+- [Efficient design of high-resolution timekeeping in real-time operating systems](../../30-sources/terraneo-cattaneo-2026-high-resolution-timekeeping.md) — current evidence for global-time/per-CPU-deadline separation and tickless tradeoffs.
+- [Linux kernel low-level core API documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — mature separation of clock sources, clock events, scheduler clocks, and delay timers.
+- [Intel 64 and IA-32 system programming documentation](../../30-sources/intel-2026-system-programming-documentation.md) — TSC discovery, invariance constraints, and TSC-deadline mechanism.
+- [Arm A-profile system architecture documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md) — architectural generic counter and timer semantics.
+- [RISC-V privileged architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md) — `time`, supervisor timer, and privilege/environment dependencies.
+- [RISC-V supervisor binary interface](../../30-sources/risc-v-international-2025-supervisor-binary-interface.md) — the higher-privilege TIME boundary plus fallible HSM, IPI, and remote-fence services in the underlying specification.
+- [Scheduling-context capabilities](../../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md) — shows how a deadline mechanism is consumed by explicit CPU-budget authority rather than becoming scheduling policy itself.
+- [Time protection: The missing OS abstraction](../../30-sources/ge-et-al-2019-time-protection.md) — bounds claims about clocks, budgets, and timing-channel isolation.
