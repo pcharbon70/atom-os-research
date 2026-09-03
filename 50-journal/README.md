@@ -55,6 +55,10 @@ notes.
   records the expanded research across all thirteen runtime components, shared
   implementation criteria, new primary sources, cross-component synthesis,
   and explicit lack of prototype evidence.
+- [2026-09-03 minimal privileged kernel components deep dive](2026-09-03-minimal-privileged-kernel-components-deep-dive.md) —
+  records the expanded research across all eleven capability-microkernel
+  components, source and design review method, cross-component lifecycle
+  synthesis, falsifiers, and explicit lack of prototype evidence.
 
 ## Maintaining this index
 

@@ -31,6 +31,10 @@ restart policy, device protocols, filesystems, and physical board design.
   bounded stop and teardown state machines, passive-call admission/failure
   policy, recovery escrow, DMA quarantine, BEAM mapping, and implementation
   sequence.
+- [Minimal privileged kernel component
+  index](../20-notes/minimal-privileged-kernel-components/README.md) — the
+  complete local inventory of the eleven evidence-backed implementation deep
+  dives.
 - [What contract should the minimal privileged kernel
   provide?](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md) —
   keeps the proposal falsifiable through explicit authority, isolation,
@@ -39,6 +43,70 @@ restart policy, device protocols, filesystems, and physical board design.
   dive](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md) — records
   the literature search, synthesis method, source scope, and absence of local
   implementation evidence.
+- [2026-09-03 minimal privileged kernel components deep
+  dive](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md) —
+  records the expanded source search, shared implementation criteria,
+  component results, falsifiers, and explicit absence of prototype evidence.
+
+## Component implementation deep dives
+
+The kernel is decomposed into eleven components numbered 0 through 10. Each
+report recommends an implementation while preserving the architecture-support
+mechanism boundary below and the managed-runtime and OTP-policy boundaries
+above.
+
+### Authority, resources, and execution
+
+- [0. Bootstrap and root-authority
+  handoff](../20-notes/minimal-privileged-kernel-components/bootstrap-and-root-authority-handoff.md) —
+  builds a deterministic manifest-derived initial authority graph and seals
+  temporary bootstrap authority after an auditable handoff.
+- [1. Typed object storage and explicit
+  memory](../20-notes/minimal-privileged-kernel-components/typed-object-storage-and-explicit-memory.md) —
+  makes every privileged object caller-backed, charged, typed, and reusable
+  only after every declared quiescence class completes.
+- [2. Capability spaces and
+  authority](../20-notes/minimal-privileged-kernel-components/capability-spaces-and-authority.md) —
+  combines typed local selectors, attenuation, stable lineage, constant-work
+  logical anchor closure, and charged physical revocation.
+- [3. Protection domains, threads, and address
+  spaces](../20-notes/minimal-privileged-kernel-components/protection-domains-threads-and-address-spaces.md) —
+  defines fixed domain gates, exact membership, and epoch-tagged SMP stop
+  without equating a domain with an actor or service identity.
+
+### Communication, time, architecture resources, and faults
+
+- [4. Bounded invocation and
+  transport](../20-notes/minimal-privileged-kernel-components/bounded-invocation-and-transport.md) —
+  gives calls, replies, cancellation, notification, and shared queues finite
+  state, explicit funding, and honest terminal outcomes.
+- [5. Scheduling contexts and temporal
+  authority](../20-notes/minimal-privileged-kernel-components/scheduling-contexts-and-temporal-authority.md) —
+  makes CPU time conserved capability authority, accounts causal service work,
+  and reserves independent recovery execution.
+- [6. Memory mappings and architecture-resource
+  bindings](../20-notes/minimal-privileged-kernel-components/memory-mappings-and-architecture-resource-bindings.md) —
+  composes CPU mappings, IRQs, timers, IOMMU/DMA, queues, and reset through
+  generational completion-aware objects.
+- [7. Fault capture and
+  containment](../20-notes/minimal-privileged-kernel-components/fault-capture-and-containment.md) —
+  turns faults into bounded typed evidence and separately attenuates repair,
+  observation, lifecycle, device, and fatal actions.
+
+### Recovery, reclamation, and evidence
+
+- [8. Failure boundaries and recovery
+  topology](../20-notes/minimal-privileged-kernel-components/failure-boundaries-and-recovery-topology.md) —
+  keeps replacement authority and resources outside failed scopes and fences
+  stale supervisors through current recovery epochs.
+- [9. Teardown, revocation, and safe
+  reclamation](../20-notes/minimal-privileged-kernel-components/teardown-revocation-and-safe-reclamation.md) —
+  separates bounded close from charged traversal, hardware quiescence,
+  quarantine custody, sanitization, and safe reuse.
+- [10. Observability and crash
+  evidence](../20-notes/minimal-privileged-kernel-components/observability-and-crash-evidence.md) —
+  defines capability-scoped bounded telemetry, explicit evidence loss, and
+  post-seal enrichment of the architecture layer's terminal record and sink.
 
 ## Selected contract
 
@@ -76,6 +144,13 @@ authority.
 
 ### Capabilities and explicit resources
 
+- [capDL](../30-sources/kuz-et-al-2010-capdl.md) makes the initial object and
+  capability distribution explicit data that can be related to isolation and
+  information-flow reasoning.
+- [Formally verified system
+  initialisation](../30-sources/boyton-et-al-2013-verified-system-initialisation.md)
+  proves a model-level initialiser reaches its declarative target while
+  preserving the distinction between that result and implementation coverage.
 - [seL4 reference manual, version
   16.0.0](../30-sources/sel4-foundation-2026-reference-manual.md) documents a
   concrete modern object, capability, untyped-memory, IPC, fault, and
@@ -170,6 +245,31 @@ physical fencing remains split-phase: the old manager must be terminally
 stopped or every profile-declared writable alias revoked through completed TLB
 invalidation before the successor can reset, attest completion, or release a
 frame.
+
+### Teardown and evidence
+
+- [Read-copy
+  update](../30-sources/mckenney-slingwine-1998-read-copy-update.md) separates
+  logical removal from physical reclamation after pre-existing software readers
+  pass quiescence.
+- [Hazard pointers](../30-sources/michael-2004-hazard-pointers.md) provides an
+  alternative bounded explicit-reference publication mechanism for lock-free
+  objects while leaving hardware quiescence outside its scope.
+- [Kdump](../30-sources/goyal-et-al-2005-kdump.md) motivates reserving an
+  independent crash-capture environment and metadata while the system is still
+  healthy.
+- [Dynamic instrumentation of production
+  systems](../30-sources/cantrill-et-al-2004-dtrace.md) contributes typed probe,
+  safe-execution, per-consumer, aggregation, and disabled-probe lessons while
+  exposing a larger trusted and timing surface than the baseline kernel needs.
+- [Linux lockless tracing ring-buffer
+  design](../30-sources/rostedt-2009-lockless-ring-buffer-design.md) provides a
+  concrete per-CPU record-commit design and makes overwrite versus reject-new
+  saturation policy explicit without supplying a security or timing proof.
+- [Linux RAS
+  documentation](../30-sources/linux-kernel-community-2026-ras-documentation.md)
+  supports retaining source, severity, precision, containment state, and raw
+  records separately for hardware faults.
 
 ### Assurance and configuration
 
