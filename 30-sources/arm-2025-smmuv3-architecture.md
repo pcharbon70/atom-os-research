@@ -79,4 +79,4 @@ obeys its shared-memory protocol, or that reset drains device-internal work.
 
 ## Derived work
 
-- [Protected I/O and DMA ownership](../20-notes/protected-io-and-dma-ownership.md)
+- [Protected I/O and DMA ownership](../20-notes/kernel-hardware-and-architecture-components/protected-io-and-dma-ownership.md)

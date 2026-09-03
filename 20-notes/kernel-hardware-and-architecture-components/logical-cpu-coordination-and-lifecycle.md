@@ -820,22 +820,22 @@ dependencies.
 
 ## Connections
 
-- [Kernel hardware and architecture support layer](kernel-hardware-and-architecture-support-layer.md) — places CPU lifecycle among translation, interrupt, time, and fault components.
+- [Kernel hardware and architecture support layer](../kernel-hardware-and-architecture-support-layer.md) — places CPU lifecycle among translation, interrupt, time, and fault components.
 - [Typed kernel-facing architecture facade](typed-kernel-facing-architecture-facade.md) — provides the typed handles, completion sets, and explicit failure vocabulary used here.
 - [Raw time and deadline programming](raw-time-and-deadline-programming.md) — supplies lifecycle timeouts and per-CPU channels that must be created and drained.
 - [Address translation and protection transitions](address-translation-and-protection-transitions.md) — depends on exact active-CPU sets and cannot reclaim through a missing target.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) — defines protection domains, execution stop, budgets, and teardown that consume this mechanism.
-- [BEAM, ERTS, and OTP principles for a new operating system](beam-erts-and-otp-principles-for-a-new-operating-system.md) — distinguishes kernel CPU resources from runtime schedulers and lightweight processes.
-- [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) — remains open pending implementation and fault-injection evidence.
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md) — defines protection domains, execution stop, budgets, and teardown that consume this mechanism.
+- [BEAM, ERTS, and OTP principles for a new operating system](../beam-erts-and-otp-principles-for-a-new-operating-system.md) — distinguishes kernel CPU resources from runtime schedulers and lightweight processes.
+- [Kernel hardware-contract inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) — remains open pending implementation and fault-injection evidence.
 
 ## Sources
 
-- [Linux kernel low-level core API documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — ordered CPU-hotplug states, subsystem migration, teardown, and rollback precedent.
-- [Arm Power State Coordination Interface 1.3](../30-sources/arm-2024-power-state-coordination-interface.md) — asynchronous start, self-stop, affinity state, and firmware/OS race contract.
-- [RISC-V supervisor binary interface](../30-sources/risc-v-international-2025-supervisor-binary-interface.md) — ratified higher-privilege interface whose HSM, IPI, and remote-fence mechanisms back a RISC-V port.
-- [Intel 64 and IA-32 system programming documentation](../30-sources/intel-2026-system-programming-documentation.md) — multiprocessor startup, APIC, execution-state, and feature mechanisms for x86-64.
-- [Arm A-profile system architecture documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md) — exception, coherency, counter, and per-PE state that a PSCI-backed port must normalize.
-- [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md) — hart privilege, translation, interrupt, and optional-feature boundary below SBI.
-- [The Multikernel](../30-sources/baumann-et-al-2009-multikernel.md) — evidence for explicit inter-core messages, replicated state, and heterogeneous hardware awareness.
-- [For a microkernel, a big lock is fine](../30-sources/peters-et-al-2015-big-lock-microkernel.md) — conditional evidence for a simple cluster-level locking baseline on moderate core counts.
-- [Scheduling-context capabilities](../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md) — shows the CPU-budget and donation state that must drain separately from raw CPU mechanism.
+- [Linux kernel low-level core API documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — ordered CPU-hotplug states, subsystem migration, teardown, and rollback precedent.
+- [Arm Power State Coordination Interface 1.3](../../30-sources/arm-2024-power-state-coordination-interface.md) — asynchronous start, self-stop, affinity state, and firmware/OS race contract.
+- [RISC-V supervisor binary interface](../../30-sources/risc-v-international-2025-supervisor-binary-interface.md) — ratified higher-privilege interface whose HSM, IPI, and remote-fence mechanisms back a RISC-V port.
+- [Intel 64 and IA-32 system programming documentation](../../30-sources/intel-2026-system-programming-documentation.md) — multiprocessor startup, APIC, execution-state, and feature mechanisms for x86-64.
+- [Arm A-profile system architecture documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md) — exception, coherency, counter, and per-PE state that a PSCI-backed port must normalize.
+- [RISC-V privileged architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md) — hart privilege, translation, interrupt, and optional-feature boundary below SBI.
+- [The Multikernel](../../30-sources/baumann-et-al-2009-multikernel.md) — evidence for explicit inter-core messages, replicated state, and heterogeneous hardware awareness.
+- [For a microkernel, a big lock is fine](../../30-sources/peters-et-al-2015-big-lock-microkernel.md) — conditional evidence for a simple cluster-level locking baseline on moderate core counts.
+- [Scheduling-context capabilities](../../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md) — shows the CPU-budget and donation state that must drain separately from raw CPU mechanism.

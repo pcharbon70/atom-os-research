@@ -36,6 +36,10 @@ resolution criteria here. Promote independently useful conclusions to
 - [What contract should the kernel hardware and architecture layer provide?](what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) —
   defines authority, completion, isolation, ordering, portability, recovery,
   and performance criteria for the privileged architecture boundary.
+- [What contract should the managed actor runtime provide?](what-contract-should-the-managed-actor-runtime-provide.md) —
+  defines falsifiable compatibility, memory, signal, scheduling, resource,
+  native-isolation, distribution, replay, and fault criteria for the
+  unprivileged BEAM-compatible runtime layer.
 - [What contract should the minimal privileged kernel provide?](what-contract-should-the-minimal-privileged-kernel-provide.md) —
   defines falsifiable capability, domain, IPC, temporal-isolation, fault,
   teardown, recovery-independence, BEAM-compatibility, and assurance criteria.

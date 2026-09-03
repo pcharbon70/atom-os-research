@@ -66,6 +66,8 @@ fail-stop process assumed by the model.
 
 ## Derived work
 
+- [Distribution gateway and remote actor semantics](../20-notes/managed-actor-runtime-components/distribution-gateway-and-remote-actor-semantics.md)
+- [Failure translation and the OTP boundary](../20-notes/managed-actor-runtime-components/failure-translation-and-the-otp-boundary.md)
 - [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
 - [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
 - [Minimal privileged-kernel contract inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)

@@ -89,7 +89,7 @@ policy required by this project.
 
 ## Derived work
 
-- [Address translation and protection transitions](../20-notes/address-translation-and-protection-transitions.md)
-- [Ordering, coherence, and code publication](../20-notes/ordering-coherence-and-code-publication.md)
-- [Raw time and deadline programming](../20-notes/raw-time-and-deadline-programming.md)
-- [Logical-CPU coordination and lifecycle](../20-notes/logical-cpu-coordination-and-lifecycle.md)
+- [Address translation and protection transitions](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions.md)
+- [Ordering, coherence, and code publication](../20-notes/kernel-hardware-and-architecture-components/ordering-coherence-and-code-publication.md)
+- [Raw time and deadline programming](../20-notes/kernel-hardware-and-architecture-components/raw-time-and-deadline-programming.md)
+- [Logical-CPU coordination and lifecycle](../20-notes/kernel-hardware-and-architecture-components/logical-cpu-coordination-and-lifecycle.md)

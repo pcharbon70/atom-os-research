@@ -73,6 +73,7 @@ bug or corrupt external state.
 
 ## Derived work
 
+- [Failure translation and the OTP boundary](../20-notes/managed-actor-runtime-components/failure-translation-and-the-otp-boundary.md)
 - [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
 - [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
 - [Minimal privileged-kernel contract inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)

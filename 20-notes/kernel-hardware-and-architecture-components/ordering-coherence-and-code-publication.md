@@ -90,15 +90,15 @@ The first implementation is adequate when:
 
 | Evidence | Supported conclusion | Explicit boundary |
 | --- | --- | --- |
-| [x86-TSO](../30-sources/sewell-et-al-2010-x86-tso.md) | x86 ordinary memory is strong but not sequentially consistent; formal models are preferable to folklore | Excludes self-modifying code, exceptions, page tables, and devices |
-| [Multicopy-atomic Armv8 model](../30-sources/pulte-et-al-2018-simplifying-arm-concurrency.md) | Arm ordinary-memory acquire, release, dependencies, atomics, and barriers have distinct executable semantics | Does not establish translation, instruction fetch, MMIO, or DMA behavior |
-| [Linux kernel concurrency model](../30-sources/alglave-et-al-2018-linux-kernel-concurrency.md) | A portable kernel can maintain an executable software memory model and litmus suite | The published model explicitly excludes interrupts, self-modifying code, I/O, and other mechanisms |
-| [Arm instruction-fetch semantics](../30-sources/simner-et-al-2020-arm-instruction-fetch.md) | Data writes, cache maintenance, barriers, pipeline state, and cross-core fetch form a separate system protocol | Covers Arm, not this kernel's authority or lifecycle |
-| [RISC-V unprivileged ISA](../30-sources/risc-v-international-2026-unprivileged-architecture.md) | RVWMO, I/O fence classes, and local `FENCE.I` are distinct; remote code publication needs more than the writer's local fence | The execution environment must supply remote action and cache facilities |
-| [RISC-V SBI](../30-sources/risc-v-international-2025-supervisor-binary-interface.md) | Remote `FENCE.I` can be requested through a versioned, fallible firmware boundary | A successful request is not automatically this project's migration, lifetime, or fault proof |
-| [Arm engineering guidance for threaded self-modifying code](../30-sources/bramley-2025-arm-self-modifying-code-threads.md) | The writing core's local instruction synchronization is not broadcast; full cooperation and best-effort compatible patching are different contracts | Engineering explanation, not a formal proof or benchmark |
-| [Linux low-level API documentation](../30-sources/linux-kernel-community-2026-low-level-core-apis.md) | Compiler, CPU, I/O, DMA, and cache/TLB operations need separate semantic interfaces | Linux's compatibility surface is not a minimal design requirement |
-| [The Road to the JIT](../30-sources/gustavsson-2020-road-to-the-jit.md) | BEAM native execution is constrained by hot loading, scheduling, tracing, and whole-system behavior, not instruction throughput alone | Historical engineering account; it does not specify an OS publication primitive |
+| [x86-TSO](../../30-sources/sewell-et-al-2010-x86-tso.md) | x86 ordinary memory is strong but not sequentially consistent; formal models are preferable to folklore | Excludes self-modifying code, exceptions, page tables, and devices |
+| [Multicopy-atomic Armv8 model](../../30-sources/pulte-et-al-2018-simplifying-arm-concurrency.md) | Arm ordinary-memory acquire, release, dependencies, atomics, and barriers have distinct executable semantics | Does not establish translation, instruction fetch, MMIO, or DMA behavior |
+| [Linux kernel concurrency model](../../30-sources/alglave-et-al-2018-linux-kernel-concurrency.md) | A portable kernel can maintain an executable software memory model and litmus suite | The published model explicitly excludes interrupts, self-modifying code, I/O, and other mechanisms |
+| [Arm instruction-fetch semantics](../../30-sources/simner-et-al-2020-arm-instruction-fetch.md) | Data writes, cache maintenance, barriers, pipeline state, and cross-core fetch form a separate system protocol | Covers Arm, not this kernel's authority or lifecycle |
+| [RISC-V unprivileged ISA](../../30-sources/risc-v-international-2026-unprivileged-architecture.md) | RVWMO, I/O fence classes, and local `FENCE.I` are distinct; remote code publication needs more than the writer's local fence | The execution environment must supply remote action and cache facilities |
+| [RISC-V SBI](../../30-sources/risc-v-international-2025-supervisor-binary-interface.md) | Remote `FENCE.I` can be requested through a versioned, fallible firmware boundary | A successful request is not automatically this project's migration, lifetime, or fault proof |
+| [Arm engineering guidance for threaded self-modifying code](../../30-sources/bramley-2025-arm-self-modifying-code-threads.md) | The writing core's local instruction synchronization is not broadcast; full cooperation and best-effort compatible patching are different contracts | Engineering explanation, not a formal proof or benchmark |
+| [Linux low-level API documentation](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) | Compiler, CPU, I/O, DMA, and cache/TLB operations need separate semantic interfaces | Linux's compatibility surface is not a minimal design requirement |
+| [The Road to the JIT](../../30-sources/gustavsson-2020-road-to-the-jit.md) | BEAM native execution is constrained by hot loading, scheduling, tracing, and whole-system behavior, not instruction throughput alone | Historical engineering account; it does not specify an OS publication primitive |
 
 The claim ledger must remain explicit: a proof about ordinary-memory
 happens-before does not justify a device-doorbell order, page-table reuse, or
@@ -511,7 +511,7 @@ cannot surface as a late `CodePublishError`.
 
 ## Interaction with the capability microkernel
 
-The [minimal privileged kernel](minimal-privileged-kernel-layer.md) supplies
+The [minimal privileged kernel](../minimal-privileged-kernel-layer.md) supplies
 frame authority, mapping generations, runtime-domain lifecycle, scheduling
 contexts, and teardown ledgers. This component adds:
 
@@ -811,7 +811,7 @@ order.
 ## Connections
 
 - [Kernel hardware and architecture support
-  layer](kernel-hardware-and-architecture-support-layer.md) defines this as
+  layer](../kernel-hardware-and-architecture-support-layer.md) defines this as
   component 4 and separates it from translation, DMA, and interrupt flow.
 - [Address translation and protection
   transitions](address-translation-and-protection-transitions.md) supplies only
@@ -820,28 +820,28 @@ order.
 - [Interrupt event fabric](interrupt-event-fabric.md) consumes IRQ-safe
   atomics and release/acquire publication but has its own controller flow and
   acknowledgement semantics.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md)
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md)
   supplies capability authority, domain lifecycle, scheduling eligibility,
   teardown, and code-frame accounting.
 - [BEAM, ERTS, and OTP principles for a new operating
-  system](beam-erts-and-otp-principles-for-a-new-operating-system.md) keeps
+  system](../beam-erts-and-otp-principles-for-a-new-operating-system.md) keeps
   compiled-BEAM policy, hot-code semantics, and tracing GC in the managed
   runtime.
 - [Kernel hardware-contract
-  inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+  inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
   remains the workbench for testing the contract on two ISAs.
 
 ## Sources
 
-- [x86-TSO](../30-sources/sewell-et-al-2010-x86-tso.md)
-- [Simplifying Arm concurrency](../30-sources/pulte-et-al-2018-simplifying-arm-concurrency.md)
-- [Concurrency in the Linux kernel](../30-sources/alglave-et-al-2018-linux-kernel-concurrency.md)
-- [Arm instruction-fetch semantics](../30-sources/simner-et-al-2020-arm-instruction-fetch.md)
-- [Arm A-profile system architecture documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
-- [Intel system programming documentation](../30-sources/intel-2026-system-programming-documentation.md)
-- [RISC-V unprivileged architecture](../30-sources/risc-v-international-2026-unprivileged-architecture.md)
-- [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
-- [RISC-V supervisor binary interface](../30-sources/risc-v-international-2025-supervisor-binary-interface.md)
-- [Arm self-modifying code with threads](../30-sources/bramley-2025-arm-self-modifying-code-threads.md)
-- [Linux kernel low-level core APIs](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
-- [The Road to the JIT](../30-sources/gustavsson-2020-road-to-the-jit.md)
+- [x86-TSO](../../30-sources/sewell-et-al-2010-x86-tso.md)
+- [Simplifying Arm concurrency](../../30-sources/pulte-et-al-2018-simplifying-arm-concurrency.md)
+- [Concurrency in the Linux kernel](../../30-sources/alglave-et-al-2018-linux-kernel-concurrency.md)
+- [Arm instruction-fetch semantics](../../30-sources/simner-et-al-2020-arm-instruction-fetch.md)
+- [Arm A-profile system architecture documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+- [Intel system programming documentation](../../30-sources/intel-2026-system-programming-documentation.md)
+- [RISC-V unprivileged architecture](../../30-sources/risc-v-international-2026-unprivileged-architecture.md)
+- [RISC-V privileged architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)
+- [RISC-V supervisor binary interface](../../30-sources/risc-v-international-2025-supervisor-binary-interface.md)
+- [Arm self-modifying code with threads](../../30-sources/bramley-2025-arm-self-modifying-code-threads.md)
+- [Linux kernel low-level core APIs](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+- [The Road to the JIT](../../30-sources/gustavsson-2020-road-to-the-jit.md)

@@ -128,6 +128,9 @@ are not public compatibility guarantees.
 
 ## Derived work
 
+- [Managed actor runtime layer](../20-notes/managed-actor-runtime-layer.md)
+- [Managed actor runtime map](../10-maps/managed-actor-runtime.md)
+- [Managed-runtime contract inquiry](../40-inquiries/what-contract-should-the-managed-actor-runtime-provide.md)
 - [BEAM, ERTS, and OTP principles for a new operating system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
 - [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
 - [BEAM, ERTS, and OTP map](../10-maps/beam-erts-and-otp.md)

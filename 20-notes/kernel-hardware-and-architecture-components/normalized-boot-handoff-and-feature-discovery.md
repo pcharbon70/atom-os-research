@@ -25,7 +25,7 @@ portable kernel never follows firmware pointers, interprets ACPI or device-tree
 records, or guesses CPU features on an allocator or scheduler fast path.
 
 This is component 0 of the [kernel hardware and architecture support
-layer](kernel-hardware-and-architecture-support-layer.md). It establishes
+layer](../kernel-hardware-and-architecture-support-layer.md). It establishes
 initial facts and provenance. It does not select scheduling, allocation,
 driver, power, or BEAM-runtime policy.
 
@@ -78,27 +78,27 @@ both a map key and a descriptor stride/version; `ExitBootServices()` succeeds
 only with the current key, after which boot-services pointers are invalid and
 some memory changes ownership. A kernel that caches the first map or assumes a
 compiled descriptor size has not implemented the specified lifetime contract.
-See the [UEFI 2.11 source note](../30-sources/uefi-forum-2024-uefi-2-11.md).
+See the [UEFI 2.11 source note](../../30-sources/uefi-forum-2024-uefi-2-11.md).
 
 ACPI 6.6 supplies length-delimited, checksummed static tables for CPU,
 interrupt, memory-affinity, and other platform facts, while its AML namespace
 can execute platform methods. This is evidence for separating a small early
 allowlist of static discovery from a later, isolated firmware-policy service.
 It is not evidence that a checksum makes firmware trustworthy. See the
-[ACPI 6.6 source note](../30-sources/uefi-forum-2025-acpi-6-6.md).
+[ACPI 6.6 source note](../../30-sources/uefi-forum-2025-acpi-6-6.md).
 
 The flattened device-tree format has its own total size, block offsets, token
 grammar, string offsets, inherited address/size cell widths, and two forms of
 memory reservation. Those facts require a real bounded parser; casting the
 blob to host structures is not a parser. See the [Devicetree 0.4 source
-note](../30-sources/devicetree-org-2023-devicetree-specification-0-4.md).
+note](../../30-sources/devicetree-org-2023-devicetree-specification-0-4.md).
 
 The current Limine protocol is useful engineering precedent for versioned
 requests, optional responses, cross-ISA entry ABIs, and explicit
 bootloader-reclaimable memory. Its revisions also demonstrate why revision
 numbers must select semantics, not just structure layout. It remains an adapter
 input, not the kernel's internal format. See the [Limine protocol source
-note](../30-sources/limine-project-2026-limine-boot-protocol.md).
+note](../../30-sources/limine-project-2026-limine-boot-protocol.md).
 
 ### Security evidence and the justified inference
 
@@ -108,15 +108,15 @@ UEFI tables handed to this kernel. The justified design inference is that
 authenticated early code and data still deserve hostile-input discipline:
 verification of one image does not prove every subsequent parser or state
 transition safe. See the [BootStomp source
-note](../30-sources/redini-et-al-2017-bootstomp.md).
+note](../../30-sources/redini-et-al-2017-bootstomp.md).
 
 The architecture manuals independently show that important facts are
 CPU-local or mechanism-specific: x86 extended state and address widths,
 AArch64 exception and translation features, and RISC-V delegated privilege and
 optional extensions cannot be established solely by a platform-description
-table. See the [Intel](../30-sources/intel-2026-system-programming-documentation.md),
-[Arm](../30-sources/arm-2026-a-profile-system-architecture-documentation.md),
-and [RISC-V](../30-sources/risc-v-international-2026-privileged-architecture.md)
+table. See the [Intel](../../30-sources/intel-2026-system-programming-documentation.md),
+[Arm](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md),
+and [RISC-V](../../30-sources/risc-v-international-2026-privileged-architecture.md)
 source notes.
 
 ### Synthesis
@@ -616,13 +616,13 @@ boot path itself is a bounded state machine, not an OTP supervision tree.
 ## Connections
 
 - [Kernel hardware and architecture support
-  layer](kernel-hardware-and-architecture-support-layer.md) defines the other
+  layer](../kernel-hardware-and-architecture-support-layer.md) defines the other
   ten components that consume this initial snapshot.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md) uses
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md) uses
   canonical memory and mechanism facts to create capability-authorized kernel
   objects without granting authority through raw physical addresses.
 - [Kernel hardware-contract
-  inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+  inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
   tracks whether the proposed contract survives real ports and fault tests.
 - [Unsafe architecture-primitives
   capsule](unsafe-architecture-primitives-capsule.md) performs direct CPU
@@ -634,18 +634,18 @@ boot path itself is a bounded state machine, not an OTP supervision tree.
 ## Sources
 
 - [Unified Extensible Firmware Interface specification, version
-  2.11](../30-sources/uefi-forum-2024-uefi-2-11.md)
+  2.11](../../30-sources/uefi-forum-2024-uefi-2-11.md)
 - [Advanced Configuration and Power Interface specification, version
-  6.6](../30-sources/uefi-forum-2025-acpi-6-6.md)
+  6.6](../../30-sources/uefi-forum-2025-acpi-6-6.md)
 - [Devicetree specification, release
-  0.4](../30-sources/devicetree-org-2023-devicetree-specification-0-4.md)
+  0.4](../../30-sources/devicetree-org-2023-devicetree-specification-0-4.md)
 - [The Limine boot
-  protocol](../30-sources/limine-project-2026-limine-boot-protocol.md)
+  protocol](../../30-sources/limine-project-2026-limine-boot-protocol.md)
 - [BootStomp: On the security of bootloaders in mobile
-  devices](../30-sources/redini-et-al-2017-bootstomp.md)
+  devices](../../30-sources/redini-et-al-2017-bootstomp.md)
 - [Intel 64 and IA-32 system programming
-  documentation](../30-sources/intel-2026-system-programming-documentation.md)
+  documentation](../../30-sources/intel-2026-system-programming-documentation.md)
 - [Arm A-profile system architecture
-  documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+  documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
 - [The RISC-V privileged
-  architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
+  architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)

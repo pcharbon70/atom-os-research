@@ -73,6 +73,7 @@ kernel contract.
 
 ## Derived work
 
+- [Native work, ports, and drivers](../20-notes/managed-actor-runtime-components/native-work-ports-and-drivers.md)
 - [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
 - [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
 - [Minimal privileged-kernel contract inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)

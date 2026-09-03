@@ -79,4 +79,4 @@ policy, or safe reclamation of kernel per-CPU objects.
 
 ## Derived work
 
-- [Logical-CPU coordination and lifecycle](../20-notes/logical-cpu-coordination-and-lifecycle.md)
+- [Logical-CPU coordination and lifecycle](../20-notes/kernel-hardware-and-architecture-components/logical-cpu-coordination-and-lifecycle.md)

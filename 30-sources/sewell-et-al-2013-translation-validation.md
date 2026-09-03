@@ -70,4 +70,4 @@ speculative effects, and its proof does not transfer to this project.
 
 ## Derived work
 
-- [Unsafe architecture-primitives capsule](../20-notes/unsafe-architecture-primitives-capsule.md)
+- [Unsafe architecture-primitives capsule](../20-notes/kernel-hardware-and-architecture-components/unsafe-architecture-primitives-capsule.md)

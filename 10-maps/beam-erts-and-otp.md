@@ -42,6 +42,16 @@ kernel ABI, and the project is not committed to one existing VM implementation.
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md) —
   the current synthesis, required compiled-BEAM and process-local-GC contract,
   proposed layering, design rules, risks, and research program.
+- [Managed actor runtime layer](../20-notes/managed-actor-runtime-layer.md) —
+  the detailed third-layer contract, evidence synthesis, component design,
+  critical paths, staged implementation, and evaluation matrix.
+- [Managed actor runtime map](managed-actor-runtime.md) — the focused route
+  through compatibility, memory, mailboxes, scheduling, code, native
+  boundaries, distribution, and deterministic testing.
+- [Managed actor runtime component deep
+  dives](managed-actor-runtime.md#component-implementation-deep-dives) — the
+  thirteen detailed implementation recommendations and their falsifiable
+  experiments.
 - [Which BEAM, ERTS, and OTP principles belong in a new
   kernel?](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
   the open decision and its falsifiable evaluation criteria.
@@ -53,6 +63,10 @@ kernel ABI, and the project is not committed to one existing VM implementation.
 
 ### Current system semantics and implementation
 
+- [Erlang/OTP 29.0.6 managed-runtime
+  documentation](../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md) —
+  the current compatibility and managed-runtime baseline, distinguished from
+  implementation-private ERTS machinery.
 - [Erlang/OTP 29.0.5 system
   documentation](../30-sources/erlang-otp-team-2026-otp-29-documentation.md) —
   current language, process, scheduler, memory, code-loading, supervision,
@@ -94,6 +108,30 @@ kernel ABI, and the project is not committed to one existing VM implementation.
 - [Scaling Reliably](../30-sources/trinder-et-al-2017-scaling-reliably.md) —
   shows how global namespaces, full-mesh distribution, and global recovery
   state constrain scale, and how partitioned groups recover it.
+- [Orca](../30-sources/clebsch-et-al-2017-orca.md) — demonstrates how stronger
+  reference-capability guarantees enable a different zero-copy actor collector
+  without making those guarantees available to arbitrary BEAM code.
+- [Locality-aware actor
+  scheduling](../30-sources/barghi-karsten-2018-locality-aware-actor-scheduling.md) —
+  supports adaptive local-first work stealing while documenting workloads in
+  which affinity creates contention and severe tails.
+
+### Mailboxes, testing, and measurement
+
+- [A few notes on message
+  passing](../30-sources/hogberg-2021-message-passing.md) — records per-sender
+  order, message copying, signal/message queue separation, and selective
+  receive costs.
+- [The Many-to-One Parallel Signal Sending
+  Optimization](../30-sources/winblad-2021-parallel-signal-sending.md) — shows
+  how permissive ordering enables adaptive striped ingress and why one receiver
+  remains the bottleneck.
+- [QuickCheck and
+  PULSE](../30-sources/claessen-et-al-2009-quickcheck-pulse.md) — motivates
+  deterministic actor schedules, generated histories, shrinking, and replay.
+- [Bencherl](../30-sources/aronis-et-al-2012-scalability-benchmark-suite-erlang-otp.md) —
+  frames scalability as a curve across scheduler, workload, and resource
+  dimensions rather than one peak result.
 
 ### Concrete implementation cases
 
@@ -107,6 +145,13 @@ kernel ABI, and the project is not committed to one existing VM implementation.
 
 ### Kernel mechanism boundary
 
+- [Managed actor runtime](managed-actor-runtime.md) covers the unprivileged
+  third layer that consumes kernel domains, budgets, endpoints, timers, code
+  publication, faults, and teardown while retaining BEAM/ERTS semantics.
+- Its [component implementation deep
+  dives](managed-actor-runtime.md#component-implementation-deep-dives) refine
+  bootstrap through crash evidence without moving OTP restart policy or raw
+  hardware authority into the runtime.
 - [Minimal privileged kernel](minimal-privileged-kernel.md) covers the
   capability, protection-domain, bounded-IPC, scheduling-budget, fault, and
   teardown mechanisms between architecture support and the managed runtime.
@@ -121,6 +166,8 @@ kernel ABI, and the project is not committed to one existing VM implementation.
 
 - [What contract should the minimal privileged kernel
   provide?](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)
+- [What contract should the managed actor runtime
+  provide?](../40-inquiries/what-contract-should-the-managed-actor-runtime-provide.md)
 - [What contract should the kernel hardware and architecture layer
   provide?](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
 - [Which BEAM, ERTS, and OTP principles belong in a new

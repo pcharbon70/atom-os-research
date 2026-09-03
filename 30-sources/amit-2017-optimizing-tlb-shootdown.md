@@ -72,4 +72,4 @@ after an unresponsive target CPU.
 
 ## Derived work
 
-- [Address translation and protection transitions](../20-notes/address-translation-and-protection-transitions.md)
+- [Address translation and protection transitions](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions.md)

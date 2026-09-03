@@ -32,7 +32,7 @@ that may change cost but not the postcondition.
 
 This is a proposed implementation for the architecture developed in [Kernel
 hardware and architecture support
-layer](kernel-hardware-and-architecture-support-layer.md), not evidence that
+layer](../kernel-hardware-and-architecture-support-layer.md), not evidence that
 the protocol has been implemented or verified.
 
 ## Question, scope, and operational standard
@@ -85,14 +85,14 @@ The sources support constraints and precedents, not this exact object model.
 
 | Evidence | Supported conclusion | What it does not establish |
 | --- | --- | --- |
-| [Relaxed virtual memory in Armv8-A](../30-sources/simner-et-al-2022-relaxed-virtual-memory.md) | Page-table mutation, concurrent walks, barriers, invalidation, and reuse form a protocol; Arm break-before-make has precise preconditions | A portable kernel transaction API or correctness on x86 and RISC-V |
-| [Arm A-profile manual](../30-sources/arm-2026-a-profile-system-architecture-documentation.md), [Intel system-programming manual](../30-sources/intel-2026-system-programming-documentation.md), and [RISC-V privileged ISA](../30-sources/risc-v-international-2026-privileged-architecture.md) | Each ISA exposes different entry formats, context identifiers, invalidation scopes, and ordering rules | That one instruction or identical table format can implement the common contract |
-| [RISC-V SBI 3.0](../30-sources/risc-v-international-2025-supervisor-binary-interface.md) | A supervisor may request range- and ASID-scoped remote fences through a fallible higher-privilege interface | That firmware success is timely or sufficient for this kernel's reclamation claim without a pinned platform contract |
-| [Linux cache/TLB APIs](../30-sources/linux-kernel-community-2026-low-level-core-apis.md) | A mature portable kernel specifies caller-visible cache/TLB effects and leaves instruction sequences to ports | That Linux's data structures or compatibility surface are minimal here |
-| [Page-access-tracked shootdown](../30-sources/amit-2017-optimizing-tlb-shootdown.md) | Hardware evidence can eliminate some remote invalidations and materially improve selected workloads | A sound cross-ISA baseline; tracking itself can add cost |
-| [Hydra](../30-sources/gao-et-al-2024-scalable-page-table-tlb.md) | NUMA placement, page-table replication, sharer tracking, and shootdown cost are coupled | That replication belongs in a small first implementation |
-| [Least-privilege memory protection](../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md) | Authority to configure a translator is distinct from authority to access the translated memory | The project's concrete capability types or teardown protocol |
-| [L4 lessons](../30-sources/elphinstone-heiser-2013-l4-lessons.md) and the [seL4 manual](../30-sources/sel4-foundation-2026-reference-manual.md) | Address spaces and mappings can remain small capability-mediated kernel mechanisms while paging policy stays outside privilege | That similar names transfer seL4's proofs or performance |
+| [Relaxed virtual memory in Armv8-A](../../30-sources/simner-et-al-2022-relaxed-virtual-memory.md) | Page-table mutation, concurrent walks, barriers, invalidation, and reuse form a protocol; Arm break-before-make has precise preconditions | A portable kernel transaction API or correctness on x86 and RISC-V |
+| [Arm A-profile manual](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md), [Intel system-programming manual](../../30-sources/intel-2026-system-programming-documentation.md), and [RISC-V privileged ISA](../../30-sources/risc-v-international-2026-privileged-architecture.md) | Each ISA exposes different entry formats, context identifiers, invalidation scopes, and ordering rules | That one instruction or identical table format can implement the common contract |
+| [RISC-V SBI 3.0](../../30-sources/risc-v-international-2025-supervisor-binary-interface.md) | A supervisor may request range- and ASID-scoped remote fences through a fallible higher-privilege interface | That firmware success is timely or sufficient for this kernel's reclamation claim without a pinned platform contract |
+| [Linux cache/TLB APIs](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) | A mature portable kernel specifies caller-visible cache/TLB effects and leaves instruction sequences to ports | That Linux's data structures or compatibility surface are minimal here |
+| [Page-access-tracked shootdown](../../30-sources/amit-2017-optimizing-tlb-shootdown.md) | Hardware evidence can eliminate some remote invalidations and materially improve selected workloads | A sound cross-ISA baseline; tracking itself can add cost |
+| [Hydra](../../30-sources/gao-et-al-2024-scalable-page-table-tlb.md) | NUMA placement, page-table replication, sharer tracking, and shootdown cost are coupled | That replication belongs in a small first implementation |
+| [Least-privilege memory protection](../../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md) | Authority to configure a translator is distinct from authority to access the translated memory | The project's concrete capability types or teardown protocol |
+| [L4 lessons](../../30-sources/elphinstone-heiser-2013-l4-lessons.md) and the [seL4 manual](../../30-sources/sel4-foundation-2026-reference-manual.md) | Address spaces and mappings can remain small capability-mediated kernel mechanisms while paging policy stays outside privilege | That similar names transfer seL4's proofs or performance |
 
 Two negative lessons are as important as the positive evidence. Ordinary CPU
 cache coherence does not imply translation coherence, and a formal memory
@@ -494,7 +494,7 @@ atomicity, and CPU-locality limits.
 
 ## Interaction with the capability microkernel
 
-The [minimal privileged kernel](minimal-privileged-kernel-layer.md) already
+The [minimal privileged kernel](../minimal-privileged-kernel-layer.md) already
 defines `AddressSpace`, `Mapping`, frame-authority epochs, protection-domain
 teardown, and quarantine. This component is the architecture-level executor
 for those objects:
@@ -757,9 +757,9 @@ preserves one semantics while allowing bounded kernel work.
 ## Connections
 
 - [Kernel hardware and architecture support
-  layer](kernel-hardware-and-architecture-support-layer.md) defines this as
+  layer](../kernel-hardware-and-architecture-support-layer.md) defines this as
   component 3 and supplies its neighboring CPU, ordering, and DMA contracts.
-- [Minimal privileged kernel layer](minimal-privileged-kernel-layer.md)
+- [Minimal privileged kernel layer](../minimal-privileged-kernel-layer.md)
   supplies the authority-bearing `AddressSpace`, `Mapping`, frame epochs,
   teardown ledger, and quarantine policy consumed here.
 - [Ordering, coherence, and code
@@ -770,23 +770,23 @@ preserves one semantics while allowing bounded kernel work.
   kernel-owned IPI delivery without turning device interrupt bindings into
   shootdown authority.
 - [BEAM, ERTS, and OTP principles for a new operating
-  system](beam-erts-and-otp-principles-for-a-new-operating-system.md) explains
+  system](../beam-erts-and-otp-principles-for-a-new-operating-system.md) explains
   why managed actor heaps and process-local tracing GC remain outside this
   page-granular kernel mechanism.
 - [Kernel hardware-contract
-  inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+  inquiry](../../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
   remains open until this protocol has two-port experimental evidence.
 
 ## Sources
 
-- [Relaxed virtual memory in Armv8-A](../30-sources/simner-et-al-2022-relaxed-virtual-memory.md)
-- [Arm A-profile system architecture documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
-- [Intel 64 and IA-32 system programming documentation](../30-sources/intel-2026-system-programming-documentation.md)
-- [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
-- [RISC-V supervisor binary interface](../30-sources/risc-v-international-2025-supervisor-binary-interface.md)
-- [Linux kernel low-level core APIs](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
-- [Optimizing TLB shootdown with page access tracking](../30-sources/amit-2017-optimizing-tlb-shootdown.md)
-- [Scalable page-table and TLB management on NUMA systems](../30-sources/gao-et-al-2024-scalable-page-table-tlb.md)
-- [A least-privilege memory protection model](../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md)
-- [From L3 to seL4](../30-sources/elphinstone-heiser-2013-l4-lessons.md)
-- [seL4 reference manual](../30-sources/sel4-foundation-2026-reference-manual.md)
+- [Relaxed virtual memory in Armv8-A](../../30-sources/simner-et-al-2022-relaxed-virtual-memory.md)
+- [Arm A-profile system architecture documentation](../../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+- [Intel 64 and IA-32 system programming documentation](../../30-sources/intel-2026-system-programming-documentation.md)
+- [RISC-V privileged architecture](../../30-sources/risc-v-international-2026-privileged-architecture.md)
+- [RISC-V supervisor binary interface](../../30-sources/risc-v-international-2025-supervisor-binary-interface.md)
+- [Linux kernel low-level core APIs](../../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+- [Optimizing TLB shootdown with page access tracking](../../30-sources/amit-2017-optimizing-tlb-shootdown.md)
+- [Scalable page-table and TLB management on NUMA systems](../../30-sources/gao-et-al-2024-scalable-page-table-tlb.md)
+- [A least-privilege memory protection model](../../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md)
+- [From L3 to seL4](../../30-sources/elphinstone-heiser-2013-l4-lessons.md)
+- [seL4 reference manual](../../30-sources/sel4-foundation-2026-reference-manual.md)

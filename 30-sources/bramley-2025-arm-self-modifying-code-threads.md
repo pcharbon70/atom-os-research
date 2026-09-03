@@ -69,4 +69,4 @@ the Arm instruction-fetch formal work, or experiments on the selected cores.
 
 ## Derived work
 
-- [Ordering, coherence, and code publication](../20-notes/ordering-coherence-and-code-publication.md)
+- [Ordering, coherence, and code publication](../20-notes/kernel-hardware-and-architecture-components/ordering-coherence-and-code-publication.md)

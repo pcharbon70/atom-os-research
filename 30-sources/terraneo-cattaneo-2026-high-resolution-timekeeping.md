@@ -79,4 +79,4 @@ not evidence that every target needs a physically separate global timer.
 
 ## Derived work
 
-- [Raw time and deadline programming](../20-notes/raw-time-and-deadline-programming.md)
+- [Raw time and deadline programming](../20-notes/kernel-hardware-and-architecture-components/raw-time-and-deadline-programming.md)
