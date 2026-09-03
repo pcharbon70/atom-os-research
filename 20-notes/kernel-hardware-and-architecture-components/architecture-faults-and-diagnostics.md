@@ -200,20 +200,29 @@ generation-tagged `RawStagingSlot` reserved for that CPU. It is independent of
 the drainable operational ring, so a ring full of corrected reports cannot
 prevent capture and promotion of the first fatal event:
 
-```text
-RawStagingSlot:
-Free
-  -> WritingRaw
-  -> RawSealed
-  -> Classifying
-       -> CopyingOperational -> OperationalCopied -> Free(next_generation)
-       -> Promoting(first_fatal_generation)
-            -> TerminalCopied -> Promoted -> Free(next_generation)
+```mermaid
+flowchart TD
+  subgraph staging["RawStagingSlot"]
+    free["Free"] -->|"claim staging slot"| writing["WritingRaw"]
+    writing -->|"finish raw copy"| rawSealed["RawSealed"]
+    rawSealed -->|"begin bounded classification"| classifying["Classifying"]
+    classifying -->|"classify nonterminal"| copying["CopyingOperational"]
+    copying -->|"seal operational copy"| operationalCopied["OperationalCopied"]
+    operationalCopied -->|"release staging"| nextFree["Free<br/>(next generation)"]
+    classifying -->|"classify fatal"| promoting["Promoting<br/>(first fatal generation)"]
+    promoting -->|"copy sealed record"| terminalCopied["TerminalCopied"]
+    terminalCopied -->|"publish terminal copy"| promoted["Promoted"]
+    promoted -->|"release staging"| nextFree
+    writing -->|"fail to seal raw copy"| torn["Torn"]
+    torn -->|"promote torn capture"| promoting
+  end
 
-WritingRaw -> Torn -> Promoting
-
-OperationalRing<M> slot:
-Free -> WritingCopy -> Sealed -> Exported -> Free(next_slot_generation)
+  subgraph ring["OperationalRing&lt;M&gt; slot"]
+    ringFree["Free"] -->|"claim ring slot"| writingCopy["WritingCopy"]
+    writingCopy -->|"finish record copy"| sealed["Sealed"]
+    sealed -->|"copy to policy queue"| exported["Exported"]
+    exported -->|"release ring slot"| ringNext["Free<br/>(next slot generation)"]
+  end
 ```
 
 - `WritingRaw` is established before raw state is copied, and `RawSealed` is
@@ -296,30 +305,35 @@ be necessary for sealing the local record.
 
 ## Capture state machine
 
-```text
-Architecture event
-    -> component 2 enters its dedicated vector and guarded stack
-    -> component 2 establishes recursion depth and a typed entry context
-    -> if FatalPreclassificationProof exists:
-         component 9 claims the corresponding terminal slot directly
-         -> snapshot minimum raw state -> seal terminal record
-         -> enter CrashContext for sink/halt/reset; decoding remains deferred
-       otherwise:
-         component 9 claims the CPU's RawStagingSlot
-         -> snapshot raw state before destructive acknowledge
-         -> seal the CPU-local raw capture
-         -> perform source-specific minimum acknowledgement if safe
-         -> classify using only bounded, pre-resident data
-            -> asynchronous non-disruptive report:
-                 copy to the operational ring and enqueue bounded evidence
-            -> synchronous LocalResumePostcondition:
-                 copy, consume the token, enqueue, and return
-            -> ContainmentRequirement:
-                 copy, park/divert locally, and notify policy plane
-            -> uncertain or uncontained:
-                 atomically promote staging before terminal transfer
-                 -> enter CrashContext only after TerminalStore is sealed
-    -> decoder/policy plane enriches, redacts, persists, and decides recovery
+```mermaid
+flowchart TD
+  event["Architecture event"] -->|"dispatch"| vector["Component 2 enters its dedicated vector<br/>and guarded stack"]
+  vector -->|"establish entry metadata"| context["Establish recursion depth<br/>and typed entry context"]
+  context -->|"check preclassification"| fatal{"FatalPreclassificationProof exists?"}
+
+  fatal -->|"yes"| claimTerminal["Component 9 claims the terminal slot directly"]
+  claimTerminal -->|"begin direct capture"| rawMinimum["Snapshot minimum raw state"]
+  rawMinimum -->|"finish minimum snapshot"| sealTerminal["Seal terminal record"]
+  sealTerminal -->|"publish terminal evidence"| crashDirect["Enter CrashContext for sink / halt / reset<br/>Decoding remains deferred"]
+
+  fatal -->|"no"| claimStaging["Component 9 claims the CPU RawStagingSlot"]
+  claimStaging -->|"begin staged capture"| snapshot["Snapshot raw state before destructive acknowledge"]
+  snapshot -->|"finish raw snapshot"| sealRaw["Seal CPU-local raw capture"]
+  sealRaw -->|"publish raw evidence"| acknowledge["Perform source-specific minimum acknowledgement<br/>when safe"]
+  acknowledge -->|"complete minimum acknowledgement"| classify["Classify using bounded pre-resident data"]
+  classify -->|"produce bounded result"| afdClassificationChoice{"Classification"}
+  afdClassificationChoice -->|"Asynchronous non-disruptive"| operational["Copy to operational ring<br/>and enqueue bounded evidence"]
+  afdClassificationChoice -->|"Synchronous LocalResumePostcondition"| resume["Copy, consume token, enqueue, and return"]
+  afdClassificationChoice -->|"ContainmentRequirement"| contain["Copy, park or divert locally,<br/>and notify policy plane"]
+  afdClassificationChoice -->|"Uncertain or uncontained"| promote["Atomically promote staging<br/>before terminal transfer"]
+  promote -->|"copy fatal evidence"| sealedStore["Seal TerminalStore"]
+  sealedStore -->|"publish terminal record"| crashPromoted["Enter CrashContext"]
+
+  crashDirect -->|"defer decoding"| policy["Decoder / policy plane enriches, redacts,<br/>persists, and decides recovery"]
+  operational -->|"handoff evidence"| policy
+  resume -->|"handoff evidence"| policy
+  contain -->|"request coordination"| policy
+  crashPromoted -->|"defer decoding"| policy
 ```
 
 No capture-plane branch waits for another CPU. The policy plane may start

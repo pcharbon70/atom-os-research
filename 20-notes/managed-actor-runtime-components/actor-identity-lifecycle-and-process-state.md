@@ -170,14 +170,14 @@ PID terms should encode or indirectly reference `{runtime_epoch, slot,
 generation}` with enough width that accidental wrap is infeasible during the
 declared lifetime. The runtime maintains a bounded table whose entry state is:
 
-```text
-Free(g)
-  -> Reserved(g)
-  -> Constructing(g)
-  -> Published(g)
-  -> Exiting(g)
-  -> Retiring(g)
-  -> Free(g + 1)
+```mermaid
+flowchart LR
+  ail_free_g["Free(g)"] --> ail_reserved["Reserved(g)"]
+  ail_reserved --> ail_constructing["Constructing(g)"]
+  ail_constructing --> ail_published["Published(g)"]
+  ail_published --> ail_exiting["Exiting(g)"]
+  ail_exiting --> ail_retiring["Retiring(g)"]
+  ail_retiring --> ail_free_next["Free(g + 1)"]
 ```
 
 A fast lookup reads the entry generation and state, then pins or validates it
@@ -207,14 +207,14 @@ operation was not accepted, completed, or remains indeterminate.
 
 ## Transactional spawn
 
-```text
-Requested
-  -> CapacityReserved
-  -> ActorConstructed
-  -> InitialFrameInstalled
-  -> RelationsInstalled
-  -> PIDPublished
-  -> Runnable
+```mermaid
+flowchart LR
+  aic_requested["Requested"] --> aic_capacity["Capacity reserved"]
+  aic_capacity --> aic_constructed["Actor constructed"]
+  aic_constructed --> aic_frame["Initial frame installed"]
+  aic_frame --> aic_relations["Relations installed"]
+  aic_relations --> aic_pid["PID published"]
+  aic_pid --> aic_runnable["Runnable"]
 ```
 
 1. Reserve a table slot, minimum heap/stack, queue head, actor ledger, and
@@ -241,13 +241,16 @@ exit signal generation as explicit choice points.
 
 The semantic states are narrower than implementation flags:
 
-```text
-Runnable(owner_queue)
-  -> Running(owner_scheduler)
-  -> Runnable | Waiting(reason) | Suspended(reason) | Exiting(reason)
-
-Waiting -> Runnable             // one successful wake publication
-Suspended -> Runnable|Waiting   // authorized resume
+```mermaid
+flowchart TD
+  ais_runnable["Runnable(owner_queue)"] --> ais_running["Running(owner_scheduler)"]
+  ais_running -->|"remains ready"| ais_runnable
+  ais_running -->|"waits"| ais_waiting["Waiting(reason)"]
+  ais_running -->|"is suspended"| ais_suspended["Suspended(reason)"]
+  ais_running -->|"begins exit"| ais_exiting["Exiting(reason)"]
+  ais_waiting -->|"one successful wake publication"| ais_runnable
+  ais_suspended -->|"authorized resume to ready"| ais_runnable
+  ais_suspended -->|"authorized resume to wait"| ais_waiting
 ```
 
 Only the owner scheduler touches instruction state, stack, or actor heap.
@@ -262,14 +265,14 @@ hints never alter PID or message semantics.
 
 ## Exit and reclamation
 
-```text
-Alive
-  -> ExitClaimed(reason, evidence)
-  -> LanguageStopped
-  -> VisibleResourcesReleasing
-  -> DeathSignalsPublishing
-  -> ResidualStateDraining
-  -> SlotRetired
+```mermaid
+flowchart LR
+  aix_alive["Alive"] --> aix_claimed["Exit claimed(reason, evidence)"]
+  aix_claimed --> aix_stopped["Language stopped"]
+  aix_stopped --> aix_resources["Visible resources releasing"]
+  aix_resources --> aix_signals["Death signals publishing"]
+  aix_signals --> aix_draining["Residual state draining"]
+  aix_draining --> aix_retired["Slot retired"]
 ```
 
 Exactly one exit claimant seals the primary reason. Later faults can append

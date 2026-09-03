@@ -205,6 +205,31 @@ reservation, immutable publication, incarnation-bound identities, terminal
 arbitration, safe-point progress, recovery reserve, typed uncertainty, and
 bounded external evidence.
 
+### Post-merge semantic correction audit
+
+A later line-by-line comparison against the OTP 29.0.6 manuals found several
+places where the initial synthesis accidentally promoted an Atom OS mechanism
+to an OTP promise or carried forward older ERTS behavior. The corrective pass
+used the current `erlang`, `erl_nif`, `ets`, process, and external-term-format
+documentation and made these distinctions explicit:
+
+- logical old-code purge checks direct executable references; local funs and
+  literals require invalidation/copy handling but are not OTP 29 purge blockers;
+- dirty classification is per NIF name/arity entry and can change when a job is
+  rescheduled, rather than being one immutable module-wide class;
+- Atom OS request outcomes are an extension beneath the OTP send API, not new
+  return values from `!/2`, `send/2`, or `send/3`;
+- standard remote PIDs and references are tied to node creation and identifier
+  fields, not to one transport session, even though links and monitors break on
+  a connection failure;
+- the compatible failure path preserves exact Erlang exit reasons;
+- timer cleanup follows the timer destination rather than its creator; and
+- ETS owner death, heir data, notification, and explicit `give_away/3` remain
+  observably distinct operations.
+
+No executable conformance test accompanied this correction. The amended
+reports therefore add focused differential tests for each distinction.
+
 ### Evidence boundary
 
 This work did not:

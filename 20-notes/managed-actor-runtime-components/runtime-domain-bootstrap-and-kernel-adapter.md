@@ -159,15 +159,24 @@ the outcome.
 The adapter should hold attenuated child authorities rather than one ambient
 root capability:
 
-```text
-runtime-domain authority
-├── memory account → page reservations and mappings
-├── temporal account → scheduler contexts
-├── event set → selected notification bindings
-├── deadline set → selected timer channels
-├── code publisher → stage/seal/publish only
-├── service routes → bounded named endpoints
-└── evidence slot → append/seal current runtime record
+```mermaid
+flowchart TD
+  rba_authority["Runtime-domain authority"]
+  rba_memory["Memory account: page reservations and mappings"]
+  rba_temporal["Temporal account: scheduler contexts"]
+  rba_events["Event set: selected notification bindings"]
+  rba_deadlines["Deadline set: selected timer channels"]
+  rba_code["Code publisher: stage, seal, and publish only"]
+  rba_services["Service routes: bounded named endpoints"]
+  rba_evidence["Evidence slot: append and seal current runtime record"]
+
+  rba_authority -->|"grants"| rba_memory
+  rba_authority -->|"grants"| rba_temporal
+  rba_authority -->|"grants"| rba_events
+  rba_authority -->|"grants"| rba_deadlines
+  rba_authority -->|"grants"| rba_code
+  rba_authority -->|"grants"| rba_services
+  rba_authority -->|"grants"| rba_evidence
 ```
 
 The memory allocator cannot publish code. The loader cannot submit device I/O.
@@ -180,16 +189,16 @@ coupling and provides a path to later compartmentalization.
 
 ### Bootstrap
 
-```text
-Created
-  -> DescriptorValidated
-  -> ImageMapped
-  -> CompatibilityChecked
-  -> RuntimeStateConstructed
-  -> ContextsBound
-  -> ServicesConnected
-  -> FirstActorPublished
-  -> Running
+```mermaid
+flowchart LR
+  rbs_created["Created"] --> rbs_descriptor["Descriptor validated"]
+  rbs_descriptor --> rbs_image["Image mapped"]
+  rbs_image --> rbs_compatibility["Compatibility checked"]
+  rbs_compatibility --> rbs_state["Runtime state constructed"]
+  rbs_state --> rbs_contexts["Contexts bound"]
+  rbs_contexts --> rbs_services["Services connected"]
+  rbs_services --> rbs_actor["First actor published"]
+  rbs_actor --> rbs_running["Running"]
 ```
 
 Before `FirstActorPublished`, failure follows a rollback ledger in reverse
@@ -203,17 +212,18 @@ ordinary actor pool that untrusted initialization code can exhaust.
 
 ### Quiescence and teardown
 
-```text
-Running
-  -> AdmissionsClosed
-  -> OperationsDraining
-  -> RuntimeThreadsQuiescing
-  -> RuntimeFrozen
-  -> FinalEvidenceSealed
-  -> ObjectsReleased
-  -> Released
+```mermaid
+flowchart TD
+  rbt_running["Running"] --> rbt_admissions["Admissions closed"]
+  rbt_admissions --> rbt_draining["Operations draining"]
+  rbt_draining --> rbt_quiescing["Runtime threads quiescing"]
+  rbt_quiescing --> rbt_frozen["Runtime frozen"]
+  rbt_frozen --> rbt_evidence["Final evidence sealed"]
+  rbt_evidence --> rbt_objects["Objects released"]
+  rbt_objects --> rbt_released["Released"]
 
-any nonterminal state -> KernelFrozen -> KernelReclaimed
+  rbt_nonterminal["Any nonterminal state"] -->|"kernel-forced teardown"| rbt_kernel_frozen["Kernel frozen"]
+  rbt_kernel_frozen --> rbt_kernel_reclaimed["Kernel reclaimed"]
 ```
 
 `AdmissionsClosed` is monotonic for the runtime epoch. New actors, timers,

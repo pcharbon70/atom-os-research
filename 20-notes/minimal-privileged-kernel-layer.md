@@ -275,23 +275,38 @@ A protection boundary does not establish all five properties.
 The components form a directed authority and lifecycle graph rather than a
 flat system-call list:
 
-```text
- normalized boot facts + architecture facade
-                  |
-          bootstrap authority
-                  |
-       typed object memory store
-          /       |        \
- capability   protection   scheduling
-   spaces       domains      contexts
-      |          /   \          |
-      +---- invocation ---- timeouts
-      |          |              |
- mappings   IRQ/timer/DMA   fault delivery
-      \          |              /
-       +---- teardown ledger ---+
-                  |
-       quiescence + safe reuse
+```mermaid
+flowchart TD
+  mkp_boot_facts["Normalized boot facts and architecture facade"]
+  mkp_bootstrap["Bootstrap authority"]
+  mkp_store["Typed object memory store"]
+  mkp_cap_spaces["Capability spaces"]
+  mkp_domains["Protection domains"]
+  mkp_sched["Scheduling contexts"]
+  mkp_invocation["Invocation"]
+  mkp_timeouts["Timeouts"]
+  mkp_mappings["Mappings"]
+  mkp_devices["IRQ, timer, and DMA"]
+  mkp_faults["Fault delivery"]
+  mkp_teardown["Teardown ledger"]
+  mkp_reuse["Quiescence and safe reuse"]
+
+  mkp_boot_facts -->|"dependency"| mkp_bootstrap
+  mkp_bootstrap -->|"dependency"| mkp_store
+  mkp_store -->|"typed-object backing"| mkp_cap_spaces
+  mkp_store -->|"typed-object backing"| mkp_domains
+  mkp_store -->|"typed-object backing"| mkp_sched
+  mkp_cap_spaces -->|"dependency"| mkp_invocation
+  mkp_domains -->|"dependency"| mkp_invocation
+  mkp_domains -->|"dependency"| mkp_timeouts
+  mkp_sched -->|"dependency"| mkp_timeouts
+  mkp_cap_spaces -->|"dependency"| mkp_mappings
+  mkp_invocation -->|"dependency"| mkp_devices
+  mkp_timeouts -->|"dependency"| mkp_faults
+  mkp_mappings -->|"lifecycle record"| mkp_teardown
+  mkp_devices -->|"lifecycle record"| mkp_teardown
+  mkp_faults -->|"lifecycle record"| mkp_teardown
+  mkp_teardown -->|"completion discipline"| mkp_reuse
 ```
 
 The arrows show dependency, not authority inheritance. The IPC component may
@@ -778,31 +793,40 @@ its previously admitted descendants remains charged incremental work.
 
 ### Domain lifecycle
 
-```text
-DEFINED -> STARTING -> RUNNING
-RUNNING -> SUSPENDING(suspend_epoch) -> ADMIN_SUSPENDED
-SUSPENDING -> SUSPEND_FAILED
-SUSPEND_FAILED --late checkpoint acknowledgement with full postconditions-->
-  ADMIN_SUSPENDED
-ADMIN_SUSPENDED --authorized resume--> RUNNING
+```mermaid
+flowchart TD
+  mdl_defined["DEFINED"] -->|"start"| mdl_starting["STARTING"]
+  mdl_starting -->|"startup completes"| mdl_running["RUNNING"]
 
-DEFINED -------------------------------> CLOSING(no_stop) -> STOPPED
-STARTING | RUNNING | SUSPENDING | SUSPEND_FAILED | ADMIN_SUSPENDED
-                         -> CLOSING(stop_epoch) -> STOPPING(stop_epoch)
-                                                       |-> STOPPED
-                                                       `-> STOP_FAILED
+  mdl_running -->|"administrative suspend"| mdl_suspending["SUSPENDING(suspend_epoch)"]
+  mdl_suspending -->|"all checkpoints acknowledge"| mdl_admin_suspended["ADMIN_SUSPENDED"]
+  mdl_suspending -->|"checkpoint acknowledgement fails or is incomplete"| mdl_suspend_failed["SUSPEND_FAILED"]
+  mdl_suspend_failed -->|"late checkpoint acknowledgement with full postconditions"| mdl_admin_suspended
+  mdl_admin_suspended -->|"authorized resume"| mdl_running
 
-STOP_FAILED --late checkpoint acknowledgement with full postconditions--> STOPPED
+  mdl_defined -->|"terminate before execution"| mdl_closing_no_stop["CLOSING(no_stop)"]
+  mdl_closing_no_stop -->|"empty activation set verified"| mdl_stopped["STOPPED"]
+  mdl_starting -->|"terminate"| mdl_closing_stop["CLOSING(stop_epoch)"]
+  mdl_running -->|"terminate"| mdl_closing_stop
+  mdl_suspending -->|"terminate"| mdl_closing_stop
+  mdl_suspend_failed -->|"terminate"| mdl_closing_stop
+  mdl_admin_suspended -->|"terminate"| mdl_closing_stop
+  mdl_closing_stop --> mdl_stopping["STOPPING(stop_epoch)"]
+  mdl_stopping -->|"stop proof completes"| mdl_stopped
+  mdl_stopping -->|"stop proof fails"| mdl_stop_failed["STOP_FAILED"]
+  mdl_stop_failed -->|"late checkpoint acknowledgement with full postconditions"| mdl_stopped
 
-STOPPED -> DRAINING
-DRAINING -> QUIESCENT -> SANITIZING_REUSABLE_SET
-                         -> REAPED_CLEAN -> DEAD
-DRAINING -> QUARANTINING -> SANITIZING_NONQUARANTINED_SET
-                            -> REAPED_WITH_QUARANTINE -> DEAD
+  mdl_stopped --> mdl_draining["DRAINING"]
+  mdl_draining -->|"all effects can quiesce"| mdl_quiescent["QUIESCENT"]
+  mdl_quiescent --> mdl_sanitize_reusable["SANITIZING_REUSABLE_SET"]
+  mdl_sanitize_reusable --> mdl_reaped_clean["REAPED_CLEAN"]
+  mdl_reaped_clean --> mdl_dead["DEAD"]
+  mdl_draining -->|"unresolved effects require containment"| mdl_quarantining["QUARANTINING"]
+  mdl_quarantining --> mdl_sanitize_nonquarantined["SANITIZING_NONQUARANTINED_SET"]
+  mdl_sanitize_nonquarantined --> mdl_reaped_quarantine["REAPED_WITH_QUARANTINE"]
+  mdl_reaped_quarantine --> mdl_dead
 
-DEAD --destroy/retype after object-specific completion--> backing extent
-                                                          reusable under a
-                                                          non-aliasing generation
+  mdl_dead -->|"destroy or retype after object-specific completion"| mdl_reusable["Backing extent reusable under a non-aliasing generation"]
 ```
 
 This is the authoritative domain lifecycle. Entry into observable `CLOSING`
@@ -890,46 +914,63 @@ fresh stop epoch.
 Individual thread termination has its own lifecycle, serialized with the
 domain membership and stop epochs:
 
-```text
-NEW -> CONFIGURED -> RUNNABLE <-> RUNNING
-RUNNING -> BLOCKED -> RUNNABLE
-RUNNING -> FAULT_BLOCKED -> RUNNABLE
-RUNNING --server-funded endpoint_receive waits-->
-  RECEIVE_BLOCKED(endpoint_epoch, server_context_bound)
-RECEIVE_BLOCKED --accept wins--> READY(RequestAccepted, server_context_bound)
-RECEIVE_BLOCKED --endpoint close drains--> READY(ReceiveClosed, server_context_bound)
-READY --positive dispatch budget and execution admission open--> RUNNABLE
-RUNNING --terminal passive receive--> PARKED_RECEIVE(endpoint_epoch, unbound)
-PARKED_RECEIVE --compatible caller-funded acceptance-->
-  READY(RequestAccepted, donated_context_bound)
-PARKED_RECEIVE --endpoint close wins--> RECEIVE_CLOSED(endpoint_epoch, unbound)
-RUNNING --reply_and_receive commits-->
-  PARKING_RECEIVE(call_id, endpoint_epoch, close_pending=false, donation_bound)
-PARKING_RECEIVE --drain, endpoint still open--> PARKED_RECEIVE(endpoint_epoch, unbound)
-PARKING_RECEIVE --drain, close_pending--> RECEIVE_CLOSED(endpoint_epoch, unbound)
+```mermaid
+flowchart TD
+  mtl_new["NEW"] --> mtl_configured["CONFIGURED"]
+  mtl_configured --> mtl_runnable["RUNNABLE"]
+  mtl_runnable -->|"dispatch"| mtl_running["RUNNING"]
+  mtl_running -->|"yield or preemption"| mtl_runnable
+  mtl_running -->|"blocks"| mtl_blocked["BLOCKED"]
+  mtl_blocked -->|"wake"| mtl_runnable
+  mtl_running -->|"fault"| mtl_fault_blocked["FAULT_BLOCKED"]
+  mtl_fault_blocked -->|"fault resolved"| mtl_runnable
 
-RUNNABLE | RUNNING | BLOCKED | FAULT_BLOCKED | READY | RECEIVE_BLOCKED |
-PARKING_RECEIVE | PARKED_RECEIVE
-  -> THREAD_SUSPENDING(suspend_epoch, saved_state)
-  -> THREAD_SUSPENDED(saved_state) | THREAD_SUSPEND_FAILED(progress)
-THREAD_SUSPEND_FAILED --late checkpoint acknowledgement with full postconditions-->
-  THREAD_SUSPENDED(saved_state)
-THREAD_SUSPENDED(saved_state) --authorized resume wins-->
-  saved_state adjusted by any event that won while frozen
+  mtl_running -->|"server-funded endpoint_receive waits"| mtl_receive_blocked["RECEIVE_BLOCKED(endpoint_epoch, server_context_bound)"]
+  mtl_receive_blocked -->|"accept wins: RequestAccepted, server_context_bound"| mtl_ready["READY(outcome, context_bound)"]
+  mtl_receive_blocked -->|"endpoint close drains: ReceiveClosed, server_context_bound"| mtl_ready
+  mtl_ready -->|"positive dispatch budget and execution admission open"| mtl_runnable
+  mtl_running -->|"terminal passive receive"| mtl_parked["PARKED_RECEIVE(endpoint_epoch, unbound)"]
+  mtl_parked -->|"compatible caller-funded acceptance: RequestAccepted, donated_context_bound"| mtl_ready
+  mtl_parked -->|"endpoint close wins"| mtl_receive_closed["RECEIVE_CLOSED(endpoint_epoch, unbound)"]
+  mtl_running -->|"reply_and_receive commits"| mtl_parking["PARKING_RECEIVE(call_id, endpoint_epoch, close_pending=false, donation_bound)"]
+  mtl_parking -->|"drain; endpoint still open"| mtl_parked
+  mtl_parking -->|"drain; close_pending"| mtl_receive_closed
 
-validated thread-local caller-funded handler --failure and checkpoint drain-->
-  CALL_ABORTED(call_id, outcome, saved_state, unbound)
-generic caller-funded handler --failure selection-->
-  ABORT_PENDING + domain CLOSING(stop_epoch) -> domain terminal path
+  mtl_runnable -->|"suspend requested; save state"| mtl_suspending["THREAD_SUSPENDING(suspend_epoch, saved_state)"]
+  mtl_running -->|"suspend requested; save state"| mtl_suspending
+  mtl_blocked -->|"suspend requested; save state"| mtl_suspending
+  mtl_fault_blocked -->|"suspend requested; save state"| mtl_suspending
+  mtl_ready -->|"suspend requested; save state"| mtl_suspending
+  mtl_receive_blocked -->|"suspend requested; save state"| mtl_suspending
+  mtl_parking -->|"suspend requested; save state"| mtl_suspending
+  mtl_parked -->|"suspend requested; save state"| mtl_suspending
+  mtl_suspending -->|"checkpoint acknowledgement completes"| mtl_suspended["THREAD_SUSPENDED(saved_state)"]
+  mtl_suspending -->|"checkpoint acknowledgement fails or is incomplete"| mtl_suspend_failed["THREAD_SUSPEND_FAILED(progress)"]
+  mtl_suspend_failed -->|"late checkpoint acknowledgement with full postconditions"| mtl_suspended
+  mtl_suspended -->|"authorized resume wins"| mtl_resume_result["Saved state adjusted by any event that won while frozen"]
 
-NEW | CONFIGURED | RUNNABLE | RUNNING | BLOCKED | FAULT_BLOCKED |
-THREAD_SUSPENDING | THREAD_SUSPENDED | THREAD_SUSPEND_FAILED |
-READY | RECEIVE_BLOCKED | PARKING_RECEIVE | PARKED_RECEIVE |
-RECEIVE_CLOSED | CALL_ABORTED
-  -> THREAD_TERMINATING(thread_stop_epoch)
-  -> THREAD_STOPPED
-  -> THREAD_DRAINING
-  -> THREAD_DEAD
+  mtl_validated_handler["Validated thread-local caller-funded handler"] -->|"failure and checkpoint drain"| mtl_call_aborted["CALL_ABORTED(call_id, outcome, saved_state, unbound)"]
+  mtl_generic_handler["Generic caller-funded handler"] -->|"failure selection"| mtl_abort_closing["ABORT_PENDING + domain CLOSING(stop_epoch)"]
+  mtl_abort_closing --> mtl_domain_terminal["Domain terminal path"]
+
+  mtl_new -->|"terminate"| mtl_terminating["THREAD_TERMINATING(thread_stop_epoch)"]
+  mtl_configured -->|"terminate"| mtl_terminating
+  mtl_runnable -->|"terminate"| mtl_terminating
+  mtl_running -->|"terminate"| mtl_terminating
+  mtl_blocked -->|"terminate"| mtl_terminating
+  mtl_fault_blocked -->|"terminate"| mtl_terminating
+  mtl_suspending -->|"terminate"| mtl_terminating
+  mtl_suspended -->|"terminate"| mtl_terminating
+  mtl_suspend_failed -->|"terminate"| mtl_terminating
+  mtl_ready -->|"terminate"| mtl_terminating
+  mtl_receive_blocked -->|"terminate"| mtl_terminating
+  mtl_parking -->|"terminate"| mtl_terminating
+  mtl_parked -->|"terminate"| mtl_terminating
+  mtl_receive_closed -->|"terminate"| mtl_terminating
+  mtl_call_aborted -->|"terminate"| mtl_terminating
+  mtl_terminating --> mtl_stopped["THREAD_STOPPED"]
+  mtl_stopped --> mtl_draining["THREAD_DRAINING"]
+  mtl_draining --> mtl_dead["THREAD_DEAD"]
 ```
 
 `THREAD_SUSPENDED(saved_state)` is published only after that thread is off-CPU
@@ -1304,30 +1345,38 @@ thread, or to `UNBOUND` if that thread became terminal.
 
 Acceptance, outcome selection, and resource drainage are separate transitions:
 
-```text
-PENDING --accept wins--> ACCEPTED
-PENDING --pre-accept cancellation wins-->
-  DRAINING_PREACCEPT(CANCELLED_BEFORE_ACCEPT) -> CANCELLED_BEFORE_ACCEPT
-PENDING --deadline wins-->
-  DRAINING_PREACCEPT(TIMED_OUT_BEFORE_ACCEPT) -> TIMED_OUT_BEFORE_ACCEPT
-PENDING --caller death wins-->
-  DRAINING_PREACCEPT(CALLER_DIED_BEFORE_ACCEPT) -> CALLER_DIED_BEFORE_ACCEPT
-PENDING --origin call-anchor close wins-->
-  DRAINING_PREACCEPT(ORIGIN_CLOSED_BEFORE_ACCEPT) -> ORIGIN_CLOSED_BEFORE_ACCEPT
-PENDING --parent call-anchor close wins-->
-  DRAINING_PREACCEPT(PARENT_CALL_CLOSED_BEFORE_ACCEPT) -> PARENT_CALL_CLOSED_BEFORE_ACCEPT
-PENDING --passive admission or abort-policy close wins-->
-  DRAINING_PREACCEPT(PASSIVE_AUTHORITY_CLOSED_BEFORE_ACCEPT)
-    -> PASSIVE_AUTHORITY_CLOSED_BEFORE_ACCEPT
-PENDING --endpoint close wins-->
-  DRAINING_PREACCEPT(ENDPOINT_CLOSED_BEFORE_ACCEPT) -> ENDPOINT_CLOSED_BEFORE_ACCEPT
+```mermaid
+flowchart TD
+  mil_pending["PENDING"] -->|"accept wins"| mil_accepted["ACCEPTED"]
 
-ACCEPTED --reply wins--> REPLY_COMMITTED --> DRAINING_SUCCESS --> REPLIED
-ACCEPTED --cancel wins--> DRAINING_FAILURE(CANCELLED) -----------> CANCELLED
-ACCEPTED --timeout wins--> DRAINING_FAILURE(TIMED_OUT) ----------> TIMED_OUT
-ACCEPTED --caller death wins--> DRAINING_FAILURE(CALLER_DIED) ---> CALLER_DIED
-ACCEPTED --callee death wins--> DRAINING_FAILURE(CALLEE_DIED) ---> CALLEE_DIED
-ACCEPTED --endpoint close wins--> DRAINING_FAILURE(ENDPOINT_REVOKED) --> ENDPOINT_REVOKED
+  mil_pending -->|"pre-accept cancellation wins"| mil_pre_cancel["DRAINING_PREACCEPT(CANCELLED_BEFORE_ACCEPT)"]
+  mil_pre_cancel --> mil_cancel_before["CANCELLED_BEFORE_ACCEPT"]
+  mil_pending -->|"deadline wins"| mil_pre_timeout["DRAINING_PREACCEPT(TIMED_OUT_BEFORE_ACCEPT)"]
+  mil_pre_timeout --> mil_timeout_before["TIMED_OUT_BEFORE_ACCEPT"]
+  mil_pending -->|"caller death wins"| mil_pre_caller_died["DRAINING_PREACCEPT(CALLER_DIED_BEFORE_ACCEPT)"]
+  mil_pre_caller_died --> mil_caller_died_before["CALLER_DIED_BEFORE_ACCEPT"]
+  mil_pending -->|"origin call-anchor close wins"| mil_pre_origin_closed["DRAINING_PREACCEPT(ORIGIN_CLOSED_BEFORE_ACCEPT)"]
+  mil_pre_origin_closed --> mil_origin_closed_before["ORIGIN_CLOSED_BEFORE_ACCEPT"]
+  mil_pending -->|"parent call-anchor close wins"| mil_pre_parent_closed["DRAINING_PREACCEPT(PARENT_CALL_CLOSED_BEFORE_ACCEPT)"]
+  mil_pre_parent_closed --> mil_parent_closed_before["PARENT_CALL_CLOSED_BEFORE_ACCEPT"]
+  mil_pending -->|"passive admission or abort-policy close wins"| mil_pre_passive_closed["DRAINING_PREACCEPT(PASSIVE_AUTHORITY_CLOSED_BEFORE_ACCEPT)"]
+  mil_pre_passive_closed --> mil_passive_closed_before["PASSIVE_AUTHORITY_CLOSED_BEFORE_ACCEPT"]
+  mil_pending -->|"endpoint close wins"| mil_pre_endpoint_closed["DRAINING_PREACCEPT(ENDPOINT_CLOSED_BEFORE_ACCEPT)"]
+  mil_pre_endpoint_closed --> mil_endpoint_closed_before["ENDPOINT_CLOSED_BEFORE_ACCEPT"]
+
+  mil_accepted -->|"reply wins"| mil_reply_committed["REPLY_COMMITTED"]
+  mil_reply_committed --> mil_draining_success["DRAINING_SUCCESS"]
+  mil_draining_success --> mil_replied["REPLIED"]
+  mil_accepted -->|"cancel wins"| mil_failure_cancelled["DRAINING_FAILURE(CANCELLED)"]
+  mil_failure_cancelled --> mil_cancelled["CANCELLED"]
+  mil_accepted -->|"timeout wins"| mil_failure_timeout["DRAINING_FAILURE(TIMED_OUT)"]
+  mil_failure_timeout --> mil_timed_out["TIMED_OUT"]
+  mil_accepted -->|"caller death wins"| mil_failure_caller["DRAINING_FAILURE(CALLER_DIED)"]
+  mil_failure_caller --> mil_caller_died["CALLER_DIED"]
+  mil_accepted -->|"callee death wins"| mil_failure_callee["DRAINING_FAILURE(CALLEE_DIED)"]
+  mil_failure_callee --> mil_callee_died["CALLEE_DIED"]
+  mil_accepted -->|"endpoint close wins"| mil_failure_endpoint["DRAINING_FAILURE(ENDPOINT_REVOKED)"]
+  mil_failure_endpoint --> mil_endpoint_revoked["ENDPOINT_REVOKED"]
 ```
 
 Before a pre-accept terminal state is published, `DRAINING_PREACCEPT(reason)`
@@ -1594,37 +1643,37 @@ A `SchedulingContext` should contain at least:
 Binding state and budget availability are separate state machines. The initial
 binding contract is deliberately restrictive:
 
-```text
-UNBOUND --bind--> BOUND(home_thread, active_thread=home_thread)
-BOUND --caller invokes pending call-->
-  PENDING_DONATION(prior=BOUND, blocked_caller, call_id)
-DONATED --active server invokes nested pending call-->
-  PENDING_DONATION(prior=DONATED, blocked_caller, call_id)
-PENDING_DONATION --pre-accept terminal--> revalidate prior frame
-  prior BOUND + exact live/open home -> BOUND + READY(NotAccepted)
-  prior DONATED + matching parent ACTIVE + live/open predecessor
-    -> popped DONATED binding + READY(NotAccepted)
-  valid suspended predecessor (prior BOUND, or DONATED + parent ACTIVE)
-    -> restore binding + saved READY, no dispatch
-  parent ABORT_PENDING | REPLY_DRAINING -> popped binding to drainage, no dispatch
-  terminal predecessor | closing domain -> predecessor unwind or UNBOUND
-PENDING_DONATION --accept-->
-  DONATED(home_thread, extended_chain, accepted_receiver)
-DONATED(depth > 1) --inner drainage--> revalidate previous frame
-  matching parent ACTIVE + live/open previous server
-    -> DONATED(home_thread, popped_chain, previous_server) + predecessor READY
-  matching parent ACTIVE + valid suspended previous server
-    -> popped DONATED binding + saved READY, no dispatch
-  parent ABORT_PENDING | REPLY_DRAINING
-    -> popped binding to parent drainage, no dispatch
-  terminal predecessor | closing domain -> continue unwind
-DONATED(depth = 1) --outer drainage--> revalidate home frame
-  live/open home -> BOUND(home_thread, active_thread=home_thread) + home READY
-  valid suspended home -> BOUND + saved READY, no dispatch
-  terminal home | closing domain -> UNBOUND
-BOUND --unbind--> UNBOUND
+```mermaid
+flowchart TD
+  msd_unbound["UNBOUND"] -->|"bind"| msd_bound["BOUND(home_thread, active_thread=home_thread)"]
+  msd_bound -->|"caller invokes pending call; prior=BOUND"| msd_pending["PENDING_DONATION(prior, blocked_caller, call_id)"]
+  msd_donated["DONATED(home_thread, call_chain, active_server)"] -->|"active server invokes nested pending call; prior=DONATED"| msd_pending
+  msd_bound -->|"unbind"| msd_unbound
 
-budget: AVAILABLE <-> EXHAUSTED
+  msd_pending -->|"pre-accept terminal"| msd_revalidate_prior["Revalidate prior frame"]
+  msd_revalidate_prior -->|"prior BOUND + exact live/open home; restore BOUND + READY(NotAccepted)"| msd_bound
+  msd_revalidate_prior -->|"prior DONATED + matching parent ACTIVE + live/open predecessor; pop binding + READY(NotAccepted)"| msd_donated
+  msd_revalidate_prior -->|"valid suspended predecessor: prior BOUND, or prior DONATED + parent ACTIVE"| msd_restore_suspended["Restore binding + saved READY; no dispatch"]
+  msd_revalidate_prior -->|"parent ABORT_PENDING or REPLY_DRAINING"| msd_parent_drainage["Popped binding to drainage; no dispatch"]
+  msd_revalidate_prior -->|"terminal predecessor or closing domain; predecessor frames remain"| msd_continue_unwind["Continue predecessor unwind"]
+  msd_revalidate_prior -->|"terminal predecessor or closing domain; no predecessor remains"| msd_unbound
+
+  msd_pending -->|"accept; extend chain and bind accepted receiver"| msd_donated
+  msd_donated -->|"inner drainage when depth > 1"| msd_revalidate_previous["Revalidate previous frame"]
+  msd_revalidate_previous -->|"matching parent ACTIVE + live/open previous server; pop chain + predecessor READY"| msd_donated
+  msd_revalidate_previous -->|"matching parent ACTIVE + valid suspended previous server"| msd_restore_suspended
+  msd_revalidate_previous -->|"parent ABORT_PENDING or REPLY_DRAINING"| msd_parent_drainage
+  msd_revalidate_previous -->|"terminal predecessor or closing domain"| msd_continue_unwind
+
+  msd_donated -->|"outer drainage when depth = 1"| msd_revalidate_home["Revalidate home frame"]
+  msd_revalidate_home -->|"live/open home; restore BOUND + home READY"| msd_bound
+  msd_revalidate_home -->|"valid suspended home"| msd_restore_home["BOUND + saved READY; no dispatch"]
+  msd_revalidate_home -->|"terminal home or closing domain"| msd_unbound
+  msd_continue_unwind -->|"another donated predecessor remains"| msd_revalidate_previous
+  msd_continue_unwind -->|"home frame reached"| msd_revalidate_home
+
+  msb_available["Budget AVAILABLE"] -->|"budget is exhausted"| msb_exhausted["Budget EXHAUSTED"]
+  msb_exhausted -->|"eligible refill matures"| msb_available
 ```
 
 Exactly one thread is active on a scheduling context, while
@@ -1904,22 +1953,35 @@ recoverable isolation profile.
 
 The `ResetDomain` serializes one protected operation state machine:
 
-```text
-control overlay:
-CURRENT(e) --takeover/close mediated epoch-->
-  CURRENT(e+1, MANAGER_FENCE_PENDING)
-MANAGER_FENCE_PENDING --terminal old-manager stop or alias/TLB completion-->
-  MANAGER_FENCED
+```mermaid
+flowchart TD
+  subgraph mrc_control["Control overlay"]
+    mrc_current["CURRENT(e)"] -->|"takeover or close mediated epoch"| mrc_fence_pending["CURRENT(e+1, MANAGER_FENCE_PENDING)"]
+    mrc_fence_pending -->|"terminal old-manager stop or alias/TLB completion"| mrc_fenced["MANAGER_FENCED"]
+  end
 
-operation state (new issue/verification/release requires MANAGER_FENCED):
-IDLE -> REQUESTED(reset_operation_id, admitted_control_epoch, profile_generation)
-     -> QUIESCING -> RESET_ISSUED -> COMPLETION_RECORDED -> VERIFYING
-VERIFYING -> COMPLETE -> seal ledger, advance operation generation -> IDLE
-REQUESTED | QUIESCING -> SAFELY_ABORTED_BEFORE_EFFECT
-                       -> seal ledger, advance operation generation -> IDLE
-QUIESCING | RESET_ISSUED | COMPLETION_RECORDED | VERIFYING
-  -> RESET_FAILED_PINNED -> QUARANTINED
-QUARANTINED --higher-boundary reset and complete reinitialization--> IDLE
+  subgraph mrc_operation["Operation state"]
+    mrc_idle["IDLE"] -->|"request admitted"| mrc_requested["REQUESTED(reset_operation_id, admitted_control_epoch, profile_generation)"]
+    mrc_requested --> mrc_quiescing["QUIESCING"]
+    mrc_quiescing --> mrc_reset_issued["RESET_ISSUED"]
+    mrc_reset_issued --> mrc_completion["COMPLETION_RECORDED"]
+    mrc_completion --> mrc_verifying["VERIFYING"]
+    mrc_verifying -->|"verification succeeds"| mrc_complete["COMPLETE"]
+    mrc_complete -->|"seal ledger; advance operation generation"| mrc_idle
+
+    mrc_requested -->|"proved safe before effect"| mrc_safely_aborted["SAFELY_ABORTED_BEFORE_EFFECT"]
+    mrc_quiescing -->|"proved safe before effect"| mrc_safely_aborted
+    mrc_safely_aborted -->|"seal ledger; advance operation generation"| mrc_idle
+
+    mrc_quiescing -->|"reset cannot complete safely"| mrc_failed_pinned["RESET_FAILED_PINNED"]
+    mrc_reset_issued -->|"reset cannot complete safely"| mrc_failed_pinned
+    mrc_completion -->|"completion cannot be verified safely"| mrc_failed_pinned
+    mrc_verifying -->|"verification fails"| mrc_failed_pinned
+    mrc_failed_pinned --> mrc_quarantined["QUARANTINED"]
+    mrc_quarantined -->|"higher-boundary reset and complete reinitialization"| mrc_idle
+  end
+
+  mrc_fenced -->|"precondition for new issue, verification, and release"| mrc_idle
 ```
 
 Reset-control takeover does not erase or duplicate an admitted operation. It
@@ -2386,9 +2448,13 @@ the domain's `CLOSING`, `DRAINING`, `QUIESCENT`, sanitizing, and reaped states
 with one product-state record per capability lineage, call, mapping, IRQ,
 queue, DMA lease, frame, and owned object:
 
-```text
-OPEN -> CLOSED_PUBLISHED -> QUIESCING -> QUIESCENT -> SANITIZED_OR_RELEASED
-                                  `----> QUARANTINED(custodian, reason, scope)
+```mermaid
+flowchart LR
+  mtp_open["OPEN"] --> mtp_closed["CLOSED_PUBLISHED"]
+  mtp_closed --> mtp_quiescing["QUIESCING"]
+  mtp_quiescing -->|"quiescence completes"| mtp_quiescent["QUIESCENT"]
+  mtp_quiescent --> mtp_sanitized["SANITIZED_OR_RELEASED"]
+  mtp_quiescing -->|"safe quiescence cannot complete"| mtp_quarantined["QUARANTINED(custodian, reason, scope)"]
 ```
 
 The domain may publish `REAPED_CLEAN` only when every reusable record reached

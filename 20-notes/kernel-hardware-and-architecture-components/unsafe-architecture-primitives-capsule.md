@@ -132,18 +132,16 @@ proposals that require implementation evidence.
 
 ## Boundary and dependency rule
 
-```text
-portable kernel policy
-        |
-capability-authorized semantic components
-  entry | mapping | ordering | interrupt | time | CPU | I/O | fault
-        |
-        | validated state + typed feature/context witness
-        v
-private architecture-primitives capsule
-        |
-        v
-compiler + ISA + platform mechanism
+```mermaid
+flowchart TB
+  policy["Portable kernel policy"]
+  semantics["Capability-authorized semantic components<br/>entry · mapping · ordering · interrupt · time · CPU · I/O · fault"]
+  capsule["Private architecture-primitives capsule"]
+  mechanism["Compiler + ISA + platform mechanism"]
+
+  policy -->|"request authorized operation"| semantics
+  semantics -->|"Validated state + typed feature/context witness"| capsule
+  capsule -->|"invoke exact leaf mechanism"| mechanism
 ```
 
 Only semantic components import the capsule. A scheduler can ask the context
@@ -155,15 +153,27 @@ runtime invokes kernel services; it has no linkage to this package.
 The source tree should enforce the boundary structurally. A representative
 layout is:
 
-```text
-arch/
-  contract/                 machine-readable primitive schema
-  generated/                offsets, constants, contract inventory
-  x86_64/raw/               private package
-  aarch64/raw/              private package
-  riscv64/raw/              private package
-  model/raw/                deterministic test backend
-kernel/arch_semantics/      only allowed importers
+```mermaid
+flowchart TB
+  arch["arch/"]
+  contract["contract/<br/>machine-readable primitive schema"]
+  generated["generated/<br/>offsets, constants, contract inventory"]
+  x86["x86_64/raw/<br/>private package"]
+  arm["aarch64/raw/<br/>private package"]
+  riscv["riscv64/raw/<br/>private package"]
+  model["model/raw/<br/>deterministic test backend"]
+  semantics["kernel/arch_semantics/<br/>only allowed importers"]
+
+  arch -->|"contains"| contract
+  arch -->|"contains"| generated
+  arch -->|"contains"| x86
+  arch -->|"contains"| arm
+  arch -->|"contains"| riscv
+  arch -->|"contains"| model
+  x86 -.->|"imported only by"| semantics
+  arm -.->|"imported only by"| semantics
+  riscv -.->|"imported only by"| semantics
+  model -.->|"imported only by"| semantics
 ```
 
 In a language with module privacy and an `unsafe` construct, the entire raw
@@ -272,14 +282,16 @@ arrive. Semantic components cannot use the guard as a global lock.
 
 State is:
 
-```text
-Unmasked(depth=0)
-  -> Masked(guard=g1, depth=1)
-  -> Masked(guard=g2, depth=2)
-  -> restore(g2)
-  -> Masked(guard=g1, depth=1)
-  -> restore(g1)
-  -> Unmasked(depth=0)
+```mermaid
+flowchart LR
+  unmasked["Unmasked<br/>(depth 0)"]
+  maskedOne["Masked<br/>(guard g1, depth 1)"]
+  maskedTwo["Masked<br/>(guard g2, depth 2)"]
+
+  unmasked -->|"save and mask: g1"| maskedOne
+  maskedOne -->|"save and mask: g2"| maskedTwo
+  maskedTwo -->|"restore g2"| maskedOne
+  maskedOne -->|"restore g1"| unmasked
 ```
 
 Production builds fail closed on a token/order mismatch. Fatal-entry code logs
@@ -410,23 +422,31 @@ caller dependence can be detected.
 
 Optional primitives have a feature lifecycle:
 
-```text
-Unavailable
-  -> Discovered(raw_fact)
-  -> PolicyAccepted
-  -> Enabled
-  -> SelfTested
-  -> WitnessPublished
-  -> Disabled or CpuOffline
+```mermaid
+flowchart LR
+  unavailable["Unavailable"] -->|"discover raw fact"| discovered["Discovered<br/>(raw fact)"]
+  discovered -->|"accept by policy"| accepted["PolicyAccepted"]
+  accepted -->|"enable on CPU"| enabled["Enabled"]
+  enabled -->|"run self-test"| tested["SelfTested"]
+  tested -->|"mint witness"| published["WitnessPublished"]
+  published -->|"disable feature"| disabled["Disabled"]
+  published -->|"offline CPU"| offline["CpuOffline"]
 ```
 
 Invocation has a deliberately short lifecycle:
 
-```text
-ContractPreconditionsEstablished
-  -> RawInstructionSequence
-  -> LocalPostconditionEstablished
-  -> ReturnToSemanticComponent
+```mermaid
+flowchart LR
+  preconditions["ContractPreconditionsEstablished"]
+  sequence["RawInstructionSequence"]
+  postcondition["LocalPostconditionEstablished"]
+  returned["ReturnToSemanticComponent"]
+  faultPath["Component 9 architecture-fault path<br/>(contract ID, safe inputs)"]
+
+  preconditions -->|"invoke leaf"| sequence
+  sequence -->|"complete locally"| postcondition
+  postcondition -->|"return"| returned
+  sequence -.->|"unexpected fault"| faultPath
 ```
 
 The semantic component then performs remote requests, acknowledgement,

@@ -294,16 +294,16 @@ short-circuits either dependency ledger.
 
 For any nonlocal or potentially unbounded operation:
 
-```text
-Prepared
-  -> submit
-     -> Rejected(resource returned, no mutation)
-     -> Accepted(OperationToken)
-          -> Succeeded(Completion, resulting resource/state)
-          -> Cancelled(Completion, drained resource/state)
-          -> Incomplete(acknowledged set, missing set, quarantine)
-          -> Failed(typed post-state)
-          -> Fatal(crash record)
+```mermaid
+flowchart TD
+  prepared["Prepared"] -->|"invoke operation"| submit["Submit"]
+  submit -->|"admission rejected"| rejected["Rejected<br/>(resource returned, no mutation)"]
+  submit -->|"admitted"| accepted["Accepted<br/>(OperationToken)"]
+  accepted -->|"completion proved"| succeeded["Succeeded<br/>(completion, resulting resource/state)"]
+  accepted -->|"cancellation drains"| cancelled["Cancelled<br/>(completion, drained resource/state)"]
+  accepted -->|"completion unproved"| incomplete["Incomplete<br/>(acknowledged set, missing set, quarantine)"]
+  accepted -->|"typed failure"| failed["Failed<br/>(typed post-state)"]
+  accepted -->|"fatal fault"| fatal["Fatal<br/>(crash record)"]
 ```
 
 Once accepted, exactly one terminal result is published. Timeout is not proof

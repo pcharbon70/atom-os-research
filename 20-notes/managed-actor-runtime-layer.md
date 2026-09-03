@@ -118,17 +118,18 @@ compatibility contract, not fastest on one microbenchmark.
 
 ## Placement in the operating-system architecture
 
-```text
-applications
-    │  domain protocols and state machines
-OTP-like system services
-    │  supervision, naming, networking, storage, update policy
-managed actor runtime  ← this report
-    │  actors, BEAM execution, heaps/GC, signals, mailboxes, safe points
-minimal privileged kernel
-    │  capabilities, domains, bounded IPC, budgets, faults, teardown
-hardware and architecture support
-       entry/exit, translation, interrupts, time, CPU, DMA, diagnostics
+```mermaid
+flowchart TB
+  applications["Applications"]
+  services["OTP-like system services"]
+  runtime["Managed actor runtime<br/>(this report)"]
+  kernel["Minimal privileged kernel"]
+  hardware["Hardware and architecture support<br/>Entry/exit, translation, interrupts, time, CPU, DMA, diagnostics"]
+
+  applications -->|"Domain protocols and state machines"| services
+  services -->|"Supervision, naming, networking, storage, update policy"| runtime
+  runtime -->|"Actors, BEAM execution, heaps/GC, signals, mailboxes, safe points"| kernel
+  kernel -->|"Capabilities, domains, bounded IPC, budgets, faults, teardown"| hardware
 ```
 
 The [kernel hardware and architecture support
@@ -327,10 +328,14 @@ destination. It does not invent a total order among independent senders.
 
 A scalable physical path is:
 
-```text
-sender → sender/stripe FIFO → receiver signal ingress
-       → bounded signal handling → ordered message queue
-       → selective receive cursor → matching clause
+```mermaid
+flowchart LR
+  sender["Sender"] -->|"enqueue signal"| fifo["Sender/stripe FIFO"]
+  fifo -->|"preserve sender order"| ingress["Receiver signal ingress"]
+  ingress -->|"drain bounded work"| handling["Bounded signal handling"]
+  handling -->|"append receivable message"| queue["Ordered message queue"]
+  queue -->|"scan from saved position"| cursor["Selective-receive cursor"]
+  cursor -->|"select first match"| clause["Matching clause"]
 ```
 
 Striped ingress is allowed because signals from one sender use the same ordered
@@ -490,10 +495,14 @@ native effects performed during initialization.
 The two current/old module versions visible to Erlang code are a runtime
 compatibility rule, not the same thing as the kernel’s code-publication epochs
 or current ERTS’s internal code-index count. State transformation remains an
-OTP/application operation. Code retirement waits for stacks, continuations,
-fun references, literals, NIF resources, and trace state to release the old
-generation. Forced purge is an explicit process-termination policy with
-evidence.
+OTP/application operation. In the OTP 29 compatibility profile, logical purge
+eligibility checks direct executable references such as active frames and
+continuations; it does not wait for local fun terms or code literals. A local
+fun into purged code fails if later invoked, and literals are copied out during
+later runtime work. Atom OS may conservatively delay physical page reclamation
+for native resources, trace metadata, epoch readers, or deferred literal-copy
+work, but that retention is not exposed as a stronger language-level purge
+blocker. Forced purge is an explicit process-termination policy with evidence.
 
 ### [8. Native work, ports, and drivers](managed-actor-runtime-components/native-work-ports-and-drivers.md)
 
@@ -501,6 +510,11 @@ Official NIF documentation is direct: a native function executes as an unsafe
 extension of the VM; a crash or memory error can crash or corrupt the whole VM,
 and even dirty work can delay operations on the calling process. Dirty
 schedulers protect normal scheduler availability, not memory safety.
+Classification is per NIF name/arity entry, not per module, and
+`enif_schedule_nif` can schedule later segments as regular, dirty CPU, or dirty
+I/O work. A compatibility manifest therefore constrains every callable entry
+and permitted class transition rather than attaching one immutable class to a
+library.
 
 The default Atom OS design is therefore:
 
@@ -536,6 +550,16 @@ The default gateway contract is:
   semantics; and
 - explicit evidence for refusal, disconnect, protocol violation, stale epoch,
   and lost authority.
+
+That evidence belongs to the Atom OS gateway protocol and to explicit
+credit-aware request extensions. It does not change the OTP send API:
+`Dest ! Msg` and `erlang:send/2` return `Msg`, while `erlang:send/3` returns
+only `ok`, `nosuspend`, or `noconnect` and provides no delivery completion.
+Likewise, a transport session epoch bounds channel ordering and credit state;
+it is not part of the identity of a standard remote PID or reference. Those
+terms carry node-creation and identifier fields and can be used after a
+same-node-incarnation reconnect, although links and monitors from the failed
+connection have already broken and are not silently restored.
 
 Standard Erlang distribution may be provided as a compatibility adapter for a
 trusted deployment. It must not define the base security model. The current
@@ -615,8 +639,11 @@ runtime-global exhaustion.
 An ETS-like table is a distinct runtime object with an owner, optional heir,
 access mode, generation-stamped handle, and resource account. Terms are copied
 into and out of the table at the actor boundary in the compatible baseline.
-Owner exit destroys the table or performs one explicit heir transfer; garbage
-collection of an actor-local handle is not table deletion.
+Owner exit destroys a table with no live local heir. A two-tuple heir inherits
+silently; a three-tuple heir carrying `HeirData` also receives the documented
+`ETS-TRANSFER` message. Successful `give_away/3` always sends its transfer
+message and leaves the configured heir unchanged. Garbage collection of an
+actor-local handle is not table deletion.
 
 Every operation publishes the atomicity and isolation that its documented OTP
 profile promises. This includes single-key operations and documented
@@ -849,8 +876,18 @@ system.
 - runtime termination during kernel call, code publication, and cross-domain
   transfer;
 - NIF/service crash, infinite loop, malformed reply, and stale completion;
-- old-code process suspension, forced purge, trace, and collector interaction;
+- per-function NIF class and `enif_schedule_nif` class-transition behavior;
+- old-code direct-frame suspension and forced purge, plus local-fun invocation
+  and deferred literal copying after purge;
 - distribution partition before accept, after accept, and before reply;
+- same-node-creation transport reconnect with reusable remote PID/reference
+  terms but broken, non-restored links and monitors;
+- arbitrary structured exit reasons and every documented `normal`, `kill`, and
+  `killed` transformation;
+- PID-target versus registered-name timer cleanup across creator and
+  destination exit;
+- silent two-tuple ETS heir transfer, notifying three-tuple heir transfer, and
+  `give_away/3` with unchanged heir configuration;
 - atom, binary, table, timer, link, trace, and code-generation exhaustion; and
 - complete kernel reclamation and stale-incarnation rejection after restart.
 

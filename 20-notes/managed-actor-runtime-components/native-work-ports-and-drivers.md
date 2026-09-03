@@ -66,7 +66,7 @@ A satisfactory baseline must guarantee:
 3. Every request binds caller, runtime, service, endpoint, and operation
    generations and reaches exactly one terminal disposition.
 4. Timeout or service loss after acceptance is `Indeterminate` unless stronger
-   evidence proves `NotExecuted` or a completed effect.
+   evidence proves `CancelledBeforeEffect`, `NotExecuted`, or `Completed`.
 5. Buffers, DMA mappings, endpoints, and service leases remain owned until
    terminal completion and quiescence establish safe release.
 6. Replies from an old service or actor incarnation cannot reach a successor.
@@ -125,9 +125,34 @@ bits cannot create additional kernel authority.
 
 Opening a service is a transaction:
 
-```text
-Requested -> PolicyChecked -> ServiceResolved -> CapacityReserved
-          -> SessionEstablished -> HandlePublished
+```mermaid
+flowchart LR
+  nw_open_requested["Requested"]
+  nw_open_policy["Policy checked"]
+  nw_open_service["Service resolved"]
+  nw_open_capacity["Capacity reserved"]
+  nw_open_session["Session established"]
+  nw_open_published["Handle published"]
+  nw_open_no_handle["No actor-visible handle"]
+  nw_open_policy_choice{"Handle policy after service restart"}
+  nw_open_invalidated["Handle invalidated"]
+  nw_open_rebound["Handle explicitly rebound to the new incarnation"]
+  nw_open_stale_rejected["Stale handle rejected"]
+
+  nw_open_requested -->|"check policy"| nw_open_policy
+  nw_open_policy -->|"authorized"| nw_open_service
+  nw_open_policy -->|"denied before publication"| nw_open_no_handle
+  nw_open_policy -->|"service resolution fails"| nw_open_no_handle
+  nw_open_service -->|"capacity reservation succeeds"| nw_open_capacity
+  nw_open_service -->|"capacity reservation fails"| nw_open_no_handle
+  nw_open_capacity -->|"establish session"| nw_open_session
+  nw_open_capacity -->|"session setup fails"| nw_open_no_handle
+  nw_open_session -->|"publish handle"| nw_open_published
+  nw_open_session -->|"publication fails"| nw_open_no_handle
+  nw_open_published -->|"service restarts"| nw_open_policy_choice
+  nw_open_policy_choice -->|"invalidate by policy"| nw_open_invalidated
+  nw_open_policy_choice -->|"explicitly rebind by policy"| nw_open_rebound
+  nw_open_invalidated -->|"stale handle use never retargets silently"| nw_open_stale_rejected
 ```
 
 Failure before publication leaves no actor-visible handle. Service restart
@@ -137,17 +162,62 @@ silently targets a new incarnation.
 ## Request protocol
 
 ```text
-Proposed
-  -> Reserved
-  -> Encoded
-  -> Submitted
-  -> Accepted
-  -> Completed(result)
-   | NotExecuted(reason)
-   | Indeterminate(reason)
-  -> ActorSignalPublishedOrActorGone
-  -> ResourcesReleased
+NativeRequestOutcome =
+  Completed(result)
+| CancelledBeforeEffect(reason)
+| NotExecuted(reason)
+| Indeterminate(reason)
 ```
+
+```mermaid
+flowchart TD
+  nw_request_proposed["Proposed"]
+  nw_request_reserved["Reserved"]
+  nw_request_encoded["Encoded"]
+  nw_request_submitted["Submitted"]
+  nw_request_accepted["Accepted"]
+  nw_request_outcome{"Exactly one outcome supported by the available evidence"}
+  nw_request_completed["Completed(result)"]
+  nw_request_cancelled["CancelledBeforeEffect(reason)"]
+  nw_request_not_executed["NotExecuted(reason)"]
+  nw_request_indeterminate["Indeterminate(reason)"]
+  nw_request_terminal["Single terminal slot sealed"]
+  nw_request_actor_signal["Actor signal published"]
+  nw_request_actor_gone["Caller actor already gone"]
+  nw_request_released["Resources released"]
+
+  nw_request_proposed -->|"reserve resources and credit"| nw_request_reserved
+  nw_request_reserved -->|"bounded encoding succeeds"| nw_request_encoded
+  nw_request_encoded -->|"endpoint takes the transport record"| nw_request_submitted
+  nw_request_submitted -->|"service accepts responsibility"| nw_request_accepted
+
+  nw_request_proposed -.->|"terminal evidence is available at this phase"| nw_request_outcome
+  nw_request_reserved -.->|"terminal evidence is available at this phase"| nw_request_outcome
+  nw_request_encoded -.->|"terminal evidence is available at this phase"| nw_request_outcome
+  nw_request_submitted -.->|"terminal evidence is available at this phase"| nw_request_outcome
+  nw_request_accepted -.->|"terminal evidence is available at this phase"| nw_request_outcome
+
+  nw_request_outcome -->|"result or effect record proves completion"| nw_request_completed
+  nw_request_outcome -->|"cancellation provably won before any effect"| nw_request_cancelled
+  nw_request_outcome -->|"other evidence proves no effect occurred"| nw_request_not_executed
+  nw_request_outcome -->|"effect state remains unresolved"| nw_request_indeterminate
+  nw_request_completed -->|"seal exactly once"| nw_request_terminal
+  nw_request_cancelled -->|"seal exactly once"| nw_request_terminal
+  nw_request_not_executed -->|"seal exactly once"| nw_request_terminal
+  nw_request_indeterminate -->|"seal exactly once"| nw_request_terminal
+  nw_request_terminal -->|"caller actor remains reachable"| nw_request_actor_signal
+  nw_request_terminal -->|"caller actor exited"| nw_request_actor_gone
+  nw_request_actor_signal -->|"release when safe"| nw_request_released
+  nw_request_actor_gone -->|"release when safe"| nw_request_released
+```
+
+Progress can branch to a terminal outcome from the phase allowed by its
+evidence; reaching `Accepted` is not a prerequisite for every outcome. The
+variants are disjoint. `CancelledBeforeEffect` means cancellation provably won
+before any effect. `NotExecuted` means other protocol evidence proves that no
+effect occurred. `Completed` carries the protocol's result or effect record,
+while `Indeterminate` preserves unresolved effect state. A cancellation
+request or elapsed deadline alone proves none of these outcomes.
 
 Every record contains:
 
@@ -191,11 +261,12 @@ generic runtime promise.
 
 Cancellation competes with acceptance/completion:
 
-- before submission: release locally and return `NotExecuted`;
-- submitted but provably unaccepted: endpoint/service acknowledgement may
-  establish `NotExecuted`;
+- before submission: cancel locally and return `CancelledBeforeEffect`;
+- submitted but provably unaccepted: an endpoint/service cancellation
+  acknowledgement may establish `CancelledBeforeEffect`;
 - after acceptance: request cancellation, but retain buffers and report
-  `Completed`, `CancelledBeforeEffect`, or `Indeterminate` based on evidence;
+  `Completed`, `CancelledBeforeEffect`, `NotExecuted`, or `Indeterminate`
+  according to the evidence and which event won;
 - timeout: stop actor waiting, optionally deactivate reply alias, but do not
   free native state or claim the operation never ran.
 
@@ -207,15 +278,24 @@ releases the operation through its terminal slot.
 Hardware services consume the [protected I/O and DMA
 component](../kernel-hardware-and-architecture-components/protected-io-and-dma-ownership.md):
 
-```text
-driver service
-├── scheduling/memory account
-├── endpoint to runtime/service clients
-├── selected MMIO/configuration authority
-├── interrupt binding/sink
-├── IOMMU requester set and DMA mapping authority
-├── exclusive buffer/queue leases
-└── reset/quiescence authority appropriate to device class
+```mermaid
+flowchart TD
+  nw_driver_service["Driver service"]
+  nw_driver_account["Scheduling and memory account"]
+  nw_driver_endpoint["Endpoint to runtime and service clients"]
+  nw_driver_mmio["Selected MMIO and configuration authority"]
+  nw_driver_interrupt["Interrupt binding or sink"]
+  nw_driver_iommu["IOMMU requester set and DMA mapping authority"]
+  nw_driver_leases["Exclusive buffer and queue leases"]
+  nw_driver_reset["Reset and quiescence authority appropriate to the device class"]
+
+  nw_driver_service -->|"is charged to"| nw_driver_account
+  nw_driver_service -->|"communicates through"| nw_driver_endpoint
+  nw_driver_service -->|"holds only"| nw_driver_mmio
+  nw_driver_service -->|"receives events through"| nw_driver_interrupt
+  nw_driver_service -->|"maps DMA through"| nw_driver_iommu
+  nw_driver_service -->|"owns exclusively"| nw_driver_leases
+  nw_driver_service -->|"may exercise"| nw_driver_reset
 ```
 
 Device reset and service restart are separate. A new driver process cannot
@@ -257,9 +337,13 @@ The manifest for an allowed in-process module should declare:
 NativeModuleProfile {
   module_hash,
   nif_api_version,
-  exported_functions,
-  regular_or_dirty_class,
-  maximum_uninterrupted_work,
+  nif_functions[]: {
+    name,
+    arity,
+    initial_execution_class,       // ErlNifFunc.flags
+    maximum_uninterrupted_work,
+    allowed_reschedule_classes[],  // enif_schedule_nif flags
+  },
   allocation_and_gc_behavior,
   thread_creation_policy,
   resource_types_and_upgrade_callbacks,
@@ -269,11 +353,24 @@ NativeModuleProfile {
 }
 ```
 
+OTP does not assign one regular-or-dirty class to a whole NIF module. Each
+`ErlNifFunc` entry identifies a function by name and arity and declares its
+initial class in `flags`: `0` for regular,
+`ERL_NIF_DIRTY_JOB_CPU_BOUND`, or `ERL_NIF_DIRTY_JOB_IO_BOUND`. A NIF need not
+be exported from its Erlang module. Moreover, a call can return
+`enif_schedule_nif(...)` with the same choice of flags to schedule a later
+segment as regular, dirty CPU, or dirty I/O work. A staged job can therefore
+yield between segments and, when its work changes character, reschedule onto
+the appropriate class. The profile must authorize and meter both the initial
+`name`/`arity` entry and every scheduled class transition rather than treating
+the module as statically regular or dirty.
+
 The runtime gives the NIF a minimal generated API and no raw kernel
-capabilities. Regular NIFs must yield within the declared bound or use
+capabilities. Regular segments must yield within the declared bound or use
 resumable calls. Dirty CPU and I/O pools have separate finite kernel budgets so
 misclassified CPU work cannot starve every normal runtime/domain. Watchdogs
-record elapsed time and blocked process operations.
+record per-segment and whole-invocation elapsed time and blocked process
+operations.
 
 These controls improve availability and auditability. They do not contain a
 wild pointer, use-after-free, corrupt root, or arbitrary runtime call. A
@@ -287,7 +384,7 @@ Native failures remain typed:
 ```text
 NativeServiceLost(service_incarnation, cause, requests[])
 NativeProtocolViolation(service_incarnation, evidence)
-NativeRequestTerminal(request_id, Completed | NotExecuted | Indeterminate)
+NativeRequestTerminal(request_id, outcome: NativeRequestOutcome)
 DriverQuarantined(device_generation, cause)
 InProcessNativeFault(module_hash, fault_ref)  // runtime-domain fatal
 ```
@@ -369,10 +466,15 @@ durable transaction semantics.
 
 ## Verification and measurements
 
-- Run infinite/slow regular NIFs, dirty CPU/I/O misclassification, and dirty NIF
-  actor exit; measure normal scheduler tails and delayed reclamation.
+- Run infinite/slow regular NIFs, per-`name`/`arity` dirty CPU/I/O
+  misclassification, `enif_schedule_nif` continuations that stay in or change
+  class, and dirty-NIF actor exit; measure normal scheduler tails and delayed
+  reclamation.
 - Crash service before submit, after submit, after accept, after effect, and
-  before reply; verify `NotExecuted` versus `Indeterminate` truthfully.
+  before reply; verify `Completed`, `NotExecuted`, and `Indeterminate`
+  truthfully. Race cancellation at each phase and require
+  `CancelledBeforeEffect` only when evidence proves cancellation won before
+  any effect.
 - Inject malformed and stale replies, duplicated completions, endpoint overflow,
   and capability/handle confusion.
 - Attack DMA outside buffers, interrupt storms, failed reset, and post-crash DMA;

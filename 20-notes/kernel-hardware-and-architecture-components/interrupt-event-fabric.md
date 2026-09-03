@@ -112,26 +112,34 @@ project's explicit generations, budgets, and failure routes.
 
 ## Recommended structure
 
-```text
-boot controller descriptors + feature profile
-                 |
-       controller-instance backends
-                 |
-        typed InterruptSource
-                 |
-        selected FlowPlan  <----- protected-I/O device profile
-                 |
-       InterruptRoute(target CPU/context)
-                 |
-       InterruptBinding(generation)
-          /                    \
- hard-path event record      management/fault route
-          |                    |
- bounded EventSink       storm/quarantine supervisor
-          |
- unprivileged driver service
-          |
- device registers, queues, DMA; then ordinary runtime/OTP messages
+```mermaid
+flowchart TB
+  irq_boot_profile["Boot controller descriptors + feature profile"]
+  irq_controller_backends["Controller-instance backends"]
+  irq_source["Typed InterruptSource"]
+  irq_flow_plan["Selected FlowPlan"]
+  irq_device_profile["Protected-I/O device profile"]
+  irq_route["InterruptRoute(target CPU / context)"]
+  irq_binding["InterruptBinding(generation)"]
+  irq_hard_record["Hard-path event record"]
+  irq_management_route["Management / fault route"]
+  irq_event_sink["Bounded EventSink"]
+  irq_supervisor["Storm / quarantine supervisor"]
+  irq_driver["Unprivileged driver service"]
+  irq_device_work["Device registers, queues, DMA;<br/>then ordinary runtime / OTP messages"]
+
+  irq_boot_profile --> irq_controller_backends
+  irq_controller_backends --> irq_source
+  irq_source --> irq_flow_plan
+  irq_device_profile --> irq_flow_plan
+  irq_flow_plan --> irq_route
+  irq_route --> irq_binding
+  irq_binding --> irq_hard_record
+  irq_binding --> irq_management_route
+  irq_hard_record --> irq_event_sink
+  irq_management_route --> irq_supervisor
+  irq_event_sink --> irq_driver
+  irq_driver --> irq_device_work
 ```
 
 The flow plan is data chosen from a closed set after validating controller and
@@ -262,25 +270,49 @@ the interrupt record.
 
 ## Source lifecycle
 
-```text
-DiscoveredMasked
-  -> ConfiguredMasked(source_generation)
-  -> BoundMasked(binding_generation)
-  -> RoutePublished(route_generation)
-  -> Armed
-  -> Claimed(flow_token)
-  -> NoticePublished(observed_sequence)
-  -> AwaitingDriverCompletion      [only for deferred-completion flows]
-  -> ControllerCompleted
-  -> Armed
+```mermaid
+flowchart TB
+  irq_discovered_masked["DiscoveredMasked"]
+  irq_configured_masked["ConfiguredMasked(source_generation)"]
+  irq_bound_masked["BoundMasked(binding_generation)"]
+  irq_route_published["RoutePublished(route_generation)"]
+  irq_armed["Armed"]
+  irq_claimed["Claimed(flow_token)"]
+  irq_notice_published["NoticePublished(observed_sequence)"]
+  irq_awaiting_driver["AwaitingDriverCompletion"]
+  irq_controller_completed["ControllerCompleted"]
 
-Any live binding state -> ClosingBinding(new binding generation)
-ClosingBinding -> DrainingBinding(old route and hard-path references)
-DrainingBinding -> BoundMasked | DiscoveredMasked
-DiscoveredMasked -> DestroyingSource(new source generation) -> Dead
+  irq_discovered_masked --> irq_configured_masked
+  irq_configured_masked --> irq_bound_masked
+  irq_bound_masked --> irq_route_published
+  irq_route_published --> irq_armed
+  irq_armed --> irq_claimed
+  irq_claimed --> irq_notice_published
+  irq_notice_published -->|"Deferred-completion flow"| irq_awaiting_driver
+  irq_notice_published -->|"Immediate-completion flow"| irq_controller_completed
+  irq_awaiting_driver --> irq_controller_completed
+  irq_controller_completed --> irq_armed
 
-Any live state -> StormMasked -> Quarantined
-Quarantined -> BoundMasked only through SourceRecover
+  irq_any_live_binding["Any live binding state"]
+  irq_closing_binding["ClosingBinding(new binding generation)"]
+  irq_draining_binding["DrainingBinding(old route and hard-path references)"]
+  irq_destroying_source["DestroyingSource(new source generation)"]
+  irq_dead["Dead"]
+
+  irq_any_live_binding --> irq_closing_binding
+  irq_closing_binding --> irq_draining_binding
+  irq_draining_binding --> irq_bound_masked
+  irq_draining_binding --> irq_discovered_masked
+  irq_discovered_masked --> irq_destroying_source
+  irq_destroying_source --> irq_dead
+
+  irq_any_live["Any live state"]
+  irq_storm_masked["StormMasked"]
+  irq_quarantined["Quarantined"]
+
+  irq_any_live --> irq_storm_masked
+  irq_storm_masked --> irq_quarantined
+  irq_quarantined -->|"Only through SourceRecover"| irq_bound_masked
 ```
 
 Controller hardware may contain its own pending/active substates. The common
@@ -494,13 +526,20 @@ Polling is a driver policy, not a replacement for the fabric. For a suitable
 queue, a manager asks the minimal kernel to create a funded, capability-backed
 `PollingLease`. The event fabric performs only the interrupt-side transition:
 
-```text
-ArmedInterrupt
-  -> MaskAndDrain(old binding generation)
-  -> InterruptPollingTransition(masked binding generation)
-  -> [kernel-owned PollingLease(driver domain, queue, budget, deadline)]
-  -> ReturnAndReconcile
-  -> ArmedInterrupt(new binding generation)
+```mermaid
+flowchart LR
+  polling_armed_old["ArmedInterrupt"]
+  polling_mask_drain["MaskAndDrain(old binding generation)"]
+  polling_transition["InterruptPollingTransition(masked binding generation)"]
+  polling_lease["Kernel-owned PollingLease<br/>(driver domain, queue, budget, deadline)"]
+  polling_reconcile["ReturnAndReconcile"]
+  polling_armed_new["ArmedInterrupt(new binding generation)"]
+
+  polling_armed_old --> polling_mask_drain
+  polling_mask_drain --> polling_transition
+  polling_transition --> polling_lease
+  polling_lease --> polling_reconcile
+  polling_reconcile --> polling_armed_new
 ```
 
 The polling thread and lease are owned by the minimal kernel/driver domain and

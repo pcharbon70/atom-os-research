@@ -298,16 +298,22 @@ through repeated restart attempts.
 
 ### Endpoint lifecycle
 
-```text
-Denied
-  -> QuiescentBound(binding_generation)
-  -> Active
-  -> Draining
-  -> Resetting
-  -> Denied(next_generation)
+```mermaid
+flowchart LR
+  denied["Denied<br/>(current generation)"] -->|"bind contained endpoint"| bound["QuiescentBound<br/>(binding generation)"]
+  bound -->|"enable submissions"| active["Active"]
+  active -->|"begin revocation"| draining["Draining"]
+  draining -->|"authorize coordinated reset"| resetting["Resetting"]
+  resetting -->|"complete ledger and advance generation"| denied
 
-Draining/Resetting -> Quarantined(reason, pinned_resources)
-Any state          -> RemovedUnknown(reason, pinned_resources)
+  draining -.->|"revocation fails"| quarantined["Quarantined<br/>(reason, pinned resources)"]
+  resetting -.->|"reset fails"| quarantined
+  denied -.->|"removal detected"| removed["RemovedUnknown<br/>(reason, pinned resources)"]
+  bound -.->|"removal detected"| removed
+  active -.->|"removal detected"| removed
+  draining -.->|"removal detected"| removed
+  resetting -.->|"removal detected"| removed
+  quarantined -.->|"removal detected"| removed
 ```
 
 `Denied` means all known requester IDs are blocked or attached to a domain with
@@ -337,27 +343,33 @@ The profile is part of the type and diagnostic record. Code may not infer
 
 For an exclusive device operation:
 
-```text
-CpuOwned
-  -> MappedCpuOwned
-  -> CpuClosing
-  -> CpuAccessClosed
-  -> Offered
-  -> DeviceOwned
-  -> Returned
-  -> CpuReacquiring
-  -> CpuOwned
+```mermaid
+flowchart LR
+  cpuOwned["CpuOwned"] -->|"install DMA mapping"| mapped["MappedCpuOwned"]
+  mapped -->|"accept prepare for device"| closing["CpuClosing"]
+  closing -->|"drain CPU aliases"| cpuClosed["CpuAccessClosed"]
+  cpuClosed -->|"accept queue publication"| offered["Offered"]
+  offered -->|"publish descriptor and doorbell"| deviceOwned["DeviceOwned"]
+  deviceOwned -->|"accept protected completion"| returned["Returned"]
+  returned -->|"accept prepare for CPU"| reacquiring["CpuReacquiring"]
+  reacquiring -->|"prove device exclusion"| cpuOwned
 
-MappedCpuOwned/CpuClosing/CpuAccessClosed/Offered/
-DeviceOwned/Returned/CpuReacquiring
-  -> Revoking
-  -> TranslationPending
-  -> Quiescent
-  -> Unmapped
-  -> ScrubbedOrReassigned
+  mapped -.->|"begin revocation"| revoking["Revoking"]
+  closing -.->|"begin revocation"| revoking
+  cpuClosed -.->|"begin revocation"| revoking
+  offered -.->|"begin revocation"| revoking
+  deviceOwned -.->|"begin revocation"| revoking
+  returned -.->|"begin revocation"| revoking
+  reacquiring -.->|"begin revocation"| revoking
+  revoking -->|"remove device translation"| translationPending["TranslationPending"]
+  translationPending -->|"complete invalidation"| quiescent["Quiescent"]
+  quiescent -->|"release mapping"| unmapped["Unmapped"]
+  unmapped -->|"scrub or reassign frames"| scrubbed["ScrubbedOrReassigned"]
 
-CpuClosing/CpuReacquiring/Revoking/TranslationPending
-  -> QuarantinedPinned
+  closing -.->|"CPU close unproved"| quarantined["QuarantinedPinned"]
+  reacquiring -.->|"device exclusion unproved"| quarantined
+  revoking -.->|"revocation unproved"| quarantined
+  translationPending -.->|"translation completion unproved"| quarantined
 ```
 
 `prepare_for_device` owns `CpuClosing`; its success record is the only path to
@@ -403,8 +415,11 @@ QueueEntryToken {
 At most one party owns an exclusive entry. Transfer is monotonic for that
 operation generation:
 
-```text
-DriverAvailable -> DeviceOffered -> DeviceHeld -> DriverReturned
+```mermaid
+flowchart LR
+  available["DriverAvailable"] -->|"publish descriptor ownership"| offered["DeviceOffered"]
+  offered -->|"device accepts offer"| held["DeviceHeld"]
+  held -->|"accept protected completion"| returned["DriverReturned"]
 ```
 
 The producer writes descriptor contents, performs the backend's DMA publication

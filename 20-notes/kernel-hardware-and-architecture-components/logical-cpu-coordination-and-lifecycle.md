@@ -176,26 +176,54 @@ with them.
 
 ### State machine
 
-```text
-Absent
-  -> PresentOffline
-  -> Preparing(txn)
-  -> Prepared(incarnation)
-  -> StartRequested(txn)
-  -> Joining(txn)
-  -> JoinReady(txn)
-  -> Online
-  -> Draining
-  -> StopCommitted
-  -> FirmwareStopping
-  -> PresentOffline(next_incarnation)
+```mermaid
+flowchart TB
+  cpu_absent["Absent"]
+  cpu_present_offline["PresentOffline"]
+  cpu_preparing["Preparing(txn)"]
+  cpu_prepared["Prepared(incarnation)"]
+  cpu_start_requested["StartRequested(txn)"]
+  cpu_joining["Joining(txn)"]
+  cpu_join_ready["JoinReady(txn)"]
+  cpu_online["Online"]
+  cpu_draining["Draining"]
+  cpu_stop_committed["StopCommitted"]
+  cpu_firmware_stopping["FirmwareStopping"]
+  cpu_present_offline_next["PresentOffline(next_incarnation)"]
 
-Preparing/Prepared/StartRequested/Joining/JoinReady -> StartFailed
-Online/Draining/StopCommitted/FirmwareStopping -> Failed
-StartFailed -> PresentOffline only after confirmed cancellation/reset
-StartFailed/Failed -> Quarantined otherwise
-Any nonterminal state + Indeterminate ledger    -> Quarantined
-Quarantined                               -> PresentOffline only after reset/isolation proof
+  cpu_absent --> cpu_present_offline
+  cpu_present_offline --> cpu_preparing
+  cpu_preparing --> cpu_prepared
+  cpu_prepared --> cpu_start_requested
+  cpu_start_requested --> cpu_joining
+  cpu_joining --> cpu_join_ready
+  cpu_join_ready --> cpu_online
+  cpu_online --> cpu_draining
+  cpu_draining -->|"Rollbackable failure before commit"| cpu_online
+  cpu_draining --> cpu_stop_committed
+  cpu_stop_committed --> cpu_firmware_stopping
+  cpu_firmware_stopping --> cpu_present_offline_next
+
+  cpu_start_failed["StartFailed"]
+  cpu_failed["Failed"]
+  cpu_quarantined["Quarantined"]
+
+  cpu_preparing --> cpu_start_failed
+  cpu_prepared --> cpu_start_failed
+  cpu_start_requested --> cpu_start_failed
+  cpu_joining --> cpu_start_failed
+  cpu_join_ready --> cpu_start_failed
+  cpu_online --> cpu_failed
+  cpu_draining -->|"Non-rollbackable failure"| cpu_failed
+  cpu_stop_committed --> cpu_failed
+  cpu_firmware_stopping --> cpu_failed
+  cpu_start_failed -->|"Confirmed cancellation / reset"| cpu_present_offline
+  cpu_start_failed -->|"Otherwise"| cpu_quarantined
+  cpu_failed -->|"Otherwise"| cpu_quarantined
+
+  cpu_any_nonterminal["Any nonterminal state"]
+  cpu_any_nonterminal -->|"Indeterminate ledger"| cpu_quarantined
+  cpu_quarantined -->|"Only after reset / isolation proof"| cpu_present_offline
 ```
 
 `StartRequested` means a backend accepted or began the request. `Joining`
