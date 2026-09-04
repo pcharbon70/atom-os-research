@@ -51,6 +51,13 @@ holder outside its own failure boundary.
   dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md) —
   research scope, current documentation baseline, primary-source selection,
   synthesis method, and limitations.
+- [OTP-like system services component index](../20-notes/otp-like-system-services-components/README.md) —
+  the complete local inventory of thirteen detailed architecture and
+  implementation reports.
+- [2026-09-04 OTP-like system services component deep
+  dive](../50-journal/2026-09-04-otp-like-system-services-components-deep-dive.md) —
+  the expanded source manifest, shared research method, cross-component
+  conclusions, evidence gaps, and falsifiers.
 - [BEAM, ERTS, and OTP principles for a new operating
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
   — the original decomposition that placed OTP-style policy above the managed
@@ -60,16 +67,16 @@ holder outside its own failure boundary.
 
 ### Lifecycle and local composition
 
-- **0. Service-domain bootstrap and manifest controller** validates immutable
+- **[0. Service-domain bootstrap and manifest controller](../20-notes/otp-like-system-services-components/service-domain-bootstrap-and-manifest-controller.md)** validates immutable
   desired state, reserves resources, prepares services privately, and
   atomically publishes generations.
-- **1. Behaviour engines and management protocol** preserve reusable
+- **[1. Behaviour engines and capability-gated management](../20-notes/otp-like-system-services-components/behaviour-engines-and-capability-gated-management.md)** preserve reusable
   server/state-machine patterns while making management capability-gated and
   bounded.
-- **2. Supervision and recovery policy** adds typed evidence, restart budgets,
+- **[2. Supervision and recovery policy](../20-notes/otp-like-system-services-components/supervision-and-recovery-policy.md)** adds typed evidence, restart budgets,
   backoff, recovery reserve, state recovery, and escalation to OTP's
   hierarchical policy.
-- **3. Application lifecycle and dependency orchestration** turns dependency,
+- **[3. Application lifecycle and dependency orchestration](../20-notes/otp-like-system-services-components/application-lifecycle-and-dependency-orchestration.md)** turns dependency,
   readiness, drain, and stop rules into explicit transactional state machines.
 
 Primary routes:
@@ -81,16 +88,20 @@ Primary routes:
 - [Crash-only software](../30-sources/candea-fox-2003-crash-only-software.md)
 - [Microreboots](../30-sources/candea-et-al-2004-microreboot.md)
 - [Borg](../30-sources/verma-et-al-2015-borg.md)
+- [Anvil](../30-sources/sun-et-al-2024-anvil.md)
+- [TOSCA 2.0](../30-sources/oasis-2025-tosca-2.md)
+- [The Erlang start phase](../30-sources/burcsi-et-al-2010-erlang-start-phase.md)
+- [Exponential backoff and jitter](../30-sources/brooker-2015-exponential-backoff-jitter.md)
 
 ### Names, configuration, identity, and durable outcomes
 
-- **4. Naming, registry, and local discovery** maps stable names to
+- **[4. Naming, registry, and local discovery](../20-notes/otp-like-system-services-components/naming-registry-and-local-discovery.md)** maps stable names to
   incarnation-aware, attenuated handles and separates unique ownership from
   eventual groups.
-- **5. Configuration, workload identity, and secrets** publishes immutable
+- **[5. Configuration, workload identity, and secrets](../20-notes/otp-like-system-services-components/configuration-workload-identity-and-secrets.md)** publishes immutable
   validated snapshots and rotates short-lived identity material through a
   separate least-authority channel.
-- **6. Durable state and outcome recovery** uses a simple WAL/checkpoint
+- **[6. Durable state, transactions, and outcome recovery](../20-notes/otp-like-system-services-components/durable-state-transactions-and-outcome-recovery.md)** uses a simple WAL/checkpoint
   baseline with ordered replay cuts, explicit operation IDs, proved commit
   points, and semantic compensation for selected workflows.
 
@@ -101,16 +112,20 @@ Primary routes:
 - [Sagas](../30-sources/garcia-molina-salem-1987-sagas.md)
 - [Remote procedure calls](../30-sources/birrell-nelson-1984-remote-procedure-calls.md)
 - [SPIFFE Workload API](../30-sources/spiffe-project-2026-workload-api.md)
+- [etcd API guarantees](../30-sources/etcd-project-2026-api-guarantees.md)
+- [xDS protocol](../30-sources/envoy-project-2026-xds-protocol.md)
+- [Vault secrets and leases](../30-sources/hashicorp-2026-vault-secrets-and-leases.md)
+- [FSCQ](../30-sources/chen-et-al-2015-fscq.md)
 
 ### Devices, networking, and distributed authority
 
-- **7. Device-service policy and management** gives isolated drivers
+- **[7. Device-service policy and management](../20-notes/otp-like-system-services-components/device-service-policy-and-management.md)** gives isolated drivers
   generation-bound operations, reset policy, and indeterminate-completion
   ledgers over lower-layer device capabilities.
-- **8. Network endpoint and protocol services** gives capability-scoped local
+- **[8. Network endpoint and protocol services](../20-notes/otp-like-system-services-components/network-endpoint-and-protocol-services.md)** gives capability-scoped local
   endpoints, authenticated peers, bounded flow control, and explicit
   acceptance/outcome semantics.
-- **9. Distributed membership, discovery, and coordination** separates an
+- **[9. Distributed membership, discovery, and authoritative coordination](../20-notes/otp-like-system-services-components/distributed-membership-discovery-and-authoritative-coordination.md)** separates an
   available observational plane from quorum-backed authoritative metadata,
   leases, and sink-enforced fencing.
 
@@ -126,17 +141,21 @@ Primary routes:
 - [Raft](../30-sources/ongaro-ousterhout-2014-raft.md)
 - [PARTISAN](../30-sources/meiklejohn-et-al-2019-partisan.md)
 - [Scaling Reliably](../30-sources/trinder-et-al-2017-scaling-reliably.md)
+- [sDDF design](../30-sources/heiser-et-al-2026-sddf-design.md)
+- [QUIC](../30-sources/iyengar-thomson-2021-quic.md)
+- [Leases](../30-sources/gray-cheriton-1989-leases.md)
+- [Gray failure](../30-sources/huang-et-al-2017-gray-failure.md)
 
 ### Change, overload, and operations
 
-- **10. Release, update, rollback, and state migration** authenticates
+- **[10. Release, update, rollback, and state migration](../20-notes/otp-like-system-services-components/release-update-rollback-and-state-migration.md)** authenticates
   immutable artifacts and records freshness, preparation, canary, quiescence,
   resumable shadow migration, atomic publication, compatibility, commit, and
   rollback boundaries.
-- **11. Admission, overload, and service-resource governance** uses finite
+- **[11. Admission, overload, and service-resource governance](../20-notes/otp-like-system-services-components/admission-overload-and-service-resource-governance.md)** uses finite
   queues, server-derived classes, fairness rules, budgets, backpressure,
   shedding, degradation, retry limits, and protected control reserves.
-- **12. Observability, audit, alarms, and operator control** separates lossy
+- **[12. Observability, audit, alarms, and operator control](../20-notes/otp-like-system-services-components/observability-audit-alarms-and-operator-control.md)** separates lossy
   telemetry, bounded crash evidence, persistent alarm state, and durable
   tamper-evident intent/effect/outcome audit.
 
@@ -151,6 +170,9 @@ Primary routes:
 - [Dapper](../30-sources/sigelman-et-al-2010-dapper.md)
 - [Secure audit logs](../30-sources/schneier-kelsey-1999-secure-audit-logs.md)
 - [DTrace](../30-sources/cantrill-et-al-2004-dtrace.md)
+- [OpenTelemetry specification 1.60](../30-sources/opentelemetry-project-2026-specification-1-60.md)
+- [Omega](../30-sources/schwarzkopf-et-al-2013-omega.md)
+- [End-to-end arguments](../30-sources/saltzer-et-al-1984-end-to-end-arguments.md)
 
 ## Architectural boundaries
 

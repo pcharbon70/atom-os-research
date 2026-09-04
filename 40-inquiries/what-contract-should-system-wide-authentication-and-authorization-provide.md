@@ -100,6 +100,12 @@ unreported universal decryption or administrator key.
 
 ### Formal and executable models
 
+- Use the [sixteen component implementation
+  reports](../20-notes/authentication-and-authorization-components/README.md)
+  as the initial state-machine and message-schema inventory, then check their
+  shared generations, request digests, evidence revisions, permit receipts,
+  issuer envelopes, revocation watermarks, and effect outcomes for gaps or
+  contradictory ownership.
 - Model the authority graph, attenuation order, transfer, generation reuse,
   delegation depth, budgets, revocation traversal, and bootstrap authority.
 - Specify state machines for enrollment, login, session fixation prevention,
@@ -152,6 +158,23 @@ grant, revocation, recovery, audit, and failure contracts.
 The [authentication and authorization map](../10-maps/authentication-and-authorization.md)
 organizes the supporting primary research and standards. The [2026-09-04 research journal](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md)
 records source versions, method, and evidence boundaries.
+
+The [component implementation deep
+dives](../20-notes/authentication-and-authorization-components/README.md)
+now develop all sixteen proposed layer-4 services individually. Their shared
+conclusion is that architectural separation must be enforced by distinct
+unprivileged Layer-4 service domains isolated by Layer 2 and by narrowly
+delegated facets, not merely by actor names or supervision inside one mutually
+trusting runtime. Every service protocol has
+typed negative and uncertain outcomes; outage, stale state, overload, restart,
+or malformed input must never widen authority. The policy-enforcement point at
+the resource remains authoritative even after a permit has been evaluated or
+a grant has been compiled.
+
+The [component research journal](../50-journal/2026-09-04-authentication-and-authorization-components-deep-dive.md)
+records the exact new and reused evidence for that expansion, as well as the
+cross-service lifecycle model, evaluation program, falsifiers, and unresolved
+hardware, usability, consistency, and proof obligations.
 
 The literature supports the components but does not settle their Atom-specific
 composition. In particular, WebAuthn does not specify a native OS trusted path;

@@ -363,7 +363,11 @@ capacity is itself bounded and charged to the owning service domain.
 
 ## Proposed components
 
-### 0. Service-domain bootstrap and manifest controller
+Each summary below is expanded in the [OTP-like system services component
+index](otp-like-system-services-components/README.md), with one detailed
+evidence, architecture, implementation, and verification report per component.
+
+### [0. Service-domain bootstrap and manifest controller](otp-like-system-services-components/service-domain-bootstrap-and-manifest-controller.md)
 
 **Responsibility.** Convert a validated desired-service manifest and a fixed
 delegation envelope into running, capability-confined service domains and
@@ -409,7 +413,7 @@ The desired-state idea is consistent with
 but Atom OS needs a far smaller local controller and cannot infer embedded
 footprint or kernel suitability from a datacenter cluster manager.
 
-### 1. Behaviour engines and capability-gated management
+### [1. Behaviour engines and capability-gated management](otp-like-system-services-components/behaviour-engines-and-capability-gated-management.md)
 
 **Responsibility.** Provide reusable protocol engines for serialized services,
 explicit state machines, asynchronous workers, fanout, and cooperative
@@ -449,7 +453,7 @@ system messages while ordinary messages can accumulate; it is neither
 admission close nor quiescence, and any native bounded-mailbox divergence must
 be explicit in the compatibility profile.
 
-### 2. Supervision and recovery policy
+### [2. Supervision and recovery policy](otp-like-system-services-components/supervision-and-recovery-policy.md)
 
 **Responsibility.** Observe termination, select recovery scope, sequence
 shutdown/start, rate-limit attempts, and escalate when local policy is
@@ -509,7 +513,7 @@ why a supervisor needs a non-cooperative escape path. Restart intensity alone
 is not overload control; repeated failures must consume a separate recovery
 budget.
 
-### 3. Application lifecycle and dependency orchestration
+### [3. Application lifecycle and dependency orchestration](otp-like-system-services-components/application-lifecycle-and-dependency-orchestration.md)
 
 **Responsibility.** Manage a deployable bundle's dependencies, lifecycle root,
 readiness, configuration, health, drain, and stop semantics. Native Atom OS
@@ -582,7 +586,7 @@ either emulate that association and `application:get_application/1` behavior
 or declare it unsupported. Native bundles use explicit manifest membership and
 supervision instead of treating an I/O group leader as an ownership boundary.
 
-### 4. Naming, registry, and local discovery
+### [4. Naming, registry, and local discovery](otp-like-system-services-components/naming-registry-and-local-discovery.md)
 
 **Responsibility.** Resolve stable logical names to current service instances
 without turning the namespace into ambient authority.
@@ -624,7 +628,7 @@ afterward; exclusive names require component 9's quorum lease and fencing
 proof. A watch notification is a change hint, not proof that a cached
 authoritative binding remains current.
 
-### 5. Configuration, workload identity, and secrets
+### [5. Configuration, workload identity, and secrets](otp-like-system-services-components/configuration-workload-identity-and-secrets.md)
 
 **Responsibility.** Supply validated service settings and authenticated
 workload identity while minimizing secret exposure and making rotation
@@ -664,7 +668,7 @@ declare which already-established operations may continue, which new
 operations fail closed, and how emergency recovery works while the issuer is
 unavailable. Long-lived static cluster cookies are not an acceptable substitute.
 
-### 6. Durable state, transactions, and outcome recovery
+### [6. Durable state, transactions, and outcome recovery](otp-like-system-services-components/durable-state-transactions-and-outcome-recovery.md)
 
 **Responsibility.** Give services a small, explicit contract for
 crash-consistent state and request outcomes without placing a general database
@@ -741,7 +745,7 @@ Durability profiles must state:
 - transaction isolation, if any; and
 - which external effects remain outside the transaction.
 
-### 7. Device-service policy and management
+### [7. Device-service policy and management](otp-like-system-services-components/device-service-policy-and-management.md)
 
 **Responsibility.** Turn exclusive device capabilities, queues, interrupts,
 DMA mappings, and resets into safe application-facing protocols.
@@ -775,7 +779,7 @@ quarantine ledger.
 Every effect sink validates the current device/reset fencing generation.
 Fencing in the registry alone is advisory.
 
-### 8. Network endpoint and protocol services
+### [8. Network endpoint and protocol services](otp-like-system-services-components/network-endpoint-and-protocol-services.md)
 
 **Responsibility.** Provide bounded local network APIs and protocol engines
 over isolated drivers without making a connected peer a trusted node.
@@ -820,7 +824,7 @@ support the session, outcome, and identity boundaries. A concrete secure
 channel and application protocol profile remains an implementation decision
 and must receive its own source and conformance record when selected.
 
-### 9. Distributed membership, discovery, and authoritative coordination
+### [9. Distributed membership, discovery, and authoritative coordination](otp-like-system-services-components/distributed-membership-discovery-and-authoritative-coordination.md)
 
 **Responsibility.** Represent remote observations, discover services, maintain
 small authoritative metadata, and transfer exclusive ownership safely during
@@ -926,7 +930,7 @@ The baseline is crash/non-Byzantine. Mutual TLS and workload identities protect
 channels from outsiders but do not make a compromised authorized participant
 truthful.
 
-### 10. Release, update, rollback, and state migration
+### [10. Release, update, rollback, and state migration](otp-like-system-services-components/release-update-rollback-and-state-migration.md)
 
 **Responsibility.** Authenticate artifacts, decide rollout, coordinate
 quiescence and state transformation, preserve a recovery ledger, and define
@@ -1024,7 +1028,7 @@ explicitly trusted compatibility profile with bounded authority and audit.
 Purging old code can terminate actors still using it, so reclamation follows
 quiescence evidence, not a timer alone.
 
-### 11. Admission, overload, and service-resource governance
+### [11. Admission, overload, and service-resource governance](otp-like-system-services-components/admission-overload-and-service-resource-governance.md)
 
 **Responsibility.** Keep useful work responsive under excess demand and make
 resource policy visible, testable, and distinct from restart policy.
@@ -1078,7 +1082,7 @@ because demand is high. Retry attempts carry a budget and cannot outlive their
 original intent deadline. Logging and health checks have independent bounds so
 they cannot amplify an incident.
 
-### 12. Observability, audit, alarms, and operator control
+### [12. Observability, audit, alarms, and operator control](otp-like-system-services-components/observability-audit-alarms-and-operator-control.md)
 
 **Responsibility.** Explain service behavior and support authorized operations
 without making instrumentation an unbounded dependency or confusing
