@@ -192,6 +192,24 @@ Unless the user requests another shape, create or update this connected bundle:
 6. journal evidence for material local experiments; and
 7. every affected directory README.
 
+Every deep-dive journal must contain an exhaustive `## Source manifest` with
+`### Newly introduced sources` and `### Reused sources`. “Newly introduced”
+means the source note first entered the archive during that exact dated
+session; “reused” means a source note already existed and substantively
+informed the session. Name deep-dive journal files with the `-deep-dive.md`
+suffix. In each category, use one Markdown list item per source with exactly
+one inline relative source-note link, followed by an em dash and a concise role
+description. Use exactly `- None.` when a category is empty. A source may be
+reused by many sessions but may have only one introducing session. Topic maps
+remain selective conceptual routes; the journal manifest is the authoritative
+curated session-level provenance record. Matching creation dates are only a
+consistency check, not proof that a source originated in a session; use the
+journal evidence and revision history to resolve ambiguous ordering.
+Every local source-note link outside `## Threads` and `## Follow-ups` is treated
+as substantive session evidence and must appear in one manifest category.
+Prospective or merely contextual source-note links belong under those two
+sections; an incidental external citation does not require a source note.
+
 Research method:
 
 - Define the question, scope, terminology, and an operational standard for the

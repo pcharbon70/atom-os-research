@@ -225,6 +225,29 @@ Contextual sources screened but not used as independent proof included:
 No forum anecdote was used to establish performance, safety, compatibility, or
 production readiness.
 
+## Source manifest
+
+This is the authoritative session-level provenance list. “Newly introduced”
+means that the source note first entered the archive during this deep dive;
+“reused” means that an existing source note substantively informed the work.
+
+### Newly introduced sources
+
+- [Erlang/OTP 29.0.5 system documentation](../30-sources/erlang-otp-team-2026-otp-29-documentation.md) — established the pinned process, scheduling, memory, supervision, release, distribution, and security contracts.
+- [Erlang/OTP source tree at `5cf5f9725452`](../30-sources/erlang-otp-team-2026-otp-29-source-tree.md) — supplied the pinned ERTS implementation, runtime constants, native boundaries, and Unix host dependencies.
+- [Högberg, A brief introduction to BEAM](../30-sources/hogberg-2020-brief-introduction-to-beam.md) — established the BEAM and ERTS terminology boundary.
+- [Gustavsson, The Road to the JIT](../30-sources/gustavsson-2020-road-to-the-jit.md) — supplied BeamAsm's implementation lineage and load-time translation rationale.
+- [Stenman, The BEAM Book](../30-sources/stenman-2025-beam-book.md) — served as a secondary map to compiler and ERTS internals checked against primary material.
+- [Armstrong, Making reliable distributed systems in the presence of software errors](../30-sources/armstrong-2003-making-reliable-distributed-systems.md) — supplied the process-isolation, failure-detection, supervision, upgrade, and stable-storage argument.
+- [Armstrong, A History of Erlang](../30-sources/armstrong-2007-history-of-erlang.md) — supplied the concurrency model's lineage and documented isolation, foreign-code, atom, and distribution limits.
+- [Sagonas and Wilhelmsson, Efficient memory management for concurrent programs that use message passing](../30-sources/sagonas-wilhelmsson-2006-efficient-memory-management.md) — supplied comparative evidence for private, shared, and hybrid heap designs.
+- [Zhang, Characterizing the scalability of Erlang VM on many-core processors](../30-sources/zhang-2011-erlang-vm-many-core-scalability.md) — supplied historical evidence about runtime lock and allocator contention.
+- [Trinder et al., Scaling Reliably](../30-sources/trinder-et-al-2017-scaling-reliably.md) — supplied evidence about global names, full-mesh distribution, recovery state, and partitioned scaling.
+
+### Reused sources
+
+- None.
+
 ## Threads
 
 - [The durable synthesis](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)

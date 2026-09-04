@@ -130,6 +130,54 @@ Consequently:
 - the eleven-component decomposition and recommendations are cross-source
   synthesis, not reported conclusions of any one source.
 
+## Source manifest
+
+### Newly introduced sources
+
+- [Dune: Safe user-level access to privileged CPU features](../30-sources/belay-et-al-2012-dune.md)
+  — controlled delegation of hardware privilege.
+- [From L3 to seL4](../30-sources/elphinstone-heiser-2013-l4-lessons.md)
+  — empirical microkernel minimality and mechanism placement.
+- [Exokernel](../30-sources/engler-et-al-1995-exokernel.md) — protection versus
+  application-level resource management.
+- [The Flux OSKit](../30-sources/ford-et-al-1997-flux-oskit.md) — explicit
+  architecture-module composition and interface boundaries.
+- [CertiKOS](../30-sources/gu-et-al-2016-certikos.md) — layered abstraction and
+  refinement for concurrent privileged mechanisms.
+- [Linux low-level core APIs](../30-sources/linux-kernel-community-2026-low-level-core-apis.md)
+  — current entry, interrupt, time, CPU, barrier, TLB, and DMA precedent.
+- [Simplifying ARM concurrency](../30-sources/pulte-et-al-2018-simplifying-arm-concurrency.md)
+  — rigorous weak-memory semantics for Arm multicore ordering.
+- [ARMv8-A instruction-fetch semantics](../30-sources/simner-et-al-2020-arm-instruction-fetch.md)
+  — code-publication and instruction-cache completion obligations.
+
+### Reused sources
+
+- [Least-privilege memory protection](../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md)
+  — authority-aware memory, interrupt, and DMA protection.
+- [Arm A-profile system architecture documentation](../30-sources/arm-2026-a-profile-system-architecture-documentation.md)
+  — normative Arm privilege and system-register semantics.
+- [The Multikernel](../30-sources/baumann-et-al-2009-multikernel.md) — per-core
+  state and message-oriented multicore coordination.
+- [CleanQ](../30-sources/haecki-et-al-2019-cleanq.md) — ownership transfer for
+  bounded shared-memory and device queues.
+- [Intel system-programming documentation](../30-sources/intel-2026-system-programming-documentation.md)
+  — normative x86 privilege, translation, interrupt, and cache behavior.
+- [Comprehensive seL4 verification](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+  — assurance layering and explicit proof assumptions.
+- [Thunderclap](../30-sources/markettos-et-al-2019-thunderclap.md) — practical
+  limits of IOMMU-based DMA isolation.
+- [Arrakis](../30-sources/peter-et-al-2014-arrakis.md) — kernel control plane
+  with delegated protected I/O data paths.
+- [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
+  — normative RISC-V privilege, trap, translation, and fence semantics.
+- [x86-TSO](../30-sources/sewell-et-al-2010-x86-tso.md) — rigorous x86
+  multiprocessor memory-ordering model.
+- [Relaxed virtual memory in Armv8-A](../30-sources/simner-et-al-2022-relaxed-virtual-memory.md)
+  — translation-update and TLB-completion semantics.
+- [LazyFP](../30-sources/stecklina-prescher-2018-lazyfp.md) — stale privileged
+  context state as a confidentiality failure mode.
+
 ## Threads
 
 - [Kernel hardware and architecture support

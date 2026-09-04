@@ -70,9 +70,11 @@ require `status: open | paused | resolved`.
 1. Capture temporary material in `00-inbox/`.
 2. Promote useful material with the closest template.
 3. Connect every durable document to another document or a map.
-4. Develop maps when clusters emerge.
-5. Preserve superseded work in `90-archive/` when its context remains useful.
-6. Update affected indexes and validate in the same change.
+4. For every deep dive, record an exhaustive journal source manifest that
+   separates newly introduced sources from reused sources.
+5. Develop selective maps when conceptual clusters emerge.
+6. Preserve superseded work in `90-archive/` when its context remains useful.
+7. Update affected indexes and validate in the same change.
 
 ## Validation
 
@@ -85,8 +87,8 @@ python3 -m unittest test_validate_archive.py
 ```
 
 The validator checks metadata, placeholders, filenames, local links,
-directory inventories, conceptual connections, and duplicate source
-identifiers.
+directory inventories, conceptual connections, deep-dive source-manifest
+structure and classification, and duplicate source identifiers.
 
 ## Repository files
 

@@ -30,6 +30,10 @@ resolution criteria here. Promote independently useful conclusions to
 
 ### Documents
 
+- [What contract should system-wide authentication and authorization provide?](what-contract-should-system-wide-authentication-and-authorization-provide.md) —
+  defines falsifiable evidence, session, policy, grant, capability, revocation,
+  recovery, distributed-consistency, and assurance criteria for security
+  across all five layers.
 - [Can AtomVM serve as the kernel-facing runtime of a new embedded operating system?](can-atomvm-serve-as-a-kernel-facing-runtime.md) — defines
   falsifiable boot, substrate, resource, fault, trust, and lifecycle criteria
   and the next experiments.

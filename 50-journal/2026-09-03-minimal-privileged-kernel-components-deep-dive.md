@@ -248,6 +248,110 @@ hardware; architecture specifications define mechanisms, not platform routing
 or implementation correctness; and the component recommendations remain
 developing syntheses with explicit experiments rather than transferred proofs.
 
+## Source manifest
+
+### Newly introduced sources
+
+- [Formally verified system initialisation](../30-sources/boyton-et-al-2013-verified-system-initialisation.md)
+  — proving that bootstrap reaches a declarative target state.
+- [Dynamic instrumentation of production systems](../30-sources/cantrill-et-al-2004-dtrace.md)
+  — safe probes, per-consumer state, aggregation, and disabled-probe cost.
+- [capDL](../30-sources/kuz-et-al-2010-capdl.md) — declarative kernel-object and
+  capability-distribution manifests.
+- [Read-copy update](../30-sources/mckenney-slingwine-1998-read-copy-update.md)
+  — logical removal followed by grace-period reclamation.
+- [Hazard pointers](../30-sources/michael-2004-hazard-pointers.md) — explicit
+  reader protection for lock-free reclamation.
+- [Lockless ring-buffer design](../30-sources/rostedt-2009-lockless-ring-buffer-design.md)
+  — per-CPU nested-writer reservation and commit semantics.
+
+### Reused sources
+
+- [Least-privilege memory protection](../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md)
+  — authority-aware mappings, interrupts, and DMA bindings.
+- [Scheduler activations](../30-sources/anderson-et-al-1992-scheduler-activations.md)
+  — explicit kernel/runtime scheduling events and processor ownership.
+- [Arm SMMUv3 architecture](../30-sources/arm-2025-smmuv3-architecture.md)
+  — DMA translation, invalidation, and fault completion.
+- [Making reliable distributed systems](../30-sources/armstrong-2003-making-reliable-distributed-systems.md)
+  — supervision, failure isolation, and recovery topology.
+- [Resource containers](../30-sources/banga-et-al-1999-resource-containers.md)
+  — resource charging separated from execution identity.
+- [The Multikernel](../30-sources/baumann-et-al-2009-multikernel.md) — per-core
+  state and message-oriented multicore coordination.
+- [Implementing remote procedure calls](../30-sources/birrell-nelson-1984-remote-procedure-calls.md)
+  — call identity, duplicate suppression, and uncertain outcomes.
+- [Timing analysis of a protected kernel](../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md)
+  — bounded privileged execution and interruptibility constraints.
+- [Tolerating malicious device drivers](../30-sources/boyd-wickizer-zeldovich-2010-malicious-device-drivers.md)
+  — hostile-driver confinement and resource mediation.
+- [Microreboot](../30-sources/candea-et-al-2004-microreboot.md) — fine-grained
+  restart and independently recoverable component scope.
+- [Crash-only software](../30-sources/candea-fox-2003-crash-only-software.md)
+  — restart-oriented service lifecycle and externally held state.
+- [Unreliable failure detectors](../30-sources/chandra-toueg-1996-failure-detectors.md)
+  — separating suspicion, proof, and recovery action.
+- [Hive](../30-sources/chapin-et-al-1995-hive.md) — fault-containment limits on
+  shared-memory multiprocessors.
+- [CuriOS](../30-sources/david-et-al-2008-curios.md) — client-state placement for
+  recoverable operating-system services.
+- [Kernel isolation of physical memory](../30-sources/elkaduwe-et-al-2008-kernel-memory-isolation.md)
+  — caller-provided kernel-object memory and authority accounting.
+- [From L3 to seL4](../30-sources/elphinstone-heiser-2013-l4-lessons.md) —
+  empirical guidance on minimal kernel objects and fast paths.
+- [Exokernel](../30-sources/engler-et-al-1995-exokernel.md) — protected resource
+  multiplexing separated from higher-level policy.
+- [Time protection](../30-sources/ge-et-al-2019-time-protection.md) — scheduling
+  authority versus microarchitectural timing isolation.
+- [Kdump](../30-sources/goyal-et-al-2005-kdump.md) — crash capture, handoff, and
+  incomplete-evidence semantics.
+- [CertiKOS](../30-sources/gu-et-al-2016-certikos.md) — layered refinement of
+  concurrent privileged mechanisms.
+- [CleanQ](../30-sources/haecki-et-al-2019-cleanq.md) — explicit queue-slot
+  ownership transfer and completion.
+- [seL4 design principles](../30-sources/heiser-2020-sel4-design-principles.md)
+  — rationale for keeping policy and convenience outside privilege.
+- [Construction of a highly dependable operating system](../30-sources/herder-et-al-2006-dependable-operating-system.md)
+  — user-space drivers, reincarnation, and recovery services.
+- [Intel VT-d architecture](../30-sources/intel-2024-vt-d-architecture.md) —
+  requester attachment, DMA remapping, faults, and invalidation.
+- [Comprehensive seL4 verification](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+  — assurance layers, refinement, and explicit proof assumptions.
+- [On micro-kernel construction](../30-sources/liedtke-1995-microkernel-construction.md)
+  — minimal primitives and IPC-path design.
+- [Linux RAS documentation](../30-sources/linux-kernel-community-2026-ras-documentation.md)
+  — bounded fault records, machine checks, and crash evidence.
+- [Scheduling-context capabilities](../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md)
+  — explicit CPU budgets, donation, and return.
+- [Thunderclap](../30-sources/markettos-et-al-2019-thunderclap.md) — practical
+  gaps in IOMMU and DMA containment.
+- [Capability myths demolished](../30-sources/miller-et-al-2003-capability-myths.md)
+  — delegation, confinement, indirection, and revocation semantics.
+- [seL4 information-flow enforcement](../30-sources/murray-et-al-2013-sel4-information-flow.md)
+  — confidentiality proof scope and configuration assumptions.
+- [For a microkernel, a big lock is fine](../30-sources/peters-et-al-2015-big-lock-microkernel.md)
+  — multicore serialization and bounded synchronization tradeoffs.
+- [BootStomp](../30-sources/redini-et-al-2017-bootstomp.md) — hostile bootstrap
+  input and pre-kernel attack surface.
+- [RISC-V IOMMU architecture](../30-sources/risc-v-international-2026-iommu-architecture.md)
+  — DMA requester, translation, fault, and invalidation state machines.
+- [The protection of information in computer systems](../30-sources/saltzer-schroeder-1975-protection-information.md)
+  — complete mediation, least privilege, and fail-safe defaults.
+- [seL4 reference manual](../30-sources/sel4-foundation-2026-reference-manual.md)
+  — concrete object, capability, IPC, scheduling, mapping, and fault semantics.
+- [Vulnerabilities in synchronous IPC designs](../30-sources/shapiro-2003-synchronous-ipc-vulnerabilities.md)
+  — dependency, cancellation, and server-failure hazards.
+- [EROS](../30-sources/shapiro-et-al-1999-eros.md) — explicit capability
+  authority, object construction, persistence, and revocation indirection.
+- [Relaxed virtual memory in Armv8-A](../30-sources/simner-et-al-2022-relaxed-virtual-memory.md)
+  — translation-update, TLB-completion, and safe-reuse obligations.
+- [Nooks](../30-sources/swift-et-al-2003-nooks.md) — extension isolation and the
+  limits of same-address-space recovery.
+- [Recovering device drivers](../30-sources/swift-et-al-2004-recovering-device-drivers.md)
+  — driver restart, state restoration, and client reconciliation.
+- [Capsicum](../30-sources/watson-et-al-2010-capsicum.md) — practical
+  capability-space confinement and rights attenuation.
+
 ## Threads
 
 - [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md) routes

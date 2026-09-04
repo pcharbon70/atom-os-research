@@ -27,6 +27,11 @@ one existing VM implementation the kernel foundation.
 
 ## Active inquiries
 
+- [What contract should system-wide authentication and authorization
+  provide?](../40-inquiries/what-contract-should-system-wide-authentication-and-authorization-provide.md) —
+  defines falsifiable human, workload, policy, capability, revocation,
+  recovery, distributed-consistency, and assurance criteria across all five
+  layers.
 - [What contract should the OTP-like system-services layer
   provide?](../40-inquiries/what-contract-should-the-otp-like-system-services-layer-provide.md) —
   defines falsifiable lifecycle, durability, outcome, naming, distributed
@@ -56,6 +61,10 @@ one existing VM implementation the kernel foundation.
 
 ## Topic maps
 
+- [Authentication and authorization](authentication-and-authorization.md) —
+  routes from human, workload, node, and recovery evidence through typed
+  policy and bounded grants to capability enforcement, revocation, audit,
+  update, and recovery.
 - [OTP-like system services](otp-like-system-services.md) — routes through
   behaviours, supervision, application lifecycle, names, configuration,
   durable outcomes, device/network policy, distributed coordination, releases,
@@ -83,6 +92,15 @@ one existing VM implementation the kernel foundation.
 
 ## Recently developed
 
+- [Authentication and authorization across the five-layer
+  architecture](../20-notes/authentication-and-authorization-across-the-five-layer-architecture.md) —
+  proposes an identity/policy control plane plus a capability data plane, with
+  explicit anonymous authority, trusted interaction, exact grant contracts,
+  distributed freshness, recovery, and a staged assurance program.
+- [2026-09-04 authentication and authorization research
+  session](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md) —
+  records the scientific and standards search, current source revisions,
+  independent architecture review, and absence of implementation evidence.
 - [OTP-like system services
   layer](../20-notes/otp-like-system-services-layer.md) — proposes thirteen
   unprivileged policy components with explicit generations, effect outcomes,
@@ -163,6 +181,12 @@ one existing VM implementation the kernel foundation.
 
 ## Unsettled threads
 
+- Select the first security deployment profile and model the complete
+  anonymous-to-authenticated-to-capability authority graph before building a
+  login UI or compatibility superuser.
+- Specify native trusted interaction, pre-boot storage unlock, credential and
+  data-key recovery, policy activation, revocation watermarks, and maximum
+  stale-authority windows for each protected operation class.
 - Model capability derivation, call cancellation, scheduling-context donation,
   SMP domain freeze, and quiescence-gated reaping before choosing kernel data
   structures or optimizing fast paths.

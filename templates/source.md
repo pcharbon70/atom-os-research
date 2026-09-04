@@ -44,4 +44,7 @@ aliases: []
 
 ## Derived work
 
-<!-- Link notes, inquiries, maps, or journal entries developed from this source. -->
+<!--
+Selectively link the most important notes, inquiries, and maps developed from
+this source. Exact session provenance belongs in deep-dive journal manifests.
+-->

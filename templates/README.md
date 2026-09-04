@@ -32,7 +32,8 @@ are not completed archive documents until copied and filled in.
 
 - [Directory README template](directory-readme.md) — an exhaustive local inventory.
 - [Inquiry template](inquiry.md) — an active question and research workbench.
-- [Journal template](journal.md) — a dated research or experiment record.
+- [Journal template](journal.md) — a dated research or experiment record with
+  an authoritative introduced-versus-reused source manifest for deep dives.
 - [Map template](map.md) — a selective route through related material.
 - [Note template](note.md) — an idea or synthesis in the author's own words.
 - [Source template](source.md) — a bibliographic and evidence-focused reading note.

@@ -54,6 +54,9 @@ KNOWLEDGE_FILENAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 JOURNAL_FILENAME = re.compile(
     r"^\d{4}-\d{2}-\d{2}(?:-[a-z0-9]+(?:-[a-z0-9]+)*)?\.md$"
 )
+DEEP_DIVE_JOURNAL_FILENAME = re.compile(
+    r"^\d{4}-\d{2}-\d{2}(?:-[a-z0-9]+)*-deep-dive\.md$"
+)
 PLACEHOLDER = re.compile(
     r"\{(?:title|question|YYYY-MM-DD|author|directory title|directory-name)\}"
 )
@@ -199,6 +202,101 @@ def github_heading_anchors(markdown: str) -> set[str]:
     return anchors
 
 
+def markdown_without_hidden_content(markdown: str) -> str:
+    """Remove HTML comments and fenced code before structural Markdown checks."""
+
+    markdown = re.sub(
+        r"<!--.*?-->",
+        lambda match: "\n" * match.group(0).count("\n"),
+        markdown,
+        flags=re.DOTALL,
+    )
+    visible: list[str] = []
+    fence_character: str | None = None
+    fence_length = 0
+    for line in markdown.splitlines():
+        fence = re.match(r"^\s{0,3}(`{3,}|~{3,})", line)
+        if fence_character is None:
+            if fence:
+                fence_character = fence.group(1)[0]
+                fence_length = len(fence.group(1))
+                visible.append("")
+            else:
+                visible.append(line)
+            continue
+        if fence and fence.group(1)[0] == fence_character and len(
+            fence.group(1)
+        ) >= fence_length:
+            fence_character = None
+            fence_length = 0
+        visible.append("")
+    return "\n".join(visible)
+
+
+def markdown_heading_section(
+    markdown: str, level: int, heading: str
+) -> str | None:
+    """Return content below one heading through the next peer or ancestor."""
+
+    lines = markdown_without_hidden_content(markdown).splitlines()
+    marker = f"{'#' * level} {heading}"
+    starts = [index for index, line in enumerate(lines) if line.strip() == marker]
+    if len(starts) != 1:
+        return None
+    start = starts[0] + 1
+    end = len(lines)
+    for index in range(start, len(lines)):
+        match = re.match(r"^\s{0,3}(#{1,6})\s+", lines[index])
+        if match and len(match.group(1)) <= level:
+            end = index
+            break
+    return "\n".join(lines[start:end])
+
+
+def markdown_list_items(markdown: str) -> list[str]:
+    """Return top-level hyphen list items with wrapped continuation text."""
+
+    items: list[str] = []
+    current: list[str] | None = None
+    for line in markdown_without_hidden_content(markdown).splitlines():
+        bullet = re.match(r"^\s{0,3}-\s+(.*)$", line)
+        if bullet:
+            if current is not None:
+                items.append(" ".join(current))
+            current = [bullet.group(1).strip()]
+            continue
+        if current is None:
+            continue
+        if re.match(r"^\s{0,3}#{1,6}\s+", line):
+            items.append(" ".join(current))
+            current = None
+            continue
+        if line.strip():
+            current.append(line.strip())
+    if current is not None:
+        items.append(" ".join(current))
+    return items
+
+
+def markdown_without_sections(
+    markdown: str, level: int, excluded_headings: set[str]
+) -> str:
+    """Remove named heading sections through their next peer or ancestor."""
+
+    kept: list[str] = []
+    skipping = False
+    for line in markdown_without_hidden_content(markdown).splitlines():
+        match = re.match(r"^\s{0,3}(#{1,6})\s+(.+?)\s*#*\s*$", line)
+        if match and len(match.group(1)) <= level:
+            skipping = (
+                len(match.group(1)) == level
+                and match.group(2).strip() in excluded_headings
+            )
+        if not skipping:
+            kept.append(line)
+    return "\n".join(kept)
+
+
 def validate() -> tuple[list[str], dict[str, int]]:
     """Run all checks and return errors plus summary counts."""
 
@@ -329,6 +427,215 @@ def validate() -> tuple[list[str], dict[str, int]]:
                 if source_is_conceptual:
                     incoming_from_conceptual[target].add(path.resolve())
 
+    introduced_by_source: defaultdict[Path, list[Path]] = defaultdict(list)
+    for path, (metadata, body) in sorted(
+        records.items(), key=lambda item: relative(item[0])
+    ):
+        is_deep_dive_journal = (
+            metadata.get("kind") == "journal"
+            and DEEP_DIVE_JOURNAL_FILENAME.fullmatch(path.name) is not None
+        )
+        if metadata.get("kind") != "journal":
+            continue
+
+        visible_body = markdown_without_hidden_content(body)
+        manifest_heading_count = len(
+            re.findall(
+                r"^\s{0,3}##\s+Source manifest\s*#*\s*$",
+                visible_body,
+                flags=re.MULTILINE,
+            )
+        )
+        if is_deep_dive_journal:
+            counts["deep_dive_journals"] += 1
+        if not manifest_heading_count:
+            if is_deep_dive_journal:
+                errors.append(f"{relative(path)}: missing unique ## Source manifest")
+            continue
+        if manifest_heading_count != 1:
+            errors.append(f"{relative(path)}: missing unique ## Source manifest")
+            continue
+
+        manifest = markdown_heading_section(body, 2, "Source manifest")
+        if manifest is None:
+            errors.append(f"{relative(path)}: missing unique ## Source manifest")
+            continue
+
+        expected_categories = {"Newly introduced sources", "Reused sources"}
+        actual_categories = set(
+            re.findall(
+                r"^\s{0,3}###\s+(.+?)\s*#*\s*$",
+                manifest,
+                flags=re.MULTILINE,
+            )
+        )
+        for unexpected in sorted(actual_categories - expected_categories):
+            errors.append(
+                f"{relative(path)}: unexpected source-manifest category: {unexpected}"
+            )
+
+        classified: dict[str, set[Path]] = {}
+        for heading in ("Newly introduced sources", "Reused sources"):
+            section = markdown_heading_section(manifest, 3, heading)
+            if section is None:
+                errors.append(f"{relative(path)}: missing unique ### {heading}")
+                continue
+
+            targets: list[Path] = []
+            items = markdown_list_items(section)
+            if items == ["None."]:
+                classified[heading] = set()
+                continue
+            if not items:
+                errors.append(
+                    f"{relative(path)}: ### {heading} must list source notes or - None."
+                )
+                classified[heading] = set()
+                continue
+            if "None." in items or "None" in items:
+                errors.append(
+                    f"{relative(path)}: ### {heading} must use exactly - None. alone"
+                )
+
+            for item in items:
+                raw_links = MARKDOWN_LINK.findall(item)
+                if len(raw_links) != 1:
+                    errors.append(
+                        f"{relative(path)}: each ### {heading} item must contain "
+                        "exactly one inline source-note link"
+                    )
+                    continue
+                raw = raw_links[0]
+                resolved = local_link_target(path, raw)
+                if resolved is None:
+                    errors.append(
+                        f"{relative(path)}: {heading} entry must link a local "
+                        f"source note: {raw}"
+                    )
+                    continue
+                target, _fragment = resolved
+                target_record = records.get(target)
+                if target_record is None or target_record[0].get("kind") != "source":
+                    errors.append(
+                        f"{relative(path)}: {heading} link is not a source note: {raw}"
+                    )
+                    continue
+                targets.append(target)
+                if not re.search(r"\)\s+—\s+\S", item):
+                    errors.append(
+                        f"{relative(path)}: {heading} entry lacks an em-dash role "
+                        f"description for {relative(target)}"
+                    )
+            if len(targets) != len(items):
+                errors.append(
+                    f"{relative(path)}: every ### {heading} list item must be valid"
+                )
+            if len(targets) != len(set(targets)):
+                errors.append(
+                    f"{relative(path)}: duplicate source within ### {heading}"
+                )
+            classified[heading] = set(targets)
+
+        introduced = classified.get("Newly introduced sources", set())
+        reused = classified.get("Reused sources", set())
+        if is_deep_dive_journal:
+            counts["introduced_source_classifications"] += len(introduced)
+            counts["reused_source_classifications"] += len(reused)
+        for target in sorted(introduced & reused):
+            errors.append(
+                f"{relative(path)}: source classified as both introduced and reused: "
+                f"{relative(target)}"
+            )
+        for target in introduced:
+            if is_deep_dive_journal:
+                introduced_by_source[target].append(path)
+            target_metadata = records[target][0]
+            if target_metadata.get("created") != metadata.get("created"):
+                errors.append(
+                    f"{relative(path)}: introduced source has different creation date: "
+                    f"{relative(target)}"
+                )
+        for target in reused:
+            target_metadata = records[target][0]
+            target_created = str(target_metadata.get("created", ""))
+            journal_created = str(metadata.get("created", ""))
+            if target_created > journal_created:
+                errors.append(
+                    f"{relative(path)}: reused source was created after the session: "
+                    f"{relative(target)}"
+                )
+
+        substantive_body = markdown_without_sections(
+            body, 2, {"Threads", "Follow-ups"}
+        )
+        all_linked_sources: set[Path] = set()
+        for raw in MARKDOWN_LINK.findall(substantive_body):
+            resolved = local_link_target(path, raw)
+            if resolved is None:
+                continue
+            target, _fragment = resolved
+            target_record = records.get(target)
+            if target_record is not None and target_record[0].get("kind") == "source":
+                all_linked_sources.add(target)
+        for target in sorted(all_linked_sources - introduced - reused):
+            errors.append(
+                f"{relative(path)}: linked source missing from source manifest: "
+                f"{relative(target)}"
+            )
+
+    deep_dive_journals = {
+        path
+        for path, (metadata, _body) in records.items()
+        if metadata.get("kind") == "journal"
+        and DEEP_DIVE_JOURNAL_FILENAME.fullmatch(path.name) is not None
+    }
+    sources_readme = (ROOT / "30-sources" / "README.md").resolve()
+    sources_readme_record = records.get(sources_readme)
+    if sources_readme_record is not None:
+        provenance = markdown_heading_section(
+            sources_readme_record[1], 2, "Research provenance"
+        )
+        if provenance is None:
+            errors.append(
+                "30-sources/README.md: missing unique ## Research provenance"
+            )
+        else:
+            journal_links: list[Path] = []
+            for raw in MARKDOWN_LINK.findall(provenance):
+                resolved = local_link_target(sources_readme, raw)
+                if resolved is None:
+                    continue
+                target, _fragment = resolved
+                target_record = records.get(target)
+                if target_record is not None and target_record[0].get("kind") == "journal":
+                    if DEEP_DIVE_JOURNAL_FILENAME.fullmatch(target.name) is not None:
+                        journal_links.append(target)
+            if len(journal_links) != len(set(journal_links)):
+                errors.append(
+                    "30-sources/README.md: duplicate deep-dive journal in "
+                    "## Research provenance"
+                )
+            for missing in sorted(deep_dive_journals - set(journal_links)):
+                errors.append(
+                    "30-sources/README.md: deep-dive journal missing from research "
+                    f"provenance: {relative(missing)}"
+                )
+
+    for source, journals in sorted(
+        introduced_by_source.items(), key=lambda item: relative(item[0])
+    ):
+        if len(journals) > 1:
+            joined = ", ".join(relative(path) for path in sorted(journals))
+            errors.append(
+                f"{relative(source)}: introduced by multiple deep-dive journals: {joined}"
+            )
+
+    counts["sources_without_deep_dive_origin"] = sum(
+        1
+        for path, (metadata, _body) in records.items()
+        if metadata.get("kind") == "source" and path not in introduced_by_source
+    )
+
     for directory in archive_directories():
         counts["directories"] += 1
         readme = directory / "README.md"
@@ -407,7 +714,12 @@ def main() -> int:
         f"{counts['completed_documents']} completed documents, "
         f"{counts['directories']} directories, "
         f"{counts['local_links']} local links, and "
-        f"{counts['source_documents']} source notes checked."
+        f"{counts['source_documents']} source notes checked; "
+        f"{counts['deep_dive_journals']} deep-dive source manifests classify "
+        f"{counts['introduced_source_classifications']} introduced and "
+        f"{counts['reused_source_classifications']} reused source uses; "
+        f"{counts['sources_without_deep_dive_origin']} source notes entered "
+        "outside a deep-dive manifest."
     )
     return 0
 

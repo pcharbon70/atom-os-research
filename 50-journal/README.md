@@ -22,6 +22,11 @@ Put time-bound observations and reproducibility evidence here. Promote durable
 ideas into notes, questions into inquiries, and source analysis into source
 notes.
 
+Every deep-dive entry includes an exhaustive source manifest separating notes
+first introduced in that exact session from pre-existing notes reused by it.
+Maps remain selective; these manifests are the authoritative session-level
+provenance record.
+
 ## Index
 
 ### Subdirectories
@@ -63,8 +68,19 @@ notes.
   records the current OTP baseline, scientific papers, standards and
   engineering evidence, thirteen-component synthesis method, architectural
   distinctions, and explicit lack of prototype evidence.
+- [2026-09-04 authentication and authorization deep dive](2026-09-04-authentication-and-authorization-deep-dive.md) —
+  records the cross-layer literature and standards search, current source
+  revisions, security synthesis and independent review, and explicit absence
+  of implementation or hardware evidence.
 
 ## Maintaining this index
 
 Name entries by date, index every direct entry, and retain commands, versions,
 outputs, target details, and artifact links needed to reproduce experiments.
+For deep dives, keep both source-manifest categories exhaustive and explain
+each source's role; use exactly `- None.` when a category is empty. Deep-dive
+journal filenames end in `-deep-dive.md` so structural validation can identify
+them without adding provenance metadata to every source note.
+Local source-note links under `## Threads` or `## Follow-ups` are prospective
+or contextual and are excluded from manifest-completeness checks; source-note
+links elsewhere in a deep-dive journal count as substantive evidence.
