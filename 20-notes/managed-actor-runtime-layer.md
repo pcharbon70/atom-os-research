@@ -966,6 +966,11 @@ runtime-domain-wide native failure.
 - [Managed actor runtime component
   index](managed-actor-runtime-components/README.md) inventories the thirteen
   detailed implementation reports derived from this integrated model.
+- [OTP-like system services
+  layer](otp-like-system-services-layer.md) defines the unprivileged policy
+  layer immediately above this runtime, including supervision, lifecycle,
+  naming, durable outcomes, I/O services, distributed authority, updates, and
+  operations.
 - [2026-09-02 managed actor runtime deep
   dive](../50-journal/2026-09-02-managed-actor-runtime-deep-dive.md) records the
   research method, versions, search coverage, and limitations.

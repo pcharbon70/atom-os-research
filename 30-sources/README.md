@@ -396,6 +396,67 @@ work. Incidental mentions can remain citations in the document using them.
   integrates native Erlang compilation with runtime stacks, roots, garbage
   collection, exceptions, and services, exposing conventions a safe-point-aware
   execution engine must preserve.
+- [The Chubby lock service for loosely-coupled distributed systems](burrows-2006-chubby.md) —
+  develops a coarse-grained coordination
+  service with sessions, leases, cache invalidation, and sequencer values while
+  preserving quorum and non-Byzantine limits.
+- [SWIM](das-et-al-2002-swim.md) — separates scalable probing from
+  dissemination and uses suspicion and incarnations for weakly consistent
+  membership without turning observations into authoritative truth.
+- [NixOS: A Purely Functional Linux Distribution](dolstra-et-al-2008-nixos.md) —
+  applies immutable,
+  derivation/input-identified dependency closures and atomic profile selection to
+  system configuration while exposing mutable activation limits.
+- [Erlang/OTP 29.0.6 system-services documentation](erlang-otp-team-2026-otp-29-0-6-system-services-documentation.md) —
+  records current behaviour, supervision, application, release, distribution,
+  registry, configuration, and Logger semantics and limits.
+- [Erlang/OTP 24 Highlights](larsson-2021-erlang-otp-24-highlights.md) — explains
+  the process-alias reply path and the deadlock-avoidance motivation for
+  significant children and supervisor automatic shutdown.
+- [Erlang/OTP 28 Highlights](huang-2025-erlang-otp-28-highlights.md) — uses
+  Logger mailbox overload to motivate receiver-authorized priority messages
+  while leaving admission, fairness, and resource bounds unspecified.
+- [Sagas](garcia-molina-salem-1987-sagas.md) — decomposes long-lived
+  transactions into committed subtransactions and application-defined
+  compensations without promising global rollback.
+- [Implementing linearizability at large scale and low latency](lee-et-al-2015-rifl.md) —
+  develops RIFL's durable request-result and
+  retry-rendezvous conditions for a restricted exactly-once RPC profile.
+- [ARIES](mohan-et-al-1992-aries.md) — develops analysis, repeat-history redo,
+  logical undo, compensation log records, and fuzzy checkpoints over
+  write-ahead logging.
+- [Practical dynamic software updating for C](neamtiu-et-al-2006-practical-dynamic-software-updating.md) —
+  evaluates
+  Ginseng safe update points, type transformation, and state migration while
+  exposing its single-program assumptions.
+- [In search of an understandable consensus algorithm](ongaro-ousterhout-2014-raft.md) —
+  decomposes crash-fault consensus
+  into leader election, log replication, safety, and membership change with
+  majority-availability assumptions.
+- [Survivable key compromise in software update systems](samuel-et-al-2010-tuf.md) —
+  develops role-separated update metadata,
+  threshold trust, freshness, and repository consistency under partial key
+  compromise.
+- [Secure audit logs to support computer forensics](schneier-kelsey-1999-secure-audit-logs.md) —
+  develops
+  forward-integrity protections for logs written by a machine that may later
+  be compromised while retaining availability and deletion limits.
+- [Dapper](sigelman-et-al-2010-dapper.md) — describes low-overhead distributed
+  context propagation, sampling, collection, and analysis and why traces are
+  not a complete audit history.
+- [The SPIFFE Workload API](spiffe-project-2026-workload-api.md) — specifies
+  local delivery and rotation of workload identities, keys, and trust bundles
+  while leaving authorization and platform attestation to other policy.
+- [Large-scale cluster management at Google with Borg](verma-et-al-2015-borg.md) —
+  reports desired-state reconciliation,
+  controller/agent separation, resource policy, and operational introspection
+  at datacenter scale.
+- [SEDA](welsh-et-al-2001-seda.md) — evaluates explicit stages, finite queues,
+  admission control, and adaptive resource controllers while documenting queue
+  and isolation trade-offs.
+- [Overload control for scaling WeChat microservices](zhou-et-al-2018-dagor.md) —
+  evaluates queue-delay detection,
+  early rejection, and propagated admission state across a service call graph.
 
 ## Maintaining this index
 

@@ -27,6 +27,11 @@ one existing VM implementation the kernel foundation.
 
 ## Active inquiries
 
+- [What contract should the OTP-like system-services layer
+  provide?](../40-inquiries/what-contract-should-the-otp-like-system-services-layer-provide.md) —
+  defines falsifiable lifecycle, durability, outcome, naming, distributed
+  authority, update, overload, evidence, and recovery criteria for the fourth
+  system layer.
 - [What contract should the managed actor runtime
   provide?](../40-inquiries/what-contract-should-the-managed-actor-runtime-provide.md) —
   defines falsifiable compatibility, actor-memory, signal, scheduling,
@@ -51,6 +56,10 @@ one existing VM implementation the kernel foundation.
 
 ## Topic maps
 
+- [OTP-like system services](otp-like-system-services.md) — routes through
+  behaviours, supervision, application lifecycle, names, configuration,
+  durable outcomes, device/network policy, distributed coordination, releases,
+  overload, telemetry, audit, and operator control.
 - [Managed actor runtime](managed-actor-runtime.md) — routes through compiled
   BEAM compatibility, private heaps and collection, signal and mailbox design,
   two-level scheduling, code publication, native boundaries, distribution,
@@ -74,6 +83,15 @@ one existing VM implementation the kernel foundation.
 
 ## Recently developed
 
+- [OTP-like system services
+  layer](../20-notes/otp-like-system-services-layer.md) — proposes thirteen
+  unprivileged policy components with explicit generations, effect outcomes,
+  sink-enforced fencing, staged updates, overload control, and separate
+  telemetry and audit paths.
+- [2026-09-03 OTP-like system services research
+  session](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md) —
+  records the current OTP baseline, papers, standards, engineering evidence,
+  synthesis method, and absence of prototype evidence.
 - [Minimal privileged kernel component deep
   dives](minimal-privileged-kernel.md#component-implementation-deep-dives) —
   develops one evidence-backed implementation recommendation for each of the
@@ -163,6 +181,9 @@ one existing VM implementation the kernel foundation.
   compatible.
 - Turn the thirteen managed-runtime component state machines and falsifiers
   into executable models, conformance fixtures, and measured prototypes.
+- Turn the thirteen OTP-like system-service components, effect-outcome states,
+  distributed leases/fences, and update lifecycle into executable models and
+  fault-injected prototypes.
 - Validate the proposed capability, quota, bounded-transport, and
   failure-domain semantics against a BEAM runtime without making each actor a
   kernel object.
