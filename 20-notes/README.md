@@ -38,6 +38,11 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [Authentication and authorization across the five-layer architecture](authentication-and-authorization-across-the-five-layer-architecture.md) —
+  proposes an unprivileged identity/policy control plane and a capability data
+  plane, then defines human and workload authentication, exact grant contracts,
+  trusted interaction, revocation, recovery, audit, and assurance across every
+  layer.
 - [AtomVM as an operating-system foundation](atomvm-as-an-operating-system-foundation.md) — assesses the
   current runtime boundary, empirical limits, missing OS responsibilities, and
   a proposed minimal-substrate architecture.

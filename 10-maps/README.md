@@ -29,6 +29,10 @@ should explain why its links belong together rather than merely list files.
 
 ### Documents
 
+- [Authentication and authorization](authentication-and-authorization.md) —
+  routes from human, workload, node, and recovery evidence through versioned
+  policy and bounded grants to capability enforcement, revocation, audit, and
+  recovery across all five layers.
 - [AtomVM foundation](atomvm-foundation.md) — curates the architecture,
   evidence, measurements, community priorities, and open questions around
   AtomVM as one possible OS execution nucleus.

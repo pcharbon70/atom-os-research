@@ -22,6 +22,50 @@ Create one note for each substantively used paper, book, specification,
 official documentation set, codebase revision, talk, dataset, or other primary
 work. Incidental mentions can remain citations in the document using them.
 
+## Research provenance
+
+The topic maps show which research stream a source supports. The dated
+deep-dive journals are the authoritative session-level provenance records:
+each has an exhaustive `## Source manifest` that separates source notes first
+introduced in that session from pre-existing source notes reused by it. A
+source may appear in several maps and several journal manifests without being
+duplicated in this directory.
+
+The table below is the exhaustive navigation list of current deep-dive
+journals. A source note's `## Derived work` remains a selective route to
+important outputs; it is not the provenance ledger and need not duplicate
+every journal-manifest backlink.
+
+| Research stream | Curated map | Exact deep-dive session manifests |
+| --- | --- | --- |
+| AtomVM foundation | [AtomVM foundation](../10-maps/atomvm-foundation.md) | [2026-08-28 AtomVM deep dive](../50-journal/2026-08-28-atomvm-deep-dive.md) |
+| BEAM, ERTS, and OTP | [BEAM, ERTS, and OTP](../10-maps/beam-erts-and-otp.md) | [2026-08-28 BEAM, ERTS, and OTP deep dive](../50-journal/2026-08-28-beam-erts-and-otp-deep-dive.md) |
+| Kernel hardware and architecture | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-08-30 layer deep dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md); [2026-09-02 component deep dive](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md) |
+| Minimal privileged kernel | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-08-31 layer deep dive](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md) |
+| Managed actor runtime | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-02 layer deep dive](../50-journal/2026-09-02-managed-actor-runtime-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-managed-actor-runtime-components-deep-dive.md) |
+| OTP-like system services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-03 system-services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md) |
+| Authentication and authorization | [Authentication and authorization](../10-maps/authentication-and-authorization.md) | [2026-09-04 deep dive](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md) |
+
+### Sources introduced outside a deep-dive session
+
+Twelve hardware-architecture foundation notes first entered the archive in Git
+change `af7d686` before the dated kernel-layer deep-dive journal was written.
+They are therefore honestly classified as reused by the 2026-08-30 deep dive,
+not retroactively labeled as introduced by it:
+
+- [A least-privilege memory protection model for modern hardware](achermann-et-al-2019-least-privilege-memory-protection.md)
+- [Arm A-profile system architecture documentation](arm-2026-a-profile-system-architecture-documentation.md)
+- [The Multikernel](baumann-et-al-2009-multikernel.md)
+- [CleanQ](haecki-et-al-2019-cleanq.md)
+- [Intel system-programming documentation](intel-2026-system-programming-documentation.md)
+- [Comprehensive formal verification of an OS microkernel](klein-et-al-2014-comprehensive-sel4-verification.md)
+- [Thunderclap](markettos-et-al-2019-thunderclap.md)
+- [Arrakis](peter-et-al-2014-arrakis.md)
+- [RISC-V privileged architecture](risc-v-international-2026-privileged-architecture.md)
+- [x86-TSO](sewell-et-al-2010-x86-tso.md)
+- [Relaxed virtual memory in Armv8-A](simner-et-al-2022-relaxed-virtual-memory.md)
+- [LazyFP](stecklina-prescher-2018-lazyfp.md)
+
 ## Index
 
 ### Subdirectories
@@ -457,8 +501,84 @@ work. Incidental mentions can remain citations in the document using them.
 - [Overload control for scaling WeChat microservices](zhou-et-al-2018-dagor.md) —
   evaluates queue-delay detection,
   early rejection, and propagated admission state across a service call graph.
+- [Computer security technology planning study](anderson-1972-computer-security-technology-planning-study.md) —
+  develops the reference-monitor and security-kernel requirements of complete
+  mediation, tamper resistance, and analyzability while exposing assurance
+  assumptions outside the mechanism.
+- [Protection](lampson-1971-protection.md) — models subjects, objects, domains,
+  rights, and access matrices and separates protection mechanism from policy.
+- [The confused deputy](hardy-1988-confused-deputy.md) — shows how ambient
+  authority lets an authorized program misuse its privilege for a less-
+  privileged caller and motivates designation coupled to authority.
+- [Protection in operating systems](harrison-et-al-1976-protection-in-operating-systems.md) —
+  proves general safety undecidable for an unrestricted access-control model,
+  motivating a deliberately constrained authority algebra.
+- [The KeyKOS architecture](hardy-1990-keykos-architecture.md) — describes a
+  pure capability system whose protected keys combine object designation and
+  authority without a global privileged identity.
+- [Digital identity guidelines: Authentication and authenticator management](temoshok-et-al-2025-authentication-and-authenticator-management.md) —
+  records current NIST authentication assurance, phishing-resistance,
+  authenticator lifecycle, binding, recovery, and notification requirements.
+- [Web Authentication: An API for accessing public key credentials — Level 3](w3c-2026-webauthn-level-3.md) —
+  specifies the current W3C public-key credential ceremony, relying-party and
+  origin bindings, user presence/verification signals, and authenticator data.
+- [Client to Authenticator Protocol 2.2](fido-alliance-2025-ctap-2-2.md) —
+  specifies authenticator transport, PIN/user-verification, credential
+  management, and authenticator behavior below a FIDO client.
+- [A formal analysis of the FIDO2 protocols](guan-et-al-2022-formal-analysis-fido2.md) —
+  analyzes WebAuthn and CTAP composition and exposes parallel-session and
+  state-sharing risks that subsystem-only arguments can miss.
+- [Operating System Framed](bravo-lillo-et-al-2012-operating-system-framed.md) —
+  empirically evaluates OS-framed credential prompts and shows that strong
+  visual security treatments do not eliminate spoofing.
+- [A Nitpicker's guide to a minimal-complexity secure GUI](feske-helmuth-2005-nitpicker.md) —
+  develops a small secure-GUI service with protected input, focus, display,
+  and trusted labeling boundaries.
+- [The abusability of passkeys](daffalla-et-al-2025-passkey-abusability.md) —
+  studies passkey enrollment, sharing, synchronization, and recovery abuse and
+  broadens evaluation beyond the assertion protocol.
+- [Zero trust architecture](rose-et-al-2020-zero-trust-architecture.md) —
+  separates policy decision, administration, and enforcement and rejects
+  network location as an implicit trust signal.
+- [Remote ATtestation procedureS architecture](birkholz-et-al-2023-rats-architecture.md) —
+  defines attester, verifier, relying-party, endorsement, reference-value, and
+  appraisal-policy roles while keeping attestation distinct from authorization.
+- [The Entity Attestation Token](lundblade-et-al-2025-entity-attestation-token.md) —
+  specifies a claims container for attestation results and evidence without
+  making those claims a resource-permission decision.
+- [TPM 2.0 Library Specification, version 185](trusted-computing-group-2026-tpm-2-0-library.md) —
+  provides the current full hardware profile for protected keys, measured
+  state, authorization sessions, sealing, and platform attestation.
+- [Hardware requirements for a Device Identifier Composition Engine](trusted-computing-group-2024-dice-hardware-requirements.md) —
+  provides a constrained-device hardware root and compound identity profile
+  for measured, layered key derivation.
+- [Macaroons: Cookies with contextual caveats for decentralized authorization in the cloud](birgisson-et-al-2014-macaroons.md) —
+  develops monotonic caveat-based attenuation and third-party discharge
+  patterns while retaining important bearer, revocation, and verifier-key
+  limitations.
+- [Zanzibar: Google's consistent, global authorization system](pang-et-al-2019-zanzibar.md) —
+  develops relationship-based authorization with causal consistency tokens and
+  exposes the distributed new-enemy problem.
+- [Cedar: A new language for expressive, fast, safe, and analyzable authorization](cutler-et-al-2024-cedar.md) —
+  develops a typed policy language over principals, actions, resources,
+  context, roles, groups, and relationships with explicit forbid semantics.
+- [Verification-guided development of Cedar authorization](disselkoen-et-al-2024-verification-guided-cedar.md) —
+  combines mechanized policy properties with differential randomized testing
+  of production authorization implementations.
+- [Best current practice for OAuth 2.0 security](lodderstedt-et-al-2025-oauth-security-bcp.md) —
+  consolidates current OAuth attack mitigations, deprecates unsafe grants, and
+  requires precise redirect, audience, PKCE, and sender-constraint profiles.
+- [OAuth 2.0 Demonstrating Proof of Possession](fett-et-al-2023-dpop.md) —
+  sender-constrains application-layer tokens while documenting replay,
+  endpoint, and request-body limits that stronger Atom profiles must address.
+- [Verified security for the Morello capability-enhanced prototype Arm architecture](bauereiss-et-al-2022-verified-morello-security.md) —
+  proves selected architectural security properties for a formal Morello
+  model and carefully bounds what hardware-capability evidence can transfer.
 
 ## Maintaining this index
 
 Index every direct source note with a concise description. Preserve exact
 metadata where available, never invent unknown fields, and link derived work.
+Do not duplicate or move a source note to represent reuse: classify it in each
+deep-dive journal manifest and route it through every conceptually relevant
+map instead.

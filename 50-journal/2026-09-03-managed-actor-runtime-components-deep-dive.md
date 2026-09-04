@@ -252,6 +252,157 @@ release; maintainer articles explain implementations but are not formal
 specifications; and every “best implementation” in these notes is a bounded
 cross-source recommendation awaiting the stated experiments.
 
+## Source manifest
+
+The classification records the session in which each source note first entered
+the archive. Sources introduced by the preceding managed-runtime synthesis are
+therefore reused here even though both sessions were committed together later.
+
+### Newly introduced sources
+
+- [Proof-carrying
+  code](../30-sources/necula-1997-proof-carrying-code.md) — producer-side proof
+  generation with a smaller consumer-side validation boundary.
+- [Simple, fast, and practical non-blocking and blocking concurrent queue
+  algorithms](../30-sources/michael-scott-1996-concurrent-queue-algorithms.md)
+  — queue linearizability and the limits of a queue-level guarantee.
+- [Scheduling multithreaded computations by work
+  stealing](../30-sources/blumofe-leiserson-1999-work-stealing.md) — formal
+  work-stealing bounds and their fully strict computation assumptions.
+- [Hashed and hierarchical timing
+  wheels](../30-sources/varghese-lauck-1987-timing-wheels.md) — timer structure,
+  granularity, and expiration-burst trade-offs.
+- [HiPErJiT: A profile-driven just-in-time compiler for
+  Erlang](../30-sources/kallas-sagonas-2018-hiperjit.md) — profile-directed
+  native compilation evidence and deoptimization constraints.
+- [Resource containers](../30-sources/banga-et-al-1999-resource-containers.md)
+  — request-causal resource attribution beyond process ownership.
+- [A contention adapting approach to concurrent ordered
+  sets](../30-sources/sagonas-winblad-2018-contention-adapting-ordered-sets.md)
+  — workload-sensitive shared-table adaptation.
+- [Systematic testing for detecting concurrency errors in Erlang
+  programs](../30-sources/christakis-et-al-2013-concuerror.md) — stateless
+  schedule exploration for Erlang concurrency.
+- [Efficient and deterministic record and replay for actor
+  languages](../30-sources/aumayr-et-al-2018-actor-record-replay.md) — actor
+  record/replay design and event-capture requirements.
+- [Orleans: Distributed virtual actors for programmability and
+  scalability](../30-sources/bernstein-et-al-2014-orleans.md) — stable logical
+  actor identity as a higher-level service model.
+- [Crash-only
+  software](../30-sources/candea-fox-2003-crash-only-software.md) — externally
+  coordinated restart and crash-oriented component boundaries.
+- [A NUMA-aware runtime environment for the actor
+  model](../30-sources/francesquini-et-al-2013-numa-aware-actor-runtime.md) —
+  topology-aware scheduling and memory placement.
+- [PARTISAN: Scaling the distributed actor
+  runtime](../30-sources/meiklejohn-et-al-2019-partisan.md) — replaceable
+  distributed-actor topologies and connection structure.
+- [Special delivery: Programming with mailbox
+  types](../30-sources/fowler-et-al-2023-mailbox-types.md) — optional static
+  protocol checking without redefining ordinary BEAM mailboxes.
+- [On the scalability of the Erlang Term
+  Storage](../30-sources/klaftenegger-et-al-2013-ets-scalability.md) — ETS
+  contention and table-structure scaling evidence.
+- [Implementing remote procedure
+  calls](../30-sources/birrell-nelson-1984-remote-procedure-calls.md) — ambiguous
+  remote outcomes and call/reply protocol foundations.
+- [A high performance Erlang
+  system](../30-sources/johansson-et-al-2000-high-performance-erlang.md) — HiPE's
+  integrated native execution and runtime conventions.
+
+### Reused sources
+
+- [Scheduler
+  activations](../30-sources/anderson-et-al-1992-scheduler-activations.md) —
+  two-level scheduling and kernel-to-runtime processor-allocation boundaries.
+- [Erlang/OTP 29.0.6 managed-runtime
+  documentation](../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md)
+  — current public behavior for all thirteen component contracts.
+- [Erlang/OTP source tree at
+  5cf5f9725452](../30-sources/erlang-otp-team-2026-otp-29-source-tree.md) —
+  pinned implementation dependencies and ERTS mechanisms.
+- [Making reliable distributed systems in the presence of software
+  errors](../30-sources/armstrong-2003-making-reliable-distributed-systems.md)
+  — actor lifecycle, failure signaling, and supervision principles.
+- [A History of
+  Erlang](../30-sources/armstrong-2007-history-of-erlang.md) — historical
+  process, VM, distribution, and operational design constraints.
+- [A scalability benchmark suite for
+  Erlang/OTP](../30-sources/aronis-et-al-2012-scalability-benchmark-suite-erlang-otp.md)
+  — multidimensional evaluation design.
+- [Work-Stealing, Locality-Aware Actor
+  Scheduling](../30-sources/barghi-karsten-2018-locality-aware-actor-scheduling.md)
+  — actor locality and NUMA-sensitive stealing.
+- [Tolerating malicious device
+  drivers](../30-sources/boyd-wickizer-zeldovich-2010-malicious-device-drivers.md)
+  — containment limits under actively hostile native services.
+- [Microreboot—A technique for cheap
+  recovery](../30-sources/candea-et-al-2004-microreboot.md) — selective restart
+  and outer recovery coordination.
+- [Unreliable failure detectors for reliable distributed
+  systems](../30-sources/chandra-toueg-1996-failure-detectors.md) — separation of
+  suspicion from authoritative failure knowledge.
+- [Finding Race Conditions in Erlang with QuickCheck and
+  PULSE](../30-sources/claessen-et-al-2009-quickcheck-pulse.md) — controlled
+  schedules for differential concurrency tests.
+- [Orca: GC and Type System Co-Design for Actor
+  Languages](../30-sources/clebsch-et-al-2017-orca.md) — ownership assumptions
+  required by zero-copy collection.
+- [Secure Virtual
+  Architecture](../30-sources/criswell-et-al-2007-secure-virtual-architecture.md)
+  — typed execution and consumer-side validation boundaries.
+- [Exokernel](../30-sources/engler-et-al-1995-exokernel.md) — separation of
+  privileged protection/revocation from runtime resource policy.
+- [Kdump](../30-sources/goyal-et-al-2005-kdump.md) — failure-isolated crash
+  capture and preservation.
+- [The Road to the
+  JIT](../30-sources/gustavsson-2020-road-to-the-jit.md) — BeamAsm code
+  publication and implementation history.
+- [CleanQ](../30-sources/haecki-et-al-2019-cleanq.md) — explicit queue ownership
+  and data-path state transitions.
+- [Dependable operating-system
+  construction](../30-sources/herder-et-al-2006-dependable-operating-system.md)
+  — isolated driver services and recovery boundaries.
+- [A brief introduction to
+  BEAM](../30-sources/hogberg-2020-brief-introduction-to-beam.md) — instruction,
+  register, frame, and safe-point background.
+- [A few notes on message
+  passing](../30-sources/hogberg-2021-message-passing.md) — signal queues,
+  message copying, ordering, and selective receive.
+- [Scheduling-context
+  capabilities](../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md)
+  — kernel-accounted temporal authority delegated to runtime schedulers.
+- [Arrakis](../30-sources/peter-et-al-2014-arrakis.md) — delegated data paths and
+  their protection/management boundary.
+- [Efficient memory management for concurrent programs that use message
+  passing](../30-sources/sagonas-wilhelmsson-2006-efficient-memory-management.md)
+  — private heaps, tracing collection, and message copying.
+- [seL4 Reference
+  Manual](../30-sources/sel4-foundation-2026-reference-manual.md) — concrete
+  capability, protection-domain, and invocation mechanics.
+- [Translation validation for a verified OS
+  kernel](../30-sources/sewell-et-al-2013-translation-validation.md) — validating
+  generated low-level artifacts outside the producer.
+- [Improving the reliability of commodity operating
+  systems](../30-sources/swift-et-al-2003-nooks.md) — driver isolation benefits
+  and shared-kernel containment limits.
+- [Recovering device
+  drivers](../30-sources/swift-et-al-2004-recovering-device-drivers.md) — device
+  state recovery and restart limits.
+- [High-resolution
+  timekeeping](../30-sources/terraneo-cattaneo-2026-high-resolution-timekeeping.md)
+  — raw-clock conversion and precision trade-offs beneath runtime timers.
+- [Scaling Reliably: Improving the Scalability of the Erlang Distributed Actor
+  Platform](../30-sources/trinder-et-al-2017-scaling-reliably.md) — distributed
+  Erlang topology and scaling limits.
+- [The Many-to-One Parallel Signal Sending
+  Optimization](../30-sources/winblad-2021-parallel-signal-sending.md) —
+  adaptive sender-striped signal ingress.
+- [Characterizing the scalability of Erlang VM on many-core
+  processors](../30-sources/zhang-2011-erlang-vm-many-core-scalability.md) —
+  scheduler and shared-runtime bottleneck evidence.
+
 ## Threads
 
 - [Managed actor runtime map](../10-maps/managed-actor-runtime.md) now routes

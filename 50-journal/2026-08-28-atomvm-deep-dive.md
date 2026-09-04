@@ -196,6 +196,26 @@ from MDPI and converted locally to text for review. Crossref supplied DOI,
 author, venue, and publication metadata. The ACM paper note is deliberately
 limited because only authoritative metadata and the abstract were reviewed.
 
+## Source manifest
+
+This is the authoritative session-level provenance list. “Newly introduced”
+means that the source note first entered the archive during this deep dive;
+“reused” means that an existing source note substantively informed the work.
+
+### Newly introduced sources
+
+- [AtomVM main documentation](../30-sources/atomvm-project-2026-main-documentation.md) — established the documented runtime, platform, execution, distribution, and compatibility surface.
+- [AtomVM source tree at `0220c78e`](../30-sources/atomvm-project-2026-source-tree.md) — supplied the pinned implementation and platform-boundary audit.
+- [AtomVM v0.7.0-alpha.0 announcement](../30-sources/atomvm-project-2026-v0-7-alpha0.md) — bounded prerelease maturity and post-v0.6 feature evolution.
+- [Ferenczi, Ruda, and Tóth, Measuring Erlang-Based Scalability and Fault Tolerance on the Edge](../30-sources/ferenczi-ruda-toth-2025-measuring-erlang-scalability.md) — supplied ESP32-S3 process, supervision, mailbox, memory, LoRa, and power measurements.
+- [Branch and Weinstock, Functional Programming for the Internet of Things](../30-sources/branch-weinstock-2024-functional-programming-iot.md) — supplied a workload-specific AtomVM/Elixir and C++ LoRa–MQTT comparison.
+- [Ferenczi, Ruda, and Tóth, Evaluating AtomVM for Fault-Tolerant ESP32-Based Systems](../30-sources/ferenczi-ruda-toth-2025-evaluating-atomvm.md) — supplied abstract-level evidence about remote monitoring and redundant-node recovery directions.
+- [AtomVM community, What's on your mind for AtomVM v0.7?](../30-sources/atomvm-community-2025-v0-7-priorities.md) — supplied a dated community agenda for performance, tooling, networking, power, and storage work.
+
+### Reused sources
+
+- None.
+
 ## Threads
 
 - [AtomVM as an operating-system foundation](../20-notes/atomvm-as-an-operating-system-foundation.md)

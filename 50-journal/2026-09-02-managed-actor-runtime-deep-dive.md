@@ -138,6 +138,68 @@ components, local send/activation/collection/cross-domain critical paths,
 implementation stages, an evaluation matrix, provisional decisions, and
 explicit falsifiers.
 
+## Source manifest
+
+The classification records the session in which each source note first entered
+the archive. A source note that already existed and was used substantively in
+this session is listed as reused even when its external publication was newly
+rechecked.
+
+### Newly introduced sources
+
+- [Erlang/OTP 29.0.6 managed-runtime
+  documentation](../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md)
+  — current public process, signal, scheduling, memory, timer, code, ETS,
+  tracing, native-work, and distribution semantics.
+- [A few notes on message
+  passing](../30-sources/hogberg-2021-message-passing.md) — maintainer account
+  of signal queues, message copying, per-sender order, and selective receive.
+- [The Many-to-One Parallel Signal Sending
+  Optimization](../30-sources/winblad-2021-parallel-signal-sending.md) —
+  adaptive sender-striped signal ingress and its focused benchmark.
+- [Orca: GC and Type System Co-Design for Actor
+  Languages](../30-sources/clebsch-et-al-2017-orca.md) — zero-copy actor
+  collection results and the ownership assumptions they require.
+- [Work-Stealing, Locality-Aware Actor
+  Scheduling](../30-sources/barghi-karsten-2018-locality-aware-actor-scheduling.md)
+  — NUMA-sensitive actor placement and stealing evidence.
+- [A scalability benchmark suite for
+  Erlang/OTP](../30-sources/aronis-et-al-2012-scalability-benchmark-suite-erlang-otp.md)
+  — multidimensional runtime-scaling methodology and benchmark coverage.
+- [Finding Race Conditions in Erlang with QuickCheck and
+  PULSE](../30-sources/claessen-et-al-2009-quickcheck-pulse.md) — controlled
+  scheduling as a concurrency-testing method.
+
+### Reused sources
+
+- [Erlang/OTP 29.0.5 system
+  documentation](../30-sources/erlang-otp-team-2026-otp-29-documentation.md)
+  — the preceding documented compatibility baseline.
+- [Erlang/OTP source tree at
+  5cf5f9725452](../30-sources/erlang-otp-team-2026-otp-29-source-tree.md) —
+  pinned ERTS implementation evidence kept separate from public semantics.
+- [A brief introduction to
+  BEAM](../30-sources/hogberg-2020-brief-introduction-to-beam.md) — BEAM
+  execution, register, frame, and liveness background.
+- [The Road to the
+  JIT](../30-sources/gustavsson-2020-road-to-the-jit.md) — BeamAsm publication
+  and implementation history.
+- [Making reliable distributed systems in the presence of software
+  errors](../30-sources/armstrong-2003-making-reliable-distributed-systems.md)
+  — actor isolation, failure signaling, supervision, and reliability baseline.
+- [Efficient memory management for concurrent programs that use message
+  passing](../30-sources/sagonas-wilhelmsson-2006-efficient-memory-management.md)
+  — process-local heaps, tracing collection, and message-copying trade-offs.
+- [Scheduler
+  activations](../30-sources/anderson-et-al-1992-scheduler-activations.md) —
+  separation of kernel processor allocation from user-level scheduling.
+- [Characterizing the scalability of Erlang VM on many-core
+  processors](../30-sources/zhang-2011-erlang-vm-many-core-scalability.md) —
+  historical shared-runtime bottlenecks and many-core measurements.
+- [Scaling Reliably: Improving the Scalability of the Erlang Distributed Actor
+  Platform](../30-sources/trinder-et-al-2017-scaling-reliably.md) — distributed
+  Erlang topology, scale, and reliability evidence.
+
 ## Threads
 
 - [Managed actor runtime layer: evidence, contract, and implementation

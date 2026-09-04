@@ -262,6 +262,84 @@ or compiled-BEAM execution was performed. Statements about the proposed object
 model, state machines, API, and phase plan are therefore marked as design
 decisions or hypotheses rather than demonstrated behavior.
 
+## Source manifest
+
+### Newly introduced sources
+
+- [Scheduler activations](../30-sources/anderson-et-al-1992-scheduler-activations.md)
+  — kernel/runtime scheduling boundary and explicit processor events.
+- [Timing analysis of a protected kernel](../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md)
+  — measured and statically analysed kernel execution bounds.
+- [Tolerating malicious device drivers](../30-sources/boyd-wickizer-zeldovich-2010-malicious-device-drivers.md)
+  — hostile-driver confinement and resource mediation.
+- [Microreboot](../30-sources/candea-et-al-2004-microreboot.md) — fine-grained
+  restart and independently recoverable component scope.
+- [Unreliable failure detectors](../30-sources/chandra-toueg-1996-failure-detectors.md)
+  — separation of suspicion from proved failure.
+- [Hive](../30-sources/chapin-et-al-1995-hive.md) — fault containment limits on
+  shared-memory multiprocessors.
+- [CuriOS](../30-sources/david-et-al-2008-curios.md) — client-state placement for
+  recoverable operating-system services.
+- [Kernel isolation of physical memory](../30-sources/elkaduwe-et-al-2008-kernel-memory-isolation.md)
+  — explicit kernel-object memory and authority accounting.
+- [Time protection](../30-sources/ge-et-al-2019-time-protection.md) — temporal
+  isolation as a distinct resource-protection obligation.
+- [seL4 design principles](../30-sources/heiser-2020-sel4-design-principles.md)
+  — maintainer rationale for a minimal policy-free kernel.
+- [Construction of a highly dependable operating system](../30-sources/herder-et-al-2006-dependable-operating-system.md)
+  — user-space drivers, reincarnation, and recovery services.
+- [On micro-kernel construction](../30-sources/liedtke-1995-microkernel-construction.md)
+  — minimal kernel primitives and IPC-path design.
+- [Scheduling-context capabilities](../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md)
+  — capability-mediated CPU budgets and donation.
+- [Capability myths demolished](../30-sources/miller-et-al-2003-capability-myths.md)
+  — designation, delegation, confinement, and revocation patterns.
+- [seL4 information-flow enforcement](../30-sources/murray-et-al-2013-sel4-information-flow.md)
+  — proved confidentiality scope and covert-channel assumptions.
+- [For a microkernel, a big lock is fine](../30-sources/peters-et-al-2015-big-lock-microkernel.md)
+  — multicore kernel-locking tradeoffs and measured costs.
+- [Design and verification of secure systems](../30-sources/rushby-1981-design-verification-secure-systems.md)
+  — separation-kernel structure and formal security obligations.
+- [The protection of information in computer systems](../30-sources/saltzer-schroeder-1975-protection-information.md)
+  — reference-monitor, least-privilege, and complete-mediation principles.
+- [seL4 reference manual](../30-sources/sel4-foundation-2026-reference-manual.md)
+  — concrete capability, object, IPC, scheduling, and fault semantics.
+- [Vulnerabilities in synchronous IPC designs](../30-sources/shapiro-2003-synchronous-ipc-vulnerabilities.md)
+  — blocking, cancellation, and dependency hazards in synchronous calls.
+- [EROS](../30-sources/shapiro-et-al-1999-eros.md) — pure capabilities,
+  explicit object authority, persistence, and revocation indirection.
+- [Nooks](../30-sources/swift-et-al-2003-nooks.md) — in-kernel extension
+  isolation and the limits of same-address-space recovery.
+- [Recovering device drivers](../30-sources/swift-et-al-2004-recovering-device-drivers.md)
+  — driver restart, state restoration, and client-visible recovery.
+- [Capsicum](../30-sources/watson-et-al-2010-capsicum.md) — pragmatic
+  capability-mode confinement and rights attenuation.
+
+### Reused sources
+
+- [Least-privilege memory protection](../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md)
+  — authority-aware memory, interrupt, and DMA isolation.
+- [Making reliable distributed systems](../30-sources/armstrong-2003-making-reliable-distributed-systems.md)
+  — supervision, failure isolation, and recovery philosophy.
+- [The Multikernel](../30-sources/baumann-et-al-2009-multikernel.md) — per-core
+  state and message-oriented multicore coordination.
+- [From L3 to seL4](../30-sources/elphinstone-heiser-2013-l4-lessons.md) —
+  empirical microkernel minimality and policy placement.
+- [Exokernel](../30-sources/engler-et-al-1995-exokernel.md) — protected resource
+  multiplexing separated from higher-level policy.
+- [Erlang/OTP system documentation](../30-sources/erlang-otp-team-2026-otp-29-documentation.md)
+  — current runtime, supervision, and system-semantics baseline.
+- [Erlang/OTP source tree](../30-sources/erlang-otp-team-2026-otp-29-source-tree.md)
+  — implementation evidence for the runtime/kernel boundary.
+- [CertiKOS](../30-sources/gu-et-al-2016-certikos.md) — layered refinement of
+  concurrent privileged mechanisms.
+- [CleanQ](../30-sources/haecki-et-al-2019-cleanq.md) — ownership transfer for
+  bounded shared-memory and device queues.
+- [Comprehensive seL4 verification](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
+  — end-to-end assurance layers and explicit assumptions.
+- [Thunderclap](../30-sources/markettos-et-al-2019-thunderclap.md) — practical
+  gaps in IOMMU and DMA containment.
+
 ## Threads
 
 - The [minimal privileged-kernel contract
