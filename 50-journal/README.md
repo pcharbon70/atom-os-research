@@ -80,6 +80,10 @@ provenance record.
   records the expanded research across all thirteen service components, exact
   source provenance, shared lifecycle and outcome model, implementation
   recommendations, falsifiers, and absence of prototype evidence.
+- [2026-09-04 Alan Kay and Smalltalk UI deep dive](2026-09-04-alan-kay-smalltalk-ui-deep-dive.md) —
+  records the historical, implementation, HCI, current-platform, security, and
+  accessibility research; attribution controls; complete source provenance;
+  architectural synthesis; and absence of prototype or user-study evidence.
 
 ## Maintaining this index
 

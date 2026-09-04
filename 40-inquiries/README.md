@@ -30,6 +30,10 @@ resolution criteria here. Promote independently useful conclusions to
 
 ### Documents
 
+- [What visual-computing model should Atom OS adopt?](what-visual-computing-model-should-atom-os-adopt.md) —
+  asks whether a user-programmable semantic project can be built from isolated
+  actors, primary accessibility semantics, disposable presentation, and
+  capability-scoped live tools, with explicit usability and recovery tests.
 - [What contract should system-wide authentication and authorization provide?](what-contract-should-system-wide-authentication-and-authorization-provide.md) —
   defines falsifiable evidence, session, policy, grant, capability, revocation,
   recovery, distributed-consistency, and assurance criteria for security

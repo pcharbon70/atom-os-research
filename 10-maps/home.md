@@ -27,6 +27,11 @@ one existing VM implementation the kernel foundation.
 
 ## Active inquiries
 
+- [What visual-computing model should Atom OS
+  adopt?](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+  tests whether a user-programmable semantic project can coexist with isolated
+  actors, capability-scoped live tools, primary accessibility, and restartable
+  presentation services.
 - [What contract should system-wide authentication and authorization
   provide?](../40-inquiries/what-contract-should-system-wide-authentication-and-authorization-provide.md) —
   defines falsifiable human, workload, policy, capability, revocation,
@@ -61,6 +66,10 @@ one existing VM implementation the kernel foundation.
 
 ## Topic maps
 
+- [Alan Kay, Smalltalk, and visual computing](alan-kay-smalltalk-ui.md) —
+  routes through the Dynabook metamedium vision, collective Smalltalk
+  implementation, Star and HCI analysis, current desktop mechanisms, and a
+  capability-safe Atom OS synthesis.
 - [Authentication and authorization](authentication-and-authorization.md) —
   routes from human, workload, node, and recovery evidence through typed
   policy and bounded grants to capability enforcement, revocation, audit,
@@ -92,6 +101,15 @@ one existing VM implementation the kernel foundation.
 
 ## Recently developed
 
+- [Alan Kay's Smalltalk visual interface and the modern
+  desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
+  reconstructs the personal dynamic medium and its components, compares it to
+  application-centered current desktops, and proposes durable semantic actors,
+  user-owned project graphs, disposable rendering, and scoped live tools.
+- [2026-09-04 Alan Kay and Smalltalk UI research
+  session](../50-journal/2026-09-04-alan-kay-smalltalk-ui-deep-dive.md) — records
+  the primary and scholarly literature, current platform review, attribution
+  controls, exhaustive source provenance, and absence of experimental evidence.
 - [Authentication and authorization component deep
   dives](authentication-and-authorization.md#component-implementation-deep-dives) —
   develops one evidence-backed authority boundary, protocol, failure model,

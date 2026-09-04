@@ -29,6 +29,10 @@ should explain why its links belong together rather than merely list files.
 
 ### Documents
 
+- [Alan Kay, Smalltalk, and visual computing](alan-kay-smalltalk-ui.md) —
+  connects the Dynabook and metamedium vision, implemented Smalltalk tools,
+  Star and direct-manipulation lineage, modern desktop mechanisms, and the
+  proposed Atom OS visual-computing model.
 - [Authentication and authorization](authentication-and-authorization.md) —
   routes from human, workload, node, and recovery evidence through versioned
   policy and bounded grants to capability enforcement, revocation, audit, and

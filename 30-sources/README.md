@@ -45,6 +45,7 @@ every journal-manifest backlink.
 | Managed actor runtime | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-02 layer deep dive](../50-journal/2026-09-02-managed-actor-runtime-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-managed-actor-runtime-components-deep-dive.md) |
 | OTP-like system services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-03 system-services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md); [2026-09-04 component deep dive](../50-journal/2026-09-04-otp-like-system-services-components-deep-dive.md) |
 | Authentication and authorization | [Authentication and authorization](../10-maps/authentication-and-authorization.md) | [2026-09-04 deep dive](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md); [2026-09-04 component deep dive](../50-journal/2026-09-04-authentication-and-authorization-components-deep-dive.md) |
+| Alan Kay, Smalltalk, and visual computing | [Alan Kay, Smalltalk, and visual computing](../10-maps/alan-kay-smalltalk-ui.md) | [2026-09-04 Alan Kay and Smalltalk UI deep dive](../50-journal/2026-09-04-alan-kay-smalltalk-ui-deep-dive.md) |
 
 ### Sources introduced outside a deep-dive session
 
@@ -74,6 +75,65 @@ not retroactively labeled as introduced by it:
 
 ### Documents
 
+- [Apple desktop UI framework and design documentation](apple-2026-desktop-ui-frameworks.md) —
+  documents object-based and declarative view construction, application and
+  state lifecycles, sandboxing, macOS conventions, and accessibility semantics.
+- [A conversation with Alan Kay](feldman-kay-2004-conversation-alan-kay.md) —
+  records Kay's later critique of function-access interfaces and his case for
+  an evolving learning environment with a protected meta-level boundary.
+- [Smalltalk-80: The interactive programming environment](goldberg-1984-smalltalk-80-interactive-environment.md) —
+  documents projects, workspaces, browsers, inspectors, debuggers, snapshots,
+  source and change files, and the risks of live system modification.
+- [Direct manipulation interfaces](hutchins-et-al-1985-direct-manipulation-interfaces.md) —
+  distinguishes semantic and articulatory distance, explains direct
+  engagement, and identifies abstraction limits of visible manipulation.
+- [The Smalltalk-76 programming system](ingalls-1978-smalltalk-76-programming-system.md) —
+  gives contemporaneous implementation evidence for communicating objects,
+  reactive components, windows, and content-specific editors.
+- [The evolution of Smalltalk](ingalls-2020-evolution-of-smalltalk.md) —
+  traces live images, BitBlt, Projects, tools, repair, and implementation
+  trade-offs from Smalltalk-72 through Squeak.
+- [A personal computer for children of all ages](kay-1972-personal-computer-for-children.md) —
+  proposes the Dynabook as an owned active medium and connects its device,
+  learning, networking, and uniform object/message requirements.
+- [User interface: A personal view](kay-1990-user-interface-personal-view.md) —
+  explains Kay's action–image–symbol learning gradient, object-first
+  interaction, windows, modelessness, and computer-as-medium rationale.
+- [The early history of Smalltalk](kay-1993-early-history-smalltalk.md) —
+  provides Kay's participant history, interface intent, team attribution,
+  implementation account, and mixed educational evidence.
+- [Personal dynamic media](kay-goldberg-1977-personal-dynamic-media.md) —
+  develops the active metamedium, dynamic document, media-specific editing,
+  simulation, instrument-like response, and user tool-making model.
+- [The Smalltalk-80 MVC cookbook](krasner-pope-1988-mvc-smalltalk-80.md) —
+  documents model/view/controller dependencies, view composition, reusable
+  interface components, editors, browsers, and debuggers.
+- [Alan Kay's universal media machine](manovich-2007-alan-kay-universal-media-machine.md) —
+  independently analyzes the metamedium, new computational media, user
+  authorship, and the narrowing effect of commercial application boundaries.
+- [Windows desktop UI architecture documentation](microsoft-2026-desktop-ui-architecture.md) —
+  records current official composition, GPU, toolkit, accessibility, lifecycle,
+  and optional AppContainer-isolation contracts.
+- [Live objects all the way down](pimas-et-al-2023-live-objects-all-the-way-down.md) —
+  evaluates a live metacircular Smalltalk-derived runtime through collector,
+  JIT, and SIMD case studies.
+- [Models-views-controllers](reenskaug-1979-models-views-controllers.md) —
+  defines the original MVC roles and establishes Reenskaug's attribution.
+- [Designing the Star user interface](smith-et-al-1982-designing-star-user-interface.md) —
+  documents the separate Star team's office desktop metaphor, universal
+  commands, interaction principles, and product discipline.
+- [The Smalltalk environment](tesler-1981-smalltalk-environment.md) —
+  gives a participant account of integrated tools, windows, modeless editing,
+  browser lineage, snapshots, and collective implementation.
+- [Learnable programming](victor-2012-learnable-programming.md) —
+  argues through interactive examples for visible vocabulary, execution,
+  state, flow, causality, and progressive abstraction.
+- [Web Content Accessibility Guidelines 2.2](w3c-2024-wcag-2-2.md) —
+  specifies testable, technology-neutral perceivability, operability,
+  understandability, robustness, semantic, and keyboard criteria.
+- [Wayland architecture and protocol](wayland-project-2026-architecture-and-protocol.md) —
+  documents current kernel, compositor, client-surface, buffer, focus, seat,
+  and input-routing boundaries.
 - [A least-privilege memory protection model for modern hardware](achermann-et-al-2019-least-privilege-memory-protection.md) —
   separates authority to configure address translation from authority to
   access the translated memory across CPUs and devices.
