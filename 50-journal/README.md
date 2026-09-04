@@ -59,6 +59,10 @@ notes.
   records the expanded research across all eleven capability-microkernel
   components, source and design review method, cross-component lifecycle
   synthesis, falsifiers, and explicit lack of prototype evidence.
+- [2026-09-03 OTP-like system services deep dive](2026-09-03-otp-like-system-services-deep-dive.md) —
+  records the current OTP baseline, scientific papers, standards and
+  engineering evidence, thirteen-component synthesis method, architectural
+  distinctions, and explicit lack of prototype evidence.
 
 ## Maintaining this index
 

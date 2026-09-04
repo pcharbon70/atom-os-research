@@ -58,6 +58,11 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   execution-stop domains, bounded IPC and CPU budgets, revocation anchors,
   structured fault routes, and quiescence- or quarantine-gated recovery, with
   each component linked to its detailed evidence and implementation report.
+- [OTP-like system services layer](otp-like-system-services-layer.md) —
+  develops thirteen unprivileged policy components for lifecycle, behaviours,
+  supervision, naming, configuration and identity, durable outcomes, device
+  and network services, distributed coordination, updates, overload, and
+  operations.
 
 ## Maintaining this index
 

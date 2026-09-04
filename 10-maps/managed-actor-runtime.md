@@ -41,6 +41,10 @@ JIT, or in-process NIF.
 - [Managed actor runtime component
   index](../20-notes/managed-actor-runtime-components/README.md) — the complete
   local inventory of the thirteen implementation deep dives.
+- [OTP-like system services
+  layer](../20-notes/otp-like-system-services-layer.md) — the consumer of this
+  runtime's actor mechanisms and the owner of restart, naming, persistence,
+  distribution trust, update, overload, and operations policy.
 - [Managed-runtime contract inquiry](../40-inquiries/what-contract-should-the-managed-actor-runtime-provide.md)
   — the open decisions, falsifiers, and minimum experiments.
 - [2026-09-02 managed actor runtime deep

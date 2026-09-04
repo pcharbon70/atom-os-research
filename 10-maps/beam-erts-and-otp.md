@@ -52,6 +52,14 @@ kernel ABI, and the project is not committed to one existing VM implementation.
   dives](managed-actor-runtime.md#component-implementation-deep-dives) — the
   thirteen detailed implementation recommendations and their falsifiable
   experiments.
+- [OTP-like system services
+  layer](../20-notes/otp-like-system-services-layer.md) — the detailed
+  architecture above the runtime: thirteen unprivileged policy components,
+  cross-cutting lifecycle and outcome contracts, implementation stages, and
+  evaluation criteria.
+- [OTP-like system services map](otp-like-system-services.md) — the focused
+  route through lifecycle, persistence, I/O policy, distributed authority,
+  updates, overload, and operational evidence.
 - [Which BEAM, ERTS, and OTP principles belong in a new
   kernel?](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
   the open decision and its falsifiable evaluation criteria.
@@ -162,12 +170,27 @@ kernel ABI, and the project is not committed to one existing VM implementation.
   fault contracts that a managed actor runtime would consume without turning
   BEAM or OTP policy into architecture code.
 
+### OTP-like system-service policy
+
+- [OTP-like system services](otp-like-system-services.md) covers the
+  unprivileged layer that turns runtime and kernel mechanisms into lifecycle,
+  recovery, naming, persistence, device/network, distribution, update,
+  overload, and operations policy.
+- [Erlang/OTP 29.0.6 system-services
+  documentation](../30-sources/erlang-otp-team-2026-otp-29-0-6-system-services-documentation.md)
+  records the current public behaviour and its semantic hazards.
+- [What contract should the OTP-like system-services layer
+  provide?](../40-inquiries/what-contract-should-the-otp-like-system-services-layer-provide.md)
+  keeps the proposed guarantees falsifiable.
+
 ## Open questions
 
 - [What contract should the minimal privileged kernel
   provide?](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)
 - [What contract should the managed actor runtime
   provide?](../40-inquiries/what-contract-should-the-managed-actor-runtime-provide.md)
+- [What contract should the OTP-like system-services layer
+  provide?](../40-inquiries/what-contract-should-the-otp-like-system-services-layer-provide.md)
 - [What contract should the kernel hardware and architecture layer
   provide?](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
 - [Which BEAM, ERTS, and OTP principles belong in a new

@@ -79,3 +79,7 @@ runtime memory.
 - [Runtime-domain bootstrap and kernel adapter](../20-notes/managed-actor-runtime-components/runtime-domain-bootstrap-and-kernel-adapter.md)
 - [Managed actor runtime layer](../20-notes/managed-actor-runtime-layer.md)
 - [2026-09-03 component research journal](../50-journal/2026-09-03-managed-actor-runtime-components-deep-dive.md)
+- [OTP-like system services layer](../20-notes/otp-like-system-services-layer.md)
+- [OTP-like system services map](../10-maps/otp-like-system-services.md)
+- [OTP-like system-services contract inquiry](../40-inquiries/what-contract-should-the-otp-like-system-services-layer-provide.md)
+- [2026-09-03 OTP-like system services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md)

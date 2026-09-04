@@ -130,3 +130,7 @@ requirements for a new kernel.
 - [BEAM, ERTS, and OTP principles for a new operating system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
 - [BEAM, ERTS, and OTP map](../10-maps/beam-erts-and-otp.md)
 - [Kernel-placement inquiry](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)
+- [OTP-like system services layer](../20-notes/otp-like-system-services-layer.md)
+- [OTP-like system services map](../10-maps/otp-like-system-services.md)
+- [OTP-like system-services contract inquiry](../40-inquiries/what-contract-should-the-otp-like-system-services-layer-provide.md)
+- [2026-09-03 OTP-like system services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md)

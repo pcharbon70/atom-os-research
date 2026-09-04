@@ -43,6 +43,10 @@ resolution criteria here. Promote independently useful conclusions to
 - [What contract should the minimal privileged kernel provide?](what-contract-should-the-minimal-privileged-kernel-provide.md) —
   defines falsifiable capability, domain, IPC, temporal-isolation, fault,
   teardown, recovery-independence, BEAM-compatibility, and assurance criteria.
+- [What contract should the OTP-like system-services layer provide?](what-contract-should-the-otp-like-system-services-layer-provide.md) —
+  defines falsifiable lifecycle, outcome, durability, naming, distributed
+  authority, update, overload, evidence, and outer-recovery criteria for the
+  unprivileged policy layer.
 - [Which BEAM, ERTS, and OTP principles belong in a new kernel?](which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
   defines layer-placement criteria for required BEAM compatibility, compares
   a pinned ERTS port with a new compatible runtime, and specifies the minimum

@@ -424,7 +424,7 @@ The following is a hypothesis to test, not a settled design:
 | [Kernel hardware and architecture support](kernel-hardware-and-architecture-support-layer.md) | Privileged entry and context, protection transitions, ordering and code publication, interrupt events, raw time, logical-CPU coordination, protected I/O, and architecture faults | Architecture and privilege boundary; port-specific mechanism without board bring-up or device policy |
 | [Minimal privileged kernel](minimal-privileged-kernel-layer.md) | Typed capability spaces, explicit kernel-object memory, first-class protection domains, address spaces and mappings, bounded invocation, scheduling-context budgets, authorized IRQ/timer/DMA bindings, structured faults, and quiescence-gated reaping | A domain provides coordinated execution stop and lifecycle isolation; shared state, device reset, and external effects may have larger recovery boundaries; kernel failure remains system-wide |
 | [Managed actor runtime](managed-actor-runtime-layer.md) | Term representation, very lightweight actors, process heaps and GC, reduction accounting, signal protocols, mailbox implementation, loader and safe points, runtime tracing | One protected runtime domain; ordinary actor failures contained within it |
-| OTP-like system services | Supervisors, behaviours, device-service policy, naming, storage, networking, update orchestration, metrics, configuration | Supervision tree or service domain; replaceable without kernel change |
+| [OTP-like system services](otp-like-system-services-layer.md) | Supervisors, behaviours, lifecycle, device-service policy, naming, configuration and identity, durable state, networking, distributed coordination, update orchestration, overload control, metrics, and audit | Supervision tree or protected service domain; unprivileged and replaceable without kernel change |
 | Applications | Domain protocols and state machines, organized as supervised trees with declared capabilities and budgets | Application subtree or protected application domain |
 
 This shape intentionally has both kernel scheduling and runtime scheduling. The
@@ -622,6 +622,12 @@ treated as proof.
 - [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
   connects that proposal to its protection, IPC, failure, driver, and assurance
   evidence.
+- [OTP-like system services layer](otp-like-system-services-layer.md) develops
+  the unprivileged lifecycle, supervision, naming, durable-state, I/O-policy,
+  distribution, update, overload, and operations layer proposed here.
+- [OTP-like system services map](../10-maps/otp-like-system-services.md) routes
+  through that report, its open contract inquiry, research journal, and
+  primary evidence.
 - [Which principles belong in the
   kernel?](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)
   keeps the architectural placement decision open.
