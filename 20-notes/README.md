@@ -26,6 +26,10 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Subdirectories
 
+- [Authentication and authorization components](authentication-and-authorization-components/README.md) —
+  contains the sixteen detailed component-level implementation syntheses for
+  the authentication, identity, policy, grant, revocation, secret, audit,
+  recovery, update, and federation control plane.
 - [Kernel hardware and architecture components](kernel-hardware-and-architecture-components/README.md) —
   contains the eleven detailed component-level implementation syntheses for
   the kernel hardware and architecture support layer.
@@ -35,6 +39,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 - [Minimal privileged kernel components](minimal-privileged-kernel-components/README.md) —
   contains the eleven detailed component-level implementation syntheses for
   the capability-microkernel layer.
+- [OTP-like system services components](otp-like-system-services-components/README.md) —
+  contains the thirteen detailed component-level implementation syntheses for
+  the unprivileged service-policy layer.
 
 ### Documents
 
@@ -67,7 +74,8 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   develops thirteen unprivileged policy components for lifecycle, behaviours,
   supervision, naming, configuration and identity, durable outcomes, device
   and network services, distributed coordination, updates, overload, and
-  operations.
+  operations, with each component linked to a detailed evidence and
+  implementation report.
 
 ## Maintaining this index
 

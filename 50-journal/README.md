@@ -72,6 +72,14 @@ provenance record.
   records the cross-layer literature and standards search, current source
   revisions, security synthesis and independent review, and explicit absence
   of implementation or hardware evidence.
+- [2026-09-04 authentication and authorization components deep dive](2026-09-04-authentication-and-authorization-components-deep-dive.md) —
+  records the expanded research across all sixteen proposed security services,
+  exact source provenance, shared authority and lifecycle contracts,
+  falsifiers, and absence of prototype evidence.
+- [2026-09-04 OTP-like system services components deep dive](2026-09-04-otp-like-system-services-components-deep-dive.md) —
+  records the expanded research across all thirteen service components, exact
+  source provenance, shared lifecycle and outcome model, implementation
+  recommendations, falsifiers, and absence of prototype evidence.
 
 ## Maintaining this index
 

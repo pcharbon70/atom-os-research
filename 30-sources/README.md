@@ -43,8 +43,8 @@ every journal-manifest backlink.
 | Kernel hardware and architecture | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-08-30 layer deep dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md); [2026-09-02 component deep dive](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md) |
 | Minimal privileged kernel | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-08-31 layer deep dive](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md) |
 | Managed actor runtime | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-02 layer deep dive](../50-journal/2026-09-02-managed-actor-runtime-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-managed-actor-runtime-components-deep-dive.md) |
-| OTP-like system services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-03 system-services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md) |
-| Authentication and authorization | [Authentication and authorization](../10-maps/authentication-and-authorization.md) | [2026-09-04 deep dive](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md) |
+| OTP-like system services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-03 system-services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md); [2026-09-04 component deep dive](../50-journal/2026-09-04-otp-like-system-services-components-deep-dive.md) |
+| Authentication and authorization | [Authentication and authorization](../10-maps/authentication-and-authorization.md) | [2026-09-04 deep dive](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md); [2026-09-04 component deep dive](../50-journal/2026-09-04-authentication-and-authorization-components-deep-dive.md) |
 
 ### Sources introduced outside a deep-dive session
 
@@ -574,6 +574,145 @@ not retroactively labeled as introduced by it:
 - [Verified security for the Morello capability-enhanced prototype Arm architecture](bauereiss-et-al-2022-verified-morello-security.md) —
   proves selected architectural security properties for a formal Morello
   model and carefully bounds what hardware-capability evidence can transfer.
+- [Exponential backoff and jitter](brooker-2015-exponential-backoff-jitter.md) —
+  explains how capped randomized retry schedules reduce synchronized
+  contention while preserving their workload-specific limitations.
+- [The Erlang start phase](burcsi-et-al-2010-erlang-start-phase.md) — analyzes
+  dependency-aware parallel startup and records the benchmark and compatibility
+  limits of the proposed Erlang wrapper.
+- [FSCQ](chen-et-al-2015-fscq.md) — connects crash specifications,
+  write-ahead logging, recovery, and machine-checked filesystem behavior while
+  preserving the proof's storage-model boundary.
+- [etcd API guarantees](etcd-project-2026-api-guarantees.md) — records
+  revisioned updates, consistency classes, ordered watches, compaction, and
+  explicit resynchronization behavior.
+- [xDS REST and gRPC protocol](envoy-project-2026-xds-protocol.md) — records
+  versioned configuration delivery, ACK/NACK semantics, reconnection, and the
+  distinction between validation and actual activation.
+- [Leases](gray-cheriton-1989-leases.md) — derives time-bounded cache validity
+  tradeoffs and exposes the timing assumptions that constrain lease safety.
+- [Vault secrets, leases, and security model](hashicorp-2026-vault-secrets-and-leases.md) —
+  records dynamic credential lifetime, renewal, revocation lineage, key
+  rotation, and product threat-model limits.
+- [sDDF design](heiser-et-al-2026-sddf-design.md) — specifies isolated driver
+  and virtualizer components, bounded ownership queues, selective shared
+  memory, and IOMMU-backed DMA containment.
+- [Gray failure](huang-et-al-2017-gray-failure.md) — characterizes partial and
+  perspective-dependent failures that evade binary health detection in
+  cloud-scale systems.
+- [QUIC](iyengar-thomson-2021-quic.md) — specifies secure multiplexed
+  transport, connection and stream flow control, path migration, and 0-RTT
+  replay limits without claiming application commit.
+- [A global name service for a highly decentralized system](lampson-1986-global-name-service.md) —
+  distinguishes stable names from changing locations and analyzes caching,
+  hierarchy, and failure in decentralized naming.
+- [TOSCA 2.0](oasis-2025-tosca-2.md) — defines a current typed service-model
+  representation and orchestration vocabulary while leaving implementation
+  and rollback behavior non-prescriptive.
+- [OpenTelemetry specification 1.60](opentelemetry-project-2026-specification-1-60.md) —
+  records the current traces, metrics, logs, context, sampling, limits, and
+  exporter contract as interoperability evidence.
+- [End-to-end arguments in system design](saltzer-et-al-1984-end-to-end-arguments.md) —
+  explains why lower-layer delivery and checks cannot replace correctness
+  checks at the application's actual boundary.
+- [Omega](schwarzkopf-et-al-2013-omega.md) — evaluates shared-state,
+  optimistic, version-checked scheduling by specialized cluster controllers.
+- [Anvil](sun-et-al-2024-anvil.md) — verifies eventually stable reconciliation
+  for generated controllers and makes liveness assumptions and wrapper trust
+  explicit.
+- [Android Protected Confirmation](android-project-2026-protected-confirmation.md) —
+  documents a TEE-backed trusted user-confirmation path whose token is
+  cryptographically authenticated and bound to the displayed message.
+- [Recommendation for key management: Part 1 – General](barker-2020-key-management.md) —
+  defines cryptographic-key lifecycle states, protection requirements,
+  compromise handling, destruction, accountability, and metadata.
+- [RATS Conceptual Message Wrapper](birkholz-et-al-2026-rats-conceptual-message-wrapper.md) —
+  defines typed wrappers for attestation evidence, appraisal policy,
+  endorsements, reference values, and attestation results.
+- [Argon2 memory-hard function for password hashing](biryukov-et-al-2021-argon2.md) —
+  specifies the Argon2 password-hashing construction, parameter choices, and
+  memory-hardness tradeoffs for a confined compatibility verifier.
+- [Secrets, lies, and account recovery](bonneau-et-al-2015-secrets-lies-account-recovery.md) —
+  empirically studies account-recovery mechanisms and exposes recovery as a
+  distinct, frequently weaker authentication system.
+- [OAuth 2.0 mutual-TLS client authentication and certificate-bound access tokens](campbell-et-al-2020-oauth-mutual-tls.md) —
+  specifies mutual-TLS client authentication and proof-of-possession binding
+  for externally federated OAuth tokens.
+- [Efficient data structures for tamper-evident logging](crosby-wallach-2009-tamper-evident-logging.md) —
+  develops authenticated append-only data structures and efficient proofs for
+  tamper-evident audit histories.
+- [The Web SSO standard OpenID Connect](fett-et-al-2017-openid-connect-security.md) —
+  gives a formal security analysis of OpenID Connect and identifies protocol-
+  composition and deployment conditions needed for its guarantees.
+- [FIDO Metadata Service](fido-alliance-2026-metadata-service.md) —
+  specifies signed authenticator metadata, certification and status records,
+  and relying-party processing for credential inventory and risk decisions.
+- [Guide to attribute based access control definition and considerations](hu-et-al-2014-attribute-based-access-control.md) —
+  defines ABAC actors, attributes, policies, environmental inputs, and the
+  governance concerns behind authoritative attribute services.
+- [Security Event Token](hunt-et-al-2018-security-event-token.md) —
+  specifies an interoperable signed security-event envelope plus event and
+  ordering semantics, while leaving delivery reliability to profiles.
+- [OAuth 2.0 token exchange](jones-et-al-2020-oauth-token-exchange.md) —
+  specifies explicit subject-token, actor-token, audience, resource, and scope
+  semantics for bounded external delegation and impersonation.
+- [Signed syslog messages](kelsey-et-al-2010-signed-syslog-messages.md) —
+  specifies cryptographic signatures, certificate blocks, replay protection,
+  and loss detection for syslog event streams.
+- [Guide to computer security log management](kent-souppaya-2006-log-management.md) —
+  treats log generation, transport, storage, analysis, retention, and incident
+  response as an operational lifecycle with capacity and availability limits.
+- [Certificate Transparency version 2.0](laurie-et-al-2021-certificate-transparency-v2.md) —
+  specifies Merkle-tree commitments and consistency and inclusion proofs for
+  independently witnessed append-only logs.
+- [OAuth 2.0 token revocation](lodderstedt-et-al-2013-oauth-token-revocation.md) —
+  specifies a revocation endpoint while making propagation delay, validation
+  behavior, and short-lived-token limitations explicit.
+- [A firmware update architecture for Internet of Things](moran-et-al-2021-firmware-update-architecture.md) —
+  separates update authorship, distribution, manifest processing, installation,
+  trust anchors, and anti-rollback responsibilities.
+- [A manifest information model for firmware updates in IoT devices](moran-et-al-2022-firmware-manifest-information-model.md) —
+  defines typed firmware applicability, dependency, storage, sequencing,
+  cryptographic, and installation metadata.
+- [eXtensible Access Control Markup Language version 3.0 plus Errata 01](oasis-2017-xacml-3-0.md) —
+  specifies policy decision, administration, information, and enforcement
+  roles plus obligations, combining algorithms, and indeterminate outcomes.
+- [PKCS #11 Cryptographic Token Interface Usage Guide version 3.2](oasis-2025-pkcs11-usage-guide-3-2.md) —
+  records practical token, session, login, object, concurrency, and recovery
+  behavior that constrains a safe cryptographic-service wrapper.
+- [PKCS #11 Specification version 3.2](oasis-2026-pkcs11-3-2.md) —
+  defines cryptographic-token objects, mechanisms, sessions, authentication,
+  operation state, and error contracts.
+- [Platform firmware resiliency guidelines](regenscheid-2018-platform-firmware-resiliency.md) —
+  defines protection, detection, and recovery roots for resisting unauthorized
+  firmware changes and restoring known-good platform state.
+- [OAuth 2.0 token introspection](richer-2015-oauth-token-introspection.md) —
+  specifies authenticated active-state queries for externally issued tokens
+  and clarifies the freshness-versus-availability tradeoff.
+- [The NIST model for role-based access control](sandhu-et-al-2000-nist-rbac-model.md) —
+  unifies flat, hierarchical, constrained, and symmetric RBAC and formalizes
+  sessions and separation-of-duty constraints.
+- [JSON Web Token best current practices](sheffer-et-al-2020-jwt-best-practices.md) —
+  catalogues algorithm, key, issuer, audience, substitution, replay, and cross-
+  JWT confusion hazards for any confined token parser.
+- [SPIFFE Federation](spiffe-project-2026-federation.md) —
+  documents explicit trust-domain bundle exchange and name authentication while
+  leaving local workload authorization to relying parties.
+- [The X.509 SPIFFE Verifiable Identity Document](spiffe-project-2026-x509-svid.md) —
+  defines exact SPIFFE URI identity, leaf/signing-certificate, key-usage,
+  path-validation, and bundle constraints for X.509-SVIDs.
+- [in-toto: Providing farm-to-table guarantees for bits and bytes](torres-arias-et-al-2019-in-toto.md) —
+  binds software-supply-chain steps, actors, materials, products, and layout
+  policy into verifiable provenance metadata.
+- [The Update Framework Specification version 1.0.36](tuf-project-2026-specification-1-0-36.md) —
+  defines role-separated signed metadata, thresholds, delegation, expiration,
+  consistent snapshots, and rollback and freeze resistance.
+- [Uptane Standard for Design and Implementation version 2.1.0](uptane-community-2023-standard-2-1-0.md) —
+  extends role-separated update metadata with vehicle-specific inventory,
+  assignment, installation reporting, and compromise-resilient recovery.
+- [User interaction design for secure systems](yee-2002-user-interaction-design-secure-systems.md) —
+  derives trusted-path and authorization-interface principles from the limits
+  of user attention, distinguishability, and untrusted application surfaces.
 
 ## Maintaining this index
 

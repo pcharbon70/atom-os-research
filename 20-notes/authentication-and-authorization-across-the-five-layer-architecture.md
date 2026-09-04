@@ -356,22 +356,29 @@ single identity daemon:
 
 | Service | Holds | Does not hold |
 | --- | --- | --- |
-| Trusted-interaction broker | Exclusive trusted display/input lease, ceremony state, request-bound challenge channel | Arbitrary resource capabilities, policy-edit rights, raw long-term keys |
-| Credential registrar and inventory | Principal-to-authenticator bindings, assurance metadata, lifecycle status | General application authority or hidden credential removal |
-| Authentication verifier | Protocol-specific verification envelopes, replay state, rate limits | Policy-edit or arbitrary capability-minting authority |
-| Session service | Session anchors, assurance/age, proof-of-possession binding, generation, expiry | The principal's complete possible authority |
-| Workload identity issuer | Manifest/domain evidence and narrowly scoped workload credentials | Human credentials, roles inferred from names, application data |
-| RATS Verifier and Appraisal Policy owner | Evidence appraisal, endorsements, reference values, freshness policy | Direct resource capabilities or application policy |
-| Relationship authority | Versioned ownership, membership, sharing, and revocation facts | Authentication secrets or arbitrary effect authority |
-| Attribute authorities | Signed, typed, short-lived claims with provenance | Self-asserted values or policy decisions |
-| Policy decision point | Pure evaluation over versioned inputs | Side effects, credentials, kernel authority, or mutable lookup during evaluation |
-| Grant compiler/issuer | A bounded capability envelope and one decision-to-grant transformation | Policy-edit, credential, recovery, audit-deletion, or unlimited minting authority |
-| Revocation and epoch service | Session/object/relation epochs, ordered invalidations, freshness watermarks | Secret disclosure or silent recovery activation |
-| Key and secret service | Non-exportable key handles, sealed objects, explicit sign/decrypt/derive facets | Policy bypass, debugging access, raw-key export by default |
-| Audit and witness services | Append-only event admission, forward-integrity state, external commitments | Credential secrets, policy bypass, unilateral log deletion |
-| Recovery coordinator | Predeclared recovery workflow and narrowly scoped recovery envelopes | Ordinary administrator session or universal read authority |
-| Update/release service | Threshold verification, freshness and rollback policy for signed artifacts | Identity-root, audit-root, or recovery-root keys |
-| Federation gateway | Remote protocol parsing, issuer/audience/PoP validation, local capability derivation within its envelope | Deserializing a kernel capability or trusting network location |
+| [Trusted-interaction broker](authentication-and-authorization-components/trusted-interaction-broker.md) | Exclusive trusted display/input lease, ceremony state, request-bound challenge channel | Arbitrary resource capabilities, policy-edit rights, raw long-term keys |
+| [Credential registrar and inventory](authentication-and-authorization-components/credential-registrar-and-inventory.md) | Principal-to-authenticator bindings, assurance metadata, lifecycle status | General application authority or hidden credential removal |
+| [Authentication verifier](authentication-and-authorization-components/authentication-verifier.md) | Protocol-specific verification envelopes, replay state, rate limits | Policy-edit or arbitrary capability-minting authority |
+| [Session service](authentication-and-authorization-components/session-service.md) | Session anchors, assurance/age, proof-of-possession binding, generation, expiry | The principal's complete possible authority |
+| [Workload identity issuer](authentication-and-authorization-components/workload-identity-issuer.md) | Manifest/domain evidence and narrowly scoped workload credentials | Human credentials, roles inferred from names, application data |
+| [RATS Verifier and Appraisal Policy owner](authentication-and-authorization-components/rats-verifier-and-appraisal-policy.md) | Evidence appraisal, endorsements, reference values, freshness policy | Direct resource capabilities or application policy |
+| [Relationship authority](authentication-and-authorization-components/relationship-authority.md) | Versioned ownership, membership, sharing, and revocation facts | Authentication secrets or arbitrary effect authority |
+| [Attribute authorities](authentication-and-authorization-components/attribute-authorities.md) | Signed, typed, short-lived claims with provenance | Self-asserted values or policy decisions |
+| [Policy decision point](authentication-and-authorization-components/policy-decision-point.md) | Pure evaluation over versioned inputs | Side effects, credentials, kernel authority, or mutable lookup during evaluation |
+| [Grant compiler/issuer](authentication-and-authorization-components/grant-compiler-and-issuer.md) | A bounded capability envelope and one decision-to-grant transformation | Policy-edit, credential, recovery, audit-deletion, or unlimited minting authority |
+| [Revocation and epoch service](authentication-and-authorization-components/revocation-and-epoch-service.md) | Session/object/relation epochs, ordered invalidations, freshness watermarks | Secret disclosure or silent recovery activation |
+| [Key and secret service](authentication-and-authorization-components/key-and-secret-service.md) | Non-exportable key handles, sealed objects, explicit sign/decrypt/derive facets | Policy bypass, debugging access, raw-key export by default |
+| [Audit and witness services](authentication-and-authorization-components/audit-and-witness-services.md) | Append-only event admission, forward-integrity state, external commitments | Credential secrets, policy bypass, unilateral log deletion |
+| [Recovery coordinator](authentication-and-authorization-components/recovery-coordinator.md) | Predeclared recovery workflow and narrowly scoped recovery envelopes | Ordinary administrator session or universal read authority |
+| [Update/release service](authentication-and-authorization-components/update-and-release-service.md) | Threshold verification, freshness and rollback policy for signed artifacts | Identity-root, audit-root, or recovery-root keys |
+| [Federation gateway](authentication-and-authorization-components/federation-gateway.md) | Remote protocol parsing, issuer/audience/PoP validation, local capability derivation within its envelope | Deserializing a kernel capability or trusting network location |
+
+The [component research index](authentication-and-authorization-components/README.md)
+develops each row as a separate evidence-backed implementation report. The
+reports use the same review frame—authority boundary, typed objects, protocol
+and supervision, failure and compromise behavior, verification, and staged
+implementation—so their contracts can be checked together rather than treated
+as sixteen independent daemons.
 
 No service should combine policy editing, identity proofing, evidence
 verification, arbitrary grant issuance, revocation override, update signing,
@@ -1442,12 +1449,20 @@ classes warrant information-flow enforcement.
   the unprivileged policy and lifecycle setting for the control-plane services.
 - [Authentication and authorization map](../10-maps/authentication-and-authorization.md)
   provides a shorter route through the design and evidence.
+- [Authentication and authorization component
+  research](authentication-and-authorization-components/README.md) develops
+  one detailed architecture, protocol, failure analysis, verification plan,
+  and staged implementation path for each proposed layer-4 security service.
 - [What contract should system-wide authentication and authorization
   provide?](../40-inquiries/what-contract-should-system-wide-authentication-and-authorization-provide.md)
   retains the open design decisions and falsification program.
 - [2026-09-04 authentication and authorization deep
   dive](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md)
   records the research method, source families, and evidence limits.
+- [2026-09-04 authentication and authorization components deep
+  dive](../50-journal/2026-09-04-authentication-and-authorization-components-deep-dive.md)
+  records the component-level search, exact source provenance, cross-service
+  conclusions, falsifiers, and remaining evidence gaps.
 
 ## Sources
 

@@ -92,6 +92,24 @@ one existing VM implementation the kernel foundation.
 
 ## Recently developed
 
+- [Authentication and authorization component deep
+  dives](authentication-and-authorization.md#component-implementation-deep-dives) —
+  develops one evidence-backed authority boundary, protocol, failure model,
+  verification plan, and staged implementation for each of the sixteen
+  proposed OTP-like security services.
+- [2026-09-04 authentication and authorization component research
+  session](../50-journal/2026-09-04-authentication-and-authorization-components-deep-dive.md) —
+  records the expanded scientific, standards, and engineering review, exact
+  source provenance, cross-service conclusions, falsifiers, and absence of
+  prototype evidence.
+- [OTP-like system services component deep
+  dives](otp-like-system-services.md#component-route) — develops one
+  evidence-backed architecture and implementation recommendation for each of
+  the thirteen unprivileged service-policy components.
+- [2026-09-04 OTP-like system services component research
+  session](../50-journal/2026-09-04-otp-like-system-services-components-deep-dive.md) —
+  records the expanded source review, exact provenance, shared generation and
+  outcome model, falsifiers, and absence of prototype evidence.
 - [Authentication and authorization across the five-layer
   architecture](../20-notes/authentication-and-authorization-across-the-five-layer-architecture.md) —
   proposes an identity/policy control plane plus a capability data plane, with

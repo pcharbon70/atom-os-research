@@ -33,12 +33,91 @@ unauthenticated bypass.
   plane and a kernel-enforced capability data plane, then specifies human and
   workload authentication, grant contracts, revocation, recovery, audit, and
   evaluation.
+- [Component implementation deep dives](../20-notes/authentication-and-authorization-components/README.md)
+  develop each of the sixteen proposed OTP-like security services as an
+  explicit authority boundary, typed protocol, supervised state machine,
+  failure contract, verification target, and staged implementation.
 - [Open system-wide security contract inquiry](../40-inquiries/what-contract-should-system-wide-authentication-and-authorization-provide.md)
   keeps the unresolved profile, protocol, policy, consistency, hardware,
   recovery, and assurance choices falsifiable.
 - [2026-09-04 research journal](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md)
   records the research method, evidence families, current source revisions,
   and explicit absence of implementation evidence.
+- [2026-09-04 component research journal](../50-journal/2026-09-04-authentication-and-authorization-components-deep-dive.md)
+  records the expanded scientific, standards, and engineering search, exact
+  source provenance, cross-service conclusions, falsifiers, and remaining
+  evidence gaps.
+
+## Component implementation deep dives
+
+The control plane is decomposed into sixteen separately confined services,
+numbered 0 through 15. Each report preserves one invariant: these services may
+interpret evidence and policy, but only a bounded capability accepted at the
+actual effect boundary authorizes local execution.
+
+### Human authentication and session continuity
+
+- [0. Trusted-interaction broker](../20-notes/authentication-and-authorization-components/trusted-interaction-broker.md) —
+  develops secure attention, exclusive input/display leasing, canonical
+  request rendering, one-shot confirmation, and explicit abort behavior.
+- [1. Credential registrar and inventory](../20-notes/authentication-and-authorization-components/credential-registrar-and-inventory.md) —
+  develops transactional enrollment and an auditable, visible authenticator
+  lifecycle whose tombstones resist rollback and hidden reactivation.
+- [2. Authentication verifier](../20-notes/authentication-and-authorization-components/authentication-verifier.md) —
+  confines protocol parsing, challenge verification, password compatibility,
+  replay defense, throttling, and bounded evidence production.
+- [3. Session service](../20-notes/authentication-and-authorization-components/session-service.md) —
+  models authenticated continuity as a proof-of-possession-capable,
+  generation-bound context rather than ambient user authority.
+
+### Workload evidence and policy inputs
+
+- [4. Workload identity issuer](../20-notes/authentication-and-authorization-components/workload-identity-issuer.md) —
+  derives short-lived credentials from kernel-authenticated incarnations and
+  versioned registration policy without inferring roles from names.
+- [5. RATS Verifier and Appraisal Policy](../20-notes/authentication-and-authorization-components/rats-verifier-and-appraisal-policy.md) —
+  separates evidence parsing, endorsement and reference-value selection,
+  appraisal, and the relying party's eventual authorization decision.
+- [6. Relationship authority](../20-notes/authentication-and-authorization-components/relationship-authority.md) —
+  provides a versioned, causally queryable ownership and sharing graph with
+  immutable models, tombstones, and bounded traversal.
+- [7. Attribute authorities](../20-notes/authentication-and-authorization-components/attribute-authorities.md) —
+  issues scoped, typed, provenance-carrying, short-lived claims while
+  preserving privacy and excluding self-asserted policy inputs.
+
+### Decision, grant, and revocation
+
+- [8. Policy decision point](../20-notes/authentication-and-authorization-components/policy-decision-point.md) —
+  develops a pure, deterministic, resource-bounded evaluator over immutable
+  policy and evidence snapshots with typed non-permit outcomes.
+- [9. Grant compiler and issuer](../20-notes/authentication-and-authorization-components/grant-compiler-and-issuer.md) —
+  compiles one authenticated permit into attenuated local authority or a
+  sender-constrained remote grant inside a fixed issuer envelope.
+- [10. Revocation and epoch service](../20-notes/authentication-and-authorization-components/revocation-and-epoch-service.md) —
+  distinguishes committed, distributed, enforced, quiesced, and sanitized
+  revocation and binds authority to rollback-resistant epochs.
+
+### Secrets, evidence, recovery, and release
+
+- [11. Key and secret service](../20-notes/authentication-and-authorization-components/key-and-secret-service.md) —
+  exposes non-exportable, purpose-specific cryptographic facets with explicit
+  lease, rotation, compromise, destruction, and recovery behavior.
+- [12. Audit and witness services](../20-notes/authentication-and-authorization-components/audit-and-witness-services.md) —
+  composes bounded durable admission, forward integrity, Merkle commitments,
+  independent witnesses, and declared loss semantics.
+- [13. Recovery coordinator](../20-notes/authentication-and-authorization-components/recovery-coordinator.md) —
+  separates credential, data-key, platform, break-glass, and destructive-reset
+  recovery into predeclared threshold workflows and one-shot authority.
+- [14. Update and release service](../20-notes/authentication-and-authorization-components/update-and-release-service.md) —
+  combines role-separated metadata, supply-chain provenance, applicability,
+  trial activation, independent health, and rollback protection.
+
+### External federation boundary
+
+- [15. Federation gateway](../20-notes/authentication-and-authorization-components/federation-gateway.md) —
+  confines remote token and certificate parsing, preserves subject/actor
+  provenance, and terminates federation in a fresh local authorization
+  decision rather than importing bearer authority.
 
 ## Trails
 

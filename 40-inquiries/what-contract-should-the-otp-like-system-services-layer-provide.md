@@ -168,6 +168,26 @@ diagnosis.
 
 ## Paths to explore
 
+### Component implementation reports
+
+The current evidence and proposed implementation contracts are decomposed into
+thirteen reports in the [OTP-like system services component
+index](../20-notes/otp-like-system-services-components/README.md):
+
+- [Service-domain bootstrap and manifest controller](../20-notes/otp-like-system-services-components/service-domain-bootstrap-and-manifest-controller.md)
+- [Behaviour engines and capability-gated management](../20-notes/otp-like-system-services-components/behaviour-engines-and-capability-gated-management.md)
+- [Supervision and recovery policy](../20-notes/otp-like-system-services-components/supervision-and-recovery-policy.md)
+- [Application lifecycle and dependency orchestration](../20-notes/otp-like-system-services-components/application-lifecycle-and-dependency-orchestration.md)
+- [Naming, registry, and local discovery](../20-notes/otp-like-system-services-components/naming-registry-and-local-discovery.md)
+- [Configuration, workload identity, and secrets](../20-notes/otp-like-system-services-components/configuration-workload-identity-and-secrets.md)
+- [Durable state, transactions, and outcome recovery](../20-notes/otp-like-system-services-components/durable-state-transactions-and-outcome-recovery.md)
+- [Device-service policy and management](../20-notes/otp-like-system-services-components/device-service-policy-and-management.md)
+- [Network endpoint and protocol services](../20-notes/otp-like-system-services-components/network-endpoint-and-protocol-services.md)
+- [Distributed membership, discovery, and authoritative coordination](../20-notes/otp-like-system-services-components/distributed-membership-discovery-and-authoritative-coordination.md)
+- [Release, update, rollback, and state migration](../20-notes/otp-like-system-services-components/release-update-rollback-and-state-migration.md)
+- [Admission, overload, and service-resource governance](../20-notes/otp-like-system-services-components/admission-overload-and-service-resource-governance.md)
+- [Observability, audit, alarms, and operator control](../20-notes/otp-like-system-services-components/observability-audit-alarms-and-operator-control.md)
+
 ### Formal and executable models
 
 - Service lifecycle with controller crash before and after publication.
@@ -281,6 +301,11 @@ layer](../20-notes/otp-like-system-services-layer.md).
 No architecture has yet satisfied the operational question. The current best
 candidate is the thirteen-component, unprivileged federation developed in the
 [detailed report](../20-notes/otp-like-system-services-layer.md), with
+component details inventoried by the [component
+index](../20-notes/otp-like-system-services-components/README.md), and
 supporting evidence routed by the [topic
-map](../10-maps/otp-like-system-services.md). It remains a proposal until the
-models, prototypes, conformance tests, and failure experiments above succeed.
+map](../10-maps/otp-like-system-services.md). The [2026-09-04 component
+research session](../50-journal/2026-09-04-otp-like-system-services-components-deep-dive.md)
+records exact source provenance and evidence limits. The architecture remains
+a proposal until the models, prototypes, conformance tests, and failure
+experiments above succeed.
