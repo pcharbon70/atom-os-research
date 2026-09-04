@@ -45,6 +45,10 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [Alan Kay's Smalltalk visual interface and the modern desktop](alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
+  reconstructs Kay's metamedium and learning vision, distinguishes it from the
+  collective Smalltalk and Star implementations, compares it with current
+  desktop boundaries, and proposes a capability-safe actor-oriented synthesis.
 - [Authentication and authorization across the five-layer architecture](authentication-and-authorization-across-the-five-layer-architecture.md) —
   proposes an unprivileged identity/policy control plane and a capability data
   plane, then defines human and workload authentication, exact grant contracts,
