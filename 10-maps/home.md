@@ -27,6 +27,11 @@ one existing VM implementation the kernel foundation.
 
 ## Active inquiries
 
+- [How should Atom OS structure applications and domain
+  services?](../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) —
+  defines falsifiable semantic, identity, invariant, persistence, workflow,
+  effect, presentation, collaboration, extension, evolution, tenancy,
+  overload, and recovery criteria for Layer 5.
 - [What visual-computing model should Atom OS
   adopt?](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
   tests whether a user-programmable semantic project can coexist with isolated
@@ -66,6 +71,11 @@ one existing VM implementation the kernel foundation.
 
 ## Topic maps
 
+- [Applications and domain services](applications-and-domain-services.md) —
+  routes through Layer 5 composition, bounded contexts, durable identities,
+  typed protocols, invariant-selected consistency, persistence, workflows,
+  effects, presentation, collaboration, extensions, evolution, semantic
+  assurance, tenancy, overload, and recovery.
 - [Alan Kay, Smalltalk, and visual computing](alan-kay-smalltalk-ui.md) —
   routes through the Dynabook metamedium vision, collective Smalltalk
   implementation, Star and HCI analysis, current desktop mechanisms, and a
@@ -101,6 +111,31 @@ one existing VM implementation the kernel foundation.
 
 ## Recently developed
 
+- [Applications and domain services component deep
+  dives](applications-and-domain-services.md#component-route) — develops
+  evidence-backed architecture, implementation, failure, authority, overload,
+  recovery, and falsification contracts for all fourteen proposed Layer 5
+  components.
+- [2026-09-05 applications and domain services research
+  session](../50-journal/2026-09-05-applications-and-domain-services-deep-dive.md) —
+  records the scientific, standards, engineering, and practitioner review,
+  exact source provenance, cross-source contradictions, shared identity and
+  outcome model, and absence of implementation evidence.
+- [Applications and domain services
+  layer](../20-notes/applications-and-domain-services-layer.md) — proposes a
+  fifth layer that owns domain meaning while consuming the prior four layers,
+  with stable domain identity, invariant-selected consistency, explicit
+  workflows/effects, disposable presentation, confined extensions, evolution,
+  tenancy, and recovery.
+- [Visual-computing synthesis component deep
+  dives](alan-kay-smalltalk-ui.md#component-implementation-deep-dives) —
+  develops evidence-backed implementation contracts for all seven proposed
+  Atom OS visual-computing directions and maps them onto the existing system
+  architecture.
+- [2026-09-04 visual-computing component research
+  session](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md) —
+  records the expanded source review, exact provenance, shared identity and
+  generation model, falsifiers, and absence of prototype evidence.
 - [Alan Kay's Smalltalk visual interface and the modern
   desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
   reconstructs the personal dynamic medium and its components, compares it to
@@ -217,6 +252,10 @@ one existing VM implementation the kernel foundation.
 
 ## Unsettled threads
 
+- Select the first Layer 5 application domain, write its complete vocabulary
+  and invariant catalog, and model aggregate commit, workflow/effect outcomes,
+  migration, presentation restart, and tenant/resource failure before choosing
+  a universal application framework.
 - Select the first security deployment profile and model the complete
   anonymous-to-authenticated-to-capability authority graph before building a
   login UI or compatibility superuser.

@@ -30,6 +30,10 @@ resolution criteria here. Promote independently useful conclusions to
 
 ### Documents
 
+- [How should Atom OS structure applications and domain services?](how-should-atom-os-structure-applications-and-domain-services.md) —
+  defines falsifiable semantic, identity, invariant, persistence, workflow,
+  effect, presentation, collaboration, extension, evolution, tenancy,
+  overload, and recovery criteria for the fifth layer.
 - [What visual-computing model should Atom OS adopt?](what-visual-computing-model-should-atom-os-adopt.md) —
   asks whether a user-programmable semantic project can be built from isolated
   actors, primary accessibility semantics, disposable presentation, and

@@ -1404,9 +1404,15 @@ layer](kernel-hardware-and-architecture-support-layer.md) owns privileged
 entry, translation, interrupts, raw time, DMA, and architecture faults below
 that kernel.
 
-Applications remain above this report. Their business protocols, schemas, and
-compensations are not generic system-service policy merely because they use
-supervision or behaviours.
+The [applications and domain services layer](applications-and-domain-services-layer.md)
+remains above this report. Its business protocols, stable domain identities,
+schemas, invariants, workflows, compensations, semantic views, collaboration
+rules, and user-visible outcomes are not generic system-service policy merely
+because they use supervision, behaviours, persistence, or lifecycle services.
+Conversely, Layer 5 declares its needs but does not duplicate this layer's
+manifest validation, identity/policy, generic durable store, timers, devices,
+networking, release orchestration, resource enforcement, telemetry, audit, or
+recovery control.
 
 The [OTP-like system-services map](../10-maps/otp-like-system-services.md)
 routes through the evidence, and the [research

@@ -34,6 +34,13 @@ authorship, protection, and recovery as separate questions.
 - [2026-09-04 Alan Kay and Smalltalk UI deep
   dive](../50-journal/2026-09-04-alan-kay-smalltalk-ui-deep-dive.md) — records
   search method, evidence boundaries, and the complete session source manifest.
+- [Visual-computing synthesis component
+  reports](../20-notes/visual-computing-synthesis-components/README.md) — turns
+  the seven proposed Atom OS directions into implementation-oriented contracts.
+- [2026-09-04 visual-computing synthesis components deep
+  dive](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md) —
+  records the expanded scientific, standards, and engineering source review
+  and exact session provenance.
 
 ## Trails
 
@@ -106,8 +113,43 @@ authorship, protection, and recovery as separate questions.
   GUI](../30-sources/feske-helmuth-2005-nitpicker.md) — motivates a narrow
   trusted compositor/input path without placing desktop policy in the kernel.
 
+### Component implementation deep dives
+
+- [User-owned project graph and
+  composition](../20-notes/visual-computing-synthesis-components/user-owned-project-graph-and-composition.md) —
+  makes the user's typed semantic/object graph the durable unit of work while
+  deriving live authority under current policy.
+- [Durable semantic actors and disposable
+  presentation](../20-notes/visual-computing-synthesis-components/durable-semantic-actors-and-disposable-presentation.md) —
+  separates project and effect truth from semantic views, renderers, surfaces,
+  focus, and other reconstructible or ephemeral state.
+- [Semantics-first accessible UI
+  protocol](../20-notes/visual-computing-synthesis-components/semantics-first-accessible-ui-protocol.md) —
+  defines one authoritative semantic graph and multiple filtered projections
+  with stable logical identity, generation fencing, and resynchronization.
+- [Input, focus, and trusted-interaction
+  authority](../20-notes/visual-computing-synthesis-components/input-focus-and-trusted-interaction-authority.md) —
+  turns gestures and trusted ceremonies into narrow, short-lived grants rather
+  than ambient access.
+- [Capability-scoped live tools and transactional
+  evolution](../20-notes/visual-computing-synthesis-components/capability-scoped-live-tools-and-transactional-evolution.md) —
+  separates inspection, evaluation, tracing, mutation, migration, rollback,
+  and publication powers.
+- [Cross-layer placement and recovery
+  topology](../20-notes/visual-computing-synthesis-components/cross-layer-placement-and-recovery-topology.md) —
+  assigns visual-computing responsibilities to the hardware, kernel, runtime,
+  OTP-like service, visual-service, and domain layers.
+- [Plural representations and cross-view
+  consistency](../20-notes/visual-computing-synthesis-components/plural-representations-and-cross-view-consistency.md) —
+  coordinates visual, textual, programmatic, voice, assistive, and remote
+  projections without confusing convergence with intent or authorization.
+
 ### Into the Atom OS architecture
 
+- [Applications and domain services layer](../20-notes/applications-and-domain-services-layer.md) —
+  now provides the enclosing Layer 5 domain identity, invariants, typed actions
+  and outcomes, semantic-view, collaboration, extension, evolution, tenancy,
+  and recovery contracts specialized by the visual-computing reports.
 - [BEAM, ERTS, and OTP principles for a new operating
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md) —
   provides the existing layer decomposition.
