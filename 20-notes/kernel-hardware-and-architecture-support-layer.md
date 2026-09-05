@@ -440,8 +440,10 @@ must form one generation-matched pair; many other contexts may remain saved.
 - Hard-entry code is bounded and uses only operations declared safe for that
   context.
 - `NmiContext` and `FatalCaptureContext` are non-widening effect subsets of
-  `HardEntryContext`; `CrashContext` begins only after terminal evidence is
-  sealed.
+  `HardEntryContext`; normal `CrashContext` begins only after outer terminal
+  evidence is sealed, while restricted `RecursiveCrashContext` begins only
+  after the independent recursive record seals and cannot bless an incomplete
+  outer prefix.
 - Nesting depth is bounded or fails into a crash-safe path.
 - A context cannot migrate while its extended state is paired with a resident
   CPU unit.
@@ -1141,42 +1143,81 @@ policy a trustworthy description of what is and is not recoverable.
 
 ### Internal subcomponents
 
-1. **Bounded capture routine.** Component 2 enters on its dedicated stack and
+1. **[Bounded capture routine](kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/bounded-capture-routine.md).**
+   Component 2 enters on its dedicated stack and
    passes an `ArchitectureFaultFrame` plus `HardEntryContext`, `NmiContext`, or
-   `FatalCaptureContext`. Unless a pinned `FatalPreclassificationProof` permits
-   direct terminal capture, this component reserves a preallocated CPU-local
-   staging slot and captures fault-specific raw status before destructive
-   acknowledgement.
-2. **Fault decoder.** Converts raw architecture registers into a versioned
-   `ArchitectureFaultRecord` while retaining the original values.
-3. **Containment classifier and promotion.** Records affected CPU,
+   `FatalCaptureContext`. Depth one reserves a preallocated CPU-local staging
+   slot and captures each fault-specific raw attempt before its separate
+   destructive acknowledgement, except for an explicitly profiled
+   observation-is-acknowledgement source. Only a depth-two recursive route with a pinned
+   `FatalPreclassificationProof` can bypass that path, and it may target only
+   the independent recursive record. The boot profile generates a fixed read/
+   copy/acknowledge program with explicit side effects, retry limits, and loss
+   flags.
+2. **[Fault decoder](kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/fault-decoder.md).**
+   Outside hard entry, converts immutable raw architecture and firmware views
+   into versioned, append-only diagnostic views. Every derived field retains
+   source/provenance and epistemic status; conflicts remain visible and no
+   later view changes the original entry decision. Decoder-derived operational
+   claims reach recovery only through a sealed validator attestation and trusted
+   fixed-schema declassifier; raw/untrusted interpretations remain diagnostic.
+3. **[Containment classifier and promotion](kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/containment-classifier-and-promotion.md).**
+   Before deferred decoding, a tiny generated capture-time table consumes
+   sealed raw/profile facts and acknowledgement state. It records affected CPU,
    address-space, memory extent, device/domain, and selects asynchronous
    non-disruptive reporting, `LocalResumePostcondition`,
    `ContainmentRequirement`, or terminal disposition. Terminal disposition
-   atomically claims and publishes the first-fatal slot from sealed staging;
-   severity is not guessed before capture.
-4. **Crash-safe sink.** After terminal evidence is sealed, a `CrashContext`
-   writes bounded records to reserved memory or another explicitly verified
-   sink without depending on filesystems or ordinary allocation.
-5. **Escalation channel.** Delivers a typed event to recovery policy when
-   ordinary kernel operation remains valid.
-6. **Double-fault guard.** Detects recursive capture, supplies the pinned direct-
-   terminal proof and `FatalCaptureContext`, and falls back to a smaller
-   terminal record/reset path.
+   atomically claims the first-fatal slot from sealed staging, then copies and
+   release-publishes it;
+   severity is not guessed before capture. “First fatal” means first successful
+   software promotion, while hardware overwrite indicators preserve uncertainty
+   about the first physical error.
+4. **[Crash-safe sink](kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/crash-safe-sink.md).**
+   After terminal evidence is sealed, a `CrashContext` commits the mandatory
+   bounded reserved-memory record before trying optional firmware, independent
+   capture, debug, or forensic adapters. Sealing, acceptance, reset survival,
+   durability, authenticity, confidentiality, and freshness are separate
+   claims.
+5. **[Escalation channel](kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/escalation-channel.md).**
+   Delivers stable-ID evidence and action requests to recovery policy through a
+   bounded retained-at-least-once path, with a named durable claim only after
+   the corresponding persistence transition succeeds. Diagnostic identifiers
+   convey no action authority; recovery epochs, idempotence, persisted receipts,
+   and custody state govern retry and reclamation.
+6. **[Double-fault guard](kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/double-fault-guard.md).**
+   Detects recursive capture, validates and consumes the pinned direct-terminal
+   proof and `FatalCaptureContext` minted by component 2, and permits one
+   independent minimal record when the ISA routes a second entry to software,
+   before a finite architecture/profile-specific shutdown, halt, or reset path.
+   Hardware-terminal cases that bypass software promise no recursive record.
 
 ### Invariants
 
-- Raw architecture state is preserved alongside normalized fields so decoding
-  can be revised after a crash.
+- Every complete-evidence graph preserves raw architecture state alongside
+  normalized fields so decoding can be revised after a crash. The explicitly
+  degraded asynchronous ring-full path instead seals a loss-only graph with
+  logical evidence digests and `UnavailableAfterLossTransfer`; it never claims
+  raw preservation and cannot be submitted to the decoder.
 - A fault is never labeled recoverable solely because a handler returned.
   Synchronous resume requires `LocalResumePostcondition`; remote or policy work
   produces `ContainmentRequirement` and later
   `CoordinatedContainmentCompletion`, never a substitute local token.
 - Operational-versus-terminal storage is selected only after bounded raw
-  capture and classification, except under a sealed pinned
-  `FatalPreclassificationProof`.
+  capture and classification. The sole baseline bypass is depth-two recursive
+  capture into the independent recursive record after claiming and consuming
+  an `Available`, pinned `FatalPreclassificationProofPublication`; it never
+  claims the normal terminal slot. Only a successfully sealed recursive record,
+  not the proof publication itself, can mint `RecursiveCrashContext`.
 - Fatal capture does not acquire ordinary locks, allocate, or depend on another
   CPU responding.
+- The first sealed fatal record is never overwritten; source-level overwrite
+  and lost-record evidence remains attached.
+- Reserved-memory sealing never depends on an optional sink or recovery
+  service. Reclamation requires both an authenticated durable complete custody
+  receipt and a distinct generation-current `CrashReclaim` deletion decision;
+  the custody signer is not deletion authority.
+- Escalation and containment/reset authority are separate capabilities; a
+  forged or stale diagnostic identifier cannot authorize an action.
 - Records contain CPU/lifecycle generation, address-space generation, active
   context identity, entry nesting state, and relevant mapping/interrupt/DMA
   epochs where safely available.
@@ -1189,8 +1230,9 @@ OTP's “let it crash” model assumes failure detection and an intact superviso
 It cannot make arbitrary machine corruption recoverable. This component
 provides the facts and containment boundary; a recovery service decides whether
 to terminate a domain, offline a CPU, revoke a device, restart a service, or
-stop the machine. Machine-wide integrity loss must remain distinguishable from
-an ordinary actor exit.
+stop the machine. That service must be independently resourced and generation-
+fenced; if it fails, quarantine remains conservative. Machine-wide integrity
+loss must remain distinguishable from an ordinary actor exit.
 
 ## Component 10: typed kernel-facing architecture facade
 

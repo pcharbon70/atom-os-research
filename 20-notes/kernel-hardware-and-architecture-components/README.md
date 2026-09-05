@@ -34,6 +34,9 @@ system syntheses in the parent notes directory.
 - [Address translation and protection transition components](address-translation-and-protection-transitions/README.md) —
   contains nine detailed internal-service reports for component 3, covering
   address-space identity through safe privileged user access.
+- [Architecture fault and diagnostic components](architecture-faults-and-diagnostics/README.md) —
+  contains six detailed internal-service reports for component 9, covering
+  bounded raw capture through recursive-fault termination and evidence custody.
 
 ### Documents
 
@@ -65,7 +68,8 @@ system syntheses in the parent notes directory.
   composes requester sets, mappings, buffers, queues, interrupts, reset, and
   quiescence into a revocable protected-I/O lifecycle.
 - [9. Architecture faults and diagnostics](architecture-faults-and-diagnostics.md) —
-  develops preallocated staging and terminal capture, typed decoding, and
+  develops preallocated staging and terminal capture, a separate deferred
+  decoder and capture-time disposition gate, explicit sink/custody claims, and
   distinct local-resume and coordinated-containment proofs.
 - [10. Typed kernel-facing architecture facade](typed-kernel-facing-architecture-facade.md) —
   exposes the components through sealed generational objects, typed contexts,

@@ -49,6 +49,14 @@ backend must declare them as dependencies.
   dive](../50-journal/2026-09-04-address-translation-and-protection-transitions-deep-dive.md)
   records the expanded primary-source search, exact source manifest,
   cross-service synthesis, and remaining proof and platform gaps.
+- [Architecture-fault service deep
+  dives](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/README.md)
+  develop component 9 as six separately reviewable contracts while preserving
+  one capture, decision, custody, and terminal-fallback transaction.
+- [Research session: architecture-fault service deep
+  dive](../50-journal/2026-09-05-architecture-faults-and-diagnostics-components-deep-dive.md)
+  records the primary-source search, exact source manifest, cross-service
+  reconciliation, and remaining platform/proof gaps.
 
 ## Component implementation deep dives
 
@@ -109,9 +117,10 @@ microkernel and managed-runtime boundary.
 
 - [9. Architecture faults and
   diagnostics](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics.md) — proposes a
-  preallocated staging/terminal capture plane plus a typed decoding and
-  recovery-policy plane, with synchronous return gated by a local-resume proof
-  and coordinated containment kept split-phase.
+  preallocated staging/terminal capture plane plus a distinct generated
+  capture-time disposition gate and append-only policy-plane decoder, with
+  synchronous return proof-gated, containment split-phase, and crash custody
+  failure-domain qualified.
 - [10. Typed kernel-facing architecture
   facade](../20-notes/kernel-hardware-and-architecture-components/typed-kernel-facing-architecture-facade.md) — exposes the
   components through sealed generational objects, context requirements,
@@ -161,6 +170,43 @@ without changing the parent component's caller-visible contract.
   combines checked ranges, bounded architecture access windows, explicit
   partial faults, copy-once control snapshots, and the absence of ambient
   privileged aliases.
+
+## Component 9 service deep dives
+
+The [local research
+index](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/README.md)
+is the exhaustive inventory. The six reports separate entry-safe capture and
+decision from deferred interpretation, failure-domain-qualified custody, and
+recursive terminal handling.
+
+### Capture, interpretation, and disposition
+
+- [1. Bounded capture routine](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/bounded-capture-routine.md) —
+  generates fixed architecture-profiled raw-read and acknowledgement programs,
+  seals each attempt before its associated destructive acknowledgement except for explicitly
+  profiled observation-is-acknowledgement sources such as clear-on-read MMIO,
+  and records loss without claiming the first physical error.
+- [2. Fault decoder](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/fault-decoder.md) —
+  creates deterministic append-only views whose facts retain validity,
+  availability, conflict, loss, producer trust, and raw provenance.
+- [3. Containment classifier and promotion](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/containment-classifier-and-promotion.md) —
+  applies a tiny total raw-fact rule table in capture context, separates two
+  incomparable return proofs from park/terminal outcomes, and publishes one
+  immutable first-fatal software observation.
+
+### Custody, escalation, and recursive termination
+
+- [4. Crash-safe sink](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/crash-safe-sink.md) —
+  commits a reserved-memory first record before optional adapters and keeps
+  acceptance, durability, reset survival, authenticity, confidentiality,
+  freshness, and custody as independent claims.
+- [5. Escalation channel](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/escalation-channel.md) —
+  qualifies at-least-once semantics by failure domain, separates evidence from
+  action capabilities, and gates retry/reclamation on recovery epochs and
+  durable receipts.
+- [6. Double-fault guard](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/double-fault-guard.md) —
+  uses a separately provisioned recursive record/context and an ISA-profiled
+  finite halt/reset path, including the hardware-protected early-entry window.
 
 ## Trails
 
@@ -242,6 +288,28 @@ without changing the parent component's caller-visible contract.
   IOMMU alone does not secure driver/device shared-memory protocols or
   transition windows.
 
+### Fault evidence, containment, and custody
+
+- [Evaluating Linux kernel crash dumping
+  mechanisms](../30-sources/vazquez-cao-2006-evaluating-linux-crash-dumping.md)
+  supplies a failure-injection method spanning corrupt stacks, entry context,
+  DMA, device state, and dump completeness.
+- [Recovery domains](../30-sources/lenharth-et-al-2009-recovery-domains.md) and
+  [recovering device drivers](../30-sources/swift-et-al-2004-recovering-device-drivers.md)
+  bound narrow rollback by shared state, commit points, device reconstruction,
+  and indeterminate effects.
+- [Ramoops](../30-sources/iordache-2021-ramoops.md) and [pstore/blk](../30-sources/linux-kernel-community-2026-pstore-crash-backends.md)
+  document practical reserved-RAM and panic-time storage constraints without
+  proving survival across every reset class or power-loss durability.
+- [Scrash](../30-sources/broadwell-et-al-2003-scrash.md), [NIST authenticated
+  encryption guidance](../30-sources/dworkin-2007-gcm-gmac.md), and
+  [Memoir](../30-sources/parno-et-al-2011-memoir.md) separate dump minimization,
+  confidentiality/integrity, and anti-replay state continuity.
+- [Life beyond distributed
+  transactions](../30-sources/helland-2007-life-beyond-distributed-transactions.md)
+  motivates stable identities, deduplication, idempotence, and explicit retry
+  windows for recovery escalation.
+
 ### Normative architecture mechanisms
 
 - [Intel 64 and IA-32 system programming
@@ -256,6 +324,14 @@ without changing the parent component's caller-visible contract.
   architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
   is the current ratified supervisor/privilege, translation, ordering, trap,
   and extension-state reference.
+- [Arm RAS](../30-sources/arm-2019-ras-specification.md) and the ratified
+  optional [RISC-V RERI v1.0](../30-sources/risc-v-international-2024-ras-error-record-interface.md)
+  expose materially different record, overwrite, validity, and acknowledgement
+  protocols that the capture profile must preserve.
+- [UEFI 2.11](../30-sources/uefi-forum-2024-uefi-2-11.md) and [ACPI
+  6.6](../30-sources/uefi-forum-2025-acpi-6-6.md) define CPER and APEI
+  interchange/persistence mechanisms without making firmware a bounded or
+  authenticated first-record dependency.
 
 ### Connection to the larger operating-system model
 

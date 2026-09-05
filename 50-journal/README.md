@@ -92,6 +92,10 @@ provenance record.
   records the expanded research across all seven proposed visual-computing
   components, exact source provenance, shared identity and authority model,
   architecture placement, falsifiers, and absence of prototype evidence.
+- [2026-09-05 architecture faults and diagnostics components deep dive](2026-09-05-architecture-faults-and-diagnostics-components-deep-dive.md) —
+  records the six-service fault-transaction expansion, exact source provenance,
+  cross-ISA capture and recursive-entry distinctions, custody and authority
+  reconciliation, falsifiers, and absence of prototype or hardware evidence.
 - [2026-09-05 applications and domain services deep dive](2026-09-05-applications-and-domain-services-deep-dive.md) —
   records the scientific, standards, engineering, and practitioner research
   across fourteen Layer 5 components, exact source provenance, shared semantic
