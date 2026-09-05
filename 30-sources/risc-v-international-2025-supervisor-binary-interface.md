@@ -66,16 +66,22 @@ treating an SBI implementation as part of the supervisor kernel.
   operation that does not return. These semantics require an OS-side
   incarnation/cookie handshake and separate confirmation before a hart becomes
   schedulable or reclaimable.
-- The specification describes a request interface; a kernel still needs to
-  define which returned state constitutes protection completion and how failed
-  or unavailable harts affect reclamation.
+- For RFENCE calls, `SBI_SUCCESS` means that IPIs were sent to all targeted
+  harts successfully. It does not state that every target has executed the
+  requested fence before the caller observes the return. A kernel therefore
+  must either use IPI transport to run and acknowledge its own target-side local
+  fence, or require a separately specified platform completion emitted causally
+  after the exact RFENCE and bound to the request/hart incarnation. An unrelated
+  later OS acknowledgement is not evidence of firmware fence execution.
 
 ## Relevance
 
 A RISC-V backend should declare whether it owns inter-hart coordination or
-depends on SBI RFENCE. Firmware success is admitted as completion only under a
-pinned platform profile whose SBI implementation provides the required
-semantics; errors remain explicit and keep affected mappings or code pinned.
+depends on SBI RFENCE. Standard `SBI_SUCCESS` proves successful request
+transmission, not remote execution, and an adapter cannot reinterpret it. Atom
+therefore needs its own IPI-invoked local-fence handler or a request- and hart-
+bound platform completion causally after RFENCE execution; errors remain
+explicit and keep affected mappings or code pinned.
 TIME should back one typed absolute deadline channel, and HSM should remain the
 fallible platform step inside the logical-CPU transaction rather than defining
 kernel membership by itself.

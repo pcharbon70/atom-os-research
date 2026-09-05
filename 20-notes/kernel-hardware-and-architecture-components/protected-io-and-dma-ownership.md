@@ -238,9 +238,16 @@ DmaBufferCapability(buffer, frame_authority_epoch, buffer_access_epoch,
                     byte_range, rights)
   rights = CpuRead | CpuWrite | DeviceRead | DeviceWrite | Share
 
-DmaMapping(mapping, address_space, iova_range, access, generation,
-           frame_authority_epoch, buffer_access_epoch,
-           rights = Unmap | Invalidate | Inspect)
+CpuBufferToken(buffer, byte_range, buffer_access_epoch,
+               frame_authority_epoch, cpu_ownership_generation,
+               enforcement_profile, cpu_access)
+
+DmaMapping<State>(mapping, address_space, iova_range,
+                  intended_access: DeviceRead | DeviceWrite,
+                  declared_access_state: State,
+                  enforcement_profile, generation,
+                  frame_authority_epoch, buffer_access_epoch,
+                  rights = ActivateDeviceAccess | Unmap | Invalidate | Inspect)
 DeviceQueueLease(queue, binding_generation, ring_generation, rights)
 InterruptBinding(irq_binding, source_incarnation,
                  route_generation, binding_generation)
@@ -253,8 +260,16 @@ reset/profile facets it needs. A still more independent final controller holds
 two authorities are never collapsed into a copyable “control lease.” An I/O
 service receives the smallest MMIO subset, `DeviceQueueLease`,
 `InterruptBinding` view, and buffer/`DmaMapping` rights needed by its
-device-class protocol. An allocator can mint a buffer capability without
-revealing its physical pages. Every buffer and mapping binds the minimal
+device-class protocol. A buffer allocator or registration authority validates
+the frames and range, opens a fresh CPU-ownership generation, and mints the
+sole initial sealed `CpuBufferToken` alongside the attenuated buffer
+capability. The token is linear and non-forgeable: its exact buffer/range,
+`BufferAccessEpoch`, global frame-authority epoch, CPU-ownership generation,
+enforcement profile, and admitted CPU access must all match a transition.
+Splitting a buffer requires the authority to consume the old token and mint
+non-overlapping child tokens; ordinary code cannot copy, widen, or substitute
+one. An allocator can mint a buffer capability without revealing its physical
+pages. Every buffer, ownership token, and mapping binds the minimal
 kernel's global frame-authority epoch. The mapping broker verifies ownership
 and quota, pins the pages, chooses an IOVA, and returns an opaque `DmaMapping`.
 
@@ -345,14 +360,15 @@ For an exclusive device operation:
 
 ```mermaid
 flowchart LR
-  cpuOwned["CpuOwned"] -->|"install DMA mapping"| mapped["MappedCpuOwned"]
+  cpuOwned["CpuOwned"] -->|"install dormant/no-access DMA relation"| mapped["DormantMappedCpuOwned"]
   mapped -->|"accept prepare for device"| closing["CpuClosing"]
   closing -->|"drain CPU aliases"| cpuClosed["CpuAccessClosed"]
   cpuClosed -->|"accept queue publication"| offered["Offered"]
   offered -->|"publish descriptor and doorbell"| deviceOwned["DeviceOwned"]
   deviceOwned -->|"accept protected completion"| returned["Returned"]
   returned -->|"accept prepare for CPU"| reacquiring["CpuReacquiring"]
-  reacquiring -->|"prove device exclusion"| cpuOwned
+  reacquiring -->|"close issue/access; retain dormant relation"| mapped
+  reacquiring -->|"remove translation completely"| cpuOwned
 
   mapped -.->|"begin revocation"| revoking["Revoking"]
   closing -.->|"begin revocation"| revoking
@@ -390,6 +406,15 @@ aliases and reaches remote translation quiescence before device transfer; only
 a trusted mediator's minimal alias may remain. Conversely, revocation may
 remove device translation while physical pages remain pinned because earlier
 transactions are not known to be drained.
+
+For baseline `EnforcedExclusive`, `DormantMappedCpuOwned` means the checked IOVA
+relation and resources exist but hardware exposes neither `DeviceRead` nor
+`DeviceWrite`; the context is unattached, the entry is invalid/no-access, or an
+independently trusted hardware gate is closed according to the pinned profile.
+This state is distinct in the shared alias ledger from live device access.
+Only the later buffer-transfer transaction may activate the intended rights,
+and only after CPU `RestrictionQuiescent`. A malicious driver cannot turn the
+dormant mapping live by writing an ordinary queue or control word.
 
 Each transition names the agent allowed to initiate it and the evidence needed
 to complete it. Queue indices alone are not evidence: a malicious service can
@@ -437,39 +462,77 @@ does not make an underspecified lock-free ring correct.
 The common interface should be narrow and split phase:
 
 ```text
+DmaOperationKind =
+    Map | BufferTransfer | QueuePublication | CompletionAcceptance |
+    CpuReacquire | Revocation
+
+DmaOperationRight<Kind> =
+    Inspect | ClaimTerminalResult |
+    RequestCancellation
+        only if Kind = QueuePublication | CompletionAcceptance
+
+DmaOperationRef<Kind> {
+    operation_incarnation,
+    target_binding_mapping_and_buffer_incarnations,
+    intended_owner_domain_and_incarnation,
+    terminal_result_slot_set_digest,
+    right: DmaOperationRight<Kind>,
+    capability_generation
+}
+
+DmaOperationAccess<Kind> {
+    inspect: Authorized<DmaOperationRef<Kind>, Inspect>,
+    claim: Authorized<DmaOperationRef<Kind>, ClaimTerminalResult>
+}
+
+CancellableDmaOperationAccess<Kind>
+    where Kind = QueuePublication | CompletionAcceptance {
+    inspect: Authorized<DmaOperationRef<Kind>, Inspect>,
+    cancel: Authorized<DmaOperationRef<Kind>, RequestCancellation>,
+    claim: Authorized<DmaOperationRef<Kind>, ClaimTerminalResult>
+}
+
 bind_endpoint(endpoint_cap, service, isolation_profile)
   -> EndpointBinding | BindError
 
 create_dma_address_space(binding, quotas)
   -> DmaAddressSpace | AddressSpaceError
 
-map_dma(address_space, buffer_cap, byte_range, device_access, lifetime)
-  -> Rejected(MapError) | Accepted(DmaMapOperation)
+map_dma(address_space, buffer_cap, borrow CpuBufferToken,
+        byte_range, device_access, lifetime)
+  -> Rejected(MapError) | Accepted(DmaOperationAccess<Map>)
 
-poll_dma_map(map_operation)
+poll_dma_map(Borrowed<Authorized<DmaOperationRef<Map>, Inspect>>)
   -> Pending(stage)
-   | Succeeded(DmaMapping)
+   | Succeeded(OneShotReturnSlot<DmaMapping<DeclaredAccessState>>)
    | Incomplete(observed, missing, quarantine)
    | QuarantinedPinned(reason)
 
-prepare_for_device(mapping, byte_range, operation_generation)
-  -> Rejected(OwnershipError) | Accepted(BufferTransferOperation)
+prepare_for_device(
+    Authorized<DmaMapping<DormantNoDeviceAccess>, ActivateDeviceAccess>,
+    CpuBufferToken, byte_range, operation_generation)
+  -> Rejected(OwnershipError, unchanged_mapping_facet_and_cpu_buffer_token)
+   | Accepted(DmaOperationAccess<BufferTransfer>)
 
-poll_buffer_transfer(transfer_operation)
-  -> Pending(stage) | Succeeded(DeviceBufferToken)
+poll_buffer_transfer(
+    Borrowed<Authorized<DmaOperationRef<BufferTransfer>, Inspect>>)
+  -> Pending(stage) | Succeeded(OneShotReturnSlot<DeviceBufferToken>)
    | Incomplete(observed, missing, quarantine)
 
 publish_to_device(queue_lease, device_buffer_token, descriptor)
   -> Rejected(QueueError, DeviceBufferToken)
-   | Accepted(OperationToken<QueuePublication>)
+   | Accepted(CancellableDmaOperationAccess<QueuePublication>)
 
-cancel_publish_to_device(operation_token)
-  -> CancellationSelected | TooLate(stage) | AlreadyTerminal(result)
+cancel_publish_to_device(
+    Borrowed<Authorized<DmaOperationRef<QueuePublication>,
+                        RequestCancellation>>)
+  -> CancellationSelected | TooLate(stage) | AlreadyTerminal(metadata_and_slots)
 
-poll_publish_to_device(operation_token)
+poll_publish_to_device(
+    Borrowed<Authorized<DmaOperationRef<QueuePublication>, Inspect>>)
   -> Pending(stage)
-   | Succeeded(DeviceOperationToken)
-   | Cancelled(DeviceBufferToken)
+   | Succeeded(OneShotReturnSlot<DeviceOperationToken>)
+   | Cancelled(OneShotReturnSlot<DeviceBufferToken>)
    | Incomplete(observed, missing, PinnedPublicationRecord)
    | QuarantinedPinned(reason, PinnedPublicationRecord)
    | Fatal(CrashRecord, PinnedPublicationRecord)
@@ -479,38 +542,89 @@ accept_completion(queue_lease, device_operation_token,
                   current_completion_facet)
   -> Rejected(CompletionError, DeviceOperationToken,
               DeviceCompletionToken)
-   | Accepted(OperationToken<CompletionAcceptance>)
+   | Accepted(CancellableDmaOperationAccess<CompletionAcceptance>)
 
-cancel_accept_completion(operation_token)
-  -> CancellationSelected | TooLate(stage) | AlreadyTerminal(result)
+cancel_accept_completion(
+    Borrowed<Authorized<DmaOperationRef<CompletionAcceptance>,
+                        RequestCancellation>>)
+  -> CancellationSelected | TooLate(stage) | AlreadyTerminal(metadata_and_slots)
 
-poll_accept_completion(operation_token)
+poll_accept_completion(
+    Borrowed<Authorized<DmaOperationRef<CompletionAcceptance>, Inspect>>)
   -> Pending(stage)
-   | Succeeded(ReturnedBufferToken)
-   | Cancelled(DeviceOperationToken, DeviceCompletionToken)
+   | Succeeded(OneShotReturnSlot<ReturnedBufferToken>)
+   | Cancelled(AtomicOneShotReturnSlot<
+         (DeviceOperationToken, DeviceCompletionToken)>)
    | Incomplete(observed, missing, PinnedCompletionRecord)
    | QuarantinedPinned(reason, PinnedCompletionRecord)
    | Fatal(CrashRecord, PinnedCompletionRecord)
 
-prepare_for_cpu(returned_buffer_token, cpu_access)
-  -> Rejected(OwnershipError) | Accepted(CpuReacquireOperation)
+prepare_for_cpu(returned_buffer_token, Borrowed<cpu_access>)
+  -> Rejected(OwnershipError, unchanged_returned_buffer_token)
+   | Accepted(DmaOperationAccess<CpuReacquire>)
 
-poll_cpu_reacquire(reacquire_operation)
-  -> Pending(stage) | Succeeded(CpuBufferToken)
+poll_cpu_reacquire(
+    Borrowed<Authorized<DmaOperationRef<CpuReacquire>, Inspect>>)
+  -> Pending(stage)
+   | Succeeded(AtomicOneShotReturnSlot<
+         (CpuBufferToken, DeviceTranslationDisposition)>)
    | Incomplete(observed, missing, quarantine)
 
-begin_revoke(binding_or_mapping, reason)
-  -> Rejected(RevokeError) | Accepted(RevocationToken)
+begin_revoke(
+    Authorized<EndpointBinding | DmaMapping, Revoke>, reason)
+  -> Rejected(RevokeError, unchanged_revoke_authority)
+   | Accepted(DmaOperationAccess<Revocation>)
 
-poll_revoke(revocation_token)
-  -> Pending(stage) | MappingReclaimable | FrameRetypable
+poll_revoke(Borrowed<Authorized<DmaOperationRef<Revocation>, Inspect>>)
+  -> Pending(stage)
+   | OneShotReturnSlot<MappingReclaimable>
+   | OneShotReturnSlot<FrameRetypable>
    | QuarantinedPinned(reason)
+
+DeviceTranslationDisposition =
+    Removed(mapping_incarnation, invalidation_completion_digest) |
+    RetainedDormant(DmaMapping<DormantNoDeviceAccess>,
+                    access_closure_digest)
+
+dma_operation_claim_terminal_result(
+    Borrowed<Authorized<DmaOperationRef<Kind>, ClaimTerminalResult>>,
+    opaque_terminal_result_slot_identity)
+  -> Claimed(authority_bearing_terminal_member_or_atomic_bundle)
+   | AlreadyClaimed(slot_generation)
+   | NotTerminal
+   | StaleOrWrongSlot(current_terminal_slot_set_digest)
 ```
+
+`DeclaredAccessState` is part of the mapping capability type. Baseline
+`EnforcedExclusive` admits only `DormantNoDeviceAccess` here; live or
+independently gate-closed variants require the separately validated profile
+named below. `prepare_for_device` consumes or exclusively borrows the exact
+state and cannot reinterpret a dormant relation as live before its transfer
+proof closes.
 
 Every accepted operation has exactly one terminal result. Polling observes a
 preallocated completion record; it does not block a privileged thread until a
 hardware queue, remote CPU, device, or interconnect responds. Timeout yields
 `Incomplete` or `QuarantinedPinned`, never an implied cancellation.
+Every `OneShotReturnSlot<T>` shown above is an opaque terminal slot identity,
+not `T` itself. Every accepted operation mints a borrowed `Inspect` facet and an
+intended-owner `ClaimTerminalResult` facet. Only `QueuePublication` and
+`CompletionAcceptance` also mint a `RequestCancellation` facet through
+`CancellableDmaOperationAccess`; the other four operation kinds have no
+cancellation authority. Poll and `AlreadyTerminal` expose only immutable
+metadata and slot identities; the claim facet moves a slot once and returns
+`AlreadyClaimed` or `StaleOrWrongSlot` on a repeat, foreign operation, or wrong
+generation. `AtomicOneShotReturnSlot` moves the complete tuple or nothing, so
+paired linear inputs cannot split between claimants.
+
+For `BufferTransferOperation` and `CpuReacquireOperation`, either incomplete
+terminal transfers the still-held physical-extent reservation, every outgoing
+`RetiringOldAccess` entry, and every prospective pending entry
+(`PendingDeviceAccess` or CPU `PendingAdd`) to the named
+quarantine. The prospective side never becomes live, and an outgoing hazard is
+never retired, without its exact direction-specific completion proof. A later
+recovery operation must adopt those generation-bound ledger entries explicitly;
+terminal observation alone cannot release them.
 
 `DeviceQueueLease.Submit` and `.Doorbell` are borrowed, generation-checked
 facets; a call does not transfer the lease itself. Before accepting publication,
@@ -520,7 +634,8 @@ descriptor ownership bit, queue tail, or doorbell became device-visible, every
 reservation was released, and the exact `DeviceBufferToken` remains with the
 caller in `CpuAccessClosed`. `Accepted` consumes that token into the protected
 operation record, moves the buffer to `Offered`, and leaves the caller only the
-`OperationToken<QueuePublication>`. `Succeeded` replaces it with the sole
+three attenuated `CancellableDmaOperationAccess<QueuePublication>` facets.
+`Succeeded` places the sole
 `DeviceOperationToken` for the now-`DeviceOwned` buffer. `Cancelled` can return
 the original device-buffer authority only after proving no publication escaped
 and rolling back the reservation. `Incomplete`, `QuarantinedPinned`, and
@@ -532,7 +647,8 @@ Completion admission follows the same ownership rule. `Rejected` performs no
 ownership transition, does not consume the one-shot `DeviceCompletionToken`,
 and returns it with the exact `DeviceOperationToken`; the current completion
 facet is borrowed, not transferred. `Accepted` moves both tokens into the protected
-`OperationToken<CompletionAcceptance>`. `Succeeded` atomically consumes the
+completion-acceptance operation and returns only its attenuated operation
+facets. `Succeeded` atomically consumes the
 completion token and replaces the device-operation token with one
 `ReturnedBufferToken` in
 `Returned`. `Cancelled` returns both linear inputs only if it wins before the
@@ -591,11 +707,72 @@ above this layer.
 
 ### Map
 
+The alias ledger uses an explicit access state:
+
+```text
+DmaAliasAccessState =
+    PendingInstall |
+    DormantNoDeviceAccess |
+    InstalledWithIndependentIssueGateClosed |
+    PendingDeviceAccess |
+    LiveDeviceAccess |
+    RetiringOldAccess
+```
+
+The entry always retains its intended `DeviceRead`/`DeviceWrite` rights and
+enforcement profile, but only `LiveDeviceAccess` denotes currently exercisable
+device authority. Dormant and gate-closed states remain conflicts for any
+operation that could make their prospective rights live, so code publication
+or a second ownership transfer cannot bypass the common reservation ledger.
+
+At the cross-component boundary, both `PendingInstall` and
+`PendingDeviceAccess` normalize to the shared ledger's `PendingAdd` hazard,
+carrying the intended device rights, memory type, physical extent/backing
+lineage, and enforcement profile. `RetiringOldAccess` retains its common
+meaning. CPU mapping, code publication, diagnostic aliases, IOMMU/DMA, and
+device ownership all evaluate this normalized projection under the same
+generation-bound reservation; no participant may ignore a pending device-write
+transition because its local typestate has a more specific name.
+
+The projection also consults the code ledger's persistent
+`SealedWriteDeny`. A buffer extent in `Sealing`, `Sealed`, `Published`, or code-
+retiring state rejects prospective `DeviceWrite` even if no executable alias is
+currently live and the caller presents an older or derived frame authority.
+Seal acceptance advances/revokes the bound frame-write epoch and closes DMA,
+device, CPU, and diagnostic writer admission in the same global-reservation
+linearization.
+
 Before acceptance, the mapping broker validates domain, endpoint, service,
-buffer, frame-authority epoch, access, and quotas, allocates a checked IOVA, and
-constructs unpublished translation entries. Rejection returns every resource.
-Acceptance atomically pins the frame, charges quota, and records a
-`DmaMapOperation`; from that point the split-phase backend:
+buffer, frame-authority epoch, access, and quotas against a synchronous borrow
+of the exact live `CpuBufferToken`, allocates a checked IOVA, and
+constructs unpublished translation entries. It also acquires generation-bound
+reservations for every canonical physical extent and backing lineage in the
+same globally ordered alias ledger used by CPU mapping, executable publication,
+device, and diagnostic-alias admission. `PendingInstall` (the DMA-typed form of
+the shared pending-alias hazard) and
+`RetiringOldAccess` entries remain conflicts, including a pending executable
+alias against device-write authority. Rejection returns every resource and
+releases those reservations. Acceptance atomically revalidates the ledger and
+borrowed token's identity and access epoch, pins the frame, charges quota,
+records the proposed DMA alias as operation-owned
+`PendingInstall`, and creates a `DmaMapOperation`; from that point the split-phase backend:
+
+The broker follows the same total acquisition hierarchy: sorted extents first;
+then every affected DMA-domain, endpoint, buffer, and address-space lifecycle
+or mutation gate in global object-key order; then sorted IOVA/virtual ranges;
+then translation tables root-to-leaf. Diagnostic and temporary-alias admission
+must use the identical order. Preparation may occur optimistically, but no
+admission commits until all generations have been revalidated under the full
+ordered set; no path may hold an object/range lock while waiting for an extent.
+
+The token borrow cannot escape the synchronous `map_dma` admission call: the
+broker may neither copy it nor retain it in `DmaMapOperation`. Buffer-access
+admission serializes this validation with ownership transfer. Rejection ends
+the borrow unchanged; acceptance binds the observed token identity and epochs
+into the dormant-map operation while the caller keeps the sole CPU-ownership
+token. The later `prepare_for_device` call, not `map_dma`, consumes that exact
+token. A concurrent transfer or epoch advance therefore makes admission stale
+rather than leaving two ownership transitions authorized.
 
 1. makes table writes visible under the IOMMU contract;
 2. installs or updates the domain root/context;
@@ -603,14 +780,30 @@ Acceptance atomically pins the frame, charges quota, and records a
 4. records the backend's defined completion event without blocking the caller;
    and
 5. publishes the opaque mapping capability only in the terminal `Succeeded`
-   result.
+   result. For baseline `EnforcedExclusive`, it atomically changes
+   `PendingInstall` to `DormantNoDeviceAccess` and returns
+   `DmaMapping<DormantNoDeviceAccess>`; it does **not** make the requested
+   device rights live.
+   `TrustedTypestateExclusive`, `CoherentShared`, or a profile with an
+   independently enforced issue gate may instead return its explicitly typed
+   live or gate-closed state.
 
 Failure unwinds only state proved unobserved. If hardware may have observed a
 partial change and completion cannot be established, the operation terminates
 `Incomplete` or `QuarantinedPinned`; the endpoint/domain and frame remain
-pinned rather than being reused.
+pinned and the alias reservation/state remains quarantine-owned rather than
+being reused.
 
 ### Give ownership to the device
+
+Baseline admission consumes the sole `CpuBufferToken` together with a
+generation-checked `ActivateDeviceAccess` facet of the exact
+`DmaMapping<DormantNoDeviceAccess>`. An inspect, invalidate, or unmap-only
+mapping reference cannot initiate transfer. The accepted operation owns both
+authorities until success replaces them with `DeviceBufferToken`, or an
+incomplete path transfers them to quarantine. Trusted/shared/gated profiles
+use separately typed variants with their own proven preconditions; they are not
+casts from the dormant baseline.
 
 For a device-read buffer on a non-coherent platform, clean dirty CPU cache
 lines to the point required by the platform before descriptor publication. For
@@ -618,9 +811,18 @@ a device-write buffer, prevent dirty CPU lines from later overwriting device
 results; the exact clean/invalidate sequence comes from the platform coherency
 profile. In `EnforcedExclusive`, the transfer operation first closes the
 `BufferAccessEpoch` admission gate, making every old CPU mapping/copy facet
-stale, then closes extant untrusted aliases and obtains remote
-`TranslationQuiescent` evidence before returning a `DeviceBufferToken` bound to
-the new epoch. A mere typestate statement that the CPU “must not touch” the
+stale. Before acceptance it reserves the affected physical extents in the
+shared alias ledger. Acceptance revalidates the ledger and records outgoing
+untrusted CPU aliases and accesses (`CpuRead` and `CpuWrite`, as applicable) as
+`RetiringOldAccess`, preserving each entry's exact rights so cross-alias W^X and
+ownership checks remain precise, and advances the dormant intended
+device-access entry to operation-owned `PendingDeviceAccess`; the operation
+owns both while it closes extant untrusted
+aliases and obtains remote
+`RestrictionQuiescent` evidence before returning a `DeviceBufferToken` bound to
+the new epoch. Only then does it retire the CPU hazards and commit device access
+as `LiveDeviceAccess`. This closes CPU translations and privileged access borrows but
+does not replace the later IOMMU/device/DMA predicates. A mere typestate statement that the CPU “must not touch” the
 range is insufficient.
 
 After data and descriptor preparation, execute the architecture/device memory
@@ -648,9 +850,16 @@ claim or ownership mutation, while uncertainty pins them without creating CPU
 authority.
 
 `prepare_for_cpu` then closes or quiesces device issue/translation authority as
-required by `EnforcedExclusive`, performs non-coherent CPU cache acquisition,
-and only after those split-phase obligations complete returns
-`CpuBufferToken`. Thus the API and prose preserve the intermediate returned
+required by `EnforcedExclusive`. Its accepted operation holds the shared
+physical-alias reservation with device access `RetiringOldAccess` and the
+prospective CPU alias/access state `PendingAdd` until device, transport, IOMMU,
+and non-coherent cache-acquisition obligations close. Only then does it commit
+CPU access live and return `CpuBufferToken` together with one typed translation
+disposition. `Removed` consumes the mapping authority, completes the required
+IOMMU invalidation, and retires the outgoing device hazard. `RetainedDormant`
+atomically changes `LiveDeviceAccess`/`RetiringOldAccess` to
+`DormantNoDeviceAccess` under the reservation and returns the checked dormant
+mapping capability; no device right remains exercisable. Thus the API and prose preserve the intermediate returned
 state; they do not treat a device-authored queue word as CPU ownership.
 
 Partial completion, short packets, scatter/gather chains, and devices that can
@@ -661,8 +870,19 @@ The common layer cannot infer this from an interrupt.
 
 ### Revocation ledger
 
-`begin_revoke` closes the logical gate immediately, then executes a durable,
-profile-validated `RevocationPlan` dependency DAG. Its nodes include:
+Before `begin_revoke` accepts, it reserves the affected canonical physical
+extents/backing lineages in the common alias ledger and preallocates the
+retirement/quarantine records. Acceptance revalidates that shared ledger,
+consumes the exact generation-bound `Revoke` authority into the operation,
+closes the logical gate, and marks every outgoing CPU/device/DMA alias
+`RetiringOldAccess`; the durable, profile-validated `RevocationPlan` owns those
+entries until the complete predicate DAG closes or transfers them to
+quarantine. Its nodes include:
+
+Pre-effect rejection returns the unchanged revoke authority. Every accepted
+terminal either consumes it into the completed endpoint/mapping generation or
+transfers that actual authority—not a snapshot or digest—to the same named
+quarantine as the retained plan and resources.
 
 | Obligation node | Required evidence |
 | --- | --- |

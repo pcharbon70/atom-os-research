@@ -193,6 +193,17 @@ EntryCpuState {
     current_domain,
     current_thread,
     active_translation_guard: Option<ActivationGuard>,
+    observed_address_space_mutation_sequence,
+    translation_catchup_state:
+        TranslationCatchupGenerationStateIncarnation,
+    translation_catchup_state_digest,
+    observed_translation_catchup_program_or_chain_digest,
+    observed_execution_admission_epoch,
+    code_publication_generation_state:
+        CodePublicationGenerationStateIncarnation,
+    observed_code_publication_generation,
+    observed_code_publication_program_digest,
+    observed_code_publication_state_digest,
     thread_kernel_stack,
     hard_interrupt_stack,
     nmi_like_stack,
@@ -394,6 +405,17 @@ UserReturnEnvelope {
     context_generation,
     address_space_id,
     address_space_generation,
+    address_space_mutation_sequence,
+    translation_catchup_state:
+        TranslationCatchupGenerationStateIncarnation,
+    translation_catchup_state_digest,
+    translation_catchup_program_or_chain_digest,
+    execution_admission_epoch,
+    code_publication_generation_state:
+        CodePublicationGenerationStateIncarnation,
+    code_publication_generation,
+    code_publication_program_digest,
+    code_publication_state_digest,
     context_shape_id,
     user_pc,
     user_sp,
@@ -409,6 +431,19 @@ Before final return, the validator proves:
 
 - the domain, thread, address space, context shape, CPU lifecycle, and
   mitigation generations are current;
+- the envelope, active translation guard, persistent address-space catch-up
+  state, and CPU observation name the same stable even mutation sequence,
+  catch-up-state incarnation, and digest; if the CPU was behind, it pinned and
+  executed the actual dominating program or retained incremental chain before
+  validation;
+- the address-space execution-admission epoch equals the active translation
+  guard, no lifecycle-close or publication-suspension owner is present, and
+  this CPU is not required to stop for a pending suspension drain;
+- the envelope, active translation guard, persistent component-4 publication
+  state, and this CPU incarnation's observed code-publication state incarnation
+  and generation all name the same current incarnation, generation, and digest;
+  a newly eligible or
+  migrated CPU has completed the required privileged fetch catch-up;
 - `user_pc` and `user_sp` are correctly formed, aligned, in the permitted user
   range, and mapped under the expected address-space generation;
 - privilege fields request only the configured less-privileged mode;
@@ -426,8 +461,13 @@ Before final return, the validator proves:
   public constants, never kernel temporaries.
 
 Validation yields a short-lived, CPU-bound `ValidatedReturnToken`. Only the
-final assembly leaf accepts this token. An interrupt or generation change
-between validation and final return invalidates or restarts the return path.
+final assembly leaf accepts this token. The token binds the execution-admission
+epoch, translation-catch-up state, and code-publication state as well as the
+translation and lifecycle generations. An interrupt, generation change, or
+newly published execution-suspension owner between
+validation and final return invalidates or restarts the return path; the final
+leaf performs the component-3-defined pending/epoch check before crossing the
+privilege boundary.
 Where static linear types are unavailable, the token is opaque and guarded by
 CPU-local generation checks.
 
@@ -743,8 +783,12 @@ context owner, generation, and return outcome. Check at minimum:
   `ResidentOn` state, and a new pair cannot commit before the old pair is saved
   or discarded and any required scrub completes;
 - an event at every transition either reaches a valid nested state or bounded
-  fatal state; and
-- a generation change invalidates all prepared returns for the old generation.
+  fatal state;
+- a generation change invalidates all prepared returns for the old generation;
+  and
+- a CPU whose observed code-publication generation is stale cannot construct a
+  validated return, including after eligibility change, migration, or CPU-
+  identity reuse.
 
 ### Frame and return property tests
 

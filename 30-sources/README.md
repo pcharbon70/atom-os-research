@@ -40,7 +40,7 @@ every journal-manifest backlink.
 | --- | --- | --- |
 | AtomVM foundation | [AtomVM foundation](../10-maps/atomvm-foundation.md) | [2026-08-28 AtomVM deep dive](../50-journal/2026-08-28-atomvm-deep-dive.md) |
 | BEAM, ERTS, and OTP | [BEAM, ERTS, and OTP](../10-maps/beam-erts-and-otp.md) | [2026-08-28 BEAM, ERTS, and OTP deep dive](../50-journal/2026-08-28-beam-erts-and-otp-deep-dive.md) |
-| Kernel hardware and architecture | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-08-30 layer deep dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md); [2026-09-02 component deep dive](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md) |
+| Kernel hardware and architecture | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-08-30 layer deep dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md); [2026-09-02 component deep dive](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md); [2026-09-04 address-translation component deep dive](../50-journal/2026-09-04-address-translation-and-protection-transitions-deep-dive.md) |
 | Minimal privileged kernel | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-08-31 layer deep dive](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md) |
 | Managed actor runtime | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-02 layer deep dive](../50-journal/2026-09-02-managed-actor-runtime-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-managed-actor-runtime-components-deep-dive.md) |
 | OTP-like system services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-03 system-services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md); [2026-09-04 component deep dive](../50-journal/2026-09-04-otp-like-system-services-components-deep-dive.md) |
@@ -773,6 +773,55 @@ not retroactively labeled as introduced by it:
 - [User interaction design for secure systems](yee-2002-user-interaction-design-secure-systems.md) —
   derives trusted-path and authorization-interface principles from the limits
   of user attention, distinguishability, and untrusted application surfaces.
+- [Machine-independent virtual memory management](rashid-et-al-1987-machine-independent-virtual-memory.md) —
+  separates semantic virtual-memory objects and policy from a machine-
+  dependent address-translation module.
+- [A scalable implementation of virtual memory HAT layer for shared memory multiprocessor machines](balan-gollhardt-1992-scalable-virtual-memory-hat-layer.md) —
+  develops the SVR4.2 HAT boundary, context activation, and processor-aware
+  mapping maintenance.
+- [TLB consistency: a software approach](black-et-al-1989-tlb-consistency.md) —
+  describes acknowledged multiprocessor invalidation with bounded address
+  queues and conservative full-flush fallback.
+- [Ephemeral mapping management](elmeleegy-et-al-2005-ephemeral-mapping-management.md) —
+  studies bounded ownership, reuse, and lifetime for temporary kernel virtual
+  mappings.
+- [SecVisor retrospective](franklin-et-al-2008-secvisor-retrospective.md) —
+  reports physical-page provenance and executable-page mediation lessons from
+  a small code-integrity hypervisor.
+- [RadixVM](clements-et-al-2013-radixvm.md) — evaluates range concurrency, per-
+  core page tables, target tracking, shootdown, and delayed reference release.
+- [ret2dir](kemerlis-et-al-2014-ret2dir.md) — demonstrates how a privileged
+  direct physical map can create aliases around user/supervisor isolation.
+- [Nested Kernel](dautenhahn-et-al-2015-nested-kernel.md) — confines page-table
+  and isolation machinery behind a protected subkernel boundary.
+- [HATRIC](yan-et-al-2017-hatric.md) — proposes hardware translation coherence
+  using dependency-aware invalidation for virtualized systems.
+- [Reducing liveness to safety](padon-et-al-2018-reducing-liveness-to-safety.md) —
+  uses TLB shootdown to show how fairness and exact atomic regions shape
+  protocol liveness proofs.
+- [seL4 RISC-V page-map defect](sel4-foundation-2020-risc-v-page-map-defect.md) —
+  preserves a concrete descriptor-interpretation failure caused by rights
+  attenuation.
+- [Don't shoot down TLB shootdowns](amit-et-al-2020-dont-shoot-down-tlb-shootdowns.md) —
+  evaluates batching, deferral, and conditional early acknowledgement while
+  exposing required user-return and privileged-access gates.
+- [Secure memory management](achermann-et-al-2020-secure-memory-management.md) —
+  develops a typed, authority-aware memory-management model, executable
+  specification, and scoped prototype evaluation.
+- [Midas](bhattacharyya-et-al-2022-midas.md) — uses page-table-mediated access
+  control to prevent kernel double-fetch attacks and reports its overhead.
+- [SafeFetch](duta-et-al-2024-safefetch.md) — replays first-fetched user bytes
+  on later overlapping kernel fetches through compiler instrumentation and a
+  per-system-call cache.
+- [Practical page-table verification in a Rust OS](asterinas-community-2025-practical-page-table-verification.md) —
+  develops typed page purposes, cursor invariants, representability checks,
+  and tree-to-flat refinement for page tables.
+- [Linux arm64 ASID context management](linux-kernel-community-2026-arm64-asid-context-management.md) —
+  records current generation, bitmap, reserved/active tag, rollover, and
+  pending-flush implementation precedent.
+- [Linux virtual-memory implementation contracts](linux-kernel-community-2026-virtual-memory-implementation-contracts.md) —
+  records current page-table teardown, software-walker, user-copy, pinning,
+  and secondary-MMU lifetime rules.
 
 ## Maintaining this index
 

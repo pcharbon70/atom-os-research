@@ -37,7 +37,8 @@ A candidate contract is adequate when all of the following can be demonstrated:
 | --- | --- |
 | Complete responsibility model | Every privileged transition is owned by one component and every cross-component dependency is named |
 | Authority safety | Tests show raw identifiers/pointers cannot bypass frame, interrupt, CPU, timer, or DMA authority |
-| Completion safety | Mapping, code, CPU, interrupt, and DMA state cannot be reclaimed or rebound before required local/remote quiescence |
+| User-access mediation | Fault-injected copy and probe tests demonstrate nonwrapping checked ranges, bounded architecture privilege windows, explicit partial completion, stable snapshots for control data, and no ambient supervisor alias to user-owned frames |
+| Completion safety | No identity, page-table page, frame, executable image, or DMA buffer is reclaimed or rebound until its separately required CPU-translation, hardware-walker, software-reader, pin/borrow, code-execution, IOTLB, and device-access quiescence predicates hold |
 | Context isolation | All enabled integer, FP/SIMD/vector, debug, and control state is saved, scrubbed, or disabled across domains |
 | Ordering correctness | Language/ISA litmus tests and device/DMA tests match pinned memory and I/O models |
 | Bounded exceptional paths | Entry, interrupt, NMI-like, and fatal-fault paths have measured stack, time, nesting, lock, and allocation bounds |
@@ -78,6 +79,12 @@ experimental evidence. Literature synthesis alone cannot resolve it.
 
 ### Specify before implementing
 
+- Use the [nine address-translation service
+  reports](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/README.md)
+  as the initial state-machine and message-schema inventory. Reconcile their
+  object incarnations, mutation and context-tag generations, acceptance
+  handoffs, frozen target sets, completion-slot generations, invalidation
+  effects, quiescence predicates, and user-access snapshots before coding.
 - Define the object, authority, generation, context-safety, failure, and
   completion schema for every proposed operation.
 - Write executable state machines for mapping/reclamation, interrupt rebinding,
@@ -103,6 +110,18 @@ experimental evidence. Literature synthesis alone cannot resolve it.
 - Inject nested traps at every entry transition and fuzz every user return.
 - Force ASID generation rollover, delayed shootdowns, CPU failure, and task
   migration during mapping and code publication.
+- Delay IPI or firmware request acceptance independently from target execution
+  and acknowledgement; verify that transport success, timeout, and a stale CPU
+  lifecycle snapshot cannot satisfy `CpuTranslationQuiescent`.
+- Deliver acknowledgements after CPU-number, address-space, mapping, context-
+  tag, and completion-slot reuse; only the exact incarnation-and-generation
+  tuple may advance its original teardown ledger.
+- Race software page-table walkers, pinned user pages, executable-code
+  retirement, IOMMU invalidation, device-TLB timeout, and in-flight DMA against
+  frame and table-page reuse.
+- Inject partial user-copy faults, arithmetic wrap, remapping, concurrent
+  mutation, and supervisor direct-map aliases; authorization must consume one
+  immutable snapshot and no failed path may leave the user-access gate open.
 - Exercise edge/level interrupt storms, receiver overflow, affinity changes,
   and stale completion tokens.
 - Delay DMA completions across revoke, reset, domain reuse, and driver restart.
@@ -142,6 +161,30 @@ prepared work, sealed generational ownership, explicit acceptance and terminal
 completion, acknowledged/missing target sets, and quarantine whenever
 quiescence cannot be proven. This strengthens the provisional contract but does
 not supply the executable or two-ISA evidence required to resolve the inquiry.
+
+The [nine address-translation service deep
+dives](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/README.md)
+further refine component 3 into separately reviewable identity, admission,
+representation, transaction, context-tag, invalidation, shootdown, reclamation,
+and safe-access contracts. Their shared conclusion is that
+`CpuTranslationQuiescent` is evidence over an incarnation-bound frozen CPU
+target set—not a synonym for IPI submission, firmware success, timeout,
+CPU-number absence, privileged helper-borrow closure, or DMA quiescence. A
+restrictive mapping succeeds only when that proof is joined with
+`CpuAccessQuiescent` as `RestrictionQuiescent`. Reclamation is a further join
+over the independently required hardware-walker, software-reader, reference,
+code, IOMMU, device-drain, and lifecycle predicates. Safe user access requires
+checked nonwrapping ranges, bounded architecture-gated windows, explicit
+partial-fault results, copy-once immutable control snapshots, and no ambient
+privileged alias to user-owned frames.
+
+These are sharper proposed invariants and test obligations, not implementation,
+hardware-conformance, liveness, or two-ISA evidence. They therefore strengthen
+the inquiry without changing its open status. The [address-translation
+component research
+journal](../50-journal/2026-09-04-address-translation-and-protection-transitions-deep-dive.md)
+records the exact newly introduced and reused evidence, cross-service
+conclusions, falsifiers, and bounded remaining gaps.
 
 Evidence currently supports these constraints:
 

@@ -19,6 +19,7 @@ tags:
   - microkernels
   - operating-systems
   - scheduling
+  - virtual-memory
 aliases:
   - "seL4 manual version 16.0.0"
 ---
@@ -62,6 +63,13 @@ memory, interrupts, and boot authority.
 - A fault suspends the thread and is delivered as a structured message to its
   configured handler. Missing fault handling leaves the thread suspended; the
   kernel does not choose a restart policy.
+- The manual's object model and virtual-memory chapter allow one VSpace to be
+  associated with one or more threads. User frames may be mapped into several
+  VSpaces, while intermediate paging structures are not shared between
+  VSpaces.
+- Section 7.1.2 states that mapping rights requested at invocation are reduced
+  by the rights on the frame capability. Callers therefore must account for
+  the final effective rights, not only the requested mask.
 
 ## Relevance
 
@@ -69,7 +77,8 @@ This is the most concrete precedent for typed capability tables, explicit
 object backing, small IPC, first-class time authority, fault endpoints, and
 user-level policy. It also exposes edge cases the proposed design must specify:
 large revocations, unreachable capability subtrees, call cancellation, donated
-budgets, reply authority, and reclaiming mappings separately from capabilities.
+budgets, reply authority, shared-thread VSpace activation, effective mapping
+rights, and reclaiming mappings separately from capabilities.
 
 ## Limits
 
@@ -86,3 +95,6 @@ and incarnation-aware cancellation, which are not claims about the seL4 API.
 - [Minimal privileged kernel layer](../20-notes/minimal-privileged-kernel-layer.md)
 - [Minimal privileged kernel map](../10-maps/minimal-privileged-kernel.md)
 - [Minimal privileged-kernel contract inquiry](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)
+- [Address-space object](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/address-space-object.md)
+- [Mapping validator](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/mapping-validator.md)
+- [Page-table and protection encoder](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/page-table-and-protection-encoder.md)
