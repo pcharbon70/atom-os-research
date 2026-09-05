@@ -341,13 +341,20 @@ share ownership and completion vocabulary.
 
 ### Executable code
 
-Objects: `ExecutableImage`, `CodeWriteLease`, `SealedCode`, `PublicationSet`,
-`PublishedCode`, `CodeEpoch`. `CodePublicationState` remains backend-private.
+Objects: `ExecutableImage`, `CodeWriteLease`, `SealedCode`, scheduler-issued
+`Authorized<PublicationSetWitness>`, `PublishCodeWithinAuthority`,
+`AddressSpaceExecutionSuspensionReservation`, `PublishedCode`,
+`CodeRetirementRef`, `ExecutionQuiescenceSource`, and `CodeEpoch`.
+`CodePublicationGenerationState` remains protected architecture/runtime state.
 
-Publication consumes a sealed region plus target CPU set and yields executable
-authority only after data, instruction, and remote observation requirements are
-satisfied. Retirement preserves memory until every possible executor crosses
-the required epoch.
+Publication consumes a sealed region plus independently authorized target-range
+and suspension resources. The scheduler witness fixes the complete eligible CPU
+set; the caller cannot choose, omit, or forge members. Executable authority is
+returned only after execution admission is held closed while RX installation,
+instruction maintenance, and remote observation complete. Retirement requires
+the exact version's authorized no-new-dispatch and execution-quiescence evidence
+before RX removal and preserves memory until the reclamation gate joins every
+remaining predicate.
 
 ### Interrupts
 

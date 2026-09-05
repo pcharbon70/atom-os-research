@@ -76,6 +76,10 @@ provenance record.
   records the expanded research across all sixteen proposed security services,
   exact source provenance, shared authority and lifecycle contracts,
   falsifiers, and absence of prototype evidence.
+- [2026-09-04 address translation and protection transitions deep dive](2026-09-04-address-translation-and-protection-transitions-deep-dive.md) —
+  records the nine-service component expansion, exact source provenance,
+  cross-ISA transition and completion synthesis, falsifiers, and absence of
+  prototype or hardware evidence.
 - [2026-09-04 OTP-like system services components deep dive](2026-09-04-otp-like-system-services-components-deep-dive.md) —
   records the expanded research across all thirteen service components, exact
   source provenance, shared lifecycle and outcome model, implementation

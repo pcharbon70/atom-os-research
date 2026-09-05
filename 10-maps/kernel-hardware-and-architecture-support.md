@@ -41,6 +41,14 @@ backend must declare them as dependencies.
   records the expanded source search, shared review questions, resulting
   implementation recommendations, and the continuing lack of prototype
   evidence.
+- [Address-translation service deep
+  dives](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/README.md)
+  develop component 3 as nine separately reviewable contracts while preserving
+  one integrated protection-transition lifecycle.
+- [Research session: address-translation and protection-transition deep
+  dive](../50-journal/2026-09-04-address-translation-and-protection-transitions-deep-dive.md)
+  records the expanded primary-source search, exact source manifest,
+  cross-service synthesis, and remaining proof and platform gaps.
 
 ## Component implementation deep dives
 
@@ -67,8 +75,10 @@ microkernel and managed-runtime boundary.
 
 - [3. Address translation and protection
   transitions](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions.md) —
-  develops typed mapping transactions, centralized publication, generation-
-  safe address-space tags, and explicit quiescence.
+  composes typed address-space identity and mapping admission with
+  architecture-specific encoding, generation-safe context tags, monotonic
+  invalidation planning, acknowledged shootdown, joined reclamation evidence,
+  and bounded user access.
 - [4. Ordering, coherence, and code
   publication](../20-notes/kernel-hardware-and-architecture-components/ordering-coherence-and-code-publication.md) — keeps
   compiler, memory, device, DMA, translation, and instruction-fetch ordering
@@ -106,6 +116,51 @@ microkernel and managed-runtime boundary.
   facade](../20-notes/kernel-hardware-and-architecture-components/typed-kernel-facing-architecture-facade.md) — exposes the
   components through sealed generational objects, context requirements,
   split-phase tokens, explicit feature profiles, and conformance tests.
+
+## Component 3 service deep dives
+
+The [local research
+index](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/README.md)
+is the exhaustive inventory. The nine reports separate internal ownership
+without changing the parent component's caller-visible contract.
+
+### Identity, admission, and representation
+
+- [1. Address-space object](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/address-space-object.md) —
+  binds authority, roots, ledgers, generations, activation, and teardown to one
+  durable address-space incarnation.
+- [2. Mapping validator](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/mapping-validator.md) —
+  performs total checked admission and reserves all post-accept resources
+  before visible mutation.
+- [3. Page-table and protection encoder](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/page-table-and-protection-encoder.md) —
+  confines raw ISA representation and publication recipes behind typed
+  semantic constructors and complete mediation.
+
+### Transaction, tag, and invalidation planning
+
+- [4. Mapping transaction](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/mapping-transaction.md) —
+  owns the interval from accepted intent through publication, invalidation,
+  terminal evidence, and retained-resource transfer.
+- [5. Translation-context allocator](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/translation-context-allocator.md) —
+  manages finite ASID/PCID-like values as incarnation- and generation-bound
+  leases with explicit rollover and fallback.
+- [6. Translation invalidation planner](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/invalidation-planner.md) —
+  lowers semantic hazards to immutable backend plans and permits only
+  correctness-preserving strengthening.
+
+### Completion, reclamation, and privileged access
+
+- [7. Shootdown coordinator](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/shootdown-coordinator.md) —
+  closes the activation/snapshot race, executes bounded target work, and
+  distinguishes transport, local execution, CPU-translation quiescence,
+  lifecycle exclusion, and incomplete completion.
+- [8. Reclamation gate](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/reclamation-gate.md) —
+  joins CPU translation/access, hardware-walker, software-reader, reference,
+  code, IOMMU, and device-drain predicates before reuse.
+- [9. Safe user-access helpers](../20-notes/kernel-hardware-and-architecture-components/address-translation-and-protection-transitions/safe-user-access-helpers.md) —
+  combines checked ranges, bounded architecture access windows, explicit
+  partial faults, copy-once control snapshots, and the absence of ambient
+  privileged aliases.
 
 ## Trails
 
@@ -152,6 +207,20 @@ microkernel and managed-runtime boundary.
   give rigorous but differently relaxed ordinary-memory models.
 - [LazyFP](../30-sources/stecklina-prescher-2018-lazyfp.md) demonstrates that
   extended processor state is security context, not merely switch overhead.
+- [TLB consistency](../30-sources/black-et-al-1989-tlb-consistency.md),
+  [shootdown liveness](../30-sources/padon-et-al-2018-reducing-liveness-to-safety.md),
+  and [conditional shootdown
+  deferral](../30-sources/amit-et-al-2020-dont-shoot-down-tlb-shootdowns.md)
+  ground target-set, acknowledgement, bounded-handler, safety, and liveness
+  obligations.
+- [Linux virtual-memory implementation
+  contracts](../30-sources/linux-kernel-community-2026-virtual-memory-implementation-contracts.md)
+  expose the distinct translation, software-walker, pin, and secondary-MMU
+  lifetime constraints hidden by a simple “flush the TLB” abstraction.
+- [Midas](../30-sources/bhattacharyya-et-al-2022-midas.md),
+  [SafeFetch](../30-sources/duta-et-al-2024-safefetch.md), and
+  [ret2dir](../30-sources/kemerlis-et-al-2014-ret2dir.md) establish the double-
+  fetch and privileged-alias hazards that shape safe domain access.
 
 ### Interrupts, time, CPUs, and practical contract precedent
 

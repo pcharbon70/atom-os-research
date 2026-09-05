@@ -495,7 +495,9 @@ effects.
 6. **Invalidation planner.** Selects local address, local context, remote range,
    or global invalidation according to backend guarantees.
 7. **Shootdown coordinator.** Sends requests, tracks acknowledgements, handles
-   offline or unresponsive CPUs, and produces a completion epoch.
+   offline or unresponsive CPUs, and produces generation-bound completion
+   evidence that the mapping transaction incorporates into its terminal
+   publication epoch.
 8. **Reclamation gate.** Prevents reuse of page tables and frames until stale
    walkers, translations, DMA, and executable references are quiescent.
 9. **Safe user-access helpers.** Perform bounded copy/probe operations with
@@ -506,15 +508,17 @@ effects.
 ```mermaid
 flowchart LR
   prepared["Prepared"] -->|"publish mapping"| published["Published"]
-  published -->|"begin reduction, replacement, or unmap"| pending["InvalidationPending<br/>(local CPU set, generation)"]
-  pending -->|"complete required invalidation"| quiescent["TranslationQuiescent<br/>(completion epoch)"]
-  quiescent -->|"authorize reuse"| reclaimable["Reclaimable"]
+  published -->|"begin reduction, replacement, or unmap"| pending["RestrictionPublished + InvalidationPending<br/>(CPU and access-borrow obligations)"]
+  pending -->|"CPU translation and privileged borrows quiescent"| quiescent["RestrictionQuiescent<br/>(operation)"]
+  quiescent -->|"gate validates resource-specific predicate set"| reclaimable["Reclaimable"]
 ```
 
 An additive map may have a shorter safe path than permission reduction,
 replacement, or unmap. The transaction class records which postcondition is
-needed. A returned `Published` result does not imply that a removed mapping is
-safe to reclaim; callers needing reuse await `TranslationQuiescent`.
+needed. A returned `Published` result does not imply that old access is closed
+or that a removed mapping is safe to reclaim. Restrictive callers await
+`RestrictionQuiescent`; only the reclamation gate may emit `Reclaimable` after
+the exact resource's remaining predicates hold.
 Admission errors are returned only before the first mutation. Once accepted,
 the operation owns its frozen CPU targets and resource pins until success,
 drained cancellation, or an explicit incomplete/quarantine terminal record.
@@ -631,15 +635,14 @@ Loading or generating code is modeled as a lifecycle:
 
 ```mermaid
 flowchart LR
-  writable["WritableOwned"] -->|"close all writers"| sealed["SealedNoMoreWrites"]
-  sealed -->|"make data visible"| visible["DataVisible"]
-  visible -->|"close writable translation"| writeClosed["WritableTranslationClosed"]
-  writeClosed -->|"install unreachable executable mapping"| mapped["ExecutableMappedButUnreachable"]
-  mapped -->|"invalidate instruction state"| invalidated["InstructionStateInvalidated"]
-  invalidated -->|"synchronize target CPUs"| synchronized["RemoteFetchSynchronized<br/>(CPU set, generation)"]
-  synchronized -->|"publish reachability"| published["PublishedCode"]
-  published -->|"retire generation"| retired["Retired"]
-  retired -->|"complete reclamation gates"| reclaimable["Reclaimable"]
+  writable["WritableOwned"] -->|"deny and drain every writer domain"| closing["WriterClosureEvidence"]
+  closing -->|"data visibility + hash exact extent;<br/>bind runtime metadata"| sealed["SealedCode<br/>(non-W, non-X; CodeSealQuiescent)"]
+  sealed -->|"authorized publication accepted;<br/>close and drain execution admission"| suspended["AddressSpaceExecutionSuspension<br/>&lt;Held&gt;"]
+  suspended -->|"install RX while suspension remains held"| mapped["ExecutableEnabledWhileSuspended"]
+  mapped -->|"instruction maintenance +<br/>synchronize frozen target CPUs"| synchronized["RemoteFetchSynchronized<br/>(CPU set, generation)"]
+  synchronized -->|"atomic PublishedCode commit +<br/>remove this suspension owner"| published["PublishedCode"]
+  published -->|"no-new-dispatch + exact-version<br/>executor quiescence"| retired["Retirement quiescent<br/>(RX still mapped until proof)"]
+  retired -->|"remove RX + translation/fetch quiescence;<br/>complete reclamation gates"| reclaimable["Reclaimable"]
 ```
 
 `ExecutableImage` is the minimal kernel's single accounting and lifetime
@@ -1203,7 +1206,7 @@ interfaces. The facade is where portability is judged.
 | --- | --- | --- | --- |
 | Execution | `UserContext`, `ContextShape`, `EntryFrame` | initialize, sanitize, activate, capture | local state transferred or explicit failure |
 | Translation | `AddressSpace`, `MappingTransaction`, `Mapping` | map, protect, unmap, activate | publication or quiescent epoch |
-| Code | `ExecutableImage`, `PublicationSet` | seal, publish, retire | CPUs synchronized at generation |
+| Code | `ExecutableImage`, scheduler-issued `Authorized<PublicationSetWitness>`, target-range and suspension authority | seal, publish, retire; caller cannot choose or omit CPUs | publication generation synchronized under held execution suspension; retirement gate token |
 | Interrupts | accounted `IRQBinding`; typed `InterruptSource`, `InterruptRoute`, and `InterruptBinding` views; `EventSink` | bind, route, arm, complete, quarantine | binding/event generation |
 | Time | `ClockDomain`, `ClockEra`, `TimerChannel`, `DeadlineToken`, `DeadlineTerminal` | read, arm, poll, cancel, consume | exactly one sticky fired/cancelled/rebased/rebase-failed/era-discontinuity/channel-failed result per token |
 | CPUs | `CpuHandle`, `CpuSet`, `CpuRequest`, `CpuLifecycleEpoch` | start/quiesce/offline under `CpuLifecycleAuthority`; send typed requests under their operation authority | acknowledged/failed CPU set at a lifecycle epoch |
@@ -1646,7 +1649,7 @@ have transferred.
 3. Code publication closes the writer lease and completes data-cache visibility
    through the staging aliases.
 4. Translation removes every writable alias to a
-   `TranslationQuiescent(generation)` postcondition, then installs an RX mapping
+   `RestrictionQuiescent(operation)` postcondition, then installs an RX mapping
    that remains unreachable by runtime dispatch.
 5. Code publication invalidates instruction state over the executable aliases
    and completes the required local and remote fetch synchronization for the

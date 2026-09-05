@@ -328,13 +328,25 @@ The joining CPU performs local work and acknowledgements:
 - validates mandatory features again from the executing CPU;
 - initializes local interrupt reception and drains a test IPI;
 - initializes/disarms its one-shot deadline channel and validates a test event;
-- acknowledges current translation and executable-publication generations;
+- under the membership-admission gate, pins the current
+  `TranslationCatchupGenerationState` and `CodePublicationGenerationState`,
+  their exact architecture-profile program objects, and state/program digests;
+- validates and executes both authorized catch-up programs, then publishes the
+  exact translation and code observations for this CPU incarnation rather than
+  merely acknowledging generation numbers;
 - initializes extended-state ownership as disabled/scrubbed;
 - enters the kernel lock/message protocol for its cluster;
 - verifies crash capture; and
 - reaches the idle context with no user task attached.
 
 The joining CPU then release-transitions its exact transaction to `JoinReady`.
+That state contains a checked `JoinReadyCatchupEvidence` naming both persistent
+state incarnations, their committed generations and immutable state digests,
+the executed translation/code program incarnations and digests, the observed
+root/binding and fetch-reachable-set digests, and the CPU incarnation. The
+membership gate rechecks all of those fields against the still-current states;
+if either state advanced, the CPU repeats catch-up before it can become
+eligible.
 The coordinator checks every ledger item and constructs one new immutable
 `CpuMembership` snapshot that changes that transaction from `JoinReady` to
 `Online` and includes the permitted `online`, `requestable`,

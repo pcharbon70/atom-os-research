@@ -24,11 +24,14 @@ stack/continuation layout, exception state, reductions, mailbox cursor, and
 active code generation.
 
 Native code is generated into writable, non-executable staging pages. The
-runtime validates instructions, relocations, root maps, calls, and safe points;
-the architecture layer completes data/instruction-cache publication; every
-writable mapping is revoked; and only then is the generation mapped executable
-and non-writable. One atomic runtime index switch publishes a complete view
-after participating schedulers cross a safe epoch.
+runtime validates instructions, relocations, root maps, calls, and safe points,
+then the architecture layer closes and drains every writer domain before
+returning `SealedCode` in a non-writable, non-executable state. Publication next
+holds the target address space execution-suspended while it installs RX,
+completes instruction/fetch synchronization for the scheduler-issued complete
+CPU set, and atomically returns `PublishedCode` as it removes that suspension
+owner. Only then may one atomic runtime index switch expose the complete
+version.
 
 Language-visible current/old module versions are not the same thing as the
 runtime's internal publication snapshots or the kernel's executable-page
@@ -205,10 +208,12 @@ flowchart TD
   cgp_prepared --> cgp_emitted["Emitted"]
   cgp_emitted --> cgp_relocated["Relocated"]
   cgp_relocated --> cgp_validated["Validated"]
-  cgp_validated --> cgp_cache["Cache synchronized"]
-  cgp_cache --> cgp_writers["Writers revoked"]
-  cgp_writers --> cgp_sealed["Sealed(X, RO)"]
-  cgp_sealed --> cgp_staged["Staged in runtime index"]
+  cgp_validated -->|"close and drain every writer domain;<br/>complete data visibility"| cgp_sealed["SealedCode<br/>(non-W, non-X)"]
+  cgp_sealed -->|"architecture publication accepted;<br/>execution admission drained"| cgp_suspended["Address space execution suspended"]
+  cgp_suspended -->|"install RX while held"| cgp_rx["Executable enabled while suspended"]
+  cgp_rx -->|"instruction/fetch sync for complete CPU set"| cgp_fetch["Remote fetch synchronized"]
+  cgp_fetch -->|"atomic PublishedCode +<br/>remove suspension owner"| cgp_published["PublishedCode(RX, non-W)"]
+  cgp_published --> cgp_staged["Staged in runtime index"]
 
   cgp_staged -->|"module has no on_load"| cgp_active["Active"]
   cgp_staged -->|"module declares on_load"| cgp_pending["Pending on_load"]
@@ -218,8 +223,9 @@ flowchart TD
   cgp_onload_failed --> cgp_reclaimed["Reclaimed"]
 
   cgp_active -->|"superseded"| cgp_old["Old"]
-  cgp_old --> cgp_retiring["Retiring"]
-  cgp_retiring --> cgp_reclaimed
+  cgp_old -->|"commit no-new-dispatch;<br/>keep RX mapped"| cgp_retiring["Retiring"]
+  cgp_retiring -->|"exact-version execution quiescent"| cgp_quiet["Execution quiescent"]
+  cgp_quiet -->|"remove RX; translation/fetch and<br/>reclamation proofs complete"| cgp_reclaimed
 ```
 
 ### Prepare and emit

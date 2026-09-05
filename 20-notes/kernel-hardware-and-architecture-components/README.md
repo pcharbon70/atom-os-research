@@ -31,7 +31,9 @@ system syntheses in the parent notes directory.
 
 ### Subdirectories
 
-- None yet.
+- [Address translation and protection transition components](address-translation-and-protection-transitions/README.md) —
+  contains nine detailed internal-service reports for component 3, covering
+  address-space identity through safe privileged user access.
 
 ### Documents
 
