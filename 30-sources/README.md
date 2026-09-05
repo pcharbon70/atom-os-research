@@ -44,8 +44,9 @@ every journal-manifest backlink.
 | Minimal privileged kernel | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-08-31 layer deep dive](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md) |
 | Managed actor runtime | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-02 layer deep dive](../50-journal/2026-09-02-managed-actor-runtime-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-managed-actor-runtime-components-deep-dive.md) |
 | OTP-like system services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-03 system-services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md); [2026-09-04 component deep dive](../50-journal/2026-09-04-otp-like-system-services-components-deep-dive.md) |
+| Applications and domain services | [Applications and domain services](../10-maps/applications-and-domain-services.md) | [2026-09-05 layer and component deep dive](../50-journal/2026-09-05-applications-and-domain-services-deep-dive.md) |
 | Authentication and authorization | [Authentication and authorization](../10-maps/authentication-and-authorization.md) | [2026-09-04 deep dive](../50-journal/2026-09-04-authentication-and-authorization-deep-dive.md); [2026-09-04 component deep dive](../50-journal/2026-09-04-authentication-and-authorization-components-deep-dive.md) |
-| Alan Kay, Smalltalk, and visual computing | [Alan Kay, Smalltalk, and visual computing](../10-maps/alan-kay-smalltalk-ui.md) | [2026-09-04 Alan Kay and Smalltalk UI deep dive](../50-journal/2026-09-04-alan-kay-smalltalk-ui-deep-dive.md) |
+| Alan Kay, Smalltalk, and visual computing | [Alan Kay, Smalltalk, and visual computing](../10-maps/alan-kay-smalltalk-ui.md) | [2026-09-04 Alan Kay and Smalltalk UI deep dive](../50-journal/2026-09-04-alan-kay-smalltalk-ui-deep-dive.md); [2026-09-04 visual-computing component deep dive](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md) |
 
 ### Sources introduced outside a deep-dive session
 
@@ -134,6 +135,75 @@ not retroactively labeled as introduced by it:
 - [Wayland architecture and protocol](wayland-project-2026-architecture-and-protocol.md) —
   documents current kernel, compositor, client-surface, buffer, focus, seat,
   and input-routing boundaries.
+- [An approach to persistent programming](atkinson-et-al-1983-persistent-programming.md) —
+  proposes type-independent persistence from explicit roots and identifies the
+  continuity advantages and retention risks of persistent object graphs.
+- [A theory of changes for higher-order languages](cai-et-al-2014-theory-of-changes.md) —
+  gives a formal correctness relationship for incremental computation relative
+  to an exact base program state.
+- [A unifying reference framework for multi-target user interfaces](calvary-et-al-2003-multi-target-user-interface-framework.md) —
+  separates task/domain, abstract, concrete, and final interface models across
+  devices and contexts.
+- [Practical access control management for distributed collaborative editors](cherif-et-al-2014-access-control-collaborative-editors.md) —
+  studies how replicated editing and access-control decisions interact rather
+  than treating convergence as authorization.
+- [Functional reactive animation](elliott-hudak-1997-functional-reactive-animation.md) —
+  develops compositional behaviors and events for time-varying presentation
+  while exposing implementation and resource-bound questions.
+- [Combinators for bidirectional tree transformations](foster-et-al-2007-bidirectional-tree-transformations.md) —
+  formalizes round-trip laws and explicit update policies for editable,
+  potentially lossy projections.
+- [Automatically generating personalized user interfaces with SUPPLE](gajos-et-al-2010-personalized-user-interfaces-supple.md) —
+  evaluates declarative interface generation and personalization while
+  documenting modeling cost and domain limits.
+- [The Dexter hypertext reference model](halasz-schwartz-1994-dexter-hypertext-reference-model.md) —
+  separates durable components and links from transient runtime presentation
+  and within-component media concerns.
+- [Single application model, multiple synchronized views](hosn-et-al-2001-single-application-model-multiple-views.md) —
+  demonstrates a common application model coordinating visual and speech
+  presentations through shared intent.
+- [Clickjacking: Attacks and defenses](huang-et-al-2012-clickjacking-attacks-and-defenses.md) —
+  analyzes how misleading composition, visibility, timing, and pointer context
+  can subvert otherwise authentic input routing.
+- [A conflict-free replicated JSON datatype](kleppmann-beresford-2017-conflict-free-json.md) —
+  develops structured convergent replication and exposes delete, move, undo,
+  schema, and invariant boundaries.
+- [Local-first software](kleppmann-et-al-2019-local-first-software.md) —
+  argues for user ownership, offline availability, longevity, and collaboration
+  while recording unresolved conflict, history, and access-control problems.
+- [Webstrates: Shareable dynamic media](klokmose-et-al-2015-webstrates-shareable-dynamic-media.md) —
+  implements synchronized dynamic documents with several editors, embedded
+  computation, collaboration, and multi-device presentation.
+- [Potluck: Dynamic documents as personal software](litt-et-al-2022-potluck-dynamic-documents.md) —
+  explores gradual enrichment of durable user text into personal software and
+  records complexity and representation limits.
+- [Ten myths of multimodal interaction](oviatt-1999-ten-myths-multimodal-interaction.md) —
+  synthesizes empirical evidence that modalities are complementary,
+  task-dependent, user-dependent, and often sequential.
+- [Living in your programming environment](rein-et-al-2017-living-in-programming-environment.md) —
+  reports qualitative experience with continuous exploratory adaptation inside
+  a mature live programming environment.
+- [Exploratory and live, programming and coding](rein-et-al-2019-liveness-literature-study.md) —
+  systematically separates liveness perspectives, dimensions, and terminology
+  across programming research.
+- [User-driven access control](roesner-et-al-2012-user-driven-access-control.md) —
+  binds resource authority to authentic in-context user actions and evaluates
+  trusted resource-selection mechanisms.
+- [Conflict-free replicated data types](shapiro-et-al-2011-conflict-free-replicated-data-types.md) —
+  formalizes convergence conditions for replicated datatypes and the delivery
+  assumptions under which they hold.
+- [Mutatis Mutandis](stoyle-et-al-2005-safe-predictable-dynamic-updating.md) —
+  develops type-directed dynamic software updating with controlled update
+  points and state transformation.
+- [Achieving convergence, causality preservation, and intention preservation](sun-et-al-1998-cooperative-editing-consistency.md) —
+  separates three distinct correctness properties for real-time cooperative
+  editing systems.
+- [Accessible Rich Internet Applications 1.2](w3c-2023-wai-aria-1-2.md) —
+  specifies normative roles, names, values, states, relationships, actions,
+  focus behavior, and accessibility-tree semantics.
+- [Core Accessibility API Mappings 1.2](w3c-2026-core-accessibility-api-mappings-1-2.md) —
+  maps web semantics into current platform accessibility APIs and demonstrates
+  that the mappings are not structurally one-to-one.
 - [A least-privilege memory protection model for modern hardware](achermann-et-al-2019-least-privilege-memory-protection.md) —
   separates authority to configure address translation from authority to
   access the translated memory across CPUs and devices.
@@ -822,6 +892,89 @@ not retroactively labeled as introduced by it:
 - [Linux virtual-memory implementation contracts](linux-kernel-community-2026-virtual-memory-implementation-contracts.md) —
   records current page-table teardown, software-walker, user-copy, pinning,
   and secondary-MMU lifetime rules.
+- [Domain-Driven Design Reference](evans-2015-domain-driven-design-reference.md) —
+  defines bounded contexts, entities, aggregates, domain services, domain
+  events, and layered separation for the Layer 5 semantic model.
+- [On the Criteria To Be Used in Decomposing Systems into Modules](parnas-1972-decomposing-systems-into-modules.md) —
+  argues for information-hiding boundaries around volatile design decisions
+  rather than decomposition by execution phase.
+- [Statecharts](harel-1987-statecharts.md) — defines hierarchical, concurrent,
+  communicating state machines for explicit complex lifecycle behavior.
+- [Typestate](strom-yemini-1986-typestate.md) — associates permitted operations
+  with abstract object states so protocol misuse can be checked.
+- [Multiparty asynchronous session types](honda-et-al-2008-multiparty-asynchronous-session-types.md) —
+  projects global conversations to endpoint types with scoped communication-
+  safety and progress results.
+- [A behavioral notion of subtyping](liskov-wing-1994-behavioral-subtyping.md) —
+  defines compatibility through invariants, preconditions, postconditions, and
+  history rather than structural shape alone.
+- [Protocol Buffers language guide and schema evolution practices](google-2026-protocol-buffers-evolution.md) —
+  records stable field-identity, reservation, unknown-field, and wire-change
+  guidance while separating decoding from semantic compatibility.
+- [Maintaining robust protocols](thomson-schinazi-2023-maintaining-robust-protocols.md) —
+  explains how permissive ambiguity creates ossification and security risk and
+  motivates explicit extension and validation behavior.
+- [The transaction concept](gray-1981-transaction-concept.md) — frames
+  recoverable consistency-preserving state transformations and the limits of
+  flat transactions for long or distributed work.
+- [Coordination avoidance in database systems](bailis-et-al-2014-coordination-avoidance.md) —
+  defines invariant confluence and evaluates coordination-free execution under
+  exact invariant and merge assumptions.
+- [Life beyond distributed transactions](helland-2007-life-beyond-distributed-transactions.md) —
+  argues for entity-local transactions, messages, stable identity, and explicit
+  uncertainty in scalable systems.
+- [An empirical characterization of event-sourced systems and their schema evolution: lessons from industry](overeem-et-al-2021-event-sourced-systems.md) —
+  reports industry motivations, evolution tactics, and learning, tooling,
+  projection, and privacy costs across 25 engineers and 19 systems.
+- [Event sourcing](fowler-2005-event-sourcing.md) — supplies the practitioner
+  history/replay pattern and cautions around external queries and effects.
+- [Workflow patterns](van-der-aalst-et-al-2003-workflow-patterns.md) —
+  defines reusable sequencing, branching, joining, multiple-instance, and
+  cancellation semantics and compares workflow-system support.
+- [Durable Functions semantics](burckhardt-et-al-2021-durable-functions.md) —
+  formalizes replay-backed actors, workflows, and critical sections and makes
+  determinism and history-growth limits explicit.
+- [Fault tolerance via idempotence](ramalingam-vaswani-2013-fault-tolerance-via-idempotence.md) —
+  formalizes duplicate/failure behavior and idempotent composition over local
+  transactions under a scoped model.
+- [Hexagonal architecture](cockburn-2005-hexagonal-architecture.md) — defines
+  semantic ports and replaceable technology adapters as a practitioner
+  application-architecture pattern.
+- [A note on distributed computing](waldo-et-al-1994-distributed-computing.md) —
+  explains why latency, concurrency, memory separation, and partial failure
+  prevent transparent equivalence between local and remote calls.
+- [Transactional outbox](richardson-2026-transactional-outbox.md) — records the
+  practitioner pattern for atomic state-and-publication intent and its
+  duplicate-relay limitation.
+- [Managing update conflicts in Bayou, a weakly connected replicated storage system](terry-et-al-1995-bayou-conflicts.md) —
+  demonstrates tentative state plus application-specific dependency checks and
+  merge procedures under weak connectivity.
+- [OpSets](kleppmann-et-al-2018-opsets.md) — gives sequential specifications for
+  replicated datatypes and shows that convergence can retain surprising user-
+  intent anomalies.
+- [Asynchronous functional reactive programming for GUIs](czaplicki-chong-2013-asynchronous-frp-guis.md) —
+  demonstrates compositional asynchronous presentation in an early Elm design.
+- [WASI design principles](wasi-project-2026-design-principles.md) — documents
+  explicit portable capability imports and host/linker control for an optional
+  extension profile.
+- [Online, asynchronous schema change in F1](rae-et-al-2013-online-schema-change-f1.md) —
+  models mixed-version schema transitions, identifies corruption risks, and
+  builds safe intermediate stages under explicit assumptions.
+- [QuickCheck](claessen-hughes-2000-quickcheck.md) — introduces executable
+  properties, generated typed inputs, classifications, and reduced
+  counterexamples.
+- [How Amazon Web Services uses formal methods](newcombe-et-al-2015-aws-formal-methods.md) —
+  reports first-party use of small TLA+ models to expose subtle distributed-
+  system design defects.
+- [Service level objectives](jones-et-al-2016-service-level-objectives.md) —
+  starts service indicators and targets from behavior users care about and
+  requires explicit measurement conditions.
+- [Architectural concerns in multi-tenant SaaS applications](krebs-et-al-2012-multi-tenant-saas.md) —
+  treats tenant-private state, configuration, performance, QoS, customization,
+  persistence, and placement as interacting concerns.
+- [Wedge](bittau-et-al-2008-wedge.md) — evaluates default-deny, reduced-
+  privilege compartments for legacy network applications and exposes the
+  limits of coarse application isolation.
 
 ## Maintaining this index
 

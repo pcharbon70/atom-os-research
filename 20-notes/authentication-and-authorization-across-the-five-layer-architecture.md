@@ -393,6 +393,12 @@ fall-through allow.
 
 ### Layer 5 — applications, CLI, and domain services
 
+The detailed [applications and domain services
+layer](applications-and-domain-services-layer.md) now defines the domain
+identity, invariant, command/outcome, workflow, effect, presentation,
+collaboration, extension, evolution, tenancy, and recovery contracts that
+consume this security architecture.
+
 Applications define typed resource and action schemas, place policy-
 enforcement points at actual effect boundaries, request authentication or
 step-up, and consume narrow grants. They do not collect OS credentials,

@@ -50,7 +50,8 @@ accessibility infrastructure, internationalization, deployment identity, and
 resource lifecycle management. The useful Atom OS conclusion is therefore not
 to recreate a single globally mutable Smalltalk image. It is to recover Kay's
 semantic continuity and user authorship **above capability and actor
-boundaries**: durable model actors, user-owned project graphs, primary semantic
+boundaries**: durable semantic objects served by supervised model actors,
+user-owned project graphs, primary semantic
 UI descriptions, disposable renderers, a narrow compositor, and live tools
 whose authority is explicit, revocable, auditable, and recoverable.
 
@@ -650,17 +651,18 @@ current platform.
 ### Project graph as the visible unit of work
 
 Make a **user-owned project** the visible composition boundary. A project is a
-durable, versioned capability graph linking model actors, media objects,
-commands, views, histories, and collaborators. An application package may
-supply actor types and editors, but it does not own the user's project or
-become the only place where its objects can appear.
+durable, versioned semantic graph linking model objects, media, commands,
+views, histories, collaborators, and authority intent. Live capabilities are
+derived afresh under current policy rather than serialized into the project.
+An application package may supply actor types and editors, but it does not own
+the user's project or become the only place where its objects can appear.
 
 ```mermaid
 flowchart TB
-    Project["Durable project capability graph"]
+    Project["Durable semantic/object graph<br/>with authority intent"]
     Models["Supervised semantic model actors"]
     Tools["Scoped browser, inspector, editor, debugger actors"]
-    Semantics["Versioned semantic UI tree: roles, values, actions, relations"]
+    Semantics["Versioned semantic interaction graph:<br/>roles, values, actions, relations"]
     Views["Reconstructible declarative view actors"]
     Renderers["Replaceable renderer actors and surface leases"]
     Broker["Input, focus, clipboard, drag/drop capability broker"]
@@ -682,45 +684,65 @@ flowchart TB
     Models <--> History
 ```
 
+The detailed [user-owned project graph and composition
+report](visual-computing-synthesis-components/user-owned-project-graph-and-composition.md)
+specifies its identifiers, persistence, provider, collaboration, authority,
+and export contracts.
+
 ### Separate durable meaning from disposable presentation
 
-The model actors and project graph own durable application meaning. Semantic
-view state is derived from versioned model observations. Renderer actors own
-GPU objects, caches, fonts, and surface leases. The compositor owns placement,
-occlusion, focus arbitration, secure overlays, and final presentation—not the
-domain model.
+The project graph/store and effect ledgers own committed application truth;
+supervised model actors provide current behavior over it. Semantic view state
+is derived from versioned model observations. Renderer actors own GPU objects,
+caches, fonts, and surface leases. The compositor owns placement, occlusion,
+focus arbitration, secure overlays, and final presentation—not the domain
+model.
 
 If the shell, compositor, or renderer fails:
 
 ```mermaid
 sequenceDiagram
-    participant M as Durable model actors
+    participant M as Model actors over durable project state
+    participant RM as Layer 4 recovery manager
     participant V as Semantic view supervisor
     participant R as Renderer
     participant C as Compositor
+    participant B as Input broker
+    participant PG as Policy/grant issuer
 
     M->>V: versioned semantic state
     V->>R: declarative view generation n
     R->>C: surface lease and frame
-    C--xR: compositor generation ends
+    C--xRM: compositor generation ends
     Note over M,V: model and project continue
-    C->>C: restart with generation n+1
+    RM->>B: close old raw-input routes and capture state
+    RM->>PG: revoke old focus and trusted-input grant generations
+    RM->>C: start generation n+1 with fresh display authority
+    C-->>RM: readiness and composition-generation attestation
     V->>R: restart renderer and replay latest complete view
     R->>C: acquire new surface lease
-    C-->>V: focus/input authority re-established explicitly
+    B->>PG: authenticated focus candidate for new composition
+    PG-->>V: make fresh focus/input grant decision
 ```
 
 The user's computation can therefore continue while its presentation restarts.
-An application “with a UI” is not identical to that UI process: its durable
-actors survive, buffer or reject interactions according to explicit policy,
-and republish a fresh view after presentation recovers. A compositor crash
-must not silently replay an input or duplicate an external effect.
+An application “with a UI” is not identical to that UI process: its committed
+semantic state survives, unaffected model actors may continue, and failed
+model activations recover under their own policy. They buffer or reject
+interactions according to explicit policy and republish a fresh view after
+presentation recovers. A compositor crash must not silently replay an input or
+duplicate an external effect.
+
+The detailed [durable semantic actors and disposable presentation
+report](visual-computing-synthesis-components/durable-semantic-actors-and-disposable-presentation.md)
+classifies semantic, effect, derived, and interaction state and defines the
+generation-fenced reconstruction protocol.
 
 ### Make semantics primary, not an accessibility afterthought
 
 Every visible component should publish a semantic record containing at least:
 
-- stable identity and model generation;
+- stable identity, lifecycle generation, and state revision;
 - role, name, description, value, and state;
 - parent/child and labelled-by/described-by relationships;
 - available actions and the capability needed to request each one;
@@ -733,6 +755,11 @@ The renderer and accessibility service consume the same record. Pixels are one
 projection of meaning, not the source of meaning. This recovers part of Kay's
 object continuity while supporting assistive technologies and nonvisual views.
 
+The detailed [semantics-first accessible UI protocol
+report](visual-computing-synthesis-components/semantics-first-accessible-ui-protocol.md)
+defines one authoritative semantic graph with filtered, materialized
+projections rather than requiring one literal tree for every consumer.
+
 ### Treat input as authority
 
 Focus, pointer capture, drag-and-drop, clipboard access, global shortcuts,
@@ -742,6 +769,11 @@ input broker may route an event to a view actor, but that event does not confer
 ambient access to the model, filesystem, device, or other projects. Secure
 attention and credential entry require a trusted path that ordinary clients
 cannot imitate.
+
+The detailed [input, focus, and trusted-interaction authority
+report](visual-computing-synthesis-components/input-focus-and-trusted-interaction-authority.md)
+defines gesture-derived grants, focus and capture generations, trusted
+ceremonies, expiry, revocation, and recovery.
 
 ### Scope liveness with capabilities and transactions
 
@@ -763,6 +795,11 @@ Meta-level changes cross an explicit fence, echoing Kay's later insistence that
 reflection needs a boundary. [Feldman and Kay
 2004](../30-sources/feldman-kay-2004-conversation-alan-kay.md)
 
+The detailed [capability-scoped live tools and transactional evolution
+report](visual-computing-synthesis-components/capability-scoped-live-tools-and-transactional-evolution.md)
+separates inspection, pure evaluation, tracing, staging, commit, secret
+access, and publication authorities and specifies changeset outcomes.
+
 ### Map the idea onto the existing Atom OS layers
 
 | Existing layer | UI responsibility |
@@ -771,13 +808,21 @@ reflection needs a boundary. [Feldman and Kay
 | Minimal privileged kernel | domains, capabilities, mappings, bounded IPC, scheduling budgets, fault routes, revocation, safe teardown |
 | Managed actor runtime | private heaps, actor identities, messaging, supervision signals, scheduling, code generations, serialization, distribution |
 | OTP-like system services | project lifecycle policy, registries, persistence, device services, network sessions, updates, overload control, telemetry and audit |
-| Unprivileged visual-computing services | semantic UI protocol, view supervision, renderer workers, compositor/shell policy, input broker, accessibility, live authoring tools |
+| [Applications and domain services](applications-and-domain-services-layer.md) | durable domain/project meaning, invariants, typed actions and outcomes, semantic projection contracts, collaboration rules, and application evolution |
+| Visual-computing services within Layer 5 | semantic UI protocol, view supervision, renderer workers, compositor/shell policy, input broker, accessibility, and live authoring tools |
 
-The last row is a service/application layer above the four previously
-researched mechanism and policy layers. Only the smallest hardware and
-protection mechanisms stay privileged. The compositor may be highly trusted
-without living in the kernel; it should run in a protected user-space domain
-with recovery reserve and narrowly delegated display/input authority.
+The final two rows are one unprivileged fifth application layer above the four
+previously researched mechanism and policy layers; visual computing is a
+service stratum and presentation profile within it, not a sixth privileged
+layer. Only the smallest hardware and protection mechanisms stay privileged.
+The compositor may be highly trusted without living in the kernel; it should
+run in a protected user-space domain with recovery reserve and narrowly
+delegated display/input authority.
+
+The detailed [cross-layer placement and recovery topology
+report](visual-computing-synthesis-components/cross-layer-placement-and-recovery-topology.md)
+turns this table into explicit ownership, trust, boot, failure, overload, and
+restart dependency contracts across the existing architecture.
 
 ### Do not force one representation
 
@@ -787,6 +832,12 @@ screen-reader traversal, program, table, voice dialogue, or remote collaborative
 view. Several can coexist. The contract is that views reveal and manipulate
 the same durable meaning and that symbolic access is available when it adds
 leverage.
+
+The detailed [plural representations and cross-view consistency
+report](visual-computing-synthesis-components/plural-representations-and-cross-view-consistency.md)
+defines identity, projection, edit, localization, multimodal, collaboration,
+and resynchronization rules without treating convergence as intent or
+authorization.
 
 ## Principles to preserve, adapt, and reject
 
@@ -913,6 +964,9 @@ modification are explicit powers rather than ambient privileges.
 - [Alan Kay, Smalltalk, and visual computing](../10-maps/alan-kay-smalltalk-ui.md) —
   curated route through the historical, implementation, HCI, modern-platform,
   and Atom OS evidence.
+- [Visual-computing synthesis component reports](visual-computing-synthesis-components/README.md) —
+  seven detailed architecture and implementation studies for the proposed
+  Atom OS synthesis.
 - [What visual-computing model should Atom OS
   adopt?](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
   falsifiable workbench for the proposed project, semantic UI, compositor, and
@@ -931,6 +985,10 @@ modification are explicit powers rather than ambient privileges.
   and secure interaction.
 - [2026-09-04 research session](../50-journal/2026-09-04-alan-kay-smalltalk-ui-deep-dive.md) —
   records method, evidence boundaries, and exhaustive source provenance.
+- [2026-09-04 visual-computing component research
+  session](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md) —
+  records the expanded component evidence, source manifest, synthesis method,
+  and absence of implementation or user-study evidence.
 
 ## Sources
 

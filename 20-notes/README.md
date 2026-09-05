@@ -26,6 +26,11 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Subdirectories
 
+- [Applications and domain services components](applications-and-domain-services-components/README.md) —
+  contains the fourteen detailed component-level syntheses for application
+  composition, domain modeling, identity, protocols, invariants, persistence,
+  workflows, effects, presentation, collaboration, extensions, evolution,
+  assurance, tenancy, overload, and recovery.
 - [Authentication and authorization components](authentication-and-authorization-components/README.md) —
   contains the sixteen detailed component-level implementation syntheses for
   the authentication, identity, policy, grant, revocation, secret, audit,
@@ -42,9 +47,18 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 - [OTP-like system services components](otp-like-system-services-components/README.md) —
   contains the thirteen detailed component-level implementation syntheses for
   the unprivileged service-policy layer.
+- [Visual computing synthesis components](visual-computing-synthesis-components/README.md) —
+  contains the seven detailed implementation syntheses for user-owned
+  projects, restartable presentation, semantic UI, trusted input, live tools,
+  cross-layer recovery, and plural views.
 
 ### Documents
 
+- [Applications and domain services layer](applications-and-domain-services-layer.md) —
+  develops an unprivileged Layer 5 with fourteen components, stable domain and
+  operation identities, invariant-selected consistency, explicit workflows
+  and external outcomes, disposable presentation, confined extensions,
+  migration, semantic assurance, and cross-layer recovery.
 - [Alan Kay's Smalltalk visual interface and the modern desktop](alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
   reconstructs Kay's metamedium and learning vision, distinguishes it from the
   collective Smalltalk and Star implementations, compares it with current

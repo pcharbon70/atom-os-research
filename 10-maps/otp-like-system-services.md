@@ -195,10 +195,14 @@ into privileged code.
 
 ### Above this layer
 
-Applications supply domain-specific protocols, persistent schemas,
-compensating actions, and business correctness. A generic saga engine cannot
-invent a safe compensation, and a generic supervisor cannot decide whether an
-application effect is semantically valid.
+The [applications and domain services layer](../20-notes/applications-and-domain-services-layer.md)
+supplies domain-specific identities, protocols, invariants, persistent schemas,
+workflows, compensating actions, semantic views, and business correctness. A
+generic saga engine cannot invent a safe compensation, and a generic supervisor
+cannot decide whether an application effect is semantically valid. Layer 5
+consumes this layer's generic lifecycle, persistence, identity, network,
+device, update, overload, telemetry, audit, and recovery services rather than
+reimplementing them.
 
 ## Key distinctions to preserve
 

@@ -425,7 +425,7 @@ The following is a hypothesis to test, not a settled design:
 | [Minimal privileged kernel](minimal-privileged-kernel-layer.md) | Typed capability spaces, explicit kernel-object memory, first-class protection domains, address spaces and mappings, bounded invocation, scheduling-context budgets, authorized IRQ/timer/DMA bindings, structured faults, and quiescence-gated reaping | A domain provides coordinated execution stop and lifecycle isolation; shared state, device reset, and external effects may have larger recovery boundaries; kernel failure remains system-wide |
 | [Managed actor runtime](managed-actor-runtime-layer.md) | Term representation, very lightweight actors, process heaps and GC, reduction accounting, signal protocols, mailbox implementation, loader and safe points, runtime tracing | One protected runtime domain; ordinary actor failures contained within it |
 | [OTP-like system services](otp-like-system-services-layer.md) | Supervisors, behaviours, lifecycle, device-service policy, naming, configuration and identity, durable state, networking, distributed coordination, update orchestration, overload control, metrics, and audit | Supervision tree or protected service domain; unprivileged and replaceable without kernel change |
-| Applications | Domain protocols and state machines, organized as supervised trees with declared capabilities and budgets | Application subtree or protected application domain |
+| [Applications and domain services](applications-and-domain-services-layer.md) | Bounded contexts, stable domain identity, aggregates and invariants, typed commands/queries/events, durable application state and projections, business workflows, external-effect semantics, presentation, collaboration, extensions, evolution, and semantic assurance, organized with declared capabilities and budgets | Aggregate actor or application subtree for ordinary recovery; tenant and protected application domains are separate enforced boundaries selected by trust, authority, native-code risk, and resource coupling |
 
 This shape intentionally has both kernel scheduling and runtime scheduling. The
 kernel schedules protected domains and enforces hard resource limits; the
@@ -434,6 +434,13 @@ that making every actor kernel-visible is affordable, but that should be
 measured rather than assumed. The two-level design preserves cheap concurrency
 without asking every actor context switch or mailbox operation to cross a
 privilege boundary.
+
+The fifth layer is developed in the [applications and domain services
+report](applications-and-domain-services-layer.md) and its [fourteen component
+deep dives](applications-and-domain-services-components/README.md). That work
+keeps bounded contexts, aggregate transactions, actor activations, supervision
+trees, tenant/security realms, and protected domains distinct rather than
+deriving one deployment or security boundary from domain terminology.
 
 The runtime- and service-facing kernel interface could start with only:
 

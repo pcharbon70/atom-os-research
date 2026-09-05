@@ -88,6 +88,15 @@ provenance record.
   records the historical, implementation, HCI, current-platform, security, and
   accessibility research; attribution controls; complete source provenance;
   architectural synthesis; and absence of prototype or user-study evidence.
+- [2026-09-04 visual-computing synthesis components deep dive](2026-09-04-visual-computing-synthesis-components-deep-dive.md) —
+  records the expanded research across all seven proposed visual-computing
+  components, exact source provenance, shared identity and authority model,
+  architecture placement, falsifiers, and absence of prototype evidence.
+- [2026-09-05 applications and domain services deep dive](2026-09-05-applications-and-domain-services-deep-dive.md) —
+  records the scientific, standards, engineering, and practitioner research
+  across fourteen Layer 5 components, exact source provenance, shared semantic
+  identity and outcome model, contradictions, falsifiers, and absence of
+  prototype evidence.
 
 ## Maintaining this index
 

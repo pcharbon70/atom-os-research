@@ -59,9 +59,9 @@ desktop with scripting.
 
 ## Working hypotheses
 
-- A project can be a durable, versioned capability graph of semantic model
-  actors, histories, commands, media objects, editor providers, and
-  collaborators.
+- A project can be a durable, versioned semantic/object graph with explicit
+  authority intent, histories, commands, media objects, editor providers, and
+  collaborators; live capabilities are re-derived rather than persisted.
 - A versioned semantic UI protocol can be the common source for visual,
   assistive, automation, and remote views without prescribing one widget set.
 - Rendering surfaces and GPU resources can be disposable leases derived from
@@ -84,7 +84,7 @@ desktop with scripting.
 
 - Define identities, generations, roles, values, relationships, actions,
   focus, selection, localization, update streams, and protocol negotiation for
-  a semantic UI tree.
+  an authoritative semantic graph and its filtered materialized projections.
 - Define project ownership, editor discovery, object handoff, embedding,
   provenance, capability attenuation, offline replicas, and deletion.
 - Separate commands that request durable domain effects from ephemeral
@@ -136,6 +136,31 @@ views primary; render through disposable workers and surfaces; and expose live
 tools only through explicit authority and transactional change. No prototype
 or human study yet verifies that this combination is usable, secure, or
 performant.
+
+The seven [component implementation
+reports](../20-notes/visual-computing-synthesis-components/README.md) refine that
+direction into a common contract:
+
+- durable identity belongs to project and semantic objects, never actor PIDs,
+  kernel selectors, surface handles, or localized labels;
+- the persistent graph records meaning and authority intent, while current
+  policy derives generation-bound live capabilities;
+- one authoritative semantic graph can produce several filtered and
+  structurally different projections, so consistency is defined by logical
+  objects, typed actions, and model effects rather than identical trees;
+- presentation, focus, capture, and input grants are disposable and cannot be
+  replayed across a service generation;
+- live changes use separately authorized facets and durable changeset outcomes,
+  with code rollback distinguished from data migration and external-effect
+  compensation; and
+- visual computing remains an unprivileged service stratum whose protection,
+  messaging, persistence, lifecycle, and recovery dependencies terminate in
+  the four existing architecture layers.
+
+These are proposed contracts supported by the expanded literature review in
+the [component research
+session](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md),
+not implementation evidence.
 
 ## Outcome
 

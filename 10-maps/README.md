@@ -29,6 +29,11 @@ should explain why its links belong together rather than merely list files.
 
 ### Documents
 
+- [Applications and domain services](applications-and-domain-services.md) —
+  routes through Layer 5 composition, bounded contexts, durable identity,
+  protocols, invariants, persistence, workflows, effects, presentation,
+  collaboration, extensions, evolution, assurance, tenancy, overload, and
+  recovery.
 - [Alan Kay, Smalltalk, and visual computing](alan-kay-smalltalk-ui.md) —
   connects the Dynabook and metamedium vision, implemented Smalltalk tools,
   Star and direct-manipulation lineage, modern desktop mechanisms, and the
