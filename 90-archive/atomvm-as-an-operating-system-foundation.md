@@ -20,6 +20,13 @@ aliases:
 
 # AtomVM as an operating-system foundation
 
+Archived on 2026-09-05 after the user confirmed that AtomVM has been rejected
+as an implementation foundation. The assessment below preserves the original
+research and its limits; its proposed implementation program is inactive.
+This is a project-scope decision, not a new experimental finding about AtomVM.
+The replacement direction is the [minimal OS and CLI
+proof of concept](../20-notes/proof-of-concept-research-readiness.md).
+
 ## Conclusion
 
 AtomVM is a credible **execution nucleus** for an experimental, single-purpose
@@ -285,8 +292,9 @@ The next work should proceed by falsification rather than feature accumulation:
    crash-consistent persistence, and retained diagnostics. A bootable VM
    without recovery is firmware, not yet a dependable OS foundation.
 
-These steps are maintained as an open [operational
-inquiry](../40-inquiries/can-atomvm-serve-as-a-kernel-facing-runtime.md).
+These historical steps are retained in the paused [operational
+inquiry](../90-archive/can-atomvm-serve-as-a-kernel-facing-runtime.md).
+They are not prerequisites or active work for Atom OS.
 
 ## Confidence and unresolved points
 
@@ -306,9 +314,9 @@ journal](../50-journal/2026-08-28-atomvm-deep-dive.md).
 
 ## Connections
 
-- [AtomVM foundation map](../10-maps/atomvm-foundation.md) provides the
+- [AtomVM foundation map](../90-archive/atomvm-foundation.md) provides the
   selective route through this bundle.
-- [The kernel-facing-runtime inquiry](../40-inquiries/can-atomvm-serve-as-a-kernel-facing-runtime.md)
+- [The kernel-facing-runtime inquiry](../90-archive/can-atomvm-serve-as-a-kernel-facing-runtime.md)
   defines the evidence needed to strengthen or falsify this assessment.
 - [The source audit journal](../50-journal/2026-08-28-atomvm-deep-dive.md)
   records local evidence and search coverage.

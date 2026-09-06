@@ -2,7 +2,7 @@
 title: "Can AtomVM serve as the kernel-facing runtime of a new embedded operating system?"
 kind: inquiry
 created: "2026-08-28"
-status: open
+status: paused
 tags:
   - atom-vm
   - embedded-systems
@@ -14,6 +14,12 @@ aliases:
 ---
 
 # Can AtomVM serve as the kernel-facing runtime of a new embedded operating system?
+
+Archived on 2026-09-05: the user confirmed AtomVM's rejection as an Atom OS
+implementation foundation. The technical inquiry is paused and preserved as
+historical research; it is not an active candidate or a proof-of-concept gate.
+The [replacement inquiry](../40-inquiries/can-a-minimal-bootable-system-validate-the-architecture.md)
+starts with a minimal OS that boots into a CLI.
 
 ## Why this matters
 
@@ -109,7 +115,7 @@ AtomVM for every embedded design.
 
 ## Findings
 
-- The current [synthesis](../20-notes/atomvm-as-an-operating-system-foundation.md)
+- The current [synthesis](../90-archive/atomvm-as-an-operating-system-foundation.md)
   supports AtomVM as an execution nucleus, not a complete kernel.
 - The pinned [source audit](../30-sources/atomvm-project-2026-source-tree.md)
   finds direct STM32 and RP2 VM entry points but continued dependence on vendor
@@ -129,7 +135,9 @@ AtomVM for every embedded design.
 
 ## Outcome
 
-Open. The next decisive artifact is a pinned, reproducible reset-to-BEAM trace
-and dependency census on an MCU or faithful simulator, followed by mailbox and
-native-fault pressure tests. Until then, the foundation claim is a supported
-architectural hypothesis rather than a demonstrated OS design.
+Paused and archived following the explicit project decision to reject AtomVM.
+No rejection rationale beyond that decision was supplied in this session, and
+no new experiment established technical nonviability. The earlier proposed
+reset-to-BEAM, dependency, mailbox, and native-fault experiments remain
+unperformed historical follow-ups. They must not gate the current CLI-based
+Atom OS proof of concept.

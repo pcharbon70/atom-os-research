@@ -218,11 +218,11 @@ means that the source note first entered the archive during this deep dive;
 
 ## Threads
 
-- [AtomVM as an operating-system foundation](../20-notes/atomvm-as-an-operating-system-foundation.md)
+- [AtomVM as an operating-system foundation](../90-archive/atomvm-as-an-operating-system-foundation.md)
   is the durable synthesis from this session.
-- [The operational inquiry](../40-inquiries/can-atomvm-serve-as-a-kernel-facing-runtime.md)
+- [The operational inquiry](../90-archive/can-atomvm-serve-as-a-kernel-facing-runtime.md)
   needs a successful pinned build and MCU/simulator trace next.
-- [The AtomVM foundation map](../10-maps/atomvm-foundation.md) organizes the
+- [The AtomVM foundation map](../90-archive/atomvm-foundation.md) organizes the
   evidence by architecture, measurement, and project evolution.
 
 ## Follow-ups

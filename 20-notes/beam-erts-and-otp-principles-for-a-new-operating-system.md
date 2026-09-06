@@ -75,9 +75,9 @@ built on ERTS process and signal mechanisms.
 
 This separation also clarifies what AtomVM contributed to the archive's first
 deep dive. AtomVM is one compact implementation of a useful subset of the
-combined model. It remains valuable evidence, but the project can compare it
-with unmodified ERTS, other BEAM implementations, or a clean-slate runtime
-that also implements the required BEAM contract without changing its goal.
+combined model. Its research is retained as historical evidence, but AtomVM
+has been rejected as an implementation foundation and is excluded from the
+proof-of-concept program. The required BEAM contract does not imply reusing it.
 
 ## The durable principles
 
@@ -565,8 +565,11 @@ principles-only runtime.
 
 ## Research program
 
-The next experiments should compare mechanisms rather than begin with a broad
-OS implementation:
+The [CLI-first proof-of-concept plan](proof-of-concept-research-readiness.md)
+defines the current implementation sequence: first boot a minimal OS into a
+CLI, then integrate protected services and the project's managed runtime.
+The experiments below support the wider architecture; they are not all
+prerequisites for the first CLI boot.
 
 1. **Bounded actor endpoint.** Implement a mailbox with byte and message
    limits, capability-scoped send rights, credits, cancellation, and queue
@@ -587,8 +590,8 @@ OS implementation:
    identities and delegated service capabilities. Test partition, replay,
    duplication, node compromise, backpressure, and loss of recovery state.
 6. **Compatibility comparison.** Run the same actor/supervision workload on
-   upstream OTP 29, AtomVM, and the candidate BEAM-compatible runtime, with a
-   principles-only runtime as an optional research control. Include long-lived
+   a pinned upstream OTP 29 reference and the project's BEAM-compatible runtime,
+   with a principles-only runtime as an optional research control. Include long-lived
    allocation, minor/full collection, mailbox, shared-binary, code-loading,
    exception, and process-information behavior. Record semantic differences
    separately from performance.
@@ -642,8 +645,8 @@ treated as proof.
   records the exact revision, commands, searches, contextual sources, and
   limitations.
 - [AtomVM as an operating-system
-  foundation](atomvm-as-an-operating-system-foundation.md) supplies one compact
-  implementation case to compare with the broader model.
+  foundation](../90-archive/atomvm-as-an-operating-system-foundation.md) preserves
+  historical evidence for a rejected candidate, not an active implementation path.
 
 ## Sources
 

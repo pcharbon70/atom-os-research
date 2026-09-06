@@ -7,6 +7,13 @@ thought while keeping provenance, navigation, and document structure reliable.
 Follow an explicit user request when it conflicts with this file. Otherwise,
 use these conventions for every document and organizational change.
 
+For any phased implementation plan, use the mandatory
+[phase template](templates/implementation-phase.md) and
+[milestone README template](templates/milestone-plan-readme.md). Before creating,
+expanding, revising, or reviewing such a plan, read both templates and follow
+[Phased implementation planning](#phased-implementation-planning) below. This
+applies to every milestone and planning stream, not only the proof of concept.
+
 ## Project goal
 
 This project researches and develops a new kernel and operating system based on
@@ -20,6 +27,30 @@ collection, while keeping the collector and ordinary BEAM processes outside
 the privileged kernel. Compatibility does not make the BEAM instruction set a
 kernel ABI or require one particular VM implementation; record the exact BEAM
 and OTP compatibility profile and verify it with conformance tests.
+
+AtomVM has been explicitly rejected as an implementation foundation. Do not
+propose an AtomVM port, reuse experiment, dependency, or comparison milestone
+for the proof of concept. Preserve existing AtomVM research as historical
+provenance rather than an active implementation path.
+
+The proof of concept targets a minimal bootable operating system with a CLI.
+Its first delivery boots into a minimal interactive command environment;
+graphical UI and desktop work are outside this proof-of-concept scope. A
+native CLI can precede the managed runtime, but the completed proof of concept
+must still meet its declared compiled-BEAM and process-local tracing-GC profile.
+
+The initial physical target is the Dell Precision T7500 with Intel Xeon
+processors and Intel 64/x86-64. The user explicitly corrected the AMD-processor
+assumption. Follow the target profile in
+`20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md`.
+Start QEMU tests with the Nehalem-v1 fixture, one CPU, 128 MiB and serial I/O;
+add SMP, socket/SMT topology and NUMA only when their tests require them.
+Two multicore packages are user-reported; exact Xeon SKUs, enabled threads,
+RAM, board revision, firmware and device inventory remain unverified.
+Use Intel architecture and processor-family references for this target.
+“AMD64” remains valid in shared ISA/ABI names, but AMD-specific processor
+research and the former Opteron fixture do not gate this PoC. RISC-V/OpenSBI
+remains comparative and historical first-target research.
 
 Keep research and implementation work oriented toward carrying principles such
 as lightweight isolated processes, message passing, supervision, fault
@@ -61,6 +92,7 @@ Distinguish clearly among:
 30-sources/     Reading notes and bibliographic records
 40-inquiries/   Active questions and research workbenches
 50-journal/     Dated observations and research-session evidence
+60-planning/    Milestone-scoped phased implementation plans
 90-archive/     Inactive or superseded material worth retaining
 assets/         Images, PDFs, diagrams, datasets, and attachments
 templates/      Starting points for documents and directory indexes
@@ -89,7 +121,9 @@ previously written.
 
 Every archive directory, including a future nested directory, must contain a
 `README.md`. Create it from `templates/directory-readme.md` as part of creating
-the directory.
+the directory, except milestone-plan directories, which must use
+[`templates/milestone-plan-readme.md`](templates/milestone-plan-readme.md).
+That specialized template preserves the same directory README invariant.
 
 Directory READMEs must:
 
@@ -153,10 +187,85 @@ directory README.
 | Source note | `30-sources/` | `templates/source.md` | A bibliographic record and evidence-focused analysis |
 | Inquiry | `40-inquiries/` | `templates/inquiry.md` | A live question, hypotheses, findings, and outcome |
 | Journal entry | `50-journal/` | `templates/journal.md` | A dated observation or reproducible research-session record |
+| Milestone plan index | `60-planning/<stream>/<milestone>/README.md` | `templates/milestone-plan-readme.md` | Scope, decisions, ordered phases, and milestone acceptance |
+| Implementation phase | `60-planning/<stream>/<milestone>/phase-NN-<name>.md` | `templates/implementation-phase.md` | Described work hierarchy ending in integration tests |
 
 Copy the closest template, replace every placeholder, and adapt its headings
 only as the material requires. Do not add a document kind when an existing role
 plus links or tags expresses the same work.
+
+## Phased implementation planning
+
+### Mandatory templates and workflow
+
+Before drafting or reviewing a phased implementation plan, read the
+[planning convention](60-planning/README.md) and both required templates in full:
+
+- [Milestone plan README](templates/milestone-plan-readme.md) — the required
+  starting point for each milestone directory's `README.md`.
+- [Implementation phase](templates/implementation-phase.md) — the required
+  starting point for every phase document, including its described work
+  hierarchy and final integration-tests section.
+
+Do not substitute a generic note template, flat task list, or prose-only
+roadmap for a requested phased implementation plan. For a new plan, copy and
+fill the appropriate templates. For an existing plan, check and adapt its
+structure against them without recreating the document, renumbering accepted
+work, erasing evidence, or resetting verified completion state. Replace all
+placeholders before handoff. An explicit user request for a different format
+takes precedence over this default.
+
+### Required location and structure
+
+Use `60-planning/` to translate research milestones into phased implementation
+plans. Follow its README for the full convention. Planning streams use a stable
+number and descriptive name, such as `01-proof-of-concept`. Each milestone has
+its own subdirectory named for its existing ID and milestone name, such as
+`m0-boot-inputs`; do not rename milestones merely to fit a template.
+
+- A stream README records scope, milestone order, dependencies, and current
+  planning state. A milestone README uses the specialized directory template
+  and records authoritative research, entry decisions, ordered phases, and exit
+  evidence. Both remain `kind: map` and satisfy the directory README invariant.
+- Each phase is one `kind: note`, initially `maturity: developing`, named
+  `phase-NN-<descriptive-name>.md`. Phase numbering restarts within each
+  milestone. Use a numbered checkbox hierarchy: phase, section, task, sub-task.
+- Every phase, section, task, and sub-task starts with a descriptive paragraph
+  immediately below its label and before its children or other content. A
+  title, checkbox, or imperative alone is not the description. Explain the
+  intended result and relevant boundary; tasks and sub-tasks identify concrete
+  deliverables and how completion will be checked.
+- The last section of every phase is `Phase N Integration Tests`. It has its
+  own description, tasks, and described sub-tasks. Cover the assembled phase,
+  relevant earlier behavior, failure cases, reproducible evidence, and the
+  handoff decision. Place references and other context before the work hierarchy
+  so nothing follows this final section in the phase document.
+- Determine the number of phases, sections, tasks, and sub-tasks from the actual
+  work required: scope, dependencies, complexity, risks, and independently
+  verifiable outcomes. Counts may differ between milestones, phases, sections,
+  and tasks. Never impose an arbitrary number, uniform count, or template-derived
+  quota at any level. Do not pad, split, merge, or omit necessary work merely to
+  reach a target count; template examples illustrate structure, not quantities.
+- Use stable hierarchical IDs; do not renumber delivered work or silently
+  change acceptance after a failed test.
+- Keep plan review, implementation progress, and test results distinct in body
+  text. Checkboxes record verified delivery, not the act of writing a plan.
+  A parent is complete only when its children and applicable gates pass. Required
+  tests that are blocked or not run remain open; they are not implied passes.
+- Link each phase to its milestone and the research/decisions it implements.
+  Record local execution evidence in dated `50-journal/` entries and artifacts
+  in `assets/` (or an explicitly selected implementation repository). Link exact
+  evidence to task IDs and update indexes together.
+- Do not create empty milestone directories or placeholder phase documents to
+  make a roadmap look implemented. Decompose the near-term milestone first and
+  keep later milestones at roadmap depth until their inputs justify detail.
+- A plan does not itself authorize implementation, commits, pushes, PRs,
+  publishing, installation, or physical-device writes. Follow the user's actual
+  request and preserve the existing authorization and safety rules.
+
+The archive validator checks planning metadata, placement, links, and directory
+inventories. Description quality, hierarchy completeness, and integration-test
+adequacy require review; no automated phase-shape enforcement is claimed.
 
 ## Filenames and paths
 
@@ -256,6 +365,14 @@ Before reporting archive work complete:
 4. verify newly introduced external citations against primary sources;
 5. run `git diff --check` when this is a Git worktree; and
 6. review the complete change for stale paths and accidental rewrites.
+
+For any phased implementation plan created or changed, also review it against
+both planning templates: confirm the milestone-named directory and index,
+needs-based counts at all four work levels, a description before children at
+every phase/section/task/sub-task level, and a
+final integration-tests section with acceptance criteria and evidence/handoff
+requirements in every phase. Archive validation alone does not establish these
+planning requirements.
 
 Whenever the user asks for a URL to a document or other content on GitHub,
 include the complete, visible, absolute `https://github.com/...` URL in the

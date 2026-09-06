@@ -32,6 +32,7 @@ ARCHIVE_DIRECTORIES = {
     "30-sources",
     "40-inquiries",
     "50-journal",
+    "60-planning",
     "90-archive",
     "assets",
     "templates",
@@ -352,6 +353,8 @@ def validate() -> tuple[list[str], dict[str, int]]:
             )
 
         if path.name == "README.md":
+            if metadata.get("kind") != "map":
+                errors.append(f"{relative(path)}: directory README must use kind 'map'")
             continue
         kind = metadata.get("kind")
         filename_pattern = JOURNAL_FILENAME if kind == "journal" else KNOWLEDGE_FILENAME
@@ -361,15 +364,16 @@ def validate() -> tuple[list[str], dict[str, int]]:
             )
         top_name = path.relative_to(ROOT).parts[0]
         destinations = {
-            "map": "10-maps",
-            "note": "20-notes",
-            "source": "30-sources",
-            "inquiry": "40-inquiries",
-            "journal": "50-journal",
+            "map": ("10-maps",),
+            "note": ("20-notes", "60-planning"),
+            "source": ("30-sources",),
+            "inquiry": ("40-inquiries",),
+            "journal": ("50-journal",),
         }
         expected = destinations.get(kind)
-        if top_name not in {"90-archive", "assets"} and expected and top_name != expected:
-            errors.append(f"{relative(path)}: kind {kind!r} belongs in {expected}/")
+        if top_name not in {"90-archive", "assets"} and expected and top_name not in expected:
+            locations = " or ".join(f"{destination}/" for destination in expected)
+            errors.append(f"{relative(path)}: kind {kind!r} belongs in {locations}")
 
     for path in sorted(ROOT.rglob("*.md")):
         if is_ignored(path):

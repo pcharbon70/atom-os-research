@@ -143,9 +143,9 @@ kernel ABI, and the project is not committed to one existing VM implementation.
 
 ### Concrete implementation cases
 
-- [AtomVM foundation](atomvm-foundation.md) — a compact, embedded BEAM
-  implementation already studied in this archive. It is now treated as one
-  design case rather than the project’s prescribed foundation.
+- [Archived AtomVM foundation research](../90-archive/atomvm-foundation.md) —
+  preserves a rejected candidate's evidence and provenance. It is not an
+  implementation, dependency, or comparison path for the proof of concept.
 - [Tyn](https://github.com/tyn-os/kernel), [GRiSP
   Metal](https://www.grisp.org/software), and historical LING are implementation
   leads surveyed in the journal. Their claims remain contextual until pinned,

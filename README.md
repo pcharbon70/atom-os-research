@@ -9,6 +9,26 @@ implementation. The platform is required to run compiled BEAM code and retain
 automatic process-local tracing garbage collection; the exact compatible
 runtime and versioned OTP profile remain implementation questions.
 
+The current proof of concept builds a minimal bootable OS whose first delivery
+is an interactive CLI. Graphical UI and desktop work are outside its scope.
+AtomVM has been rejected as an implementation foundation; its archived research
+is retained for provenance. The CLI can be native during bring-up, with the
+required unprivileged BEAM runtime and tracing GC integrated in a later
+milestone. See the [readiness assessment](20-notes/proof-of-concept-research-readiness.md)
+for the staged acceptance criteria.
+
+The [implementation planning area](60-planning/README.md) defines the
+milestone-directory and phased-plan convention. The
+[proof-of-concept planning stream](60-planning/01-proof-of-concept/README.md)
+connects M0–M4 to that structure; detailed phase plans are not yet authored.
+
+The initial physical target is the **Dell Precision T7500**, using
+**Intel Xeon / Intel 64 (x86-64)**. The [active target profile](20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+defines a Nehalem-class, one-CPU, 128 MiB serial QEMU fixture and the remaining
+installed-unit inventory. The AMD-processor assumption has been corrected;
+its former profile is archived. RISC-V/OpenSBI remains comparative research,
+not the first implementation path.
+
 Start at the [home map](10-maps/home.md). Repository-wide authoring and
 maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
@@ -20,6 +40,7 @@ maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 - [`30-sources/`](30-sources/README.md) — reading notes and bibliographic records
 - [`40-inquiries/`](40-inquiries/README.md) — active research questions
 - [`50-journal/`](50-journal/README.md) — dated observations and experiments
+- [`60-planning/`](60-planning/README.md) — milestone-scoped phased implementation plans
 - [`90-archive/`](90-archive/README.md) — inactive or superseded material
 - [`assets/`](assets/README.md) — durable research attachments
 - [`templates/`](templates/README.md) — document and directory scaffolds
@@ -73,8 +94,10 @@ require `status: open | paused | resolved`.
 4. For every deep dive, record an exhaustive journal source manifest that
    separates newly introduced sources from reused sources.
 5. Develop selective maps when conceptual clusters emerge.
-6. Preserve superseded work in `90-archive/` when its context remains useful.
-7. Update affected indexes and validate in the same change.
+6. Translate near-term milestones into described, integration-gated phase plans
+   in `60-planning/`; keep plans distinct from implementation evidence.
+7. Preserve superseded work in `90-archive/` when its context remains useful.
+8. Update affected indexes and validate in the same change.
 
 ## Validation
 
@@ -89,6 +112,9 @@ python3 -m unittest test_validate_archive.py
 The validator checks metadata, placeholders, filenames, local links,
 directory inventories, conceptual connections, deep-dive source-manifest
 structure and classification, and duplicate source identifiers.
+Planning notes are included in metadata and navigation checks. The described
+task hierarchy and adequacy of phase-ending integration tests are review
+requirements, not currently automated checks.
 
 ## Repository files
 

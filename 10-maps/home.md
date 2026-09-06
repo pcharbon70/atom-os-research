@@ -25,6 +25,32 @@ platform must run compiled BEAM code with BEAM-compatible process semantics,
 including automatic process-local tracing garbage collection, without making
 one existing VM implementation the kernel foundation.
 
+## Starting implementation
+
+The proof of concept is a minimal bootable OS with a CLI as its first delivery.
+AtomVM is rejected; graphical UI and desktop work are outside this scope.
+The initial physical target is the Dell Precision T7500 with Intel Xeon
+x86-64 processors; its installed components still need inventory.
+
+- [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md) —
+  organizes M0–M4 under the described, integration-gated phase convention;
+  near-term milestone decomposition remains to be written.
+- [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) —
+  adopts Nehalem-class, one-CPU, 128 MiB serial bring-up for the selected machine,
+  and prioritizes remaining boot, entry, paging and timer work.
+
+- [Proof-of-concept research readiness](../20-notes/proof-of-concept-research-readiness.md) —
+  assesses why a bounded prototype can start now, identifies the remaining
+  target/build/contract decisions, and sequences CLI boot, protected services,
+  and the project's BEAM-and-recovery demonstration with explicit evidence limits.
+- [Proof-of-concept map](proof-of-concept.md) — provides a short route through
+  the existing research needed for that first implementation.
+- [Proof-of-concept requirement studies](../20-notes/proof-of-concept-requirements/README.md) —
+  maps every readiness requirement to one of nineteen evidence-backed reports,
+  proposed contracts and next tests, including the six post-PoC capabilities.
+- [Can a minimal bootable system validate the architecture?](../40-inquiries/can-a-minimal-bootable-system-validate-the-architecture.md) —
+  tracks the integration gates while the wider layer inquiries remain open.
+
 ## Active inquiries
 
 - [How should Atom OS structure applications and domain
@@ -64,10 +90,6 @@ one existing VM implementation the kernel foundation.
   kernel?](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md) —
   defines the experiments needed to place required BEAM-compatible runtime
   mechanisms at the right system layer and choose between runtime strategies.
-- [Can AtomVM serve as the kernel-facing runtime of a new embedded operating
-  system?](../40-inquiries/can-atomvm-serve-as-a-kernel-facing-runtime.md) —
-  retains AtomVM as one concrete implementation case and defines its boot,
-  substrate, resource, fault, trust, and lifecycle evidence requirements.
 
 ## Topic maps
 
@@ -105,9 +127,6 @@ one existing VM implementation the kernel foundation.
   machine, runtime mechanisms, and OTP policy, then routes through current
   documentation, source, foundational papers, scalability evidence, and the OS
   design synthesis.
-- [AtomVM foundation](atomvm-foundation.md) — routes through the current
-  architecture, measurements, and open questions for one compact BEAM
-  implementation.
 
 ## Recently developed
 
@@ -245,10 +264,6 @@ one existing VM implementation the kernel foundation.
   dive](../50-journal/2026-08-28-beam-erts-and-otp-deep-dive.md) — records the
   pinned OTP 29.0.5 source audit, literature search, practitioner survey, and
   evidence limits.
-- [AtomVM as an operating-system
-  foundation](../20-notes/atomvm-as-an-operating-system-foundation.md) —
-  assesses one possible compact execution nucleus and its native isolation
-  limits.
 
 ## Unsettled threads
 

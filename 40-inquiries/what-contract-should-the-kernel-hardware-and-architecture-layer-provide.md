@@ -29,6 +29,12 @@ This question is explicitly about the kernel-level boundary. It does not ask
 which board, CPU product, physical memory, peripheral, or firmware stack the
 project should build or buy.
 
+The [active T7500 / Intel x86-64 decision](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+selects the first implementation backend without narrowing this inquiry's
+longer-term portability standard. Start with single-CPU CLI bring-up; Intel
+processor-family qualification and the T7500's installed configuration are
+the immediate hardware research gaps. Second-ISA and DMA evidence remain later work.
+
 ## Operational question
 
 A candidate contract is adequate when all of the following can be demonstrated:

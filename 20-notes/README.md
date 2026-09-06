@@ -47,6 +47,11 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 - [OTP-like system services components](otp-like-system-services-components/README.md) —
   contains the thirteen detailed component-level implementation syntheses for
   the unprivileged service-policy layer.
+- [Proof-of-concept requirements](proof-of-concept-requirements/README.md) —
+  contains nineteen requirement studies plus the T7500 target and manufacturer
+  reference, covering CLI boot, bounded kernel
+  contracts, BEAM/GC, integrated recovery and all six later capability gates,
+  with evidence, alternatives, failure cases and next experiments.
 - [Visual computing synthesis components](visual-computing-synthesis-components/README.md) —
   contains the seven detailed implementation syntheses for user-owned
   projects, restartable presentation, semantic UI, trusted input, live tools,
@@ -54,6 +59,11 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [Proof-of-concept research readiness](proof-of-concept-research-readiness.md) —
+  assesses research coverage and missing implementation evidence, proposes a
+  minimal bootable OS with the CLI as its first delivery, excludes AtomVM and
+  graphical UI, defines subsequent BEAM/recovery evidence gates, and connects
+  the requirement-level deep dives.
 - [Applications and domain services layer](applications-and-domain-services-layer.md) —
   develops an unprivileged Layer 5 with fourteen components, stable domain and
   operation identities, invariant-selected consistency, explicit workflows
@@ -68,9 +78,6 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   plane, then defines human and workload authentication, exact grant contracts,
   trusted interaction, revocation, recovery, audit, and assurance across every
   layer.
-- [AtomVM as an operating-system foundation](atomvm-as-an-operating-system-foundation.md) — assesses the
-  current runtime boundary, empirical limits, missing OS responsibilities, and
-  a proposed minimal-substrate architecture.
 - [BEAM, ERTS, and OTP principles for a new operating system](beam-erts-and-otp-principles-for-a-new-operating-system.md) —
   separates the three layers, makes compiled-BEAM compatibility and
   process-local tracing collection explicit, identifies needed security and
