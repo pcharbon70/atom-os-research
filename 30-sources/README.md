@@ -38,7 +38,8 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
-| AtomVM foundation | [AtomVM foundation](../10-maps/atomvm-foundation.md) | [2026-08-28 AtomVM deep dive](../50-journal/2026-08-28-atomvm-deep-dive.md) |
+| Proof-of-concept readiness and requirements | [Proof of concept](../10-maps/proof-of-concept.md) | [2026-09-05 readiness assessment](../50-journal/2026-09-05-proof-of-concept-readiness-deep-dive.md); [2026-09-06 requirement deep dives](../50-journal/2026-09-06-proof-of-concept-requirements-deep-dive.md); [2026-09-06 AMD64 retargeting (superseded target)](../50-journal/2026-09-06-amd64-retargeting-deep-dive.md) |
+| AtomVM foundation (archived; rejected candidate) | [Archived AtomVM research](../90-archive/atomvm-foundation.md) | [2026-08-28 AtomVM deep dive](../50-journal/2026-08-28-atomvm-deep-dive.md) |
 | BEAM, ERTS, and OTP | [BEAM, ERTS, and OTP](../10-maps/beam-erts-and-otp.md) | [2026-08-28 BEAM, ERTS, and OTP deep dive](../50-journal/2026-08-28-beam-erts-and-otp-deep-dive.md) |
 | Kernel hardware and architecture | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-08-30 layer deep dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md); [2026-09-02 component deep dive](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md); [2026-09-04 address-translation component deep dive](../50-journal/2026-09-04-address-translation-and-protection-transitions-deep-dive.md); [2026-09-05 architecture-fault component deep dive](../50-journal/2026-09-05-architecture-faults-and-diagnostics-components-deep-dive.md) |
 | Minimal privileged kernel | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-08-31 layer deep dive](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md) |
@@ -76,6 +77,41 @@ not retroactively labeled as introduced by it:
 
 ### Documents
 
+- [Dell Precision T7500 specification sheet](dell-2026-precision-t7500-specification-sheet.md) — manufacturer CPU, memory and device capability envelope.
+- [Dell Precision T5500/T7500 technical guide](dell-2026-precision-t5500-t7500-technical-guide.md) — original-generation options and model-specific distinctions.
+- [Dell Precision T7500 service manual](dell-2026-precision-t7500-service-manual.md) — riser, setup and physical inventory reference.
+- [Dell Precision T7500 BIOS A18](dell-2018-precision-t7500-bios-a18.md) — release identity without an installed-version or update claim.
+- [QEMU x86 PC test configuration](qemu-project-2026-x86-pc-test-configuration.md) — machine, CPU, firmware and minimum virtual test controls.
+- [AMD64 system-programming manual discovery](amd-2026-amd64-system-programming-manual.md) — official catalog metadata and failed retrieval retained as history; not a T7500 dependency.
+- [AMD64 procedure ABI](x86-psabi-project-2026-amd64-procedure-abi.md) — baseline feature levels, native register and stack conventions.
+
+- [xv6: a simple, Unix-like teaching operating system](cox-et-al-2026-xv6-risc-v-book.md) —
+  Teaching implementation of protection, trap entry, UART and wakeups.
+- [RISC-V from scratch 3: Writing a UART driver in assembly (1 / 3)](twilco-2019-risc-v-uart-driver.md) —
+  First-party UART/DTB bring-up workflow and historical-example cautions.
+- [SOURCE_DATE_EPOCH specification](lamb-luo-2017-source-date-epoch.md) —
+  Deterministic build timestamps and the limits of timestamp control.
+- [GCC standards and the freestanding environment](gnu-project-2026-gcc-freestanding-environment.md) —
+  Freestanding startup, linking and generated support dependencies.
+- [ELF object file format: Program loading](xinuos-2026-elf-program-loading.md) —
+  Native segment loading, lengths, alignment and permission fields.
+- [RISC-V ABIs Specification](risc-v-international-2026-elf-psabi.md) —
+  Procedure ABI, enabled state and the separate syscall contract.
+- [OpenSBI firmware handoff: FW_DYNAMIC and FW_JUMP](opensbi-project-2026-firmware-handoff.md) —
+  Dynamic versus configured-jump firmware handoff and payload placement.
+- [QEMU debugging and record/replay](qemu-project-2026-debugging-and-record-replay.md) —
+  Debugger entry control and qualified replay configurations.
+- [OTP 29.0.6 generic behaviour call protocol](erlang-otp-team-2026-otp-29-0-6-generic-behaviour-call-protocol.md) —
+  Tagged finite/infinite call paths and alias/monitor dependency closure.
+- [All File Systems Are Not Created Equal: On the Complexity of Crafting Crash-Consistent Applications](pillai-et-al-2014-crash-consistent-applications.md) —
+  Persistence-ordering counterexamples and application-level crash testing.
+- [Recommendation for the Entropy Sources Used for Random Bit Generation](turan-et-al-2018-entropy-source-requirements.md) —
+  Entropy-source assumptions, health tests and failure policy.
+- [TLC model configuration and specification options](tlaplus-project-2026-tlc-model-configuration.md) —
+  Model properties, fairness, bounds and state-constraint limitations.
+- [QEMU RISC-V virt platform documentation](qemu-project-2026-risc-v-virt-platform.md) —
+  records official candidate-target evidence, emulated platform and firmware
+  boundaries, and the need to pin and test an actual executable configuration.
 - [Apple desktop UI framework and design documentation](apple-2026-desktop-ui-frameworks.md) —
   documents object-based and declarative view construction, application and
   state lifecycles, sandboxing, macOS conventions, and accessibility semantics.

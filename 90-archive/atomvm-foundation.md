@@ -16,24 +16,24 @@ aliases:
 
 ## Scope
 
-This map covers AtomVM as the prospective execution nucleus of a new embedded
-operating system: what the runtime already owns, what its platform ports and
-vendor SDKs currently supply, what empirical work says about its limits, and
-which system responsibilities still need design and experimental evidence.
+Archived on 2026-09-05 following the user's explicit rejection of AtomVM as an
+implementation foundation. This map preserves the former candidate's runtime,
+platform, measurement, and evidence trails. Its experiments and open questions
+are historical, not active Atom OS work.
 
-It is a concrete implementation case within the broader [BEAM, ERTS, and OTP
-research](beam-erts-and-otp.md), not the repository's prescribed foundation.
+The current [proof-of-concept route](../10-maps/proof-of-concept.md) starts
+with a minimal bootable OS and CLI. The broader [BEAM, ERTS, and OTP
+research](../10-maps/beam-erts-and-otp.md) remains relevant independently.
 
 ## Start here
 
-- [BEAM, ERTS, and OTP](beam-erts-and-otp.md) provides the principle-first
-  context and alternative implementation strategies against which AtomVM
-  should be compared.
-- [AtomVM as an operating-system foundation](../20-notes/atomvm-as-an-operating-system-foundation.md)
-  gives the current synthesis and proposed system boundary.
+- [BEAM, ERTS, and OTP](../10-maps/beam-erts-and-otp.md) provides the
+  principle-first context for the original comparison.
+- [AtomVM as an operating-system foundation](../90-archive/atomvm-as-an-operating-system-foundation.md)
+  preserves the historical synthesis and proposed system boundary.
 - [Can AtomVM serve as the kernel-facing runtime of a new embedded operating
-  system?](../40-inquiries/can-atomvm-serve-as-a-kernel-facing-runtime.md)
-  turns that assessment into falsifiable criteria and experiments.
+  system?](../90-archive/can-atomvm-serve-as-a-kernel-facing-runtime.md)
+  preserves the paused criteria and unperformed experiments.
 - [The 2026-08-28 source audit](../50-journal/2026-08-28-atomvm-deep-dive.md)
   pins the inspected revision, commands, search paths, and failed local build
   attempt.

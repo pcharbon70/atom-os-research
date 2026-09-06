@@ -116,7 +116,7 @@ optional vendor mechanism can be configured downstream.
 
 ## Derived work
 
-- [AtomVM as an operating-system foundation](../20-notes/atomvm-as-an-operating-system-foundation.md)
-- [AtomVM foundation map](../10-maps/atomvm-foundation.md)
-- [Kernel-facing-runtime inquiry](../40-inquiries/can-atomvm-serve-as-a-kernel-facing-runtime.md)
+- [AtomVM as an operating-system foundation](../90-archive/atomvm-as-an-operating-system-foundation.md)
+- [AtomVM foundation map](../90-archive/atomvm-foundation.md)
+- [Kernel-facing-runtime inquiry](../90-archive/can-atomvm-serve-as-a-kernel-facing-runtime.md)
 - [2026-08-28 source audit](../50-journal/2026-08-28-atomvm-deep-dive.md)

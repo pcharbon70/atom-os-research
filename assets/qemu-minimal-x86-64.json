@@ -1,0 +1,93 @@
+{
+  "format_version": 1,
+  "profile_id": "t7500-poc-minimal-x86-64",
+  "status": "adopted-configuration-intent-not-execution-qualified",
+  "specification": "../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md",
+  "physical_target": {
+    "model": "Dell Precision T7500",
+    "architecture": "x86-64 (Intel 64)",
+    "processor_models": null,
+    "cores_per_package": null,
+    "threads_per_core": null,
+    "installed_memory_mib": null,
+    "numa_layout": null,
+    "bios_version": null,
+    "processor_vendor": "Intel",
+    "processor_packages_user_reported": 2,
+    "processor_packages_verified": null
+  },
+  "qemu": {
+    "executable": "qemu-system-x86_64",
+    "release": null,
+    "binary_sha256": null,
+    "machine_family": "q35",
+    "versioned_machine": null,
+    "accelerator": "tcg",
+    "cpu_model": "Nehalem-v1",
+    "vcpus": 1,
+    "sockets": 1,
+    "cores_per_socket": 1,
+    "threads_per_core": 1,
+    "memory_mib": 128,
+    "base_arguments": [
+      "-accel",
+      "tcg",
+      "-cpu",
+      "Nehalem-v1",
+      "-smp",
+      "1,sockets=1,cores=1,threads=1",
+      "-m",
+      "128M",
+      "-nodefaults",
+      "-display",
+      "none",
+      "-monitor",
+      "none",
+      "-serial",
+      "stdio",
+      "-nic",
+      "none",
+      "-boot",
+      "order=d",
+      "-no-reboot",
+      "-no-shutdown"
+    ]
+  },
+  "firmware": {
+    "family": "SeaBIOS",
+    "version": null,
+    "path": null,
+    "sha256": null
+  },
+  "boot": {
+    "format": "bios-bootable-iso",
+    "bootloader": null,
+    "bootloader_version": null,
+    "handoff_protocol": null,
+    "image_path": null,
+    "image_sha256": null,
+    "drive_options": {
+      "format": "raw",
+      "interface": "ide",
+      "index": 0,
+      "media": "cdrom",
+      "readonly": true
+    }
+  },
+  "execution_requirements": [
+    "Resolve versioned_machine and pass it with -machine; do not silently use the q35 alias for acceptance runs.",
+    "Resolve and hash firmware.path; pass it with -bios.",
+    "Build and hash boot.image_path; attach with the recorded read-only drive options.",
+    "Keep actual hardware inventory distinct from emulator settings.",
+    "Use a serial harness with a finite watchdog and explicit assertions; QEMU exit is not test success.",
+    "Qualify the CPU feature contract against the installed processors before physical acceptance."
+  ],
+  "excluded": [
+    "network-devices",
+    "writable-guest-storage",
+    "gpu-and-desktop",
+    "host-device-passthrough",
+    "host-shared-folders",
+    "atomvm"
+  ]
+}

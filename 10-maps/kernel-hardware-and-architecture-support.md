@@ -26,6 +26,12 @@ backend must declare them as dependencies.
 
 ## Start here
 
+The first implementation now follows the [T7500 / Intel x86-64 target](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md):
+one executing CPU and serial CLI bring-up. The multi-ISA studies below remain
+broader research and later portability evidence, not parallel first-port
+requirements. Intel SDM and the installed Xeon's family-specific errata now
+guide implementation; modern features still require model-specific checks.
+
 - [Kernel hardware and architecture support
   layer](../20-notes/kernel-hardware-and-architecture-support-layer.md) is the
   comprehensive synthesis, proposed component decomposition, tradeoff analysis,

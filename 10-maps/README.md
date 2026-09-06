@@ -29,6 +29,10 @@ should explain why its links belong together rather than merely list files.
 
 ### Documents
 
+- [Proof of concept](proof-of-concept.md) — routes from research readiness
+  through the T7500 / Intel x86-64 first CLI boot, protected service control, project BEAM runtime,
+  resource containment, recovery, and later capability gates, with connected
+  requirement-level research and acceptance tests.
 - [Applications and domain services](applications-and-domain-services.md) —
   routes through Layer 5 composition, bounded contexts, durable identity,
   protocols, invariants, persistence, workflows, effects, presentation,
@@ -42,9 +46,6 @@ should explain why its links belong together rather than merely list files.
   routes from human, workload, node, and recovery evidence through versioned
   policy and bounded grants to capability enforcement, revocation, audit, and
   recovery across all five layers.
-- [AtomVM foundation](atomvm-foundation.md) — curates the architecture,
-  evidence, measurements, community priorities, and open questions around
-  AtomVM as one possible OS execution nucleus.
 - [BEAM, ERTS, and OTP](beam-erts-and-otp.md) — separates the instruction
   machine, runtime, and OTP policy and connects them to the new kernel design.
 - [Atom OS Research](home.md) — the selective entry point to the archive.

@@ -138,6 +138,12 @@ host services.
 
 ### Minimum experiments
 
+These are wider architectural experiments. The current
+[proof-of-concept sequence](../20-notes/proof-of-concept-research-readiness.md)
+starts with a minimal OS booting into a CLI, excludes AtomVM, and integrates
+the project's managed runtime afterward. The first CLI boot does not depend
+on completing every experiment below.
+
 1. Implement a bounded endpoint with send and receive capabilities, byte and
    message quotas, credits, revocable reply authority, and structured drop or
    refusal evidence.
@@ -158,8 +164,8 @@ host services.
 6. Trace reset to the first managed actor on one emulator and one physical
    target. Inventory firmware, privilege state, memory maps, clocks, allocator,
    interrupts, storage, console, and network dependencies.
-7. Port one identical supervision workload to pinned OTP 29, AtomVM, and the
-   candidate compatible runtime. Exercise long-lived allocation and
+7. Run one identical supervision workload on a pinned OTP 29 reference and
+   the project's compatible runtime. Exercise long-lived allocation and
    reclamation, explicit collection requests, process memory reporting,
    messages, shared binaries, exceptions, and code loading before comparing
    performance. A principles-only runtime may remain a research control.

@@ -256,7 +256,7 @@ means that the source note first entered the archive during this deep dive;
   implementation, reliability, memory, and scaling trails.
 - [The open inquiry](../40-inquiries/which-beam-erts-and-otp-principles-belong-in-the-kernel.md)
   turns the synthesis into testable placement decisions.
-- [The AtomVM map](../10-maps/atomvm-foundation.md) remains a concrete compact-
+- [The AtomVM map](../90-archive/atomvm-foundation.md) remains a concrete compact-
   VM comparison case rather than the project's prescribed implementation.
 
 ## Follow-ups

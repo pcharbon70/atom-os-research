@@ -49,8 +49,11 @@ compensation records for concurrent in-place databases. It is powerful but
 brings locking, buffer, and page assumptions the first Atom OS metadata store
 may not need. [FSCQ](../../30-sources/chen-et-al-2015-fscq.md) demonstrates how
 a crash specification and write-ahead logging can support machine-checked
-filesystem guarantees; its proof and synchronous disk model do not transfer
-automatically to new hardware or code.
+filesystem guarantees. It models asynchronous disk writes and builds a
+synchronous transactional interface above them; its proof and storage
+assumptions do not transfer automatically to new hardware or code. The focused
+[PoC durability study](../proof-of-concept-requirements/durable-state-and-crash-consistency.md)
+turns that boundary into backend-selection and crash-injection requirements.
 
 [RIFL](../../30-sources/lee-et-al-2015-rifl.md) demonstrates retryable RPC
 through unique request IDs, durable result records, acknowledgements, and

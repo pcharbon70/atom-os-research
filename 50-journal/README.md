@@ -35,6 +35,15 @@ provenance record.
 
 ### Documents
 
+- [2026-09-06 T7500 target correction](2026-09-06-t7500-target-correction.md) —
+  records the confirmed Intel-based physical target, replacement Nehalem
+  fixture, archived AMD assumption, repaired navigation and configuration checks.
+
+- [2026-09-06 AMD64 retargeting and minimum QEMU research](2026-09-06-amd64-retargeting-deep-dive.md) —
+  preserves the superseded AMD-processor decision, preceding Dell platform evidence,
+  minimal configuration intent, AMD manual retrieval limit, seven new and two
+  reused sources, and structural checks without a boot or hardware claim.
+
 - [2026-08-28 AtomVM deep dive](2026-08-28-atomvm-deep-dive.md) — records the
   pinned source audit, release check, literature and community search, host
   environment, and failed prerequisite-limited build attempt.
@@ -101,6 +110,14 @@ provenance record.
   across fourteen Layer 5 components, exact source provenance, shared semantic
   identity and outcome model, contradictions, falsifiers, and absence of
   prototype evidence.
+- [2026-09-05 proof-of-concept readiness deep dive](2026-09-05-proof-of-concept-readiness-deep-dive.md) —
+  records the archive assessment, missing experimental evidence, primary
+  documentation checks, CLI-first prototype gates, the explicit rejection and
+  archiving of AtomVM as a candidate, and exact source provenance.
+- [2026-09-06 proof-of-concept requirements deep dive](2026-09-06-proof-of-concept-requirements-deep-dive.md) —
+  records nineteen requirement studies, scientific and implementation evidence,
+  twelve new and twenty-four reused sources, cross-layer gaps, the FSCQ
+  disk-model correction, and archive checks without claiming prototype results.
 
 ## Maintaining this index
 

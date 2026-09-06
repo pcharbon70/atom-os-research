@@ -30,6 +30,10 @@ resolution criteria here. Promote independently useful conclusions to
 
 ### Documents
 
+- [Can a minimal bootable system validate the architecture?](can-a-minimal-bootable-system-validate-the-architecture.md) —
+  tracks the T7500 / Intel x86-64 first native CLI boot, protected service control, CLI-launched
+  BEAM/GC, and integrated recovery/resource/fault gates, informed by nineteen
+  requirement studies without treating research completion as gate evidence.
 - [How should Atom OS structure applications and domain services?](how-should-atom-os-structure-applications-and-domain-services.md) —
   defines falsifiable semantic, identity, invariant, persistence, workflow,
   effect, presentation, collaboration, extension, evolution, tenancy,
@@ -42,9 +46,6 @@ resolution criteria here. Promote independently useful conclusions to
   defines falsifiable evidence, session, policy, grant, capability, revocation,
   recovery, distributed-consistency, and assurance criteria for security
   across all five layers.
-- [Can AtomVM serve as the kernel-facing runtime of a new embedded operating system?](can-atomvm-serve-as-a-kernel-facing-runtime.md) — defines
-  falsifiable boot, substrate, resource, fault, trust, and lifecycle criteria
-  and the next experiments.
 - [What contract should the kernel hardware and architecture layer provide?](what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md) —
   defines authority, completion, isolation, ordering, portability, recovery,
   and performance criteria for the privileged architecture boundary.
