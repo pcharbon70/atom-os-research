@@ -83,5 +83,7 @@ date.
 ## Derived work
 
 - [Architecture faults and diagnostics](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics.md)
+- [Fault decoder](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/fault-decoder.md)
+- [Containment classifier and promotion](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/containment-classifier-and-promotion.md)
 - [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
 - [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)

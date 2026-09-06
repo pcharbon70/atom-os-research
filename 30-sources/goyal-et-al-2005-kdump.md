@@ -81,4 +81,5 @@ malicious-device DMA, recursive faults, or corrupted firmware.
 
 - [Observability, deterministic testing, and crash evidence](../20-notes/managed-actor-runtime-components/observability-deterministic-testing-and-crash-evidence.md)
 - [Architecture faults and diagnostics](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics.md)
+- [Crash-safe sink](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/crash-safe-sink.md)
 - [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)

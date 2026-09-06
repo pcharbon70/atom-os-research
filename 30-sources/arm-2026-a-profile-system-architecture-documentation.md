@@ -7,14 +7,15 @@ authors:
 published: 2026
 citation_key: "arm-2026-a-profile-system-architecture-documentation"
 container: "Arm Architecture Reference Manual for A-profile architecture"
-edition: "Latest documentation accessed 2026-08-30"
+edition: "Issue M.c"
 isbn: null
 doi: null
-url: "https://developer.arm.com/documentation/ddi0487/latest/"
-accessed: "2026-08-30"
+url: "https://developer.arm.com/documentation/ddi0487/mc/"
+accessed: "2026-09-05"
 tags:
   - arm64
   - cpu-architecture
+  - hardware-errors
   - interrupts
   - memory-ordering
   - privilege
@@ -28,8 +29,8 @@ aliases:
 ## Reference
 
 Arm Limited. *Arm Architecture Reference Manual for A-profile architecture*,
-latest version available 2026-08-30.
-[Official manual](https://developer.arm.com/documentation/ddi0487/latest/).
+Issue M.c.
+[Official versioned manual](https://developer.arm.com/documentation/ddi0487/mc/).
 
 ## Research question or contribution
 
@@ -64,13 +65,22 @@ selection, board wiring, firmware implementation, or peripheral protocols.
 - Floating-point/SIMD, SVE, SME, debug, performance-monitoring, pointer
   authentication, and memory-tagging features enlarge or qualify execution
   context and should be exposed through discovered feature profiles.
+- SError delivery, exception synchronization, optional RAS features, and
+  double-fault routing do not provide one universal recovery meaning.
+- AArch64 vector selection distinguishes origin, exception level, and use of
+  `SP_EL0` versus `SP_ELx`; it is not an x86-style independently selected stack
+  for every vector.
 
 ## Relevance
 
 Arm makes several implicit-looking operations observably multi-step. The
 kernel layer therefore needs transactional mapping, code-publication, and
 context-state contracts whose completion points include the necessary cache,
-TLB, and remote-core synchronization.
+TLB, and remote-core synchronization. A port must preserve architectural
+validity and precision while pinning the exact feature/firmware profile that
+justifies any return or containment claim. It also needs an early preallocated
+software stack strategy and must save overwrite-prone entry state before a
+higher-priority exception can replace it.
 
 ## Limits
 
@@ -84,3 +94,5 @@ interface it assumes. This source does not evaluate those implementations.
 - [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
 - [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
 - [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+- [Bounded capture routine](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/bounded-capture-routine.md)
+- [Double-fault guard](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/double-fault-guard.md)

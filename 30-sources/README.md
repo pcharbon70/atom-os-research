@@ -40,7 +40,7 @@ every journal-manifest backlink.
 | --- | --- | --- |
 | AtomVM foundation | [AtomVM foundation](../10-maps/atomvm-foundation.md) | [2026-08-28 AtomVM deep dive](../50-journal/2026-08-28-atomvm-deep-dive.md) |
 | BEAM, ERTS, and OTP | [BEAM, ERTS, and OTP](../10-maps/beam-erts-and-otp.md) | [2026-08-28 BEAM, ERTS, and OTP deep dive](../50-journal/2026-08-28-beam-erts-and-otp-deep-dive.md) |
-| Kernel hardware and architecture | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-08-30 layer deep dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md); [2026-09-02 component deep dive](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md); [2026-09-04 address-translation component deep dive](../50-journal/2026-09-04-address-translation-and-protection-transitions-deep-dive.md) |
+| Kernel hardware and architecture | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-08-30 layer deep dive](../50-journal/2026-08-30-kernel-hardware-and-architecture-support-deep-dive.md); [2026-09-02 component deep dive](../50-journal/2026-09-02-kernel-architecture-components-deep-dive.md); [2026-09-04 address-translation component deep dive](../50-journal/2026-09-04-address-translation-and-protection-transitions-deep-dive.md); [2026-09-05 architecture-fault component deep dive](../50-journal/2026-09-05-architecture-faults-and-diagnostics-components-deep-dive.md) |
 | Minimal privileged kernel | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-08-31 layer deep dive](../50-journal/2026-08-31-minimal-privileged-kernel-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-minimal-privileged-kernel-components-deep-dive.md) |
 | Managed actor runtime | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-02 layer deep dive](../50-journal/2026-09-02-managed-actor-runtime-deep-dive.md); [2026-09-03 component deep dive](../50-journal/2026-09-03-managed-actor-runtime-components-deep-dive.md) |
 | OTP-like system services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-03 system-services deep dive](../50-journal/2026-09-03-otp-like-system-services-deep-dive.md); [2026-09-04 component deep dive](../50-journal/2026-09-04-otp-like-system-services-components-deep-dive.md) |
@@ -463,6 +463,52 @@ not retroactively labeled as introduced by it:
 - [Linux reliability, availability, and serviceability documentation](linux-kernel-community-2026-ras-documentation.md) —
   distinguishes hardware-error origin, correction, severity, reporting, and
   containment while retaining raw source-specific evidence.
+- [Arm Reliability, Availability, and Serviceability specification](arm-2019-ras-specification.md) —
+  defines standard error-record validity, overwrite, ordering, syndrome, poison,
+  and write-one-to-clear behavior for Arm profiles.
+- [Scrash](broadwell-et-al-2003-scrash.md) — demonstrates sensitive-data
+  exposure in core dumps, a distinct cleaning phase, and residual indirect-
+  information leaks.
+- [GCM and GMAC](dworkin-2007-gcm-gmac.md) — defines authenticated-encryption
+  properties and nonce requirements while leaving replay protection to the
+  surrounding protocol.
+- [FATE and DESTINI](gunawi-et-al-2011-fate-destini.md) — evaluates
+  specification-driven compound-failure generation and recovery checking.
+- [Ramoops](iordache-2021-ramoops.md) — documents reserved-RAM placement,
+  mapping, chunk overwrite, software ECC, and supported-restart constraints.
+- [Machine-check handling on Linux](kleen-2004-machine-check-handling-linux.md) —
+  records constrained raw collection, later decoding, and recovery limits in a
+  historical x86 Linux implementation.
+- [Recovery domains](lenharth-et-al-2009-recovery-domains.md) — evaluates
+  request-scoped rollback and makes shared state and externally committed output
+  explicit recovery boundaries.
+- [A realistic evaluation of memory hardware errors](li-et-al-2010-realistic-memory-error-evaluation.md) —
+  uses production-derived correlated error patterns and external injection to
+  challenge isolated random-bit fault models.
+- [Linux entry/exit handling](linux-kernel-community-2026-entry-exit-handling.md) —
+  documents current non-instrumentable and nesting-aware NMI-like entry/exit
+  discipline.
+- [Linux hwpoison memory-failure handling design](kleen-2009-hwpoison.md) —
+  records the historical split between hard-context error capture and later
+  page/process recovery, including unsupported page classes.
+- [Linux pstore block oops/panic logger](linux-kernel-community-2026-pstore-crash-backends.md) —
+  documents panic-time preallocation, polling, no-lock/no-sleep constraints,
+  overwrite behavior, and adapter-return semantics.
+- [Machine-check recovery on Itanium](luck-2003-machine-check-recovery-itanium.md) —
+  describes narrow object/process recovery cases and the conditions that force
+  wider kernel or machine failure.
+- [Revisiting memory errors in large-scale production data centers](meza-et-al-2015-revisiting-memory-errors.md) —
+  measures recurrence and page-offlining outcomes without turning fleet
+  statistics into an individual-event recovery proof.
+- [Memoir](parno-et-al-2011-memoir.md) — combines protected execution and state
+  continuity to detect replay of cryptographically valid stale state.
+- [RISC-V RERI Architecture Specification](risc-v-international-2024-ras-error-record-interface.md) —
+  defines the optional ratified record layout, validity, containability,
+  overwrite detection, injection controls, and implementation-defined reset-
+  retention rules.
+- [Evaluating Linux kernel crash dumping mechanisms](vazquez-cao-2006-evaluating-linux-crash-dumping.md) —
+  evaluates crash capture across stack, interrupt, CPU identity, DMA, load, and
+  device-state failure dimensions.
 - [Meltdown](lipp-et-al-2018-meltdown.md) — demonstrates transient user access
   to privileged mappings on affected processors and motivates explicit
   entry/return mitigation and mapping profiles.

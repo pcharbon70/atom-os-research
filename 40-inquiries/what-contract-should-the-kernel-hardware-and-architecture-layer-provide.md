@@ -186,6 +186,31 @@ journal](../50-journal/2026-09-04-address-translation-and-protection-transitions
 records the exact newly introduced and reused evidence, cross-service
 conclusions, falsifiers, and bounded remaining gaps.
 
+The [six architecture-fault service deep
+dives](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/README.md)
+now refine component 9 into bounded capture, deferred decoding, capture-time
+classification/promotion, crash-safe sink, escalation, and recursive-fault
+contracts. Their shared protocol corrects several tempting equivalences: each
+raw attempt normally seals before its separately published destructive
+acknowledgement, with an explicit observation-is-acknowledgement exception for
+profiled clear-on-read sources; a
+small generated raw-fact classifier decides the interrupted return while the
+richer decoder remains deferred; the first fatal record is the first successful
+software promotion, not provably the first physical error; and a sink's seal,
+adapter acceptance, reset survival, durability, authenticity, confidentiality,
+freshness, and custody receipt are independent claims.
+
+The reports also qualify escalation as generation-lifetime retained at least
+once until a named persistence transition succeeds, keep evidence identifiers
+separate from action capabilities, and give recursive failure a restricted sink
+context rather than blessing an incomplete outer record. Optional RISC-V RERI
+v1.0 is now a first-class profile alongside base-without-RERI and platform/
+firmware records. These are sharper proposed invariants, not proof of bounded
+MMIO response, memory survivability, safe continuation, reset persistence, or
+recovery liveness. The [architecture-fault component research
+journal](../50-journal/2026-09-05-architecture-faults-and-diagnostics-components-deep-dive.md)
+records the exact source provenance and unresolved platform experiments.
+
 Evidence currently supports these constraints:
 
 - L4 history and OSKit support a small architecture-specific surface with

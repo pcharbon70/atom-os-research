@@ -11,9 +11,10 @@ edition: "Ratified specifications, release 20260120"
 isbn: null
 doi: null
 url: "https://docs.riscv.org/reference/isa/priv/priv-index.html"
-accessed: "2026-08-30"
+accessed: "2026-09-05"
 tags:
   - cpu-architecture
+  - hardware-errors
   - interrupts
   - memory-ordering
   - privilege
@@ -63,6 +64,28 @@ dependencies, not assumed parts of the base ISA.
 - Floating-point, vector, and other extension state is optional and visible
   through architectural status. Context management must be parameterized by
   discovered extensions.
+- Early trap code must save `xepc`, `xcause`, and other overwrite-prone state
+  before enabling interrupts or causing another exception; scratch registers
+  provide an architecture-defined route to hart-local entry storage but do not
+  themselves switch stacks.
+- Ratified double-trap and resumable-NMI extensions make recursive failure an
+  explicit profile choice. Depending on the implemented extensions, an
+  unexpected second trap can redirect into RNMI state or enter a platform-
+  signalled critical-error state; the base trap mechanism alone supplies
+  neither a portable recursive-recovery guarantee nor a universal reset
+  behavior.
+- Under `Ssdbltrp`, an unexpected trap from S/VS handling transfers to M-mode
+  with exception code 16 in `mcause`; `mtval2` records the cause value that the
+  unexpected trap would have written, while the remaining M-mode trap state is
+  written for the transfer. This repurposing means a guest-page-fault guest
+  physical address otherwise carried in `mtval2` is unavailable. Under
+  `Smdbltrp` with `Smrnmi`, `mnepc`/`mncause` describe the unexpected trap while
+  the first trap's `mepc`/`mcause` remains separately available, and the RNMI
+  state supplies no corresponding `mtval`/`mtval2` detail.
+- The base privileged architecture still does not define a universal hardware-
+  error taxonomy. The separately ratified optional [RERI
+  specification](risc-v-international-2024-ras-error-record-interface.md) adds a
+  standardized record interface.
 
 ## Relevance
 
@@ -70,7 +93,8 @@ RISC-V is a strong test of whether the proposed contract is semantic rather
 than x86-shaped: local versus remote completion, delegated versus retained
 privilege, and optional extensions all need explicit representation. A port
 should declare its execution-environment assumptions rather than burying them
-inside generic calls.
+inside generic calls, and must discover optional RERI support rather than
+assuming it.
 
 ## Limits
 
@@ -84,3 +108,5 @@ platform recommendation.
 - [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
 - [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
 - [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+- [Bounded capture routine](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/bounded-capture-routine.md)
+- [Double-fault guard](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/double-fault-guard.md)

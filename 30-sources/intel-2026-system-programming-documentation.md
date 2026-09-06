@@ -11,9 +11,10 @@ edition: "Combined Volumes, Order Number 325462-092US"
 isbn: null
 doi: null
 url: "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html"
-accessed: "2026-08-30"
+accessed: "2026-09-05"
 tags:
   - cpu-architecture
+  - hardware-errors
   - interrupts
   - memory-ordering
   - privilege
@@ -59,6 +60,21 @@ mechanism and does not select a board, chipset, or device set.
 - XSAVE-family facilities make floating-point, SIMD, protection, and other
   extended state a discoverable, growing execution-context set rather than a
   fixed register block.
+- Machine Check Architecture banks expose explicit validity, overflow,
+  processor-context-corrupt, instruction-restart, signalled, and action-required
+  state. The documented handler sequence reads valid status and dependent
+  address/miscellaneous registers before explicitly clearing status and
+  serializing; bank layout and interpretation remain model specific.
+- Per-bank `MCi_STATUS` acknowledgement is distinct from
+  `MCG_STATUS.MCIP`, which records that a machine-check handler is in progress.
+  MCIP must remain set during handler execution and is cleared only on the
+  validated return path; clearing it early defeats recursive-machine-check
+  detection.
+- IA-32e interrupt-stack-table entries can select known-good stacks for NMI,
+  machine check, and double-fault entry. NMI blocking and `IRET` semantics make
+  the early entry/exit sequence nonordinary, while `#DF` is an abort whose
+  saved state may be undefined and whose safe architectural use is bounded
+  diagnosis followed by shutdown or reset.
 - VMX and VT-d add optional second-level translation and device-remapping
   mechanisms. They are candidates for controlled delegation and DMA isolation,
   not requirements of the baseline kernel contract.
@@ -83,3 +99,7 @@ are deliberately outside this note.
 - [Kernel hardware and architecture support layer](../20-notes/kernel-hardware-and-architecture-support-layer.md)
 - [Kernel hardware and architecture support map](../10-maps/kernel-hardware-and-architecture-support.md)
 - [Kernel hardware-contract inquiry](../40-inquiries/what-contract-should-the-kernel-hardware-and-architecture-layer-provide.md)
+- [Bounded capture routine](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/bounded-capture-routine.md)
+- [Fault decoder](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/fault-decoder.md)
+- [Containment classifier and promotion](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/containment-classifier-and-promotion.md)
+- [Double-fault guard](../20-notes/kernel-hardware-and-architecture-components/architecture-faults-and-diagnostics/double-fault-guard.md)
