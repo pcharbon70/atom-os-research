@@ -138,6 +138,13 @@ instantiations, measurements, or integration. Storage and networking are not
 absent from the archive. Their device-specific implementation choices remain
 open, as the reports explicitly acknowledge.
 
+The [milestone coverage mapping](../60-planning/01-proof-of-concept/README.md#coverage-by-area-traceability)
+now assigns the in-scope missing artifacts to detailed M0–M4 definitions, each
+with required outputs, acceptance cases, dependencies, and completion evidence.
+It also preserves the storage/networking and broader deployment deferrals.
+These definitions describe what must be delivered; they are not executable
+artifacts, authored phase/task plans, or evidence that the gaps are closed.
+
 ## Work package 1: target, bootstrap, CLI, and reproducible build
 
 The hardware inquiry intentionally excluded choosing a board or firmware stack.
@@ -472,6 +479,9 @@ component counts.
 
 ## Connections
 
+- [M0–M4 milestone definitions](../60-planning/01-proof-of-concept/README.md)
+  translate these outcomes into artifact and test obligations for subsequent
+  phased implementation planning.
 - [Proof-of-concept map](../10-maps/proof-of-concept.md) provides the selective
   implementation-oriented route through existing research.
 - [Can a minimal bootable system validate the architecture?](../40-inquiries/can-a-minimal-bootable-system-validate-the-architecture.md)

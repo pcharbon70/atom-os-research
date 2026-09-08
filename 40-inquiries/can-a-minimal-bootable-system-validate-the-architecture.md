@@ -99,6 +99,12 @@ session. The corrected T7500 / Intel x86-64 selection narrows M0 but provides no
 boot evidence. A qualified physical single-CPU CLI check can follow virtual
 M1 before SMP or second-ISA work. All gates below therefore remain open.
 
+The [M0–M4 definitions](../60-planning/01-proof-of-concept/README.md), authored
+on 2026-09-08, assign detailed artifact and acceptance obligations to each
+milestone and map the coverage gaps to their owners or explicit deferrals.
+No phase/task decomposition, implementation, model execution, or guest test
+was delivered by that writing pass. The gate state is unchanged.
+
 | Gate | State |
 | --- | --- |
 | M0: pinned boot inputs | Open; T7500 / Intel x86-64 selected, but exact installed-unit inventory, virtual binary pins, toolchain, firmware/bootloader, static image and console/time ABI need concrete artifacts |

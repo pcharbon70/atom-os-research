@@ -22,8 +22,8 @@ The first stream is the [CLI-first proof of concept](01-proof-of-concept/README.
 ## What belongs here
 
 - Numbered planning streams grouping related milestones.
-- Milestone-named subdirectories containing an exhaustive README and one note
-  per phase, created when the milestone is actually decomposed.
+- Milestone-named subdirectories containing a substantive definition and
+  exhaustive README, with one note per phase when the work is decomposed.
 - Entry decisions, dependencies, task-level acceptance criteria, test plans,
   and links to the research and execution evidence they depend on.
 
@@ -35,11 +35,12 @@ the kernel source tree and does not select an implementation repository.
 ## Directory and identity convention
 
 Use a stable stream number and name, then the existing milestone ID and name.
-For example, the intended first milestone location is
-`01-proof-of-concept/m0-boot-inputs/`. That milestone directory is not yet
-created; this example specifies naming, not planning or implementation progress.
+For example, [M0 — Boot inputs](01-proof-of-concept/m0-boot-inputs/README.md)
+contains a detailed milestone definition. Its directory is
+`01-proof-of-concept/m0-boot-inputs/`; phase/task decomposition and implementation
+remain separate work, not progress implied by the directory's existence.
 
-Each milestone directory contains `README.md` plus files named
+Each milestone directory contains `README.md`; authored phases use files named
 `phase-01-<descriptive-name>.md`, `phase-02-<descriptive-name>.md`, and so on.
 Phase numbers restart at 01 in each milestone. Keep delivered identifiers
 stable; record supersession explicitly instead of renumbering history.
@@ -50,7 +51,10 @@ evidence. It extends the ordinary directory README invariant; every direct
 child still belongs in its index. Use the
 [phase template](../templates/implementation-phase.md) for each phase.
 Create no empty milestone directories or dummy phase files simply to populate
-an index. There is no required number of phases or children per work item.
+an index. A substantive milestone definition can precede phase documents, but
+must identify that state explicitly and explain the required outcomes and
+acceptance evidence. There is no required number of phases or children per
+work item.
 
 Directory READMEs use `kind: map`. Phase notes use `kind: note`, initially
 `maturity: developing`, and the tag `implementation-planning`. Keep planning
@@ -160,8 +164,9 @@ over this project's technical scope or implementation permissions.
 
 ### Subdirectories
 
-- [01 — Proof of concept](01-proof-of-concept/README.md) — the M0–M4 roadmap,
-  naming, scope, and next decomposition decisions for the CLI-first OS.
+- [01 — Proof of concept](01-proof-of-concept/README.md) — five detailed M0–M4
+  definitions, coverage-to-artifact mapping, and next phase-decomposition
+  decisions for the CLI-first OS.
 
 ### Documents
 
