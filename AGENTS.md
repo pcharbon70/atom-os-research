@@ -39,6 +39,15 @@ graphical UI and desktop work are outside this proof-of-concept scope. A
 native CLI can precede the managed runtime, but the completed proof of concept
 must still meet its declared compiled-BEAM and process-local tracing-GC profile.
 
+Zig is the selected kernel implementation language, by user decision on
+2026-09-08. Use the [Zig feasibility study](20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
+for the evidence and remaining qualification. Narrow, audited C/assembly
+boundaries may supply missing facilities; C ABI compatibility does not remove
+library OS dependencies. Zig 0.16.0 is a researched candidate, not an accepted
+M0 compiler pin. Exact toolchain, ABI, helper, panic, allocation and processor
+state contracts still require qualification. The language decision neither
+selects a managed runtime nor supplies its required tracing GC.
+
 The initial physical target is the Dell Precision T7500 with Intel Xeon
 processors and Intel 64/x86-64. The user explicitly corrected the AMD-processor
 assumption. Follow the target profile in

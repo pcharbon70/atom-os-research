@@ -35,8 +35,11 @@ Each report distinguishes source evidence, proposed Atom contracts and missing e
 
 ### Documents
 
-The two target records complement the nineteen requirement reports:
+The two language feasibility studies, their comparison and two target records complement the nineteen requirement reports:
 
+- [Zig versus C for the kernel](zig-versus-c-kernel-language-comparison.md) — evidence-weighted pros/cons, conditional recommendation, fair-comparison limits and circumstances favoring C.
+- [C kernel feasibility and low-level compatibility](c-kernel-language-feasibility-and-low-level-compatibility.md) — alternative/fallback assessment, C/compiler/ABI/library contracts and local research probes; preserves the selected Zig decision.
+- [Zig kernel feasibility and C interoperability](zig-kernel-language-feasibility-and-c-interoperability.md) — selected kernel language, scientific/practitioner evidence, bounded local probes and remaining compiler/ABI qualification; extends R02 without closing M0.
 - [Dell Precision T7500 target and minimal QEMU profile](dell-precision-t7500-target-and-minimal-qemu-profile.md) — active architecture decision, minimum configuration and prioritized remaining hardware research.
 - [Dell Precision T7500 platform reference](dell-precision-t7500-platform-reference.md) — manufacturer capabilities for the selected machine; installed components still require inventory.
 
@@ -78,7 +81,7 @@ The [T7500 / Intel x86-64 target](dell-precision-t7500-target-and-minimal-qemu-p
 
 | Decision | Research result | Decisive artifact still missing |
 | --- | --- | --- |
-| First boot | T7500 / Intel x86-64 and minimum virtual constraints adopted; responsibilities specified | Exact tool/firmware/image identities and reset-to-user trace |
+| First boot | T7500 / Intel x86-64, Zig kernel language and minimum virtual constraints adopted; responsibilities specified | Qualified Zig/build/ABI profile, exact tool/firmware/image identities and reset-to-user trace |
 | Kernel contract | Bounded admission, payment, generations and reclamation have defensible precedents | Operation table, lifecycle/accounting models and negative protection tests |
 | BEAM compatibility | A narrow project interpreter is a coherent route; selected OTP paths enlarge its closure | Compiler-produced corpus, generated manifest and hosted/guest differential results |
 | Responsiveness and recovery | Domain protection and actor responsiveness are distinct tests | Predeclared limits, raw delay/resource traces and repeated restart results |

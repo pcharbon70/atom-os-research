@@ -1,0 +1,156 @@
+Research probe transcript, 2026-09-08. Full command output except deliberately
+filtered translated-header text (see run.sh). No freestanding code executed.
+
++ zig version
+0.16.0
++ zig cc --version
+clang version 21.1.0
+Target: x86_64-unknown-linux6.8.0-gnu2.39.0
+Thread model: posix
+InstalledDir: /home/ducky/.asdf/installs/zig/0.16.0
++ cc --version
+cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
++ ld --version
+GNU ld (GNU Binutils for Ubuntu) 2.42
+Copyright (C) 2024 Free Software Foundation, Inc.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License version 3 or (at your option) a later version.
+This program has absolutely no warranty.
++ sha256sum /home/ducky/.asdf/installs/zig/0.16.0/zig /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/arch.zig /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.zig /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.c /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/abi.h
+2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c  /home/ducky/.asdf/installs/zig/0.16.0/zig
+577e515aa36108653f661f12048dcbf3024c832ba29be72e8d4def1549df71e1  /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/arch.zig
+e22ac9fbfdae103f188bc3c8ace4235dbeb74e0b623345aa1ef8b6e3e153bbd3  /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.zig
+c5891d9c59adf62a8a80d37e465099aba2d6fca7cdd1ef5bb03ebde6edbd806c  /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.c
+e1d658d54f7dc5e1e1ee02d2d59a81992e32a55ae3af652daec3192991ec249d  /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/abi.h
++ zig build-obj /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.zig -target x86_64-linux-gnu -mcpu=nehalem -O ReleaseSafe -fllvm -fno-compiler-rt -femit-bin=host-zig.o
++ cc -std=c11 -O2 -DHOST_TEST -no-pie /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.c host-zig.o -o host-test
++ ./host-test
+PASS: C -> Zig -> C -> Zig callback; by-value struct and layout
++ zig build-obj /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.zig -target x86_64-freestanding-none -mcpu=nehalem -O ReleaseSafe -fllvm -mno-red-zone -fno-stack-check -fno-stack-protector -fno-compiler-rt -femit-bin=free-zig.o
++ zig cc -target x86_64-freestanding-none -march=nehalem -ffreestanding -mno-red-zone -fno-stack-protector -fno-pic -O2 -c /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.c -o free-c.o
++ zig build-obj /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/arch.zig -target x86_64-freestanding-none -mcpu=nehalem -O ReleaseSmall -fllvm -mno-red-zone -fno-stack-check -fno-stack-protector -fno-compiler-rt -femit-bin=arch.o
++ ld -nostdlib -static -e arch_halt -Ttext=0x100000 free-zig.o free-c.o arch.o -o research.elf
++ readelf -h -l -d research.elf
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x10004c
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          21184 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         4
+  Size of section headers:           64 (bytes)
+  Number of section headers:         14
+  Section header string table index: 13
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  LOAD           0x0000000000000000 0x00000000000ff000 0x00000000000ff000
+                 0x0000000000000120 0x0000000000000120  R      0x1000
+  LOAD           0x0000000000001000 0x0000000000100000 0x0000000000100000
+                 0x0000000000000071 0x0000000000000071  R E    0x1000
+  LOAD           0x0000000000002000 0x0000000000101000 0x0000000000101000
+                 0x000000000000010c 0x000000000000010c  R      0x1000
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .text 
+   02     .eh_frame 
+   03     
+
+There is no dynamic section in this file.
++ nm -u research.elf
++ objdump -d arch.o
+
+arch.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <arch_halt>:
+   0:	fa                   	cli
+   1:	f4                   	hlt
+   2:	eb fd                	jmp    1 <arch_halt+0x1>
+
+0000000000000004 <atomic_increment>:
+   4:	55                   	push   %rbp
+   5:	48 89 e5             	mov    %rsp,%rbp
+   8:	6a 01                	push   $0x1
+   a:	58                   	pop    %rax
+   b:	f0 48 0f c1 07       	lock xadd %rax,(%rdi)
+  10:	5d                   	pop    %rbp
+  11:	c3                   	ret
+
+0000000000000012 <mmio_read>:
+  12:	55                   	push   %rbp
+  13:	48 89 e5             	mov    %rsp,%rbp
+  16:	8b 07                	mov    (%rdi),%eax
+  18:	5d                   	pop    %rbp
+  19:	c3                   	ret
+
+000000000000001a <port_write>:
+  1a:	55                   	push   %rbp
+  1b:	48 89 e5             	mov    %rsp,%rbp
+  1e:	89 f0                	mov    %esi,%eax
+  20:	89 fa                	mov    %edi,%edx
+  22:	ee                   	out    %al,(%dx)
+  23:	5d                   	pop    %rbp
+  24:	c3                   	ret
++ timeout 180 zig translate-c -target x86_64-freestanding-none /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/abi.h
++ awk '/^pub const struct_pair/,/^};/; /^pub const callback/; /^pub extern fn/; /^pub const __VERSION__/; /unable to translate macro/'
+pub const struct_pair = extern struct {
+    tag: u32 = 0,
+    value: u64 = 0,
+    pub const c_apply = __root.c_apply;
+    pub const zig_roundtrip = __root.zig_roundtrip;
+    pub const apply = __root.c_apply;
+    pub const roundtrip = __root.zig_roundtrip;
+};
+pub const callback = ?*const fn (u64) callconv(.c) u64;
+pub extern fn c_add(a: u64, b: u64) u64;
+pub extern fn c_apply(p: struct_pair, cb: callback) struct_pair;
+pub extern fn zig_callback(n: u64) u64;
+pub extern fn zig_roundtrip(p: struct_pair) struct_pair;
+pub const __VERSION__ = "Aro aro-zig";
+pub const __seg_gs = @compileError("unable to translate macro: undefined identifier `address_space`"); // <builtin>:27:9
+pub const __seg_fs = @compileError("unable to translate macro: undefined identifier `address_space`"); // <builtin>:28:9
+pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`"); // <builtin>:109:9
+pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`"); // <builtin>:112:9
+pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`"); // <builtin>:138:9
+pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`"); // <builtin>:163:9
+pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`"); // <builtin>:172:9
+pub const __stdint_uint_c = @compileError("unable to translate macro: undefined identifier `U`"); // /home/ducky/.asdf/installs/zig/0.16.0/lib/compiler/aro/include/stdint.h:14:9
+pub const INT128_C = @compileError("unable to translate macro: undefined identifier `WB`"); // /home/ducky/.asdf/installs/zig/0.16.0/lib/compiler/aro/include/stdint.h:281:11
+pub const UINT128_C = @compileError("unable to translate macro: undefined identifier `WBU`"); // /home/ducky/.asdf/installs/zig/0.16.0/lib/compiler/aro/include/stdint.h:282:11
+pub const offsetof = @compileError("unable to translate macro: undefined identifier `__builtin_offsetof`"); // /home/ducky/.asdf/installs/zig/0.16.0/lib/compiler/aro/include/stddef.h:18:9
++ zig build-obj /home/ducky/code/atom-os-research/assets/zig-kernel-feasibility/interop.zig -target x86_64-freestanding-none -femit-h -fno-emit-bin
+error: -femit-h is currently broken, see https://github.com/ziglang/zig/issues/9698
++ printf 'OBSERVED: bare -femit-h rejected; retained as a limitation, not an ABI failure.\n'
++ sha256sum host-test research.elf
+OBSERVED: bare -femit-h rejected; retained as a limitation, not an ABI failure.
+1abd3b7ff98589dc23e864d382d8af63787c031c31013654d3f92dd4677b23ad  host-test
+ff257e9a8e56857cecac8d5074565039d3d88e946026d594bef59516d5583769  research.elf
++ printf 'Research outputs retained at %s\n' /tmp/atom-zig-probe.wm0Mrk
+Research outputs retained at /tmp/atom-zig-probe.wm0Mrk
+
+Post-review check: the same header command was rerun with a diagnostic-specific
+guard (now in run.sh); the complete build was not rerun after that guard edit.
+error: -femit-h is currently broken, see https://github.com/ziglang/zig/issues/9698
+PASS: diagnostic-specific header limitation check

@@ -38,6 +38,9 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| Kernel-language comparison | [Kernel-language selection](../10-maps/kernel-language-selection.md) | [2026-09-08 Zig versus C](../50-journal/2026-09-08-zig-versus-c-kernel-language-deep-dive.md) |
+| C kernel language | [C kernel development](../10-maps/c-kernel-development.md) | [2026-09-08 C feasibility](../50-journal/2026-09-08-c-kernel-feasibility-deep-dive.md) |
+| Zig kernel language | [Zig kernel development](../10-maps/zig-kernel-development.md) | [2026-09-08 Zig feasibility](../50-journal/2026-09-08-zig-kernel-feasibility-deep-dive.md) |
 | Proof-of-concept readiness and requirements | [Proof of concept](../10-maps/proof-of-concept.md) | [2026-09-05 readiness assessment](../50-journal/2026-09-05-proof-of-concept-readiness-deep-dive.md); [2026-09-06 requirement deep dives](../50-journal/2026-09-06-proof-of-concept-requirements-deep-dive.md); [2026-09-06 AMD64 retargeting (superseded target)](../50-journal/2026-09-06-amd64-retargeting-deep-dive.md) |
 | AtomVM foundation (archived; rejected candidate) | [Archived AtomVM research](../90-archive/atomvm-foundation.md) | [2026-08-28 AtomVM deep dive](../50-journal/2026-08-28-atomvm-deep-dive.md) |
 | BEAM, ERTS, and OTP | [BEAM, ERTS, and OTP](../10-maps/beam-erts-and-otp.md) | [2026-08-28 BEAM, ERTS, and OTP deep dive](../50-journal/2026-08-28-beam-erts-and-otp-deep-dive.md) |
@@ -76,6 +79,32 @@ not retroactively labeled as introduced by it:
 - None yet.
 
 ### Documents
+
+- [Zig language overview](zig-project-2026-language-overview.md) — design idioms, illustrative examples and limits of performance advocacy.
+- [Clang source analysis and sanitizers](llvm-project-2025-clang-analysis-and-sanitizer-contracts.md) — concrete C diagnostic paths with explicit runtime/platform and assurance limits.
+- [C11 committee draft N1570](wg14-2011-c11-committee-draft.md) — C kernel feasibility primary evidence.
+- [C23 publication status and public working draft](iso-wg14-2024-c23-status-and-draft.md) — C kernel feasibility primary evidence.
+- [GCC x86 kernel C extensions and dependency contract](gnu-project-2026-x86-kernel-c-profile.md) — C kernel feasibility primary evidence.
+- [Clang 21 x86 interrupt attribute contract](llvm-project-2025-clang-x86-interrupt-contract.md) — C kernel feasibility primary evidence.
+- [Linux kernel C dialect and compiler profile](linux-community-2026-kernel-c-dialect.md) — C kernel feasibility primary evidence.
+- [Finding and understanding bugs in C compilers](yang-et-al-2011-csmith.md) — C kernel feasibility primary evidence.
+- [Towards optimization-safe systems](wang-et-al-2013-optimization-safe-systems.md) — C kernel feasibility primary evidence.
+- [Exploring C semantics and pointer provenance](memarian-et-al-2019-c-pointer-provenance.md) — C kernel feasibility primary evidence.
+- [What every C programmer should know about undefined behavior](lattner-2011-c-undefined-behavior.md) — C kernel feasibility primary evidence.
+- [Off by two: a low-level compiler regression](desaulniers-2020-off-by-two.md) — C kernel feasibility primary evidence.
+- [Zig 0.16.0 language reference](zig-project-2026-language-reference-0-16.md) — Use these mechanisms behind a small architecture and C boundary; retain explicit ownership and failure contracts.
+- [Zig 0.16.0 release and compatibility changes](zig-project-2026-release-0-16.md) — Pin the actual tool distribution and translator; treat upgrades as qualification events.
+- [Zig 0.16.0 freestanding build and runtime source profile](zig-project-2026-freestanding-source-profile.md) — Use a compiler-profile manifest and an audited helper inventory. Fixed-buffer allocation is a possible bootstrap mechanism, not our eventual quota/reclamation implementation.
+- [Zig C translator: bitfields and unsupported statements](zig-project-2026-c-translator-limits.md) — Keep difficult implementation bodies in C and expose small accessors or opaque handles. C-to-Zig translation is optional for calling original compiled C.
+- [Clang 21.1.0 freestanding compilation contract](llvm-project-2025-clang-21-freestanding.md) — C fallbacks need a reviewed memory-helper implementation and final symbol census even without explicit library calls.
+- [Newlib C library system-call dependencies](newlib-project-2026-libc-system-hooks.md) — A portable libc can be adapted, but its hooks must map to real bounded Atom services or explicitly unsupported operations.
+- [musl and its Linux syscall dependency](musl-project-2026-linux-dependency.md) — A statically linked Linux/musl executable cannot be assumed to run on Atom merely because its machine code and C calling convention match.
+- [LZ4 1.10.0 freestanding library profile](collet-2024-lz4-freestanding-profile.md) — A concrete example of a C library with a bounded porting surface, unlike arbitrary hosted software.
+- [Making No-Fuss Compiler Fuzzing Effective](groce-et-al-2022-no-fuss-compiler-fuzzing.md) — Retain minimized compiler regressions and test critical code generation independently when selecting or upgrading a compiler.
+- [Pragma Driven Shared Memory Parallelism in Zig by Supporting OpenMP Loop Directives](kacs-et-al-2024-zig-openmp.md) — Concrete foreign-runtime integration evidence, while demonstrating that translation and integration require engineering.
+- [Writing Hypervisor in Zig and the Ymir implementation](smallkirby-2024-writing-hypervisor-in-zig.md) — Existence and mechanism evidence for a small Zig architecture boundary.
+- [Bootstrapping Uber's Infrastructure on arm64 with Zig](lubys-et-al-2023-uber-zig-toolchain.md) — Industrial evidence for the C toolchain and dependency-closure discipline.
+- [Ashet OS: Zig operating-system practice and scope](ashet-technologies-2026-operating-system.md) — Practical OS-development evidence and a reminder to qualify dependencies against their actual compiler version.
 
 - [Dell Precision T7500 specification sheet](dell-2026-precision-t7500-specification-sheet.md) — manufacturer CPU, memory and device capability envelope.
 - [Dell Precision T5500/T7500 technical guide](dell-2026-precision-t5500-t7500-technical-guide.md) — original-generation options and model-specific distinctions.

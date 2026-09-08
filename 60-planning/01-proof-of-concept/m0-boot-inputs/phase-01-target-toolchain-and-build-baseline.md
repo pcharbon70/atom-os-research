@@ -20,8 +20,8 @@ Back to milestone: [M0 definition and plan](README.md).
 
 ## Entry, scope, and dependencies
 
-Accepted CLI-first scope and T7500 target decision; implementation language, repository,
-binary pins, and individual owners remain open.
+Accepted CLI-first scope, T7500 target and Zig kernel language decision;
+repository, compiler/backend/linker/translator pins and individual owners remain open.
 
 Entry gate `accepted-scope-entry`: the milestone's accepted Intel target and CLI-first scope; this is not a prerequisite implementation task.
 
@@ -31,8 +31,10 @@ resolves the source location and initial roles, and this phase's decisions task 
 execution/review roles before dependent work. The label unresolved-implementation is a
 recorded blocker, not a selected repository.
 
-Decision M0-D01 is resolved by m0-p01-decisions: Select the implementation repository and
-language/toolchain using freestanding support, instruction control, reproducibility, and
+Decision M0-D01 is partially decided: Zig is the selected kernel language.
+Resolve the remaining choices through m0-p01-decisions: select the implementation
+repository and qualify the Zig compiler/backend/linker/translator using
+freestanding support, C ABI/helper closure, instruction control, reproducibility, and
 maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability and
 installed-unit inventory rather than relying on family specifications. Until resolution,
 downstream code and passing acceptance claims are blocked.
@@ -52,6 +54,7 @@ The governing [milestone definition](README.md) retains the full artifact and ac
 
 - [target firmware and boot handoff](../../../20-notes/proof-of-concept-requirements/target-firmware-and-boot-handoff.md) — contract and failure-case input for this phase.
 - [freestanding build and static images](../../../20-notes/proof-of-concept-requirements/freestanding-build-and-static-images.md) — contract and failure-case input for this phase.
+- [Zig feasibility and C interoperability](../../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — selected language, candidate profile and limited research evidence; neither the compiler pin nor this phase is accepted by those probes.
 
 Follow the [planning convention](../../README.md). Retain results in [dated journal evidence](../../../50-journal/README.md), using the optional [execution-record template](../../../templates/phase-execution-record.md), with indexed [assets](../../../assets/README.md) or exact artifacts in the selected implementation repository.
 
@@ -89,11 +92,13 @@ logical independence statement, not authorization for parallel agents.
       Produce the M0-D01 decision record and bind the locations and owners used by every later
       task.
 
-      - [ ] 1.1.1.1 Subtask — Compare freestanding candidates.
+      - [ ] 1.1.1.1 Subtask — Qualify the selected Zig development profile.
 
-        Compile and link a minimal fixture with candidate toolchains; record required helpers,
-        license constraints, instruction controls, and reasons for the accepted language and
-        repository. No choice is made by this plan.
+        Preserve the user's Zig kernel-language decision. Evaluate the researched 0.16.0
+        candidate and any justified pinned profile revision through freestanding compile/link
+        fixtures. Record compiler/backend/linker/translator identities, C and runtime helpers,
+        license constraints, instruction controls, ownership and source location. Language
+        selection does not accept those remaining inputs or close this subtask.
 
       - [ ] 1.1.1.2 Subtask — Pin the virtual fixture.
 
@@ -130,7 +135,10 @@ logical independence statement, not authorization for parallel agents.
 
         Create the selected flags/linker layout and native fixture; enumerate symbols,
         compiler helpers, calling convention, FP/SIMD policy, and unsupported instructions.
-        Undefined helpers or accidental host syscalls must fail.
+        Undefined helpers or accidental host syscalls must fail. Verify C/Zig boundary
+        sizes, alignment, offsets, supported arguments/results and callbacks in both directions;
+        compile consumers of the intended translated declarations. Retain fixed-signature
+        wrappers for unqualified interfaces and a custom panic/stack-support contract.
 
       - [ ] 1.2.1.2 Subtask — Reproduce independent builds.
 

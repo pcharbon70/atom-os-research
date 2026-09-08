@@ -50,6 +50,13 @@ produced, so none of M0–M4 is closed by the additional reading.
 
 The corrected [T7500 target](proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) fixes the initial physical machine and Intel x86-64 architecture. It supersedes the AMD-processor assumption without turning any prior research session into a successful boot or complete M0.
 
+On 2026-09-08 the user selected **Zig as the kernel language**. The
+[language feasibility study](proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
+adds limited hosted C-ABI and freestanding-link evidence. It narrows the
+remaining M0 choice to a qualified compiler/build profile, not another general
+language comparison. It does not supply a boot, accepted toolchain pin or
+completed M0–M4 gate.
+
 The assessment asks whether remaining uncertainty can be reduced more
 effectively by building a bounded prototype than by further general reading.
 The confirmed scope is a bootable OS operated through a CLI, with compiled BEAM,
@@ -171,7 +178,7 @@ The first target/build record must specify:
 
 - emulator release, machine/CPU features, RAM, firmware hash, boot entry,
   memory map, timer path, and interrupt configuration;
-- implementation language, compiler/linker versions, freestanding target ABI,
+- selected Zig kernel language, compiler/linker versions, freestanding target ABI,
   linker layout, exception/unwind policy, and all enabled register state;
 - how native service images and compiler-produced BEAM modules reach memory;
 - the permitted libc, allocator, clock, thread, entropy, and image-loader

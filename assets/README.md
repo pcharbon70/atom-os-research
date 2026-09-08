@@ -25,7 +25,8 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Subdirectories
 
-- None yet.
+- [C kernel feasibility](c-kernel-feasibility/README.md) — original C ABI, compile/link and missing-helper research probes with transcripts; no boot or privileged execution.
+- [Zig kernel feasibility](zig-kernel-feasibility/README.md) — original hosted ABI and compile/link research fixtures, reproduction script and observed output; no boot or physical qualification claim.
 
 ### Files
 
