@@ -26,6 +26,22 @@ Keep plan review state, execution state, and test results separate.}
 and the parent planning convention. Map requirements to task IDs and gate cases.
 Put all contextual references here, before the work hierarchy.}
 
+## Task identity, ownership, and dependencies
+
+{Give every task a stable milestone-qualified ID, for example m0-p01-build-inputs.
+Use it consistently in labels, dependencies, and execution records. These are
+symbolic IDs, not automatic Markdown anchors; cross-phase references also link
+the owning document. Include integration and handoff tasks in the table.}
+
+| Task ID | Repository/location | Responsible role | Requires | Requirement / artifact / acceptance IDs | Completion evidence |
+| --- | --- | --- | --- | --- | --- |
+| {milestone}-p{NN}-{task-name} | {selected repository or unresolved} | {assigned role or unassigned} | {task IDs or entry gate and document link} | {governing IDs and links} | {expected evidence; not run until executed} |
+
+{Add one row per actual task. Identify the decision task and blocked work for
+unresolved ownership or repository choices. Use "none" only for genuinely
+independent work, not unknown dependencies. Resolve missing prerequisites and
+cycles before accepting the plan. Counts follow actual work, not this scaffold.}
+
 ## Planned work
 
 <!-- Replace N with the phase number. Add as many substantive sections, tasks,
@@ -43,7 +59,7 @@ Integration Tests section last, moving its number as sections are added. -->
     {Describe this section's responsibility, boundaries, and contribution to
     the phase before listing its tasks.}
 
-    - [ ] {N}.1.1 Task — {concrete deliverable}.
+    - [ ] {N}.1.1 Task [id: {milestone}-p{NN}-{task-name}] [repo: {location-or-unresolved}] [after: {dependency-IDs-or-none}] — {concrete deliverable}.
 
       {Describe the artifact or behavior to deliver, its constraints, and the
       completion check before listing sub-tasks.}
@@ -58,7 +74,7 @@ Integration Tests section last, moving its number as sections are added. -->
     {Describe how the assembled phase and relevant earlier behavior will be
     exercised together, including negative cases and the handoff decision.}
 
-    - [ ] {N}.2.1 Task — Verify the integrated outcome and regressions.
+    - [ ] {N}.2.1 Task [id: {milestone}-p{NN}-integration] [repo: {location-or-unresolved}] [after: {required-task-IDs}] — Verify the integrated outcome and regressions.
 
       {Describe the system/contracts under test, success criteria, failure
       model, predeclared limits, and required target environments.}
@@ -75,10 +91,12 @@ Integration Tests section last, moving its number as sections are added. -->
         and earlier behavior to recheck. Define expected rejection/containment
         and observables; justify cases that are genuinely not applicable.}
 
-    - [ ] {N}.2.2 Task — Record evidence and decide phase handoff.
+    - [ ] {N}.2.2 Task [id: {milestone}-p{NN}-handoff] [repo: {evidence-repository}] [after: {milestone}-p{NN}-integration] — Record evidence and decide phase handoff.
 
       {Describe the reproducible evidence and review needed to proceed, revise,
-      or stop. A required blocked or unrun test keeps the gate open.}
+      or stop. A required blocked or unrun test keeps the gate open. The optional
+      phase-execution-record template provides a journal scaffold; its use
+      neither changes acceptance nor authorizes publication.}
 
       - [ ] {N}.2.2.1 Subtask — Publish the execution record.
 

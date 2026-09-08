@@ -248,6 +248,18 @@ its own subdirectory named for its existing ID and milestone name, such as
   reach a target count; template examples illustrate structure, not quantities.
 - Use stable hierarchical IDs; do not renumber delivered work or silently
   change acceptance after a failed test.
+- Give every task a stable milestone/phase-qualified symbolic ID in addition
+  to its hierarchy number, including integration and handoff tasks. Use
+  `[id: ...]`, `[repo: ...]`, and `[after: ...]` in task labels and maintain the
+  phase ownership/traceability table. Link requirements, artifacts, acceptance
+  cases, responsible roles, and evidence expectations. These IDs are not
+  automatic Markdown anchors; cross-phase references include the document link.
+  Review dependency targets and cycles. Unselected repositories and unassigned
+  roles stay explicit, with decision blockers; never invent acceptance.
+- Maintain the milestone decision register and gate/artifact-to-phase mapping.
+  Map every required obligation to actual tasks, or mark decomposition pending
+  when phases are not authored. Record exclusions explicitly. This mapping
+  neither closes gates nor changes needs-based counts.
 - Keep plan review, implementation progress, and test results distinct in body
   text. Checkboxes record verified delivery, not the act of writing a plan.
   A parent is complete only when its children and applicable gates pass. Required
@@ -266,6 +278,17 @@ its own subdirectory named for its existing ID and milestone name, such as
 The archive validator checks planning metadata, placement, links, and directory
 inventories. Description quality, hierarchy completeness, and integration-test
 adequacy require review; no automated phase-shape enforcement is claimed.
+
+The optional [phase execution record](templates/phase-execution-record.md)
+specializes the journal template for actual implementation evidence. Use
+`kind: journal` in `50-journal/`, update its index, and link records from the
+phase and milestone. Record task/case IDs, tested revision and dirty state,
+environment, commands, actual results, raw artifacts, limitations, review, and
+handoff. Distinguish tested, plan, and later merge revisions; missing required
+merged-baseline evidence keeps closure pending. Preserve failed attempts and
+gate-reopening conditions. Deep-dive sessions retain their source-manifest
+rules. The template is optional, required evidence is not, and it does not
+authorize a commit-per-section or PR-per-phase workflow.
 
 ## Filenames and paths
 

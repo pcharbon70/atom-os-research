@@ -48,10 +48,11 @@ the delivered interface.
 
 ## Planning and delivery state
 
-This is a draft milestone definition. It records required behavior and evidence,
-not an implemented OS or an executed test suite. All artifact delivery and
-acceptance states remain open/not run. Detailed phase/task plans are not yet
-authored; no technical choice is approved merely by being described below.
+This milestone now has a draft phased implementation plan. The detailed outcome,
+artifact IDs and acceptance criteria below remain authoritative. All tasks are
+unchecked, implementation has not started, and every acceptance case is not run.
+Open decisions must be resolved before dependent execution; writing or reviewing
+a plan neither closes a delivery gate nor authorizes implementation or publication.
 
 ## Authoritative inputs
 
@@ -196,11 +197,59 @@ overall PoC completion.
 
 ## Ordered phases
 
-No phase documents are authored here yet. This definition supplies the
-deliverables and acceptance boundaries for that decomposition. Actual phases
-must use the required template, include descriptions at all four work levels,
-and end with integration tests; their counts follow the work, not this table's
-artifact or test count.
+4 phases separate independently verifiable outcomes; their section/task/sub-task
+counts follow the work rather than a quota. All are draft/not started, with no
+execution evidence. Review dependencies and resolve decisions before execution.
+
+| Phase | Integrated outcome | Entry dependency | State / evidence |
+| --- | --- | --- | --- |
+| [Phase 1 — Kernel entry and memory foundation](phase-01-kernel-entry-and-memory-foundation.md) | Bring up the real ring-0 kernel and validated boot-memory state on the M0 fixture, with bounded diagnostics and no host OS inside the guest. | m0-p03-handoff | Draft; not started; tests not run |
+| [Phase 2 — Protected images and user transitions](phase-02-protected-images-and-user-transitions.md) | Install validated native images and demonstrate safe ring-3 execution, traps, and return with kernel-owned context and protected memory. | m1-p01-handoff | Draft; not started; tests not run |
+| [Phase 3 — Serial CLI and virtual acceptance](phase-03-serial-cli-and-virtual-acceptance.md) | Deliver the native user-mode atom prompt with real commands, bounded serial behavior, advancing time, and the complete virtual M1 evidence bundle. | m1-p02-handoff | Draft; not started; tests not run |
+| [Phase 4 — Physical T7500 qualification](phase-04-physical-t7500-qualification.md) | Repeat the single-CPU CLI qualification on the observed T7500 without confusing emulator evidence with physical support. | m1-p03-handoff | Draft; not started; tests not run |
+
+Work within each phase follows its task dependencies. The serial order provides
+a conservative baseline, not authorization for parallel agents. Independent
+experiments may be proposed separately; their results cannot bypass a gate.
+
+Phase 3 closes virtual M1 when all required virtual cases pass. Phase 4 is the
+separate physical qualification branch and may run alongside later virtual
+milestones after its own safety prerequisites. An open physical gate is not a
+physical pass and is not an SMP prerequisite for M2.
+
+## Decision register
+
+The entry choices above remain open. Each row names its resolution task,
+evaluation criteria and blocked work; responsible individuals are unassigned.
+M0-D01 owns the initial implementation repository and toolchain selection.
+
+| Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
+| --- | --- | --- | --- | --- | --- |
+| M1-D01 | Reconcile M0 entry/feature/register policies with the implementation; assign exception-stack and reserved-memory ownership before admitting any user image. | [m1-p01-decisions](phase-01-kernel-entry-and-memory-foundation.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 1 work and its dependent gates | Open; no decision evidence |
+| M1-D02 | Freeze image permissions, state preservation, syscall buffer rules, and return validation against M0; restricted FP/SIMD remains explicit rather than full ABI support. | [m1-p02-decisions](phase-02-protected-images-and-user-transitions.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 2 work and its dependent gates | Open; no decision evidence |
+| M1-D03 | Select framing, line limit, overflow resynchronization, timer source/units, interrupts/waits, and finite output behavior before acceptance; the proposed 256-byte limit is not automatically selected. | [m1-p03-decisions](phase-03-serial-cli-and-virtual-acceptance.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 3 work and its dependent gates | Open; no decision evidence |
+| M1-D04 | Select safe boot media, actual firmware path, serial/debug transport, test boundaries, and explicit permission for any media or persistent-device writes. | [m1-p04-decisions](phase-04-physical-t7500-qualification.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 4 work and its dependent gates | Open; no decision evidence |
+
+## Gate-to-phase and artifact mapping
+
+Rows map contributions, not automatic acceptance. The phase task tables give
+stable implementation IDs; the integration task exercises the mapped cases
+and the handoff task records evidence. Shared cases retain their full definition
+above and close only after all required environments and dependent portions pass.
+
+| Phase gate | Artifact contributions | Acceptance coverage | Owning tasks | Entry dependency | Evidence / state |
+| --- | --- | --- | --- | --- | --- |
+| [M1-P01](phase-01-kernel-entry-and-memory-foundation.md) | M1-A01, M1-A06 | M1-T06, M1-T07, M1-T08 | m1-p01-decisions, m1-p01-memory; m1-p01-integration; m1-p01-handoff | m0-p03-handoff | Not run; evidence absent |
+| [M1-P02](phase-02-protected-images-and-user-transitions.md) | M1-A02, M1-A03, M1-A06 | M1-T01, M1-T05, M1-T06, M1-T07 | m1-p02-decisions, m1-p02-images, m1-p02-transitions; m1-p02-integration; m1-p02-handoff | m1-p01-handoff | Not run; evidence absent |
+| [M1-P03](phase-03-serial-cli-and-virtual-acceptance.md) | M1-A03, M1-A04, M1-A05, M1-A06 | M1-T01, M1-T02, M1-T03, M1-T04, M1-T05, M1-T06, M1-T07, M1-T08 | m1-p03-decisions, m1-p03-io, m1-p03-cli; m1-p03-integration; m1-p03-handoff | m1-p02-handoff | Not run; evidence absent |
+| [M1-P04](phase-04-physical-t7500-qualification.md) | M1-A01, M1-A04, M1-A06 | M1-T01, M1-T02, M1-T03, M1-T04, M1-T05, M1-T06, M1-T07, M1-T08 | m1-p04-decisions, m1-p04-physical; m1-p04-integration; m1-p04-handoff | m1-p03-handoff | Not run; evidence absent |
+
+The final virtual phase (Phase 3) reruns all M1 acceptance cases for milestone closure.
+Earlier contract, fixture, model or hosted results remain partial where guest
+integration is required. Scope exclusions and physical obligations in this
+definition are unchanged. An acceptance reviewer must retain failure history,
+record the accepted tested revision, and reopen gates on incompatible input
+changes, missing required evidence or a violated invariant.
 
 ## Index
 
@@ -210,7 +259,10 @@ artifact or test count.
 
 ### Documents
 
-- None yet; this README currently contains the milestone definition.
+- [Phase 1 — Kernel entry and memory foundation](phase-01-kernel-entry-and-memory-foundation.md) — Bring up the real ring-0 kernel and validated boot-memory state on the M0 fixture, with bounded diagnostics and no host OS inside the guest.
+- [Phase 2 — Protected images and user transitions](phase-02-protected-images-and-user-transitions.md) — Install validated native images and demonstrate safe ring-3 execution, traps, and return with kernel-owned context and protected memory.
+- [Phase 3 — Serial CLI and virtual acceptance](phase-03-serial-cli-and-virtual-acceptance.md) — Deliver the native user-mode atom prompt with real commands, bounded serial behavior, advancing time, and the complete virtual M1 evidence bundle.
+- [Phase 4 — Physical T7500 qualification](phase-04-physical-t7500-qualification.md) — Repeat the single-CPU CLI qualification on the observed T7500 without confusing emulator evidence with physical support.
 
 ## Maintaining this index
 

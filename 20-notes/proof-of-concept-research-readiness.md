@@ -142,8 +142,10 @@ The [milestone coverage mapping](../60-planning/01-proof-of-concept/README.md#co
 now assigns the in-scope missing artifacts to detailed M0–M4 definitions, each
 with required outputs, acceptance cases, dependencies, and completion evidence.
 It also preserves the storage/networking and broader deployment deferrals.
-These definitions describe what must be delivered; they are not executable
-artifacts, authored phase/task plans, or evidence that the gaps are closed.
+The definitions now link 18 draft phase/task plans using the required described
+hierarchy and integration gates. They specify what must be delivered; neither
+the definitions nor those plans are executable artifacts or evidence that
+the gaps are closed. Unresolved decisions block dependent implementation.
 
 ## Work package 1: target, bootstrap, CLI, and reproducible build
 

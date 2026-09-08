@@ -47,11 +47,11 @@ tested paths. The shared runtime is not claimed to sandbox hostile BEAM code.
 
 ## Planning and delivery state
 
-This is a draft milestone definition, not a decomposed phased implementation
-plan. No phase documents, implementation artifacts, compiled fixtures, or test
-results are supplied by this document. Implementation is not started by this
-writing task; all acceptance cases below remain not run. Reviewing this
-definition does not close M3 or authorize implementation or publication.
+This milestone now has a draft phased implementation plan. The detailed outcome,
+artifact IDs and acceptance criteria below remain authoritative. All tasks are
+unchecked, implementation has not started, and every acceptance case is not run.
+Open decisions must be resolved before dependent execution; writing or reviewing
+a plan neither closes a delivery gate nor authorizes implementation or publication.
 
 ## Authoritative inputs
 
@@ -91,8 +91,8 @@ must resolve the following decisions; individuals are not assigned here:
 
 ## Required artifacts
 
-The identifiers below name delivery obligations, not completed tasks. Future
-phases must map each artifact to described tasks and their integration gates.
+The identifiers below name delivery obligations, not completed tasks. The
+phases below map each artifact to described tasks and their integration gates.
 
 ### M3-A01 — Versioned compatibility profile and compiled corpus
 
@@ -177,7 +177,7 @@ services. QEMU evidence does not qualify the physical T7500.
 
 ## Integrated acceptance cases
 
-These milestone-level cases will become phase-ending gates after decomposition.
+These milestone-level cases are mapped to the phase-ending gates below.
 Each remains open until its artifacts and reproducible guest evidence exist.
 
 | Case | Required demonstration | Artifacts |
@@ -192,11 +192,54 @@ Each remains open until its artifacts and reproducible guest evidence exist.
 
 ## Ordered phases
 
-Not yet decomposed. No phase count is reserved. The accepted workload closure,
-M2 interfaces, and unresolved decisions must determine the necessary phases,
-sections, tasks, and sub-tasks. Future phase documents must use the
-[mandatory phase template](../../../templates/implementation-phase.md), describe
-every work level, and end with integration tests covering these obligations.
+4 phases separate independently verifiable outcomes; their section/task/sub-task
+counts follow the work rather than a quota. All are draft/not started, with no
+execution evidence. Review dependencies and resolve decisions before execution.
+
+| Phase | Integrated outcome | Entry dependency | State / evidence |
+| --- | --- | --- | --- |
+| [Phase 1 — Compiled profile and atomic loader](phase-01-compiled-profile-and-atomic-loader.md) | Freeze an executable BEAM compatibility boundary and admit its compiler-produced modules atomically under finite loader accounts. | m2-p04-handoff | Draft; not started; tests not run |
+| [Phase 2 — Actor interpreter and tracing GC](phase-02-actor-interpreter-and-tracing-gc.md) | Execute admitted BEAM semantics and automatically trace/reclaim private-heap garbage in long-lived actors outside the kernel. | m3-p01-handoff | Draft; not started; tests not run |
+| [Phase 3 — Guest adapter and runtime accounting](phase-03-guest-adapter-and-runtime-accounting.md) | Replace host dependencies with the bounded guest substrate and finish runtime accounting without blocking the sole actor scheduler on native work. | m3-p02-handoff | Draft; not started; tests not run |
+| [Phase 4 — CLI BEAM and guest conformance](phase-04-cli-beam-and-guest-conformance.md) | Launch the compiled workload from the real CLI and qualify the complete BEAM/GC profile with actor and whole-runtime recovery evidence. | m3-p03-handoff | Draft; not started; tests not run |
+
+Work within each phase follows its task dependencies. The serial order provides
+a conservative baseline, not authorization for parallel agents. Independent
+experiments may be proposed separately; their results cannot bypass a gate.
+
+## Decision register
+
+The entry choices above remain open. Each row names its resolution task,
+evaluation criteria and blocked work; responsible individuals are unassigned.
+M0-D01 owns the initial implementation repository and toolchain selection.
+
+| Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
+| --- | --- | --- | --- | --- | --- |
+| M3-D01 | Select workload and claimed OTP behavior, exact compiler/oracle/flags/library closure, supported term/opcode/BIF/chunk subset, loader staging and bounded retained-interning policy. | [m3-p01-decisions](phase-01-compiled-profile-and-atomic-loader.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 1 work and its dependent gates | Open; no decision evidence |
+| M3-D02 | Choose term/root representation, collection/growth/workspace failure policy, reductions and safe points by correctness, bounded memory, latency risks and implementation complexity. | [m3-p02-decisions](phase-02-actor-interpreter-and-tracing-gc.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 2 work and its dependent gates | Open; no decision evidence |
+| M3-D03 | Bind M2 ABI/lifecycle versions, asynchronous continuation/reply rules, capacities, mailbox overload semantics, complete global accounting and responsiveness targets. | [m3-p03-decisions](phase-03-guest-adapter-and-runtime-accounting.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 3 work and its dependent gates | Open; no decision evidence |
+| M3-D04 | Freeze the static workload launch catalog, inspection exposure, reproducible comparison suite and acceptance envelope against the accepted profile and M2 authority. | [m3-p04-decisions](phase-04-cli-beam-and-guest-conformance.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 4 work and its dependent gates | Open; no decision evidence |
+
+## Gate-to-phase and artifact mapping
+
+Rows map contributions, not automatic acceptance. The phase task tables give
+stable implementation IDs; the integration task exercises the mapped cases
+and the handoff task records evidence. Shared cases retain their full definition
+above and close only after all required environments and dependent portions pass.
+
+| Phase gate | Artifact contributions | Acceptance coverage | Owning tasks | Entry dependency | Evidence / state |
+| --- | --- | --- | --- | --- | --- |
+| [M3-P01](phase-01-compiled-profile-and-atomic-loader.md) | M3-A01, M3-A02, M3-A06 | M3-T01, M3-T02 | m3-p01-decisions, m3-p01-loader; m3-p01-integration; m3-p01-handoff | m2-p04-handoff | Not run; evidence absent |
+| [M3-P02](phase-02-actor-interpreter-and-tracing-gc.md) | M3-A03, M3-A04, M3-A06 | M3-T01, M3-T03, M3-T05 | m3-p02-decisions, m3-p02-interpreter, m3-p02-gc; m3-p02-integration; m3-p02-handoff | m3-p01-handoff | Not run; evidence absent |
+| [M3-P03](phase-03-guest-adapter-and-runtime-accounting.md) | M3-A05, M3-A06 | M3-T02, M3-T03, M3-T04, M3-T05, M3-T07 | m3-p03-decisions, m3-p03-adapter, m3-p03-ledger; m3-p03-integration; m3-p03-handoff | m3-p02-handoff | Not run; evidence absent |
+| [M3-P04](phase-04-cli-beam-and-guest-conformance.md) | M3-A01, M3-A02, M3-A03, M3-A04, M3-A05, M3-A06, M3-A07 | M3-T01, M3-T02, M3-T03, M3-T04, M3-T05, M3-T06, M3-T07 | m3-p04-decisions, m3-p04-launch, m3-p04-conformance; m3-p04-integration; m3-p04-handoff | m3-p03-handoff | Not run; evidence absent |
+
+The final phase reruns all M3 acceptance cases for milestone closure.
+Earlier contract, fixture, model or hosted results remain partial where guest
+integration is required. Scope exclusions and physical obligations in this
+definition are unchanged. An acceptance reviewer must retain failure history,
+record the accepted tested revision, and reopen gates on incompatible input
+changes, missing required evidence or a violated invariant.
 
 ## Milestone exit
 
@@ -223,8 +266,10 @@ must not be reported as that campaign's completion.
 
 ### Documents
 
-- None yet; this README is the substantive milestone definition. Phase documents
-  have not been authored.
+- [Phase 1 — Compiled profile and atomic loader](phase-01-compiled-profile-and-atomic-loader.md) — Freeze an executable BEAM compatibility boundary and admit its compiler-produced modules atomically under finite loader accounts.
+- [Phase 2 — Actor interpreter and tracing GC](phase-02-actor-interpreter-and-tracing-gc.md) — Execute admitted BEAM semantics and automatically trace/reclaim private-heap garbage in long-lived actors outside the kernel.
+- [Phase 3 — Guest adapter and runtime accounting](phase-03-guest-adapter-and-runtime-accounting.md) — Replace host dependencies with the bounded guest substrate and finish runtime accounting without blocking the sole actor scheduler on native work.
+- [Phase 4 — CLI BEAM and guest conformance](phase-04-cli-beam-and-guest-conformance.md) — Launch the compiled workload from the real CLI and qualify the complete BEAM/GC profile with actor and whole-runtime recovery evidence.
 
 ## Maintaining this index
 
