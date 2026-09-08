@@ -28,7 +28,8 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
   required artifacts and acceptance cases. The
   [planning convention](../60-planning/README.md) requires descriptions
   at all four work levels and integration tests at the end of every phase;
-  detailed phase plans and implementation evidence do not yet exist.
+  18 draft phase plans now provide that hierarchy, while implementation
+  evidence and accepted decisions remain outstanding.
 - [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
   controls the first architecture, minimum virtual test and next hardware research.
 - [T7500 target-correction journal](../50-journal/2026-09-06-t7500-target-correction.md)

@@ -38,8 +38,11 @@ implicit requirements for the first CLI.
 
 Five detailed milestone definitions were authored on 2026-09-08. Each names
 its required artifacts, observable acceptance cases, open decisions, trust
-boundary, exclusions, and handoff evidence. They are draft definitions, not
-approved phase/task plans; no phase documents have been authored yet.
+boundary, exclusions, and handoff evidence. Each now includes a draft phased
+implementation plan: M0 has 3 phases, M1 has 4 (including separate physical
+qualification), M2 has 4, M3 has 4, and M4 has 3. The 18 phases map artifacts and
+acceptance cases to described tasks, dependencies, and final integration gates.
+These are conditional plans, not accepted technical decisions or executed work.
 
 All M0–M4 delivery gates remain open and all acceptance cases are not run.
 Writing or reviewing these definitions closes none of them. They neither
@@ -64,7 +67,9 @@ select the implementation language or bootloader nor initiate implementation.
 
 Read these definitions in order. They explain what each milestone must
 accomplish without pretending that later implementation choices are settled.
-Phase counts and task decomposition remain to be decided from the work needed.
+Phase/task decomposition is linked from each milestone README. Counts reflect
+separate decision, implementation, integration, and qualification outcomes;
+they are not a quota for future revisions or other milestones.
 
 | Milestone | Detailed definition | Required outcome | Planning dependency |
 | --- | --- | --- | --- |
@@ -106,23 +111,29 @@ are not silently added to M0–M4 merely because their research exists. Applicab
 PoC constraints, such as static authority and safely leaving extra CPUs unused,
 still apply and are called out above and in the milestone definitions.
 
-## Next decomposition work
+## Next decision and execution work
 
-Use the M0 definition to author its first phase/task plan and resolve the
-decision dependencies. Then decompose M1 against those contracts. The M2–M4
-definitions now establish detailed outcomes and acceptance obligations, but
-their phase/task breakdown should wait until predecessor interfaces support
-useful detail. It is possible to draft M1 conditionally while M0 is open, but
-not to present conditional choices as accepted implementation facts.
+Begin with [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
+and resolve its repository, language/toolchain, fixture, and inventory decisions.
+Later plans are deliberately conditional on those inputs and predecessor
+evidence. Before executing each phase, review its decision register and bind
+accepted interface versions; revise affected dependencies and tests together
+if a decision changes the planned mechanism.
 
-Every future artifact and acceptance case needs a traceable owner in the phase
-hierarchy. Use the mandatory milestone/phase templates, descriptions at every
+M1 Phase 3 is the first virtual CLI delivery. M1 Phase 4 is its separate physical
+T7500 qualification branch; M2 virtual acceptance depends on M1 Phase 3, not
+physical qualification or SMP. All physical obligations stay visible and open
+until supported by their own evidence.
+
+Every artifact and acceptance case has a phase mapping; its task and evidence
+ownership must stay synchronized as decisions resolve. Use the mandatory
+milestone/phase templates, descriptions at every
 phase/section/task/sub-task level, and a final integration-tests section in
 each phase. Determine counts from dependencies, risk, and verifiable outcomes;
 do not turn the artifact tables into an arbitrary one-artifact-per-phase quota.
 
-The next planning pass should turn these open choices into bounded decision
-tasks rather than require another broad research cycle:
+The authored decision tasks must settle these open choices before dependent
+implementation, rather than require another broad research cycle:
 
 - Implementation language, freestanding toolchain, linker, reproducible build
   environment, and implementation-repository location.
@@ -136,8 +147,8 @@ tasks rather than require another broad research cycle:
   physical single-CPU check. Hardware qualification remains distinct from the
   minimal virtual fixture; q35 is not a motherboard replica.
 
-Select and close the exact BEAM workload and compatibility profile before
-detailed M3 commitments; that work does not block drafting M0 or M1. Retain
+Select and close the exact BEAM workload and compatibility profile in M3 Phase 1
+before dependent interpreter commitments; that work does not block M0 or M1. Retain
 the selected Intel target and start virtual tests small: one CPU, 128 MiB,
 serial I/O, with the full fixture controlled by the linked target profile.
 Do not enlarge QEMU topology simply because the lab machine has two packages.

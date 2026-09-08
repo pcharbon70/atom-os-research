@@ -41,11 +41,11 @@ dependencies of this single-CPU proof, nor receive claims from its results.
 
 ## Planning and delivery state
 
-This is a draft milestone definition, not a decomposed phase plan. It defines
-deliverables and acceptance obligations; no implementation or campaign execution
-is recorded here. Plan review remains pending, execution is not started, and
-all acceptance cases below are not run. Artifact and case IDs support future
-traceability, not completed-task claims or authorization to implement.
+This milestone now has a draft phased implementation plan. The detailed outcome,
+artifact IDs and acceptance criteria below remain authoritative. All tasks are
+unchecked, implementation has not started, and every acceptance case is not run.
+Open decisions must be resolved before dependent execution; writing or reviewing
+a plan neither closes a delivery gate nor authorizes implementation or publication.
 
 ## Authoritative inputs
 
@@ -145,12 +145,51 @@ substitute model or fake-backend success for the guest cases.
 
 ## Ordered phases
 
-Not decomposed yet. No phase documents or task checkboxes have been authored.
-Once predecessor interfaces and the campaign envelope support decomposition,
-use the [phase template](../../../templates/implementation-phase.md), with
-needs-based phase/section/task/sub-task counts, descriptions at every level,
-and integration tests as each phase's final section. Map every artifact and
-acceptance case above to those future task IDs.
+3 phases separate independently verifiable outcomes; their section/task/sub-task
+counts follow the work rather than a quota. All are draft/not started, with no
+execution evidence. Review dependencies and resolve decisions before execution.
+
+| Phase | Integrated outcome | Entry dependency | State / evidence |
+| --- | --- | --- | --- |
+| [Phase 1 — Campaign baseline and fault workload](phase-01-campaign-baseline-and-fault-workload.md) | Assemble the CLI, recovery controller, BEAM runtime and native test domain into one reproducible campaign with frozen limits and fault controls. | m3-p04-handoff | Draft; not started; tests not run |
+| [Phase 2 — Resource pressure and recovery campaign](phase-02-resource-pressure-and-recovery-campaign.md) | Demonstrate bounded retention, preserved recovery reserves, charged CPU behavior and quiescence-safe repeated replacement under combined pressure. | m4-p01-handoff | Draft; not started; tests not run |
+| [Phase 3 — Reproducible qualification and PoC handoff](phase-03-reproducible-qualification-and-poc-handoff.md) | Independently reproduce the integrated results and issue an evidence-backed PoC acceptance or revise/blocked decision with explicit limitations. | m4-p02-handoff | Draft; not started; tests not run |
+
+Work within each phase follows its task dependencies. The serial order provides
+a conservative baseline, not authorization for parallel agents. Independent
+experiments may be proposed separately; their results cannot bypass a gate.
+
+## Decision register
+
+The entry choices above remain open. Each row names its resolution task,
+evaluation criteria and blocked work; responsible individuals are unassigned.
+M0-D01 owns the initial implementation repository and toolchain selection.
+
+| Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
+| --- | --- | --- | --- | --- | --- |
+| M4-D01 | Freeze exact inherited versions, workload seeds/counts/durations, capacities and measurement clocks/targets. Adopt or revise proposed actor/allocation/restart counts before testing, not after failure. | [m4-p01-decisions](phase-01-campaign-baseline-and-fault-workload.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 1 work and its dependent gates | Open; no decision evidence |
+| M4-D02 | Confirm every ledger category has a sweep/failure case or explicit profile exclusion, and freeze cleanup/quarantine/wrap escalation plus measurement acceptance before running the campaign. | [m4-p02-decisions](phase-02-resource-pressure-and-recovery-campaign.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 2 work and its dependent gates | Open; no decision evidence |
+| M4-D03 | Select the final reviewed evidence baseline and qualification environments; keep physical support and all deferred capability claims separate from virtual PoC acceptance. | [m4-p03-decisions](phase-03-reproducible-qualification-and-poc-handoff.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 3 work and its dependent gates | Open; no decision evidence |
+
+## Gate-to-phase and artifact mapping
+
+Rows map contributions, not automatic acceptance. The phase task tables give
+stable implementation IDs; the integration task exercises the mapped cases
+and the handoff task records evidence. Shared cases retain their full definition
+above and close only after all required environments and dependent portions pass.
+
+| Phase gate | Artifact contributions | Acceptance coverage | Owning tasks | Entry dependency | Evidence / state |
+| --- | --- | --- | --- | --- | --- |
+| [M4-P01](phase-01-campaign-baseline-and-fault-workload.md) | M4-A01, M4-A02, M4-A05 | M4-T01, M4-T02 | m4-p01-decisions, m4-p01-workload; m4-p01-integration; m4-p01-handoff | m3-p04-handoff | Not run; evidence absent |
+| [M4-P02](phase-02-resource-pressure-and-recovery-campaign.md) | M4-A03, M4-A04, M4-A05 | M4-T02, M4-T03, M4-T04, M4-T05, M4-T06 | m4-p02-decisions, m4-p02-pressure, m4-p02-restarts; m4-p02-integration; m4-p02-handoff | m4-p01-handoff | Not run; evidence absent |
+| [M4-P03](phase-03-reproducible-qualification-and-poc-handoff.md) | M4-A01, M4-A02, M4-A03, M4-A04, M4-A05, M4-A06 | M4-T01, M4-T02, M4-T03, M4-T04, M4-T05, M4-T06, M4-T07 | m4-p03-decisions, m4-p03-reproduce, m4-p03-report; m4-p03-integration; m4-p03-handoff | m4-p02-handoff | Not run; evidence absent |
+
+The final phase reruns all M4 acceptance cases for milestone closure.
+Earlier contract, fixture, model or hosted results remain partial where guest
+integration is required. Scope exclusions and physical obligations in this
+definition are unchanged. An acceptance reviewer must retain failure history,
+record the accepted tested revision, and reopen gates on incompatible input
+changes, missing required evidence or a violated invariant.
 
 ## Milestone exit
 
@@ -187,7 +226,9 @@ not a delivered M4 feature or automatic authorization to begin it.
 
 ### Documents
 
-- None yet; this README is the substantive milestone definition.
+- [Phase 1 — Campaign baseline and fault workload](phase-01-campaign-baseline-and-fault-workload.md) — Assemble the CLI, recovery controller, BEAM runtime and native test domain into one reproducible campaign with frozen limits and fault controls.
+- [Phase 2 — Resource pressure and recovery campaign](phase-02-resource-pressure-and-recovery-campaign.md) — Demonstrate bounded retention, preserved recovery reserves, charged CPU behavior and quiescence-safe repeated replacement under combined pressure.
+- [Phase 3 — Reproducible qualification and PoC handoff](phase-03-reproducible-qualification-and-poc-handoff.md) — Independently reproduce the integrated results and issue an evidence-backed PoC acceptance or revise/blocked decision with explicit limitations.
 
 ## Maintaining this index
 

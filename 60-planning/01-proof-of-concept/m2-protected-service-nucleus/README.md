@@ -44,11 +44,11 @@ administration, and recovery-root takeover are not hidden M2 dependencies.
 
 ## Planning and delivery state
 
-This is a draft milestone definition, not an authored phased implementation
-plan. Required artifacts and acceptance cases below are obligations, not
-completed work. Implementation has not started here; no M2 model, guest test,
-restart transcript, or performance result is claimed. Writing this definition
-does not close an evidence gate or authorize implementation or device writes.
+This milestone now has a draft phased implementation plan. The detailed outcome,
+artifact IDs and acceptance criteria below remain authoritative. All tasks are
+unchecked, implementation has not started, and every acceptance case is not run.
+Open decisions must be resolved before dependent execution; writing or reviewing
+a plan neither closes a delivery gate nor authorizes implementation or publication.
 
 ## Authoritative inputs
 
@@ -176,9 +176,10 @@ remote-authentication, physical-timing, or all-supervisor-level survival claim.
 
 ## Integration acceptance cases
 
-Cases are proposed acceptance obligations, all not run. Future phases must map
-them to described tasks and final integration gates with exact harness commands
-and predeclared limits; the table is not a substitute for those phase plans.
+Cases are proposed acceptance obligations, all not run. The phases below map
+them to described tasks and final integration gates. Their runner tasks must
+register exact harness commands and predeclared limits before execution;
+this table is not a substitute for those phase plans or actual evidence.
 
 | Case | Required integrated observation | Artifacts |
 | --- | --- | --- |
@@ -193,13 +194,54 @@ and predeclared limits; the table is not a substitute for those phase plans.
 
 ## Ordered phases
 
-No phase documents have been authored. The next decomposition must order
-contract/model resolution before dependent enforcement and recovery integration.
-Phase, section, task, and sub-task counts must follow actual dependencies and
-verifiable outcomes, not the number of artifacts or cases above. Use both the
-[milestone template](../../../templates/milestone-plan-readme.md) and
-[phase template](../../../templates/implementation-phase.md); each phase ends
-with its own described integration-tests section.
+4 phases separate independently verifiable outcomes; their section/task/sub-task
+counts follow the work rather than a quota. All are draft/not started, with no
+execution evidence. Review dependencies and resolve decisions before execution.
+
+| Phase | Integrated outcome | Entry dependency | State / evidence |
+| --- | --- | --- | --- |
+| [Phase 1 — Object contract and lifecycle models](phase-01-object-contract-and-lifecycle-models.md) | Make the minimal object, transport, and resource lifecycle executable before selecting kernel data structures that depend on it. | m1-p03-handoff | Draft; not started; tests not run |
+| [Phase 2 — Authority and resource enforcement](phase-02-authority-and-resource-enforcement.md) | Enforce domain authority, resource ownership, and CPU budgets in the real kernel while protecting independent recovery capacity. | m2-p01-handoff | Draft; not started; tests not run |
+| [Phase 3 — Bounded transport and safe reclamation](phase-03-bounded-transport-and-safe-reclamation.md) | Join funded request/completion handling to close, stop, quiescence, and safe resource reuse in the guest. | m2-p02-handoff | Draft; not started; tests not run |
+| [Phase 4 — Recovery nucleus and CLI control](phase-04-recovery-nucleus-and-cli-control.md) | Run the independently funded ring-3 supervisor/registry and expose truthful CLI inspection and authorized replacement of native children. | m2-p03-handoff | Draft; not started; tests not run |
+
+Work within each phase follows its task dependencies. The serial order provides
+a conservative baseline, not authorization for parallel agents. Independent
+experiments may be proposed separately; their results cannot bypass a gate.
+
+## Decision register
+
+The entry choices above remain open. Each row names its resolution task,
+evaluation criteria and blocked work; responsible individuals are unassigned.
+M0-D01 owns the initial implementation repository and toolchain selection.
+
+| Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
+| --- | --- | --- | --- | --- | --- |
+| M2-D01 | Freeze minimal object/operation encodings, rights, payers, capacities, generation/admission/terminal rules, and finite-model bounds using the native demonstration and future nonblocking adapter as scope constraints. | [m2-p01-decisions](phase-01-object-contract-and-lifecycle-models.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 1 work and its dependent gates | Open; no decision evidence |
+| M2-D02 | Select replenishment, priorities, periods/budgets, kernel and interrupt charging, boundary-burst/overrun rules, account sizes and recovery reserves before scheduler acceptance. | [m2-p02-decisions](phase-02-authority-and-resource-enforcement.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 2 work and its dependent gates | Open; no decision evidence |
+| M2-D03 | Select cleanup batch bounds, local translation/reference quiescence checks, generation-wrap and quarantine release/exhaustion rules, and terminal request semantics before allowing replacement. | [m2-p03-decisions](phase-03-bounded-transport-and-safe-reclamation.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 3 work and its dependent gates | Open; no decision evidence |
+| M2-D04 | Freeze static launch/authority graph, readiness publication, restart intensity/backoff, startup/shutdown deadlines, fault delivery reserves and permitted operator targets before deliberate child faults. | [m2-p04-decisions](phase-04-recovery-nucleus-and-cli-control.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 4 work and its dependent gates | Open; no decision evidence |
+
+## Gate-to-phase and artifact mapping
+
+Rows map contributions, not automatic acceptance. The phase task tables give
+stable implementation IDs; the integration task exercises the mapped cases
+and the handoff task records evidence. Shared cases retain their full definition
+above and close only after all required environments and dependent portions pass.
+
+| Phase gate | Artifact contributions | Acceptance coverage | Owning tasks | Entry dependency | Evidence / state |
+| --- | --- | --- | --- | --- | --- |
+| [M2-P01](phase-01-object-contract-and-lifecycle-models.md) | M2-A01, M2-A02 | M2-T01, M2-T03, M2-T06 | m2-p01-decisions, m2-p01-models; m2-p01-integration; m2-p01-handoff | m1-p03-handoff | Not run; evidence absent |
+| [M2-P02](phase-02-authority-and-resource-enforcement.md) | M2-A01, M2-A03 | M2-T01, M2-T02, M2-T04, M2-T05 | m2-p02-decisions, m2-p02-authority, m2-p02-budgets; m2-p02-integration; m2-p02-handoff | m2-p01-handoff | Not run; evidence absent |
+| [M2-P03](phase-03-bounded-transport-and-safe-reclamation.md) | M2-A02, M2-A04, M2-A05 | M2-T01, M2-T03, M2-T04, M2-T06 | m2-p03-decisions, m2-p03-transport, m2-p03-reclaim; m2-p03-integration; m2-p03-handoff | m2-p02-handoff | Not run; evidence absent |
+| [M2-P04](phase-04-recovery-nucleus-and-cli-control.md) | M2-A03, M2-A05, M2-A06, M2-A07 | M2-T01, M2-T02, M2-T03, M2-T04, M2-T05, M2-T06, M2-T07, M2-T08 | m2-p04-decisions, m2-p04-recovery, m2-p04-commands; m2-p04-integration; m2-p04-handoff | m2-p03-handoff | Not run; evidence absent |
+
+The final phase reruns all M2 acceptance cases for milestone closure.
+Earlier contract, fixture, model or hosted results remain partial where guest
+integration is required. Scope exclusions and physical obligations in this
+definition are unchanged. An acceptance reviewer must retain failure history,
+record the accepted tested revision, and reopen gates on incompatible input
+changes, missing required evidence or a violated invariant.
 
 ## Milestone exit
 
@@ -232,8 +274,10 @@ postpone basic stale-handle, reclamation, or reserve-isolation correctness.
 
 ### Documents
 
-- None yet; this README is the substantive milestone definition, and phase
-  documents have not been decomposed.
+- [Phase 1 — Object contract and lifecycle models](phase-01-object-contract-and-lifecycle-models.md) — Make the minimal object, transport, and resource lifecycle executable before selecting kernel data structures that depend on it.
+- [Phase 2 — Authority and resource enforcement](phase-02-authority-and-resource-enforcement.md) — Enforce domain authority, resource ownership, and CPU budgets in the real kernel while protecting independent recovery capacity.
+- [Phase 3 — Bounded transport and safe reclamation](phase-03-bounded-transport-and-safe-reclamation.md) — Join funded request/completion handling to close, stop, quiescence, and safe resource reuse in the guest.
+- [Phase 4 — Recovery nucleus and CLI control](phase-04-recovery-nucleus-and-cli-control.md) — Run the independently funded ring-3 supervisor/registry and expose truthful CLI inspection and authorized replacement of native children.
 
 ## Maintaining this index
 

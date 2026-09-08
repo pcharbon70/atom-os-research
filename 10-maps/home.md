@@ -34,8 +34,8 @@ x86-64 processors; its installed components still need inventory.
 
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md) —
   provides detailed M0–M4 milestone definitions and coverage-to-artifact
-  traceability; phase/task decomposition remains to be written and evidence
-  gates remain open.
+  traceability, with 18 draft phases and described task dependencies;
+  implementation evidence gates remain open.
 - [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) —
   adopts Nehalem-class, one-CPU, 128 MiB serial bring-up for the selected machine,
   and prioritizes remaining boot, entry, paging and timer work.

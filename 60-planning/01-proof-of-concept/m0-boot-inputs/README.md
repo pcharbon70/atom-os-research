@@ -45,11 +45,11 @@ inside the guest supplying the claimed kernel mechanisms is not.
 
 ## Planning and delivery state
 
-This is a draft milestone definition, not an implemented contract or an
-approved phase/task decomposition. No build, binary pin, unit inventory, or
-acceptance result is created by this document. Artifact and test IDs below
-identify required future outputs; their delivery state is open and their tests
-are not run. Exact implementation decisions require their own evidence.
+This milestone now has a draft phased implementation plan. The detailed outcome,
+artifact IDs and acceptance criteria below remain authoritative. All tasks are
+unchecked, implementation has not started, and every acceptance case is not run.
+Open decisions must be resolved before dependent execution; writing or reviewing
+a plan neither closes a delivery gate nor authorizes implementation or publication.
 
 ## Authoritative inputs
 
@@ -158,11 +158,51 @@ later unprivileged placement and a bounded way to package modules.
 
 ## Ordered phases
 
-No phase documents are authored in this milestone yet. This substantive
-definition establishes what phase plans must deliver; it does not replace the
-mandatory phase/section/task/sub-task hierarchy. Decomposition should follow
-the decision and artifact dependencies above, with needs-based counts and an
-integration-tests section at the end of every actual phase.
+3 phases separate independently verifiable outcomes; their section/task/sub-task
+counts follow the work rather than a quota. All are draft/not started, with no
+execution evidence. Review dependencies and resolve decisions before execution.
+
+| Phase | Integrated outcome | Entry dependency | State / evidence |
+| --- | --- | --- | --- |
+| [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) | Turn the selected Intel target into a versioned, reproducible development fixture and installed-unit record. This phase qualifies inputs and native link fixtures, not a user-mode OS. | accepted-scope-entry | Draft; not started; tests not run |
+| [Phase 2 — Boot, image, and interface contracts](phase-02-boot-image-and-interface-contracts.md) | Specify and exercise the handoff, native image, console/time, and initial authority contracts before the guest kernel implements them. | m0-p01-handoff | Draft; not started; tests not run |
+| [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) | Deliver an exercised unattended acceptance harness and close the complete M0 input gate using real build and fixture evidence. | m0-p02-handoff | Draft; not started; tests not run |
+
+Work within each phase follows its task dependencies. The serial order provides
+a conservative baseline, not authorization for parallel agents. Independent
+experiments may be proposed separately; their results cannot bypass a gate.
+
+## Decision register
+
+The entry choices above remain open. Each row names its resolution task,
+evaluation criteria and blocked work; responsible individuals are unassigned.
+M0-D01 owns the initial implementation repository and toolchain selection.
+
+| Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
+| --- | --- | --- | --- | --- | --- |
+| M0-D01 | Select the implementation repository and language/toolchain using freestanding support, instruction control, reproducibility, and maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability and installed-unit inventory rather than relying on family specifications. | [m0-p01-decisions](phase-01-target-toolchain-and-build-baseline.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 1 work and its dependent gates | Open; no decision evidence |
+| M0-D02 | Choose loader/long-mode ownership, static image subset, native calling and register-state policy, syscall mechanism, console framing, clock units, and initial fault policy using bounded validation and T7500/fixture compatibility. | [m0-p02-decisions](phase-02-boot-image-and-interface-contracts.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 2 work and its dependent gates | Open; no decision evidence |
+| M0-D03 | Freeze watchdog deadlines, serial assertions, output retention, cleanup rules, and physical qualification prerequisites before interpreting runs. | [m0-p03-decisions](phase-03-acceptance-harness-and-input-qualification.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 3 work and its dependent gates | Open; no decision evidence |
+
+## Gate-to-phase and artifact mapping
+
+Rows map contributions, not automatic acceptance. The phase task tables give
+stable implementation IDs; the integration task exercises the mapped cases
+and the handoff task records evidence. Shared cases retain their full definition
+above and close only after all required environments and dependent portions pass.
+
+| Phase gate | Artifact contributions | Acceptance coverage | Owning tasks | Entry dependency | Evidence / state |
+| --- | --- | --- | --- | --- | --- |
+| [M0-P01](phase-01-target-toolchain-and-build-baseline.md) | M0-A01, M0-A02, M0-A07 | M0-T01, M0-T02, M0-T06 | m0-p01-decisions, m0-p01-inventory, m0-p01-build; m0-p01-integration; m0-p01-handoff | accepted-scope-entry | Not run; evidence absent |
+| [M0-P02](phase-02-boot-image-and-interface-contracts.md) | M0-A03, M0-A04, M0-A05 | M0-T02, M0-T03, M0-T04 | m0-p02-decisions, m0-p02-fixtures; m0-p02-integration; m0-p02-handoff | m0-p01-handoff | Not run; evidence absent |
+| [M0-P03](phase-03-acceptance-harness-and-input-qualification.md) | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07 | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | m0-p03-decisions, m0-p03-harness, m0-p03-qualify; m0-p03-integration; m0-p03-handoff | m0-p02-handoff | Not run; evidence absent |
+
+The final phase reruns all M0 acceptance cases for milestone closure.
+Earlier contract, fixture, model or hosted results remain partial where guest
+integration is required. Scope exclusions and physical obligations in this
+definition are unchanged. An acceptance reviewer must retain failure history,
+record the accepted tested revision, and reopen gates on incompatible input
+changes, missing required evidence or a violated invariant.
 
 ## Index
 
@@ -172,7 +212,9 @@ integration-tests section at the end of every actual phase.
 
 ### Documents
 
-- None yet; this README currently contains the milestone definition.
+- [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) — Turn the selected Intel target into a versioned, reproducible development fixture and installed-unit record. This phase qualifies inputs and native link fixtures, not a user-mode OS.
+- [Phase 2 — Boot, image, and interface contracts](phase-02-boot-image-and-interface-contracts.md) — Specify and exercise the handoff, native image, console/time, and initial authority contracts before the guest kernel implements them.
+- [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) — Deliver an exercised unattended acceptance harness and close the complete M0 input gate using real build and fixture evidence.
 
 ## Maintaining this index
 

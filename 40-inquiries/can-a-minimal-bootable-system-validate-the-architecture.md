@@ -105,6 +105,12 @@ milestone and map the coverage gaps to their owners or explicit deferrals.
 No phase/task decomposition, implementation, model execution, or guest test
 was delivered by that writing pass. The gate state is unchanged.
 
+The subsequent M0–M4 planning pass added 18 draft phases, explicit decision and
+task dependencies, artifact/case mappings, and phase-ending integration tests.
+M1 virtual CLI acceptance and physical T7500 qualification are separate gates.
+No implementation or test execution accompanied that decomposition; all gates
+below remain open, and unresolved inputs still block dependent work.
+
 | Gate | State |
 | --- | --- |
 | M0: pinned boot inputs | Open; T7500 / Intel x86-64 selected, but exact installed-unit inventory, virtual binary pins, toolchain, firmware/bootloader, static image and console/time ABI need concrete artifacts |

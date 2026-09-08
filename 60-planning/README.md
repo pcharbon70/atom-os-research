@@ -38,7 +38,8 @@ Use a stable stream number and name, then the existing milestone ID and name.
 For example, [M0 — Boot inputs](01-proof-of-concept/m0-boot-inputs/README.md)
 contains a detailed milestone definition. Its directory is
 `01-proof-of-concept/m0-boot-inputs/`; phase/task decomposition and implementation
-remain separate work, not progress implied by the directory's existence.
+remain distinct: authored phases are linked there, but no implementation
+progress is implied by their existence.
 
 Each milestone directory contains `README.md`; authored phases use files named
 `phase-01-<descriptive-name>.md`, `phase-02-<descriptive-name>.md`, and so on.
@@ -81,6 +82,28 @@ services where relevant. Link the requirement or decision being implemented.
 An unresolved choice must have a decision task, alternatives/evaluation
 criteria, a resolution point, and the dependent work it blocks. Do not write
 later work as though an unselected language or bootloader has been accepted.
+
+## Task identity and gate mapping
+
+Every task, including integration and handoff work, has a stable symbolic ID
+qualified by milestone and phase, such as `m0-p01-build-inputs`. Preserve the
+numbered hierarchy as well. Task labels use `[id: ...]`, `[repo: ...]`, and
+`[after: ...]`; the phase's ownership/traceability table records responsible
+roles, requirements, artifact/case IDs, and expected completion evidence.
+These fields are body conventions, not new frontmatter or executable directives.
+
+IDs are not automatic Markdown anchors. Cross-phase references include the
+owning document link and exact ID. Review dependencies for missing targets,
+cycles, and incompatible entry gates. Use `none` for genuine independence;
+use an explicit unresolved state and decision blocker when inputs are unknown.
+Do not invent an implementation repository or assigned person.
+
+The milestone README maps every artifact and acceptance obligation to actual
+phases/tasks, records decision owners and blockers, and explains phase order.
+Use `decomposition pending` where phase plans do not yet exist. Independent
+work may be identified when dependencies and edit ownership permit it; a plan
+does not itself authorize delegation or execution. Counts at all levels remain
+needs-based. Preserve existing IDs and verified state when extending a plan.
 
 ## Phase-ending integration tests
 
@@ -125,10 +148,26 @@ does not automatically become optional; any scope change needs an explicit
 decision and the remaining obligation must stay visible.
 
 Keep execution evidence in a dated journal entry (the
-[journal template](../templates/journal.md) applies); link it from the phase's
+[journal template](../templates/journal.md) applies; the optional
+[phase execution record](../templates/phase-execution-record.md) specializes it
+for implementation runs); link it from the phase's
 final section and milestone README. Record actual outputs, not only commands
 someone intends to run. An implementation repository may own test artifacts
 after that location is selected; link an exact revision and artifact identity.
+
+An execution record identifies the plan baseline, stable task/case IDs, full
+tested commit and dirty state, environment, commands, raw results, limits,
+review, and proceed/revise/blocked decision. Keep plan revision, tested revision,
+and any later merge revision distinct. Record a merge SHA/date only when it
+exists and is relevant; never infer merged-candidate verification from a merge
+alone. Required evidence keeps closure pending until it is supplied. Preserve
+failed attempts and explicit gate-reopening conditions.
+
+The specialized template is optional; recording required execution evidence is
+not. It creates no new metadata kind or mandatory commit-per-section,
+PR-per-phase, or closure-PR policy. No execution records are created merely to
+make a plan appear complete. For a session that also constitutes a deep dive,
+retain the journal source-manifest and filename requirements.
 
 Before calling a plan ready for implementation, review every level for a real
 description, complete dependencies, traceable requirements, bounded work,
@@ -165,8 +204,8 @@ over this project's technical scope or implementation permissions.
 ### Subdirectories
 
 - [01 — Proof of concept](01-proof-of-concept/README.md) — five detailed M0–M4
-  definitions, coverage-to-artifact mapping, and next phase-decomposition
-  decisions for the CLI-first OS.
+  definitions and 18 draft phases, with decision/task dependencies,
+  coverage-to-artifact mapping, and integration gates for the CLI-first OS.
 
 ### Documents
 

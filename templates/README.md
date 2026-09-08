@@ -35,13 +35,17 @@ introducing a new frontmatter kind.
 - [Directory README template](directory-readme.md) — an exhaustive local inventory.
 - [Inquiry template](inquiry.md) — an active question and research workbench.
 - [Implementation phase template](implementation-phase.md) — a described
-  phase/section/task/sub-task hierarchy ending in integration tests and evidence.
+  phase/section/task/sub-task hierarchy with stable task IDs, ownership,
+  dependencies, and acceptance traceability, ending in integration tests.
 - [Journal template](journal.md) — a dated research or experiment record with
   an authoritative introduced-versus-reused source manifest for deep dives.
 - [Map template](map.md) — a selective route through related material.
 - [Milestone plan README template](milestone-plan-readme.md) — a directory
-  inventory extended with decisions, ordered phases, and milestone exit criteria.
+  inventory extended with decision blockers, gate/artifact-to-phase mapping,
+  ordered dependencies, and milestone exit criteria.
 - [Note template](note.md) — an idea or synthesis in the author's own words.
+- [Phase execution record template](phase-execution-record.md) — an optional
+  journal scaffold for actual commands, results, revisions, evidence, and handoff.
 - [Source template](source.md) — a bibliographic and evidence-focused reading note.
 
 ## Maintaining this index
