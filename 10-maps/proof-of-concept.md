@@ -24,8 +24,9 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
 ## Start here
 
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
-  maps M0–M4 to milestone-named directories and identifies the next decomposition
-  work. The [planning convention](../60-planning/README.md) requires descriptions
+  provides five detailed M0–M4 definitions and maps the readiness gaps to their
+  required artifacts and acceptance cases. The
+  [planning convention](../60-planning/README.md) requires descriptions
   at all four work levels and integration tests at the end of every phase;
   detailed phase plans and implementation evidence do not yet exist.
 - [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)

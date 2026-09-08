@@ -22,7 +22,8 @@ unprivileged process-local tracing GC, protected services, and recovery.
 
 ## What belongs here
 
-- A subdirectory named for each milestone when its phases are actually written.
+- A subdirectory named for each milestone with a substantive definition of its
+  required outcomes; phase documents are added when dependencies justify them.
 - Milestone READMEs describing scope, entry decisions, dependencies, ordered
   phases, and exit evidence.
 - Phase notes using the described four-level work hierarchy and ending in
@@ -35,11 +36,14 @@ implicit requirements for the first CLI.
 
 ## Current planning state
 
-The planning convention and this stream index are established. No milestone
-directory or detailed phase plan has been authored yet. All M0–M4 evidence
-gates remain open in the governing inquiry; this index closes none of them.
-It neither selects the implementation language or bootloader nor initiates
-implementation.
+Five detailed milestone definitions were authored on 2026-09-08. Each names
+its required artifacts, observable acceptance cases, open decisions, trust
+boundary, exclusions, and handoff evidence. They are draft definitions, not
+approved phase/task plans; no phase documents have been authored yet.
+
+All M0–M4 delivery gates remain open and all acceptance cases are not run.
+Writing or reviewing these definitions closes none of them. They neither
+select the implementation language or bootloader nor initiate implementation.
 
 ## Authoritative inputs
 
@@ -56,30 +60,66 @@ implementation.
 - [Planning convention](../README.md) — controls directory naming, descriptions,
   phase-ending integration tests, evidence, and plan review.
 
-## Milestone roadmap and intended directories
+## Milestone definitions and dependencies
 
-The directory names below are reserved naming proposals, not links to existing
-plans. Phase count and task decomposition remain to be decided for each one.
+Read these definitions in order. They explain what each milestone must
+accomplish without pretending that later implementation choices are settled.
+Phase counts and task decomposition remain to be decided from the work needed.
 
-| Milestone | Intended subdirectory | Required outcome | Planning dependency |
+| Milestone | Detailed definition | Required outcome | Planning dependency |
 | --- | --- | --- | --- |
-| M0 — Boot inputs | `m0-boot-inputs/` | Pinned build/target/firmware inputs, static CLI image contract, console/time ABI, limits, and automated check definitions/harness. | Existing target decision and research; remaining choices must be resolved explicitly. |
-| M1 — Boot to CLI | `m1-boot-to-cli/` | Atom kernel launches a native user-mode CLI; `help`, `version`, `uptime`, bounded input, invalid commands, and timer progress pass. | M0 contracts and reproducible fixture. |
-| M2 — Protected service nucleus | `m2-protected-service-nucleus/` | Protected domains, capabilities, accounts, bounded transport, fault delivery, independent recovery, and real CLI inspection/control. | M1 plus concrete lifecycle, authority, and budget contracts. |
-| M3 — Project BEAM runtime | `m3-project-beam-runtime/` | CLI-launched compiler-produced BEAM in the unprivileged project runtime; pinned-profile conformance and automatic local tracing GC. | M2 substrate for guest integration; hosted profile experiments may run earlier when requested. |
-| M4 — Integrated recovery and resource campaign | `m4-integrated-recovery-and-resource-campaign/` | Integrated CLI/actor/service/runtime failures, resource limits, reclamation, generation safety, and repeated recovery evidence. | Integrated M2 and M3 with predeclared test budgets and observables. |
+| M0 — Boot inputs | [M0 definition](m0-boot-inputs/README.md) | Pinned build/target/firmware inputs, static CLI image contract, console/time ABI, limits, and exercised validation harness. | Existing target decision and research; remaining choices must be resolved explicitly. |
+| M1 — Boot to CLI | [M1 definition](m1-boot-to-cli/README.md) | Atom kernel launches a native user-mode CLI; `help`, `version`, `uptime`, bounded input, invalid commands, and timer progress pass. | M0 contracts and reproducible fixture. |
+| M2 — Protected service nucleus | [M2 definition](m2-protected-service-nucleus/README.md) | Protected domains, capabilities, accounts, bounded transport, fault delivery, independent recovery, and real CLI inspection/control. | M1 plus concrete lifecycle, authority, and budget contracts. |
+| M3 — Project BEAM runtime | [M3 definition](m3-project-beam-runtime/README.md) | CLI-launched compiler-produced BEAM in the unprivileged project runtime; pinned-profile conformance and automatic local tracing GC. | M2 substrate for guest integration; hosted profile experiments may run earlier when requested. |
+| M4 — Integrated recovery and resource campaign | [M4 definition](m4-integrated-recovery-and-resource-campaign/README.md) | Integrated CLI/actor/service/runtime failures, resource limits, reclamation, generation safety, and repeated recovery evidence. | Integrated M2 and M3 with predeclared test budgets and observables. |
 
 M1 is the first delivery, not completion of the BEAM-capable PoC. The milestone
 exit criteria remain those in the readiness assessment; writing plans must not
 silently weaken them.
 
+## Coverage-by-area traceability
+
+The [readiness assessment's coverage table](../../20-notes/proof-of-concept-research-readiness.md#coverage-by-area)
+lists missing decisive artifacts, not eight equally mandatory implementation
+programs. The mapping below assigns the in-scope artifacts and preserves the
+explicit deferrals. Within each definition, `Mn-Axx` identifies a required
+artifact and `Mn-Txx` an acceptance case. These are future delivery obligations,
+not implemented artifacts, phase/task IDs, or recorded passing tests.
+
+| Coverage area | Owning milestone artifacts | Required evidence or explicit boundary |
+| --- | --- | --- |
+| Hardware and architecture | [M0](m0-boot-inputs/README.md): A01–A04, A06–A07 fix the fixture, build, handoff, ABI, harness, and installed-unit record. [M1](m1-boot-to-cli/README.md): A01–A06 supply the actual boot image, protected entry, serial path, and timer. | M0-T01–T06 check executable inputs; M1-T01–T08 check the real guest. Physical T7500 qualification remains separately evidenced; neither q35 nor a second ISA is a motherboard qualification result. |
+| Minimal kernel | [M2](m2-protected-service-nucleus/README.md): A01–A02 are the executable object/ABI specification and bounded lifecycle/accounting models; A03–A05 implement their protection, transport, and reclamation contract, extending M0/M1. | M2-T01–T06 require contract/model, authority, race, exhaustion, CPU, and reuse evidence. [M4](m4-integrated-recovery-and-resource-campaign/README.md)-T02 and T04–T06 exercise their integrated behavior under pressure. |
+| Managed runtime | [M3](m3-project-beam-runtime/README.md): A01–A06 cover the machine-readable BEAM/OTP profile, compiled corpus, project runtime, automatic process-local tracing GC, guest adapter, and resource ledger. | M3-T01–T07 require actual conformance, loader rejection, GC, asynchronous-call, overload, recovery, and substrate evidence. M4-T02–T05 test the admitted profile under combined load. AtomVM remains excluded. |
+| System services | [M2](m2-protected-service-nucleus/README.md): A06–A07 deliver the running volatile supervisor/registry nucleus and real CLI control. [M3](m3-project-beam-runtime/README.md): A07 adds actor and whole-runtime recovery demonstrations. | M2-T07–T08, M3-T06, and M4-T01/T06 distinguish child, actor, CLI, and whole-runtime recovery. Root failure may reset; persistence and universal supervisor survival are not implied. |
+| Storage | No writable storage backend or durability barrier is assigned to M0–M4. Read-only boot media is not this missing artifact. | [R14 durability](../../20-notes/proof-of-concept-requirements/durable-state-and-crash-consistency.md) is the proposed first post-M4 capability program. Power-loss and durable-state claims remain blocked until its backend and crash tests exist. |
+| Networking | No NIC/stack, secure-channel, or interoperability implementation is assigned to this local PoC. | [R15 networking](../../20-notes/proof-of-concept-requirements/networking-and-remote-actor-boundaries.md) remains a later capability gate. Local IPC evidence does not establish network distribution. |
+| Authentication and authorization | [M0](m0-boot-inputs/README.md): A05 declares the trusted-local-development profile. [M2](m2-protected-service-nucleus/README.md): A03/A06/A07 implement and check static authority, bootstrap grants, and permitted CLI operations. | M0-T04 and M2-T02/T04/T08 test that restricted end-to-end authority graph; M4-T02 rechecks isolation under load. Human login, federation, and broader [R18 authority deployment](../../20-notes/proof-of-concept-requirements/authentication-and-administration-profile.md) are not delivered by static grants. |
+| Applications and visual computing | [M1](m1-boot-to-cli/README.md): A05 supplies the native CLI; [M3](m3-project-beam-runtime/README.md): A07 supplies a CLI-launched compiled workload; [M4](m4-integrated-recovery-and-resource-campaign/README.md): A02/A06 supply the integrated volatile workload and outcome report. | M1-T02–T03, M3-T01/T06, and M4-T01/T07 require real interaction and repeatable workload evidence. Graphical UI, desktop, and visual user evaluation remain outside this PoC. |
+
+The [requirement studies](../../20-notes/proof-of-concept-requirements/README.md)
+provide the supporting R01–R13 contracts and failure cases linked inside these
+definitions. R14–R19 cover later durability, networking, DMA, multicore/
+portability, broader administration, and update/root-survival programs. They
+are not silently added to M0–M4 merely because their research exists. Applicable
+PoC constraints, such as static authority and safely leaving extra CPUs unused,
+still apply and are called out above and in the milestone definitions.
+
 ## Next decomposition work
 
-First author the M0 plan and resolve its decision dependencies. Then develop
-M1 against those contracts, retaining only a coarse dependency outline for
-M2–M4 until their inputs support useful detail. It is possible to draft M1
-conditionally while M0 is open, but not to present conditional choices as
-accepted implementation facts.
+Use the M0 definition to author its first phase/task plan and resolve the
+decision dependencies. Then decompose M1 against those contracts. The M2–M4
+definitions now establish detailed outcomes and acceptance obligations, but
+their phase/task breakdown should wait until predecessor interfaces support
+useful detail. It is possible to draft M1 conditionally while M0 is open, but
+not to present conditional choices as accepted implementation facts.
+
+Every future artifact and acceptance case needs a traceable owner in the phase
+hierarchy. Use the mandatory milestone/phase templates, descriptions at every
+phase/section/task/sub-task level, and a final integration-tests section in
+each phase. Determine counts from dependencies, risk, and verifiable outcomes;
+do not turn the artifact tables into an arbitrary one-artifact-per-phase quota.
 
 The next planning pass should turn these open choices into bounded decision
 tasks rather than require another broad research cycle:
@@ -117,7 +157,16 @@ counts, and a privileged boot banner are not substitutes for that evidence.
 
 ### Subdirectories
 
-- None yet; milestone directories will be created with their substantive plans.
+- [M0 — Boot inputs](m0-boot-inputs/README.md) — executable fixture, build,
+  handoff, interface, harness, and physical-inventory obligations.
+- [M1 — Boot to CLI](m1-boot-to-cli/README.md) — first real user-mode CLI,
+  protected boot, serial/time behavior, and guest acceptance.
+- [M2 — Protected service nucleus](m2-protected-service-nucleus/README.md) —
+  bounded kernel contracts, models, authority, resources, and native recovery.
+- [M3 — Project BEAM runtime](m3-project-beam-runtime/README.md) — compiled
+  compatibility, interpreter, process-local GC, and guest runtime integration.
+- [M4 — Integrated recovery and resource campaign](m4-integrated-recovery-and-resource-campaign/README.md) —
+  combined fault/load evidence, repeated reclamation, and PoC acceptance.
 
 ### Documents
 
@@ -125,9 +174,10 @@ counts, and a privileged boot banner are not substitutes for that evidence.
 
 ## Maintaining this index
 
-When a milestone is decomposed, create its README and phase notes together,
-replace its proposed path above with a relative README link, and inventory it
-under Subdirectories. Update dependencies and planning/execution state without
+When a milestone is decomposed, extend its existing definition with ordered
+phase links and inventory the new phase notes in that milestone's README.
+Preserve artifact/test identities and map them to task and evidence IDs. Update
+dependencies, the coverage mapping, and planning/execution state without
 implying completion. Keep this stream, the readiness assessment, inquiry,
 proof-of-concept map, and journal evidence consistent when scope or acceptance
 changes. Do not renumber delivered milestones or phases.
