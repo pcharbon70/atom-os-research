@@ -48,8 +48,8 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   contains the thirteen detailed component-level implementation syntheses for
   the unprivileged service-policy layer.
 - [Proof-of-concept requirements](proof-of-concept-requirements/README.md) —
-  contains nineteen requirement studies plus the T7500 target and manufacturer
-  reference, covering CLI boot, bounded kernel
+  contains nineteen requirement studies, the Zig and C kernel-language feasibility
+  studies and comparison, and the T7500 target and manufacturer reference, covering CLI boot, bounded kernel
   contracts, BEAM/GC, integrated recovery and all six later capability gates,
   with evidence, alternatives, failure cases and next experiments.
 - [Visual computing synthesis components](visual-computing-synthesis-components/README.md) —

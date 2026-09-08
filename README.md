@@ -24,6 +24,11 @@ provides five detailed M0–M4 milestone definitions, required artifacts, and
 acceptance cases, now decomposed into 18 draft implementation phases. All
 delivery gates remain open; authored plans are not implementation evidence.
 
+The selected kernel language is **Zig**. The [feasibility and C-interoperability
+study](20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
+supports bounded implementation qualification and records local research
+probes; it does not close compiler, boot or milestone acceptance gates.
+
 The initial physical target is the **Dell Precision T7500**, using
 **Intel Xeon / Intel 64 (x86-64)**. The [active target profile](20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
 defines a Nehalem-class, one-CPU, 128 MiB serial QEMU fixture and the remaining

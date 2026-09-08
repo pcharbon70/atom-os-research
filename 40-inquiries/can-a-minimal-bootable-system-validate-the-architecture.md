@@ -85,6 +85,11 @@ subsequent direction excludes AtomVM and makes the CLI boot the first delivery.
 Thus implementation can start, but none of the integration gates is yet
 satisfied.
 
+The user subsequently selected Zig as the kernel language. The
+[Zig qualification inquiry](can-zig-meet-the-kernel-qualification-contract.md)
+tracks the remaining compiler/ABI/entry evidence; its narrow research probes
+do not constitute a guest boot or close the gates below.
+
 Current gate state:
 
 The [requirement deep dives](../20-notes/proof-of-concept-requirements/README.md)

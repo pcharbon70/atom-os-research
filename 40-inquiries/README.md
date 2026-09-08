@@ -30,6 +30,9 @@ resolution criteria here. Promote independently useful conclusions to
 
 ### Documents
 
+- [What evidence would change the kernel language choice?](what-evidence-would-change-the-kernel-language-choice.md) — explicit assumptions and falsifiable conditions for reconsidering Zig versus C.
+- [Can C meet the kernel qualification contract?](can-c-meet-the-kernel-qualification-contract.md) — alternative/fallback compiler, ABI, library and privileged-execution qualification; Zig remains selected.
+- [Can Zig meet the kernel qualification contract?](can-zig-meet-the-kernel-qualification-contract.md) — chosen-language compiler, C ABI, dependency closure and privileged-execution evidence still needed.
 - [Can a minimal bootable system validate the architecture?](can-a-minimal-bootable-system-validate-the-architecture.md) —
   tracks the T7500 / Intel x86-64 first native CLI boot, protected service control, CLI-launched
   BEAM/GC, and integrated recovery/resource/fault gates, informed by nineteen

@@ -45,8 +45,11 @@ acceptance cases to described tasks, dependencies, and final integration gates.
 These are conditional plans, not accepted technical decisions or executed work.
 
 All M0–M4 delivery gates remain open and all acceptance cases are not run.
-Writing or reviewing these definitions closes none of them. They neither
-select the implementation language or bootloader nor initiate implementation.
+Writing or reviewing these definitions closes none of them. The user selected
+Zig as the kernel language on 2026-09-08; the [feasibility study](../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
+records its evidence and remaining compiler/ABI qualification. The bootloader
+and exact toolchain profile remain open. Research probes do not initiate or
+complete the planned OS implementation.
 
 ## Authoritative inputs
 
@@ -114,7 +117,7 @@ still apply and are called out above and in the milestone definitions.
 ## Next decision and execution work
 
 Begin with [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
-and resolve its repository, language/toolchain, fixture, and inventory decisions.
+and resolve its repository, Zig toolchain profile, fixture, and inventory decisions.
 Later plans are deliberately conditional on those inputs and predecessor
 evidence. Before executing each phase, review its decision register and bind
 accepted interface versions; revise affected dependencies and tests together
@@ -135,8 +138,9 @@ do not turn the artifact tables into an arbitrary one-artifact-per-phase quota.
 The authored decision tasks must settle these open choices before dependent
 implementation, rather than require another broad research cycle:
 
-- Implementation language, freestanding toolchain, linker, reproducible build
-  environment, and implementation-repository location.
+- Freestanding Zig compiler/backend, C translator/helper closure, linker,
+  reproducible build environment, and implementation-repository location;
+  the kernel language itself is selected.
 - Bootloader/handoff, static kernel and user image format, startup memory map,
   and pinned QEMU machine/firmware versions.
 - Minimum user/kernel console and time ABI, privilege transition, exception

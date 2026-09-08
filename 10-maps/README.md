@@ -29,6 +29,9 @@ should explain why its links belong together rather than merely list files.
 
 ### Documents
 
+- [Kernel-language selection](kernel-language-selection.md) — Zig/C tradeoffs, conditional recommendation and evidence that could change the choice.
+- [C kernel development](c-kernel-development.md) — alternative/fallback language evidence, C ABI and freestanding compatibility; does not replace selected Zig.
+- [Zig kernel development](zig-kernel-development.md) — selected language, C/assembly boundary, scholarly/practitioner evidence and executable qualification gaps.
 - [Proof of concept](proof-of-concept.md) — routes from research readiness
   through the T7500 / Intel x86-64 first CLI boot, protected service control, project BEAM runtime,
   resource containment, recovery, and later capability gates, with connected

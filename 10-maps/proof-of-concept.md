@@ -23,6 +23,12 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
 
 ## Start here
 
+- [Kernel-language comparison](../20-notes/proof-of-concept-requirements/zig-versus-c-kernel-language-comparison.md) weighs Zig/C pros and cons, qualification risk and decision-changing conditions.
+- [C kernel-development map](c-kernel-development.md) evaluates the alternative
+  language and C-component path without changing the selected Zig decision.
+- [Zig kernel-development map](zig-kernel-development.md) connects the accepted
+  kernel-language decision to its feasibility evidence and remaining M0/M1
+  compiler, ABI and privilege-transition qualification.
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
   provides five detailed M0–M4 definitions and maps the readiness gaps to their
   required artifacts and acceptance cases. The

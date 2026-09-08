@@ -58,6 +58,7 @@ These inputs define the existing scope and the research behind its tests:
 - [Readiness assessment](../../../20-notes/proof-of-concept-research-readiness.md) — M0 exit criteria and work package 1.
 - [Target and firmware handoff, R01](../../../20-notes/proof-of-concept-requirements/target-firmware-and-boot-handoff.md) — entry ownership, reservations, bounded handoff parsing, and failure policy.
 - [Freestanding build and images, R02](../../../20-notes/proof-of-concept-requirements/freestanding-build-and-static-images.md) — compiler dependencies, image admission, and reproducibility.
+- [Zig feasibility and C interoperability](../../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — accepted language decision, researched 0.16.0 candidate and remaining executable qualification; research probes do not close M0 tasks.
 - [Serial CLI, R04](../../../20-notes/proof-of-concept-requirements/serial-console-and-minimal-cli.md) and [time, R05](../../../20-notes/proof-of-concept-requirements/time-preemption-and-cpu-budgets.md) — interfaces that must be fixed before M1 implements them.
 - [Measurement and harness, R13](../../../20-notes/proof-of-concept-requirements/models-fault-injection-and-measurement.md) — exact inputs, negative checks, and retained evidence.
 - [T7500 target profile](../../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) and [configuration intent](../../../assets/qemu-minimal-x86-64.json) — adopted constraints, not qualified binaries or a working launcher.
@@ -65,13 +66,13 @@ These inputs define the existing scope and the research behind its tests:
 
 ## Entry decisions and dependencies
 
-The T7500 / Intel Xeon target, CLI-first scope, and rejection of AtomVM are
-already decided. M0 must resolve the following implementation inputs without
+The T7500 / Intel Xeon target, CLI-first scope, rejection of AtomVM and Zig
+kernel language are already decided. M0 must resolve the following implementation inputs without
 mistaking prior research examples for accepted selections:
 
 | Decision to close | What the record must establish | Downstream dependency |
 | --- | --- | --- |
-| Language, toolchain, and source location | Confirm the implementation language, repository location, compiler/linker versions, required host tools, and support-library closure; show a working freestanding link test. | All subsequent native code and reproducible builds. |
+| Zig toolchain and source location | Preserve the selected Zig kernel language; accept repository location, compiler/backend/linker/translator versions, required host tools, and C/helper closure; qualify the freestanding link and intended ABI subset. | All subsequent native code and reproducible builds. |
 | Virtual binary and device fixture | Pin QEMU, a versioned q35 machine, `Nehalem-v1`, TCG, SeaBIOS, serial backend, and boot-media configuration; verify their availability together. | M1's boot and serial tests. |
 | Bootloader and handoff | Select a loader compatible with the fixture and record entry mode, long-mode ownership, retained memory, firmware tables, and additional-CPU policy. | Kernel entry and memory initialization. |
 | Native execution contract | Select the static image subset, layout, calling convention, stack policy, enabled register state, and syscall mechanism. | Native loader, exception entry, and validated ring-3 return. |
@@ -82,7 +83,7 @@ The compiler profile must not inherit host-native instruction selection or
 Linux syscalls accidentally. If bring-up restricts FP/SIMD, describe and check
 that restricted profile; do not label it full native ABI support. Timer and
 processor features must be qualified rather than inferred from a modern
-manual. This definition selects no new compiler, loader, or optional CPU mode.
+manual. The language decision does not select a compiler pin, loader or optional CPU mode.
 
 ## Required artifacts
 
@@ -174,13 +175,13 @@ experiments may be proposed separately; their results cannot bypass a gate.
 
 ## Decision register
 
-The entry choices above remain open. Each row names its resolution task,
+Zig is accepted by user decision; the remaining entry choices stay open. Each row names its resolution task,
 evaluation criteria and blocked work; responsible individuals are unassigned.
 M0-D01 owns the initial implementation repository and toolchain selection.
 
 | Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
 | --- | --- | --- | --- | --- | --- |
-| M0-D01 | Select the implementation repository and language/toolchain using freestanding support, instruction control, reproducibility, and maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability and installed-unit inventory rather than relying on family specifications. | [m0-p01-decisions](phase-01-target-toolchain-and-build-baseline.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 1 work and its dependent gates | Open; no decision evidence |
+| M0-D01 | Preserve Zig as the kernel language; select the implementation repository and qualify the compiler/backend/linker/translator using freestanding support, ABI/helper closure, instruction control, reproducibility, and maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability and installed-unit inventory rather than relying on family specifications. | [m0-p01-decisions](phase-01-target-toolchain-and-build-baseline.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 1 work and its dependent gates | Partially decided: Zig selected by user on 2026-09-08; toolchain/repository/roles and complete decision acceptance remain open |
 | M0-D02 | Choose loader/long-mode ownership, static image subset, native calling and register-state policy, syscall mechanism, console framing, clock units, and initial fault policy using bounded validation and T7500/fixture compatibility. | [m0-p02-decisions](phase-02-boot-image-and-interface-contracts.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 2 work and its dependent gates | Open; no decision evidence |
 | M0-D03 | Freeze watchdog deadlines, serial assertions, output retention, cleanup rules, and physical qualification prerequisites before interpreting runs. | [m0-p03-decisions](phase-03-acceptance-harness-and-input-qualification.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 3 work and its dependent gates | Open; no decision evidence |
 

@@ -27,6 +27,18 @@ one existing VM implementation the kernel foundation.
 
 ## Starting implementation
 
+The [kernel-language selection map](kernel-language-selection.md) compares
+Zig and C on the same PoC contract and gives a conditional recommendation,
+without turning feasibility probes into boot or safety evidence.
+
+The [Zig kernel-development map](zig-kernel-development.md) connects the
+selected language to its feasibility assessment, C fallback and remaining
+compiler/ABI qualification. Local research probes are not milestone acceptance.
+
+The [C kernel-development map](c-kernel-development.md) adds an alternative and
+C-component assessment with compiler/library evidence and local probes. It
+does not change the selected Zig language.
+
 The proof of concept is a minimal bootable OS with a CLI as its first delivery.
 AtomVM is rejected; graphical UI and desktop work are outside this scope.
 The initial physical target is the Dell Precision T7500 with Intel Xeon

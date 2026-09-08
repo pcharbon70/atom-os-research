@@ -35,6 +35,9 @@ provenance record.
 
 ### Documents
 
+- [2026-09-08 Zig versus C kernel language](2026-09-08-zig-versus-c-kernel-language-deep-dive.md) — two new and twenty-three reused sources, conditional recommendation, unequal-probe audit and no new implementation experiment.
+- [2026-09-08 C kernel feasibility](2026-09-08-c-kernel-feasibility-deep-dive.md) — ten new and eleven reused sources, mixed-compiler C probes, missing-helper negative evidence and open boot/safety qualification.
+- [2026-09-08 Zig kernel feasibility](2026-09-08-zig-kernel-feasibility-deep-dive.md) — thirteen new and two reused sources, selected language decision, mixed C/Zig and compile-only architecture probes, version-sensitive limitations and open qualification gates.
 - [2026-09-06 T7500 target correction](2026-09-06-t7500-target-correction.md) —
   records the confirmed Intel-based physical target, replacement Nehalem
   fixture, archived AMD assumption, repaired navigation and configuration checks.

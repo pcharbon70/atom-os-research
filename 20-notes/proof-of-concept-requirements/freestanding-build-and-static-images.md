@@ -24,7 +24,14 @@ The [AMD64 procedure ABI](../../30-sources/x86-psabi-project-2026-amd64-procedur
 
 ## Proposed implementation profile
 
-Use one language/toolchain combination initially. C with a small assembly entry has direct teaching and freestanding documentation; an alternative systems language may reduce classes of memory errors, but requires its own runtime, panic, allocation and generated-helper inventory. Team capability and a working target compiler should decide this choice. This research has not selected or benchmarked a compiler.
+The user selected **Zig as the kernel language on 2026-09-08**, superseding
+this report's earlier open language choice. The [Zig feasibility and C-interoperability
+study](zig-kernel-language-feasibility-and-c-interoperability.md) supports starting
+bounded M0 qualification with narrow audited C/assembly escape hatches. Zig
+0.16.0 is the researched and locally probed candidate, not an accepted compiler
+pin. Backend/linker, panic, allocation, helper closure and instruction/state
+policy remain explicit decisions; the study's hosted/link probes are not M0
+completion, a boot demonstration or a performance benchmark.
 
 Target the [adopted T7500 / Intel x86-64 profile](dell-precision-t7500-target-and-minimal-qemu-profile.md), with a proposed static little-endian ELF64/AMD64 image subset and an explicitly recorded LP64 procedure convention. An integer-only bring-up narrows ordinary ABI state expectations; it is not full AMD64 psABI support. Audit generated instructions and linked helpers, and implement initialized FP/SIMD context ownership before admitting that state. Record stack alignment, kernel red-zone exclusion, optimization, code model, relocation policy, stack protection, exception/unwind policy and linker version. Do not inherit host-native instruction selection or a Linux syscall interface.
 
@@ -49,5 +56,9 @@ Build a corpus of truncated headers, overflowed intervals, invalid entry points,
 The decisive next work is a linker/startup smoke test and binary dependency census. Do not claim reproducibility, a safe loader or an executable version pin from this document alone.
 
 ## Connections
+
+The [C feasibility assessment](c-kernel-language-feasibility-and-low-level-compatibility.md)
+evaluates the alternative kernel language and C-component dependency contract
+without changing the selected Zig decision or closing build qualification.
 
 [Boot handoff](target-firmware-and-boot-handoff.md) establishes load ownership. [User protection](privilege-entry-memory-and-user-return.md) enforces the installed image. [Validation](models-fault-injection-and-measurement.md) defines retained build and run evidence.
