@@ -62,7 +62,8 @@ should explain why its links belong together rather than merely list files.
   evaluation.
 - [Minimal privileged kernel](minimal-privileged-kernel.md) — routes through
   capability authority, protected domains, bounded IPC, CPU budgets, failure
-  containment, safe teardown, driver recovery, and assurance.
+  containment, safe teardown, driver recovery, and assurance, including the
+  internal-service decompositions of all eleven components.
 - [OTP-like system services](otp-like-system-services.md) — routes through
   unprivileged lifecycle, supervision, naming, persistence, device and network
   policy, distributed authority, updates, overload control, telemetry, audit,

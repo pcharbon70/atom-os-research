@@ -404,6 +404,21 @@ storage write already admitted by `D`.
 - What state-schema and attestation mechanism prevents a new runtime from
   accepting corrupt but syntactically valid recovery data?
 
+## Internal-service research decomposition
+
+The [failure boundaries and recovery topology service index](failure-boundaries-and-recovery-topology/README.md)
+decomposes this component into 5 bounded research subjects:
+
+- [Failure scope and dependency inventory](failure-boundaries-and-recovery-topology/failure-scope-and-dependency-inventory.md) — Which apparently separate components must actually fail or recover together?
+- [Recovery escrow and reserve admission](failure-boundaries-and-recovery-topology/recovery-escrow-and-reserve-admission.md) — How can a successor recover a domain when both the child and its replaceable supervisor are unusable?
+- [Lease takeover and operation adoption](failure-boundaries-and-recovery-topology/lease-takeover-and-operation-adoption.md) — How can a new manager take control without losing valid completion evidence from already admitted work?
+- [Recipient fences and service publication](failure-boundaries-and-recovery-topology/recipient-fences-and-service-publication.md) — Where must an epoch be checked to prevent a stale manager from changing a recovered service?
+- [State reconstruction and root fallback](failure-boundaries-and-recovery-topology/state-reconstruction-and-root-fallback.md) — What state may a replacement trust, and where does recovery stop when its final independent controller fails?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Bootstrap and root-authority handoff](bootstrap-and-root-authority-handoff.md)

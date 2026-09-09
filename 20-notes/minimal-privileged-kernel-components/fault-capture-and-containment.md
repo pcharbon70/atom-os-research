@@ -339,6 +339,20 @@ whether shared durable, device, or client state is consistent.
 - How should sensitive addresses and code identities be represented so crash
   evidence is useful without becoming an authority or disclosure channel?
 
+## Internal-service research decomposition
+
+The [fault capture and containment service index](fault-capture-and-containment/README.md)
+decomposes this component into 4 bounded research subjects:
+
+- [Fault taxonomy and bounded capture](fault-capture-and-containment/fault-taxonomy-and-bounded-capture.md) — How can the kernel record a fault without overstating either its cause or its containment?
+- [Fault routing and overflow fallback](fault-capture-and-containment/fault-routing-and-overflow-fallback.md) — How does fault delivery remain useful when the normal handler is full, blocked or inside the failed scope?
+- [One-shot resolvers and repair admission](fault-capture-and-containment/one-shot-resolvers-and-repair-admission.md) — What authority lets a fault handler repair one blocked thread without gaining ambient control over its domain?
+- [Containment escalation and terminal handoff](fault-capture-and-containment/containment-escalation-and-terminal-handoff.md) — Who may promote a fault into domain termination or a node-fatal decision?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Protection domains, threads, and address spaces](protection-domains-threads-and-address-spaces.md)

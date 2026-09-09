@@ -399,6 +399,21 @@ the public semantic.
 - Which ordering and fairness guarantees should endpoints expose without
   forcing one global queue implementation?
 
+## Internal-service research decomposition
+
+The [bounded invocation and transport service index](bounded-invocation-and-transport/README.md)
+decomposes this component into 5 bounded research subjects:
+
+- [Endpoint admission and call records](bounded-invocation-and-transport/endpoint-admission-and-call-records.md) — What must be reserved before a request can become an accepted service invocation?
+- [Reply authority and outcome arbitration](bounded-invocation-and-transport/reply-authority-and-outcome-arbitration.md) — What can a caller safely conclude when reply, cancellation and failure race?
+- [Passive handler abort and donation drain](bounded-invocation-and-transport/passive-handler-abort-and-donation-drain.md) — How may caller-funded work be terminated without returning a scheduling context that is still executing elsewhere?
+- [Notifications and sticky event state](bounded-invocation-and-transport/notifications-and-sticky-event-state.md) — How can a bounded wakeup primitive avoid both lost transitions and a false promise of event counting?
+- [Shared-ring ownership and incarnation](bounded-invocation-and-transport/shared-ring-ownership-and-incarnation.md) — What contract surrounds a shared queue when either endpoint may fail or supply hostile descriptors?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Capability spaces and authority](capability-spaces-and-authority.md)

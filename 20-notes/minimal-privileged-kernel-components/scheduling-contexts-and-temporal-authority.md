@@ -364,6 +364,21 @@ dispatch.
 - How should admission reserve simultaneous supervisor failures without making
   resource utilization impractically low?
 
+## Internal-service research decomposition
+
+The [scheduling contexts and temporal authority service index](scheduling-contexts-and-temporal-authority/README.md)
+decomposes this component into 5 bounded research subjects:
+
+- [Scheduling control and capacity admission](scheduling-contexts-and-temporal-authority/scheduling-control-and-capacity-admission.md) — Who may allocate CPU service, and what admission argument makes that allocation meaningful?
+- [Budget accounting and bounded refills](scheduling-contexts-and-temporal-authority/budget-accounting-and-bounded-refills.md) — How can finite replenishment metadata preserve the promised service envelope?
+- [Exclusive binding, donation and migration](scheduling-contexts-and-temporal-authority/exclusive-binding-donation-and-migration.md) — How can one execution budget follow a call chain or migrate without becoming usable in two places?
+- [Causal charging and independent recovery reserves](scheduling-contexts-and-temporal-authority/causal-charging-and-independent-recovery-reserves.md) — Which work must remain attributable, and what resource independence makes recovery possible?
+- [Timing-protection profile](scheduling-contexts-and-temporal-authority/timing-protection-profile.md) — What additional contract is needed when allocating CPU time must also prevent information leakage through timing?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Bounded invocation and transport](bounded-invocation-and-transport.md)

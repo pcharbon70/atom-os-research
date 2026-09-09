@@ -33,8 +33,8 @@ restart policy, device protocols, filesystems, and physical board design.
   sequence.
 - [Minimal privileged kernel component
   index](../20-notes/minimal-privileged-kernel-components/README.md) — the
-  complete local inventory of the eleven evidence-backed implementation deep
-  dives.
+  complete local inventory of eleven component syntheses and 54 internal-service
+  studies across eleven component-named subdirectories.
 - [What contract should the minimal privileged kernel
   provide?](../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md) —
   keeps the proposal falsifiable through explicit authority, isolation,
@@ -108,9 +108,46 @@ above.
   defines capability-scoped bounded telemetry, explicit evidence loss, and
   post-seal enrichment of the architecture layer's terminal record and sink.
 
+## Internal-service research routes
+
+All eleven components now have deeper decompositions. These are full-system
+architecture studies, not PoC plans or verified implementations. Start with the
+following joins rather than reading the directories as independent mechanisms:
+
+- [Manifest validation](../20-notes/minimal-privileged-kernel-components/bootstrap-and-root-authority-handoff/manifest-decoding-and-policy-validation.md)
+  and [product authority](../20-notes/minimal-privileged-kernel-components/capability-spaces-and-authority/product-authority-and-durable-detachment.md)
+  ask whether a valid construction also preserves the intended authority graph.
+- [Object creation](../20-notes/minimal-privileged-kernel-components/typed-object-storage-and-explicit-memory/object-creation-and-publication.md)
+  and [activation pins](../20-notes/minimal-privileged-kernel-components/typed-object-storage-and-explicit-memory/lifetime-groups-and-activation-pins.md)
+  connect allocation, publication and safe use without equating payer with owner.
+- [Root gates](../20-notes/minimal-privileged-kernel-components/protection-domains-threads-and-address-spaces/root-gates-and-close-linearization.md),
+  [kernel checkpoints](../20-notes/minimal-privileged-kernel-components/protection-domains-threads-and-address-spaces/kernel-activation-checkpoints.md)
+  and [passive-handler drainage](../20-notes/minimal-privileged-kernel-components/bounded-invocation-and-transport/passive-handler-abort-and-donation-drain.md)
+  connect admission closure to stopped execution and unique budget ownership.
+- [Budget refills](../20-notes/minimal-privileged-kernel-components/scheduling-contexts-and-temporal-authority/budget-accounting-and-bounded-refills.md)
+  and the [timing-protection profile](../20-notes/minimal-privileged-kernel-components/scheduling-contexts-and-temporal-authority/timing-protection-profile.md)
+  separate execution availability from timing confidentiality.
+- [One-shot repair](../20-notes/minimal-privileged-kernel-components/fault-capture-and-containment/one-shot-resolvers-and-repair-admission.md)
+  separates authority to resolve one fault from authority to terminate a domain.
+- [Submission fencing](../20-notes/minimal-privileged-kernel-components/memory-mappings-and-architecture-resource-bindings/submission-alias-fencing.md),
+  [operation adoption](../20-notes/minimal-privileged-kernel-components/failure-boundaries-and-recovery-topology/lease-takeover-and-operation-adoption.md)
+  and [quarantine custody](../20-notes/minimal-privileged-kernel-components/teardown-revocation-and-safe-reclamation/quarantine-custody-and-reuse-release.md)
+  distinguish current management authority, old physical effects and reusable memory.
+- [Snapshot lifetime](../20-notes/minimal-privileged-kernel-components/observability-and-crash-evidence/per-cpu-buffers-and-snapshot-lifetime.md)
+  and [post-seal enrichment](../20-notes/minimal-privileged-kernel-components/observability-and-crash-evidence/post-seal-crash-enrichment.md)
+  keep observation safe without creating a second fatal protocol.
+
+The [2026-09-09 research journal](../50-journal/2026-09-09-minimal-kernel-internal-services-deep-dive.md)
+records the complete source manifest and reading limitations. New comparisons
+include [Microkit's static system contract](../30-sources/sel4-foundation-2026-microkit-system-contracts.md),
+[Composite's capability-table alternative](../30-sources/parmer-2016-capability-based-os-design.md)
+and [Brown's stalled-participant reclamation analysis](../30-sources/brown-2015-reclaiming-lock-free-memory.md).
+None supplies a proof of the combined Atom design.
+
 ## Selected contract
 
-The baseline makes domain termination a bounded event: `CLOSING` atomically
+The baseline gives the start of domain termination a fixed-work admission
+transition, not a universal bound on completed stop or reclamation: `CLOSING` atomically
 closes the already installed fixed vector of execution,
 relationship/lifetime-derivation, outbound-call, and session root gates,
 freezes the admitted membership set, creates the stop epoch, and dispatches

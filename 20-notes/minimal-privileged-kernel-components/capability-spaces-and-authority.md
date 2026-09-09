@@ -391,6 +391,21 @@ path.
 - Should physical revoke prioritize bounded latency, locality, or deterministic
   memory release under large authority graphs?
 
+## Internal-service research decomposition
+
+The [capability spaces and authority service index](capability-spaces-and-authority/README.md)
+decomposes this component into 5 bounded research subjects:
+
+- [Selector resolution and admission](capability-spaces-and-authority/selector-resolution-and-admission.md) — What must a successful capability lookup prove at the exact point an operation becomes admitted?
+- [Slot mutation and consented transfer](capability-spaces-and-authority/slot-mutation-and-consented-transfer.md) — How can authority be delegated without allowing a sender to exhaust or overwrite a receiver's namespace?
+- [Lineage and one-way revocation anchors](capability-spaces-and-authority/lineage-and-one-way-revocation-anchors.md) — How can future admission stop promptly while a large derivation structure is cleaned incrementally?
+- [Product authority and durable detachment](capability-spaces-and-authority/product-authority-and-durable-detachment.md) — Which input authorities must continue to constrain a newly created object after its constructor returns?
+- [Sealed use facets and epoch sessions](capability-spaces-and-authority/sealed-use-facets-and-epoch-sessions.md) — How can a replaceable recovery manager use authority without duplicating or exporting its control epoch?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Typed object storage and explicit memory](typed-object-storage-and-explicit-memory.md)

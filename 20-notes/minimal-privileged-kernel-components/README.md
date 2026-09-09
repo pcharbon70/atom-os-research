@@ -16,9 +16,13 @@ aliases:
 
 ## Purpose
 
-This directory collects the detailed implementation research for the eleven
+This directory collects the detailed architecture research for the eleven
 components numbered 0 through 10 in the [minimal privileged kernel
 layer](../minimal-privileged-kernel-layer.md).
+
+All eleven components now have internal-service decompositions: 54 reports
+across eleven component-named subdirectories. The parent reports remain the
+integrated contracts. Documented coverage is not implementation or proof.
 
 ## What belongs here
 
@@ -32,7 +36,17 @@ operating-system syntheses in the parent notes directory.
 
 ### Subdirectories
 
-- None yet.
+- [0. Bootstrap and root-authority handoff: internal services](bootstrap-and-root-authority-handoff/README.md) — 5 reports. Turn sealed machine facts and an authorized construction description into a private, audited authority graph, then permanently remove bootstrap admission.
+- [1. Typed object storage and explicit memory: internal services](typed-object-storage-and-explicit-memory/README.md) — 5 reports. Give every privileged object explicit backing, accounting and lifetime, with allocator reuse dependent on completed teardown rather than capability count alone.
+- [2. Capability spaces and authority: internal services](capability-spaces-and-authority/README.md) — 5 reports. Resolve current typed authority, fund its propagation and preserve effect-bearing lifetime dependencies through logical closure and eventual revocation.
+- [3. Protection domains, threads and address spaces: internal services](protection-domains-threads-and-address-spaces/README.md) — 5 reports. Make domains exact execution-stop boundaries while keeping accounting, actors, service identity and recovery policy separate.
+- [4. Bounded invocation and transport: internal services](bounded-invocation-and-transport/README.md) — 5 reports. Keep small protected calls, coalescing notifications and shared-buffer transport finite, explicitly funded and honest about accepted effects.
+- [5. Scheduling contexts and temporal authority: internal services](scheduling-contexts-and-temporal-authority/README.md) — 5 reports. Conserve execution budget across binding and donation, separately fund causal work and recovery, and avoid confusing availability budgets with timing confidentiality.
+- [6. Memory mappings and architecture-resource bindings: internal services](memory-mappings-and-architecture-resource-bindings/README.md) — 6 reports. Bind current authority to lower-layer mapping, interrupt and device effects while preserving exact generations and profile-specific completion evidence.
+- [7. Fault capture and containment: internal services](fault-capture-and-containment/README.md) — 4 reports. Produce bounded fault evidence, route it independently and grant only the narrow repair or termination authority justified by the fault contract.
+- [8. Failure boundaries and recovery topology: internal services](failure-boundaries-and-recovery-topology/README.md) — 5 reports. Keep recovery authority and resources outside the failed scope, fence replacement managers, and leave application-state recovery policy unprivileged.
+- [9. Teardown, revocation and safe reclamation: internal services](teardown-revocation-and-safe-reclamation/README.md) — 4 reports. Turn logical closure into a charged, resumable proof of effect completion or exact quarantine custody before the allocator can reuse backing.
+- [10. Observability and crash evidence: internal services](observability-and-crash-evidence/README.md) — 5 reports. Expose bounded, authorized operational evidence and enrich the lower architecture's single terminal record without adding unsafe crash-time dependencies.
 
 ### Documents
 
@@ -71,8 +85,23 @@ operating-system syntheses in the parent notes directory.
   higher-level evidence layout that enriches the architecture layer's one
   sealed terminal record without turning tracing into ambient authority.
 
+## Reading and evidence
+
+Use the [minimal-kernel map](../../10-maps/minimal-privileged-kernel.md) for
+selective cross-service routes. Each report separates comparative evidence,
+proposed owned state, transitions, failure cases, alternatives and unexecuted
+verification obligations. The [session journal](../../50-journal/2026-09-09-minimal-kernel-internal-services-deep-dive.md)
+records six newly introduced and twenty-one reused sources, including scientific
+papers, official technical articles and first-party engineering blogs.
+
+The most consequential open joins are product-authority inheritance, domain
+stop checkpoints, passive-call drainage, independent recovery escrow,
+operation-epoch adoption, exact DMA quarantine and snapshot/crash-evidence
+lifetime. The [contract inquiry](../../40-inquiries/what-contract-should-the-minimal-privileged-kernel-provide.md)
+tracks the evidence still needed. Literature coverage does not close it.
+
 ## Maintaining this index
 
-Inventory every direct component note, preserve the 0-through-10 numbering,
+Inventory every direct component note and service directory, preserve the 0-through-10 numbering,
 and update the parent notes index and minimal-kernel map whenever a component
 is added, renamed, moved, archived, or superseded.

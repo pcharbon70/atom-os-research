@@ -313,6 +313,31 @@ whole-domain SMP stop, exact scheduling-context unwind, recovery escrow, unified
 quiescence ledgers, and cross-layer crash-evidence survival remain Atom OS
 proposals rather than transferred results from the cited systems.
 
+### Internal-service decomposition and compositional gaps
+
+The [2026-09-09 internal-service research](../50-journal/2026-09-09-minimal-kernel-internal-services-deep-dive.md)
+adds 54 reports across all eleven component directories. It concerns the full
+architecture, independently of the existing prototype investigation. The
+parent lifecycles remain authoritative; the service reports refine their
+ownership and failure boundaries rather than introducing competing protocols.
+
+The next research should prioritize these joins:
+
+| Open question | Research entry point | Required decisive evidence |
+| --- | --- | --- |
+| Does every product preserve exactly its effect-bearing authority? | [Product algebra](../20-notes/minimal-privileged-kernel-components/capability-spaces-and-authority/product-authority-and-durable-detachment.md) | Executable multi-input derivation model with guard consumption, durable consent and close/publication races |
+| Can domain stop acknowledge an interrupted privileged activation safely? | [Kernel checkpoints](../20-notes/minimal-privileged-kernel-components/protection-domains-threads-and-address-spaces/kernel-activation-checkpoints.md) | Commit/abort invariants for each checkpoint, including lock holders and a lost CPU |
+| Does passive cancellation return time exactly once without unsafe handler reuse? | [Donation drainage](../20-notes/minimal-privileged-kernel-components/bounded-invocation-and-transport/passive-handler-abort-and-donation-drain.md) | Complete reply/cancel/stop/suspend interleavings with budget conservation |
+| Can recovery survive loss of both child and replaceable supervisor? | [Escrow admission](../20-notes/minimal-privileged-kernel-components/failure-boundaries-and-recovery-topology/recovery-escrow-and-reserve-admission.md) | Authority-lineage and reserve-capacity checks under simultaneous admitted failures |
+| Can takeover accept valid late completion without accepting stale mutation? | [Operation adoption](../20-notes/minimal-privileged-kernel-components/failure-boundaries-and-recovery-topology/lease-takeover-and-operation-adoption.md) | Separate recovery and operation epochs with recipient commit-time fencing |
+| Does quarantine actually confine every remaining effect? | [Quarantine custody](../20-notes/minimal-privileged-kernel-components/teardown-revocation-and-safe-reclamation/quarantine-custody-and-reuse-release.md) | Exact reachable set, closed aliases, profile-specific completion and independent custody |
+| Can diagnostic readers and fatal capture remain bounded under interruption? | [Snapshot lifetime](../20-notes/minimal-privileged-kernel-components/observability-and-crash-evidence/per-cpu-buffers-and-snapshot-lifetime.md) | Language-level concurrency/lifetime model and partial-record fault tests |
+| Which temporal guarantees are actually claimed? | [Timing-protection profile](../20-notes/minimal-privileged-kernel-components/scheduling-contexts-and-temporal-authority/timing-protection-profile.md) | Separate budget, latency, recovery-availability and timing-channel evidence |
+
+These are research priorities, not accepted numerical limits or a new phased
+implementation plan. No executable model or kernel evidence was produced in
+this decomposition session, so the inquiry remains open.
+
 ### Important negative findings
 
 - Capability possession does not establish ownership, identity, resource
@@ -335,7 +360,8 @@ proposals rather than transferred results from the cited systems.
 ### Evidence gaps
 
 No kernel implementation, executable model, hardware experiment, benchmark,
-or BEAM runtime integration was produced during either literature pass. The
+or BEAM runtime integration was produced during the layer, component or
+internal-service literature passes. The
 specific object vocabulary, rights, generation widths, revocation-anchor depth,
 product-lineage algebra, call-depth and replenishment bounds, stop/checkpoint
 latency, recovery ledger, device-quiescence profile, quarantine proof, and
