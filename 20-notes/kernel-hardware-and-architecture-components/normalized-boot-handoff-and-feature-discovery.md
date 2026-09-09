@@ -644,6 +644,22 @@ boot path itself is a bounded state machine, not an OTP supervision tree.
 - What is the smallest useful topology model when firmware facts are incomplete
   or demonstrably inconsistent?
 
+## Internal-service research decomposition
+
+The [normalized boot handoff and feature discovery service reports](normalized-boot-handoff-and-feature-discovery/README.md)
+decompose this component into 6 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [Provider handoff adapter](normalized-boot-handoff-and-feature-discovery/provider-handoff-adapter.md) — What must become true before provider-owned pointers and execution services can disappear?
+- [Bounded envelope parser](normalized-boot-handoff-and-feature-discovery/bounded-envelope-parser.md) — Can malformed input be rejected with bounded work before it influences resource authority?
+- [Memory extent reconciler](normalized-boot-handoff-and-feature-discovery/memory-extent-reconciler.md) — How can overlapping discovery claims become allocator inputs without releasing bytes still owned by firmware, boot modules or kernel state?
+- [CPU feature admission](normalized-boot-handoff-and-feature-discovery/cpu-feature-admission.md) — How does the architecture admit heterogeneous or restarted CPUs without using instructions or state formats they cannot support?
+- [Static mechanism discovery](normalized-boot-handoff-and-feature-discovery/static-mechanism-discovery.md) — Which bounded facts can be extracted early while leaving mechanism activation to its owning component?
+- [Snapshot sealing and custody](normalized-boot-handoff-and-feature-discovery/snapshot-sealing-and-custody.md) — When may downstream components rely on boot facts and release the storage from which those facts originated?
+
 ## Connections
 
 - [Kernel hardware and architecture support

@@ -151,6 +151,25 @@ experimental evidence. Literature synthesis alone cannot resolve it.
 
 ## Findings
 
+The [2026-09-08 internal-service research](../50-journal/2026-09-08-kernel-architecture-internal-services-deep-dive.md)
+adds 55 reports for the nine components that previously lacked a deeper
+decomposition. Together with components 3 and 9, all eleven components now
+have service-level research. This concerns the full system architecture,
+not a delivery milestone or emulator profile.
+
+The new synthesis separates provider termination from data custody; exception
+entry from memory synchronization; posted-write receipt from device completion;
+snapshot consistency from storage lifetime; CPU start from admission and stop
+from reclamation; and cooperative DMA ownership from hardware enforcement.
+The facade now follows the selected Zig language, with runtime validation of
+copied generational handles instead of an assumed linear type system.
+
+The decisive remaining work is compositional: publication versus CPU lifecycle,
+restriction versus all CPU aliases, device revocation versus already-issued
+traffic, and accepted-operation custody after caller failure. Each service
+supplies concrete falsifiers, but none was executed in this session. These
+sharper contracts do not resolve this inquiry or establish recovery liveness.
+
 The current literature synthesis is developed in [Kernel hardware and
 architecture support
 layer](../20-notes/kernel-hardware-and-architecture-support-layer.md), with

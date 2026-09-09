@@ -38,6 +38,7 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| Kernel architecture internal services | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-09-08 remaining nine components](../50-journal/2026-09-08-kernel-architecture-internal-services-deep-dive.md) |
 | Kernel-language comparison | [Kernel-language selection](../10-maps/kernel-language-selection.md) | [2026-09-08 Zig versus C](../50-journal/2026-09-08-zig-versus-c-kernel-language-deep-dive.md) |
 | C kernel language | [C kernel development](../10-maps/c-kernel-development.md) | [2026-09-08 C feasibility](../50-journal/2026-09-08-c-kernel-feasibility-deep-dive.md) |
 | Zig kernel language | [Zig kernel development](../10-maps/zig-kernel-development.md) | [2026-09-08 Zig feasibility](../50-journal/2026-09-08-zig-kernel-feasibility-deep-dive.md) |
@@ -79,6 +80,15 @@ not retroactively labeled as introduced by it:
 - None yet.
 
 ### Documents
+
+- [Bus-Independent Device Accesses](linux-kernel-community-2026-device-io-contracts.md) — Use separate register-access, ordering, receipt and operation-completion contracts in the proposed architecture.
+- [NAPI](linux-kernel-community-2026-napi-contracts.md) — Model masking, notification, budget exhaustion and ownership transfer explicitly rather than treating them as one Boolean enabled state.
+- [Sequence counters and sequential locks](linux-kernel-community-2026-sequence-counter-contracts.md) — Keep conversion-snapshot consistency, bounded reader progress and backing-storage lifetime as separate obligations.
+- [VFIO - Virtual Function I/O](linux-kernel-community-2026-vfio-isolation-groups.md) — Represent requester, endpoint, interrupt and reset scopes separately and require evidence before granting independent authority.
+- [Tock: From Research to Securing 10 Million Computers](schuermann-et-al-2025-tock-decade.md) — Treat type-level structure, boundary validation and operational evidence as complementary rather than equivalent assurance.
+- [Relaxed exception semantics for Arm-A (extended version)](simner-et-al-2024-relaxed-exception-semantics.md) — Make exception-state preservation and memory-ordering contracts explicit and separate in the entry and remote-event services.
+- [A-profile non-maskable interrupts](dall-2022-a-profile-non-maskable-interrupts.md) — Specify nested-event admission and emergency-state handling by architecture profile, not by the word NMI alone.
+- [Learn the architecture — AArch64 Exception Model](arm-2025-aarch64-exception-model.md) — Separate minimal hardware capture from generated software frames, stack admission and validated return.
 
 - [Zig language overview](zig-project-2026-language-overview.md) — design idioms, illustrative examples and limits of performance advocacy.
 - [Clang source analysis and sanitizers](llvm-project-2025-clang-analysis-and-sanitizer-contracts.md) — concrete C diagnostic paths with explicit runtime/platform and assurance limits.

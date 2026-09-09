@@ -36,8 +36,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   the authentication, identity, policy, grant, revocation, secret, audit,
   recovery, update, and federation control plane.
 - [Kernel hardware and architecture components](kernel-hardware-and-architecture-components/README.md) —
-  contains the eleven detailed component-level implementation syntheses for
-  the kernel hardware and architecture support layer.
+  contains eleven component-level architecture syntheses and seventy
+  internal-service reports across all eleven component subdirectories.
+  These are full-system research contracts, not implementation results.
 - [Managed actor runtime components](managed-actor-runtime-components/README.md) —
   contains the thirteen detailed component-level implementation syntheses for
   the managed actor runtime layer.

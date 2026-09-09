@@ -20,9 +20,9 @@ aliases:
 
 The best implementation for component 10 is a **statically composed, typed
 semantic facade** over the ten mechanism components below it. It should expose
-sealed generational objects, explicit context requirements, move-only resource
-ownership, and split-phase operation tokens whose terminal result states
-exactly what has completed. Architecture backends implement the same semantic
+sealed generational objects, explicit context requirements, protocol-enforced
+single-consumer resource ownership, and split-phase tokens whose terminal result
+states exactly what has completed. Architecture backends implement the same semantic
 contract but need not share instruction sequences, internal data structures, or
 optional features.
 
@@ -32,13 +32,15 @@ boundary: it validates capabilities and resource budgets before invoking the
 facade. The facade then prevents accidental mechanism misuse inside trusted
 code and makes backend conformance testable.
 
-For the first prototype, implement common code and the facade in Rust `no_std`,
-use sealed traits and private constructors, select the backend at build time,
-and confine assembly and `unsafe` operations to component 1. Rust is recommended
-because ownership, sum types, lifetimes, and generics closely represent this
-contract and can compile away on local hot paths. The semantic specification,
-state-machine models, and serialized diagnostic records must remain language-
-independent so this choice does not become an architectural axiom.
+Use the selected Zig language for common code and the facade, with explicit
+object representations, tagged results, restricted construction paths and
+build-time backend selection. Confine privileged instructions, assembly and
+unchecked representation adapters to reviewed boundaries. Zig does not enforce
+linear ownership or borrowing: protected object records must validate copied
+handles, generations, authority and single-consumer transitions. The semantic
+specification, state-machine models and serialized diagnostic records remain
+language-independent. This supersedes the earlier Rust recommendation without
+changing the architecture's ownership requirements.
 
 ## Question and operational standard
 
@@ -206,7 +208,8 @@ practical. Prose remains necessary for hardware assumptions and rationale.
 
 ## Core type vocabulary
 
-The following pseudocode describes semantics, not settled Rust syntax:
+The following pseudocode describes semantics, not Zig syntax or compiler-enforced
+borrowing and linearity:
 
 ```text
 ObjectId<Kind>           stable identity within one boot generation
@@ -306,12 +309,17 @@ flowchart TD
   accepted -->|"fatal fault"| fatal["Fatal<br/>(crash record)"]
 ```
 
-Once accepted, exactly one terminal result is published. Timeout is not proof
-that the operation stopped; it normally yields `Incomplete` and preserves or
-widens quarantine. Cancellation selection is distinct from terminal drainage.
+Once accepted, the protocol must preserve a unique terminal owner and publish
+at most one terminal result. The exactly-once completion promise additionally
+requires the declared progress and recovery assumptions; arbitrary machine
+failure can prevent publication or observation. Timeout is not proof that the
+operation stopped; it normally yields `Incomplete` and preserves or widens
+quarantine. Cancellation selection is distinct from terminal drainage.
 
-Events carry the operation and object generation, making a late interrupt,
-IPI, firmware response, or DMA completion harmless to a replacement object.
+Events carry the operation and object generation. Validation against protected
+state prevents a stale event from changing a replacement object's protocol.
+Generation checks do not stop already-issued DMA or other hardware effects;
+their containment and drainage remain separate completion obligations.
 
 ## Interface families
 
@@ -557,22 +565,25 @@ callers to know hidden postconditions.
   than reaching into another component's internal lock.
 - CPU lifecycle participation guards prevent target-set change during a local
   publication phase; missing CPUs still produce explicit incomplete sets.
-- Tokens carry exclusive transition ownership and cannot be cloned by safe
-  code.
+- Tokens designate exclusive transition ownership. Zig values can be copied;
+  the protected operation record rejects duplicate or stale consumption.
 - Event publication is bounded and reports coalescing, loss, or quarantine.
 - Lock and context requirements are expressed in both types and generated
   contract checks; types do not excuse a missing deadlock model.
 
 ## Language and unsafe-code boundary
 
-Rust `no_std` is recommended for the first implementation because it can encode
-move-only ownership, exhaustive results, scoped guards, sealed constructors,
-and static backend selection. However:
+Zig is the selected implementation language. Tagged results, opaque interfaces,
+module boundaries and static backend selection can express much of this
+contract, but do not establish lifetime or single-consumer safety on their own.
+The [Zig language reference](../../30-sources/zig-project-2026-language-reference-0-16.md)
+is the language-level authority; semantic ownership is enforced by protected
+records and reviewed protocols, not by an assumed borrow checker:
 
-- `unsafe` is confined to the architecture-primitives capsule and narrowly
-  reviewed representation adapters;
-- every unsafe function has a written safety contract tied to the operation
-  schema;
+- privileged instructions and unchecked representation operations are confined
+  to the architecture-primitives capsule and narrowly reviewed adapters;
+- every such function has a written safety contract tied to the operation
+  schema; Zig has no general Rust-style `unsafe` boundary enforcing this;
 - inline assembly declares full clobbers and options and is inspected after
   compilation;
 - foreign firmware or C code is wrapped as an untrusted/unsafe backend whose
@@ -728,10 +739,11 @@ ordinary actors. BEAM code calls system services above the minimal kernel.
 
 This research recommends:
 
-- a statically composed Rust `no_std` facade for the first prototype;
+- a statically composed Zig facade with checked generational authority;
 - a language-independent semantic model and diagnostic wire format;
 - fine-grained sealed interfaces and private backend representations;
-- typed context, ownership, generations, and exactly-once terminal completion;
+- typed context, ownership, generations, at-most-once terminalization and
+  explicitly qualified completion progress;
 - a mandatory baseline plus conformance-backed optional profiles;
 - fake-backend, compile-fail, model, and two-ISA tests; and
 - no stable user-visible architecture ABI at this stage.
@@ -750,6 +762,22 @@ Open questions include:
   plus wide counters are sufficient?
 - Can the complete mandatory facade remain small enough for manual and formal
   review once two real backends exist?
+
+## Internal-service research decomposition
+
+The [typed kernel-facing architecture facade service reports](typed-kernel-facing-architecture-facade/README.md)
+decompose this component into 6 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [Canonical object and lifetime registry](typed-kernel-facing-architecture-facade/canonical-object-and-lifetime-registry.md) — How can the facade make misuse difficult in Zig while maintaining correct object identity and lifetime across asynchronous operations?
+- [Authorization and execution-context admission](typed-kernel-facing-architecture-facade/authorization-and-context-admission.md) — How does a caller prove both resource authority and context suitability before the facade accepts effects?
+- [Split-phase operation and terminal ownership](typed-kernel-facing-architecture-facade/split-phase-operation-and-terminal-ownership.md) — How can a facade distinguish rejection, acceptance, cancellation and completion without losing buffers or manufacturing success?
+- [Feature profiles and backend binding](typed-kernel-facing-architecture-facade/feature-profiles-and-backend-binding.md) — How can the same facade remain meaningful across architectures and optional facilities while preserving every caller's required guarantee?
+- [Cross-component completion composition](typed-kernel-facing-architecture-facade/cross-component-completion-composition.md) — How can callers join multiple component protocols without losing the distinctions needed for reclamation and authority transfer?
+- [Conformance, observation and escape hatches](typed-kernel-facing-architecture-facade/conformance-observation-and-escape-hatches.md) — What evidence would justify claiming that a backend implements the facade's architecture contract?
 
 ## Connections
 
@@ -774,6 +802,10 @@ Open questions include:
   keeps the two-ISA portability claim and profile choices open.
 
 ## Sources
+
+- [Zig language reference](../../30-sources/zig-project-2026-language-reference-0-16.md) —
+  selected language semantics; copied handles and lifetimes still require
+  explicit validation and ownership protocols.
 
 - [The Flux OSKit](../../30-sources/ford-et-al-1997-flux-oskit.md)
 - [Think](../../30-sources/fassino-et-al-2002-think.md)

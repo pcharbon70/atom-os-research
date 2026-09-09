@@ -15,9 +15,14 @@ aliases:
 
 ## Purpose
 
-This directory collects the detailed implementation research for the eleven
+This directory collects the detailed system-architecture research for the eleven
 components numbered 0 through 10 in the [kernel hardware and architecture
 support layer](../kernel-hardware-and-architecture-support-layer.md).
+
+All eleven components now have internal-service research decompositions:
+70 reports in total. These develop the full system architecture, independently
+of delivery milestones or emulator qualification. They preserve the parent
+components' integrated protocols and do not constitute implementation evidence.
 
 ## What belongs here
 
@@ -31,12 +36,39 @@ system syntheses in the parent notes directory.
 
 ### Subdirectories
 
-- [Address translation and protection transition components](address-translation-and-protection-transitions/README.md) —
-  contains nine detailed internal-service reports for component 3, covering
-  address-space identity through safe privileged user access.
-- [Architecture fault and diagnostic components](architecture-faults-and-diagnostics/README.md) —
-  contains six detailed internal-service reports for component 9, covering
-  bounded raw capture through recursive-fault termination and evidence custody.
+- [0. Normalized boot handoff and feature discovery: internal services](normalized-boot-handoff-and-feature-discovery/README.md) —
+  contains 6 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
+- [1. Unsafe architecture-primitives capsule: internal services](unsafe-architecture-primitives-capsule/README.md) —
+  contains 5 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
+- [2. Privileged entry, exit and execution context: internal services](privileged-entry-exit-and-execution-context/README.md) —
+  contains 6 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
+- [3. Address translation and protection transition components](address-translation-and-protection-transitions/README.md) —
+  contains nine detailed internal-service reports, covering address-space
+  identity through safe privileged user access.
+- [4. Ordering, coherence and code publication: internal services](ordering-coherence-and-code-publication/README.md) —
+  contains 7 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
+- [5. Interrupt event fabric: internal services](interrupt-event-fabric/README.md) —
+  contains 6 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
+- [6. Raw time and deadline programming: internal services](raw-time-and-deadline-programming/README.md) —
+  contains 6 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
+- [7. Logical-CPU coordination and lifecycle: internal services](logical-cpu-coordination-and-lifecycle/README.md) —
+  contains 6 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
+- [8. Protected I/O and DMA ownership: internal services](protected-io-and-dma-ownership/README.md) —
+  contains 7 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
+- [9. Architecture fault and diagnostic components](architecture-faults-and-diagnostics/README.md) —
+  contains six detailed internal-service reports, covering bounded raw capture
+  through recursive-fault termination and evidence custody.
+- [10. Typed kernel-facing architecture facade: internal services](typed-kernel-facing-architecture-facade/README.md) —
+  contains 6 architecture-service reports with ownership, protocols,
+  failure analysis, cross-ISA obligations and unexecuted falsification tests.
 
 ### Documents
 

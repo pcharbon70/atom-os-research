@@ -26,11 +26,10 @@ backend must declare them as dependencies.
 
 ## Start here
 
-The first implementation now follows the [T7500 / Intel x86-64 target](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md):
-one executing CPU and serial CLI bring-up. The multi-ISA studies below remain
-broader research and later portability evidence, not parallel first-port
-requirements. Intel SDM and the installed Xeon's family-specific errata now
-guide implementation; modern features still require model-specific checks.
+This is full-system architecture research. Its service boundaries and
+cross-ISA comparisons are not constrained by a proof-of-concept milestone,
+emulator profile or selected physical machine. Target-specific implementation
+decisions remain separate from the architectural claims examined here.
 
 - [Kernel hardware and architecture support
   layer](../20-notes/kernel-hardware-and-architecture-support-layer.md) is the
@@ -63,6 +62,29 @@ guide implementation; modern features still require model-specific checks.
   dive](../50-journal/2026-09-05-architecture-faults-and-diagnostics-components-deep-dive.md)
   records the primary-source search, exact source manifest, cross-service
   reconciliation, and remaining platform/proof gaps.
+
+## Internal-service research across the remaining components
+
+The [2026-09-08 research session](../50-journal/2026-09-08-kernel-architecture-internal-services-deep-dive.md)
+adds 55 internal-service reports. These complement the existing component-3
+and component-9 decompositions, giving all eleven components deeper coverage.
+The parent protocols retain authority over the integrated lifecycles; writing
+the reports does not verify their proposed contracts.
+
+- [0. Normalized boot handoff and feature discovery](../20-notes/kernel-hardware-and-architecture-components/normalized-boot-handoff-and-feature-discovery/README.md) — Separate provider lifetime, parsing, physical-resource reconciliation, discovery, and final publication. These six boundaries prevent a successful provider transaction from being mistaken for validated kernel facts.
+- [1. Unsafe architecture-primitives capsule](../20-notes/kernel-hardware-and-architecture-components/unsafe-architecture-primitives-capsule/README.md) — Separate the contract inventory, privileged state, memory effects, device/wait effects and binary boundary. These are private mechanism services, never a second capability or policy layer.
+- [2. Privileged entry, exit and execution context](../20-notes/kernel-hardware-and-architecture-components/privileged-entry-exit-and-execution-context/README.md) — Separate early admission, semantic frames, return authority, context ownership, nested failure and transition security. All six share the parent entry state; none duplicates component 9's capture or disposition owner.
+- [4. Ordering, coherence and code publication](../20-notes/kernel-hardware-and-architecture-components/ordering-coherence-and-code-publication/README.md) — Seven distinct services separate ordinary synchronization, device completion, maintenance planning, sealing, publication, membership catch-up and retirement. Visibility, execution eligibility and reclamation are deliberately not one notion of completion.
+- [5. Interrupt event fabric](../20-notes/kernel-hardware-and-architecture-components/interrupt-event-fabric/README.md) — Six services separate source identity, electrical/controller flow, bounded evidence, binding lifetime, accounting and polling handoff. Kernel IPI transport remains owned by component 7 and consumes this fabric rather than duplicating a second request protocol.
+- [6. Raw time and deadline programming](../20-notes/kernel-hardware-and-architecture-components/raw-time-and-deadline-programming/README.md) — Six services distinguish source quality, arithmetic, snapshot lifetime, continuity, hardware programming and terminal outcomes. Diagnostic sampling and delay bounds are part of source qualification; timer queues, civil time and scheduling policy remain above this component.
+- [7. Logical-CPU coordination and lifecycle](../20-notes/kernel-hardware-and-architecture-components/logical-cpu-coordination-and-lifecycle/README.md) — Separate CPU identity, admission, bounded remote work, removal, policy eligibility and uncertain recovery. The six services share one lifecycle authority; none independently declares a CPU safely stopped.
+- [8. Protected I/O and DMA ownership](../20-notes/kernel-hardware-and-architecture-components/protected-io-and-dma-ownership/README.md) — Separate device identity, memory authority, transfer, maintenance, revocation, reset and fault custody. These seven services refine one protected-I/O lifecycle rather than inventing independent buffer or device owners.
+- [10. Typed kernel-facing architecture facade](../20-notes/kernel-hardware-and-architecture-components/typed-kernel-facing-architecture-facade/README.md) — Separate object identity, admission, asynchronous custody, backend profiles, completion composition and conformance. These six services expose existing component authority rather than introducing a second hardware-management layer.
+
+The most important joins remain open: code publication against CPU admission
+and removal; CPU access closure against every alias; DMA revocation against
+device and translation-cache completion; and asynchronous custody after caller
+failure. The reports distinguish these proof obligations from source findings.
 
 ## Component implementation deep dives
 

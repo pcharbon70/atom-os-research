@@ -715,6 +715,21 @@ unsupervisable trusted surface.
 - Which physical machines provide meaningfully different coverage for the
   first two ISA backends?
 
+## Internal-service research decomposition
+
+The [unsafe architecture-primitives capsule service reports](unsafe-architecture-primitives-capsule/README.md)
+decompose this component into 5 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [Primitive contract registry](unsafe-architecture-primitives-capsule/primitive-contract-registry.md) — How can reviewers identify the complete preconditions and effects of each privileged leaf?
+- [Register, control and local-mask leaves](unsafe-architecture-primitives-capsule/register-control-and-mask-leaves.md) — How can a local privileged-state change avoid altering unrelated controls or enabling interrupts unexpectedly?
+- [Ordering and maintenance leaves](unsafe-architecture-primitives-capsule/ordering-and-maintenance-leaves.md) — How can the interface prevent one fence or flush from being treated as every kind of completion?
+- [Device, counter and wait leaves](unsafe-architecture-primitives-capsule/device-counter-and-wait-leaves.md) — What must be declared when an apparently simple read, write or halt can have external or irreversible effects?
+- [Generated ABI and binary assurance](unsafe-architecture-primitives-capsule/generated-abi-and-binary-assurance.md) — How can saved frames and procedure calls agree across generated offsets, Zig code, assembly and foreign components?
+
 ## Connections
 
 - [Kernel hardware and architecture support

@@ -54,7 +54,8 @@ should explain why its links belong together rather than merely list files.
 - [Atom OS Research](home.md) — the selective entry point to the archive.
 - [Kernel hardware and architecture support](kernel-hardware-and-architecture-support.md) —
   routes through kernel-level privilege, context, translation, ordering,
-  interrupts, time, CPU lifecycle, protected I/O, fault, and assurance work.
+  interrupts, time, CPU lifecycle, protected I/O, fault and assurance work,
+  including internal-service decompositions of all eleven components.
 - [Managed actor runtime](managed-actor-runtime.md) — routes through BEAM
   compatibility, actors, process-local GC, mailboxes, scheduling, code,
   native boundaries, distribution, deterministic testing, and runtime

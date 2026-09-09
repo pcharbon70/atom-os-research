@@ -755,6 +755,22 @@ integration. None should weaken the baseline correctness clock.
 - What clock precision should untrusted actor domains receive under the
   high-security time-protection profile?
 
+## Internal-service research decomposition
+
+The [raw time and deadline programming service reports](raw-time-and-deadline-programming/README.md)
+decompose this component into 6 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [Counter and clock-domain qualification](raw-time-and-deadline-programming/counter-and-clock-domain-qualification.md) — What comparisons and timeout decisions are justified by a particular raw source?
+- [Counter extension and checked conversion](raw-time-and-deadline-programming/counter-extension-and-conversion.md) — How can raw wrapping counts become a timescale with a declared numerical error and validity horizon?
+- [Conversion snapshot publication and lifetime](raw-time-and-deadline-programming/conversion-snapshot-publication.md) — How can interruptible readers remain safe while conversion snapshots are replaced or recycled?
+- [Clock continuity and era transitions](raw-time-and-deadline-programming/clock-continuity-and-era-transitions.md) — How does the system avoid inventing elapsed time after source replacement, suspend or reset?
+- [Absolute deadline channel programming](raw-time-and-deadline-programming/absolute-deadline-programming.md) — How is a deadline admitted without losing an expiry that races the programming sequence?
+- [Deadline terminalization and cancellation](raw-time-and-deadline-programming/deadline-terminalization-and-cancellation.md) — How can a caller determine what happened when expiry, cancellation and replacement race?
+
 ## Connections
 
 - [Kernel hardware and architecture support layer](../kernel-hardware-and-architecture-support-layer.md) — defines this component's place between raw architecture mechanisms and timer/scheduler policy.

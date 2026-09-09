@@ -1002,6 +1002,22 @@ failure, not an actor crash that a supervisor can safely restart.
 - How can binary verification cover the first and last assembly instructions,
   including nested exceptions and final return faults?
 
+## Internal-service research decomposition
+
+The [privileged entry, exit and execution context service reports](privileged-entry-exit-and-execution-context/README.md)
+decompose this component into 6 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [Early vector and stack admission](privileged-entry-exit-and-execution-context/early-vector-stack-admission.md) — Which state is trustworthy when an event arrives before entry bookkeeping is complete?
+- [Frame normalization and bounded dispatch](privileged-entry-exit-and-execution-context/frame-normalization-and-dispatch.md) — How can common handlers consume architecture-neutral evidence without losing raw information or trusting user-controlled return fields?
+- [Validated less-privileged return](privileged-entry-exit-and-execution-context/validated-user-return.md) — What prevents a stale or forged return image from crossing privilege, mapping or code-publication boundaries?
+- [Extended-state ownership and context transfer](privileged-entry-exit-and-execution-context/extended-state-ownership-transfer.md) — How are state shape, CPU ownership and migration kept consistent as optional architectural facilities expand?
+- [Nested-event and terminal handoff](privileged-entry-exit-and-execution-context/nested-event-and-terminal-handoff.md) — How can another exception be handled when the interrupted entry path has not yet made its own state coherent?
+- [Transition-security profile](privileged-entry-exit-and-execution-context/transition-security-profile.md) — Which transition effects are required beyond restoring visible registers and page tables?
+
 ## Connections
 
 - [Kernel hardware and architecture support

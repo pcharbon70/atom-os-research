@@ -859,6 +859,22 @@ through a masked reconfiguration lifecycle.
 - What controller state can be preserved across driver restart, and which
   profiles require a device or reset-domain reset?
 
+## Internal-service research decomposition
+
+The [interrupt event fabric service reports](interrupt-event-fabric/README.md)
+decompose this component into 6 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [Controller and source normalization](interrupt-event-fabric/controller-and-source-normalization.md) — How are unlike controller namespaces normalized without hiding their completion semantics?
+- [Interrupt flow-state machines](interrupt-event-fabric/interrupt-flow-state-machines.md) — Which state transitions preserve events while preventing rearm before a source is safe?
+- [Bounded hard-path recording](interrupt-event-fabric/bounded-hard-path-recording.md) — How does the system preserve useful event state when receivers are slow, failed or out of capacity?
+- [Binding, routing and teardown](interrupt-event-fabric/binding-routing-and-teardown.md) — When may a binding generation and its storage be replaced safely?
+- [Interrupt accounting and quarantine](interrupt-event-fabric/interrupt-accounting-and-quarantine.md) — How can overload be contained without losing the evidence or authority needed for recovery?
+- [Polling and interrupt handoff](interrupt-event-fabric/polling-and-interrupt-handoff.md) — How can a service switch between polling and interrupt-driven work without a lost wakeup or unbounded privileged loop?
+
 ## Connections
 
 - [Kernel hardware and architecture support
