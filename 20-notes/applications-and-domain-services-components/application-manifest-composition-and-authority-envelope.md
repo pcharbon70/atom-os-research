@@ -288,6 +288,18 @@ if a name alone authorizes a resource, if readiness is self-certified without
 external evidence, if an application can publish itself, or if retirement
 depends on the failed application releasing its own authority correctly.
 
+## Internal-service research decomposition
+
+The [internal-service index](application-manifest-composition-and-authority-envelope/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Manifest contract graph and dependency classes](application-manifest-composition-and-authority-envelope/manifest-contract-graph-and-dependency-classes.md) — Which application requirements must be closed before a generation can be composed?
+- [Recipient-bound composition and installer retirement](application-manifest-composition-and-authority-envelope/recipient-bound-composition-and-installer-retirement.md) — How can composition wire the whole application without retaining the union of its powers?
+- [Configuration snapshots and secret lease bindings](application-manifest-composition-and-authority-envelope/configuration-snapshots-and-secret-lease-bindings.md) — What configuration can be retained durably without retaining live authority or secret values?
+- [Semantic readiness and degraded lifecycle evidence](application-manifest-composition-and-authority-envelope/semantic-readiness-and-degraded-lifecycle-evidence.md) — When is an application ready to accept responsibility rather than merely running?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md) —

@@ -302,6 +302,19 @@ state disagree, if a projection claims freshness beyond its frontier, if old
 retained events become unreadable, or if storage growth has no enforceable
 bound.
 
+## Internal-service research decomposition
+
+The [internal-service index](durable-state-journals-snapshots-and-projections/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Authoritative state profiles and persistence boundaries](durable-state-journals-snapshots-and-projections/authoritative-state-profiles-and-persistence-boundaries.md) — Which stored representation is authoritative for each domain object?
+- [Deterministic event reducers and replay firewalls](durable-state-journals-snapshots-and-projections/deterministic-event-reducers-and-replay-firewalls.md) — How can history reconstruct truth without repeating real-world actions?
+- [Snapshot validation and authority promotion](durable-state-journals-snapshots-and-projections/snapshot-validation-and-authority-promotion.md) — When is a checkpoint a disposable cache, and when has pruning made it authoritative?
+- [Projection checkpoints, rebuild, and publication](durable-state-journals-snapshots-and-projections/projection-checkpoints-rebuild-and-publication.md) — How can a derived view be rebuilt and switched without claiming false freshness?
+- [Retention, erasure, and recovery dependency closure](durable-state-journals-snapshots-and-projections/retention-erasure-and-recovery-dependency-closure.md) — What must remain reachable before history, outcomes or private data can be collected?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

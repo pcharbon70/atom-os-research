@@ -262,6 +262,18 @@ The design is falsified if an extension can enumerate ambient resources, read
 another tenant, escape its budget/domain, return an unchecked domain mutation,
 or turn inspection into publication or external-effect authority.
 
+## Internal-service research decomposition
+
+The [internal-service index](extension-points-plugins-and-live-tooling-confinement/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Extension descriptors and risk-selected hosts](extension-points-plugins-and-live-tooling-confinement/extension-descriptors-and-risk-selected-hosts.md) — Which execution boundary is justified for a particular extension?
+- [Extension invocation and domain-proposal validation](extension-points-plugins-and-live-tooling-confinement/extension-invocation-and-domain-proposal-validation.md) — How can extensions influence behavior without becoming aggregate writers?
+- [Live-tool facets and staged change authority](extension-points-plugins-and-live-tooling-confinement/live-tool-facets-and-staged-change-authority.md) — How can inspection and live programming coexist without a universal debugger capability?
+- [Extension state, update, revocation, and uninstall](extension-points-plugins-and-live-tooling-confinement/extension-state-update-revocation-and-uninstall.md) — What survives an extension replacement, and what does revocation actually stop?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

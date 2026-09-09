@@ -19,6 +19,12 @@ This directory contains the detailed evidence and implementation syntheses for
 the fourteen components proposed by the [applications and domain services
 layer](../applications-and-domain-services-layer.md).
 
+All fourteen components now have internal-service decompositions: 60 studies
+of owned state, authority, transitions, completion, failure and verification.
+The [research session](../../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md)
+records four new and thirty reused sources. These are full-system architecture
+proposals, not implementation evidence or proof-of-concept work.
+
 ## What belongs here
 
 Put one component-scale synthesis here when it refines a Layer 5 responsibility
@@ -31,7 +37,20 @@ in `50-journal`.
 
 ### Subdirectories
 
-- None yet.
+- [Application manifest, composition, and authority envelope](application-manifest-composition-and-authority-envelope/README.md) — 4 internal-service studies. Separate declarative application requirements from recipient-specific authority installation and semantic readiness.
+- [Bounded contexts, domain model, and application services](bounded-contexts-domain-model-and-application-services/README.md) — 4 internal-service studies. Decompose semantic ownership, use-case admission, model translation and persistence ports without turning every module into a process.
+- [Durable domain identity, aggregate actors, and lifecycle](durable-domain-identity-aggregate-actors-and-lifecycle/README.md) — 4 internal-service studies. Separate durable entity lifetime, recoverable activation, serialized decisions and retirement.
+- [Typed commands, queries, events, and protocol contracts](typed-commands-queries-events-and-protocol-contracts/README.md) — 4 internal-service studies. Give decoding, operation outcomes, read frontiers and event histories independent contracts.
+- [Invariants, transactions, and concurrency policy](invariants-transactions-and-concurrency-policy/README.md) — 4 internal-service studies. Choose the synchronization mechanism from complete domain properties, not from the presence of actors.
+- [Durable state, journals, snapshots, and projections](durable-state-journals-snapshots-and-projections/README.md) — 5 internal-service studies. Separate authoritative persistence choice, deterministic history, checkpoint promotion, derived views and retention.
+- [Workflows, process managers, timers, and compensation](workflows-process-managers-timers-and-compensation/README.md) — 5 internal-service studies. Decompose durable control state, step outcomes, timers, compensation and structured concurrent obligations.
+- [External effects, ports, adapters, and reconciliation](external-effects-ports-adapters-and-reconciliation/README.md) — 4 internal-service studies. Make endpoint participation, intent publication, constrained authority and ambiguous effect repair explicit.
+- [Presentation sessions, semantic views, and user outcomes](presentation-sessions-semantic-views-and-user-outcomes/README.md) — 4 internal-service studies. Separate semantic publication, session transport, trusted action admission and durable user feedback.
+- [Offline collaboration, replication, and conflict semantics](offline-collaboration-replication-and-conflict-semantics/README.md) — 5 internal-service studies. Separate convergent content, authority admission, scarce rights, schema meaning and safe history collection.
+- [Extension points, plugins, and live-tooling confinement](extension-points-plugins-and-live-tooling-confinement/README.md) — 4 internal-service studies. Distinguish extension admission, proposal validation, live-tool powers and generation retirement.
+- [Application evolution, schema compatibility, and migration](application-evolution-schema-compatibility-and-migration/README.md) — 5 internal-service studies. Separate directed compatibility, safe intermediate schemas, private migration, in-flight handoff and irreversible retirement.
+- [Semantic observability, testing, and assurance](semantic-observability-testing-and-assurance/README.md) — 4 internal-service studies. Separate user-outcome measurement, disclosure-limited telemetry, executable oracles and implementation fault evidence.
+- [Cross-layer placement, tenancy, overload, and recovery topology](cross-layer-placement-tenancy-overload-and-recovery-topology/README.md) — 4 internal-service studies. Map semantic ownership onto enforceable trust, tenant, resource and recovery boundaries.
 
 ### Documents
 

@@ -276,6 +276,19 @@ The design is falsified if an accepted workflow disappears, a late timer
 changes a new state generation, a retry duplicates a semantic effect, or a
 compensation failure is reported as full rollback.
 
+## Internal-service research decomposition
+
+The [internal-service index](workflows-process-managers-timers-and-compensation/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Workflow definitions and durable control state](workflows-process-managers-timers-and-compensation/workflow-definitions-and-durable-control-state.md) — What survives when the actor coordinating a long use case disappears?
+- [Step dispatch, receipt correlation, and resume](workflows-process-managers-timers-and-compensation/step-dispatch-receipt-correlation-and-resume.md) — How is a workflow step retried without creating another business action?
+- [Durable timer meaning and retry budgets](workflows-process-managers-timers-and-compensation/durable-timer-meaning-and-retry-budgets.md) — What does a timer firing mean after restart, clock change or delayed delivery?
+- [Compensation, pivots, and manual repair](workflows-process-managers-timers-and-compensation/compensation-pivots-and-manual-repair.md) — How can interrupted work be amended without pretending its visible effects never happened?
+- [Fan-out, joins, and cancellation responsibility](workflows-process-managers-timers-and-compensation/fan-out-joins-and-cancellation-responsibility.md) — When may a parallel workflow finish while child work is still running?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

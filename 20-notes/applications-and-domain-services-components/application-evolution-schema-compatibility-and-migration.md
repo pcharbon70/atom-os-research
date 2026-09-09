@@ -295,6 +295,19 @@ a failed migration can publish partial data, if rollback loses knowledge of a
 committed effect, or if a migration facet can access or publish outside its
 declared scope.
 
+## Internal-service research decomposition
+
+The [internal-service index](application-evolution-schema-compatibility-and-migration/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Directed compatibility and behavioral fixture matrices](application-evolution-schema-compatibility-and-migration/directed-compatibility-and-behavioral-fixture-matrices.md) — Which old/new combinations preserve the application's observable contract?
+- [Expand-contract transitions and old-writer exclusion](application-evolution-schema-compatibility-and-migration/expand-contract-transitions-and-old-writer-exclusion.md) — When is it safe to remove the old representation or protocol?
+- [Shadow migration checkpoints and validation](application-evolution-schema-compatibility-and-migration/shadow-migration-checkpoints-and-validation.md) — How can data conversion be interrupted without damaging the source or guessing progress?
+- [Workflow-generation handoff and publication fences](application-evolution-schema-compatibility-and-migration/workflow-generation-handoff-and-publication-fences.md) — How do accepted operations cross a release boundary without acquiring two owners or none?
+- [Rollback cutoffs, canaries, and retirement evidence](application-evolution-schema-compatibility-and-migration/rollback-cutoffs-canaries-and-retirement-evidence.md) — When does rollback cease to mean restoring a valid prior application generation?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

@@ -365,6 +365,18 @@ accepted effect is lost under overload, if a presentation failure necessarily
 destroys domain state, or if the observed recovery group is systematically
 larger than declared.
 
+## Internal-service research decomposition
+
+The [internal-service index](cross-layer-placement-tenancy-overload-and-recovery-topology/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Placement contracts and independent boundary selection](cross-layer-placement-tenancy-overload-and-recovery-topology/placement-contracts-and-independent-boundary-selection.md) — Which application boundaries should coincide, and which should remain separate?
+- [Business-tenant bindings and realm reassignment](cross-layer-placement-tenancy-overload-and-recovery-topology/business-tenant-bindings-and-realm-reassignment.md) — How does a domain partition retain identity while its authenticated security binding changes?
+- [Semantic admission classes and protected recovery reserve](cross-layer-placement-tenancy-overload-and-recovery-topology/semantic-admission-classes-and-protected-recovery-reserve.md) — Which work may be rejected under overload without abandoning an accepted obligation?
+- [Recovery topology and responsibility handoff](cross-layer-placement-tenancy-overload-and-recovery-topology/recovery-topology-and-responsibility-handoff.md) — Can each failed component be replaced without depending on itself for authority or outcome truth?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

@@ -268,6 +268,18 @@ generation, if passivation loses accepted responsibility, if actor
 serialization is presented as durable atomicity, or if a stale PID/capability
 can act on a recreated entity.
 
+## Internal-service research decomposition
+
+The [internal-service index](durable-domain-identity-aggregate-actors-and-lifecycle/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Domain-reference resolution and lifecycle generations](durable-domain-identity-aggregate-actors-and-lifecycle/domain-reference-resolution-and-lifecycle-generations.md) — How does a domain reference survive runtime replacement without reviving a deleted entity?
+- [Activation recovery and writer fencing](durable-domain-identity-aggregate-actors-and-lifecycle/activation-recovery-and-writer-fencing.md) — What must an aggregate recover before its activation is allowed to write?
+- [Aggregate turns and asynchronous continuations](durable-domain-identity-aggregate-actors-and-lifecycle/aggregate-turns-and-asynchronous-continuations.md) — How can an aggregate remain responsive without letting reentrant work invalidate its decision?
+- [Passivation, tombstones, and retained responsibility](durable-domain-identity-aggregate-actors-and-lifecycle/passivation-tombstones-and-retained-responsibility.md) — When may an aggregate release memory or destroy state without losing ownership of unresolved work?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

@@ -329,6 +329,18 @@ The design is falsified if a decoded message is assumed behaviorally compatible
 without tests, if timeout is mapped to `NotCommitted`, if trace context grants
 authority, or if an accepted command can disappear without a queryable outcome.
 
+## Internal-service research decomposition
+
+The [internal-service index](typed-commands-queries-events-and-protocol-contracts/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Bounded envelope decoding and critical extensions](typed-commands-queries-events-and-protocol-contracts/bounded-envelope-decoding-and-critical-extensions.md) — How does an untrusted message become one unambiguous typed application request?
+- [Operation identity and honest outcome ledgers](typed-commands-queries-events-and-protocol-contracts/operation-identity-and-honest-outcome-ledgers.md) — What can a caller safely conclude after a timeout, duplicate request or lost response?
+- [Query frontiers, redaction, and continuation tokens](typed-commands-queries-events-and-protocol-contracts/query-frontiers-redaction-and-continuation-tokens.md) — How does a query expose freshness without accidentally granting write authority or leaking another scope?
+- [Event publication and behavioral history contracts](typed-commands-queries-events-and-protocol-contracts/event-publication-and-behavioral-history-contracts.md) — When does a message represent an authoritative fact, and what must a compatible consumer preserve?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)
