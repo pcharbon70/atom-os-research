@@ -35,6 +35,10 @@ provenance record.
 
 ### Documents
 
+- [2026-09-09 application and domain-service internal services](2026-09-09-application-domain-internal-services-deep-dive.md) —
+  records 60 studies across fourteen components, four new and thirty reused
+  sources, the adapter-trust clarification and unexecuted qualification cases.
+
 - [2026-09-09 managed actor runtime internal services](2026-09-09-managed-runtime-internal-services-deep-dive.md) —
   records 56 studies across thirteen components, four new and twenty reused
   sources, semantic consistency repairs and unexecuted verification obligations.

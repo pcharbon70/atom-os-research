@@ -156,6 +156,35 @@ Primary routes:
 - [SEDA](../30-sources/welsh-et-al-2001-seda.md)
 - [Dagor](../30-sources/zhou-et-al-2018-dagor.md)
 
+## Internal-service research routes
+
+All fourteen parent reports now link to component-named subdirectories with
+60 internal-service studies. The [component index](../20-notes/applications-and-domain-services-components/README.md)
+is the exhaustive inventory; the [2026-09-09 session](../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md)
+is the exhaustive provenance record. These routes select cross-component
+questions rather than prescribe an implementation order.
+
+- **Accepted responsibility:** follow [operation identity](../20-notes/applications-and-domain-services-components/typed-commands-queries-events-and-protocol-contracts/operation-identity-and-honest-outcome-ledgers.md)
+  through [aggregate commit bundles](../20-notes/applications-and-domain-services-components/invariants-transactions-and-concurrency-policy/aggregate-commit-bundles-and-revision-validation.md)
+  and [outbox/inbox retention](../20-notes/applications-and-domain-services-components/external-effects-ports-adapters-and-reconciliation/outbox-inbox-coupling-and-deduplication-retention.md).
+  A lost reply, expired result or changed owner must not create a fresh action.
+- **Authority actually held:** connect [recipient-bound composition](../20-notes/applications-and-domain-services-components/application-manifest-composition-and-authority-envelope/recipient-bound-composition-and-installer-retirement.md),
+  [adapter intent grants](../20-notes/applications-and-domain-services-components/external-effects-ports-adapters-and-reconciliation/intent-bound-grants-and-compromised-adapter-containment.md)
+  and [live-tool facets](../20-notes/applications-and-domain-services-components/extension-points-plugins-and-live-tooling-confinement/live-tool-facets-and-staged-change-authority.md).
+  A compartment limits reach, not misuse of its legitimate credentials.
+- **Offline meaning:** connect [replicated-type specifications](../20-notes/applications-and-domain-services-components/offline-collaboration-replication-and-conflict-semantics/replicated-type-specifications-and-intent-preservation.md),
+  [escrow conservation](../20-notes/applications-and-domain-services-components/invariants-transactions-and-concurrency-policy/escrow-rights-conservation-and-transfer.md)
+  and [reconnect admission](../20-notes/applications-and-domain-services-components/offline-collaboration-replication-and-conflict-semantics/offline-grants-provenance-and-reconnect-admission.md).
+  Convergence, current authorization and scarce-resource safety are separate.
+- **Evolution without lost obligations:** connect [shadow migration](../20-notes/applications-and-domain-services-components/application-evolution-schema-compatibility-and-migration/shadow-migration-checkpoints-and-validation.md),
+  [workflow handoff](../20-notes/applications-and-domain-services-components/application-evolution-schema-compatibility-and-migration/workflow-generation-handoff-and-publication-fences.md)
+  and [retention closure](../20-notes/applications-and-domain-services-components/durable-state-journals-snapshots-and-projections/retention-erasure-and-recovery-dependency-closure.md).
+  Compatibility includes old outcomes, compensation code and effect knowledge.
+- **User and operator truth:** connect [client-action binding](../20-notes/applications-and-domain-services-components/presentation-sessions-semantic-views-and-user-outcomes/client-action-binding-and-trusted-command-admission.md),
+  [semantic indicators](../20-notes/applications-and-domain-services-components/semantic-observability-testing-and-assurance/semantic-indicators-and-outcome-populations.md)
+  and [fault qualification](../20-notes/applications-and-domain-services-components/semantic-observability-testing-and-assurance/fault-campaigns-and-model-to-implementation-evidence.md).
+  Screens, telemetry and restored processes do not establish durable completion.
+
 ## Boundary with Layer 4
 
 Layer 5 owns domain identities, schemas, invariants, application use cases,

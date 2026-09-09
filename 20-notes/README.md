@@ -30,7 +30,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   contains the fourteen detailed component-level syntheses for application
   composition, domain modeling, identity, protocols, invariants, persistence,
   workflows, effects, presentation, collaboration, extensions, evolution,
-  assurance, tenancy, overload, and recovery.
+  assurance, tenancy, overload, and recovery, plus 60 internal-service studies
+  across all fourteen component subdirectories. These remain research
+  proposals with unexecuted verification obligations.
 - [Authentication and authorization components](authentication-and-authorization-components/README.md) —
   contains the sixteen detailed component-level implementation syntheses for
   the authentication, identity, policy, grant, revocation, secret, audit,

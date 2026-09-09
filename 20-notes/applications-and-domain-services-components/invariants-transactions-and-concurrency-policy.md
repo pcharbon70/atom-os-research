@@ -245,6 +245,18 @@ The design is falsified if an accepted concurrent history violates a declared
 invariant, if the proof omits an admitted operation, if a stale lease holder can
 reach the sink, or if retry can duplicate an external effect.
 
+## Internal-service research decomposition
+
+The [internal-service index](invariants-transactions-and-concurrency-policy/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Invariant catalog and coordination selection](invariants-transactions-and-concurrency-policy/invariant-catalog-and-coordination-selection.md) — Which properties actually require coordination, and which can survive independent decisions?
+- [Aggregate commit bundles and revision validation](invariants-transactions-and-concurrency-policy/aggregate-commit-bundles-and-revision-validation.md) — What must commit together for one accepted domain transition to be recoverable?
+- [Escrow rights conservation and transfer](invariants-transactions-and-concurrency-policy/escrow-rights-conservation-and-transfer.md) — When can a replica spend scarce quantity offline without exceeding the global bound?
+- [Cross-aggregate coordination and visible intermediate states](invariants-transactions-and-concurrency-policy/cross-aggregate-coordination-and-visible-intermediate-states.md) — How should a domain choose between a true atomic transaction and a long-running workflow?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

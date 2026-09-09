@@ -269,6 +269,18 @@ frame or focus state is accepted as commit evidence, if hidden fields reach an
 unauthorized adapter, or if two permitted views produce contradictory domain
 outcomes for the same action.
 
+## Internal-service research decomposition
+
+The [internal-service index](presentation-sessions-semantic-views-and-user-outcomes/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Semantic-node publication and modality projections](presentation-sessions-semantic-views-and-user-outcomes/semantic-node-publication-and-modality-projections.md) — What common semantics should different views preserve without requiring identical trees?
+- [Snapshot-delta sessions and bounded resynchronization](presentation-sessions-semantic-views-and-user-outcomes/snapshot-delta-sessions-and-bounded-resynchronization.md) — How does a disposable view recover after missing, reordered or coalesced updates?
+- [Client-action binding and trusted command admission](presentation-sessions-semantic-views-and-user-outcomes/client-action-binding-and-trusted-command-admission.md) — How is a user's action reconciled if the view disappears before learning its operation ID?
+- [Pending-outcome presentation and session recovery](presentation-sessions-semantic-views-and-user-outcomes/pending-outcome-presentation-and-session-recovery.md) — How should a user distinguish apparent responsiveness from actual domain completion?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

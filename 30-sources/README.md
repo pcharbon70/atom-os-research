@@ -38,6 +38,7 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| Application and domain-service internal services | [Applications and domain services](../10-maps/applications-and-domain-services.md) | [2026-09-09 all fourteen components](../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) |
 | Managed actor runtime internal services | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-09 all thirteen components](../50-journal/2026-09-09-managed-runtime-internal-services-deep-dive.md) |
 | Minimal privileged-kernel internal services | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-09-09 all eleven components](../50-journal/2026-09-09-minimal-kernel-internal-services-deep-dive.md) |
 | Kernel architecture internal services | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-09-08 remaining nine components](../50-journal/2026-09-08-kernel-architecture-internal-services-deep-dive.md) |
@@ -82,6 +83,11 @@ not retroactively labeled as introduced by it:
 - None yet.
 
 ### Documents
+
+- [Extending Eventually Consistent Cloud Databases for Enforcing Numeric Invariants](balegas-et-al-2015-bounded-counters.md) — numerical rights conservation, local serialization and crash-model limits.
+- [Making retries safe with idempotent APIs](featonby-2021-idempotent-apis.md) — explicit request intent, response meaning, parameter mismatch and retention.
+- [Parallel Change](sato-2014-parallel-change.md) — staged interface evolution and its distributed-correctness limits.
+- [Project Cambria: Translate your data with lenses](litt-et-al-2020-cambria.md) — schema translation, original-write provenance and semantic mapping limits.
 
 - [Automatic Yielding of C Code](erlang-otp-team-2026-yielding-c-code-contracts.md) — continuation state, helper destruction and transformation limits.
 - [Thread Progress](erlang-otp-team-2026-thread-progress-contracts.md) — software reader participation and grace-period completion limits.

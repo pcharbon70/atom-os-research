@@ -206,9 +206,15 @@ An adapter gets only:
 - recovery/revocation hooks for its resources.
 
 Payment, device, native-code, parser, and untrusted protocol adapters use
-separate protected domains. Compromise cannot reach aggregate state directly,
-mint new effects, inspect other tenants, or use the composition root as an
-ambient deputy.
+separate protected domains. Correct protection and narrow imports must prevent
+direct aggregate-state access, cross-tenant disclosure and composition-root
+deputy access. Compromise can still misuse authority actually held by the
+adapter. Preventing an unauthorized new effect additionally requires an
+intent-bound grant checked at an enforcing sink or independent broker that
+the adapter cannot bypass. A provider accepting only a broad reusable
+credential leaves the adapter trusted within that credential's effect scope.
+See [intent-bound grants and compromised-adapter containment](external-effects-ports-adapters-and-reconciliation/intent-bound-grants-and-compromised-adapter-containment.md)
+for the proposed contract and explicit residual trust.
 
 ## Backpressure, retry, and overload
 
@@ -265,6 +271,18 @@ The design is falsified if timeout is treated as safe nonexecution, if replay
 performs an effect, if the relay can duplicate a semantic effect without the
 contract saying so, or if an adapter can use authority outside its declared
 port.
+
+## Internal-service research decomposition
+
+The [internal-service index](external-effects-ports-adapters-and-reconciliation/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Semantic port profiles and endpoint qualification](external-effects-ports-adapters-and-reconciliation/semantic-port-profiles-and-endpoint-qualification.md) — Which completion guarantees can a particular external endpoint honestly support?
+- [Outbox, inbox coupling, and deduplication retention](external-effects-ports-adapters-and-reconciliation/outbox-inbox-coupling-and-deduplication-retention.md) — How do committed domain changes cross a message boundary without losing or duplicating accepted intent?
+- [Intent-bound grants and compromised-adapter containment](external-effects-ports-adapters-and-reconciliation/intent-bound-grants-and-compromised-adapter-containment.md) — What prevents a compromised adapter from using its legitimate access for a different effect?
+- [Effect reconciliation and unqueryable repair](external-effects-ports-adapters-and-reconciliation/effect-reconciliation-and-unqueryable-repair.md) — How can the system preserve useful truth when no component knows whether an effect happened?
 
 ## Connections
 

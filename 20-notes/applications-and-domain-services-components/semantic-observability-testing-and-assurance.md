@@ -287,6 +287,18 @@ declared invariant lacks a test/model path, if an old/new allowed pair corrupts
 state, or if diagnostics can acquire application authority or unbounded
 resources.
 
+## Internal-service research decomposition
+
+The [internal-service index](semantic-observability-testing-and-assurance/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Semantic indicators and outcome populations](semantic-observability-testing-and-assurance/semantic-indicators-and-outcome-populations.md) — Which observations distinguish a responsive application from one that actually completed correct work?
+- [Telemetry redaction and evidence-channel separation](semantic-observability-testing-and-assurance/telemetry-redaction-and-evidence-channel-separation.md) — How can operators diagnose failures without treating diagnostics as authority or exposing domain secrets?
+- [Executable domain models and history shrinking](semantic-observability-testing-and-assurance/executable-domain-models-and-history-shrinking.md) — What oracle can detect incorrect histories rather than merely compare implementation outputs with themselves?
+- [Fault campaigns and model-to-implementation evidence](semantic-observability-testing-and-assurance/fault-campaigns-and-model-to-implementation-evidence.md) — How will a plausible architecture be tested against failures its abstract model cannot represent?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

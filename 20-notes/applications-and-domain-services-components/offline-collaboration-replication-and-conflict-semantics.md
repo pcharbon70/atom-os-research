@@ -268,6 +268,19 @@ revoked operations integrate merely because they are structurally valid, if
 tombstone collection resurrects deleted meaning, or if replay performs an
 external effect.
 
+## Internal-service research decomposition
+
+The [internal-service index](offline-collaboration-replication-and-conflict-semantics/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Replicated-type specifications and intent preservation](offline-collaboration-replication-and-conflict-semantics/replicated-type-specifications-and-intent-preservation.md) — Which concurrent edits should be equivalent, and which must remain visible conflicts?
+- [Offline grants, provenance, and reconnect admission](offline-collaboration-replication-and-conflict-semantics/offline-grants-provenance-and-reconnect-admission.md) — What authority does a disconnected device have, and what can revocation mean while it is absent?
+- [Offline scarce rights and online effect gates](offline-collaboration-replication-and-conflict-semantics/offline-scarce-rights-and-online-effect-gates.md) — Which offline changes can commit scarce resources, and which must remain proposals?
+- [Schema lenses and concurrent semantic translation](offline-collaboration-replication-and-conflict-semantics/schema-lenses-and-concurrent-semantic-translation.md) — Can old and new offline clients collaborate without silently changing the meaning of edits?
+- [Causal frontiers, tombstones, and peer retirement](offline-collaboration-replication-and-conflict-semantics/causal-frontiers-tombstones-and-peer-retirement.md) — When can collaborative history be collected without resurrecting deleted content?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

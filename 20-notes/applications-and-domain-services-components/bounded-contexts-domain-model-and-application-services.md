@@ -249,6 +249,18 @@ crossing shares mutable internal objects, if a supervision or deployment
 boundary is asserted solely from DDD terminology, or if a supposedly pure
 domain service can perform ambient external effects.
 
+## Internal-service research decomposition
+
+The [internal-service index](bounded-contexts-domain-model-and-application-services/README.md) develops
+the following independently reviewable responsibilities. These are proposed
+full-system contracts and unexecuted falsifiers, not proof-of-concept tasks
+or a requirement for one process per service.
+
+- [Domain vocabulary, value model, and rule ownership](bounded-contexts-domain-model-and-application-services/domain-vocabulary-value-model-and-rule-ownership.md) — Where do concepts and invariants belong when several services use the same words?
+- [Application-service admission and use-case coordination](bounded-contexts-domain-model-and-application-services/application-service-admission-and-use-case-coordination.md) — How does a use case coordinate work without becoming the hidden owner of every business rule?
+- [Context translation and anti-corruption boundaries](bounded-contexts-domain-model-and-application-services/context-translation-and-anti-corruption-boundaries.md) — When does changing representation require a new domain decision rather than a field mapping?
+- [Semantic repositories and query-model boundaries](bounded-contexts-domain-model-and-application-services/semantic-repositories-and-query-model-boundaries.md) — What does a repository promise beyond access to serialized records?
+
 ## Connections
 
 - [Applications and domain services layer](../applications-and-domain-services-layer.md)

@@ -285,6 +285,38 @@ layer](../20-notes/applications-and-domain-services-layer.md).
 - Recovery exercises in which the failed component is the application root,
   adapter, store, policy service, runtime domain, or recovery manager.
 
+### Internal-service decomposition findings
+
+The [2026-09-09 research session](../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md)
+adds 60 studies beneath all fourteen parent components. The decomposition is
+complete at this research depth; qualification remains open. No prototype,
+model checker, actor runtime, storage or physical effect test ran in this session.
+
+The highest-value next investigations are composition tests, not another
+undifferentiated inventory:
+
+- **Identity retention:** join client-action admission, aggregate commit,
+  outbox/inbox deduplication, passivation and migration in one crash history.
+  Falsifier: a forgotten old operation is admitted as new, or an accepted
+  operation has no surviving lookup owner.
+- **Actual effect authority:** test an intentionally compromised adapter with
+  both intent-bound and broad provider credentials. Falsifier: the design
+  claims containment despite a permitted bypass to arbitrary effects within
+  its existing credential scope.
+- **Offline rights and revocation:** combine partition, cloned backup, replica
+  retirement, policy change and delayed integration. Falsifier: scarce rights
+  are duplicated or unauthorized work becomes trusted through a state merge.
+- **Mixed-generation responsibility:** migrate state with pending workflows,
+  old compensation code and unknown external effects. Falsifier: publication
+  precedes safe writer exclusion or loses an accepted obligation.
+- **User-visible uncertainty and overload:** restart views while outcomes are
+  pending and ordinary queues are exhausted. Falsifier: users are encouraged
+  to duplicate actions, or reconciliation loses reserved progress.
+
+The [topic map's internal-service routes](../10-maps/applications-and-domain-services.md#internal-service-research-routes)
+connect those questions to the responsible studies. These are full-system
+research directions, not new proof-of-concept phases or implementation authority.
+
 ## Outcome
 
 The inquiry remains open. The current best candidate is the fourteen-component

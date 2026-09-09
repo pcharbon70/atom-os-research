@@ -48,6 +48,14 @@ and independent crash evidence. Their
 records four new and twenty reused sources. These are full-system contracts
 and falsifiers, not proof-of-concept tasks or completed runtime behavior.
 
+The [application and domain-service decompositions](../20-notes/applications-and-domain-services-components/README.md)
+add 60 internal-service studies across all fourteen Layer 5 components.
+They connect domain meaning to retained outcomes, sink-checked effect authority,
+offline rights, schema evolution and independent recovery. The
+[research session](../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md)
+records four new and thirty reused sources. The inquiry remains open; this
+full-system work does not change the implementation milestones.
+
 ## Starting implementation
 
 The [kernel-language selection map](kernel-language-selection.md) compares
