@@ -383,6 +383,20 @@ This vocabulary should appear in results, tracing, tests, and recovery policy.
 - What platform evidence is sufficient to quarantine a stuck device without a
   full node power cycle?
 
+## Internal-service research decomposition
+
+The [teardown, revocation and safe reclamation service index](teardown-revocation-and-safe-reclamation/README.md)
+decomposes this component into 4 bounded research subjects:
+
+- [Effect ledger and dependency graph](teardown-revocation-and-safe-reclamation/effect-ledger-and-dependency-graph.md) — How can teardown know every effect that must finish without discovering dependencies after resources are already failing?
+- [Charged reaper and resumable cursors](teardown-revocation-and-safe-reclamation/charged-reaper-and-resumable-cursors.md) — How can cleanup make bounded progress without monopolizing privileged execution or depending on the failed owner?
+- [Software and hardware quiescence join](teardown-revocation-and-safe-reclamation/software-and-hardware-quiescence-join.md) — Which combination of evidence is sufficient to say that old effects cannot reach reusable memory?
+- [Quarantine custody and reuse release](teardown-revocation-and-safe-reclamation/quarantine-custody-and-reuse-release.md) — When is quarantine a safe terminal disposition rather than a name for unknown damage?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Typed object storage and explicit memory](typed-object-storage-and-explicit-memory.md)

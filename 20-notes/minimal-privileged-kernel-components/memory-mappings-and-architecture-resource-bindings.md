@@ -386,6 +386,22 @@ documented.
 - Which completion tokens can be produced entirely by trusted controller state,
   and which inevitably depend on device-specific assertions?
 
+## Internal-service research decomposition
+
+The [memory mappings and architecture-resource bindings service index](memory-mappings-and-architecture-resource-bindings/README.md)
+decomposes this component into 6 bounded research subjects:
+
+- [Mapping authority and rights ceilings](memory-mappings-and-architecture-resource-bindings/mapping-authority-and-rights-ceilings.md) — Which authorities bound a mapping throughout its lifetime, including later protection changes?
+- [Frame authority epochs and quarantine](memory-mappings-and-architecture-resource-bindings/frame-authority-epochs-and-quarantine.md) — How can quarantine prevent old grants from becoming valid again when memory is eventually released?
+- [Interrupt and timer binding lifetimes](memory-mappings-and-architecture-resource-bindings/interrupt-and-timer-binding-lifetimes.md) — What lifetime object connects an authorized consumer to asynchronous architecture events?
+- [Device profiles and requester trust sets](memory-mappings-and-architecture-resource-bindings/device-profiles-and-requester-trust-sets.md) — What deployment facts are required before separate device handles can be advertised as isolated authority?
+- [Submission alias fencing](memory-mappings-and-architecture-resource-bindings/submission-alias-fencing.md) — When does revoking a device manager actually prevent it from submitting more work?
+- [Device completion and reset composition](memory-mappings-and-architecture-resource-bindings/device-completion-and-reset-composition.md) — Which evidence can release a device effect, especially when recovery authority changes mid-operation?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Typed object storage and explicit memory](typed-object-storage-and-explicit-memory.md)

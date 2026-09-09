@@ -35,6 +35,10 @@ provenance record.
 
 ### Documents
 
+- [2026-09-09 minimal privileged-kernel internal services](2026-09-09-minimal-kernel-internal-services-deep-dive.md) —
+  records 54 service reports across eleven components, six new and twenty-one
+  reused sources, literature limitations and unexecuted verification obligations.
+
 - [2026-09-08 kernel architecture internal services](2026-09-08-kernel-architecture-internal-services-deep-dive.md) —
   records fifty-five new service reports across nine components, eight new
   and thirty-five reused sources, full-system scope, evidence limitations

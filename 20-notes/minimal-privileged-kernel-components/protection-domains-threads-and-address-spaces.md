@@ -415,6 +415,21 @@ publishes state and requests, releases locks, then consumes completion records.
 - Should optional shared-root domains be prohibited initially or represented
   explicitly as one correlated stop group?
 
+## Internal-service research decomposition
+
+The [protection domains, threads and address spaces service index](protection-domains-threads-and-address-spaces/README.md)
+decomposes this component into 5 bounded research subjects:
+
+- [Domain roots and membership](protection-domains-threads-and-address-spaces/domain-roots-and-membership.md) — What state makes one protection domain a well-defined containment boundary?
+- [Root gates and close linearization](protection-domains-threads-and-address-spaces/root-gates-and-close-linearization.md) — How can a domain stop acquiring new work without first walking every object it owns?
+- [Thread readiness and reversible suspension](protection-domains-threads-and-address-spaces/thread-readiness-and-reversible-suspension.md) — How can administrative suspension preserve a thread's logical wait state without confusing it with terminal stop?
+- [Kernel activation checkpoints](protection-domains-threads-and-address-spaces/kernel-activation-checkpoints.md) — What must be true before a stopped CPU activation can be acknowledged as safe?
+- [SMP stop and completion evidence](protection-domains-threads-and-address-spaces/smp-stop-and-completion-evidence.md) — How can a domain stop certificate cover every CPU that might still execute its old incarnation?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Scheduling contexts and temporal authority](scheduling-contexts-and-temporal-authority.md)

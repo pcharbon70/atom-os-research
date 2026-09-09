@@ -33,6 +33,13 @@ now cover the internals of all eleven components. The latest research adds
 diagnostic decompositions. This is architecture research, independent of the
 implementation stream below; proposed protocols and tests are not verified results.
 
+The [minimal privileged-kernel decompositions](../20-notes/minimal-privileged-kernel-components/README.md)
+add 54 service reports across all eleven components: authority construction,
+object lifetime, protected work, failure containment, recovery and evidence.
+Their [research journal](../50-journal/2026-09-09-minimal-kernel-internal-services-deep-dive.md)
+records six new and twenty-one reused sources and the outstanding proof
+obligations. This does not change the implementation milestones.
+
 ## Starting implementation
 
 The [kernel-language selection map](kernel-language-selection.md) compares

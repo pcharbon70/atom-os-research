@@ -38,6 +38,7 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| Minimal privileged-kernel internal services | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-09-09 all eleven components](../50-journal/2026-09-09-minimal-kernel-internal-services-deep-dive.md) |
 | Kernel architecture internal services | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-09-08 remaining nine components](../50-journal/2026-09-08-kernel-architecture-internal-services-deep-dive.md) |
 | Kernel-language comparison | [Kernel-language selection](../10-maps/kernel-language-selection.md) | [2026-09-08 Zig versus C](../50-journal/2026-09-08-zig-versus-c-kernel-language-deep-dive.md) |
 | C kernel language | [C kernel development](../10-maps/c-kernel-development.md) | [2026-09-08 C feasibility](../50-journal/2026-09-08-c-kernel-feasibility-deep-dive.md) |
@@ -80,6 +81,13 @@ not retroactively labeled as introduced by it:
 - None yet.
 
 ### Documents
+
+- [capDL Loader](sel4-foundation-2026-capdl-loader-contract.md) — Where does declarative initialization assurance stop?
+- [What the Proofs Assume](sel4-foundation-2026-proof-assumptions.md) — What remains outside a kernel correctness or security theorem?
+- [Microkit User Manual (v2.3.0)](sel4-foundation-2026-microkit-system-contracts.md) — Which static configuration restrictions simplify protected service composition?
+- [How to (and how not to) use seL4 IPC](heiser-2019-sel4-ipc-design.md) — Which communication responsibilities should a minimal privileged IPC mechanism own?
+- [Capability-based OS Design](parmer-2016-capability-based-os-design.md) — Must recursive delegation policy reside inside the privileged kernel?
+- [Reclaiming memory for lock-free data structures: there has to be a better way](brown-2015-reclaiming-lock-free-memory.md) — Can reclamation tolerate stalled participants without invalidating interrupted operations?
 
 - [Bus-Independent Device Accesses](linux-kernel-community-2026-device-io-contracts.md) — Use separate register-access, ordering, receipt and operation-completion contracts in the proposed architecture.
 - [NAPI](linux-kernel-community-2026-napi-contracts.md) — Model masking, notification, budget exhaustion and ownership transfer explicitly rather than treating them as one Boolean enabled state.

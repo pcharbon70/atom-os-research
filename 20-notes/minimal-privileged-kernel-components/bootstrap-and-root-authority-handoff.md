@@ -362,6 +362,21 @@ bootstrap, entropy provenance, and correctness of any generated binary.
 - Can the installed-graph relation reuse capDL tooling, or do the new temporal,
   escrow, and hardware-lifetime objects require a smaller new model?
 
+## Internal-service research decomposition
+
+The [bootstrap and root-authority handoff service index](bootstrap-and-root-authority-handoff/README.md)
+decomposes this component into 5 bounded research subjects:
+
+- [Manifest decoding and policy validation](bootstrap-and-root-authority-handoff/manifest-decoding-and-policy-validation.md) — What must be established before a boot description may influence privileged object creation?
+- [Capacity and construction planning](bootstrap-and-root-authority-handoff/capacity-and-construction-planning.md) — How can initialization promise that exceptional paths remain funded before any service is allowed to run?
+- [Private object construction transaction](bootstrap-and-root-authority-handoff/private-object-construction-transaction.md) — Where is the boundary between initialization that can roll back and authority that has escaped?
+- [Authority-graph installation and audit](bootstrap-and-root-authority-handoff/authority-graph-installation-and-audit.md) — How can the initialized authority graph be checked without inventing a universal administrative capability?
+- [One-way root handoff and abort](bootstrap-and-root-authority-handoff/one-way-root-handoff-and-abort.md) — What evidence permits a root service to begin ordinary operation, and what happens if it never accepts?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Typed object storage and explicit memory](typed-object-storage-and-explicit-memory.md)

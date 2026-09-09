@@ -421,6 +421,21 @@ flush/partition trace state.
 - Is a static typed filter sufficient, or will bounded aggregation justify a
   verified tracing language later?
 
+## Internal-service research decomposition
+
+The [observability and crash evidence service index](observability-and-crash-evidence/README.md)
+decomposes this component into 5 bounded research subjects:
+
+- [Event schema and static probe control](observability-and-crash-evidence/event-schema-and-static-probe-control.md) — What diagnostic information may privileged code emit, at whose expense and under which authority?
+- [Per-CPU buffers and snapshot lifetime](observability-and-crash-evidence/per-cpu-buffers-and-snapshot-lifetime.md) — How can readers obtain bounded diagnostic snapshots without racing an interrupted writer or freed backing?
+- [Scoped inspection and redacted cursors](observability-and-crash-evidence/scoped-inspection-and-redacted-cursors.md) — How can an inspector traverse changing kernel state without gaining ambient authority or holding objects forever?
+- [Post-seal crash enrichment](observability-and-crash-evidence/post-seal-crash-enrichment.md) — What higher-level evidence can be added after the architecture has sealed its terminal crash context?
+- [Crash export and assurance boundaries](observability-and-crash-evidence/crash-export-and-assurance-boundaries.md) — What may a crash artifact legitimately claim about integrity, secrecy, persistence and causality?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Fault capture and containment](fault-capture-and-containment.md)

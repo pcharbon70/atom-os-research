@@ -59,7 +59,8 @@ resolution criteria here. Promote independently useful conclusions to
   unprivileged BEAM-compatible runtime layer.
 - [What contract should the minimal privileged kernel provide?](what-contract-should-the-minimal-privileged-kernel-provide.md) —
   defines falsifiable capability, domain, IPC, temporal-isolation, fault,
-  teardown, recovery-independence, BEAM-compatibility, and assurance criteria.
+  teardown, recovery-independence, BEAM-compatibility, and assurance criteria,
+  with open compositional obligations from the 54 internal-service studies.
 - [What contract should the OTP-like system-services layer provide?](what-contract-should-the-otp-like-system-services-layer-provide.md) —
   defines falsifiable lifecycle, outcome, durability, naming, distributed
   authority, update, overload, evidence, and outer-recovery criteria for the

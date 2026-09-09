@@ -356,6 +356,21 @@ then conditionally commits the returned evidence.
 - Should quarantined capacity count only against the original payer, a system
   failure reserve, or both for admission decisions?
 
+## Internal-service research decomposition
+
+The [typed object storage and explicit memory service index](typed-object-storage-and-explicit-memory/README.md)
+decomposes this component into 5 bounded research subjects:
+
+- [Backing pools and retyping](typed-object-storage-and-explicit-memory/backing-pools-and-retyping.md) — How can memory become typed kernel objects without introducing hidden allocation authority?
+- [Object creation and publication](typed-object-storage-and-explicit-memory/object-creation-and-publication.md) — How can a multi-input constructor either publish one fully owned object or have no externally visible effect?
+- [Quota accounts and charge transfer](typed-object-storage-and-explicit-memory/quota-accounts-and-charge-transfer.md) — Who pays for a shared object when the creator, users and cleanup owner differ?
+- [Lifetime groups and activation pins](typed-object-storage-and-explicit-memory/lifetime-groups-and-activation-pins.md) — How are object lifetime ownership and temporary dereference safety represented independently?
+- [Sanitization and generation-safe reuse](typed-object-storage-and-explicit-memory/sanitization-and-generation-safe-reuse.md) — When may an old object's bytes and identifier safely become a new object?
+
+These studies refine this parent contract without replacing its lifecycle or
+authority model. They concern full-system architecture, not PoC or emulator
+qualification; proposed tests remain unexecuted.
+
 ## Connections
 
 - [Capability spaces and authority](capability-spaces-and-authority.md)

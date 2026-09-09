@@ -43,8 +43,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   contains the thirteen detailed component-level implementation syntheses for
   the managed actor runtime layer.
 - [Minimal privileged kernel components](minimal-privileged-kernel-components/README.md) —
-  contains the eleven detailed component-level implementation syntheses for
-  the capability-microkernel layer.
+  contains eleven component-level syntheses and 54 internal-service reports
+  across all eleven component subdirectories of the capability-microkernel
+  layer. These are full-system research contracts, not implementation results.
 - [OTP-like system services components](otp-like-system-services-components/README.md) —
   contains the thirteen detailed component-level implementation syntheses for
   the unprivileged service-policy layer.
