@@ -35,6 +35,10 @@ provenance record.
 
 ### Documents
 
+- [2026-09-09 managed actor runtime internal services](2026-09-09-managed-runtime-internal-services-deep-dive.md) —
+  records 56 studies across thirteen components, four new and twenty reused
+  sources, semantic consistency repairs and unexecuted verification obligations.
+
 - [2026-09-09 minimal privileged-kernel internal services](2026-09-09-minimal-kernel-internal-services-deep-dive.md) —
   records 54 service reports across eleven components, six new and twenty-one
   reused sources, literature limitations and unexecuted verification obligations.

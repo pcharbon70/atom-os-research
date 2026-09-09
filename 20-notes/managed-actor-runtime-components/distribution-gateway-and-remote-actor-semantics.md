@@ -533,6 +533,18 @@ that reorders one promised sender stream, any standard send API that reports an
 Atom OS tracked-send outcome, or any timeout/disconnect translated as definite
 non-execution without evidence.
 
+## Internal-service research decomposition
+
+The [internal-service index](distribution-gateway-and-remote-actor-semantics/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Gateway session authentication and profile negotiation](distribution-gateway-and-remote-actor-semantics/gateway-session-authentication-and-profile-negotiation.md).
+- [Remote PID/reference identity and route rebinding](distribution-gateway-and-remote-actor-semantics/remote-pid-reference-identity-and-route-rebinding.md).
+- [Hostile ETF decoding and distributed signal ingress](distribution-gateway-and-remote-actor-semantics/hostile-etf-decoding-and-distributed-signal-ingress.md).
+- [Send credits, ordering and disconnect outcomes](distribution-gateway-and-remote-actor-semantics/send-credits-ordering-and-disconnect-outcomes.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)

@@ -360,6 +360,19 @@ threshold, large-binary cutoff, queue-mode policy, reference-count batching,
 and whether resumable full collection is needed. These are measured runtime
 policies, not kernel ABI or language semantics.
 
+## Internal-service research decomposition
+
+The [internal-service index](terms-private-heaps-shared-binaries-and-tracing-collection/README.md) expands this
+component into 5 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Term representation and copy boundary](terms-private-heaps-shared-binaries-and-tracing-collection/term-representation-and-copy-boundary.md).
+- [Private heap allocation and generational invariants](terms-private-heaps-shared-binaries-and-tracing-collection/private-heap-allocation-and-generational-invariants.md).
+- [Exact root capture and collector handoff](terms-private-heaps-shared-binaries-and-tracing-collection/exact-root-capture-and-collector-handoff.md).
+- [Copying collection reserve and resumable progress](terms-private-heaps-shared-binaries-and-tracing-collection/copying-collection-reserve-and-resumable-progress.md).
+- [Shared binary, literal and fragment lifetimes](terms-private-heaps-shared-binaries-and-tracing-collection/shared-binary-literal-and-fragment-lifetimes.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)
