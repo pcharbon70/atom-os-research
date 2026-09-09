@@ -211,7 +211,8 @@ The component research adds a common implementation discipline:
   generation-checked publication, terminal disposition, and rollback rules;
 - every Atom OS native/gateway request binds actor, runtime, service/gateway,
   and object incarnations, and its internal protocol reports `Indeterminate`
-  when loss occurs after acceptance without stronger completion evidence;
+  when loss occurs after publication without stronger completion/nonexecution
+  evidence, even if acceptance was never acknowledged;
   compatible Erlang sends retain their documented return values and do not
   acquire a delivery-completion result;
 - resource accounting follows deferred work through actor, application, domain,
@@ -228,6 +229,27 @@ review questions, and exact absence of executable results.
 
 No runtime prototype, conformance result, GC measurement, mailbox-overload
 experiment, or native-domain fault test has yet been performed in this archive.
+
+## Internal-service composition questions
+
+The [2026-09-09 decomposition](../50-journal/2026-09-09-managed-runtime-internal-services-deep-dive.md)
+adds 56 service studies across all thirteen components. It exposes the following
+next research obligations without claiming prototype delivery or changing the
+proof-of-concept plan:
+
+| Boundary | Open question | Decisive evidence |
+| --- | --- | --- |
+| Loader to execution and GC | Does every accepted instruction/helper satisfy one root/effect schema? | Malformed-module corpus, generated-schema checks and forced-GC differential tests |
+| Actor publication to signal ownership | Can spawn, exit, lookup pins, queue cutover and wakeup compose without stale delivery? | Executable concurrent histories with generation wrap and stopped producers |
+| Collector to scheduling budget | Which private-heap strategy meets progress goals under live-data and reserve pressure? | Worst observed safe-point intervals, exact roots and charge conservation under OOM |
+| Logical purge to storage retirement | Can direct, fun, literal and native references be handled without changing compatibility? | Pinned purge matrix and delayed-reader/lower-publication tests |
+| Native/gateway publication to recovery | What proves completion or nonexecution after lost acknowledgement? | Service-specific receipts and failure injection at each publication/effect boundary |
+| ETS/global state to overload | Can long atomic operations yield while quotas and ownership remain exact? | Linearizable histories, owner-exit/helping races and coherent ledger reconciliation |
+| Runtime evidence to external trust | Can replay reject missing nondeterminism and capture survive runtime corruption? | Divergence fixtures, explicit model bounds and hostile crash-descriptor tests |
+
+Persistent terms and shared counters now have an explicit proposed lifecycle
+study, not an implicit promise that every optional OTP facility has been selected.
+The exact compatibility catalog and native trust profile remain decisions.
 
 ## Outcome
 

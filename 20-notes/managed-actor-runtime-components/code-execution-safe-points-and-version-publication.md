@@ -253,13 +253,16 @@ tests.
 
 ### Cache publication and W^X
 
-The architecture facade performs the target-specific data-cache clean,
-instruction-cache invalidation, barriers, and remote CPU acknowledgement
-required by the [code-publication
-component](../kernel-hardware-and-architecture-components/ordering-coherence-and-code-publication.md).
-The adapter then revokes every writable mapping before granting executable
-read-only mappings. Dual persistent RW and RX aliases are not the baseline,
-even if a hosted ERTS port uses them.
+First close and drain every writer and establish candidate-data visibility.
+The adapter/facade seals the candidate nonwritable before completing the
+executable-publication transaction. Under its required execution hold, the
+lower layer installs RX and completes the target-specific instruction-fetch,
+barrier and remote-acknowledgement obligations before reporting publication.
+The [code-publication component](../kernel-hardware-and-architecture-components/ordering-coherence-and-code-publication.md)
+owns those architecture details. Runtime entry points become visible only after
+the lower terminal result; neither a page-table store nor a runtime grace
+period substitutes for it. Dual persistent RW and RX aliases are not the
+baseline, even if a hosted ERTS port uses them.
 
 ### Runtime index publication
 
@@ -454,6 +457,20 @@ Open decisions include the native IR/template language, per-target validator,
 patchpoint strategy, epoch implementation, code/literal accounting, AOT
 artifact support, and optimization threshold. The interpreter and publication
 state machine remain the semantic reference regardless.
+
+## Internal-service research decomposition
+
+The [internal-service index](code-execution-safe-points-and-version-publication/README.md) expands this
+component into 6 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Reference interpreter and language-observation oracle](code-execution-safe-points-and-version-publication/reference-interpreter-and-language-observation-oracle.md).
+- [Canonical safe-point and native helper state](code-execution-safe-points-and-version-publication/canonical-safe-point-and-native-helper-state.md).
+- [Native emission, relocation and artifact validation](code-execution-safe-points-and-version-publication/native-emission-relocation-and-artifact-validation.md).
+- [Sealed pages and executable-publication handoff](code-execution-safe-points-and-version-publication/sealed-pages-and-executable-publication-handoff.md).
+- [Module index, on_load and current-generation commit](code-execution-safe-points-and-version-publication/module-index-on-load-and-current-generation-commit.md).
+- [Logical purge, fun invalidation and literal reclamation](code-execution-safe-points-and-version-publication/logical-purge-fun-invalidation-and-literal-reclamation.md).
 
 ## Connections
 

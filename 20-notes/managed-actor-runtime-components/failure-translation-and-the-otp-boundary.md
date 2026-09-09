@@ -306,9 +306,10 @@ Every cross-domain operation records its publication phase. Translation uses
 that phase:
 
 - before endpoint publication: `NotAccepted`;
-- accepted with a protocol-proven terminal result: `Completed`, `Failed`, or
+- published with a protocol-proven terminal result: `Completed`, `Failed`, or
   `NotExecuted` as that protocol defines;
-- accepted but route/service lost before a proving result: `Indeterminate`;
+- published but route/service lost without proof of completion or nonexecution:
+  `Indeterminate`, even if no acceptance acknowledgement was received;
 - reply received for an obsolete caller/service generation: discard with
   accounting and retain bounded evidence.
 
@@ -445,6 +446,18 @@ The design is falsified if an internal supervisor is required to recover its
 own corrupted runtime, if a stale failure can affect a successor incarnation,
 if exit cleanup can monopolize a scheduler without bound, or if timeout is
 reported as definite non-execution without supporting protocol evidence.
+
+## Internal-service research decomposition
+
+The [internal-service index](failure-translation-and-the-otp-boundary/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Typed failure provenance and compatible projection](failure-translation-and-the-otp-boundary/typed-failure-provenance-and-compatible-projection.md).
+- [Termination reason lifetime and bounded fan-out](failure-translation-and-the-otp-boundary/termination-reason-lifetime-and-bounded-fanout.md).
+- [Service loss, uncertainty and supervisor handoff](failure-translation-and-the-otp-boundary/service-loss-uncertainty-and-supervisor-handoff.md).
+- [Outer runtime failure and new-epoch recovery](failure-translation-and-the-otp-boundary/outer-runtime-failure-and-new-epoch-recovery.md).
 
 ## Connections
 

@@ -481,6 +481,18 @@ near-set structure, rearm hysteresis, compatibility behavior under domain
 pressure, poller count, and which operations can provide `NotExecuted` rather
 than `Indeterminate`. Target measurements decide them.
 
+## Internal-service research decomposition
+
+The [internal-service index](timers-events-and-asynchronous-io-integration/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Clock era and timer destination contract](timers-events-and-asynchronous-io-integration/clock-era-and-timer-destination-contract.md).
+- [Hierarchical timer queues and bounded cascade](timers-events-and-asynchronous-io-integration/hierarchical-timer-queues-and-bounded-cascade.md).
+- [Expiry, cancel, suspend and deadline-rearm arbitration](timers-events-and-asynchronous-io-integration/expiry-cancel-suspend-and-deadline-rearm-arbitration.md).
+- [Asynchronous operation records and buffer completion](timers-events-and-asynchronous-io-integration/asynchronous-operation-records-and-buffer-completion.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)

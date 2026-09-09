@@ -500,6 +500,19 @@ domain total, if actor exit drops a live deferred charge, if a hard limit is
 enforced only after partial publication, if an ordinary admitted message is
 silently discarded, or if recovery can consume unbounded “system” resources.
 
+## Internal-service research decomposition
+
+The [internal-service index](resource-accounting-and-overload-control/README.md) expands this
+component into 5 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Hierarchical reservations and ledger reconciliation](resource-accounting-and-overload-control/hierarchical-reservations-and-ledger-reconciliation.md).
+- [Pressure states and protected recovery capacity](resource-accounting-and-overload-control/pressure-states-and-protected-recovery-capacity.md).
+- [ETS table identity, ownership and heir transfer](resource-accounting-and-overload-control/ets-table-identity-ownership-and-heir-transfer.md).
+- [ETS atomic bulk work and adaptive storage](resource-accounting-and-overload-control/ets-atomic-bulk-work-and-adaptive-storage.md).
+- [Persistent terms and shared counter lifecycle](resource-accounting-and-overload-control/persistent-terms-and-shared-counter-lifecycle.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)

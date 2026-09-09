@@ -423,6 +423,18 @@ validators can provide independently checkable hints, and the boundary between
 trusted deployment provenance and hostile-module policy. These decisions must
 not delay the minimum structural verifier and interpreter.
 
+## Internal-service research decomposition
+
+The [internal-service index](compatibility-manifest-beam-loader-and-verifier/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Compatibility profile and conformance catalog](compatibility-manifest-beam-loader-and-verifier/compatibility-profile-and-conformance-catalog.md).
+- [Bounded container parser and private interning](compatibility-manifest-beam-loader-and-verifier/bounded-container-parser-and-private-interning.md).
+- [Control-flow, root and operand verifier](compatibility-manifest-beam-loader-and-verifier/control-flow-root-and-operand-verifier.md).
+- [Runtime-call effects and import binding](compatibility-manifest-beam-loader-and-verifier/runtime-call-effects-and-import-binding.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md) — defines the

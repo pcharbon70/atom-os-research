@@ -55,6 +55,46 @@ JIT, or in-process NIF.
   expanded source search, shared implementation criteria, component results,
   and the explicit boundary between research synthesis and tested evidence.
 
+## Internal-service research routes
+
+All thirteen components now have deeper decomposition: 56 studies with explicit
+state owners, proposed transitions, failure cases, alternatives and unexecuted
+tests. The [component inventory](../20-notes/managed-actor-runtime-components/README.md)
+is exhaustive; these routes highlight the hardest compositions:
+
+- **Admission to execution:** [profile catalog](../20-notes/managed-actor-runtime-components/compatibility-manifest-beam-loader-and-verifier/compatibility-profile-and-conformance-catalog.md),
+  [root verifier](../20-notes/managed-actor-runtime-components/compatibility-manifest-beam-loader-and-verifier/control-flow-root-and-operand-verifier.md)
+  and [canonical safe points](../20-notes/managed-actor-runtime-components/code-execution-safe-points-and-version-publication/canonical-safe-point-and-native-helper-state.md)
+  must agree before accepted code can allocate or yield safely.
+- **Actor identity to message observation:** [lookup pins](../20-notes/managed-actor-runtime-components/actor-identity-lifecycle-and-process-state/actor-registry-generations-and-lookup-pins.md),
+  [stripe cutover](../20-notes/managed-actor-runtime-components/signal-ingress-mailboxes-and-selective-receive/striped-ingress-order-and-node-reclamation.md)
+  and [receive cursors](../20-notes/managed-actor-runtime-components/signal-ingress-mailboxes-and-selective-receive/selective-receive-cursors-markers-and-timeouts.md)
+  separate storage safety, signal order and mailbox selection.
+- **Cheap reads to expensive retirement:** [shared binary/literal lifetime](../20-notes/managed-actor-runtime-components/terms-private-heaps-shared-binaries-and-tracing-collection/shared-binary-literal-and-fragment-lifetimes.md),
+  [logical purge](../20-notes/managed-actor-runtime-components/code-execution-safe-points-and-version-publication/logical-purge-fun-invalidation-and-literal-reclamation.md)
+  and [persistent terms/counters](../20-notes/managed-actor-runtime-components/resource-accounting-and-overload-control/persistent-terms-and-shared-counter-lifecycle.md)
+  distinguish semantic removal from retained bytes and progress debt.
+- **Timeout to actual completion:** [I/O operation records](../20-notes/managed-actor-runtime-components/timers-events-and-asynchronous-io-integration/asynchronous-operation-records-and-buffer-completion.md),
+  [native cancellation drain](../20-notes/managed-actor-runtime-components/native-work-ports-and-drivers/native-request-outcomes-and-cancellation-drain.md)
+  and [distributed outcomes](../20-notes/managed-actor-runtime-components/distribution-gateway-and-remote-actor-semantics/send-credits-ordering-and-disconnect-outcomes.md)
+  preserve residual ownership and postpublication uncertainty.
+- **Responsiveness without partial effects:** [yieldable work](../20-notes/managed-actor-runtime-components/reduction-scheduler-and-kernel-scheduling-contexts/reduction-costs-and-yieldable-work-continuations.md),
+  [atomic ETS work](../20-notes/managed-actor-runtime-components/resource-accounting-and-overload-control/ets-atomic-bulk-work-and-adaptive-storage.md)
+  and [ledger reconciliation](../20-notes/managed-actor-runtime-components/resource-accounting-and-overload-control/hierarchical-reservations-and-ledger-reconciliation.md)
+  must preserve roots, atomicity and finite reserve together.
+- **Reproducibility versus trustworthy failure evidence:** [deterministic choices](../20-notes/managed-actor-runtime-components/observability-deterministic-testing-and-crash-evidence/deterministic-choice-log-and-external-input-capture.md)
+  and [external crash custody](../20-notes/managed-actor-runtime-components/observability-deterministic-testing-and-crash-evidence/watchdog-evidence-and-external-crash-custody.md)
+  have different completeness and trust boundaries.
+
+The [session journal](../50-journal/2026-09-09-managed-runtime-internal-services-deep-dive.md)
+records four new and twenty reused sources, fresh versus archive-based reading,
+parent consistency repairs and outstanding experiments. First-party studies of
+[yielding helpers](../30-sources/erlang-otp-team-2026-yielding-c-code-contracts.md),
+[thread progress](../30-sources/erlang-otp-team-2026-thread-progress-contracts.md),
+[ETS counters](../30-sources/winblad-2021-decentralized-ets-counters.md) and
+[persistent terms](../30-sources/larsson-2019-persistent-term.md) add implementation
+tradeoffs, not verified Atom OS mechanisms.
+
 ## Component implementation deep dives
 
 The runtime is decomposed into thirteen components numbered 0 through 12. Each

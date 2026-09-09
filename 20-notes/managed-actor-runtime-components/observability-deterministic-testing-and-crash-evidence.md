@@ -431,6 +431,18 @@ can occur without loss evidence, if replay silently proceeds after an enabled-
 set mismatch, if crash capture requires cooperation from the corrupted domain,
 or if diagnostic authority allows arbitrary actor-state disclosure.
 
+## Internal-service research decomposition
+
+The [internal-service index](observability-deterministic-testing-and-crash-evidence/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Bounded trace streams, causality and privacy](observability-deterministic-testing-and-crash-evidence/bounded-trace-streams-causality-and-privacy.md).
+- [Deterministic choice log and external input capture](observability-deterministic-testing-and-crash-evidence/deterministic-choice-log-and-external-input-capture.md).
+- [Systematic exploration, differential oracles and shrinking](observability-deterministic-testing-and-crash-evidence/systematic-exploration-differential-oracles-and-shrinking.md).
+- [Watchdog evidence and external crash custody](observability-deterministic-testing-and-crash-evidence/watchdog-evidence-and-external-crash-custody.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)

@@ -40,8 +40,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   internal-service reports across all eleven component subdirectories.
   These are full-system research contracts, not implementation results.
 - [Managed actor runtime components](managed-actor-runtime-components/README.md) —
-  contains the thirteen detailed component-level implementation syntheses for
-  the managed actor runtime layer.
+  contains thirteen component syntheses and 56 internal-service studies across
+  all thirteen component subdirectories. Proposed contracts remain distinct
+  from implementation and conformance evidence.
 - [Minimal privileged kernel components](minimal-privileged-kernel-components/README.md) —
   contains eleven component-level syntheses and 54 internal-service reports
   across all eleven component subdirectories of the capability-microkernel

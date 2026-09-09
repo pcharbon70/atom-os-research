@@ -32,7 +32,19 @@ operating-system syntheses in the parent notes directory.
 
 ### Subdirectories
 
-- None yet.
+- [0. Runtime-domain bootstrap and kernel adapter](runtime-domain-bootstrap-and-kernel-adapter/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [1. Compatibility manifest, BEAM loader and verifier](compatibility-manifest-beam-loader-and-verifier/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [2. Actor identity, lifecycle and process state](actor-identity-lifecycle-and-process-state/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [3. Terms, private heaps, shared binaries and tracing collection](terms-private-heaps-shared-binaries-and-tracing-collection/README.md) — 5 internal-service studies with ownership, failure and verification contracts.
+- [4. Signal ingress, mailboxes and selective receive](signal-ingress-mailboxes-and-selective-receive/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [5. Reduction scheduler and kernel scheduling contexts](reduction-scheduler-and-kernel-scheduling-contexts/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [6. Timers, events and asynchronous I/O integration](timers-events-and-asynchronous-io-integration/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [7. Code execution, safe points and version publication](code-execution-safe-points-and-version-publication/README.md) — 6 internal-service studies with ownership, failure and verification contracts.
+- [8. Native work, ports and drivers](native-work-ports-and-drivers/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [9. Distribution gateway and remote actor semantics](distribution-gateway-and-remote-actor-semantics/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [10. Failure translation and the OTP boundary](failure-translation-and-the-otp-boundary/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
+- [11. Resource accounting and overload control](resource-accounting-and-overload-control/README.md) — 5 internal-service studies with ownership, failure and verification contracts.
+- [12. Observability, deterministic testing and crash evidence](observability-deterministic-testing-and-crash-evidence/README.md) — 4 internal-service studies with ownership, failure and verification contracts.
 
 ### Documents
 
@@ -77,6 +89,11 @@ operating-system syntheses in the parent notes directory.
   and preallocated cross-boundary crash records.
 
 ## Maintaining this index
+
+The [2026-09-09 research session](../../50-journal/2026-09-09-managed-runtime-internal-services-deep-dive.md)
+records the 56 service studies, four new and twenty reused sources, reading
+limitations and unresolved composition tests. Every component now has a deeper
+decomposition. Research completeness is not implementation or conformance evidence.
 
 Inventory every direct component note, preserve the 0-through-12 numbering,
 and update the parent notes index and managed-runtime map whenever a component

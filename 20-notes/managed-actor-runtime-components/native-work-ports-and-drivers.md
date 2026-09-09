@@ -496,6 +496,18 @@ The key falsifier is a path that releases or reuses native/device resources
 after cancellation or service death without terminal completion and quiescence
 evidence. Any such path breaks both safety and recovery semantics.
 
+## Internal-service research decomposition
+
+The [internal-service index](native-work-ports-and-drivers/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Native service broker and attenuated handles](native-work-ports-and-drivers/native-service-broker-and-attenuated-handles.md).
+- [Native request outcomes and cancellation drain](native-work-ports-and-drivers/native-request-outcomes-and-cancellation-drain.md).
+- [Native buffer leases, port ownership and driver handoff](native-work-ports-and-drivers/native-buffer-leases-port-ownership-and-driver-handoff.md).
+- [Trusted NIF segments, resources and domain risk](native-work-ports-and-drivers/trusted-nif-segments-resources-and-domain-risk.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)

@@ -406,6 +406,18 @@ on/off-heap switching, the exact compatible hard-memory outcome, and whether a
 typed/certified mailbox profile can safely specialize selected receives. All
 must preserve the simple logical model as the oracle.
 
+## Internal-service research decomposition
+
+The [internal-service index](signal-ingress-mailboxes-and-selective-receive/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Signal envelope admission and payload transfer](signal-ingress-mailboxes-and-selective-receive/signal-envelope-admission-and-payload-transfer.md).
+- [Striped ingress order and node reclamation](signal-ingress-mailboxes-and-selective-receive/striped-ingress-order-and-node-reclamation.md).
+- [Signal dispatch, priority and alias admission](signal-ingress-mailboxes-and-selective-receive/signal-dispatch-priority-and-alias-admission.md).
+- [Selective receive cursors, markers and timeouts](signal-ingress-mailboxes-and-selective-receive/selective-receive-cursors-markers-and-timeouts.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)

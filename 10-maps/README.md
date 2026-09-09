@@ -59,7 +59,7 @@ should explain why its links belong together rather than merely list files.
 - [Managed actor runtime](managed-actor-runtime.md) — routes through BEAM
   compatibility, actors, process-local GC, mailboxes, scheduling, code,
   native boundaries, distribution, deterministic testing, and runtime
-  evaluation.
+  evaluation, including internal-service studies for all thirteen components.
 - [Minimal privileged kernel](minimal-privileged-kernel.md) — routes through
   capability authority, protected domains, bounded IPC, CPU budgets, failure
   containment, safe teardown, driver recovery, and assurance, including the

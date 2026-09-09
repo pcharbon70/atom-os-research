@@ -394,6 +394,18 @@ be narrowed, selected services must be moved above it, or the proposed kernel
 contract must be revised explicitly. Hiding dependencies behind undocumented
 shims is not success.
 
+## Internal-service research decomposition
+
+The [internal-service index](runtime-domain-bootstrap-and-kernel-adapter/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Launch descriptor and bootstrap transaction](runtime-domain-bootstrap-and-kernel-adapter/launch-descriptor-and-bootstrap-transaction.md).
+- [Host dependency and adapter operation contract](runtime-domain-bootstrap-and-kernel-adapter/host-dependency-and-adapter-operation-contract.md).
+- [Page, context and route grant adoption](runtime-domain-bootstrap-and-kernel-adapter/page-context-and-route-grant-adoption.md).
+- [Admission close and domain quiescence](runtime-domain-bootstrap-and-kernel-adapter/admission-close-and-domain-quiescence.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md) — integrated

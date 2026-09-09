@@ -423,6 +423,18 @@ safe-point bound without entering an isolated lane, or if context revocation
 causes duplicate/lost actor ownership. Performance tuning is secondary to
 those invariants.
 
+## Internal-service research decomposition
+
+The [internal-service index](reduction-scheduler-and-kernel-scheduling-contexts/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Activation ownership, wakeup and work stealing](reduction-scheduler-and-kernel-scheduling-contexts/activation-ownership-wakeup-and-work-stealing.md).
+- [Reduction costs and yieldable work continuations](reduction-scheduler-and-kernel-scheduling-contexts/reduction-costs-and-yieldable-work-continuations.md).
+- [Kernel budget reconciliation and worker lifecycle](reduction-scheduler-and-kernel-scheduling-contexts/kernel-budget-reconciliation-and-worker-lifecycle.md).
+- [Priority classes and funded runtime progress](reduction-scheduler-and-kernel-scheduling-contexts/priority-classes-and-funded-runtime-progress.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)

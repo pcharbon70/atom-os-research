@@ -38,6 +38,7 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| Managed actor runtime internal services | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-09 all thirteen components](../50-journal/2026-09-09-managed-runtime-internal-services-deep-dive.md) |
 | Minimal privileged-kernel internal services | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-09-09 all eleven components](../50-journal/2026-09-09-minimal-kernel-internal-services-deep-dive.md) |
 | Kernel architecture internal services | [Kernel hardware and architecture support](../10-maps/kernel-hardware-and-architecture-support.md) | [2026-09-08 remaining nine components](../50-journal/2026-09-08-kernel-architecture-internal-services-deep-dive.md) |
 | Kernel-language comparison | [Kernel-language selection](../10-maps/kernel-language-selection.md) | [2026-09-08 Zig versus C](../50-journal/2026-09-08-zig-versus-c-kernel-language-deep-dive.md) |
@@ -81,6 +82,11 @@ not retroactively labeled as introduced by it:
 - None yet.
 
 ### Documents
+
+- [Automatic Yielding of C Code](erlang-otp-team-2026-yielding-c-code-contracts.md) — continuation state, helper destruction and transformation limits.
+- [Thread Progress](erlang-otp-team-2026-thread-progress-contracts.md) — software reader participation and grace-period completion limits.
+- [Decentralized ETS Counters for Better Scalability](winblad-2021-decentralized-ets-counters.md) — update scalability versus coherent observation cost.
+- [Clever use of persistent_term](larsson-2019-persistent-term.md) — cheap global reads versus replacement and reclamation work.
 
 - [capDL Loader](sel4-foundation-2026-capdl-loader-contract.md) — Where does declarative initialization assurance stop?
 - [What the Proofs Assume](sel4-foundation-2026-proof-assumptions.md) — What remains outside a kernel correctness or security theorem?

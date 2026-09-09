@@ -40,6 +40,14 @@ Their [research journal](../50-journal/2026-09-09-minimal-kernel-internal-servic
 records six new and twenty-one reused sources and the outstanding proof
 obligations. This does not change the implementation milestones.
 
+The [managed actor runtime decompositions](../20-notes/managed-actor-runtime-components/README.md)
+add 56 service studies across all thirteen components, from loader verification
+and actor-local tracing collection to native effects, shared-state accounting
+and independent crash evidence. Their
+[research journal](../50-journal/2026-09-09-managed-runtime-internal-services-deep-dive.md)
+records four new and twenty reused sources. These are full-system contracts
+and falsifiers, not proof-of-concept tasks or completed runtime behavior.
+
 ## Starting implementation
 
 The [kernel-language selection map](kernel-language-selection.md) compares

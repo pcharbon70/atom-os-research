@@ -406,6 +406,18 @@ The key falsifier is stale delivery: any test in which a delayed message,
 timer, `DOWN`, service completion, trace event, or process-info request is
 accepted by a successor actor invalidates the identity design.
 
+## Internal-service research decomposition
+
+The [internal-service index](actor-identity-lifecycle-and-process-state/README.md) expands this
+component into 4 ownership and lifecycle studies. The split follows actual
+contract differences rather than a uniform report count. These are developing
+full-system research notes with unexecuted falsifiers, not implementation phases.
+
+- [Actor registry generations and lookup pins](actor-identity-lifecycle-and-process-state/actor-registry-generations-and-lookup-pins.md).
+- [Spawn transaction and atomic relations](actor-identity-lifecycle-and-process-state/spawn-transaction-and-atomic-relations.md).
+- [Links, monitors, aliases and name registration](actor-identity-lifecycle-and-process-state/links-monitors-aliases-and-name-registration.md).
+- [Exit cursor and process-state snapshots](actor-identity-lifecycle-and-process-state/exit-cursor-and-process-state-snapshots.md).
+
 ## Connections
 
 - [Managed actor runtime layer](../managed-actor-runtime-layer.md)
