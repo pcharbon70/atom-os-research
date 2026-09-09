@@ -858,6 +858,22 @@ dependencies.
 - How should suspend/resume compose with ordinary offline when firmware uses
   overlapping states?
 
+## Internal-service research decomposition
+
+The [logical-cpu coordination and lifecycle service reports](logical-cpu-coordination-and-lifecycle/README.md)
+decompose this component into 6 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [CPU identity, incarnation and membership](logical-cpu-coordination-and-lifecycle/identity-incarnation-and-membership.md) — How can remote protocols distinguish a currently participating CPU from a restarted execution agent with the same hardware identifier?
+- [Secondary preparation and admission](logical-cpu-coordination-and-lifecycle/secondary-preparation-and-admission.md) — Which dependencies must be installed and validated between a firmware start request and publication of usable membership?
+- [Bounded cross-CPU request fabric](logical-cpu-coordination-and-lifecycle/cross-cpu-request-fabric.md) — How can translation, code-publication and lifecycle clients request remote effects without ambiguous completion or unbounded privileged work?
+- [CPU drain, stop and reclamation](logical-cpu-coordination-and-lifecycle/drain-stop-and-reclamation.md) — When may CPU-local memory and shared participation records be reclaimed after removal?
+- [Topology and feature eligibility](logical-cpu-coordination-and-lifecycle/topology-and-feature-eligibility.md) — How can heterogeneous feature sets and changing CPU membership be exposed without requiring all processors to be identical?
+- [CPU quarantine and recovery ledger](logical-cpu-coordination-and-lifecycle/quarantine-and-recovery-ledger.md) — How does the system preserve safety after partial CPU removal without leaking responsibility or falsely declaring resources reusable?
+
 ## Connections
 
 - [Kernel hardware and architecture support layer](../kernel-hardware-and-architecture-support-layer.md) — places CPU lifecycle among translation, interrupt, time, and fault components.

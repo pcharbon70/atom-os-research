@@ -25,6 +25,14 @@ platform must run compiled BEAM code with BEAM-compatible process semantics,
 including automatic process-local tracing garbage collection, without making
 one existing VM implementation the kernel foundation.
 
+## Full-system architecture research
+
+The [kernel architecture service decompositions](../20-notes/kernel-hardware-and-architecture-components/README.md)
+now cover the internals of all eleven components. The latest research adds
+55 reports across nine components, preserving the existing translation and
+diagnostic decompositions. This is architecture research, independent of the
+implementation stream below; proposed protocols and tests are not verified results.
+
 ## Starting implementation
 
 The [kernel-language selection map](kernel-language-selection.md) compares

@@ -1337,6 +1337,23 @@ least-privilege isolation.
 - Which advanced feature—multi-queue direct access, ATS, PRI, or PASID—earns
   its verification and recovery complexity first?
 
+## Internal-service research decomposition
+
+The [protected i/o and dma ownership service reports](protected-io-and-dma-ownership/README.md)
+decompose this component into 7 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [Requester and endpoint scope binding](protected-io-and-dma-ownership/requester-endpoint-scope-binding.md) — What is the smallest defensible authority boundary when bridges, aliases, peer-to-peer paths and shared reset mechanisms connect several functions?
+- [DMA buffer registration and range authority](protected-io-and-dma-ownership/dma-buffer-registration-and-range-authority.md) — How can a buffer be prepared for I/O without exposing neighboring data or creating a mapping that outlives its frame authority?
+- [CPU-device transfer and queue publication](protected-io-and-dma-ownership/cpu-device-transfer-and-queue-publication.md) — Which evidence is required before a buffer becomes DeviceOwned and before CPU access may resume?
+- [IOMMU maintenance and completion](protected-io-and-dma-ownership/iommu-maintenance-and-completion.md) — How can a common service expose the guarantees needed for safe mapping changes without claiming that all remappers implement one universal fence?
+- [I/O revocation and reclamation](protected-io-and-dma-ownership/revocation-and-reclamation.md) — What evidence permits a frame or IOVA to be reused after a principal, mapping or device loses access?
+- [Reset-domain and recovery authority](protected-io-and-dma-ownership/reset-domain-and-recovery-authority.md) — Who can reset a shared domain, and how is authority transferred safely when its ordinary owner crashes?
+- [I/O fault attribution and quarantine](protected-io-and-dma-ownership/io-fault-attribution-and-quarantine.md) — How can asynchronous I/O failures be attributed after bindings change without granting diagnostic code control over live hardware authority?
+
 ## Connections
 
 - [Kernel hardware and architecture support layer](../kernel-hardware-and-architecture-support-layer.md)

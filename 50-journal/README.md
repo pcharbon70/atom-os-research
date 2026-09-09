@@ -35,6 +35,11 @@ provenance record.
 
 ### Documents
 
+- [2026-09-08 kernel architecture internal services](2026-09-08-kernel-architecture-internal-services-deep-dive.md) —
+  records fifty-five new service reports across nine components, eight new
+  and thirty-five reused sources, full-system scope, evidence limitations
+  and unexecuted verification obligations.
+
 - [2026-09-08 Zig versus C kernel language](2026-09-08-zig-versus-c-kernel-language-deep-dive.md) — two new and twenty-three reused sources, conditional recommendation, unequal-probe audit and no new implementation experiment.
 - [2026-09-08 C kernel feasibility](2026-09-08-c-kernel-feasibility-deep-dive.md) — ten new and eleven reused sources, mixed-compiler C probes, missing-helper negative evidence and open boot/safety qualification.
 - [2026-09-08 Zig kernel feasibility](2026-09-08-zig-kernel-feasibility-deep-dive.md) — thirteen new and two reused sources, selected language decision, mixed C/Zig and compile-only architecture probes, version-sensitive limitations and open qualification gates.

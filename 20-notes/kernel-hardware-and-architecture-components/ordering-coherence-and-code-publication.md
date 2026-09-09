@@ -1752,6 +1752,23 @@ order.
 - Which speculative-execution mitigations belong in the mandatory publication
   profile, and which remain target-specific security options?
 
+## Internal-service research decomposition
+
+The [ordering, coherence and code publication service reports](ordering-coherence-and-code-publication/README.md)
+decompose this component into 7 separately reviewable contracts. This is
+full-system architecture research, not a milestone or platform-test plan.
+The integrated protocol in this parent remains authoritative; the child
+reports refine its ownership, transitions, failure cases and open proof
+obligations without claiming implementation evidence.
+
+- [Ordinary-memory synchronization](ordering-coherence-and-code-publication/ordinary-memory-synchronization.md) — Which synchronization effects may shared kernel objects assume, and in which execution contexts?
+- [Typed MMIO ordering and completion](ordering-coherence-and-code-publication/typed-mmio-ordering-and-completion.md) — How does a caller distinguish access issue, ordering, receipt and semantic device completion?
+- [Cache-maintenance planner](ordering-coherence-and-code-publication/cache-maintenance-planner.md) — How can maintenance plans be complete without overextending the authority or scope of their caller?
+- [Executable image sealing](ordering-coherence-and-code-publication/executable-image-sealing.md) — What must be closed before opaque bytes and their metadata commitment can become SealedCode?
+- [Executable publication transaction](ordering-coherence-and-code-publication/executable-publication-transaction.md) — When is an image safe for every authorized executor to enter?
+- [Publication membership and catch-up](ordering-coherence-and-code-publication/publication-membership-and-catch-up.md) — How does a CPU becoming eligible after publication prove it has caught up?
+- [Executable retirement and quarantine](ordering-coherence-and-code-publication/executable-retirement-and-quarantine.md) — When can code bytes be reused without invalidating a live instruction, return address or diagnostic reference?
+
 ## Connections
 
 - [Kernel hardware and architecture support
