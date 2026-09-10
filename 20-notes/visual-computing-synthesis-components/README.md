@@ -34,7 +34,13 @@ belongs in the parent synthesis; source-specific evidence belongs in
 
 ### Subdirectories
 
-- None yet.
+- [User-owned project graph and composition internal services](user-owned-project-graph-and-composition/README.md) — durable project truth, providers, authority, collaboration, and portability.
+- [Durable semantic actors and disposable presentation internal services](durable-semantic-actors-and-disposable-presentation/README.md) — model activation, view publication, renderer leases, and recovery.
+- [Semantics-first accessible UI protocol internal services](semantics-first-accessible-ui-protocol/README.md) — vocabulary, streams, actions, adapters, and consumer continuity.
+- [Input, focus, and trusted-interaction authority internal services](input-focus-and-trusted-interaction-authority/README.md) — event provenance, routing, transfer, trusted ceremonies, and remote sessions.
+- [Capability-scoped live tools and transactional evolution internal services](capability-scoped-live-tools-and-transactional-evolution/README.md) — inspection, evaluation, debugging, changesets, and publication.
+- [Cross-layer placement and recovery topology internal services](cross-layer-placement-and-recovery-topology/README.md) — placement, fencing, boot recovery, restart groups, and reserves.
+- [Plural representations and cross-view consistency internal services](plural-representations-and-cross-view-consistency/README.md) — provider contracts, equivalence, bidirectional edits, multimodality, and remote views.
 
 ### Documents
 

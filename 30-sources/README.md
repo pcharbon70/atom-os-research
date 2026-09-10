@@ -38,6 +38,7 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| Visual-computing internal services | [Alan Kay, Smalltalk, and visual computing](../10-maps/alan-kay-smalltalk-ui.md) | [2026-09-10 all seven components](../50-journal/2026-09-10-visual-computing-internal-services-deep-dive.md) |
 | OTP-like system-service internal services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-10 all thirteen components](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md) |
 | Application and domain-service internal services | [Applications and domain services](../10-maps/applications-and-domain-services.md) | [2026-09-09 all fourteen components](../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) |
 | Managed actor runtime internal services | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-09 all thirteen components](../50-journal/2026-09-09-managed-runtime-internal-services-deep-dive.md) |
@@ -84,6 +85,12 @@ not retroactively labeled as introduced by it:
 - None yet.
 
 ### Documents
+
+- [AccessKit architecture and engineering notes](accesskit-project-2026-architecture-and-engineering.md) — serializable semantic trees, atomic updates, adapter limits, subtrees, and memory trade-offs.
+- [Chromium multi-process graphics and accessibility](chromium-project-2026-multiprocess-graphics-and-accessibility.md) — renderer, GPU, input, accessibility-cache, fallback, and restart boundaries.
+- [Fault-tolerant live update](giuffrida-et-al-2013-fault-tolerant-live-update.md) — isolated versions, migration validation, and recovery from state-transfer faults.
+- [Qubes OS GUI virtualization](qubes-project-2026-gui-virtualization.md) — trusted cross-domain composition, focus-confined input, origin markers, and clipboard transfer.
+- [XDG Desktop Portal interaction sessions](xdg-desktop-portal-project-2026-interaction-sessions.md) — session-scoped remote input, screen capture, clipboard, persistence, and revocation.
 
 - [Lifeguard](dadgar-et-al-2018-lifeguard.md) — observer-local slowness, adaptive suspicion and controlled-evaluation limits.
 - [Canarying releases](warner-davidovic-2018-canarying-releases.md) — cohort attribution, representative observation and inconclusive rollout decisions.

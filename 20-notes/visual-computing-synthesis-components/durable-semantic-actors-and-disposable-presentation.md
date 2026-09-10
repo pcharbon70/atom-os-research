@@ -396,6 +396,17 @@ The proposal is falsified if restarting presentation rolls durable meaning
 back, if a view is the only authoritative copy of an edit, or if correctness
 requires replaying unacknowledged input.
 
+## Internal-service research decomposition
+
+The [internal-service index](durable-semantic-actors-and-disposable-presentation/README.md)
+expands this component into four studies selected by distinct durable,
+reconstructible, leased, and recovery state boundaries.
+
+- [Model activation, durable identity, and effect outcomes](durable-semantic-actors-and-disposable-presentation/model-activation-durable-identity-and-effect-outcomes.md) — logical continuity across actor replacement.
+- [Semantic observation and view-generation publication](durable-semantic-actors-and-disposable-presentation/semantic-observation-and-view-generation-publication.md) — coherent reconstructible meaning.
+- [Renderer, surface, buffer, and device leases](durable-semantic-actors-and-disposable-presentation/renderer-surface-buffer-and-device-leases.md) — disposable resource ownership.
+- [Restart, resynchronization, and presentation backpressure](durable-semantic-actors-and-disposable-presentation/restart-resynchronization-and-presentation-backpressure.md) — bounded recovery under overload.
+
 ## Connections
 
 - [Umbrella visual-interface synthesis](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —

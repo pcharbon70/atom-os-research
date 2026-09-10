@@ -380,6 +380,17 @@ actors by construction, if recovery depends on the failed service to release
 its own authority, or if a system can recover only while resources are
 plentiful.
 
+## Internal-service research decomposition
+
+The [internal-service index](cross-layer-placement-and-recovery-topology/README.md)
+expands this component into five placement and recovery responsibilities.
+
+- [Layer ownership, service domains, and trust boundaries](cross-layer-placement-and-recovery-topology/layer-ownership-service-domains-and-trust-boundaries.md) — enforcement and policy placement.
+- [Generation propagation, fencing, and revocation](cross-layer-placement-and-recovery-topology/generation-propagation-fencing-and-revocation.md) — stale-safe cross-layer references.
+- [Headless boot, dependency cuts, and recovery console](cross-layer-placement-and-recovery-topology/headless-boot-dependency-cuts-and-recovery-console.md) — desktop-independent recovery.
+- [Restart groups, compositor recovery, and state reconstruction](cross-layer-placement-and-recovery-topology/restart-groups-compositor-recovery-and-state-reconstruction.md) — bounded visual-service replacement.
+- [Resource reserve, overload, and fault containment](cross-layer-placement-and-recovery-topology/resource-reserve-overload-and-fault-containment.md) — capacity for trusted and recovery paths.
+
 ## Connections
 
 - [Umbrella visual-interface synthesis](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —

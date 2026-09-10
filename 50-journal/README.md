@@ -35,6 +35,11 @@ provenance record.
 
 ### Documents
 
+- [2026-09-10 visual-computing internal services](2026-09-10-visual-computing-internal-services-deep-dive.md) —
+  records 34 studies across all seven synthesis components, five new and
+  54 reused sources, explicit non-PoC scope, evidence gaps, and
+  unexecuted qualification obligations.
+
 - [2026-09-10 OTP-like system-service internal services](2026-09-10-otp-system-services-internal-services-deep-dive.md) —
   records 55 studies across thirteen components, three new and twenty-four
   reused sources, the xDS clarification and unexecuted qualification cases.

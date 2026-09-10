@@ -412,6 +412,18 @@ The proposal is falsified if essential meaning exists only in pixels, if two
 maintained view trees can disagree about a committed action, or if semantic
 access implicitly bypasses project authority.
 
+## Internal-service research decomposition
+
+The [internal-service index](semantics-first-accessible-ui-protocol/README.md)
+expands this component into five protocol responsibilities. They specify
+unexecuted conformance obligations; they do not claim accessibility compliance.
+
+- [Semantic vocabulary, identity, and localization](semantics-first-accessible-ui-protocol/semantic-vocabulary-identity-and-localization.md) — stable meaning and negotiated extensions.
+- [Atomic snapshot, delta, and resynchronization](semantics-first-accessible-ui-protocol/atomic-snapshot-delta-and-resynchronization.md) — explicit continuity and loss recovery.
+- [Action description, invocation, and durable outcomes](semantics-first-accessible-ui-protocol/action-description-invocation-and-durable-outcomes.md) — discovery separated from authority and effects.
+- [Projection filtering, redaction, and platform adapters](semantics-first-accessible-ui-protocol/projection-filtering-redaction-and-platform-adapters.md) — safe lossy platform views.
+- [Focus, selection, virtualization, and consumer continuity](semantics-first-accessible-ui-protocol/focus-selection-virtualization-and-consumer-continuity.md) — task continuity for large and changing views.
+
 ## Connections
 
 - [Umbrella visual-interface synthesis](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —

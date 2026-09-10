@@ -399,6 +399,17 @@ The design is falsified if untrusted pixels can mint authority, if ordinary
 focus unlocks unrelated channels, or if secure interaction is inaccessible to
 the users who most rely on alternate input.
 
+## Internal-service research decomposition
+
+The [internal-service index](input-focus-and-trusted-interaction-authority/README.md)
+expands this component into five authority and transfer responsibilities.
+
+- [Device normalization, event provenance, and seat routing](input-focus-and-trusted-interaction-authority/device-normalization-event-provenance-and-seat-routing.md) — trusted origin and ordering.
+- [Focus/capture leases and generation fencing](input-focus-and-trusted-interaction-authority/focus-capture-leases-and-generation-fencing.md) — bounded event routes.
+- [Drag/drop, clipboard, and format confinement](input-focus-and-trusted-interaction-authority/drag-drop-clipboard-and-format-confinement.md) — explicit cross-domain transfer.
+- [Secure attention, confirmation, and global shortcuts](input-focus-and-trusted-interaction-authority/secure-attention-confirmation-and-global-shortcuts.md) — reserved nonspoofable ceremonies.
+- [Screen capture, remote control, and context integrity](input-focus-and-trusted-interaction-authority/screen-capture-remote-control-and-context-integrity.md) — separately revocable observation and control.
+
 ## Connections
 
 - [Umbrella visual-interface synthesis](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —

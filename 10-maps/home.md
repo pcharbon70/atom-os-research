@@ -207,6 +207,14 @@ x86-64 processors; its installed components still need inventory.
   session](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md) —
   records the expanded source review, exact provenance, shared identity and
   generation model, falsifiers, and absence of prototype evidence.
+- [Visual-computing internal-service
+  decomposition](../20-notes/visual-computing-synthesis-components/README.md#subdirectories) —
+  expands all seven parent contracts into 34 state, authority, transition,
+  failure, alternative, and verification studies.
+- [2026-09-10 visual-computing internal-services research
+  session](../50-journal/2026-09-10-visual-computing-internal-services-deep-dive.md) —
+  records current scientific, standards, project-documentation, and
+  engineering-article evidence with exact provenance and open qualification.
 - [Alan Kay's Smalltalk visual interface and the modern
   desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
   reconstructs the personal dynamic medium and its components, compares it to
