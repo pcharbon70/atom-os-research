@@ -241,6 +241,17 @@ pre-derived capabilities rather than names, how registry recovery interacts
 with early boot, and which compatibility namespaces can be safely garbage
 collected without exhausting BEAM atoms.
 
+## Internal-service research decomposition
+
+The [internal-service index](naming-registry-and-local-discovery/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Namespace reservation and authority-safe resolution](naming-registry-and-local-discovery/namespace-reservation-and-authority-safe-resolution.md) — What does resolving a name authorize, and who may reserve it?
+- [Binding publication, owner death, and shard handoff](naming-registry-and-local-discovery/binding-publication-owner-death-and-shard-handoff.md) — How can replacement and owner cleanup avoid deleting a successor's binding?
+- [Snapshot/watch continuity and overflow recovery](naming-registry-and-local-discovery/snapshot-watch-continuity-and-overflow-recovery.md) — How can bounded subscribers reconstruct state without silently missing changes?
+- [Group candidate caches and bounded history](naming-registry-and-local-discovery/group-candidate-caches-and-bounded-history.md) — How should non-unique discovery remain useful without becoming an ownership oracle?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

@@ -367,6 +367,12 @@ Each summary below is expanded in the [OTP-like system services component
 index](otp-like-system-services-components/README.md), with one detailed
 evidence, architecture, implementation, and verification report per component.
 
+The [2026-09-10 internal-service research session](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md)
+adds 55 further studies across all thirteen component-named subdirectories.
+They distinguish state custody, authority, acceptance and commit, failure,
+retention and unexecuted falsifiers. This extends full-system research without
+changing the implementation program or claiming that its gates have passed.
+
 ### [0. Service-domain bootstrap and manifest controller](otp-like-system-services-components/service-domain-bootstrap-and-manifest-controller.md)
 
 **Responsibility.** Convert a validated desired-service manifest and a fixed

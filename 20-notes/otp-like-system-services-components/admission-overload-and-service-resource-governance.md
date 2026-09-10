@@ -275,6 +275,17 @@ budgets can be safely borrowed on small systems, how to price fanout and shared
 cache work, and which services need hard temporal guarantees rather than
 best-effort admission.
 
+## Internal-service research decomposition
+
+The [internal-service index](admission-overload-and-service-resource-governance/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Causal resource accounts and fanout reservations](admission-overload-and-service-resource-governance/causal-resource-accounts-and-fanout-reservations.md) — How does asynchronous work remain charged to an authenticated owner?
+- [Pressure observation, fair admission, and degradation](admission-overload-and-service-resource-governance/pressure-observation-fair-admission-and-degradation.md) — How can the system reject excess demand without confusing overload with service failure?
+- [Queue age, credit return, and backlog isolation](admission-overload-and-service-resource-governance/queue-age-credit-return-and-backlog-isolation.md) — How can backlog recovery preserve fresh work without silently discarding accepted obligations?
+- [Retry circuits, recovery reserve, and feedback stability](admission-overload-and-service-resource-governance/retry-circuit-recovery-reserve-and-feedback-stability.md) — How can retries and restarts avoid multiplying load across a dependency graph?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

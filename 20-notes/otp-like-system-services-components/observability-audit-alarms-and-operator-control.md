@@ -300,6 +300,18 @@ devices, how privacy and incident forensics should trade off, whether trusted
 wall time is available, and which minimal probe language is both useful and
 verifiable.
 
+## Internal-service research decomposition
+
+The [internal-service index](observability-audit-alarms-and-operator-control/README.md) expands this component
+into 5 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Telemetry context, redaction, and loss accounting](observability-audit-alarms-and-operator-control/telemetry-context-redaction-and-loss-accounting.md) — How can causal diagnostics remain useful while explicitly incomplete and untrusted?
+- [Crash-capsule custody and evidence retention](observability-audit-alarms-and-operator-control/crash-capsule-custody-and-evidence-retention.md) — What evidence can survive a failed runtime without trusting its normal logger?
+- [Persistent alarm state, acknowledgement, and clearance](observability-audit-alarms-and-operator-control/persistent-alarm-state-acknowledgement-and-clearance.md) — How can operators acknowledge an incident without erasing an unresolved condition?
+- [Audit intent/outcome integrity and witness progress](observability-audit-alarms-and-operator-control/audit-intent-outcome-integrity-and-witness-progress.md) — Which tampering and omission can a security audit trail actually detect?
+- [Operator-action facets, probe bounds, and break-glass](observability-audit-alarms-and-operator-control/operator-action-facets-probe-bounds-and-break-glass.md) — How can recovery tooling remain powerful without becoming permanent ambient privilege?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

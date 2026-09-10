@@ -281,6 +281,17 @@ health failures justify automatic replacement, how to share recovery reserve
 on small devices without priority inversion, and which OTP timing behaviors
 the first compatibility profile must reproduce exactly.
 
+## Internal-service research decomposition
+
+The [internal-service index](supervision-and-recovery-policy/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Failure evidence and recovery-scope selection](supervision-and-recovery-policy/failure-evidence-and-recovery-scope-selection.md) — When does an observation justify restarting an actor, runtime domain or device group?
+- [Restart budget, reserve, and cooldown controller](supervision-and-recovery-policy/restart-budget-reserve-and-cooldown-controller.md) — How can many legal restart policies coexist without exhausting recovery capacity?
+- [Fence, settle, recover, and successor readiness](supervision-and-recovery-policy/fence-settle-recover-and-successor-readiness.md) — What distinguishes a restarted process from a recovered service?
+- [Quarantine, escalation, and supervisor replacement](supervision-and-recovery-policy/quarantine-escalation-and-supervisor-replacement.md) — Who retains responsibility when local recovery cannot safely complete?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

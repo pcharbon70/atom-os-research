@@ -312,6 +312,17 @@ replicated, how trusted freshness is obtained without a reliable RTC, which
 effects qualify for automatic retry, and how much old-generation state can be
 retained on constrained devices.
 
+## Internal-service research decomposition
+
+The [internal-service index](service-domain-bootstrap-and-manifest-controller/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Bounded manifest decoding and plan normalization](service-domain-bootstrap-and-manifest-controller/bounded-manifest-decoding-and-plan-normalization.md) — How can service desired state be interpreted without acquiring authority or producing partial effects?
+- [Service-envelope reservation and private preparation](service-domain-bootstrap-and-manifest-controller/service-envelope-reservation-and-private-preparation.md) — How are resources and authority reserved without making preparation a second root of privilege?
+- [Generation publication and reconciliation](service-domain-bootstrap-and-manifest-controller/generation-publication-and-reconciliation.md) — What does one public generation switch guarantee when services continue executing independently?
+- [Controller replacement and bootstrap dependency cuts](service-domain-bootstrap-and-manifest-controller/controller-replacement-and-bootstrap-dependency-cuts.md) — How can the service controller be replaced when its normal storage, naming or identity dependencies are unavailable?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

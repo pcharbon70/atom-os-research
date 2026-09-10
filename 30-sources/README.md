@@ -38,6 +38,7 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| OTP-like system-service internal services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-10 all thirteen components](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md) |
 | Application and domain-service internal services | [Applications and domain services](../10-maps/applications-and-domain-services.md) | [2026-09-09 all fourteen components](../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) |
 | Managed actor runtime internal services | [Managed actor runtime](../10-maps/managed-actor-runtime.md) | [2026-09-09 all thirteen components](../50-journal/2026-09-09-managed-runtime-internal-services-deep-dive.md) |
 | Minimal privileged-kernel internal services | [Minimal privileged kernel](../10-maps/minimal-privileged-kernel.md) | [2026-09-09 all eleven components](../50-journal/2026-09-09-minimal-kernel-internal-services-deep-dive.md) |
@@ -83,6 +84,10 @@ not retroactively labeled as introduced by it:
 - None yet.
 
 ### Documents
+
+- [Lifeguard](dadgar-et-al-2018-lifeguard.md) — observer-local slowness, adaptive suspicion and controlled-evaluation limits.
+- [Canarying releases](warner-davidovic-2018-canarying-releases.md) — cohort attribution, representative observation and inconclusive rollout decisions.
+- [Avoiding insurmountable queue backlogs](yanacek-2019-avoiding-queue-backlogs.md) — backlog age, retry isolation and workload-dependent queue policies.
 
 - [Extending Eventually Consistent Cloud Databases for Enforcing Numeric Invariants](balegas-et-al-2015-bounded-counters.md) — numerical rights conservation, local serialization and crash-model limits.
 - [Making retries safe with idempotent APIs](featonby-2021-idempotent-apis.md) — explicit request intent, response meaning, parameter mismatch and retention.

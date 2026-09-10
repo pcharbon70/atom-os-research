@@ -56,6 +56,14 @@ offline rights, schema evolution and independent recovery. The
 records four new and thirty reused sources. The inquiry remains open; this
 full-system work does not change the implementation milestones.
 
+The [OTP-like system-service decompositions](../20-notes/otp-like-system-services-components/README.md)
+add 55 studies across all thirteen Layer 4 components. Their
+[research session](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md)
+records three new and twenty-four reused sources, including observer-aware
+failure detection, release provenance, canary evidence and backlog management.
+These remain full-system architecture research, independent of the
+implementation stream below.
+
 ## Starting implementation
 
 The [kernel-language selection map](kernel-language-selection.md) compares

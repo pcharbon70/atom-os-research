@@ -50,8 +50,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   across all eleven component subdirectories of the capability-microkernel
   layer. These are full-system research contracts, not implementation results.
 - [OTP-like system services components](otp-like-system-services-components/README.md) —
-  contains the thirteen detailed component-level implementation syntheses for
-  the unprivileged service-policy layer.
+  contains thirteen component syntheses and 55 internal-service studies across
+  all thirteen component subdirectories of the unprivileged service-policy
+  layer. These are full-system proposals with unexecuted falsifiers.
 - [Proof-of-concept requirements](proof-of-concept-requirements/README.md) —
   contains nineteen requirement studies, the Zig and C kernel-language feasibility
   studies and comparison, and the T7500 target and manufacturer reference, covering CLI boot, bounded kernel
