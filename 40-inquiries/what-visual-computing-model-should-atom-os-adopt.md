@@ -162,6 +162,16 @@ the [component research
 session](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md),
 not implementation evidence.
 
+The [internal-service decomposition](../20-notes/visual-computing-synthesis-components/README.md#subdirectories)
+now refines the seven parent reports into 34 responsibilities with separately
+owned state, authority, transitions, failure behavior, alternatives, and
+falsifiers. The [2026-09-10 research
+session](../50-journal/2026-09-10-visual-computing-internal-services-deep-dive.md)
+adds cross-process semantic-tree, secure-GUI, portal-session, browser-process,
+and fault-tolerant-migration evidence. This increases specification depth but
+does not close the inquiry because no protocol, assistive-client, security,
+recovery, performance, or human study has run.
+
 ## Outcome
 
 Open. Resolution requires at minimum a protocol specification, executable

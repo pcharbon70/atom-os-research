@@ -407,6 +407,17 @@ The design is falsified if “inspect” can mutate, if update safety depends on
 unstated quiescent moment, or if a green signature is presented as proof of
 semantic correctness.
 
+## Internal-service research decomposition
+
+The [internal-service index](capability-scoped-live-tools-and-transactional-evolution/README.md)
+expands this component into five separately authorized tool responsibilities.
+
+- [Inspection facets, redaction, and copied state](capability-scoped-live-tools-and-transactional-evolution/inspection-facets-redaction-and-copied-state.md) — observation without mutation authority.
+- [Pure-evaluation sandbox and resource bounds](capability-scoped-live-tools-and-transactional-evolution/pure-evaluation-sandbox-and-resource-bounds.md) — effect-free exploratory execution.
+- [Tracing, debugging, safe points, and lease expiry](capability-scoped-live-tools-and-transactional-evolution/tracing-debugging-safe-points-and-lease-expiry.md) — bounded live control.
+- [Changeset validation, migration, and atomic publication](capability-scoped-live-tools-and-transactional-evolution/changeset-validation-migration-and-atomic-publication.md) — recoverable state evolution.
+- [Tool packaging, provenance, rollout, and recovery](capability-scoped-live-tools-and-transactional-evolution/tool-packaging-provenance-rollout-and-recovery.md) — confined reusable distribution.
+
 ## Connections
 
 - [Umbrella visual-interface synthesis](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —

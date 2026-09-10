@@ -59,7 +59,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   contracts, BEAM/GC, integrated recovery and all six later capability gates,
   with evidence, alternatives, failure cases and next experiments.
 - [Visual computing synthesis components](visual-computing-synthesis-components/README.md) —
-  contains the seven detailed implementation syntheses for user-owned
+  contains seven parent syntheses and 34 internal-service studies for user-owned
   projects, restartable presentation, semantic UI, trusted input, live tools,
   cross-layer recovery, and plural views.
 

@@ -406,6 +406,17 @@ The proposal is falsified if one view contains the only copy of an edit, if a
 view can broaden authority through translation, or if replica convergence is
 presented as proof that users' meaning was preserved.
 
+## Internal-service research decomposition
+
+The [internal-service index](plural-representations-and-cross-view-consistency/README.md)
+expands this component into five representation and consistency responsibilities.
+
+- [Provider registration, negotiation, and representation contracts](plural-representations-and-cross-view-consistency/provider-registration-negotiation-and-representation-contracts.md) — independently replaceable projections.
+- [Observational equivalence, task outcomes, and conformance](plural-representations-and-cross-view-consistency/observational-equivalence-task-outcomes-and-conformance.md) — outcome-based cross-view tests.
+- [Bidirectional projection, lens laws, and conflict rejection](plural-representations-and-cross-view-consistency/bidirectional-projection-lens-laws-and-conflict-rejection.md) — safe editable views.
+- [Multimodal session fusion, clarification, and temporal order](plural-representations-and-cross-view-consistency/multimodal-session-fusion-clarification-and-temporal-order.md) — conservative multi-input intent.
+- [Remote collaborative views, convergence, privacy, and revocation](plural-representations-and-cross-view-consistency/remote-collaborative-views-convergence-privacy-and-revocation.md) — remote disclosure separated from data merge and control.
+
 ## Connections
 
 - [Umbrella visual-interface synthesis](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —

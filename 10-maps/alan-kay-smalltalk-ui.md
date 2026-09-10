@@ -41,6 +41,14 @@ authorship, protection, and recovery as separate questions.
   dive](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md) —
   records the expanded scientific, standards, and engineering source review
   and exact session provenance.
+- [Visual-computing internal-service
+  indexes](../20-notes/visual-computing-synthesis-components/README.md#subdirectories) —
+  route through 34 state, authority, transition, failure, and verification
+  studies beneath the seven parent contracts.
+- [2026-09-10 visual-computing internal-services deep
+  dive](../50-journal/2026-09-10-visual-computing-internal-services-deep-dive.md) —
+  records five new and 54 reused sources, the decomposition method,
+  cross-component conclusions, gaps, and absence of implementation evidence.
 
 ## Trails
 
@@ -114,6 +122,9 @@ authorship, protection, and recovery as separate questions.
   trusted compositor/input path without placing desktop policy in the kernel.
 
 ### Component implementation deep dives
+
+Each seven parent syntheses now lead to 34 internal-service studies through the
+[component directory's subdirectory index](../20-notes/visual-computing-synthesis-components/README.md#subdirectories).
 
 - [User-owned project graph and
   composition](../20-notes/visual-computing-synthesis-components/user-owned-project-graph-and-composition.md) —

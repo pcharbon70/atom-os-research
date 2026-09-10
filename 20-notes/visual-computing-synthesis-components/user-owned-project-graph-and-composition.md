@@ -367,6 +367,19 @@ The design is falsified if a package remains the only interpreter of durable
 meaning, if collaboration can grant authority through data merge, or if a
 project restart can duplicate an unconfirmed effect.
 
+## Internal-service research decomposition
+
+The [internal-service index](user-owned-project-graph-and-composition/README.md)
+expands this component into five needs-based studies. They are full-system
+architecture responsibilities and unexecuted qualification obligations, not
+PoC tasks or implementation results.
+
+- [Project manifest, object identity, and history](user-owned-project-graph-and-composition/project-manifest-object-identity-and-history.md) — durable meaning and crash-consistent history.
+- [Provider discovery, binding, and schema negotiation](user-owned-project-graph-and-composition/provider-discovery-binding-and-schema-negotiation.md) — replaceable interpretation and editing.
+- [Authority intent, rehydration, and revocation](user-owned-project-graph-and-composition/authority-intent-rehydration-and-revocation.md) — current live grants from durable policy intent.
+- [Collaboration, replica membership, and conflict](user-owned-project-graph-and-composition/collaboration-replica-membership-and-conflict.md) — convergence separated from authority and effects.
+- [Export, import, retention, and recovery](user-owned-project-graph-and-composition/export-import-retention-and-recovery.md) — provider-independent portability and retention.
+
 ## Connections
 
 - [Umbrella visual-interface synthesis](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
