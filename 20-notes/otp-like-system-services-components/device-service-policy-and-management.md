@@ -277,6 +277,17 @@ semantics, how much class validation can be generated from specifications,
 whether passive driver scheduling meets latency goals, and which devices must
 remain trusted because their hardware cannot be safely virtualized.
 
+## Internal-service research decomposition
+
+The [internal-service index](device-service-policy-and-management/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Device inventory, reset domains, and driver admission](device-service-policy-and-management/device-inventory-reset-domains-and-driver-admission.md) — Which hardware resources can actually be managed and reset independently?
+- [Class virtualization, queue credits, and buffer custody](device-service-policy-and-management/class-virtualization-queue-credits-and-buffer-custody.md) — How can untrusted clients share I/O without forging descriptors or duplicating buffer ownership?
+- [Issue intent, completion proof, and device outcomes](device-service-policy-and-management/issue-intent-completion-proof-and-device-outcomes.md) — What can software honestly conclude after a driver crashes near a hardware command?
+- [Device fencing, reset, and quarantine release](device-service-policy-and-management/device-fencing-reset-and-quarantine-release.md) — When is old device activity unable to corrupt a replacement's resources?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

@@ -190,6 +190,15 @@ index](../20-notes/otp-like-system-services-components/README.md):
 
 ### Formal and executable models
 
+The [internal-service decomposition](../20-notes/otp-like-system-services-components/README.md)
+now supplies 55 studies and 110 unexecuted falsifiers across all thirteen
+components. The [2026-09-10 session](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md)
+extends evidence for observer-aware failure detection, release provenance,
+canary attribution and backlog policy. New research obligations include an
+independent bootstrap dependency cut, explicit canary Inconclusive decisions,
+stale-request rejection after result collection and settlement of effects
+already admitted before a fence changes. These do not close this inquiry.
+
 - Service lifecycle with controller crash before and after publication.
 - Supervisor escalation with child, supervisor, runtime-domain, and recovery
   holder failures.

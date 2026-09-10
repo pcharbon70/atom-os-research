@@ -19,6 +19,12 @@ This directory contains the detailed evidence and implementation syntheses for
 the thirteen unprivileged policy components proposed by the
 [OTP-like system services layer](../otp-like-system-services-layer.md).
 
+All thirteen components now have internal-service decompositions: 55 studies
+cover distinct owned state, authority, transitions, failure cases, alternatives
+and unexecuted falsifiers. These are full-system architecture research, not
+PoC/QEMU work. The [research session](../../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md)
+records three newly introduced and twenty-four reused sources.
+
 ## What belongs here
 
 Put one component-scale synthesis here when it refines a service-layer
@@ -31,7 +37,19 @@ evidence in `50-journal`.
 
 ### Subdirectories
 
-- None yet.
+- [Service-domain bootstrap and manifest controller](service-domain-bootstrap-and-manifest-controller/README.md) — 4 studies. Separate pure desired-state compilation, constrained preparation, public selection and recovery of the controller itself.
+- [Behaviour engines and capability-gated management](behaviour-engines-and-capability-gated-management/README.md) — 5 studies. Distinguish serialized requests, state-machine scheduling, event delivery, cooperative management and callback evolution.
+- [Supervision and recovery policy](supervision-and-recovery-policy/README.md) — 4 studies. Separate evidence classification, restart admission, state recovery and escalation outside the failed subtree.
+- [Application lifecycle and dependency orchestration](application-lifecycle-and-dependency-orchestration/README.md) — 4 studies. Separate graph planning, attempt ownership, readiness publication and irreversible shutdown obligations.
+- [Naming, registry, and local discovery](naming-registry-and-local-discovery/README.md) — 4 studies. Separate namespace authority, unique publication, watch continuity and bounded candidate views.
+- [Configuration, workload identity, and secrets](configuration-workload-identity-and-secrets/README.md) — 4 studies. Separate immutable configuration construction, actual adoption, attested caller binding and credential lifetime.
+- [Durable state, transactions, and outcome recovery](durable-state-transactions-and-outcome-recovery/README.md) — 4 studies. Separate the storage fault contract, transactional log, recoverable checkpoint and durable retry-result lifetime.
+- [Device-service policy and management](device-service-policy-and-management/README.md) — 4 studies. Separate inventory/reset scope, client virtualization, issue outcomes and safe replacement.
+- [Network endpoint and protocol services](network-endpoint-and-protocol-services/README.md) — 4 studies. Separate endpoint authority, bounded parsing, authenticated session lifecycle and application outcomes.
+- [Distributed membership, discovery, and authoritative coordination](distributed-membership-discovery-and-authoritative-coordination/README.md) — 4 studies. Separate observer health, replay-resistant membership, quorum metadata and effect-sink ownership.
+- [Release, update, rollback, and state migration](release-update-rollback-and-state-migration/README.md) — 5 studies. Separate release provenance, transition compatibility, canary evidence, state migration and irreversible retention decisions.
+- [Admission, overload, and service-resource governance](admission-overload-and-service-resource-governance/README.md) — 4 studies. Separate causal accounting, pressure-based admission, queue-credit conservation and bounded retry/recovery feedback.
+- [Observability, audit, alarms, and operator control](observability-audit-alarms-and-operator-control/README.md) — 5 studies. Separate lossy telemetry, retained crash facts, persistent alarm state, integrity-protected audit and bounded operator/probe authority.
 
 ### Documents
 

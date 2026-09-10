@@ -305,6 +305,18 @@ runtime or hosted as shared services, how much management state may cross a
 trust boundary, and whether hot code transition is worth supporting in the
 first bootable profile.
 
+## Internal-service research decomposition
+
+The [internal-service index](behaviour-engines-and-capability-gated-management/README.md) expands this component
+into 5 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Serialized calls and outcome correlation](behaviour-engines-and-capability-gated-management/serialized-calls-and-outcome-correlation.md) — Which operation state survives a caller timeout or late reply?
+- [State-machine events, postponement, and timer generations](behaviour-engines-and-capability-gated-management/state-machine-events-postponement-and-timer-generations.md) — How can state-machine features remain bounded without claiming invisible OTP compatibility?
+- [Event-router subscriber isolation and delivery classes](behaviour-engines-and-capability-gated-management/event-router-subscriber-isolation-and-delivery-classes.md) — What does event publication mean when subscribers have different failure and loss contracts?
+- [Management facets, suspension, and outer termination](behaviour-engines-and-capability-gated-management/management-facets-suspension-and-outer-termination.md) — How can management remain useful without becoming unrestricted inspection or relying on cooperation for containment?
+- [Callback transition and compatibility trace boundaries](behaviour-engines-and-capability-gated-management/callback-transition-and-compatibility-trace-boundaries.md) — Which evidence is needed before replacing an engine callback and its state schema?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

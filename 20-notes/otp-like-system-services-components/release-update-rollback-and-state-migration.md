@@ -61,10 +61,13 @@ orchestration concepts, but a first Atom OS profile should remain much smaller.
 
 The synthesis treats update as a transaction over several independently
 fallible domains, with one small public activation point and explicit
-irreversibility. Build-provenance attestation and statistically sound canary
-policy are architectural requirements whose strongest direct literature is not
-yet preserved in this pass; TUF explicitly does not secure a compromised build
-process. They remain evidence gaps rather than inherited TUF guarantees.
+irreversibility. The later [provenance study](release-update-rollback-and-state-migration/artifact-authentication-provenance-and-staging-authority.md)
+connects the archive's [in-toto evidence](../../30-sources/torres-arias-et-al-2019-in-toto.md);
+the [canary study](release-update-rollback-and-state-migration/canary-cohorts-attribution-and-inconclusive-evidence.md)
+adds [first-party rollout guidance](../../30-sources/warner-davidovic-2018-canarying-releases.md).
+These narrow the literature gaps, but do not select a build-attestation
+implementation or establish a statistically qualified canary controller.
+TUF does not secure a compromised build process.
 
 ## Separated assurance chain
 
@@ -283,9 +286,22 @@ attestation system, trusted-time source, or migration language.
 Open questions include whether the earliest targets can afford two complete
 generations, how to recover root trust after device replacement, which updates
 require reboot, and whether hot code change is worth its state-space cost
-compared with service-generation replacement. Direct primary evidence for the
-chosen build-attestation scheme and statistically valid canary controller must
-be added when those mechanisms are selected.
+compared with service-generation replacement. Implementation-specific
+attestation assurance and statistical canary qualification remain required
+after selecting those mechanisms; the internal-service studies supply
+literature and falsifiers, not completed qualification.
+
+## Internal-service research decomposition
+
+The [internal-service index](release-update-rollback-and-state-migration/README.md) expands this component
+into 5 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Artifact authentication, provenance, and staging authority](release-update-rollback-and-state-migration/artifact-authentication-provenance-and-staging-authority.md) — What must be verified before signed bytes are eligible for deployment?
+- [Release compatibility graph and transition admission](release-update-rollback-and-state-migration/release-compatibility-graph-and-transition-admission.md) — Can old and new code, schemas, protocols and permissions safely coexist during rollout?
+- [Canary cohorts, attribution, and inconclusive evidence](release-update-rollback-and-state-migration/canary-cohorts-attribution-and-inconclusive-evidence.md) — What observation is strong enough to expand a release without mistaking missing or biased data for success?
+- [Private state migration and cutover frontiers](release-update-rollback-and-state-migration/private-state-migration-and-cutover-frontiers.md) — How does migration finish against a coherent state when the old generation is still changing?
+- [Activation, rollback commit, and retention closure](release-update-rollback-and-state-migration/activation-rollback-commit-and-retention-closure.md) — When may the old generation and its evidence actually be destroyed?
 
 ## Connections
 

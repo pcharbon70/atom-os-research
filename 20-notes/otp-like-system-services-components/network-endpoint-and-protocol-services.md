@@ -284,6 +284,17 @@ only a smaller datagram/RPC subset; how certificate time validation works
 without a reliable RTC; and which application protocols merit durable outcome
 lookup rather than simple at-least-once or at-most-once semantics.
 
+## Internal-service research decomposition
+
+The [internal-service index](network-endpoint-and-protocol-services/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Endpoint broker, routing, and resolver authority](network-endpoint-and-protocol-services/endpoint-broker-routing-and-resolver-authority.md) — How are network destinations selected without making connectivity ambient authority?
+- [Protocol-parser isolation and flow-control custody](network-endpoint-and-protocol-services/protocol-parser-isolation-and-flow-control-custody.md) — Which resource bounds survive hostile frames, fragmented messages and slow consumers?
+- [Session authentication, reconnect, and trust revalidation](network-endpoint-and-protocol-services/session-authentication-reconnect-and-trust-revalidation.md) — What identity and replay state can survive path change, reconnect or credential rotation?
+- [Remote outcome correlation and confined distribution](network-endpoint-and-protocol-services/remote-outcome-correlation-and-confined-distribution.md) — How can remote messaging preserve uncertainty and limit compatibility-peer authority?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

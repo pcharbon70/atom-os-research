@@ -262,6 +262,17 @@ which services need durable retry results, whether content-addressed blobs
 share the same fault domain, and when replication complexity is justified over
 simple recoverable local metadata.
 
+## Internal-service research decomposition
+
+The [internal-service index](durable-state-transactions-and-outcome-recovery/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Durability profile and storage failure boundary](durable-state-transactions-and-outcome-recovery/durability-profile-and-storage-failure-boundary.md) — Which failures does a successful persistence acknowledgement actually survive?
+- [Transaction-log framing and commit publication](durable-state-transactions-and-outcome-recovery/transaction-log-framing-and-commit-publication.md) — How can recovery distinguish a committed transaction from a plausible but incomplete log tail?
+- [Checkpoint replay and retention frontiers](durable-state-transactions-and-outcome-recovery/checkpoint-replay-and-retention-frontiers.md) — When can log history be reclaimed without invalidating recovery, readers or promised outcomes?
+- [Operation-result ledger, retry rendezvous, and expiry](durable-state-transactions-and-outcome-recovery/operation-result-ledger-retry-rendezvous-and-expiry.md) — How can duplicate suppression remain bounded without executing an old operation again?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

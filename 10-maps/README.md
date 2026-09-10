@@ -67,7 +67,8 @@ should explain why its links belong together rather than merely list files.
 - [OTP-like system services](otp-like-system-services.md) — routes through
   unprivileged lifecycle, supervision, naming, persistence, device and network
   policy, distributed authority, updates, overload control, telemetry, audit,
-  and operator control.
+  and operator control, including 55 internal-service studies across all
+  thirteen component subdirectories.
 
 ## Maintaining this index
 

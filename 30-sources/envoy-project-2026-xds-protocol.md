@@ -54,9 +54,11 @@ are part of the record.
 - A client ACK says the response was valid and that it intends to apply the
   configuration. It does not prove that every dependent subsystem has already
   made the new version active.
-- A NACK carries rejection detail while the client retains its last accepted
-  valid configuration. Failure to adopt a new candidate need not destroy the
-  previous working generation.
+- A NACK reports invalid resources and correlates the response through its
+  nonce. It does not necessarily mean that none of the resources were
+  accepted; individual resources may have been accepted. The reported version
+  and actual adoption must therefore be interpreted with resource-type and
+  subscription state, not as a universal all-or-nothing rollback.
 - State-of-the-world responses describe a complete resource set for a type;
   delta streams describe additions, changes, and removals and therefore need
   explicit client state and resynchronization behavior.
@@ -92,6 +94,9 @@ the implementation. Atom OS should reuse the semantic distinctions, not the
 full protocol or its deployment assumptions.
 
 ## Derived work
+
+- [Configuration adoption and rollout](../20-notes/otp-like-system-services-components/configuration-workload-identity-and-secrets/configuration-acknowledgement-adoption-and-rollout.md)
+- [2026-09-10 clarification session](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md) — rechecked against the current protocol's ACK/NACK summary; historical access metadata above is preserved.
 
 - [Configuration, workload identity, and secrets](../20-notes/otp-like-system-services-components/configuration-workload-identity-and-secrets.md)
 - [Application lifecycle and dependency orchestration](../20-notes/otp-like-system-services-components/application-lifecycle-and-dependency-orchestration.md)

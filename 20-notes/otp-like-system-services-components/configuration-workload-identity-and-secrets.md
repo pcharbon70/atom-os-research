@@ -257,6 +257,17 @@ Open questions include whether the first target has reliable protected time,
 which workloads genuinely need exportable credentials, and how an offline
 device renews identity without creating an effectively permanent root secret.
 
+## Internal-service research decomposition
+
+The [internal-service index](configuration-workload-identity-and-secrets/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Configuration snapshot schema and source precedence](configuration-workload-identity-and-secrets/configuration-snapshot-schema-and-source-precedence.md) — How can a complete configuration be reproducible without embedding secrets or mutable operational state?
+- [Configuration acknowledgement, adoption, and rollout](configuration-workload-identity-and-secrets/configuration-acknowledgement-adoption-and-rollout.md) — How can a controller distinguish a valid candidate from the configuration actually in use?
+- [Workload attestation and credential-authority binding](configuration-workload-identity-and-secrets/workload-attestation-and-credential-authority-binding.md) — How does the broker identify its caller without trusting a self-declared service name?
+- [Credential rotation, secret confinement, and issuer outage](configuration-workload-identity-and-secrets/credential-rotation-secret-confinement-and-issuer-outage.md) — What remains valid when credentials rotate or issuance becomes unavailable?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

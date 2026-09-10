@@ -174,6 +174,45 @@ Primary routes:
 - [Omega](../30-sources/schwarzkopf-et-al-2013-omega.md)
 - [End-to-end arguments](../30-sources/saltzer-et-al-1984-end-to-end-arguments.md)
 
+## Internal-service research routes
+
+All thirteen components now have nested decompositions, inventoried in the
+[component README](../20-notes/otp-like-system-services-components/README.md).
+The [research session](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md)
+records 55 studies, three new and twenty-four reused sources. Follow these
+selective routes for cross-component questions:
+
+- **Survive control-plane loss:** [controller replacement](../20-notes/otp-like-system-services-components/service-domain-bootstrap-and-manifest-controller/controller-replacement-and-bootstrap-dependency-cuts.md)
+  connects to [quarantine and supervisor replacement](../20-notes/otp-like-system-services-components/supervision-and-recovery-policy/quarantine-escalation-and-supervisor-replacement.md).
+  Recovery must not depend exclusively on the services being recovered.
+- **Publish coherent state:** [readiness barriers](../20-notes/otp-like-system-services-components/application-lifecycle-and-dependency-orchestration/readiness-evidence-and-coherent-activation-barriers.md),
+  [configuration adoption](../20-notes/otp-like-system-services-components/configuration-workload-identity-and-secrets/configuration-acknowledgement-adoption-and-rollout.md)
+  and [snapshot/watch continuity](../20-notes/otp-like-system-services-components/naming-registry-and-local-discovery/snapshot-watch-continuity-and-overflow-recovery.md)
+  distinguish actual usable state from acknowledgements and delayed views.
+- **Preserve effect truth through replacement:** [device issue outcomes](../20-notes/otp-like-system-services-components/device-service-policy-and-management/issue-intent-completion-proof-and-device-outcomes.md),
+  [sink fences](../20-notes/otp-like-system-services-components/distributed-membership-discovery-and-authoritative-coordination/lease-jeopardy-and-effect-sink-fence-installation.md)
+  and [retry-result expiry](../20-notes/otp-like-system-services-components/durable-state-transactions-and-outcome-recovery/operation-result-ledger-retry-rendezvous-and-expiry.md)
+  prevent stale authority or collected history from fabricating a safe retry.
+- **Avoid self-inflicted recovery storms:** [observer health](../20-notes/otp-like-system-services-components/distributed-membership-discovery-and-authoritative-coordination/observer-health-and-adaptive-failure-suspicion.md),
+  [restart reserve](../20-notes/otp-like-system-services-components/supervision-and-recovery-policy/restart-budget-reserve-and-cooldown-controller.md)
+  and [backlog isolation](../20-notes/otp-like-system-services-components/admission-overload-and-service-resource-governance/queue-age-credit-return-and-backlog-isolation.md)
+  separate evidence quality, legal recovery and affordable work.
+- **Change safely:** [artifact provenance](../20-notes/otp-like-system-services-components/release-update-rollback-and-state-migration/artifact-authentication-provenance-and-staging-authority.md),
+  [canary evidence](../20-notes/otp-like-system-services-components/release-update-rollback-and-state-migration/canary-cohorts-attribution-and-inconclusive-evidence.md)
+  and [retention closure](../20-notes/otp-like-system-services-components/release-update-rollback-and-state-migration/activation-rollback-commit-and-retention-closure.md)
+  answer different questions; a signed, healthy candidate is not automatically reversible.
+- **Operate with bounded authority:** [management facets](../20-notes/otp-like-system-services-components/behaviour-engines-and-capability-gated-management/management-facets-suspension-and-outer-termination.md),
+  [credential lifetime](../20-notes/otp-like-system-services-components/configuration-workload-identity-and-secrets/credential-rotation-secret-confinement-and-issuer-outage.md)
+  and [audit witnessing](../20-notes/otp-like-system-services-components/observability-audit-alarms-and-operator-control/audit-intent-outcome-integrity-and-witness-progress.md)
+  retain separate disclosure, revocation and durability obligations.
+
+New evidence routes include [Lifeguard](../30-sources/dadgar-et-al-2018-lifeguard.md),
+[Canarying Releases](../30-sources/warner-davidovic-2018-canarying-releases.md)
+and [queue backlog engineering](../30-sources/yanacek-2019-avoiding-queue-backlogs.md).
+The existing [in-toto study](../30-sources/torres-arias-et-al-2019-in-toto.md)
+now directly informs release decomposition. None is an Atom OS implementation
+result, a PoC requirement or evidence that the open inquiry is resolved.
+
 ## Architectural boundaries
 
 ### Below this layer

@@ -274,6 +274,17 @@ in the first profile, how much service state can be shadowed on constrained
 devices, and which OTP application-master behaviors merit compatibility before
 a bootable native system exists.
 
+## Internal-service research decomposition
+
+The [internal-service index](application-lifecycle-and-dependency-orchestration/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Typed dependency graph and bounded start scheduling](application-lifecycle-and-dependency-orchestration/typed-dependency-graph-and-bounded-start-scheduling.md) — Which dependencies constrain preparation, readiness, use and shutdown?
+- [Activation-attempt ledger and resource ownership](application-lifecycle-and-dependency-orchestration/activation-attempt-ledger-and-resource-ownership.md) — How does failed activation clean up only what it created?
+- [Readiness evidence and coherent activation barriers](application-lifecycle-and-dependency-orchestration/readiness-evidence-and-coherent-activation-barriers.md) — When may prepared services become discoverable as one usable generation?
+- [Drain, stop, and irreversible-effect handoff](application-lifecycle-and-dependency-orchestration/drain-stop-and-irreversible-effect-handoff.md) — When can a bundle be retired rather than merely stopped?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

@@ -272,6 +272,17 @@ all, which hardware can enforce fences durably, how boot epochs survive device
 replacement, and whether application-specific ownership should use this cell
 or a higher-level protocol.
 
+## Internal-service research decomposition
+
+The [internal-service index](distributed-membership-discovery-and-authoritative-coordination/README.md) expands this component
+into 4 research studies. These are full-system responsibilities and
+unexecuted qualification obligations, not PoC tasks or implementation results.
+
+- [Observer health and adaptive failure suspicion](distributed-membership-discovery-and-authoritative-coordination/observer-health-and-adaptive-failure-suspicion.md) — How can a slow failure detector avoid blaming healthy peers?
+- [Membership epochs, tombstones, and federated candidates](distributed-membership-discovery-and-authoritative-coordination/membership-epochs-tombstones-and-federated-candidates.md) — How can delayed advertisements remain harmless across reboot, removal and cell boundaries?
+- [Quorum metadata, reconfiguration, and disaster recovery](distributed-membership-discovery-and-authoritative-coordination/quorum-metadata-reconfiguration-and-disaster-recovery.md) — Which durable assumptions preserve one authoritative control history?
+- [Lease jeopardy and effect-sink fence installation](distributed-membership-discovery-and-authoritative-coordination/lease-jeopardy-and-effect-sink-fence-installation.md) — When is a successor entitled to perform effects that an old owner may still attempt?
+
 ## Connections
 
 - [OTP-like system services layer](../otp-like-system-services-layer.md)

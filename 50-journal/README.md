@@ -35,6 +35,10 @@ provenance record.
 
 ### Documents
 
+- [2026-09-10 OTP-like system-service internal services](2026-09-10-otp-system-services-internal-services-deep-dive.md) —
+  records 55 studies across thirteen components, three new and twenty-four
+  reused sources, the xDS clarification and unexecuted qualification cases.
+
 - [2026-09-09 application and domain-service internal services](2026-09-09-application-domain-internal-services-deep-dive.md) —
   records 60 studies across fourteen components, four new and thirty reused
   sources, the adapter-trust clarification and unexecuted qualification cases.
