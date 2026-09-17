@@ -60,7 +60,7 @@ reporting benchmark throughput.
 
 The paper justifies scheduler-local queues with steal-on-idle as a strong
 starting mechanism, while also supplying the reason not to overstate the
-guarantee. BEAM actors are not fully strict fork/join tasks. Atom OS therefore
+guarantee. BEAM actors are not fully strict fork/join tasks. Kay OS therefore
 uses work stealing as an adaptive implementation policy beneath actor fairness
 and kernel CPU budgets, and measures steal frequency, migrated bytes,
 safe-point latency, priorities, and locality rather than claiming the JACM

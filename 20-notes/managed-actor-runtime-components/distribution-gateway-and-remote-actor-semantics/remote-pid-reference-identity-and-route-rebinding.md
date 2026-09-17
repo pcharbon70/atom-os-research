@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 BEAM external identities include node creation; failure detection and transport replacement do not necessarily create a new remote actor. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/chandra-toueg-1996-failure-detectors.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Gateway authentication, transport sessions and BEAM node-incarnation identity are distinct. Compatible sends do not acquire delivery-completion results.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

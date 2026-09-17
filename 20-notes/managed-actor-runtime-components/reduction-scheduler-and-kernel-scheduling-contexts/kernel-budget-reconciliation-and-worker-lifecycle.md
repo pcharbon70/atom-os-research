@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Scheduling-context capabilities make budget enforceable; resource containers distinguish the account charged from the thread doing the work. [1](../../../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md), [2](../../../30-sources/banga-et-al-1999-resource-containers.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Runtime reductions select actors; kernel contexts enforce CPU authority. Neither is a hard real-time guarantee by itself.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

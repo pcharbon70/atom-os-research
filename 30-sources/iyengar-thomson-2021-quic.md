@@ -78,7 +78,7 @@ one implementation.
 
 ## Relevance
 
-Atom OS should implement network endpoints as generation-bound service objects
+Kay OS should implement network endpoints as generation-bound service objects
 with separate connection, stream, buffer-credit, route, credential, and
 admission state. Endpoint capabilities select local bind/connect/listen rights;
 the identity service provides keys or handles; the protocol service validates
@@ -100,7 +100,7 @@ traffic. Security depends on the companion TLS profile, cryptographic
 implementation, randomness, key lifecycle, and anti-amplification behavior.
 The RFC does not provide application-level exactly-once execution, service
 discovery, authorization, durable request results, or sink fencing. Its
-migration model is asymmetric in version 1, and an Atom OS profile must record
+migration model is asymmetric in version 1, and an Kay OS profile must record
 the exact extensions and versions it supports.
 
 ## Derived work

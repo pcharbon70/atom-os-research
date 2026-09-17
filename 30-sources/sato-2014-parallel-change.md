@@ -41,7 +41,7 @@ The pattern adds a new interface, migrates consumers, then removes the old one. 
 
 ## Relevance
 
-Atom OS inference: pair staged interface evolution with writer fencing, mixed-generation histories and irreversible-effect cutoffs. Compare its compatibility advice with [RFC 9413](thomson-schinazi-2023-maintaining-robust-protocols.md); silently accepting security-relevant unknown meaning is not our chosen profile.
+Kay OS inference: pair staged interface evolution with writer fencing, mixed-generation histories and irreversible-effect cutoffs. Compare its compatibility advice with [RFC 9413](thomson-schinazi-2023-maintaining-robust-protocols.md); silently accepting security-relevant unknown meaning is not our chosen profile.
 
 ## Limits
 

@@ -10,14 +10,14 @@ tags:
   - visual-computing
 aliases:
   - "Visual synthesis component 1"
-  - "Atom OS project graph"
+  - "Kay OS project graph"
 ---
 
 # User-Owned Project Graph and Composition
 
 ## Executive decision
 
-Atom OS should make a **user-owned project graph**, not an installed
+Kay OS should make a **user-owned project graph**, not an installed
 application, the durable and visible unit of work. The graph names semantic
 objects, histories, views, commands, providers, collaborators, and resource
 policies. Packages contribute implementations and editors, but a package is
@@ -31,7 +31,7 @@ disk. Durable records name authority lineage and intended grants; trusted
 services reconstitute short-lived capabilities after authenticating the opener
 and checking current policy.
 
-This is proposed architecture. No Atom OS implementation yet demonstrates its
+This is proposed architecture. No Kay OS implementation yet demonstrates its
 usability, convergence, portability, or recovery behavior.
 
 ## Question and operational standard
@@ -76,7 +76,7 @@ None of those works demonstrates a capability-safe, crash-consistent actor
 graph. Webstrates centralizes important state in a synchronized DOM; Potluck's
 tests are informal and small; local-first convergence does not establish
 authorization or semantic validity; the Smalltalk image did not isolate
-mutually distrustful principals. The Atom OS graph is therefore a synthesis,
+mutually distrustful principals. The Kay OS graph is therefore a synthesis,
 not a direct port of any one system.
 
 ## Responsibility and boundary
@@ -255,12 +255,12 @@ Content replication and authority delegation are different protocols.
 
 [Local-first software](../../30-sources/kleppmann-et-al-2019-local-first-software.md)
 supports authoritative local work and background synchronization, but its own
-limits require Atom OS to make non-mergeable effects and access changes
+limits require Kay OS to make non-mergeable effects and access changes
 explicit.
 
 ## Layer placement
 
-| Atom OS layer | Project-graph responsibility |
+| Kay OS layer | Project-graph responsibility |
 | --- | --- |
 | Kernel hardware and architecture support | Persistent-memory and device mechanisms only through typed lower interfaces; no project identity or schema. |
 | Minimal privileged kernel | Protection domains, address spaces, capabilities, IPC, budgets, revocation, fault routes, and teardown for live project components. |
@@ -383,14 +383,14 @@ PoC tasks or implementation results.
 ## Connections
 
 - [Umbrella visual-interface synthesis](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
-  introduces the project graph as the first Atom OS synthesis aspect.
+  introduces the project graph as the first Kay OS synthesis aspect.
 - [Durable semantic actors and disposable presentation](durable-semantic-actors-and-disposable-presentation.md) —
   defines which graph nodes survive UI-process failure.
 - [Capability-scoped live tools and transactional evolution](capability-scoped-live-tools-and-transactional-evolution.md) —
   constrains project inspection and mutation.
 - [OTP-like system services layer](../otp-like-system-services-layer.md) —
   supplies lifecycle, persistence, registry, update, overload, and audit policy.
-- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   retains unresolved usability and architecture questions.
 
 ## Sources

@@ -57,7 +57,7 @@ application, presentation, and infrastructure code.
 
 ## Relevance
 
-The reference supplies the vocabulary for Atom OS Layer 5. The synthesis keeps
+The reference supplies the vocabulary for Kay OS Layer 5. The synthesis keeps
 its semantic boundaries separate from actor activation, supervision,
 protected-domain, deployment, and tenant boundaries. Aggregate-per-actor is
 therefore a candidate implementation profile rather than a rule inferred from
@@ -68,7 +68,7 @@ DDD.
 The patterns do not specify crash consistency, message delivery, distributed
 transactions, capability security, resource enforcement, or empirical
 performance. DDD terminology is also used inconsistently in industry; the
-Atom OS reports define “application service” and “domain service” explicitly.
+Kay OS reports define “application service” and “domain service” explicitly.
 
 ## Derived work
 

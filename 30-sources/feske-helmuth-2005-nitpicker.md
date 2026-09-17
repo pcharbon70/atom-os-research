@@ -54,7 +54,7 @@ protocols, and report feasibility, performance, and usability observations.
 
 ## Relevance
 
-The Atom OS trusted interaction service should be a small, separately protected
+The Kay OS trusted interaction service should be a small, separately protected
 system service over kernel-enforced display and input capabilities. It should
 own only secure composition, focus provenance, exclusive prompt input, bounded
 resources, and secure-attention transitions; desktop policy, themes, and normal
@@ -64,7 +64,7 @@ window management remain untrusted.
 
 The implementation and evaluation are historical and do not establish that the
 specific label mechanism prevents modern phishing. “Kernelizing” in the paper
-does not require placing a compositor in Atom OS privileged kernel mode; an
+does not require placing a compositor in Kay OS privileged kernel mode; an
 isolated, recovery-reserved user-space service can preserve the narrower TCB.
 
 ## Derived work

@@ -77,7 +77,7 @@ same mediation.
 This is a preprint, abstract model, and prototype evaluation rather than a
 production-kernel proof. Correspondence between the abstract model and the
 executable Haskell specification was assessed by inspection, not a mechanized
-end-to-end verification. It does not prescribe Atom's transaction, shootdown,
+end-to-end verification. It does not prescribe Kay's transaction, shootdown,
 or recovery API, and no measured result transfers to the target hardware.
 
 ## Derived work

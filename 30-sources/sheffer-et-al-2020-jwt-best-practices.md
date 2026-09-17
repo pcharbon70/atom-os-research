@@ -59,7 +59,7 @@ authentication or authorization protocol.
 
 ## Relevance
 
-Atom's federation gateway should isolate token types/profiles, allowlist key
+Kay's federation gateway should isolate token types/profiles, allowlist key
 sources, pin algorithms, and treat every claim as untrusted until bound to the
 configured issuer, audience, subject mapping, proof key, request, and local
 policy.

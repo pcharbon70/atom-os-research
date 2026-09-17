@@ -68,7 +68,7 @@ evaluation.
 
 ## Relevance
 
-**Atom OS inference:** security audit must be a distinct service and data path,
+**Kay OS inference:** security audit must be a distinct service and data path,
 not a setting on lossy logs or sampled traces. Each record should bind an event
 type, actor and protection-domain incarnation, monotonic sequence or epoch,
 policy revision, and previous-chain commitment. A user-space audit service can

@@ -228,7 +228,7 @@ library, filesystem, or power behavior. Integration campaigns therefore:
   capability slots;
 - crash before/after every commit, outbox, endpoint, reply, checkpoint,
   publication, and teardown transition; and
-- compare host-prototype behavior with claimed Atom contracts.
+- compare host-prototype behavior with claimed Kay contracts.
 
 ## Privacy and diagnostic authority
 
@@ -280,7 +280,7 @@ than an unbounded event per retry.
    leak redacted fields.
 7. Exhaust telemetry while outcome/audit and recovery paths remain correct.
 8. Run the same campaign against a host prototype and the first bootable target,
-   recording inherited versus Atom-owned behavior.
+   recording inherited versus Kay-owned behavior.
 
 The design is falsified if telemetry success is used as commit proof, if a
 declared invariant lacks a test/model path, if an old/new allowed pair corrupts

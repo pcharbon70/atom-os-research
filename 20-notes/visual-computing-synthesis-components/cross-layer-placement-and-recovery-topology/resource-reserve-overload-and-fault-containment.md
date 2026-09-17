@@ -28,7 +28,7 @@ AccessKit engineering shows semantic-tree memory is a concrete design cost.
 [3](../../../30-sources/chromium-project-2026-multiprocess-graphics-and-accessibility.md)
 [4](../../../30-sources/accesskit-project-2026-architecture-and-engineering.md)
 
-No visual workload has been measured on Atom OS.
+No visual workload has been measured on Kay OS.
 
 ## Development
 

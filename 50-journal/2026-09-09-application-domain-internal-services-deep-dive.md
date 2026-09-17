@@ -85,7 +85,7 @@ The other reused works were reviewed through their existing evidence-focused
 archive notes and the parent synthesis. Their prior access dates and provenance
 remain intact; this journal does not claim a fresh cover-to-cover reading of
 all thirty reused originals. In particular, historical Orleans, Elm, NixOS and
-SEDA findings are not current product or Atom OS performance claims.
+SEDA findings are not current product or Kay OS performance claims.
 
 A guessed F1 PDF path was unavailable; search located the publisher's
 [correct paper](https://www.vldb.org/pvldb/vol6/p1045-rae.pdf), which was read.
@@ -188,7 +188,7 @@ not demonstrate the proposed OS contracts.
 - [TOSCA 2.0](../30-sources/oasis-2025-tosca-2.md) — TOSCA separates typed requirements, graph resolution and lifecycle actions; a graph does not establish authority or truthful readiness.
 - [NixOS](../30-sources/dolstra-et-al-2008-nixos.md) — NixOS separates immutable configuration generations from mutable activation effects; selecting an old generation does not undo domain state.
 - [WASI Design Principles](../30-sources/wasi-project-2026-design-principles.md) — The archived WASI design principles favor explicit imports and resource handles; correct host enforcement is still assumed.
-- [Wedge](../30-sources/bittau-et-al-2008-wedge.md) — Wedge demonstrates reduced-privilege compartments in Linux applications; it does not validate Atom OS isolation costs.
+- [Wedge](../30-sources/bittau-et-al-2008-wedge.md) — Wedge demonstrates reduced-privilege compartments in Linux applications; it does not validate Kay OS isolation costs.
 - [Crash-only software](../30-sources/candea-fox-2003-crash-only-software.md) — Crash-only design puts authoritative state outside replaceable components; restarting cannot repair every corruption or ambiguous effect.
 - [DDD Reference](../30-sources/evans-2015-domain-driven-design-reference.md) — Evans separates domain rules from application coordination; this is a pattern vocabulary, not a recovery proof.
 - [Behavioral subtyping](../30-sources/liskov-wing-1994-behavioral-subtyping.md) — Liskov and Wing treat substitution as preservation of behavioral properties, beyond compatible representation.
@@ -219,7 +219,7 @@ not demonstrate the proposed OS contracts.
 ## Threads
 
 Continue through the [application topic map](../10-maps/applications-and-domain-services.md#internal-service-research-routes)
-and [open application inquiry](../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md).
+and [open application inquiry](../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md).
 Source notes and the manifest provide provenance; neither closes that inquiry.
 
 ## Follow-ups

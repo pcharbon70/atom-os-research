@@ -28,7 +28,7 @@ retirement record, collect each required proof independently, and reuse only
 when a resource-specific predicate evaluates true. Missing proof produces
 quarantine, not optimistic reclamation.
 
-This is proposed Atom architecture. Neither its proof-token algebra nor its
+This is proposed Kay architecture. Neither its proof-token algebra nor its
 resource-lifecycle model has been implemented.
 
 ## Question, scope, and operational standard
@@ -85,10 +85,10 @@ The gate passes only if:
 | [RISC-V IOMMU](../../../30-sources/risc-v-international-2026-iommu-architecture.md) | Device translation caches and `IOFENCE.C`-style completion participate in protected-I/O lifecycle | Implementation/platform compliance must still be verified |
 | [Arm instruction fetch semantics](../../../30-sources/simner-et-al-2020-arm-instruction-fetch.md) | Publishing or retiring executable memory has instruction-fetch and synchronization obligations beyond data translation | Arm-focused formal model with bounded scope |
 | [Don't shoot down TLB shootdowns](../../../30-sources/amit-et-al-2020-dont-shoot-down-tlb-shootdowns.md) | Early CPU acknowledgement is insufficient before freeing a page-table page because speculative or in-progress walkers may retain it | Linux/x86 evidence does not supply a general hardware-walker completion primitive |
-| [Secure memory management](../../../30-sources/achermann-et-al-2020-secure-memory-management.md) | Safe retype must account for every mediated translation engine and the typed name-resolution paths by which it can reach memory | The model does not instantiate Atom's multi-domain reclamation token or failure policy |
+| [Secure memory management](../../../30-sources/achermann-et-al-2020-secure-memory-management.md) | Safe retype must account for every mediated translation engine and the typed name-resolution paths by which it can reach memory | The model does not instantiate Kay's multi-domain reclamation token or failure policy |
 
 These sources show why several lifetime domains exist. The common proof schema,
-dependency matrix, and quarantine policy below are Atom synthesis.
+dependency matrix, and quarantine policy below are Kay synthesis.
 
 ## Logical retirement is not physical reuse
 
@@ -552,7 +552,7 @@ satisfy the predicate.
 An early acknowledgement that only closes user return is inadequate for a
 table page or tag lease.
 
-Hardware-walker completion is profile-specific. Atom must determine whether
+Hardware-walker completion is profile-specific. Kay must determine whether
 the ISA's prescribed invalidation plus barriers drains pre-existing walkers,
 or whether an additional architecturally proved walker-retirement event or
 bounded interval with observable, generation-bound completion is required.

@@ -38,11 +38,11 @@ FW_DYNAMIC receives next-stage information from its predecessor. FW_JUMP uses co
 
 ## Relevance
 
-Informs the proposed requirement contract and its negative tests. This source does not establish that Atom implements or passes that contract.
+Informs the proposed requirement contract and its negative tests. This source does not establish that Kay implements or passes that contract.
 
 ## Limits
 
-The two handoffs are alternatives, not interchangeable command-line recipes. Source documentation does not pin firmware bytes, establish latency, or demonstrate an Atom kernel boot.
+The two handoffs are alternatives, not interchangeable command-line recipes. Source documentation does not pin firmware bytes, establish latency, or demonstrate an Kay kernel boot.
 
 ## Derived work
 

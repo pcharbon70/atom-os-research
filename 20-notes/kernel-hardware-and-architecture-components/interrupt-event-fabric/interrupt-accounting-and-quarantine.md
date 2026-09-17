@@ -65,7 +65,7 @@ Any eventual experiment must record the implementation and specification revisio
 
 ## Sources
 
-- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Atom proofs.
+- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Kay proofs.
 - [Time protection](../../../30-sources/ge-et-al-2019-time-protection.md) — Temporal isolation exceeds timer precision.
 - [When poll is better than interrupt](../../../30-sources/yang-et-al-2012-when-poll-is-better-than-interrupt.md) — Workload-dependent evidence, not a universal polling advantage.
 

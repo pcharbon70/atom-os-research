@@ -52,7 +52,7 @@ systems, not a modern implementation evaluation.
 
 ## Relevance
 
-Atom OS should make the privileged kernel a small reference monitor for
+Kay OS should make the privileged kernel a small reference monitor for
 capabilities, domains, memory, IPC, CPU budgets, interrupts, and devices. It
 should not move password parsing, federation, relationship policy, recovery
 decisions, or audit retention into privilege merely because those functions

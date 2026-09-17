@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 The pinned source audit exposes a substantial hosted dependency surface; crash-only design makes restart depend on explicit external state, not a second ad hoc initializer. [1](../../../30-sources/erlang-otp-team-2026-otp-29-source-tree.md), [2](../../../30-sources/candea-fox-2003-crash-only-software.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The adapter consumes kernel authority; it does not make BEAM terms into capabilities or put the managed runtime in privileged code.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

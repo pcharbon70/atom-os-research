@@ -13,9 +13,9 @@ What must a successful capability lookup prove at the exact point an operation b
 
 ## Research basis and status
 
-The seL4 manual supplies typed capability-space precedent; the integrated admission gate is Atom's proposed contract. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md)
+The seL4 manual supplies typed capability-space precedent; the integrated admission gate is Kay's proposed contract. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../capability-spaces-and-authority.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../capability-spaces-and-authority.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

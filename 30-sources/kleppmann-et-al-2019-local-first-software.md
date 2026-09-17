@@ -69,7 +69,7 @@ application semantics can merge automatically.
 
 ## Relevance
 
-The local-first ideals give Atom OS an operational meaning for “user-owned
+The local-first ideals give Kay OS an operational meaning for “user-owned
 project”: locally usable durable state, exportable history and schema, optional
 network assistance, and collaboration that does not silently transfer project
 ownership to a provider. They also support separating replication rights from
@@ -80,10 +80,10 @@ ordinary object authority.
 The paper does not define an OS capability model, trusted input path, general
 transaction protocol, or resolution rule for non-commutative external effects.
 CRDT convergence does not establish authorization, semantic validity, or
-intent preservation. Atom OS therefore cannot use “local-first” as a promise
+intent preservation. Kay OS therefore cannot use “local-first” as a promise
 that every actor state or effect is mergeable.
 
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

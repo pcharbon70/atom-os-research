@@ -60,7 +60,7 @@ attestation, and appraisal-policy boundaries were inspected.
 
 ## Relevance
 
-Atom OS should keep measured-boot evidence, verifier appraisal, and
+Kay OS should keep measured-boot evidence, verifier appraisal, and
 authorization policy as separate artifacts. A service or node may present a
 fresh, nonce-bound attestation result, but the policy service must still decide
 which resource/action grant, if any, follows, and the kernel must enforce only

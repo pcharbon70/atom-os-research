@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 A wire-format decoder and a safety policy are separate checks; structurally valid external terms can still exceed resources or invoke unsupported semantics. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/necula-1997-proof-carrying-code.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Gateway authentication, transport sessions and BEAM node-incarnation identity are distinct. Compatible sends do not acquire delivery-completion results.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

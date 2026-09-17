@@ -39,7 +39,7 @@ envelope may enlarge that intersection.
 
 ## Question, scope, and operational standard
 
-> How can Atom compile rich policy into usable authority without creating a
+> How can Kay compile rich policy into usable authority without creating a
 > universal mint, a confused deputy, replayable bearer token, or a crash window
 > in which issuance and lineage accounting disagree?
 
@@ -71,7 +71,7 @@ designation-plus-authority, attenuation, confinement, confused deputies, and
 revocation by indirection. The [seL4 reference
 manual](../../30-sources/sel4-foundation-2026-reference-manual.md) supplies a
 concrete capability-space, mint/copy attenuation, derivation, revoke, and
-single-use reply precedent; Atom inherits none of seL4's proof automatically.
+single-use reply precedent; Kay inherits none of seL4's proof automatically.
 
 [Macaroons](../../30-sources/birgisson-et-al-2014-macaroons.md) demonstrate
 monotonic caveat attenuation and third-party discharge, but their baseline is
@@ -84,7 +84,7 @@ binding](../../30-sources/campbell-et-al-2020-oauth-mutual-tls.md) and
 constraint precedents and expose target, proxy, replay, and canonicalization
 obligations.
 
-The exact Atom grant algebra, durable protocol, and capability ABI are
+The exact Kay grant algebra, durable protocol, and capability ABI are
 proposals requiring a model and implementation evidence.
 
 ## Authority boundary and partitioning
@@ -182,7 +182,7 @@ or revocation binding.
 Remote OAuth/SPIFFE compatibility is confined to a gateway. Token exchange
 keeps subject and actor distinct and prefers delegation over impersonation.
 Mutual TLS or DPoP demonstrates key possession but does not by itself authorize
-the request. DPoP does not bind a body, so Atom's profile includes the canonical
+the request. DPoP does not bind a body, so Kay's profile includes the canonical
 operation digest as a separate required claim/obligation.
 
 ## OTP-like protocol and supervision

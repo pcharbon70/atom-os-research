@@ -80,7 +80,7 @@ path testing missed.
 
 ## Relevance
 
-The Atom OS manifest controller should be specified against two obligations:
+The Kay OS manifest controller should be specified against two obligations:
 safety of every published generation and eventual stable reconciliation after
 desired state stops changing. Each step should perform one class of external
 effect, durably record its operation identity and observed revision, and return
@@ -90,7 +90,7 @@ observed before another effect is attempted.
 This property also belongs in component-level controllers. Device reset,
 release rollout, configuration adoption, and lifecycle drain can share a
 small verified reconciliation skeleton while retaining type-specific safety
-rules. Atom OS additionally needs bounded progress profiles for boot and
+rules. Kay OS additionally needs bounded progress profiles for boot and
 recovery; ESR alone cannot promise a deadline.
 
 ## Limits
@@ -101,7 +101,7 @@ itself prove authorization, secrecy, resource bounds, deadline response,
 Byzantine tolerance, storage durability, or correctness of external effects.
 Generated code inherits a trusted computing base. The work supports a
 verification strategy and liveness property, not direct reuse of Kubernetes or
-Anvil as the Atom OS service manager.
+Anvil as the Kay OS service manager.
 
 ## Derived work
 

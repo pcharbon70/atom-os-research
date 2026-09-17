@@ -10,14 +10,14 @@ tags:
   - visual-computing
 aliases:
   - "Visual synthesis component 7"
-  - "Atom OS plural views"
+  - "Kay OS plural views"
 ---
 
 # Plural Representations and Cross-View Consistency
 
 ## Executive decision
 
-Atom OS should support **one authoritative semantic/model graph with many
+Kay OS should support **one authoritative semantic/model graph with many
 access-controlled materialized interaction projections**. A semantic object may
 have a visual canvas, text outline, table, code representation, screen-reader
 traversal, voice dialogue, tactile view, automation API, or remote collaborative
@@ -86,7 +86,7 @@ None establishes universal cross-view equivalence. SUPPLE reports modeling
 cost and a limited interaction domain; lens laws omit concurrency and
 authorization; CRDT convergence does not establish domain intent; and older
 multimodal studies do not cover current assistive platforms or distributed
-actors. The Atom OS contract is therefore deliberately explicit and
+actors. The Kay OS contract is therefore deliberately explicit and
 falsifiable.
 
 ## Representation provider contract
@@ -289,7 +289,7 @@ move, schema, undo, and global-invariant cases. [Sun et
 al.](../../30-sources/sun-et-al-1998-cooperative-editing-consistency.md)
 show why convergence, causality, and operation intention are distinct.
 
-Atom OS adds two hard rules:
+Kay OS adds two hard rules:
 
 1. merge convergence never grants authority—each admitted edit is bound to a
    policy, relationship, object, and revocation generation; and
@@ -429,7 +429,7 @@ expands this component into five representation and consistency responsibilities
   provides inspectable and editable representation tooling.
 - [Input and trusted-interaction authority](input-focus-and-trusted-interaction-authority.md) —
   prevents a modality adapter from manufacturing authority.
-- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   retains the equivalence, accessibility, and collaboration questions.
 
 ## Sources

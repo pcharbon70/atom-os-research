@@ -26,7 +26,7 @@ policy, and connection lifecycle.
 
 Each connection is a session epoch. Reconnect creates a new epoch; ordering
 does not silently span it. The `NotAccepted`, `Completed`, and `Indeterminate`
-states used below are an **Atom OS tracked-send extension and internal gateway
+states used below are an **Kay OS tracked-send extension and internal gateway
 protocol**, not Erlang send return values. A timeout, disconnect, or remote
 monitor result can leave such an extended operation `Indeterminate`. TLS
 authenticates and protects a channel when configured correctly, but does not
@@ -51,7 +51,7 @@ This component owns:
 - actor-level send, link, monitor, unlink, alias, priority, and failure
   translation;
 - per-session and per-sender sequence state needed by promised order;
-- request correlation and the Atom OS extension's
+- request correlation and the Kay OS extension's
   `NotAccepted`/`Completed`/`Indeterminate` outcomes;
 - runtime-gateway credit, buffer, and admission state; and
 - actor-visible distribution telemetry and evidence references.
@@ -118,14 +118,14 @@ remote death.
 
 [Orleans](../../30-sources/bernstein-et-al-2014-orleans.md) demonstrates a
 different useful model in which stable logical virtual actors are activated by
-the platform. Atom OS can offer that as a service layer, but base BEAM PIDs
+the platform. Kay OS can offer that as a service layer, but base BEAM PIDs
 remain explicit incarnations; a stale PID is not transparently rebound.
 
 | Concern | Supported conclusion | Unsupported shortcut |
 | --- | --- | --- |
 | Security | Authenticate channels and attenuate each route/capability | Treat TLS or cookie admission as least authority |
 | Ordering | Preserve negotiated sender-destination order within one epoch | Claim total order or carry order across reconnect |
-| Delivery | Preserve OTP send returns; expose admission/completion/uncertainty only through an explicit Atom OS extension | Treat `Msg` or `ok` as delivery completion, or call timeout/disconnect definite non-execution |
+| Delivery | Preserve OTP send returns; expose admission/completion/uncertainty only through an explicit Kay OS extension | Treat `Msg` or `ok` as delivery completion, or call timeout/disconnect definite non-execution |
 | Topology | Make overlay and channel policy replaceable and measured | Embed full mesh or one overlay in actor semantics |
 | Identity | Bind every remote reference to incarnations | Resolve stale PID/name to a new actor silently |
 | Flow control | Reserve bytes/messages with explicit credits | Let async send buffer without a bound |
@@ -230,7 +230,7 @@ external-term identity. The runtime's route table separately retains the
 revocable session binding. Disconnect invalidates that binding, but not the
 identity term: after a new handshake, a PID/reference from the same node
 creation may rebind and remain usable if its target semantics still permit it.
-A node restart changes creation and makes the old identity stale. An Atom OS
+A node restart changes creation and makes the old identity stale. An Kay OS
 native profile may define a richer runtime/actor-generation reference, but it
 must be a distinct extension rather than silently changing standard PID or
 reference equality.
@@ -260,11 +260,11 @@ that it would require establishing a connection, when the corresponding
 options request those refusals. Returning `Msg` or `ok` does not report remote
 delivery, peer gateway receipt, mailbox insertion, or application effect. The
 standard surface has no later delivery-completion result and must never return
-the Atom OS tracked-send outcomes.
+the Kay OS tracked-send outcomes.
 
-### Atom OS tracked-send extension
+### Kay OS tracked-send extension
 
-An opt-in Atom OS API and the internal gateway protocol may expose a correlated
+An opt-in Kay OS API and the internal gateway protocol may expose a correlated
 operation with the following state machine:
 
 ```mermaid
@@ -420,7 +420,7 @@ acknowledges:
 Its language-facing send adapter returns `Msg` for `!` and `send/2`, and only
 `ok | nosuspend | noconnect` for `send/3`. Correlated
 `NotAccepted | Completed | Indeterminate` results belong to a separately named
-Atom OS extension or remain internal; they are never smuggled into the standard
+Kay OS extension or remain internal; they are never smuggled into the standard
 return vocabulary.
 
 It receives no kernel/device authority merely because the peer is an Erlang
@@ -476,7 +476,7 @@ same standard PID after a same-creation connection loss is not resurrection.
 
 - Model session epoch, credits, ordering, actor/runtime restart, disconnect,
   duplicate, and stale frame with tiny spaces.
-- Define the Atom OS extension's `NotAccepted`, gateway-accepted,
+- Define the Kay OS extension's `NotAccepted`, gateway-accepted,
   peer-received, application-completed, and `Indeterminate` states separately
   from the standard OTP send return values.
 
@@ -530,7 +530,7 @@ The design is falsified by any reconnect path that restores an old session
 operation, credit, link, or monitor, or accepts a PID/reference after the node
 creation changes. It is also falsified by any parallel-channel configuration
 that reorders one promised sender stream, any standard send API that reports an
-Atom OS tracked-send outcome, or any timeout/disconnect translated as definite
+Kay OS tracked-send outcome, or any timeout/disconnect translated as definite
 non-execution without evidence.
 
 ## Internal-service research decomposition

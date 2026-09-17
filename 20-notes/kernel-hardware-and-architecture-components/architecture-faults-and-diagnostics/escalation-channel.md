@@ -31,7 +31,7 @@ wakeup is only a hint. Once a containment requirement is accepted, custody and
 quarantine survive receiver crash, duplicate delivery, queue pressure, and
 recovery-service replacement.
 
-This is proposed Atom architecture. It has not been modeled with the kernel
+This is proposed Kay architecture. It has not been modeled with the kernel
 object lifecycle or tested under receiver failure.
 
 ## Question, scope, and operational standard
@@ -89,12 +89,12 @@ A channel passes only if:
 | [FATE and DESTINI](../../../30-sources/gunawi-et-al-2011-fate-destini.md) | Recovery needs explicit behavioral specifications and systematic compound-failure schedules | Evaluated distributed Java services, not silicon faults |
 | [Unreliable failure detectors](../../../30-sources/chandra-toueg-1996-failure-detectors.md) and [gray failure](../../../30-sources/huang-et-al-2017-gray-failure.md) | Timeouts and one healthy observation do not prove another path or participant is dead | Conceptual analogy; CPU/device lifecycle requires its own proof |
 | [Recovery domains](../../../30-sources/lenharth-et-al-2009-recovery-domains.md) | Narrow rollback depends on bounding shared state and committed output | Software-fault prototype only |
-| [Linux hwpoison](../../../30-sources/kleen-2009-hwpoison.md) | Hard context can queue an address-bearing event while VM/process containment runs later and may fail | Linux's queue and signal policy are not an Atom contract |
+| [Linux hwpoison](../../../30-sources/kleen-2009-hwpoison.md) | Hard context can queue an address-bearing event while VM/process containment runs later and may fail | Linux's queue and signal policy are not an Kay contract |
 | [Recovering device drivers](../../../30-sources/swift-et-al-2004-recovering-device-drivers.md) | Some device effects are safe to replay, while accepted-with-lost-completion operations can remain indeterminate | Device-class-specific historical prototype |
 
 These sources support typed suspension, external recovery state, at-least-once
 delivery, and explicit uncertainty. The event/custody/capability protocol below
-is Atom synthesis.
+is Kay synthesis.
 
 ## Objects and identities
 

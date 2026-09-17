@@ -21,7 +21,7 @@ Research question: How does migration finish against a coherent state when the o
 Compatible schema stages and crash-aware publication support controlled migration,
 but do not prove arbitrary semantic transforms. [1](../../../30-sources/rae-et-al-2013-online-schema-change-f1.md) [2](../../../30-sources/chen-et-al-2015-fscq.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

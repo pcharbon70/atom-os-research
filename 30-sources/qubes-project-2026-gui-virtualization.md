@@ -66,7 +66,7 @@ the distinction between an application's pixels and the trusted desktop frame.
 Qubes uses Xen, Xorg-compatible agents, and a privileged GUI domain. Its
 documentation does not prove resistance to every focus, timing, compositor, or
 device attack and does not define semantic accessibility or durable model
-recovery. Atom OS should borrow contracts, not the VM topology wholesale.
+recovery. Kay OS should borrow contracts, not the VM topology wholesale.
 
 ## Derived work
 

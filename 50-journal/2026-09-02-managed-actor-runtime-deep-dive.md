@@ -17,7 +17,7 @@ aliases:
 
 ## Observations
 
-The third proposed Atom OS layer was researched as a managed runtime, not as a
+The third proposed Kay OS layer was researched as a managed runtime, not as a
 second kernel. The strongest synthesis is a BEAM-first hybrid: retain the
 observable process, signal, mailbox, collection, failure, and code behavior
 needed by a declared compatibility profile while adopting actor-runtime
@@ -131,7 +131,7 @@ Claims were grouped as:
 2. current ERTS implementation;
 3. historical or alternative runtime evidence;
 4. cross-source interpretation; and
-5. proposed Atom OS architecture requiring experiments.
+5. proposed Kay OS architecture requiring experiments.
 
 The resulting note defines a compatibility manifest, thirteen runtime
 components, local send/activation/collection/cross-domain critical paths,

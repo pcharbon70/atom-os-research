@@ -78,7 +78,7 @@ treating an SBI implementation as part of the supervisor kernel.
 
 A RISC-V backend should declare whether it owns inter-hart coordination or
 depends on SBI RFENCE. Standard `SBI_SUCCESS` proves successful request
-transmission, not remote execution, and an adapter cannot reinterpret it. Atom
+transmission, not remote execution, and an adapter cannot reinterpret it. Kay
 therefore needs its own IPI-invoked local-fence handler or a request- and hart-
 bound platform completion causally after RFENCE execution; errors remain
 explicit and keep affected mappings or code pinned.

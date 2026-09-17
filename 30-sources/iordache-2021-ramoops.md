@@ -60,12 +60,12 @@ software-ECC rules were read as an implementation contract. The document's
 
 Ramoops supports the engineering feasibility of a fixed preallocated
 reserved-memory first record and exposes the mapping, overwrite, and reset-
-survival caveats that Atom must make explicit. As an Atom consequence of the
+survival caveats that Kay must make explicit. As an Kay consequence of the
 documented overwrite behavior, first-fatal retention needs a separately
 specified slot and reclamation rule rather than inheriting circular-buffer
-behavior. An Atom target must also verify the exact physical range, exclusion
+behavior. An Kay target must also verify the exact physical range, exclusion
 from ordinary allocation and DMA, mapping, and retention class before
-describing the region as a crash sink. Atom's alternating-bank commit,
+describing the region as a crash sink. Kay's alternating-bank commit,
 first-fatal preservation, authenticated custody, and freshness protocol are
 separate synthesis, not properties demonstrated by ramoops.
 

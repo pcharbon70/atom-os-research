@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS discover remote services and observe node health while
+How should Kay OS discover remote services and observe node health while
 ensuring that partitions, stale messages, and failed lease renewal cannot
 create two authoritative owners of the same external effect?
 
@@ -152,7 +152,7 @@ loss.
 
 Coordination cells have explicit membership and a bounded scope, such as one
 device group, security domain, or deployment region. They do not recursively
-join every Atom OS node into one consensus group. Cross-cell discovery uses
+join every Kay OS node into one consensus group. Cross-cell discovery uses
 authenticated gateways that export selected candidate records and translate
 only explicitly supported operations; authoritative ownership crossing a cell
 uses a dedicated transfer protocol with fences in both domains.

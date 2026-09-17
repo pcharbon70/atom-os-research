@@ -15,7 +15,7 @@ How can cleanup make bounded progress without monopolizing privileged execution 
 
 Kernel timing analysis motivates explicit preemption points; logical closure is not a bound on total cleanup work. [1](../../../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md), [2](../../../30-sources/elkaduwe-et-al-2008-kernel-memory-isolation.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../teardown-revocation-and-safe-reclamation.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../teardown-revocation-and-safe-reclamation.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

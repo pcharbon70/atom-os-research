@@ -27,7 +27,7 @@ facilities explicit.
 [2](../../../30-sources/rein-et-al-2019-liveness-literature-study.md)
 [3](../../../30-sources/wasi-project-2026-design-principles.md)
 
-No Atom evaluator, language subset, or determinism profile exists.
+No Kay evaluator, language subset, or determinism profile exists.
 
 ## Development
 

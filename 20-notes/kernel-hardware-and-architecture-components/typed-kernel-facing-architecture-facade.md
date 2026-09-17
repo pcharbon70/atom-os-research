@@ -123,7 +123,7 @@ surface and checker boundary are instructive.
 The current [Tock HIL design](../../30-sources/tock-project-2026-hil-design.md) is
 particularly useful engineering evidence for split-phase APIs: submission
 acceptance must determine whether completion will occur, callbacks must not be
-synchronous surprises, and buffers must return with terminal results. Atom OS
+synchronous surprises, and buffers must return with terminal results. Kay OS
 uses bounded events rather than callback-stack reentry, but adopts the explicit
 ownership rule.
 

@@ -1,5 +1,5 @@
-#ifndef ATOM_ZIG_RESEARCH_ABI_H
-#define ATOM_ZIG_RESEARCH_ABI_H
+#ifndef KAY_ZIG_RESEARCH_ABI_H
+#define KAY_ZIG_RESEARCH_ABI_H
 #include <stdint.h>
 #include <stddef.h>
 struct pair { uint32_t tag; uint64_t value; };

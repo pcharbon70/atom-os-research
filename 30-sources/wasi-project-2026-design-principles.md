@@ -50,7 +50,7 @@ an independent security evaluation.
 
 ## Relevance
 
-Atom OS extension hosts can borrow explicit-import discipline and narrow
+Kay OS extension hosts can borrow explicit-import discipline and narrow
 versioned resource facets. WASI is an optional compatibility/sandbox profile;
 it does not replace the primary BEAM compatibility environment or lower-layer
 protected domains.

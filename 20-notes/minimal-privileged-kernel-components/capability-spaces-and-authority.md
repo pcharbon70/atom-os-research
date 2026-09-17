@@ -30,7 +30,7 @@ privileged kernel layer](../minimal-privileged-kernel-layer.md). Capability
 systems, seL4, EROS, and Capsicum support explicit designation, attenuation,
 delegation, and derivation-based revocation. The fixed-depth anchor path,
 product-lineage inheritance, sealed recovery facets, and durable-detachment
-rule are Atom OS proposals requiring models and measurements.
+rule are Kay OS proposals requiring models and measurements.
 
 ## Question, scope, and operational standard
 

@@ -208,7 +208,7 @@ bounded external evidence.
 ### Post-merge semantic correction audit
 
 A later line-by-line comparison against the OTP 29.0.6 manuals found several
-places where the initial synthesis accidentally promoted an Atom OS mechanism
+places where the initial synthesis accidentally promoted an Kay OS mechanism
 to an OTP promise or carried forward older ERTS behavior. The corrective pass
 used the current `erlang`, `erl_nif`, `ets`, process, and external-term-format
 documentation and made these distinctions explicit:
@@ -217,7 +217,7 @@ documentation and made these distinctions explicit:
   literals require invalidation/copy handling but are not OTP 29 purge blockers;
 - dirty classification is per NIF name/arity entry and can change when a job is
   rescheduled, rather than being one immutable module-wide class;
-- Atom OS request outcomes are an extension beneath the OTP send API, not new
+- Kay OS request outcomes are an extension beneath the OTP send API, not new
   return values from `!/2`, `send/2`, or `send/3`;
 - standard remote PIDs and references are tied to node creation and identifier
   fields, not to one transport session, even though links and monitors break on
@@ -244,7 +244,7 @@ This work did not:
 - fuzz a loader, external-term decoder, trace/dump parser, or cancellation
   protocol;
 - inject a native, device, network, runtime, kernel, or power fault; or
-- demonstrate the declared compatibility profile on Atom OS hardware.
+- demonstrate the declared compatibility profile on Kay OS hardware.
 
 Therefore paper measurements apply only to their evaluated systems and
 workloads; current OTP documentation is normative only for the documented

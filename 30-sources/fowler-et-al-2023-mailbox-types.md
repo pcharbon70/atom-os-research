@@ -60,7 +60,7 @@ and evaluation.
 
 ## Relevance
 
-Mailbox types are a promising optional certified profile for future Atom OS
+Mailbox types are a promising optional certified profile for future Kay OS
 languages or generated service interfaces. The baseline BEAM-compatible
 runtime must still implement dynamic selective receive, unknown terms, and
 runtime failure semantics. Certificates may enable specialized queues only

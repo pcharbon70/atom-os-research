@@ -33,7 +33,7 @@ The page does not identify a publication date or immutable source revision.
 ## Research question or contribution
 
 Does an established emulator provide a plausible first target for a small
-protected Atom OS kernel?
+protected Kay OS kernel?
 
 ## Method
 
@@ -55,7 +55,7 @@ testing an actual guest privilege boundary.
 
 ## Limits
 
-A moving manual is not a pinned implementation or an Atom OS boot result.
+A moving manual is not a pinned implementation or an Kay OS boot result.
 Select and test the precise emulator, firmware, CPU features, and invocation.
 No performance, hardware-fidelity, or hostile-device guarantee is inferred.
 

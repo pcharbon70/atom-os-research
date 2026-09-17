@@ -16,7 +16,7 @@ aliases:
 
 ## Scope
 
-This map covers the fifth layer in the proposed Atom OS decomposition: the
+This map covers the fifth layer in the proposed Kay OS decomposition: the
 unprivileged applications and domain services that turn lower-layer actor,
 capability, persistence, identity, networking, device, lifecycle, and recovery
 mechanisms into user-meaningful work.
@@ -41,7 +41,7 @@ The route deliberately separates:
   components, cross-layer contract, implementation stages, and falsifiers.
 - [Applications and domain services component index](../20-notes/applications-and-domain-services-components/README.md) —
   the complete local inventory of detailed component reports.
-- [How should Atom OS structure applications and domain services?](../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) —
+- [How should Kay OS structure applications and domain services?](../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) —
   the open operational question, hypotheses, experiments, and evidence gaps.
 - [2026-09-05 applications and domain services deep dive](../50-journal/2026-09-05-applications-and-domain-services-deep-dive.md) —
   research method, cross-source synthesis, exact source manifest, and evidence
@@ -229,7 +229,7 @@ Examples keep the line concrete:
 
 ## Open questions
 
-- [How should Atom OS structure applications and domain services?](../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md)
+- [How should Kay OS structure applications and domain services?](../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md)
 - Which storage profile can atomically retain aggregate revision, operation
   outcome, outbox, and workflow records on the first target?
 - When does one-aggregate-per-actor outperform a pooled host under constrained

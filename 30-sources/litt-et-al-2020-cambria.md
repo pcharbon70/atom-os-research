@@ -43,7 +43,7 @@ Cambria composes schema lenses and demonstrates an issue tracker. The account fa
 
 ## Relevance
 
-Atom OS inference: qualify transformations by meaning, authority and bounded execution, not just round-trip shape. Preserve original operation provenance and explicit loss. Treat branched versions and conflicting transformation paths as separate verification obligations.
+Kay OS inference: qualify transformations by meaning, authority and bounded execution, not just round-trip shape. Preserve original operation provenance and explicit loss. Treat branched versions and conflicting transformation paths as separate verification obligations.
 
 ## Limits
 

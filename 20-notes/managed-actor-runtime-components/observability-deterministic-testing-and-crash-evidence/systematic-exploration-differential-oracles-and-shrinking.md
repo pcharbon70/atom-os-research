@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Controlled schedule exploration finds races ordinary repetition can miss; replay reproduces a history but does not by itself prove it correct. [1](../../../30-sources/christakis-et-al-2013-concuerror.md), [2](../../../30-sources/aumayr-et-al-2018-actor-record-replay.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Production traces, complete test schedules and crash evidence have different loss and trust contracts, even when they share an event schema.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

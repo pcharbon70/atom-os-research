@@ -29,7 +29,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom preserve useful, privacy-conscious evidence of authorization
+> How can Kay preserve useful, privacy-conscious evidence of authorization
 and effects across compromise, crash, partition, truncation, equivocation, and
 storage exhaustion without making a remote log service part of every critical
 effect's synchronous availability path?
@@ -65,7 +65,7 @@ compromise records outside the guarantee. [Signed
 syslog](../../30-sources/kelsey-et-al-2010-signed-syslog-messages.md) contributes
 origin authentication, reboot-session identifiers, sequencing, missing-message
 detection, and collector-flooding threats; its dated cryptographic suite is not
-an Atom choice.
+an Kay choice.
 
 [Crosby and
 Wallach](../../30-sources/crosby-wallach-2009-tamper-evident-logging.md)
@@ -81,7 +81,7 @@ confidentiality/availability as well as integrity.
 [ARIES](../../30-sources/mohan-et-al-1992-aries.md) supplies a crash-recovery
 discipline—write-ahead intent, explicit commit, ordered identifiers, restart
 analysis/redo/undo—but a database WAL cannot make arbitrary external device or
-network effects atomic. Atom's intent/outcome model is an adaptation with
+network effects atomic. Kay's intent/outcome model is an adaptation with
 explicit indeterminate reconciliation.
 
 ## Authority and trust-domain split

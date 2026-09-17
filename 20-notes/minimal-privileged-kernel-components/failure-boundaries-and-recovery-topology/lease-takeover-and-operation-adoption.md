@@ -15,7 +15,7 @@ How can a new manager take control without losing valid completion evidence from
 
 Failure-detector theory permits mistaken suspicion; authority fencing must therefore work even when the old manager resumes. [1](../../../30-sources/chandra-toueg-1996-failure-detectors.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../failure-boundaries-and-recovery-topology.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../failure-boundaries-and-recovery-topology.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

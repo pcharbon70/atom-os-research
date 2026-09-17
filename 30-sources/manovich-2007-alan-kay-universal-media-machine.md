@@ -63,7 +63,7 @@ experimental evaluation.
 
 This source provides an independent scholarly check on the report's central
 interpretation: the missing part of Kay's legacy is not a widget but universal
-media authorship. It helps distinguish historical claim from present Atom OS
+media authorship. It helps distinguish historical claim from present Kay OS
 proposal.
 
 ## Limits

@@ -55,7 +55,7 @@ trust placed in the host OS.
 
 ## Relevance
 
-Atom needs a broker that translates narrow capabilities into one key/object/
+Kay needs a broker that translates narrow capabilities into one key/object/
 operation call, rather than handing applications a globally logged-in token
 session. Non-exportability is useful but insufficient without input schemas,
 audience, rate limits, and caller-incarnation binding.

@@ -60,7 +60,7 @@ it is not an independent accessibility or interoperability evaluation.
 AccessKit is concrete evidence for a protocol core with disposable platform
 adapters, namespaced subtrees, atomic updates, and action requests. It also
 supports treating resource cost and semantic-version precision as first-class
-qualification concerns for Atom OS.
+qualification concerns for Kay OS.
 
 ## Limits
 

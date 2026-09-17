@@ -13,9 +13,9 @@ How can a multi-input constructor either publish one fully owned object or have 
 
 ## Research basis and status
 
-Explicit allocation and typed capability mechanisms provide the comparison; Atom's multi-input transaction is a separate proposal. [1](../../../30-sources/elkaduwe-et-al-2008-kernel-memory-isolation.md), [2](../../../30-sources/sel4-foundation-2026-reference-manual.md)
+Explicit allocation and typed capability mechanisms provide the comparison; Kay's multi-input transaction is a separate proposal. [1](../../../30-sources/elkaduwe-et-al-2008-kernel-memory-isolation.md), [2](../../../30-sources/sel4-foundation-2026-reference-manual.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../typed-object-storage-and-explicit-memory.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../typed-object-storage-and-explicit-memory.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

@@ -73,7 +73,7 @@ it is not a production-scale availability or rollout evaluation.
 
 ## Relevance
 
-**Atom OS inference:** the OTP-like update service should authenticate a signed,
+**Kay OS inference:** the OTP-like update service should authenticate a signed,
 versioned release graph before staging any executable, configuration, or state
 transform. Offline root authority, separately delegated release and target
 roles, threshold approval for high-impact roles, explicit expiry, and protected

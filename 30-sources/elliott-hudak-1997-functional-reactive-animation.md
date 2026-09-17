@@ -62,7 +62,7 @@ fault-recovery evaluation.
 
 ## Relevance
 
-Fran supports a narrow Atom OS conclusion: disposable presentation should be a
+Fran supports a narrow Kay OS conclusion: disposable presentation should be a
 declarative projection of versioned meaning, and input events should be typed
 data rather than callbacks with ambient authority. It does not imply that the
 durable actor graph should be an FRP network or that effects can be rolled back
@@ -78,4 +78,4 @@ explicit scheduling, backpressure, sampling, and memory bounds.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

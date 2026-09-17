@@ -58,7 +58,7 @@ spoofing and coercion.
 
 ## Relevance
 
-The proposed Atom trusted-interaction broker should bind a protected input and
+The proposed Kay trusted-interaction broker should bind a protected input and
 display lease to one canonical request digest, identify the requesting actor
 and relying party, show the exact authority being requested, and return an
 operation-bound approval rather than a reusable “user clicked yes” fact. Yee's
@@ -70,7 +70,7 @@ part of the security contract instead of UI decoration.
 The report predates contemporary authenticators, composited desktops, mobile
 permission systems, and remote administration. Its principles constrain a
 design but do not select a hardware trusted path, quantify usability, or prove
-that an Atom ceremony is unspoofable.
+that an Kay ceremony is unspoofable.
 
 ## Derived work
 

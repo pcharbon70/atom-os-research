@@ -26,7 +26,7 @@ prevents one application domain from injecting events into another.
 [2](../../../30-sources/feske-helmuth-2005-nitpicker.md)
 [3](../../../30-sources/qubes-project-2026-gui-virtualization.md)
 
-Atom event provenance and multi-seat profiles are unimplemented.
+Kay event provenance and multi-seat profiles are unimplemented.
 
 ## Development
 

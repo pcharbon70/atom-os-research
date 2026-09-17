@@ -28,7 +28,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom turn heterogeneous, attacker-controlled attestation bytes into a
+> How can Kay turn heterogeneous, attacker-controlled attestation bytes into a
 > trustworthy, fresh, provenance-preserving appraisal without treating a known
 > measurement as identity or permission?
 
@@ -67,13 +67,13 @@ Wrapper](../../30-sources/birkholz-et-al-2026-rats-conceptual-message-wrapper.md
 distinguishes conceptual message types across encodings and supports recursive
 collections while leaving authenticity/confidentiality protection to the
 surrounding profile; optional nesting limits and recursive input motivate
-Atom's own hard depth, item-count, and byte-size bounds. [TPM
+Kay's own hard depth, item-count, and byte-size bounds. [TPM
 2.0](../../30-sources/trusted-computing-group-2026-tpm-2-0-library.md) and
 [DICE](../../30-sources/trusted-computing-group-2024-dice-hardware-requirements.md)
 are hardware-root profiles; neither ensures the event log is truthful or the
 measured runtime remains uncompromised.
 
-The normalized claim model and update protocol below are Atom synthesis.
+The normalized claim model and update protocol below are Kay synthesis.
 
 ## Authority and ownership split
 

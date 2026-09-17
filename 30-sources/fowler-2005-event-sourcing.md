@@ -50,7 +50,7 @@ against later empirical evidence.
 
 ## Relevance
 
-The article gives useful vocabulary for journals and projections. The Atom OS
+The article gives useful vocabulary for journals and projections. The Kay OS
 recommendation is qualified by the later empirical finding that event
 evolution, projection rebuild, privacy, tooling, and expertise are substantial
 costs.

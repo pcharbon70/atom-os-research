@@ -70,7 +70,7 @@ implementation and review roles remain unassigned.
 
 - Pin the inherited image, toolchain, QEMU, versioned machine, SeaBIOS and OTP
   corpus/oracle identities. Preserve the initial TCG, Nehalem-v1, one-CPU,
-  128 MiB serial fixture; changes require an explicit decision and comparable
+  64 MiB serial fixture; changes require an explicit decision and comparable
   reruns, not silent enlargement after failure.
 - Set workload seeds, durations, repetitions, sweep points, memory partitions,
   queue limits, cleanup reserves, priorities, CPU periods/budgets and overrun

@@ -62,7 +62,7 @@ runtime cost on Savina actor benchmarks and the Acme-Air Web application.
 
 ## Relevance
 
-Atom OS should distinguish cheap deterministic test scheduling from optional
+Kay OS should distinguish cheap deterministic test scheduling from optional
 production record/replay. The latter needs a versioned replay manifest,
 message-selection and timer decisions, external completion values, time and
 randomness observations, service incarnations, code generations, and an

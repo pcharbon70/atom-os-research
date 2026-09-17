@@ -110,7 +110,7 @@ select one structure for all workloads.
 show that ordered-set representation can adapt between coarse and finer
 locking based on measured contention. This supports workload-sensitive table
 implementations, not a claim that the published CA tree is universally best or
-that its exact design is suitable for every Atom OS table type.
+that its exact design is suitable for every Kay OS table type.
 
 [HiPE's high-performance Erlang work](../../30-sources/johansson-et-al-2000-high-performance-erlang.md)
 is evidence that native code, garbage collection, exceptions, and runtime
@@ -311,10 +311,10 @@ For each operation, the profile states the hard action:
 | Trace event | Follow declared lossy/lossless observability mode | Loss is counted explicitly; ordinary actors do not pay unbounded trace debt |
 
 `NotAccepted` and `Indeterminate` in this table are internal service/gateway
-outcomes or results of an explicit Atom OS extension. They are not additional
+outcomes or results of an explicit Kay OS extension. They are not additional
 return values from compatible Erlang send operations.
 
-Where OTP leaves behavior implementation-dependent, Atom OS still documents
+Where OTP leaves behavior implementation-dependent, Kay OS still documents
 and tests its choice. Resource refusal is not allowed to corrupt an object or
 create a half-visible relation.
 

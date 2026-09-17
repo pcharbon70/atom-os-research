@@ -70,7 +70,7 @@ longitudinal study of broad end-user adoption or a security proof.
 
 Webstrates is direct post-Smalltalk evidence that a document/application
 boundary can be replaced by user-malleable, shared computational objects. For
-Atom OS it supports project-owned composition and provider-independent views,
+Kay OS it supports project-owned composition and provider-independent views,
 while also warning against equating a shared mutable DOM with the durable
 semantic model or authority graph.
 
@@ -80,11 +80,11 @@ The prototype centralizes synchronization and gives the shared DOM a large
 semantic and failure role. It does not demonstrate capability confinement,
 offline-first ownership, deterministic conflict resolution for arbitrary
 program state, accessible semantic equivalence, or recovery from a compromised
-renderer. Its positive examples establish feasibility, not the correct Atom OS
+renderer. Its positive examples establish feasibility, not the correct Kay OS
 trust boundary.
 
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

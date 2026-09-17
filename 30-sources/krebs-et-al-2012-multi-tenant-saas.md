@@ -54,7 +54,7 @@ benchmark of one solution.
 
 ## Relevance
 
-Atom OS must bind tenant/security realm into domain identity, authority,
+Kay OS must bind tenant/security realm into domain identity, authority,
 persistence, budgets, telemetry, and recovery. A tenant, bounded context,
 supervision subtree, and protected domain remain separate design decisions.
 

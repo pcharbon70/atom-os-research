@@ -21,7 +21,7 @@ Research question: What does resolving a name authorize, and who may reserve it?
 Object capabilities distinguish designation with authority from ambient name lookup;
 revisioned stores supply consistency, not permission. [1](../../../30-sources/miller-et-al-2003-capability-myths.md) [2](../../../30-sources/etcd-project-2026-api-guarantees.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

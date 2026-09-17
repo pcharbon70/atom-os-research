@@ -26,7 +26,7 @@ cross-platform node/action schema but explicitly retains specification gaps.
 [2](../../../30-sources/w3c-2026-core-accessibility-api-mappings-1-2.md)
 [3](../../../30-sources/accesskit-project-2026-architecture-and-engineering.md)
 
-The Atom OS core vocabulary and compatibility profile are not frozen.
+The Kay OS core vocabulary and compatibility profile are not frozen.
 
 ## Development
 

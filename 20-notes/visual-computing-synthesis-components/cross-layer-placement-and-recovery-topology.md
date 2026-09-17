@@ -10,7 +10,7 @@ tags:
   - visual-computing
 aliases:
   - "Visual synthesis component 6"
-  - "Atom OS visual service topology"
+  - "Kay OS visual service topology"
 ---
 
 # Cross-Layer Placement and Recovery Topology
@@ -74,7 +74,7 @@ and [microreboot](../../30-sources/candea-et-al-2004-microreboot.md) motivate
 restartable components, explicit leases, and recovery groups derived from real
 state dependencies.
 
-These works do not prove the proposed Atom OS topology. A microkernel can still
+These works do not prove the proposed Kay OS topology. A microkernel can still
 have unsafe user-space policy; a small compositor can be a single point of
 denial; Wayland protocols are not a capability proof; and microreboot is safe
 only when state, retry, and effect boundaries are correct. The architecture
@@ -409,7 +409,7 @@ expands this component into five placement and recovery responsibilities.
   specializes.
 - [Authentication and authorization across the five-layer architecture](../authentication-and-authorization-across-the-five-layer-architecture.md) —
   supplies policy, grant, revocation, and recovery-authority services.
-- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   retains the unresolved trust, recovery, and profile questions.
 
 ## Sources

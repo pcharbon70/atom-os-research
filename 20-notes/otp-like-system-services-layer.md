@@ -19,7 +19,7 @@ aliases:
 
 ## Executive conclusion
 
-Atom OS should implement the OTP-like system-services layer as a collection of
+Kay OS should implement the OTP-like system-services layer as a collection of
 ordinary, unprivileged managed actors and replaceable protected service
 domains. It should not be one privileged service manager, a second kernel, or
 a copy of every facility currently shipped in Erlang/OTP. Its job is to turn
@@ -71,7 +71,7 @@ distinctions in its APIs and evidence.
 The research question is:
 
 > What is the smallest unprivileged system-services architecture that carries
-> the useful OTP principles into Atom OS while providing explicit security,
+> the useful OTP principles into Kay OS while providing explicit security,
 > overload, durability, distribution, and update contracts?
 
 This report covers service lifecycle, behaviours, supervision, naming,
@@ -112,7 +112,7 @@ evidence. The companion
 [inquiry](../40-inquiries/what-contract-should-the-otp-like-system-services-layer-provide.md)
 keeps that distinction open.
 
-## Placement in the Atom OS architecture
+## Placement in the Kay OS architecture
 
 ```mermaid
 flowchart TB
@@ -215,7 +215,7 @@ them silently:
 
 ## What is inherited, retained for compatibility, and changed
 
-| Concern | Principle retained | Existing OTP/ERTS mechanism | Atom OS decision |
+| Concern | Principle retained | Existing OTP/ERTS mechanism | Kay OS decision |
 | --- | --- | --- | --- |
 | Behaviours | Protocol engines separate generic control flow from callbacks | `gen_server`, `gen_statem`, `gen_event`, `sys` | Preserve selected behaviour semantics in explicit compatibility adapters; capability-gate management and use a separate native event bus for isolated bounded subscribers |
 | Supervision | Failure observation is separated from restart policy | Hierarchical supervisors, strategies, restart intensity | Preserve hierarchy and scope; add backoff, budgets, recovery reserve, typed evidence, and outer-domain recovery |
@@ -416,7 +416,7 @@ partially prepared service is not discoverable.
 
 The desired-state idea is consistent with
 [Borg's reconciliation architecture](../30-sources/verma-et-al-2015-borg.md),
-but Atom OS needs a far smaller local controller and cannot infer embedded
+but Kay OS needs a far smaller local controller and cannot infer embedded
 footprint or kernel suitability from a datacenter cluster manager.
 
 ### [1. Behaviour engines and capability-gated management](otp-like-system-services-components/behaviour-engines-and-capability-gated-management.md)
@@ -479,7 +479,7 @@ following explicit in each child specification:
 - failure classification and causal evidence reference; and
 - escalation target outside the supervised failure boundary.
 
-These additions define the native Atom OS supervisor policy. An OTP
+These additions define the native Kay OS supervisor policy. An OTP
 compatibility adapter separately preserves the declared child restart types,
 immediate and synchronous restart/start/stop behavior, and exact “more than
 `MaxR` restarts in `MaxT`” counting. It must not insert hidden backoff,
@@ -522,7 +522,7 @@ budget.
 ### [3. Application lifecycle and dependency orchestration](otp-like-system-services-components/application-lifecycle-and-dependency-orchestration.md)
 
 **Responsibility.** Manage a deployable bundle's dependencies, lifecycle root,
-readiness, configuration, health, drain, and stop semantics. Native Atom OS
+readiness, configuration, health, drain, and stop semantics. Native Kay OS
 managed bundles use a root supervisor. An OTP compatibility adapter also
 supports applications whose top process is not a supervisor and library
 applications with no callback process.
@@ -564,7 +564,7 @@ signals are typed:
 - **draining** — new admission is closed while accepted work resolves; and
 - **failed** — a declared invariant or required dependency is unavailable.
 
-This `Ready` barrier is a native Atom OS lifecycle contract, not an implicit
+This `Ready` barrier is a native Kay OS lifecycle contract, not an implicit
 OTP promise. In the strict OTP adapter, `application:start/1,2` completes when
 the documented application callback and application-master startup sequence
 has succeeded; the adapter must not wait for an undeclared health probe or
@@ -580,7 +580,7 @@ The OTP compatibility adapter records two independent axes. Application
 `restart_type` (`permanent`, `transient`, or `temporary`) controls
 escalation after termination, including cases where OTP would terminate the
 node. The application callback's `start_type` (`normal`, `takeover`, or
-`failover`) tells the new instance why it is starting. Atom OS translates
+`failover`) tells the new instance why it is starting. Kay OS translates
 node-wide consequences into an explicitly declared root/service-domain
 escalation and does not confuse either axis with the distributed lease and
 fencing proof needed for exclusive effects.
@@ -666,7 +666,7 @@ observable.
 
 The [SPIFFE Workload API](../30-sources/spiffe-project-2026-workload-api.md)
 provides a useful precedent for local workload credential delivery and
-rotation. It does not define Atom OS authorization, bootstrap trust, issuer
+rotation. It does not define Kay OS authorization, bootstrap trust, issuer
 availability, or recovery policy.
 
 Credential expiry creates an availability dependency. Each service must
@@ -1024,7 +1024,7 @@ must fail closed for unattended updates or use an explicit, separately
 authorized offline-recovery procedure. Cached wall time and writable service
 state alone cannot establish freshness.
 
-OTP release handling is node-local and allows mixed versions. Atom OS should
+OTP release handling is node-local and allows mixed versions. Kay OS should
 embrace explicit mixed-version windows rather than promise cluster-atomic code
 replacement. Legacy `appup`/`relup` instructions can invoke arbitrary
 `{M,F,A}` code; a valid artifact signature authenticates provenance but does
@@ -1058,7 +1058,7 @@ control, or isolation justifies it.
 
 [DAGOR](../30-sources/zhou-et-al-2018-dagor.md) contributes call-graph-aware
 overload lessons: reject work early, propagate overload, and avoid consuming
-downstream capacity on requests unlikely to complete. Atom OS should not copy
+downstream capacity on requests unlikely to complete. Kay OS should not copy
 application-specific business-priority heuristics into the generic layer.
 Nor may it trust a caller's claimed priority or cost: the admission service
 derives the effective class from the presented capability, authenticated
@@ -1353,7 +1353,7 @@ The following are reasonable baselines:
     using restart as the overload controller.
 12. Separate lossy telemetry from durable audit and sealed crash evidence.
 
-These are not yet demonstrated on Atom OS.
+These are not yet demonstrated on Kay OS.
 
 ## Open decisions and falsifiers
 

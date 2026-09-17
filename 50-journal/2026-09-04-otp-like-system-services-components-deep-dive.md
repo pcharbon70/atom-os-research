@@ -46,7 +46,7 @@ teardown from the minimal kernel, plus machine mechanisms from the architecture
 layer and actor execution from the managed runtime. Policy remains in
 replaceable service domains with outer recovery holders.
 
-The reports are architectural syntheses. No Atom OS service controller,
+The reports are architectural syntheses. No Kay OS service controller,
 behavior engine, supervisor, registry, credential broker, storage engine,
 driver service, network stack, coordination cell, updater, resource governor,
 or observability pipeline was implemented or executed in this session.
@@ -81,7 +81,7 @@ For each component, the research asked:
 A recommendation was retained only when its report:
 
 - distinguishes source-demonstrated behavior from cross-source synthesis and
-  proposed Atom OS behavior;
+  proposed Kay OS behavior;
 - names the component's privilege and authority boundary;
 - defines stable identity, changing generations, lifecycle states, resource
   ownership, and public linearization points;
@@ -205,14 +205,14 @@ baseline architecture.
 
 This session did not:
 
-- implement, boot, or benchmark any Atom OS layer;
+- implement, boot, or benchmark any Kay OS layer;
 - run BEAM bytecode or OTP applications over the proposed services;
 - execute a controller, supervisor, registry, credential, storage, device,
   network, consensus, updater, overload, or audit state machine;
 - model-check a lifecycle, lease, fencing, migration, or retry protocol;
 - perform crash, power-cut, corruption, partition, clock, DMA, driver, parser,
   credential, overload, or operator fault injection;
-- reproduce any paper's experiment or transfer its proof to Atom OS; or
+- reproduce any paper's experiment or transfer its proof to Kay OS; or
 - select a final hardware target, storage profile, network stack, consensus
   library, cryptosystem, or compatibility release.
 

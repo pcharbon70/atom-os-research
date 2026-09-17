@@ -65,7 +65,7 @@ Any eventual experiment must record the implementation and specification revisio
 
 ## Sources
 
-- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Atom proofs.
+- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Kay proofs.
 - [Intel system-programming documentation](../../../30-sources/intel-2026-system-programming-documentation.md) — ISA-specific privileged state and completion requirements.
 - [seL4 reference manual](../../../30-sources/sel4-foundation-2026-reference-manual.md) — Capability-mediated authority and distinct kernel object kinds.
 

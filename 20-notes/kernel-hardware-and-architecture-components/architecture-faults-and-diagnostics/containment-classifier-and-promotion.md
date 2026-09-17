@@ -36,7 +36,7 @@ failed admission can only widen the planned scope or select terminal. A later
 containment failure never rewrites that decision; it appends a fallback outcome
 and keeps/widens the enforced scope toward terminal.
 
-This is an unverified Atom proposal. The initial implementation should contain
+This is an unverified Kay proposal. The initial implementation should contain
 very few nonterminal rules.
 
 ## Question, scope, and operational standard
@@ -87,7 +87,7 @@ A classifier passes only if:
 | [Intel system-programming documentation](../../../30-sources/intel-2026-system-programming-documentation.md) | Processor-context corruption, restart-IP validity, precision, overflow, address/misc validity, and machine-check class must be evaluated separately | Recovery matrices are processor/profile specific |
 | [Arm RAS specification](../../../30-sources/arm-2019-ras-specification.md) | Corrected, deferred, poison, uncorrected type, overflow, and validity remain independent; “recoverable” still needs software action | Does not define a selected SoC's complete topology or errata |
 | [RISC-V RERI](../../../30-sources/risc-v-international-2024-ras-error-record-interface.md) | `containable` means may be containable and explicitly leaves recovery determination to the handler | RERI is optional and may provide sparse information |
-| [Linux hwpoison](../../../30-sources/kleen-2009-hwpoison.md) | Page poisoning, mapping discovery, process notification/termination, and future exclusion are split-phase VM work; not all page types can be recovered | Linux policy and signals are not an Atom proof |
+| [Linux hwpoison](../../../30-sources/kleen-2009-hwpoison.md) | Page poisoning, mapping discovery, process notification/termination, and future exclusion are split-phase VM work; not all page types can be recovered | Linux policy and signals are not an Kay proof |
 | [Itanium machine-check recovery](../../../30-sources/luck-2003-machine-check-recovery-itanium.md) | Narrow continuation requires object-specific reconstruction and can require sacrificing a process; kernel/shared state forces wider failure | Historical architecture and implementation |
 | [Recovery domains](../../../30-sources/lenharth-et-al-2009-recovery-domains.md) | Request-local rollback is possible only when shared state and committed output remain inside the recovery boundary | Evaluated injected software faults, not arbitrary hardware corruption |
 | [Recovering device drivers](../../../30-sources/swift-et-al-2004-recovering-device-drivers.md) | Device recovery has class-specific reconstruction and indeterminate external-effect cases | Does not cover malicious hardware or every device |
@@ -97,7 +97,7 @@ A classifier passes only if:
 
 The sources justify conservative, scope-aware, split-phase recovery. The token
 types, information lattice, rule compiler, and terminal-promotion protocol are
-Atom synthesis.
+Kay synthesis.
 
 ## Classification input
 
@@ -2606,11 +2606,11 @@ belong in the model.
 - Evidence values and object identifiers do not confer control authority.
 - Classifier profiles and rule hashes are boot-measured and immutable during a
   decision; downgrade or unsigned replacement is rejected.
-- Atom-initiated fault injection requires a separate test capability, is
+- Kay-initiated fault injection requires a separate test capability, is
   disabled or tightly scoped in production, and binds authenticated out-of-band
   injection-session provenance to the capture. Hardware/firmware interfaces
   such as RERI need not retain a normative injected bit, so an event lacking
-  that Atom provenance is `injection_origin = Unknown`, not falsely marked.
+  that Kay provenance is `injection_origin = Unknown`, not falsely marked.
 - Unprivileged workloads can induce corrected-event storms or repeated guarded
   faults; quotas may coalesce reporting but cannot erase quarantine or terminal
   obligations.

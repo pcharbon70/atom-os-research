@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Crash-only recovery locates restart control outside failed state; thread-progress evidence covers participating software readers, not arbitrary domain or device quiescence. [1](../../../30-sources/candea-fox-2003-crash-only-software.md), [2](../../../30-sources/erlang-otp-team-2026-thread-progress-contracts.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The adapter consumes kernel authority; it does not make BEAM terms into capabilities or put the managed runtime in privileged code.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

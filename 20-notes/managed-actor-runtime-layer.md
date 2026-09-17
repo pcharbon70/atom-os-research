@@ -81,7 +81,7 @@ The question is not simply how to execute BEAM instructions. It is:
 > What is the smallest unprivileged runtime that can execute a declared
 > compiled-BEAM profile with ERTS-compatible actor, memory, signal, failure,
 > code, and observability behavior while consuming only the bounded mechanisms
-> of the Atom OS kernel?
+> of the Kay OS kernel?
 
 An implementation is a credible managed actor layer when it satisfies all of
 the following:
@@ -165,12 +165,12 @@ execution time.
 [Scheduler activations](../30-sources/anderson-et-al-1992-scheduler-activations.md)
 provide historical evidence for separating kernel processor allocation from
 user-level fine-grained scheduling. Their expensive upcall path and reentrant
-scheduler complexity are warnings against copying that API. Atom OS needs the
+scheduler complexity are warnings against copying that API. Kay OS needs the
 division of responsibility, not the historical mechanism verbatim.
 
 ## What is inherited, implemented, and deliberately changed
 
-| Concern | Principle to preserve | Current ERTS evidence | Atom OS placement |
+| Concern | Principle to preserve | Current ERTS evidence | Kay OS placement |
 | --- | --- | --- | --- |
 | Execution | Portable compiled BEAM contract | BEAM modules are loaded and interpreted or lowered by ERTS | Runtime loader, verifier, interpreter, and optional load-time native lowering |
 | Concurrency | Very lightweight isolated actors | ERTS processes own execution state, heaps, signals, and mailboxes | Runtime objects multiplexed over kernel-scheduled threads |
@@ -185,7 +185,7 @@ division of responsibility, not the historical mechanism verbatim.
 
 This table separates principle from mechanism. An implementation may replace
 an ERTS data structure while preserving the declared behavior. Conversely,
-copying an ERTS queue or scheduler does not prove the behavior under Atom OS
+copying an ERTS queue or scheduler does not prove the behavior under Kay OS
 budgets and failure boundaries.
 
 ## Proposed runtime components
@@ -242,7 +242,7 @@ release on 2026-09-02, while implementation claims remain tied to the archive’
 separately pinned OTP 29.0.5 source audit until the newer source is audited.
 That is a research baseline, not a promise that all OTP 29 applications work.
 The official compatibility policy itself allows compiled artifacts and runtime
-features to evolve, so the Atom OS manifest must be more explicit than a file
+features to evolve, so the Kay OS manifest must be more explicit than a file
 suffix.
 
 ### [2. Actor identity, lifecycle, and process state](managed-actor-runtime-components/actor-identity-lifecycle-and-process-state.md)
@@ -315,7 +315,7 @@ programming model, not a factual description of all runtime memory.
 
 [Orca](../30-sources/clebsch-et-al-2017-orca.md) is the strongest alternative
 evidence reviewed. Its zero-copy and shared-mutable-object results depend on
-Pony’s statically enforced reference capabilities. A future Atom OS language
+Pony’s statically enforced reference capabilities. A future Kay OS language
 profile could attach verified immutable or unique-transfer certificates to
 selected values. Those values must be rejected or copied when the proof is
 absent; the ordinary BEAM profile cannot assume it.
@@ -344,7 +344,7 @@ optimization](../30-sources/winblad-2021-parallel-signal-sending.md) demonstrate
 the value: adaptive sender-hashed buffers removed one contended enqueue lock and
 produced a very large gain in an extreme small-message microbenchmark. The same
 source warns that one receiving actor remains the drain bottleneck and that
-larger messages reduce the advantage. Atom OS should therefore measure send
+larger messages reduce the advantage. Kay OS should therefore measure send
 rate, accepted rate, drain rate, backlog, and latency separately.
 
 The message queue remains arrival ordered subject to the pinned profile’s
@@ -367,7 +367,7 @@ Storage mode is a measured policy, not application-visible semantics.
 
 Standard local send is non-blocking and a live local recipient ordinarily
 receives admitted messages. Silently dropping a message at a per-actor quota
-would create a new semantic failure mode. A bounded Atom OS deployment needs a
+would create a new semantic failure mode. A bounded Kay OS deployment needs a
 declared overload profile. The leading profile extension to test is:
 
 1. charge a send before publication to receiver queue and preserve atomic
@@ -383,7 +383,7 @@ declared overload profile. The leading profile extension to test is:
    streams where the sender can observe refusal before treating a message as
    accepted.
 
-Hard-threshold termination is an Atom OS resource-profile extension, not an
+Hard-threshold termination is an Kay OS resource-profile extension, not an
 established OTP-compatible mailbox behavior. A stricter compatibility mode may
 need buffering, spill, or distribution-like sender suspension; its boundedness
 and observable semantics remain an experiment. Tests must distinguish a
@@ -437,7 +437,7 @@ compatibility. Administrative and runtime cleanup work uses a separate capped
 reserve so it does not depend on actor-priority selection. Aging actor
 priorities would be an explicit non-compatible extension, not a hidden change
 to ERTS priority behavior. Current OTP documentation does not promise automatic
-resolution of all priority inversions, so Atom OS must not claim a real-time
+resolution of all priority inversions, so Kay OS must not claim a real-time
 guarantee from actor priority alone.
 
 Safe-point latency is the key scheduler property. Long BIFs are split,
@@ -476,7 +476,7 @@ BeamAsm history, summarized in [The Road to the
 JIT](../30-sources/gustavsson-2020-road-to-the-jit.md), favors simple load-time
 translation over a complex tracing optimizer for this workload: preserve the
 BEAM stack/register model, remove dispatch overhead, and avoid warm-up and
-mode-transition machinery. Atom OS should follow that shape before considering
+mode-transition machinery. Kay OS should follow that shape before considering
 adaptive optimization.
 
 Native publication uses write-then-seal mappings. The loader writes into
@@ -499,7 +499,7 @@ OTP/application operation. In the OTP 29 compatibility profile, logical purge
 eligibility checks direct executable references such as active frames and
 continuations; it does not wait for local fun terms or code literals. A local
 fun into purged code fails if later invoked, and literals are copied out during
-later runtime work. Atom OS may conservatively delay physical page reclamation
+later runtime work. Kay OS may conservatively delay physical page reclamation
 for native resources, trace metadata, epoch readers, or deferred literal-copy
 work, but that retention is not exposed as a stronger language-level purge
 blocker. Forced purge is an explicit process-termination policy with evidence.
@@ -516,7 +516,7 @@ I/O work. A compatibility manifest therefore constrains every callable entry
 and permitted class transition rather than attaching one immutable class to a
 library.
 
-The default Atom OS design is therefore:
+The default Kay OS design is therefore:
 
 - hardware drivers live in separately protected, restartable service domains;
 - blocking libraries and untrusted codecs run behind bounded endpoints;
@@ -551,7 +551,7 @@ The default gateway contract is:
 - explicit evidence for refusal, disconnect, protocol violation, stale epoch,
   and lost authority.
 
-That evidence belongs to the Atom OS gateway protocol and to explicit
+That evidence belongs to the Kay OS gateway protocol and to explicit
 credit-aware request extensions. It does not change the OTP send API:
 `Dest ! Msg` and `erlang:send/2` return `Msg`, while `erlang:send/3` returns
 only `ok`, `nosuspend`, or `noconnect` and provides no delivery completion.
@@ -571,7 +571,7 @@ exactly-once execution.
 [Scaling Reliably](../30-sources/trinder-et-al-2017-scaling-reliably.md) found
 that full-mesh connections, global names, and global recovery metadata created
 scaling bottlenecks in its evaluated workloads, while partitioning those
-structures improved the selected cases. Atom OS should use explicit topology,
+structures improved the selected cases. Kay OS should use explicit topology,
 partitioned names, scoped recovery data, and gateway placement aligned with
 failure domains.
 
@@ -746,7 +746,7 @@ mechanisms rather than treated as drop-in compatibility models.
 
 | System or research line | Useful lesson | Why it is not the baseline |
 | --- | --- | --- |
-| ERTS | Reductions, local heaps, per-sender signals, selective receive, links/monitors, mature diagnostics | Hosted OS dependencies, broad native/node trust, and runtime-global resources must be redesigned at the Atom OS boundary |
+| ERTS | Reductions, local heaps, per-sender signals, selective receive, links/monitors, mature diagnostics | Hosted OS dependencies, broad native/node trust, and runtime-global resources must be redesigned at the Kay OS boundary |
 | Pony and Orca | Type/runtime co-design can prove safe zero-copy transfer and concurrent collection | BEAM code lacks Pony’s reference-capability proofs and uses different language semantics |
 | CAF locality research | Local-first hierarchical stealing can reduce cross-NUMA steals and help selected workloads; policy must follow workload | CAF actors, C++ memory, and scheduling semantics are not BEAM compatibility contracts |
 | OTP/PULSE testing | Scheduler control plus generated histories and shrinking exposes protocol races | User-level control alone does not reproduce kernel, native, network, or power faults |

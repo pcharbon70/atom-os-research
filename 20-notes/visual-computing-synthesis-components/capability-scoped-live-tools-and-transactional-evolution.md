@@ -10,14 +10,14 @@ tags:
   - visual-computing
 aliases:
   - "Visual synthesis component 5"
-  - "Atom OS live tools"
+  - "Kay OS live tools"
 ---
 
 # Capability-Scoped Live Tools and Transactional Evolution
 
 ## Executive decision
 
-Atom OS should restore Smalltalk's continuity between use, inspection, and
+Kay OS should restore Smalltalk's continuity between use, inspection, and
 authorship without restoring a globally mutable, ambiently inspectable image.
 Browsers, inspectors, evaluators, tracers, debuggers, editors, migration tools,
 and publishers are ordinary supervised services. Each receives a distinct,
@@ -84,7 +84,7 @@ provenance patterns.
 These works do not prove safe arbitrary live change. Type safety is not domain
 correctness; package rollback does not reverse a data migration; signed
 provenance does not make code benevolent; and builder use does not prove
-non-programmer learnability. The Atom protocol explicitly preserves those
+non-programmer learnability. The Kay protocol explicitly preserves those
 limits.
 
 ## Capability facets
@@ -181,7 +181,7 @@ The record distinguishes:
 application-defined compensation is not equivalent to transaction isolation
 or time reversal. [ARIES](../../30-sources/mohan-et-al-1992-aries.md) shows
 how write-ahead records and compensation log records make storage recovery
-restartable, but an Atom project history remains a domain-level protocol rather
+restartable, but an Kay project history remains a domain-level protocol rather
 than a database log exposed as user meaning.
 
 ## Lifecycle
@@ -305,7 +305,7 @@ Tracing is observation with operational cost and disclosure risk.
 
 [DTrace](../../30-sources/cantrill-et-al-2004-dtrace.md) provides evidence for
 safe dynamic instrumentation and predicates, but its kernel/platform model is
-not the Atom actor authority contract.
+not the Kay actor authority contract.
 
 ## Publishing reusable tools
 
@@ -428,7 +428,7 @@ expands this component into five separately authorized tool responsibilities.
   supplies authentic approval for consequential scope or authority changes.
 - [Cross-layer placement and recovery](cross-layer-placement-and-recovery-topology.md) —
   locates tools and independent recovery holders.
-- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   retains the authorship, security, and update falsifiers.
 
 ## Sources

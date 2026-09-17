@@ -37,11 +37,11 @@ resolution criteria here. Promote independently useful conclusions to
   tracks the T7500 / Intel x86-64 first native CLI boot, protected service control, CLI-launched
   BEAM/GC, and integrated recovery/resource/fault gates, informed by nineteen
   requirement studies without treating research completion as gate evidence.
-- [How should Atom OS structure applications and domain services?](how-should-atom-os-structure-applications-and-domain-services.md) —
+- [How should Kay OS structure applications and domain services?](how-should-kay-os-structure-applications-and-domain-services.md) —
   defines falsifiable semantic, identity, invariant, persistence, workflow,
   effect, presentation, collaboration, extension, evolution, tenancy,
   overload, and recovery criteria for the fifth layer.
-- [What visual-computing model should Atom OS adopt?](what-visual-computing-model-should-atom-os-adopt.md) —
+- [What visual-computing model should Kay OS adopt?](what-visual-computing-model-should-kay-os-adopt.md) —
   asks whether a user-programmable semantic project can be built from isolated
   actors, primary accessibility semantics, disposable presentation, and
   capability-scoped live tools, with explicit usability and recovery tests.

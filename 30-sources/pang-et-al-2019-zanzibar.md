@@ -69,7 +69,7 @@ three years of Google production experience.
 
 ## Relevance
 
-Atom OS can borrow the relation model and explicit freshness tokens for
+Kay OS can borrow the relation model and explicit freshness tokens for
 distributed sharing policy, but should mint short-lived, resource-specific
 grants after a decision. The committing resource must validate the grant’s
 object generation and minimum policy revision so that a check separated from
@@ -78,7 +78,7 @@ the effect does not reintroduce a time-of-check/time-of-use race.
 ## Limits
 
 This is one company’s global service built on Google infrastructure and threat
-assumptions. The reported scale is not an Atom OS requirement, and Zanzibar
+assumptions. The reported scale is not an Kay OS requirement, and Zanzibar
 does not provide human authentication, local kernel authority, credential
 holder binding, device attestation, mandatory information flow, or a complete
 solution to effects that race with revocation.

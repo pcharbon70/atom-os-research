@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Parallel channels can improve selected workloads; a disconnected session cannot prove application consumption or nonexecution. [1](../../../30-sources/meiklejohn-et-al-2019-partisan.md), [2](../../../30-sources/chandra-toueg-1996-failure-detectors.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Gateway authentication, transport sessions and BEAM node-incarnation identity are distinct. Compatible sends do not acquire delivery-completion results.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

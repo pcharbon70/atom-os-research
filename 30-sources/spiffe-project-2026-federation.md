@@ -58,7 +58,7 @@ relationship removal.
 
 ## Relevance
 
-Atom's gateway should represent every peer as a directional, versioned
+Kay's gateway should represent every peer as a directional, versioned
 relationship with a separate bundle and namespace, controlled rotation, and an
 explicit deletion/revocation bound. A validated SPIFFE ID remains evidence for
 the local PDP, never a kernel capability.
@@ -67,7 +67,7 @@ the local PDP, never a kernel capability.
 
 The living specification leaves application authorization, refresh timing,
 storage rollback, hostile endpoints, and availability to implementations. Its
-host/platform trust assumptions do not automatically match Atom.
+host/platform trust assumptions do not automatically match Kay.
 
 ## Derived work
 

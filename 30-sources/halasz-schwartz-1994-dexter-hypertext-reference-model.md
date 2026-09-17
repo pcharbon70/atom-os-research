@@ -57,7 +57,7 @@ single implementation or define a security and recovery protocol.
 
 ## Relevance
 
-Dexter supplies a strong precedent for separating Atom OS project/model state,
+Dexter supplies a strong precedent for separating Kay OS project/model state,
 semantic anchors, view specifications, and disposable renderer/surface state.
 The same split helps a model outlive a desktop process while several providers
 offer different views.
@@ -72,4 +72,4 @@ change or safe recovery after ambiguous effects.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

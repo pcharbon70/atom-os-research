@@ -53,7 +53,7 @@ forms, and show undecidability for the general model under weak assumptions.
 
 ## Relevance
 
-Atom OS should deliberately restrict its policy and grant language: finite
+Kay OS should deliberately restrict its policy and grant language: finite
 typed actions, monotonic attenuation, bounded delegation depth, explicit
 revocation anchors, no evaluator I/O, and a small set of analyzable authority
 transitions. A general scripting language with authority-changing callbacks is

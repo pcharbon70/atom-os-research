@@ -28,7 +28,7 @@ transaction message within a device-specific TEE profile.
 [3](../../../30-sources/qubes-project-2026-gui-virtualization.md)
 [4](../../../30-sources/android-project-2026-protected-confirmation.md)
 
-Atom's hardware-backed and accessible ceremony profiles remain unselected.
+Kay's hardware-backed and accessible ceremony profiles remain unselected.
 
 ## Development
 

@@ -73,7 +73,7 @@ whole.
 
 ## Relevance
 
-Atom OS should give a service a stable identifier and incarnation while
+Kay OS should give a service a stable identifier and incarnation while
 allowing one or more names to resolve to generation-bound candidates. The
 local registry can therefore expose an atomic `snapshot + revision` read and a
 watch starting strictly after that revision. A cache entry carries the
@@ -81,7 +81,7 @@ registry revision and expiry or invalidation cursor that justifies it; a caller
 must never infer freshness merely because the name string is unchanged.
 
 The paper also supports sharding registries by administrative or failure
-scope. Atom OS can keep the common boot-local registry small and linearizable,
+scope. Kay OS can keep the common boot-local registry small and linearizable,
 then layer eventual groups or federated discovery over it. Reorganization is a
 new binding revision, not silent reuse of an old actor handle. Capability
 derivation remains separate: resolution returns an attenuated handle only
@@ -96,7 +96,7 @@ capability-oriented operating systems. Expiration-based caching assumes useful
 time bounds and can trade update latency for lookup availability. The design
 does not supply a local lock-free registry algorithm, watcher backpressure,
 actor-incarnation semantics, Byzantine replication, or exclusive-effect
-fencing. Those remain Atom OS responsibilities.
+fencing. Those remain Kay OS responsibilities.
 
 ## Derived work
 

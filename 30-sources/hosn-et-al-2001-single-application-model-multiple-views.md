@@ -58,8 +58,8 @@ fault-recovery evidence.
 
 ## Relevance
 
-The work supports an authoritative Atom OS semantic/model layer with plural
-visual, voice, assistive, and remote projections. Atom OS must add durable
+The work supports an authoritative Kay OS semantic/model layer with plural
+visual, voice, assistive, and remote projections. Kay OS must add durable
 identity, capability-bearing actions, revisions, replay and gap handling,
 resource bounds, and supervised restart.
 
@@ -73,4 +73,4 @@ bit-identical or simultaneously updated under all failures.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

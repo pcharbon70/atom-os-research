@@ -66,7 +66,7 @@ and what later systems still lacked.
 ## Relevance
 
 The interview prevents a nostalgic “restore Smalltalk exactly” conclusion. It
-supports a safer Atom OS interpretation: keep causal connection, inspection,
+supports a safer Kay OS interpretation: keep causal connection, inspection,
 and user authorship, while requiring an explicit capability step, transaction,
 or recovery boundary for changes that can affect the runtime or other users.
 
@@ -80,4 +80,4 @@ current Smalltalk implementations.
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

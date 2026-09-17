@@ -18,7 +18,7 @@ aliases:
 
 This map connects Alan Kay's personal-dynamic-medium vision, the collective
 Smalltalk implementation, the distinct Xerox Star desktop lineage, HCI
-analysis, representative current desktop architecture, and the proposed Atom
+analysis, representative current desktop architecture, and the proposed Kay
 OS visual-computing model. It treats visual technique, semantic architecture,
 authorship, protection, and recovery as separate questions.
 
@@ -27,8 +27,8 @@ authorship, protection, and recovery as separate questions.
 - [Alan Kay's Smalltalk visual interface and the modern
   desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
   gives the full historical comparison, component model, modern trade-offs,
-  and capability-safe Atom OS synthesis.
-- [What visual-computing model should Atom OS adopt?](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+  and capability-safe Kay OS synthesis.
+- [What visual-computing model should Kay OS adopt?](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   turns the synthesis into falsifiable semantic, recovery, security,
   learnability, accessibility, and evolution criteria.
 - [2026-09-04 Alan Kay and Smalltalk UI deep
@@ -36,7 +36,7 @@ authorship, protection, and recovery as separate questions.
   search method, evidence boundaries, and the complete session source manifest.
 - [Visual-computing synthesis component
   reports](../20-notes/visual-computing-synthesis-components/README.md) — turns
-  the seven proposed Atom OS directions into implementation-oriented contracts.
+  the seven proposed Kay OS directions into implementation-oriented contracts.
 - [2026-09-04 visual-computing synthesis components deep
   dive](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md) —
   records the expanded scientific, standards, and engineering source review
@@ -155,7 +155,7 @@ Each seven parent syntheses now lead to 34 internal-service studies through the
   coordinates visual, textual, programmatic, voice, assistive, and remote
   projections without confusing convergence with intent or authorization.
 
-### Into the Atom OS architecture
+### Into the Kay OS architecture
 
 - [Applications and domain services layer](../20-notes/applications-and-domain-services-layer.md) —
   now provides the enclosing Layer 5 domain identity, invariants, typed actions

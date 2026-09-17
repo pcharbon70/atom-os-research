@@ -63,7 +63,7 @@ trade-offs for different interval distributions and tick mechanisms.
 
 The work supports per-scheduler hierarchical wheels for ordinary actor timers,
 with a small exact near-deadline structure and one or a few kernel deadline
-channels. Atom OS adds requirements absent from the original data structure:
+channels. Kay OS adds requirements absent from the original data structure:
 generation-stamped references, cancellation/fire linearization, monotonic-era
 handling, bounded expiry batches, actor/resource charging, and sticky overflow
 telemetry.
@@ -74,7 +74,7 @@ The paper predates multicore runtimes and does not specify BEAM timer
 semantics, late-delivery behavior, cancellation races with mailbox publication,
 tickless hardware, clock discontinuity, or adversarial timer bursts. Its
 algorithmic result chooses a candidate structure; measurements must select
-wheel levels, granularity, shard count, and heap crossover for Atom OS.
+wheel levels, granularity, shard count, and heap crossover for Kay OS.
 
 ## Derived work
 

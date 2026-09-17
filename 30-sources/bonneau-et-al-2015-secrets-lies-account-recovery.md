@@ -63,7 +63,7 @@ signals.
 
 ## Relevance
 
-Atom OS should not make personal questions a root recovery authenticator. The
+Kay OS should not make personal questions a root recovery authenticator. The
 recovery coordinator should instead use predeclared possession factors,
 threshold custodians, cooling-off and cancellation, independent notification,
 and narrow one-shot envelopes. The study also justifies measuring both attacker

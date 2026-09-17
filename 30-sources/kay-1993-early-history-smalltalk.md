@@ -74,7 +74,7 @@ detail.
 ## Relevance
 
 The paper connects Kay's conceptual vision to actual Smalltalk components and
-supplies essential attribution and failure evidence. It also warns Atom OS
+supplies essential attribution and failure evidence. It also warns Kay OS
 against treating universal malleability as automatically learnable: the
 architecture must be paired with progressive tools, explanations, and studies
 of real users.
@@ -90,4 +90,4 @@ heaps, asynchronous signals, or modern protection domains.
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

@@ -1,5 +1,5 @@
 ---
-title: "Zig versus C for the Atom kernel: comparison and recommendation"
+title: "Zig versus C for the Kay kernel: comparison and recommendation"
 kind: note
 created: "2026-09-08"
 maturity: developing
@@ -7,7 +7,7 @@ tags: [zig, c-language, kernel-language, language-comparison, proof-of-concept]
 aliases: ["Zig versus C kernel comparison"]
 ---
 
-# Zig versus C for the Atom kernel: comparison and recommendation
+# Zig versus C for the Kay kernel: comparison and recommendation
 
 ## Recommendation
 
@@ -32,7 +32,7 @@ remains the operative decision because this request asks for analysis, not a
 language switch. No implementation, plan acceptance or new compiler pin is
 authorized by this report.
 
-Audience: the Atom OS research and implementation team. Evidence checked
+Audience: the Kay OS research and implementation team. Evidence checked
 2026-09-08. Read the individual [Zig](zig-kernel-language-feasibility-and-c-interoperability.md)
 and [C](c-kernel-language-feasibility-and-low-level-compatibility.md) studies
 for facility inventories; this report evaluates their tradeoffs rather than
@@ -208,7 +208,7 @@ must account for which checks actually run and their failure behavior.
 and [translation validation](../../30-sources/sewell-et-al-2013-translation-validation.md)
 give C a stronger established assurance precedent in this corpus. Their
 architecture, semantics, assembly, hardware and configuration assumptions do
-not transfer to Atom. A C implementation would still need its own proof
+not transfer to Kay. A C implementation would still need its own proof
 strategy and supported subset.
 
 This study did not establish an equivalent end-to-end proof route for our Zig
@@ -273,7 +273,7 @@ subsystem of that kind has been selected.
 | [Ymir](../../30-sources/smallkirby-2024-writing-hypervisor-in-zig.md) | Practitioner evidence for Zig/assembly Intel mechanisms | Our boot, isolation or recovery qualification |
 
 These works establish mechanisms and risks, not a controlled comparison of
-two otherwise equivalent Atom kernels. They differ in compiler version,
+two otherwise equivalent Kay kernels. They differ in compiler version,
 generator, error oracle, hardware, workload and effort. We do not infer a
 language ranking from publication counts or raw bug counts.
 

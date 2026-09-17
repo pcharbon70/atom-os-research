@@ -67,7 +67,7 @@ records documented guarantees, not independently reproduced results.
 
 ## Relevance
 
-Atom OS local discovery should use one shard writer, a monotonic shard
+Kay OS local discovery should use one shard writer, a monotonic shard
 revision, compare-and-publish, and a combined snapshot/cursor operation. A
 watch is a bounded change stream. If its queue overflows, its cursor is too old,
 or the consumer reconnects without continuity proof, the only correct recovery
@@ -83,7 +83,7 @@ capability needed to invoke the service.
 
 The documentation describes a particular replicated database and relies on
 its Raft, storage, transport, authentication, and deployment assumptions. The
-Atom OS local registry does not need to embed etcd, and a single-node shard can
+Kay OS local registry does not need to embed etcd, and a single-node shard can
 provide a much smaller contract. The page does not establish resource bounds,
 capability safety, workload identity, or application-level exactly-once
 effects. Version 3.5 is retained because this is the stable, explicitly scoped

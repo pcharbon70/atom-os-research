@@ -64,7 +64,7 @@ stealing overhead.
 ## Relevance
 
 The result supports scheduler-local run queues and topology hints in a managed
-actor runtime, but not a mandatory actor-to-core affinity rule. Atom OS should
+actor runtime, but not a mandatory actor-to-core affinity rule. Kay OS should
 make placement an adaptive, observable policy above kernel scheduling-context
 budgets, then test it against message locality, memory locality, migration,
 fairness, and latency together.

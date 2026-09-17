@@ -68,7 +68,7 @@ prove a state machine.
 - Host time zone: America/Toronto
 - Activity: scientific-paper, specification, engineering-article, and kernel-
   documentation review; cross-source synthesis; archive editing
-- Target kernel: no Atom implementation exists or was built
+- Target kernel: no Kay implementation exists or was built
 - Architecture scope: x86-64, Arm A-profile, and RISC-V supervisor translation
   were compared; none was executed
 - Hardware, firmware, hypervisor, emulator, or IOMMU: none exercised
@@ -283,7 +283,7 @@ note currently resolves a mutable `latest` URL, so this session treats its Arm
 claims as provisional architecture guidance rather than as a pinned normative
 baseline. Paper measurements apply only to the reported systems and hardware.
 Linux and other mature implementations supply valuable precedent, not proof
-that Atom's synthesis is correct. The reports deliberately retain unresolved
+that Kay's synthesis is correct. The reports deliberately retain unresolved
 questions and developing maturity.
 
 The search also found no primary paper that specifies the complete finite
@@ -297,7 +297,7 @@ and leaves the combined protocol as an explicit model-checking obligation.
 - Record the exact Arm Architecture Reference Manual issue, stable artifact or
   URL, architecture profile, and supporting sections for every Arm ASID, TLBI,
   break-before-make, PAN, and barrier claim; then re-audit the affected reports.
-  Do not freeze an Atom Arm profile against the mutable `latest` reference.
+  Do not freeze an Kay Arm profile against the mutable `latest` reference.
 
 ## Source manifest
 
@@ -366,7 +366,7 @@ and leaves the combined protocol as an explicit model-checking obligation.
   oracle before an optimized backend.
 - Model CPU activation, mutation, bounded mailboxes, hotplug, timeout, and
   reclamation together under weak memory and explicit fairness assumptions.
-- Port architecture virtual-memory litmus tests and add Atom-specific
+- Port architecture virtual-memory litmus tests and add Kay-specific
   generation/late-acknowledgement cases.
 - Test one x86-64 and one materially different Arm or RISC-V backend on real
   hardware, including documented errata and firmware behavior.

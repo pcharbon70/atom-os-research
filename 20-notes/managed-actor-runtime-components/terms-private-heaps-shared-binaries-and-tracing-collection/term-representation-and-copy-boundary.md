@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Heap-architecture research separates copying semantics from physical copying; Orca's transfer guarantees rely on stronger type facts than unrestricted BEAM provides. [1](../../../30-sources/sagonas-wilhelmsson-2006-efficient-memory-management.md), [2](../../../30-sources/clebsch-et-al-2017-orca.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Automatic tracing collection and term interpretation remain unprivileged runtime responsibilities; kernel pages do not encode BEAM object ownership.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

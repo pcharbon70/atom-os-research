@@ -15,7 +15,7 @@ Which apparently separate components must actually fail or recover together?
 
 CuriOS demonstrates that protection and state organization both affect recovery; address-space separation alone is insufficient. [1](../../../30-sources/david-et-al-2008-curios.md), [2](../../../30-sources/chandra-toueg-1996-failure-detectors.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../failure-boundaries-and-recovery-topology.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../failure-boundaries-and-recovery-topology.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

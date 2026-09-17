@@ -55,7 +55,7 @@ cryptographic construction or measured experiment.
 
 ## Relevance
 
-Atom should isolate producer append, durable local spool, query, retention,
+Kay should isolate producer append, durable local spool, query, retention,
 witnessing, and encryption-key authority. It should define behavior for audit
 outages and spool exhaustion per action class rather than silently discarding
 records or allowing all effects.

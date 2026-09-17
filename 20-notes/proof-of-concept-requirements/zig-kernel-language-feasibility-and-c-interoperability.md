@@ -36,7 +36,7 @@ It does not replace the [M0–M4 plan](../../60-planning/01-proof-of-concept/REA
 
 The target remains the [Dell Precision T7500 / Intel x86-64](dell-precision-t7500-target-and-minimal-qemu-profile.md).
 Initial guest tests must use the planned versioned q35/SeaBIOS/TCG,
-`Nehalem-v1`, one CPU, 128 MiB and serial fixture. A compiler CPU name is not
+`Nehalem-v1`, one CPU, 64 MiB and serial fixture. A compiler CPU name is not
 a bit-for-bit match to a QEMU CPU model; reconcile their feature sets.
 M0 must qualify that fixture before acceptance. The installed Xeon SKUs and
 physical firmware/device inventory remain unknown.
@@ -54,7 +54,7 @@ Evidence is separated as follows:
   compiler, platform and evaluation limits.
 - **Observed locally:** the exact small fixtures and transcript in the
   [research assets](../../assets/zig-kernel-feasibility/README.md).
-- **Proposed:** the Atom policies and qualification tests below.
+- **Proposed:** the Kay policies and qualification tests below.
 
 The [session journal](../../50-journal/2026-09-08-zig-kernel-feasibility-deep-dive.md)
 contains search scope, source provenance, commands, failed/limited observations
@@ -93,9 +93,9 @@ choose the runtime implementation or turn BEAM instructions into a kernel ABI.
 
 The [tagged compiler/runtime profile](../../30-sources/zig-project-2026-freestanding-source-profile.md)
 and our compile-only probes establish available mechanisms. The last column
-is proposed Atom work, not upstream functionality.
+is proposed Kay work, not upstream functionality.
 
-| Responsibility | Evidence and feasibility | What Atom must still own and test |
+| Responsibility | Evidence and feasibility | What Kay must still own and test |
 | --- | --- | --- |
 | Freestanding code and ELF | Zig and C objects linked locally without a hosted runtime or unresolved symbols | Real boot entry, linker script, reservations, BSS, relocation rules, permissions and full helper census |
 | Port I/O and machine instructions | Local Zig assembly emitted `out`, `cli` and `hlt`; external assembly can be linked | Exact operands/clobbers, compiler ordering, privilege preconditions, bounded UART policy and hardware qualification |
@@ -225,7 +225,7 @@ Treat `std` as a collection to qualify, not an OS abstraction that is already
 ported. Pure algorithms and caller-buffer utilities are candidates. Default
 heap, threading, files, sockets, entropy and clock backends must not silently
 supply host assumptions. The 0.16 I/O interface creates a possible adapter
-boundary; it does not supply Atom's implementation.
+boundary; it does not supply Kay's implementation.
 
 For M0, propose:
 

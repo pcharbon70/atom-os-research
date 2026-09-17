@@ -19,7 +19,7 @@ changed.
 
 ## Scope and research sequence
 
-Audience: the Atom OS team; target: the existing Intel T7500 CLI-first PoC.
+Audience: the Kay OS team; target: the existing Intel T7500 CLI-first PoC.
 Question: which language better fits the project, not merely whether either
 can emit freestanding instructions? Unknown team capability, deadlines and
 maintenance capacity remain explicit assumptions.
@@ -55,9 +55,9 @@ beside report claims distinguish those source records from our inferences.
 | Neither language lacks a necessary mechanism in principle | Prior studies, native ABI, compiler and Intel contracts | Strong feasibility basis; real boot/state ownership untested |
 | Zig integrates useful error/resource idioms | Versioned reference and overview | Documented features; productivity/defect reduction unmeasured |
 | ReleaseSafe is not complete memory safety or isolation | Checked versus unchecked behavior; pointer lifetime; installed defaultPanic | Strong boundary evidence; actual kernel failure policy absent |
-| C offers independent compiler and established analysis paths | Linux GCC/Clang practice; Clang analyzer/sanitizer docs | Documented availability; full Atom profiles unqualified |
+| C offers independent compiler and established analysis paths | Linux GCC/Clang practice; Clang analyzer/sanitizer docs | Documented availability; full Kay profiles unqualified |
 | Zig brings concrete migration/qualification risk | 0.16 release limits and prior translator/header observations | Confirmed scope; project maintenance cost unknown |
-| C has stronger established proof precedents in this corpus | seL4 and translation validation | Strong existence evidence, no inherited Atom proof |
+| C has stronger established proof precedents in this corpus | seL4 and translation validation | Strong existence evidence, no inherited Kay proof |
 | Local and scholarly results cannot rank languages | Different modes, workloads, oracles, compilers and platforms | Clear methodological mismatch; no matched measurements |
 | Retain Zig under stated project assumptions | Cross-source synthesis and scope/priority judgment | Moderate recommendation confidence; actual constraints can reverse it |
 

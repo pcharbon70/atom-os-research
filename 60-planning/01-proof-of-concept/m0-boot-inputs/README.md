@@ -39,7 +39,7 @@ explicit before privileged code depends on it.
 
 M0 does not implement the protected service nucleus, complete BEAM profile,
 collector, persistent filesystem, NIC stack, SMP/NUMA, human login, or GUI.
-The minimum fixture remains Intel x86-64, one logical CPU, 128 MiB, and serial
+The minimum fixture remains Intel x86-64, one logical CPU, 64 MiB, and serial
 I/O. A host-provided build or debugger is allowed and identified; a host OS
 inside the guest supplying the claimed kernel mechanisms is not.
 
@@ -110,7 +110,7 @@ launcher; it is not itself a QEMU configuration file or an executed-run record.
 
 The host owns compilation, emulation, debugger control, deadlines for a stuck
 test process, and evidence capture. Firmware and the loader own the documented
-pre-kernel path. The future Atom kernel owns validation and protection after
+pre-kernel path. The future Kay kernel owns validation and protection after
 handoff; a firmware memory claim is still input to validate.
 
 Read-only physical inventory does not authorize a firmware update, persistent

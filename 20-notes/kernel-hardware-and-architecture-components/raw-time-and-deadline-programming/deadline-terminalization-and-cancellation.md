@@ -66,7 +66,7 @@ Any eventual experiment must record the implementation and specification revisio
 ## Sources
 
 - [Tock HIL design](../../../30-sources/tock-project-2026-hil-design.md) — Submission, returned ownership and asynchronous completion contracts.
-- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Atom proofs.
+- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Kay proofs.
 - [RISC-V privileged architecture](../../../30-sources/risc-v-international-2026-privileged-architecture.md) — Privilege and trap semantics qualified by extensions.
 
 These sources support the constraints above. The proposed object division, transition composition and verification obligations are our synthesis and remain unverified.

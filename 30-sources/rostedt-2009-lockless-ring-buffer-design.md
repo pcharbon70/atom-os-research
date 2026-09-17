@@ -69,7 +69,7 @@ fixed per-CPU diagnostic rings. These mechanisms support a design in which a
 reader never treats an in-progress record as committed and loss policy is part
 of the buffer type rather than an undocumented accident.
 
-Atom OS should not copy the data structure without checking its own memory
+Kay OS should not copy the data structure without checking its own memory
 model, interrupt/NMI nesting, CPU-lifecycle, snapshot, and teardown rules. The
 kernel proposal also needs explicit sequence, loss, schema, authority, and
 redaction metadata that are outside this document's core algorithm.

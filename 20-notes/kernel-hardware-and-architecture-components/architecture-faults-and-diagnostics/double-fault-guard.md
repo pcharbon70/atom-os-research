@@ -30,7 +30,7 @@ entry/capture transaction is incomplete. It is not one uniform ISA exception.
 x86, Arm, and RISC-V route and preserve different state, so the guard is a
 common finite state machine realized by explicit feature profiles.
 
-This is proposed Atom architecture. It has not been proved at instruction
+This is proposed Kay architecture. It has not been proved at instruction
 boundaries or exercised on hardware.
 
 ## Question, scope, and operational standard
@@ -89,7 +89,7 @@ A guard passes only if:
 | [Intel system-programming documentation](../../../30-sources/intel-2026-system-programming-documentation.md) | x86-64 IST can select known stacks; `#DF` is an abort and saved state may be undefined; specified contributory/page-fault combinations while invoking `#DF`, and a new machine check while `MCG_STATUS.MCIP=1`, enter processor shutdown | Not every fault after a handler starts has that behavior; platform response to shutdown is not universally an automatic reset |
 | [RISC-V privileged architecture](../../../30-sources/risc-v-international-2026-privileged-architecture.md) | Early nested traps can overwrite `xepc`/cause; optional Smdbltrp, Ssdbltrp, and Smrnmi route double traps or enter critical-error state with limited saved evidence | Extensions are optional and final platform signal/reset behavior is external |
 | [Arm A-profile documentation](../../../30-sources/arm-2026-a-profile-system-architecture-documentation.md) | Vector selection, exception-level routing, stack state, SError synchronization, and optional double-fault behavior require an exact Arm feature profile | No x86-like universal per-vector IST assumption can be imported |
-| [Linux entry/exit handling](../../../30-sources/linux-kernel-community-2026-entry-exit-handling.md) | NMI-like machine-check/double-fault entry is nonordinary, may nest, and needs non-instrumentable early/late phases | Linux implementation discipline is not proof of Atom's path |
+| [Linux entry/exit handling](../../../30-sources/linux-kernel-community-2026-entry-exit-handling.md) | NMI-like machine-check/double-fault entry is nonordinary, may nest, and needs non-instrumentable early/late phases | Linux implementation discipline is not proof of Kay's path |
 | [Linux crash-dump evaluation](../../../30-sources/vazquez-cao-2006-evaluating-linux-crash-dumping.md) | Stack overflow, corrupt stack-derived CPU identity, recursive faults, NMI delivery, and damaged dump handoff defeat naive crash paths | Historical x86/Linux evidence |
 | [Ramoops](../../../30-sources/iordache-2021-ramoops.md) and [Linux pstore/blk](../../../30-sources/linux-kernel-community-2026-pstore-crash-backends.md) | Fixed reserved records and preinitialized mappings support minimal post-fault preservation | Reserved RAM can still be corrupt, incorrectly mapped, overwritten, or lost on reset; adapter success is not durability |
 | [FATE and DESTINI](../../../30-sources/gunawi-et-al-2011-fate-destini.md) | Compound failures and explicit intermediate/terminal specifications reveal recovery bugs missed by a single injected crash | Distributed service evaluation, not instruction-level nested traps |
@@ -1027,7 +1027,7 @@ watchdog/reset controller only as an explicit platform fallback.
 Machine check has another hardware-terminal case. Component 9 keeps
 `MCG_STATUS.MCIP` set until a committed #MC return leaf; if a new machine check
 occurs while MCIP is already one, Intel specifies processor shutdown rather
-than delivery to Atom's depth-two guard. No recursive record is promised for
+than delivery to Kay's depth-two guard. No recursive record is promised for
 that path. A service processor, watchdog, or next-boot observer may report that
 shutdown/reset only under its own measured provenance; absence of a software
 record is not proof that no second error occurred.
@@ -1046,7 +1046,7 @@ guard.
 
 The profile records current architecture issue, exception level, firmware
 routing, FEAT_RAS, error-synchronization behavior, and any supported double-
-fault/NMI extensions. Under Atom's conservative baseline policy, a second SError
+fault/NMI extensions. Under Kay's conservative baseline policy, a second SError
 or synchronous abort while handling a RAS event is terminal; this is not stated
 as a universal AArch64 architectural mandate. ELR/SPSR and syndrome values are
 copied before a higher-priority exception can overwrite them; absent validity
@@ -1067,7 +1067,7 @@ The saved state depends on the exact extension combination:
 | `Smdbltrp + Smrnmi` | RNMI state `mnepc`/`mncause` describes the unexpected trap while the first trap's `mepc`/`mcause` remains separately available; `mtval`/`mtval2` are not supplied for the unexpected trap |
 | `Smdbltrp` without usable RNMI, or exception in RNMI | The hart enters critical-error state and signals the platform; software return and platform reset behavior are not implied |
 
-Atom records the discovered extension set and platform response; it never
+Kay records the discovered extension set and platform response; it never
 assumes the supervisor can implement a machine-mode guard it does not own.
 For an admitted `Ssdbltrp` M-mode recursive path, the fixed frame snapshots
 `mtval2` and the still-available first-trap S/VS CSRs separately, with explicit

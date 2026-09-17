@@ -34,7 +34,7 @@ Inspected tagged builtin.zig, Target.zig, Build/Module.zig, compiler_rt.zig and 
 ## Findings
 
 The installed 0.16.0 lib/std/debug.zig defaultPanic (line 489 onward) traps
-for freestanding targets. It does not itself supply Atom serial diagnostics
+for freestanding targets. It does not itself supply Kay serial diagnostics
 or recovery. This was re-inspected read-only during the language comparison.
 
 The C convention maps x86_64 freestanding-none to SysV; the default internal Zig convention is not an external ABI. The convention named kernel is for GPU compute, not an x86 OS. Build controls cover libc exclusion, red zone, stack support, code model and unwind data. Runtime helpers and panic behavior are explicit integration concerns.

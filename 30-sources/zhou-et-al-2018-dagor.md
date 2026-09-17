@@ -80,7 +80,7 @@ admission baselines.
 
 ## Relevance
 
-**Atom OS inference:** the managed actor runtime should expose bounded mailbox
+**Kay OS inference:** the managed actor runtime should expose bounded mailbox
 depth, queue residence time, execution delay, deadlines, cancellation, and
 resource accounting as mechanisms. The OTP-like admission service should own
 the policies that interpret those signals, assign service-class priorities,

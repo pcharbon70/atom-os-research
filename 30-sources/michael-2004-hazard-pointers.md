@@ -65,7 +65,7 @@ and multiprogramming conditions.
 Hazard-style bounded activation pins are a candidate for fast kernel-object
 lookup paths whose maximum simultaneous protected references are known. They
 make the pin holder and retained object explicit, complementing epoch or RCU
-schemes. Atom OS could use fixed per-CPU or per-activation slots and charge the
+schemes. Kay OS could use fixed per-CPU or per-activation slots and charge the
 retired set to the object's teardown account.
 
 ## Limits

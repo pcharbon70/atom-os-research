@@ -62,7 +62,7 @@ supervision subtree alone are not confidentiality or integrity boundaries.
 
 Wedge targets Linux and C applications, focuses heavily on memory privilege,
 and predates modern side channels. Its measured costs and partitioning tools
-do not transfer to BEAM-compatible Atom OS domains.
+do not transfer to BEAM-compatible Kay OS domains.
 
 ## Derived work
 

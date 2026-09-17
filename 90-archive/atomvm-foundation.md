@@ -19,7 +19,7 @@ aliases:
 Archived on 2026-09-05 following the user's explicit rejection of AtomVM as an
 implementation foundation. This map preserves the former candidate's runtime,
 platform, measurement, and evidence trails. Its experiments and open questions
-are historical, not active Atom OS work.
+are historical, not active Kay OS work.
 
 The current [proof-of-concept route](../10-maps/proof-of-concept.md) starts
 with a minimal bootable OS and CLI. The broader [BEAM, ERTS, and OTP

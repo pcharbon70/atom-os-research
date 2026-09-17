@@ -70,7 +70,7 @@ logged undo through compensation log records.
 
 ## Relevance
 
-The Atom OS storage service should expose an explicit accepted/committed state,
+The Kay OS storage service should expose an explicit accepted/committed state,
 durable operation identifiers, checksummed generations, and crash injection at
 each ordering boundary. A simple first implementation can use append-only redo
 and immutable checkpoints; it should adopt ARIES-class undo machinery only if

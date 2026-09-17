@@ -21,7 +21,7 @@ Research question: How can replacement and owner cleanup avoid deleting a succes
 Revision conditions and incarnation-sensitive handles support replacement without
 treating reusable paths as object identity. [1](../../../30-sources/etcd-project-2026-api-guarantees.md) [2](../../../30-sources/burrows-2006-chubby.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

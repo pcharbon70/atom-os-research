@@ -139,8 +139,8 @@ not retroactively labeled as introduced by it:
 - [Zig 0.16.0 freestanding build and runtime source profile](zig-project-2026-freestanding-source-profile.md) — Use a compiler-profile manifest and an audited helper inventory. Fixed-buffer allocation is a possible bootstrap mechanism, not our eventual quota/reclamation implementation.
 - [Zig C translator: bitfields and unsupported statements](zig-project-2026-c-translator-limits.md) — Keep difficult implementation bodies in C and expose small accessors or opaque handles. C-to-Zig translation is optional for calling original compiled C.
 - [Clang 21.1.0 freestanding compilation contract](llvm-project-2025-clang-21-freestanding.md) — C fallbacks need a reviewed memory-helper implementation and final symbol census even without explicit library calls.
-- [Newlib C library system-call dependencies](newlib-project-2026-libc-system-hooks.md) — A portable libc can be adapted, but its hooks must map to real bounded Atom services or explicitly unsupported operations.
-- [musl and its Linux syscall dependency](musl-project-2026-linux-dependency.md) — A statically linked Linux/musl executable cannot be assumed to run on Atom merely because its machine code and C calling convention match.
+- [Newlib C library system-call dependencies](newlib-project-2026-libc-system-hooks.md) — A portable libc can be adapted, but its hooks must map to real bounded Kay services or explicitly unsupported operations.
+- [musl and its Linux syscall dependency](musl-project-2026-linux-dependency.md) — A statically linked Linux/musl executable cannot be assumed to run on Kay merely because its machine code and C calling convention match.
 - [LZ4 1.10.0 freestanding library profile](collet-2024-lz4-freestanding-profile.md) — A concrete example of a C library with a bounded porting surface, unlike arbitrary hosted software.
 - [Making No-Fuss Compiler Fuzzing Effective](groce-et-al-2022-no-fuss-compiler-fuzzing.md) — Retain minimized compiler regressions and test critical code generation independently when selecting or upgrading a compiler.
 - [Pragma Driven Shared Memory Parallelism in Zig by Supporting OpenMP Loop Directives](kacs-et-al-2024-zig-openmp.md) — Concrete foreign-runtime integration evidence, while demonstrating that translation and integration require engineering.
@@ -853,7 +853,7 @@ not retroactively labeled as introduced by it:
   requires precise redirect, audience, PKCE, and sender-constraint profiles.
 - [OAuth 2.0 Demonstrating Proof of Possession](fett-et-al-2023-dpop.md) —
   sender-constrains application-layer tokens while documenting replay,
-  endpoint, and request-body limits that stronger Atom profiles must address.
+  endpoint, and request-body limits that stronger Kay profiles must address.
 - [Verified security for the Morello capability-enhanced prototype Arm architecture](bauereiss-et-al-2022-verified-morello-security.md) —
   proves selected architectural security properties for a formal Morello
   model and carefully bounds what hardware-capability evidence can transfer.

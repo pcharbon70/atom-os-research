@@ -56,7 +56,7 @@ distribution.
 
 ## Relevance
 
-PARTISAN supports making Atom OS gateway topology and channel allocation
+PARTISAN supports making Kay OS gateway topology and channel allocation
 replaceable policies while keeping actor signal compatibility above them.
 Explicit routes also create a natural place for attenuated authority, credits,
 profile negotiation, and failure-domain alignment.

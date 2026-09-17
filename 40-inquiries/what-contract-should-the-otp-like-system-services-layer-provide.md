@@ -18,7 +18,7 @@ aliases:
 
 ## Why this matters
 
-The proposed Atom OS architecture deliberately keeps BEAM execution and
+The proposed Kay OS architecture deliberately keeps BEAM execution and
 process-local tracing collection in an unprivileged managed runtime while a
 minimal capability kernel enforces protection and resources. That leaves a
 fourth layer responsible for the policy that makes an operating system usable:

@@ -13,9 +13,9 @@ Which input authorities must continue to constrain a newly created object after 
 
 ## Research basis and status
 
-Capability derivation supplies the comparison, but Atom's multi-input product algebra is not a theorem supplied by that literature. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md), [2](../../../30-sources/kuz-et-al-2010-capdl.md)
+Capability derivation supplies the comparison, but Kay's multi-input product algebra is not a theorem supplied by that literature. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md), [2](../../../30-sources/kuz-et-al-2010-capdl.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../capability-spaces-and-authority.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../capability-spaces-and-authority.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

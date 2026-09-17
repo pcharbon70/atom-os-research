@@ -65,7 +65,7 @@ than evaluating one environment or deriving a security architecture.
 
 ## Relevance
 
-Atom OS should profile liveness separately for observation, pure evaluation,
+Kay OS should profile liveness separately for observation, pure evaluation,
 view editing, actor code replacement, schema migration, and system-service
 update. Each mode needs distinct authority, safe points, outcome evidence, and
 human evaluation.
@@ -79,4 +79,4 @@ a particular update mechanism is safe, resilient, or secure.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

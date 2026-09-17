@@ -28,7 +28,7 @@ A capture kernel is valuable for bulk evidence, but it is not the first-record
 mechanism. If transition, memory, CPU, firmware, controller, or DMA state is
 damaged, the small local capsule may be the only defensible evidence.
 
-This is a proposed Atom architecture. It has not survived reset, power loss, or
+This is a proposed Kay architecture. It has not survived reset, power loss, or
 fault injection on any target.
 
 ## Question, scope, and operational standard
@@ -101,7 +101,7 @@ A sink passes only if:
 | [NIST authenticated encryption guidance](../../../30-sources/dworkin-2007-gcm-gmac.md) | Confidentiality and integrity can cover payload plus metadata, while nonce uniqueness is a critical precondition and replay is a protocol concern | Does not supply keys, nonces, authorization, persistence, or target availability |
 
 The sources support the independent first record and optional adapter model.
-The capsule schema, evidence lattice, and custody protocol below are Atom
+The capsule schema, evidence lattice, and custody protocol below are Kay
 synthesis.
 
 ## Sink profile
@@ -474,7 +474,7 @@ nonwrapping arithmetic. Exhaustion retires the identity permanently until a
 fresh protected, nonrepeating boot/sink incarnation provisions new storage; it
 never wraps, aliases an old token, or relabels retained bytes. Exact atomic
 widths, flushes, fences, and top-level
-redundancy remain target-specific Atom synthesis to test, not properties of
+redundancy remain target-specific Kay synthesis to test, not properties of
 ordinary reserved DRAM.
 
 Each CPU's recursive slot is independent and single-use for the boot/crash
@@ -1125,7 +1125,7 @@ profile.
 ### UEFI hardware-error variables and ACPI ERST/BERT
 
 Convert or wrap the bounded record as CPER only after local seal. Preserve the
-original raw block and Atom schema rather than losing fields to the firmware
+original raw block and Kay schema rather than losing fields to the firmware
 format. Firmware/ERST execution is optional and strictly budgeted; busy, full,
 unavailable, failed, reentered, or timed-out results leave the local capsule
 authoritative. On next boot, BERT/ERST/`HwErrRec` data enters as a separate

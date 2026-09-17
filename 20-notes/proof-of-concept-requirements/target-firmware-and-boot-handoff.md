@@ -13,10 +13,10 @@ aliases: []
 # Target, firmware, and boot handoff
 
 Requirement R01, M0–M1. Establish a reproducible path from reset to an
-Atom-owned Intel x86-64 ring-0 kernel and then a ring-3 CLI. The
+Kay-owned Intel x86-64 ring-0 kernel and then a ring-3 CLI. The
 [active lab/QEMU profile](dell-precision-t7500-target-and-minimal-qemu-profile.md)
 selects the Dell Precision T7500 and supersedes the earlier RV64/OpenSBI
-proposal and AMD-processor assumption. Begin with one virtual CPU, 128 MiB
+proposal and AMD-processor assumption. Begin with one virtual CPU, 64 MiB
 and serial I/O; installed-unit inventory and binary pins remain unconfirmed.
 
 ## Evidence and alternatives
@@ -79,7 +79,7 @@ features without detection.
 ## Trust and failure boundary
 
 The virtual test trusts the host, QEMU, firmware, bootloader and build inputs.
-Atom owns guest protection after handoff, not isolation from its host.
+Kay owns guest protection after handoff, not isolation from its host.
 On physical hardware, firmware and system-management facilities remain
 outside ordinary kernel control and part of the trust assumptions. Firmware
 is not described using RISC-V machine/supervisor privilege terminology.

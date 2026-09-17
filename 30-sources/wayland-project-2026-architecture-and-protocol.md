@@ -67,7 +67,7 @@ independent security, performance, or interoperability evaluation.
 
 Wayland makes the modern separation vivid: the desktop authority sees surfaces,
 geometry, focus, damage, and buffers, while application meaning remains inside
-clients. Atom OS should retain this narrow trusted rendering and input boundary
+clients. Kay OS should retain this narrow trusted rendering and input boundary
 but add a separate capability-safe semantic/project protocol above it.
 
 ## Limits
@@ -80,4 +80,4 @@ proof of sandboxing.
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

@@ -60,7 +60,7 @@ GNU Zebra, then measured update latency and steady-state overhead.
 
 ## Relevance
 
-Atom OS release orchestration should model compatibility, quiescence, state
+Kay OS release orchestration should model compatibility, quiescence, state
 migration, publication, and rollback as separate stages. BEAM hot code loading
 reduces some code-redirection work but does not solve durable schema changes,
 multi-service protocol skew, irreversible effects, or distributed rollout.
@@ -70,7 +70,7 @@ multi-service protocol skew, irreversible effects, or distributed rollout.
 The evaluated programs were single-threaded C servers, not BEAM supervision
 trees, distributed clusters, kernels, or storage engines. Type safety is
 narrower than application correctness, and the reported performance ranges
-cannot be projected to Atom OS. The work does not provide signed supply-chain
+cannot be projected to Kay OS. The work does not provide signed supply-chain
 verification, crash-safe rollout, or automatic rollback across irreversible
 state changes.
 

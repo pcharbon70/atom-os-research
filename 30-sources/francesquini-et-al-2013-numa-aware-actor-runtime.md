@@ -57,7 +57,7 @@ benchmarks across NUMA hardware.
 
 ## Relevance
 
-The study supports topology hints and local-first stealing after Atom OS has a
+The study supports topology hints and local-first stealing after Kay OS has a
 correct scheduler, while its regressions argue for an adaptive switch and an
 unbiased fallback. Actor migration must move scheduling ownership, not mutate
 PID or mailbox semantics, and kernel-admitted scheduling contexts rather than

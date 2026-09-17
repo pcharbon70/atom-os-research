@@ -79,7 +79,7 @@ hardware remain in the end-to-end trusted base.
 
 ## Relevance
 
-Atom OS durable services should specify a crash condition for every persistence
+Kay OS durable services should specify a crash condition for every persistence
 step rather than documenting only the happy-path state machine. The first
 storage profile can expose append, barrier, atomic sector or record, and
 checkpoint-publication assumptions explicitly; build one small WAL over that
@@ -88,7 +88,7 @@ idempotent under repeated failure.
 
 FSCQ also informs update and audit components. A release switch or audit chain
 head is safe only if its publication record has a defined recovered state after
-each torn or reordered write. This does not require adopting FSCQ as the Atom
+each torn or reordered write. This does not require adopting FSCQ as the Kay
 OS file system, but it does require the same style of normal, crash, and
 recovery contract plus fault injection at every persistence boundary.
 
@@ -99,7 +99,7 @@ lacks multiprocessor support and deferred durability in the described version,
 and the running system includes unverified extraction and host components. The
 proof does not establish behavior for flash translation layers, lying device
 caches, media loss, malicious storage, distributed transactions, or application
-effects outside the logged store. Atom OS must validate its target-specific
+effects outside the logged store. Kay OS must validate its target-specific
 storage contract and cannot infer that a formally similar design is correct.
 
 ## Derived work

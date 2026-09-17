@@ -28,7 +28,7 @@ List every external call used by the hosted interpreter, its purpose, its guest 
 
 In the guest, allocate only from assigned pages and finite runtime accounts. Read time through the declared monotonic interface. Receive events through bounded kernel transport. Load only the static BEAM bundle at first. Disable unimplemented filesystem, socket, dynamic-library and host-thread paths explicitly.
 
-Hosted execution is valuable for differential semantics and fuzzing. It does not validate Atom's scheduler, memory protection or IPC, even when the same interpreter sources compile for both environments.
+Hosted execution is valuable for differential semantics and fuzzing. It does not validate Kay's scheduler, memory protection or IPC, even when the same interpreter sources compile for both environments.
 
 ## Signals, continuations and completion
 

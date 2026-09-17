@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS keep service latency, memory, and recovery work bounded when
+How should Kay OS keep service latency, memory, and recovery work bounded when
 offered load exceeds capacity, dependencies slow down, or retry traffic
 amplifies a partial failure?
 
@@ -62,7 +62,7 @@ jitter](../../30-sources/brooker-2015-exponential-backoff-jitter.md) shows why
 uncorrelated capped retries reduce contention compared with synchronized
 retry. None supplies the complete embedded resource model.
 
-The Atom OS synthesis charges causal work to a service/principal across actor
+The Kay OS synthesis charges causal work to a service/principal across actor
 messages and reserves a separate, bounded recovery lane.
 
 ## Resource-account architecture
@@ -178,7 +178,7 @@ permanent universal priority.
 ## Backpressure, shedding, and degraded service
 
 Credits make downstream capacity explicit. This exact cross-service credit and
-multi-resource conservation protocol is an Atom OS proposal requiring model
+multi-resource conservation protocol is an Kay OS proposal requiring model
 and workload validation; the cited systems support its constituent accounting,
 staging, and overload motivations rather than proving this composition. A
 producer cannot enqueue more

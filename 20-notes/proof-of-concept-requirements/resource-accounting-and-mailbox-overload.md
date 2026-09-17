@@ -18,7 +18,7 @@ Requirement R11, M2–M4. Every admitted allocation and outstanding operation ne
 
 The [OTP runtime limits documentation](../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md) explains that heap limits are checked at collection and that off-heap messages and shared binaries need separate attention. Ordinary send behavior cannot be replaced silently with a new successful-delivery or backpressure contract.
 
-The [seL4 object-memory model](../../30-sources/sel4-foundation-2026-reference-manual.md) provides a precedent for explicit backing resources. Atom still needs its own complete kernel/runtime ledger and rules for transient allocations.
+The [seL4 object-memory model](../../30-sources/sel4-foundation-2026-reference-manual.md) provides a precedent for explicit backing resources. Kay still needs its own complete kernel/runtime ledger and rules for transient allocations.
 
 Finite memory, an actor that never receives, unlimited accepted sends and indefinite survival cannot all be guaranteed. Choose and document the overload outcome. This is a logical constraint, not an optimization that a faster queue can remove.
 

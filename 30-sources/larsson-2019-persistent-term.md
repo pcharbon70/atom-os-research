@@ -45,7 +45,7 @@ Make persistent terms, counter references and pending generations explicit globa
 
 ## Limits
 
-The article is not a formal lifetime specification or a universal performance result. Reported percentages are not adopted as Atom OS targets. No replacement stress test or reproduction was performed.
+The article is not a formal lifetime specification or a universal performance result. Reported percentages are not adopted as Kay OS targets. No replacement stress test or reproduction was performed.
 
 ## Derived work
 

@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Selective receive examines candidates under language matching rules; systematic testing shows why receive boundaries need explicit scheduling instrumentation. [1](../../../30-sources/hogberg-2021-message-passing.md), [2](../../../30-sources/christakis-et-al-2013-concuerror.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Physical enqueue order, ordered signal delivery and selective mailbox placement are three separate contracts.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

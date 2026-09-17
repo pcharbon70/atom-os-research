@@ -92,7 +92,7 @@ A baseline passes only if:
 | [TLB shootdown liveness case study](../../../30-sources/padon-et-al-2018-reducing-liveness-to-safety.md) | Safety and liveness need separate proof; a small missing critical section or unstated fairness assumption matters | Abstract protocol omits real hardware and failed CPUs |
 
 The precise effect taxonomy, acceptance algebra, and operation-resource model
-below are Atom synthesis. Architecture sources establish hazards, not a common
+below are Kay synthesis. Architecture sources establish hazards, not a common
 transaction API.
 
 ## Semantic effect classes
@@ -1433,7 +1433,7 @@ recipe. In the standardized [SBI RFENCE
 interface](../../../30-sources/risc-v-international-2025-supervisor-binary-interface.md),
 `SBI_SUCCESS` establishes
 successful request transmission to the targeted harts, not their execution of
-the fence. Atom may instead use an IPI to invoke its own target handler, which
+the fence. Kay may instead use an IPI to invoke its own target handler, which
 executes and acknowledges the local fence. If firmware executes RFENCE, the
 platform must supply completion causally after that exact fence and bind it to
 the request and hart incarnation; an unrelated OS acknowledgement is not

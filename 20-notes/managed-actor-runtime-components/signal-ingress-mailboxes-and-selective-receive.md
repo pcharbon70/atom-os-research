@@ -319,7 +319,7 @@ flowchart TD
   evidence. It does not silently drop an arbitrary admitted message.
 
 The exact compatible behavior under hard memory exhaustion must be
-differentially characterized; termination is an Atom OS resource-profile
+differentially characterized; termination is an Kay OS resource-profile
 extension and must be advertised as such.
 
 ### Bounded-service extension

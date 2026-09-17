@@ -9,7 +9,7 @@ tags:
   - fault-tolerance
   - operating-systems
 aliases:
-  - "Atom OS Layer 5"
+  - "Kay OS Layer 5"
   - "Applications layer"
 ---
 
@@ -17,7 +17,7 @@ aliases:
 
 ## Executive decision
 
-Atom OS Layer 5 should be an **unprivileged application and domain-services
+Kay OS Layer 5 should be an **unprivileged application and domain-services
 stratum above the four researched foundation layers**. It owns the meaning of
 the system's work: bounded contexts, durable domain identities, invariants,
 commands, queries, domain events, business workflows, domain-specific external
@@ -56,7 +56,7 @@ law of DDD or the actor model.
 
 The research asks:
 
-> What architecture lets Atom OS applications express durable domain meaning,
+> What architecture lets Kay OS applications express durable domain meaning,
 > remain responsive and independently recoverable, use least authority, and
 > produce honest outcomes across actor crashes, upgrades, overload, offline
 > work, and partial external failure without duplicating lower-layer services?
@@ -79,7 +79,7 @@ The proposal succeeds only if:
 - overload is finite, deadlines are end-to-end, and the recovery/control path
   retains reserved resources;
 - scientific results retain their assumptions, system measurements are not
-  transferred to Atom OS, and proposed contracts remain marked unverified; and
+  transferred to Kay OS, and proposed contracts remain marked unverified; and
 - an executable model, property suite, compatibility corpus, and crash/retry
   experiment can falsify every high-consequence guarantee.
 
@@ -90,7 +90,7 @@ defines bounded contexts, entities, aggregates, domain services, domain events,
 and layered separation. [Parnas](../30-sources/parnas-1972-decomposing-systems-into-modules.md)
 supports hiding volatile decisions behind stable modules. Neither work chooses
 an actor, supervision, deployment, tenant, or protection boundary. Those are
-separate Atom OS decisions.
+separate Kay OS decisions.
 
 [Orleans](../30-sources/bernstein-et-al-2014-orleans.md) demonstrates one
 practical separation between stable logical actor identity and replaceable
@@ -118,7 +118,7 @@ support stable operation identity and endpoint-visible completion. They do not
 make a physical device, human institution, payment rail, or arbitrary remote
 service participate in one local commit.
 
-The result below is an evidence-backed **architecture proposal**, not an Atom
+The result below is an evidence-backed **architecture proposal**, not an Kay
 OS implementation result. No Layer 5 code, storage profile, protocol model,
 fault-injection campaign, benchmark, or user study was produced in this
 session.
@@ -666,7 +666,7 @@ queried by operation ID before retry.
    measuring invariant commits, interactive deadlines, outcome/audit paths,
    and recovery reserve.
 10. **Second platform.** Repeat on another architecture or host profile and
-    record which behavior came from Atom OS versus the prototype host.
+    record which behavior came from Kay OS versus the prototype host.
 
 ## Required falsification experiments
 
@@ -701,7 +701,7 @@ or authorize itself without lower-layer mediation.
 ## Open questions
 
 - Which storage profile can atomically commit aggregate revision, durable
-  outcome, outbox records, and new workflow records on the first Atom OS target?
+  outcome, outbox records, and new workflow records on the first Kay OS target?
 - What actor-host design best balances one-aggregate serialization, heap
   overhead, locality, migration, and protected-domain count?
 - Which critical protocols justify session types or model checking, and what
@@ -718,7 +718,7 @@ or authorize itself without lower-layer mediation.
   BEAM bytecode and OTP behavior for application bundles?
 
 These remain open because the sources establish principles and precedents, not
-an evaluated Atom OS application platform.
+an evaluated Kay OS application platform.
 
 ## Connections
 
@@ -738,7 +738,7 @@ an evaluated Atom OS application platform.
 - [Alan Kay, Smalltalk, and modern visual interfaces](alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
   supplies the persistent-model and disposable-presentation synthesis used by
   the presentation component.
-- [Applications and domain services inquiry](../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) —
+- [Applications and domain services inquiry](../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) —
   tracks the unresolved implementation and evidence questions.
 
 ## Sources

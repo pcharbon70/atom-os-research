@@ -51,7 +51,7 @@ wire protocols directly.
 ## Relevance
 
 Application protocol and schema evolution must preserve behavioral contracts
-as well as decoding. Atom OS compatibility tests should cover invariants,
+as well as decoding. Kay OS compatibility tests should cover invariants,
 outcomes, ordering, authorization expectations, and mixed-version histories.
 
 ## Limits

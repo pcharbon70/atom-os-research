@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Yielding C documentation demonstrates that helper calls need saved state and destruction paths; PCC explains why an unchecked helper lies outside a safety proof. [1](../../../30-sources/erlang-otp-team-2026-yielding-c-code-contracts.md), [2](../../../30-sources/necula-1997-proof-carrying-code.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Compatibility is a versioned language/runtime claim. A validated container or signed module is not proof of hostile-code isolation.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

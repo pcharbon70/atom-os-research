@@ -62,8 +62,8 @@ web content and existing accessibility stacks.
 
 ## Relevance
 
-WAI-ARIA gives Atom OS a mature lower bound for a semantic UI record, but the
-Atom protocol needs stronger identity, generation, authority, outcome, and
+WAI-ARIA gives Kay OS a mature lower bound for a semantic UI record, but the
+Kay protocol needs stronger identity, generation, authority, outcome, and
 recovery fields. The standard supports deriving both visual and assistive
 projections from one semantic source rather than reconstructing accessibility
 from rendered pixels.
@@ -72,10 +72,10 @@ from rendered pixels.
 
 ARIA can be applied incorrectly and cannot repair missing domain semantics.
 Its vocabulary is intentionally web-oriented and extensibility must not become
-an unreviewed central taxonomy for every Atom OS domain. Conformance to ARIA
+an unreviewed central taxonomy for every Kay OS domain. Conformance to ARIA
 also does not establish WCAG conformance or usable interaction.
 
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

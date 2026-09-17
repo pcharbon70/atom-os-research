@@ -67,7 +67,7 @@ different hardware mapping organizations fit the same higher-level model.
 
 ## Relevance
 
-This is foundational evidence for separating an Atom address-space object and
+This is foundational evidence for separating an Kay address-space object and
 mapping ledger from an ISA-specific encoder. It supports a semantic interface
 whose object identity, authority, and lifecycle survive a backend change, while
 raw entry formats and low-level maintenance remain backend-owned.
@@ -78,7 +78,7 @@ The hardware, workloads, security assumptions, and performance measurements
 are from 1987. The paper predates current multilevel TLBs, weak virtual-memory
 models, PCID/modern ASIDs, speculative execution, IOMMUs, and contemporary
 many-core machines. Portability experience is not a proof that the proposed
-Atom interface is complete or that modern backends have equal cost.
+Kay interface is complete or that modern backends have equal cost.
 
 ## Derived work
 

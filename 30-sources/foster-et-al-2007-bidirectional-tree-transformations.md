@@ -67,7 +67,7 @@ examples.
 
 ## Relevance
 
-Lenses provide a precise foundation for Atom OS editable alternate views. A
+Lenses provide a precise foundation for Kay OS editable alternate views. A
 view provider should declare whether it is read-only, command-producing, or a
 law-checked bidirectional adapter; it must never infer write authority from the
 existence of a projection.
@@ -82,4 +82,4 @@ effects. Those checks remain at the model command boundary.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

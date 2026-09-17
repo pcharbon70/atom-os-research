@@ -15,7 +15,7 @@ How does fault delivery remain useful when the normal handler is full, blocked o
 
 Fault-endpoint mechanisms provide a comparison; independent routing and overflow contracts remain explicit system obligations. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md), [2](../../../30-sources/banga-et-al-1999-resource-containers.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../fault-capture-and-containment.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../fault-capture-and-containment.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

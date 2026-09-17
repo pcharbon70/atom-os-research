@@ -66,7 +66,7 @@ Any eventual experiment must record the implementation and specification revisio
 ## Sources
 
 - [Timecounters](../../../30-sources/kamp-2002-timecounters.md) — Wrap-aware conversion and matched source/anchor publication.
-- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Atom proofs.
+- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Kay proofs.
 - [High-resolution timekeeping research](../../../30-sources/terraneo-cattaneo-2026-high-resolution-timekeeping.md) — Separating shared timekeeping from per-CPU preemption.
 
 These sources support the constraints above. The proposed object division, transition composition and verification obligations are our synthesis and remain unverified.

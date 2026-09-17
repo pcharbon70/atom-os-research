@@ -101,7 +101,7 @@ from conformance language alone.
 
 ## Relevance
 
-The Workload API offers a model for an Atom OS local identity broker. The
+The Workload API offers a model for an Kay OS local identity broker. The
 broker can obtain generation-bound caller evidence from a trusted kernel or
 orchestrator channel, bind it to a protected-domain incarnation, select the
 identities that caller is entitled to receive, and stream complete credential
@@ -118,7 +118,7 @@ treated as permission to invoke every operation or acquire a lease. The
 authorization policy must separately bind the authenticated identity, requested
 operation, resource scope, and current policy or fencing generation.
 
-For Atom OS, trust domains could align with explicit distribution and
+For Kay OS, trust domains could align with explicit distribution and
 administrative scopes, with foreign bundles admitted only through deliberate
 federation policy. Copying the exact gRPC wire format is not required. A native
 interface could preserve caller attribution, full-snapshot replacement,
@@ -144,7 +144,7 @@ delegation, service discovery, consensus membership, lease authority, or
 Byzantine-fault handling.
 
 The standard returns private-key bytes for the X.509 and WIT profiles. That is
-an interoperability fact, not evidence that exporting raw keys is the best Atom
+an interoperability fact, not evidence that exporting raw keys is the best Kay
 OS implementation. Key confinement or hardware-backed handles would require a
 separate profile and compatibility analysis. Likewise, receiving a valid SVID
 proves only what its issuer, validity interval, key possession, and selected

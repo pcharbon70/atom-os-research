@@ -18,8 +18,8 @@ aliases:
 
 ## Purpose
 
-M1 delivers the first usable Atom OS image: boot it and reach an interactive
-`atom>` prompt implemented by a native user-mode program. `help`, `version`,
+M1 delivers the first usable Kay OS image: boot it and reach an interactive
+`kay>` prompt implemented by a native user-mode program. `help`, `version`,
 and `uptime` must operate through a real kernel interface, with bounded input
 and continuing timer progress. A printed banner, a privileged monitor, or a
 program hosted inside another guest OS is not this milestone.
@@ -36,7 +36,7 @@ in [M4](../m4-integrated-recovery-and-resource-campaign/README.md).
 M1 includes the actual kernel entry path, conservative page initialization,
 static image admission, kernel/user transitions, exception handling, minimal
 console/time syscalls, serial transport, and native CLI. The initial QEMU
-fixture stays one Intel x86-64 CPU, 128 MiB, serial-only, and without a writable
+fixture stays one Intel x86-64 CPU, 64 MiB, serial-only, and without a writable
 data disk or network interface.
 
 The CLI is not a POSIX shell, general REPL, package manager, or desktop. It
@@ -129,7 +129,7 @@ working guest implementations and observed behavior.
 
 | ID | Artifact | Required result |
 | --- | --- | --- |
-| M1-A01 | Kernel boot and normalized memory snapshot | An identifiable Atom kernel reaches controlled ring-0 execution with validated reservations, features, stack/exception state, and bounded boot failure diagnostics. |
+| M1-A01 | Kernel boot and normalized memory snapshot | An identifiable Kay kernel reaches controlled ring-0 execution with validated reservations, features, stack/exception state, and bounded boot failure diagnostics. |
 | M1-A02 | Native image admission and protected memory | A bounded loader plus page-accounting/mapping implementation installs the selected native subset, zeroes user memory, applies permissions, and rejects malformed images without leaving runnable partial state. |
 | M1-A03 | Entry, exception, and console/time ABI implementation | Kernel-owned contexts, validated ring-3 return, enabled-register-state handling, range-safe copies, and defined bad-operation/fault results. |
 | M1-A04 | Serial and elapsed-time mechanisms | Bounded byte transport, specified readiness/waits/backpressure, monotonic time reads, and timer delivery that continues while input is idle or output is saturated. |
@@ -146,7 +146,7 @@ M2's complete service graph prematurely.
 
 | ID | Acceptance case | Artifacts | Passing evidence |
 | --- | --- | --- | --- |
-| M1-T01 | Clean boot and real privilege transition | A01–A03, A05, A06 | Rebuilt image reaches `atom>`; a debugger/trace establishes CLI CPL 3 and handler CPL 0 with the expected address space. |
+| M1-T01 | Clean boot and real privilege transition | A01–A03, A05, A06 | Rebuilt image reaches `kay>`; a debugger/trace establishes CLI CPL 3 and handler CPL 0 with the expected address space. |
 | M1-T02 | Interactive command round trip | A03–A06 | Harness submits all three commands, checks actual build/time results and syntax, and observes return to the prompt after each command. |
 | M1-T03 | Parser bounds and resynchronization | A04–A06 | Blank/control/editing inputs, invalid arguments, exact-limit and overlong lines produce specified bounded results; a subsequent valid command works with no memory growth or corruption beyond the declared bounds. |
 | M1-T04 | Idle and backpressure progress | A03–A06 | Timer observations continue through input waits, serial floods, and transmit stalls; no lost-wakeup state or indefinite interrupt-disabled kernel loop appears. Host timeouts and guest-time observations are reported separately. |

@@ -28,7 +28,7 @@
     "sockets": 1,
     "cores_per_socket": 1,
     "threads_per_core": 1,
-    "memory_mib": 128,
+    "memory_mib": 64,
     "base_arguments": [
       "-accel",
       "tcg",
@@ -37,7 +37,7 @@
       "-smp",
       "1,sockets=1,cores=1,threads=1",
       "-m",
-      "128M",
+      "64M",
       "-nodefaults",
       "-display",
       "none",

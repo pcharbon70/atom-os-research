@@ -66,7 +66,7 @@ performance opportunity, not contemporary OTP compatibility.
 
 ## Relevance
 
-Atom OS application orchestration should compile its manifest into a validated
+Kay OS application orchestration should compile its manifest into a validated
 DAG, start dependency-ready nodes concurrently within CPU, memory, I/O, and
 recovery budgets, and require an explicit readiness result before publishing a
 service generation. Each task is tagged with the plan and service incarnation
@@ -85,7 +85,7 @@ synthetic, dependency conditions were not exercised in the performance tests,
 and results are based on few runs. The paper does not address capability
 delegation, crash consistency, service draining, rollback of external effects,
 mixed-version activation, or distributed ownership fencing. Its quantitative
-speedups must not be projected onto Atom OS without new measurements.
+speedups must not be projected onto Kay OS without new measurements.
 
 ## Derived work
 

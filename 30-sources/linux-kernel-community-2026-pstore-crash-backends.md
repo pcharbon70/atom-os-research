@@ -54,12 +54,12 @@ behavior, readback, and operation-result rules were inspected.
 
 ## Relevance
 
-Atom's `CrashSink` should be a capability profile with independently stated
+Kay's `CrashSink` should be a capability profile with independently stated
 `sealed-in-reserved-memory`, `accepted-by-adapter`, `durability-confirmed`, and
 `recovered-on-next-boot` evidence. CPU-polled block I/O is an optional post-seal
 adapter with its own response bounds, media ordering, overwrite policy, and
 failure fallback; successful `panic_write` return establishes only adapter
-acceptance. As an Atom architectural synthesis rather than a pstore/blk result,
+acceptance. As an Kay architectural synthesis rather than a pstore/blk result,
 reserved RAM is the smaller-dependency mandatory floor even when a richer
 backend exists.
 

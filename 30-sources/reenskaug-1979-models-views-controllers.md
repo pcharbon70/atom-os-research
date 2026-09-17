@@ -57,7 +57,7 @@ hierarchy, much less later web-framework uses of the name.
 ## Relevance
 
 MVC helps explain some Smalltalk components but not Kay's complete vision. For
-Atom OS it suggests separating durable semantic actor models, reconstructible
+Kay OS it suggests separating durable semantic actor models, reconstructible
 views, and seat/input mediation. Those roles should communicate through typed
 actor protocols rather than share unrestricted object references.
 

@@ -8,7 +8,7 @@ tags:
   - research-assessment
   - research-session
 aliases:
-  - "Atom OS readiness assessment session"
+  - "Kay OS readiness assessment session"
 ---
 
 # 2026-09-05 proof-of-concept readiness deep dive
@@ -40,7 +40,7 @@ aliases:
 - Initial worktree: clean, verified with `git status --porcelain=v1`.
 - Review host: Linux x86_64; Python 3.12.12; Bash shell.
 - Review date: 2026-09-05, America/Toronto local date.
-- No Atom kernel, runtime port, emulator guest, hardware target, or model
+- No Kay kernel, runtime port, emulator guest, hardware target, or model
   checker was built or run. The only executable checks were archive diagnostics
   and validation. No packages or toolchain versions were installed.
 - The user confirmed the minimal bootable OS and CLI-first scope. No ISA,

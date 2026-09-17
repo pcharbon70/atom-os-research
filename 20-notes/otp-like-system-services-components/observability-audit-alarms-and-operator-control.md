@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS make causal behavior, failures, security-relevant effects,
+How should Kay OS make causal behavior, failures, security-relevant effects,
 and operator actions inspectable without letting telemetry block the system,
 letting a compromised service rewrite history, or turning debugging into
 ambient authority?
@@ -53,7 +53,7 @@ large services. It does not make sampled traces complete or secure. The
 [OpenTelemetry specification](../../30-sources/opentelemetry-project-2026-specification-1-60.md)
 provides a current interoperable vocabulary for traces, metrics, logs,
 resources, context propagation, sampling, limits, and export; its SDK defaults
-are not an Atom OS safety proof.
+are not an Kay OS safety proof.
 
 [Secure audit logs](../../30-sources/schneier-kelsey-1999-secure-audit-logs.md)
 support hash/MAC-chained records and key evolution to detect later tampering,
@@ -128,7 +128,7 @@ telemetry remains separate.
 Every operation can carry `TraceContext` with trace ID, parent span ID, span
 links, flags, sampling decision, and baggage allowlist. Parent expresses one
 causal predecessor; links represent fan-in, fan-out, queue handoff, retry, and
-work that continues after selective receive or a new local root. Atom OS adds
+work that continues after selective receive or a new local root. Kay OS adds
 origin trust domain, service/caller generations, operation ID and digest
 reference, and resource account. A trust-boundary gateway may retain an
 approved link but creates a new authenticated local context. Remote context is

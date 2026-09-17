@@ -65,7 +65,7 @@ engineering.
 
 ## Relevance
 
-Atom OS input-derived authority must be bound to a compositor-observed surface
+Kay OS input-derived authority must be bound to a compositor-observed surface
 generation and trusted semantic target, with stability and visibility checks
 for sensitive grants. A stale, occluded, transformed, or replaced surface must
 not receive a capability minted for an earlier view.
@@ -74,10 +74,10 @@ not receive a capability minted for an earlier view.
 
 The experiments concern web clickjacking and visual pointing. Parameters do
 not directly transfer to touch, keyboard, voice, switch access, or immersive
-interfaces. Atom OS will need modality-specific context-integrity tests rather
+interfaces. Kay OS will need modality-specific context-integrity tests rather
 than assuming a minimum visible-pixel rule is universal.
 
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

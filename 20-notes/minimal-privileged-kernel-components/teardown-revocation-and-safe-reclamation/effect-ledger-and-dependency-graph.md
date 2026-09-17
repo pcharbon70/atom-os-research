@@ -15,7 +15,7 @@ How can teardown know every effect that must finish without discovering dependen
 
 Software-reference and DMA research cover different effect classes; neither alone supplies complete reclamation evidence. [1](../../../30-sources/mckenney-slingwine-1998-read-copy-update.md), [2](../../../30-sources/haecki-et-al-2019-cleanq.md), [3](../../../30-sources/markettos-et-al-2019-thunderclap.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../teardown-revocation-and-safe-reclamation.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../teardown-revocation-and-safe-reclamation.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

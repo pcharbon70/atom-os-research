@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Signals carry relation semantics; mailbox insertion and name lookup are separate observations from merely constructing an actor reference. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/hogberg-2021-message-passing.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Actor identity is a managed routing concept. The registry does not create kernel protection between actors sharing one runtime.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

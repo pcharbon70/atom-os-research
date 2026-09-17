@@ -15,7 +15,7 @@ What authority lets a fault handler repair one blocked thread without gaining am
 
 Capability-mediated fault handling suggests narrow repair authority, but the proposed resolver has stricter identity and outcome rules. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../fault-capture-and-containment.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../fault-capture-and-containment.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

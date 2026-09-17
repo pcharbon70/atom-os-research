@@ -39,7 +39,7 @@ refresh tokens and discusses related-token invalidation and propagation.
 
 This is an IETF Standards Track protocol specification. The analysis used its
 failure, propagation, and token-type trade-offs as distributed-revocation
-evidence, not as an Atom wire-protocol choice.
+evidence, not as an Kay wire-protocol choice.
 
 ## Findings
 
@@ -55,7 +55,7 @@ evidence, not as an Atom wire-protocol choice.
 
 ## Relevance
 
-Atom should expose separate committed, distributed, enforced, quiesced, and
+Kay should expose separate committed, distributed, enforced, quiesced, and
 sanitized revocation stages and measure the maximum use window. It must never
 report a network request as completed revocation before local enforcement
 points have advanced to the required watermark.

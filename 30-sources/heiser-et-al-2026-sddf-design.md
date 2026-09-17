@@ -85,7 +85,7 @@ hardware reproduction, or independent verification was performed.
 
 ## Relevance
 
-Atom OS should place each physical device or reset-coupled group in a protected
+Kay OS should place each physical device or reset-coupled group in a protected
 driver domain and expose a separate class virtualizer or validator where
 clients need multiplexing. Queue entries should transfer explicit buffer
 ownership and include caller, service, device, and operation generations. A
@@ -95,7 +95,7 @@ backpressure result.
 sDDF also supports keeping mechanism and policy apart. The lower layers grant
 MMIO, interrupts, DMA windows, scheduling context, and reset facets. The
 unprivileged service manager selects the driver, meters clients, records
-outcomes, performs recovery, and publishes the current generation. Atom OS
+outcomes, performs recovery, and publishes the current generation. Kay OS
 adds a persistent in-flight ledger and fencing protocol because isolated
 restart alone cannot decide whether hardware accepted an effect.
 
@@ -106,7 +106,7 @@ framework assumptions. The performance section does not prove uniform cost
 across devices or workloads, and the design does not solve all discovery,
 initialization, crash recovery, or external-effect ambiguity. Isolation does
 not make a compromised trusted virtualizer safe, retract DMA already accepted
-by a device, or establish Atom OS compatibility. The report is a strong design
+by a device, or establish Kay OS compatibility. The report is a strong design
 reference, not an implementation result for this repository.
 
 ## Derived work

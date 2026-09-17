@@ -35,11 +35,11 @@ Microkit uses statically described protection domains. Protected calls go to a h
 
 ## Relevance
 
-Compare static acyclic deployment against Atom's proposed dynamic admission, bootstrap handoff and failure topology. Initialization eligibility needs a checked protocol, not a presumed global barrier.
+Compare static acyclic deployment against Kay's proposed dynamic admission, bootstrap handoff and failure topology. Initialization eligibility needs a checked protocol, not a presumed global barrier.
 
 ## Limits
 
-These are framework contracts, not universal microkernel requirements. The URL tracks latest documentation; the observed version is recorded here. Atom does not adopt Microkit's fixed configuration limits or recovery semantics.
+These are framework contracts, not universal microkernel requirements. The URL tracks latest documentation; the observed version is recorded here. Kay does not adopt Microkit's fixed configuration limits or recovery semantics.
 
 ## Derived work
 

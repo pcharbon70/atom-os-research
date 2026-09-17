@@ -60,7 +60,7 @@ an artifact.
 
 ## Relevance
 
-SafeFetch supports an Atom rule that control data crosses the boundary once
+SafeFetch supports an Kay rule that control data crosses the boundary once
 into kernel-owned storage and is then parsed and authorized from that snapshot.
 It also motivates an optional per-operation fetch cache if compatibility code
 must repeat reads. Neither raw pointer validation nor a pinned page makes
@@ -70,7 +70,7 @@ mutable contents stable.
 
 The results are from a Linux prototype and selected workloads. The paper does
 not prove all possible kernel or device fetches are mediated, and the 4.4%
-number is not an Atom performance prediction. Stable bytes do not establish
+number is not an Kay performance prediction. Stable bytes do not establish
 that their meaning, authority, or target object remains current.
 
 ## Derived work

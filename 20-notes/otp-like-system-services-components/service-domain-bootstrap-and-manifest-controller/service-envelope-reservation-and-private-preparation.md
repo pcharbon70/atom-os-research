@@ -21,7 +21,7 @@ Research question: How are resources and authority reserved without making prepa
 Capability attenuation constrains delegated authority; Anvil motivates explicit
 version-sensitive controller steps, not a resource-transaction theorem. [1](../../../30-sources/miller-et-al-2003-capability-myths.md) [2](../../../30-sources/sun-et-al-2024-anvil.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

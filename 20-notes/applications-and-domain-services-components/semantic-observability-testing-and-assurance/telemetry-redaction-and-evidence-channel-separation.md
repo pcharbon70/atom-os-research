@@ -20,9 +20,9 @@ Research question: How can operators diagnose failures without treating diagnost
 
 Google SRE guidance starts indicators from user-relevant behavior and explicit measurement populations, not process uptime alone. [1](../../../30-sources/jones-et-al-2016-service-level-objectives.md).
 
-Wedge demonstrates reduced-privilege compartments in Linux applications; it does not validate Atom OS isolation costs. [2](../../../30-sources/bittau-et-al-2008-wedge.md).
+Wedge demonstrates reduced-privilege compartments in Linux applications; it does not validate Kay OS isolation costs. [2](../../../30-sources/bittau-et-al-2008-wedge.md).
 
-The model below is proposed Atom OS architecture, not a result demonstrated by
+The model below is proposed Kay OS architecture, not a result demonstrated by
 these sources. Layer 5 owns domain meaning; lower layers enforce authority,
 durability and resource limits. This is full-system research, independent of
 proof-of-concept plans, QEMU configuration and kernel-language implementation.
@@ -75,7 +75,7 @@ compromised enforcement layer.
 - [Component service index](README.md) — sibling ownership and research boundaries.
 - [Operation identity and honest outcome ledgers](../typed-commands-queries-events-and-protocol-contracts/operation-identity-and-honest-outcome-ledgers.md) — a cross-component contract this service must preserve.
 - [Semantic admission classes and protected recovery reserve](../cross-layer-placement-tenancy-overload-and-recovery-topology/semantic-admission-classes-and-protected-recovery-reserve.md) — a cross-component contract this service must preserve.
-- [Open application inquiry](../../../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
+- [Open application inquiry](../../../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
 - [Research session](../../../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) — exhaustive source manifest and reading limits.
 
 ## Sources

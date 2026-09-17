@@ -60,7 +60,7 @@ tuning, JIT recompilation behavior, and SIMD optimization.
 ## Relevance
 
 The result is contemporary evidence that Smalltalk's live-system ambition is
-not only historical. For Atom OS it motivates reflective service protocols and
+not only historical. For Kay OS it motivates reflective service protocols and
 inspectable runtime components, but the privileged kernel and authority model
 must remain protected. Live access should be capability-scoped, audited, and
 transactional.
@@ -74,4 +74,4 @@ user learnability, or safe modification of a privileged OS substrate.
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

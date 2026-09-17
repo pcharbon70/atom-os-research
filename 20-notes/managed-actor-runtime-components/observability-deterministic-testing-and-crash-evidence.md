@@ -101,11 +101,11 @@ OTP applications.
 shows that actor-language replay can focus on ordering nondeterministic actor
 events rather than recording every instruction. The evaluated language/runtime
 and actor semantics differ from BEAM, so the exact logged choices and overhead
-must be established for Atom OS.
+must be established for Kay OS.
 
 [Kdump](../../30-sources/goyal-et-al-2005-kdump.md) demonstrates a valuable
 systems pattern: preserve failed-system memory and use a separate, freshly
-booted capture environment to write evidence. Atom OS should adopt the boundary
+booted capture environment to write evidence. Kay OS should adopt the boundary
 principle, not Linux-specific machinery. The kernel and an outer evidence
 service must retain the minimal fault record and immutable mappings after a
 runtime fault.

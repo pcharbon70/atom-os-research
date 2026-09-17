@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS turn the lower layers' sealed boot handoff into a running
+How should Kay OS turn the lower layers' sealed boot handoff into a running
 set of unprivileged system services without creating a second privileged
 kernel or an immortal application controller?
 
@@ -35,7 +35,7 @@ recovery, or make remote effects exactly once. It succeeds only when it can:
 5. converge once desired state and required dependencies remain stable; and
 6. be replaced by an independently authorized recovery holder.
 
-The report proposes an implementation and verification target. No Atom OS
+The report proposes an implementation and verification target. No Kay OS
 controller, persistent ledger, model check, benchmark, or hardware result
 exists yet.
 
@@ -54,7 +54,7 @@ criterion: a reconciler should eventually reach and retain the goal after
 desired state and its environment stabilize. Its one-external-request-per-step
 discipline is especially useful for crash reasoning. [TOSCA
 2.0](../../30-sources/oasis-2025-tosca-2.md) supports a typed parser, resolver,
-representation graph, and orchestrator, while also showing why Atom OS needs a
+representation graph, and orchestrator, while also showing why Kay OS needs a
 much smaller fixed profile. [NixOS](../../30-sources/dolstra-et-al-2008-nixos.md)
 supports immutable dependency closures and atomic selection of a static
 generation, but explicitly does not make live activation side effects atomic.
@@ -296,7 +296,7 @@ falsifies this design.
 - **Publish each service as it becomes ready:** exposes partial graph
   generations and makes rollback depend on client timing.
 - **Full TOSCA or Kubernetes API:** offers breadth at the cost of a large
-  parser, policy language, and compatibility surface before Atom OS has proved
+  parser, policy language, and compatibility surface before Kay OS has proved
   its minimal lifecycle.
 
 ## Supported decisions and open questions

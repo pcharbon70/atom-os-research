@@ -77,7 +77,7 @@ with a small verifiable kernel or hard latency bounds. Its safety claims do not
 make trace values non-sensitive, prevent timing channels, or prove that a
 crash record survives a failed kernel. Dynamic tracing is therefore distinct
 from the preallocated terminal crash capsule and from ordinary unprivileged
-runtime telemetry. Atom OS must evaluate probe overhead, buffer-loss semantics,
+runtime telemetry. Kay OS must evaluate probe overhead, buffer-loss semantics,
 redaction, and authority composition on its own implementation.
 
 ## Derived work

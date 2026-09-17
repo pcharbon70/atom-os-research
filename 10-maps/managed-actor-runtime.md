@@ -20,7 +20,7 @@ aliases:
 
 ## Scope
 
-This map covers the third layer in the proposed Atom OS decomposition: an
+This map covers the third layer in the proposed Kay OS decomposition: an
 unprivileged runtime that executes a declared compiled-BEAM profile and owns
 cheap actors, term memory, process-local tracing collection, signal and mailbox
 semantics, reduction scheduling, timers, shared tables, code loading, and
@@ -93,7 +93,7 @@ parent consistency repairs and outstanding experiments. First-party studies of
 [thread progress](../30-sources/erlang-otp-team-2026-thread-progress-contracts.md),
 [ETS counters](../30-sources/winblad-2021-decentralized-ets-counters.md) and
 [persistent terms](../30-sources/larsson-2019-persistent-term.md) add implementation
-tradeoffs, not verified Atom OS mechanisms.
+tradeoffs, not verified Kay OS mechanisms.
 
 ## Component implementation deep dives
 

@@ -42,7 +42,7 @@ Practical OS-development evidence and a reminder to qualify dependencies against
 
 ## Limits
 
-Not evidence for Atom's protected, preemptive Intel x86-64 design. Some minimum-platform details differ between overview and README, so no precise hardware minima are imported.
+Not evidence for Kay's protected, preemptive Intel x86-64 design. Some minimum-platform details differ between overview and README, so no precise hardware minima are imported.
 
 ## Derived work
 

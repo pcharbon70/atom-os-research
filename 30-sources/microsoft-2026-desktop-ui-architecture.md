@@ -76,7 +76,7 @@ that every Windows application adopts every recommended facility.
 
 The corpus demonstrates real modern advances Kay's environment did not solve:
 trusted cross-process composition, hardware-efficient presentation,
-accessibility semantics, explicit lifecycle, and least privilege. Atom OS
+accessibility semantics, explicit lifecycle, and least privilege. Kay OS
 should preserve them while making user-owned semantic projects and live tools
 first-class above the compositor.
 
@@ -90,4 +90,4 @@ Windows application.
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

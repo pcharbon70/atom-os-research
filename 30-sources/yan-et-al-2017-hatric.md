@@ -62,14 +62,14 @@ derived from the page-table-entry address.
 ## Relevance
 
 HATRIC is evidence that a future backend may provide stronger hardware
-translation-coherence assistance. Atom's portable contract should allow such
+translation-coherence assistance. Kay's portable contract should allow such
 a backend to satisfy the same invalidation and completion effects without
 exposing IPIs as the API or weakening the conservative software baseline.
 
 ## Limits
 
 This is a simulated hardware proposal focused on virtualized workloads, not a
-shipping mechanism or Atom prototype. Reported maxima are configuration-
+shipping mechanism or Kay prototype. Reported maxima are configuration-
 specific. Hardware invalidation still requires a precisely specified
 completion and reclamation contract; it does not replace authority validation,
 mapping identity, DMA quiescence, or software-object lifetime management.

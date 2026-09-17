@@ -21,7 +21,7 @@ Research question: What evidence can survive a failed runtime without trusting i
 Sampled tracing is not guaranteed crash evidence; access to diagnostic state needs
 separately scoped authority. [1](../../../30-sources/sigelman-et-al-2010-dapper.md) [2](../../../30-sources/miller-et-al-2003-capability-myths.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

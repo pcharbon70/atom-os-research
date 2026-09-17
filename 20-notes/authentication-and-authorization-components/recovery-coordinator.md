@@ -26,7 +26,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom recover from lost authenticators, keys, corrupt software, or
+> How can Kay recover from lost authenticators, keys, corrupt software, or
 operator emergencies without making the recovery path weaker than ordinary
 authentication or hiding a universal administrator/decryption key?
 

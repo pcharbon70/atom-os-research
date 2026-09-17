@@ -15,7 +15,7 @@ What must be established before a boot description may influence privileged obje
 
 capDL describes authority configurations; description validity and intended security policy are different questions. [1](../../../30-sources/kuz-et-al-2010-capdl.md), [2](../../../30-sources/sel4-foundation-2026-capdl-loader-contract.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../bootstrap-and-root-authority-handoff.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../bootstrap-and-root-authority-handoff.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

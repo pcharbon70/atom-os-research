@@ -58,7 +58,7 @@ recovery plus time and memory overhead under its stated model.
 ## Relevance
 
 The paper supports isolating migration workers, retaining the old generation,
-and publishing only validated candidate state. It sharpens Atom OS changeset
+and publishing only validated candidate state. It sharpens Kay OS changeset
 work by making migration failure a first-class recoverable event.
 
 ## Limits

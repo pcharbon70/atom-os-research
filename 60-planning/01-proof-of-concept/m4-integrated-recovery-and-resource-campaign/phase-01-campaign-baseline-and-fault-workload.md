@@ -40,7 +40,7 @@ service are separate ring-3 domains. Actor failure inside one runtime is distinc
 failure.
 
 Unless explicitly identified as the physical qualification phase, guest checks use the
-M0-pinned QEMU/SeaBIOS, versioned q35, Nehalem-v1, TCG, one CPU, 128 MiB and serial fixture.
+M0-pinned QEMU/SeaBIOS, versioned q35, Nehalem-v1, TCG, one CPU, 64 MiB and serial fixture.
 Do not add writable storage, networking, SMP/NUMA or graphical UI to satisfy a failing case.
 AtomVM remains excluded. No command, commit, PR, installation or device write is authorized by
 this plan.
@@ -80,7 +80,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 
     - [ ] 1.1.1 Task [id: m4-p01-decisions] [repo: atom-os-research] [after: m3-p04-handoff] — Freeze the campaign manifest.
 
-      Resolve M4-D01 against accepted predecessor evidence and the actual 128 MiB single-CPU
+      Resolve M4-D01 against accepted predecessor evidence and the actual 64 MiB single-CPU
       envelope.
 
       - [ ] 1.1.1.1 Subtask — Pin the inherited system.

@@ -28,7 +28,7 @@ pressure, range size, missing feature knowledge, and errata may widen an
 address operation into a context or system operation; they may never weaken
 the semantic obligation.
 
-This is proposed Atom architecture. Its common plan algebra and backend
+This is proposed Kay architecture. Its common plan algebra and backend
 refinement proofs do not yet exist.
 
 ## Question, scope, and operational standard
@@ -81,7 +81,7 @@ or resource reclamation. A candidate planner is adequate only if:
 | [RISC-V privileged architecture](../../../30-sources/risc-v-international-2026-privileged-architecture.md) | `SFENCE.VMA` is local; operand and global-mapping rules affect scope; invalid PTEs may be cached without Svvptc | Remote execution and platform coherence are separate contracts |
 | [RISC-V supervisor binary interface](../../../30-sources/risc-v-international-2025-supervisor-binary-interface.md) | RFENCE standardizes remote-fence requests, but `SBI_SUCCESS` reports successful transmission to targeted harts rather than target execution | A platform may specify stronger completion separately; the standard return alone does not |
 | [TLB consistency](../../../30-sources/black-et-al-1989-tlb-consistency.md) | Address lists can be accumulated and safely upgraded to a full flush on overflow, with explicit remote participation | The measured multiprocessors and software interfaces are historical |
-| [Ephemeral mapping management](../../../30-sources/elmeleegy-et-al-2005-ephemeral-mapping-management.md) | CPU-private and shared temporary mappings have different remote-invalidation scope and lifetime costs | Historical FreeBSD mechanisms do not establish Atom's alias policy or modern ISA ordering |
+| [Ephemeral mapping management](../../../30-sources/elmeleegy-et-al-2005-ephemeral-mapping-management.md) | CPU-private and shared temporary mappings have different remote-invalidation scope and lifetime costs | Historical FreeBSD mechanisms do not establish Kay's alias policy or modern ISA ordering |
 | [Optimizing TLB shootdown](../../../30-sources/amit-2017-optimizing-tlb-shootdown.md) | Page-versus-context thresholds and target pruning can reduce cost when the correctness invariant is preserved | Results are workload- and x86/Linux-specific |
 | [Don't shoot down TLB shootdowns](../../../30-sources/amit-et-al-2020-dont-shoot-down-tlb-shootdowns.md) | Deferral and batching require return-to-user and privileged-access gates; they are not transparent substitutions | Early acknowledgement does not establish table-reclamation safety |
 | [HATRIC](../../../30-sources/yan-et-al-2017-hatric.md) | Hardware translation coherence can replace some software shootdown work and exposes the value of precise dependency tracking | It is a simulated proposal, not a generally available platform guarantee |
@@ -361,7 +361,7 @@ is no post-freeze pruning or unrecorded omitted-member proof.
 There is no portable “adding a mapping never needs invalidation” rule. A
 documented Arm profile may treat selected translation faults as noncached,
 while RISC-V permits invalid PTEs to be cached unless a feature such as Svvptc
-changes the contract. Atom therefore records negative-cache behavior in the
+changes the contract. Kay therefore records negative-cache behavior in the
 machine profile and returns synchronous `Usable` only after the required
 maintenance.
 
@@ -449,7 +449,7 @@ claim to remove global entries.
 sequences only when present in the frozen profile. In the standardized SBI
 RFENCE interface, `SBI_SUCCESS` establishes successful request transmission to
 the targeted harts, not their execution of the local fence. The coordinator
-therefore either uses an IPI only to invoke an Atom target handler that executes
+therefore either uses an IPI only to invoke an Kay target handler that executes
 and acknowledges the local fence, or consumes a separately specified platform
 completion emitted causally after execution of that exact RFENCE and bound to
 the request and hart incarnation. An unrelated later OS acknowledgement cannot
@@ -517,7 +517,7 @@ with the reference plan and a table decoder.
 
 ### Architecture litmus and hardware tests
 
-- Port the relevant Arm relaxed-VM litmus cases and add Atom's activation
+- Port the relevant Arm relaxed-VM litmus cases and add Kay's activation
   handshake.
 - On RISC-V, probe ASID length and Svvptc/Svinval, then test invalid-to-valid,
   global ancestry, and remote-hart paths.

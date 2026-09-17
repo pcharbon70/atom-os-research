@@ -9,7 +9,7 @@ tags:
   - operating-systems
   - proof-of-concept
 aliases:
-  - "First Atom OS prototype gates"
+  - "First Kay OS prototype gates"
 ---
 
 # Can a minimal bootable system validate the architecture?
@@ -30,7 +30,7 @@ board revision, memory, firmware and device inventory remain open.
 
 ## Operational question
 
-Can one pinned virtual target boot an Atom-owned privileged kernel into a
+Can one pinned virtual target boot an Kay-owned privileged kernel into a
 native user-mode CLI, then use that CLI to operate protected services and a
 project runtime executing declared compiled BEAM, with automatic process-local
 tracing collection, supervised actor failure, enforced domain resources,
@@ -119,7 +119,7 @@ below remain open, and unresolved inputs still block dependent work.
 | Gate | State |
 | --- | --- |
 | M0: pinned boot inputs | Open; T7500 / Intel x86-64 selected, but exact installed-unit inventory, virtual binary pins, toolchain, firmware/bootloader, static image and console/time ABI need concrete artifacts |
-| M1: first boot into a native user-mode CLI | Open; no interactive Atom OS boot is recorded |
+| M1: first boot into a native user-mode CLI | Open; no interactive Kay OS boot is recorded |
 | M2: protected service nucleus and CLI control | Open |
 | M3: CLI-launched compiled BEAM and tracing GC | Open |
 | M4: integrated recovery/resource/fault campaign | Open |

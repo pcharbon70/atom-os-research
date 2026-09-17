@@ -50,7 +50,7 @@ analysis work, not a distributed actor evaluation.
 
 ## Relevance
 
-Atom OS command handles, workflow steps, effect tickets, migration phases, and
+Kay OS command handles, workflow steps, effect tickets, migration phases, and
 application lifecycle interfaces can expose state-constrained facets. Runtime
 validation remains necessary across asynchronous messages and untyped or
 mixed-version boundaries.

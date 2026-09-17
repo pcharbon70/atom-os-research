@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 A component cannot be its own reliable recovery authority after corruption; watchdog silence alone is only a liveness observation. [1](../../../30-sources/candea-fox-2003-crash-only-software.md), [2](../../../30-sources/chandra-toueg-1996-failure-detectors.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The runtime implements observations and actor termination; OTP-like services choose restart policy, and an outer service handles runtime corruption.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

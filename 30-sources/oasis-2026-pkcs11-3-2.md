@@ -42,7 +42,7 @@ sessions, mechanisms, and cryptographic operations.
 This is a consensus interface specification. The review used its object,
 session, attribute, mechanism, and operation model as an engineering precedent
 for keeping cryptographic material behind handles; it did not treat every
-Cryptoki function as an Atom requirement.
+Cryptoki function as an Kay requirement.
 
 ## Findings
 
@@ -58,8 +58,8 @@ Cryptoki function as an Atom requirement.
 
 ## Relevance
 
-The useful Atom precedent is opaque, typed key handles and operation-specific
-facets. Atom should use a smaller capability-native service API with explicit
+The useful Kay precedent is opaque, typed key handles and operation-specific
+facets. Kay should use a smaller capability-native service API with explicit
 audience, generation, purpose, algorithm, quota, cancellation, and lifecycle
 state rather than embedding the full PKCS #11 ABI in the kernel.
 
@@ -67,7 +67,7 @@ state rather than embedding the full PKCS #11 ABI in the kernel.
 
 PKCS #11 defines an API, not a proof that a token is tamper resistant or free
 of side channels. Vendor mechanisms, authentication models, and session
-semantics vary, and a large general API is unsuitable as Atom's privileged
+semantics vary, and a large general API is unsuitable as Kay's privileged
 boundary.
 
 ## Derived work

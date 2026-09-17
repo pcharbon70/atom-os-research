@@ -40,7 +40,7 @@ Version-specific, representative metrics reveal regressions hidden by aggregate 
 
 ## Relevance
 
-Proposed Atom OS use: bounded effect-scoped cohorts and explicit Inconclusive outcomes when evidence is insufficient.
+Proposed Kay OS use: bounded effect-scoped cohorts and explicit Inconclusive outcomes when evidence is insufficient.
 
 ## Limits
 

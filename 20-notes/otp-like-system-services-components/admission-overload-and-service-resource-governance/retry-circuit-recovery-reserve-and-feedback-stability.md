@@ -21,7 +21,7 @@ Research question: How can retries and restarts avoid multiplying load across a 
 Randomized backoff reduces contention, while propagated admission can avoid wasted
 paths; neither removes the need for retry budgets. [1](../../../30-sources/brooker-2015-exponential-backoff-jitter.md) [2](../../../30-sources/zhou-et-al-2018-dagor.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

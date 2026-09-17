@@ -35,11 +35,11 @@ The loader constructs a system from a declarative description. Its documented co
 
 ## Relevance
 
-Separate manifest validation, construction correctness and elimination of usable bootstrap authority. Each needs its own evidence in Atom OS.
+Separate manifest validation, construction correctness and elimination of usable bootstrap authority. Each needs its own evidence in Kay OS.
 
 ## Limits
 
-A successfully parsed model need not encode the intended security policy. A model-level theorem neither verifies an Atom loader nor covers extensions without a corresponding argument.
+A successfully parsed model need not encode the intended security policy. A model-level theorem neither verifies an Kay loader nor covers extensions without a corresponding argument.
 
 ## Derived work
 

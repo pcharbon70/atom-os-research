@@ -15,7 +15,7 @@ What contract surrounds a shared queue when either endpoint may fail or supply h
 
 CleanQ formalizes data-transfer ownership while leaving surrounding control responsibilities to other mechanisms. [1](../../../30-sources/haecki-et-al-2019-cleanq.md), [2](../../../30-sources/markettos-et-al-2019-thunderclap.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../bounded-invocation-and-transport.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../bounded-invocation-and-transport.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

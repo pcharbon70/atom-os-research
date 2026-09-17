@@ -56,7 +56,7 @@ persistence, and command-system composition.
 
 ## Relevance
 
-This is direct precedent for placing the Atom OS CLI at the application layer.
+This is direct precedent for placing the Kay OS CLI at the application layer.
 The shell should hold a session namespace and command-launch authority, while
 each command receives a newly constructed, attenuated capability set and
 budget. Administrative work should create a separate, short-lived, audited
@@ -66,7 +66,7 @@ session after step-up authentication rather than mutate a process-wide UID.
 
 KeyKOS targeted historical mainframe hardware and has different performance,
 persistence, I/O, multicore, and network assumptions. Its architecture is
-evidence of feasibility, not a proof that every KeyKOS mechanism fits Atom OS
+evidence of feasibility, not a proof that every KeyKOS mechanism fits Kay OS
 or satisfies modern side-channel and usability requirements.
 
 ## Derived work

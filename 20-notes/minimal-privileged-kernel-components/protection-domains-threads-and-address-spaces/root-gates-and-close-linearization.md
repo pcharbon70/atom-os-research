@@ -15,7 +15,7 @@ How can a domain stop acquiring new work without first walking every object it o
 
 Split logical removal and delayed reclamation is a useful concurrency precedent, not a complete domain-stop mechanism. [1](../../../30-sources/mckenney-slingwine-1998-read-copy-update.md), [2](../../../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../protection-domains-threads-and-address-spaces.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../protection-domains-threads-and-address-spaces.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

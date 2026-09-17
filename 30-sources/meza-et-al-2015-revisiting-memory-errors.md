@@ -62,7 +62,7 @@ device-days in Facebook data centers and evaluates page-offlining behavior on
 
 ## Relevance
 
-Atom should retain persistent physical-component and retired-extent identity,
+Kay should retain persistent physical-component and retired-extent identity,
 track repeated events across boot generations, and expose threshold evidence
 to a maintenance service. It must still decide each event using current
 precision, ownership, consumption, and containment facts. Historical rate is

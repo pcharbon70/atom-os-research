@@ -55,14 +55,14 @@ deployments detect equivocation or certificate abuse.
 
 ## Relevance
 
-Atom's audit service can use periodic Merkle commitments and independent
+Kay's audit service can use periodic Merkle commitments and independent
 witnesses to make post-commit deletion or equivocation detectable. Resource
 servers still need bounded local admission and explicit loss markers when the
 audit path is unavailable; transparency is not synchronous authorization.
 
 ## Limits
 
-Certificate Transparency is designed for public certificate ecosystems. Atom
+Certificate Transparency is designed for public certificate ecosystems. Kay
 may require confidential event payloads, selective disclosure, retention, and
 redaction, so it can reuse commitment structures and role separation without
 publishing sensitive logs.

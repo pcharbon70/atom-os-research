@@ -21,7 +21,7 @@ Research question: How can causal diagnostics remain useful while explicitly inc
 Dapper samples correlated traces and excludes payloads by default; bounded emission
 needs explicit loss policy. [1](../../../30-sources/sigelman-et-al-2010-dapper.md) [2](../../../30-sources/welsh-et-al-2001-seda.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

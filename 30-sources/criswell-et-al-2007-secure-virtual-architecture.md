@@ -67,7 +67,7 @@ safety exploits.
 
 ## Relevance
 
-Atom OS should make all unsafe privileged instructions reachable only through
+Kay OS should make all unsafe privileged instructions reachable only through
 the architecture capsule and expose typed semantic operations above it. The
 facade can use language types, sealed constructors, capability authority, and
 generational tokens without turning BEAM into the kernel instruction set or

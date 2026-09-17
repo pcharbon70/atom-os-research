@@ -58,7 +58,7 @@ considerations—not on adopting its XML representation.
 
 ## Relevance
 
-Atom should preserve the role separation and typed outcome discipline while
+Kay should preserve the role separation and typed outcome discipline while
 using a smaller bounded language and canonical binary request form. Attribute
 resolution happens before the pure PDP call; the resource-side admission path
 must treat every non-`Permit` outcome as fail-closed and either atomically

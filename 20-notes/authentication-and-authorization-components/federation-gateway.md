@@ -27,7 +27,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom interoperate across trust domains and OAuth/OIDC/SPIFFE systems
+> How can Kay interoperate across trust domains and OAuth/OIDC/SPIFFE systems
 without forwarding broad tokens, merging trust bundles, losing delegation
 semantics, accepting bearer replay, or letting hostile parsers and peers reach
 the local capability namespace?
@@ -76,7 +76,7 @@ defenses against cross-JWT confusion and attacker-controlled key URLs/IDs.
 provides a current first-party precedent for explicit one-way trust-domain
 relationships, separate bundles, overlap during key rotation, normal-interval
 retry, and removal propagation. It authenticates workloads; it does not decide
-Atom authorization.
+Kay authorization.
 
 ## Authority boundary
 
@@ -156,7 +156,7 @@ rules prevent one JWT class from being accepted as another.
 The target verifies PoP at the actual authenticated transport/request boundary.
 If TLS terminates at a proxy, the propagation of client-certificate facts is a
 separately authenticated internal protocol, not an HTTP header convention.
-DPoP method/URI binding is supplemented by Atom's canonical body/operation
+DPoP method/URI binding is supplemented by Kay's canonical body/operation
 digest when the effect depends on a body.
 
 ## Outbound and exchange protocol

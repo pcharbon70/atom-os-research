@@ -39,7 +39,7 @@ Separate software-reference protection from legal kernel checkpoints. A remote i
 
 ## Limits
 
-The algorithm assumes a hosted signaling contract and structured operations. Its bounds and experiments do not establish Atom's privileged stop protocol, hardware drainage, or performance. The DOI identifies the accessed full version, not the conference edition.
+The algorithm assumes a hosted signaling contract and structured operations. Its bounds and experiments do not establish Kay's privileged stop protocol, hardware drainage, or performance. The DOI identifies the accessed full version, not the conference edition.
 
 ## Derived work
 

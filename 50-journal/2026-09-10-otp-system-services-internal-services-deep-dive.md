@@ -119,7 +119,7 @@ and unsupported numerical recommendations were not adopted.
 3. Snapshot/watch loss must be observable outside the queue that overflowed.
    Notification delay and a valid cached name do not establish current authority.
 4. xDS NACK can coexist with partial resource acceptance. The existing source
-   note's blanket last-valid interpretation is clarified; Atom OS complete-
+   note's blanket last-valid interpretation is clarified; Kay OS complete-
    snapshot rejection remains a proposed stronger native policy. ACK still
    cannot stand for successful adoption.
 5. A fence rejects future stale admission but does not erase operations that

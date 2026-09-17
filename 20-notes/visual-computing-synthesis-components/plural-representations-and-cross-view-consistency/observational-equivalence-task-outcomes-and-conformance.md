@@ -28,7 +28,7 @@ final presentations legitimately differ by target.
 [3](../../../30-sources/w3c-2024-wcag-2-2.md)
 [4](../../../30-sources/calvary-et-al-2003-multi-target-user-interface-framework.md)
 
-No Atom conformance suite or participant study exists.
+No Kay conformance suite or participant study exists.
 
 ## Development
 

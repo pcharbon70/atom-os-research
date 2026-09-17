@@ -53,7 +53,7 @@ verification of the RISC-V port discovered the defect.
 
 ## Relevance
 
-Atom's validator should construct a typed effective mapping after all
+Kay's validator should construct a typed effective mapping after all
 authority intersections. Its encoder should accept distinct leaf and table-
 link types, set contextual bits itself, and decode/assert the resulting entry
 in tests. An empty rights intersection is a rejection, never an implicit
@@ -62,7 +62,7 @@ table-link encoding.
 ## Limits
 
 This is a concise official release notice, not a full incident or proof report.
-It concerns one historical RISC-V implementation bug. The recommended Atom
+It concerns one historical RISC-V implementation bug. The recommended Kay
 type structure and decode-after-encode check are deductions, not seL4 API
 requirements.
 

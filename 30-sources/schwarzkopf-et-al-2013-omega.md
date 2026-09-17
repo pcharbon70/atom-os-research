@@ -82,7 +82,7 @@ compatibility.
 
 ## Relevance
 
-Omega supports an Atom OS service layer made from several capability-confined
+Omega supports an Kay OS service layer made from several capability-confined
 controllers rather than one all-powerful application manager. A small manifest
 authority can own immutable desired state and publication revisions while
 specialized lifecycle, resource, update, device, and network controllers plan
@@ -90,7 +90,7 @@ from snapshots. Their writes should name the input revisions and be accepted
 only if the relevant objects still match; conflict then returns a typed
 `StalePlan` outcome for recomputation.
 
-The inference is deliberately narrower than Omega. Atom OS should not expose
+The inference is deliberately narrower than Omega. Kay OS should not expose
 one writable global object store to every service. Each controller should
 receive attenuated mutation capabilities for a typed subset of state, and
 publication of a prepared service generation should remain one explicit

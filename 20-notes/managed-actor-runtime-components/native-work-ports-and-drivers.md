@@ -102,7 +102,7 @@ interrupt/configuration control does not contain an adversarial device driver.
 | Dirty NIF | From normal scheduler class | No | Only by convention | Trusted compatibility only |
 | Linked driver | Partial runtime scheduling conventions | No | Only by convention | Disallowed by default |
 | External host port | Host process scheduling | Host address space | Depends on host privileges | Bring-up compatibility |
-| Atom OS service domain | Kernel budget | Kernel protection domain | Attenuated capabilities and IOMMU protocol | Baseline |
+| Kay OS service domain | Kernel budget | Kernel protection domain | Attenuated capabilities and IOMMU protocol | Baseline |
 
 ## Actor-visible service model
 
@@ -311,7 +311,7 @@ restarted.
 
 ## Port-compatible behavior
 
-An Atom OS port-like adapter can preserve actor-facing concepts:
+An Kay OS port-like adapter can preserve actor-facing concepts:
 
 - one owning actor and explicit transfer rules where the profile allows it;
 - messages or command operations with ordered correlation;
@@ -321,7 +321,7 @@ An Atom OS port-like adapter can preserve actor-facing concepts:
 
 External executable names, host file descriptors, shell commands, and ambient
 environment variables are not part of the native architecture. A compatibility
-service may implement them for a trusted hosted profile. On native Atom OS,
+service may implement them for a trusted hosted profile. On native Kay OS,
 service discovery and launch are capability/policy operations.
 
 The port's “closed” event states whether the route disappeared, the service

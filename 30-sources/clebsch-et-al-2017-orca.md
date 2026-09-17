@@ -70,7 +70,7 @@ with microbenchmarks and comparisons to other collectors.
 
 Orca is a valuable alternative to indiscriminate message copying. It shows a
 possible future extension profile in which verified immutable or unique terms
-cross actors cheaply. It also supplies a warning: Atom OS cannot import Orca’s
+cross actors cheaply. It also supplies a warning: Kay OS cannot import Orca’s
 zero-copy conclusions for arbitrary compiled BEAM terms, because ordinary BEAM
 code does not carry Pony’s reference-capability proofs. The compatible
 baseline should retain process-local tracing collection and copy or explicitly

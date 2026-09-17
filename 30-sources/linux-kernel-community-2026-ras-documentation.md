@@ -41,7 +41,7 @@ firmware mechanisms?
 The current RAS guide and its linked EDAC, machine-check, APEI, trace-event,
 memory-failure, and error-record material were read as implementation precedent.
 The analysis extracts distinctions and failure constraints rather than treating
-Linux policy or its user-space ABI as a proposed Atom OS interface.
+Linux policy or its user-space ABI as a proposed Kay OS interface.
 
 ## Findings
 

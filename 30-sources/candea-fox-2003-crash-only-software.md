@@ -58,7 +58,7 @@ leases, timeouts, and fine-grained restart can mask component failures.
 
 ## Relevance
 
-The argument reinforces a strict Atom OS boundary: actors may be restarted by
+The argument reinforces a strict Kay OS boundary: actors may be restarted by
 OTP policy, but corruption of the runtime requires an outer service to replace
 the entire runtime incarnation. Bootstrap and teardown should converge on the
 same idempotent object-creation and release protocol, and gateways must reject

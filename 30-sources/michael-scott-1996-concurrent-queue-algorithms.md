@@ -67,7 +67,7 @@ ingress, especially linearization, publication of a complete node, delayed
 producers, and memory reclamation. It does not imply that one global
 Michael–Scott queue is the best mailbox: ERTS evidence favors sender-striped
 ingress under extreme fan-in, while the actor owner alone should drain and
-materialize its receivable queue. Atom OS should compare a simple MPSC queue,
+materialize its receivable queue. Kay OS should compare a simple MPSC queue,
 striped FIFOs, and a two-lock fallback under its actual memory model.
 
 ## Limits

@@ -64,14 +64,14 @@ pins. They are read as one implementation family, not as a single stable API.
 
 ## Relevance
 
-The implementation shows why Atom needs typed and separate gates for hardware
+The implementation shows why Kay needs typed and separate gates for hardware
 translations, software readers, DMA, and copy progress. It also provides
 practical precedent for consuming user-range readers and lexically scoped
-temporary mappings while leaving Atom free to choose a smaller interface.
+temporary mappings while leaving Kay free to choose a smaller interface.
 
 ## Limits
 
-Linux code and documentation evolve and include compatibility constraints Atom
+Linux code and documentation evolve and include compatibility constraints Kay
 may not need. This note preserves one revision rather than claiming current
 behavior for all releases. The behavior is not a proof, and architecture-
 specific completion must still be checked against normative manuals and target

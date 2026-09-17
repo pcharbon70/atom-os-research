@@ -62,7 +62,7 @@ DOI above identify the abridged CSF proceedings paper.
 
 ## Relevance
 
-Atom's federation gateway should terminate remote protocols in a confined
+Kay's federation gateway should terminate remote protocols in a confined
 parser domain, pin issuer-specific metadata, bind every response to a request
 record, and emit typed evidence for local policy. It should never pass a remote
 token through as a kernel capability or let federated logout mutate local
@@ -72,7 +72,7 @@ session generations without local validation.
 
 The analysis covers the modeled OpenID Connect ecosystem at publication time.
 It is not a proof of current implementations, native OS login, OAuth extensions
-added later, certificate-bound tokens, or Atom's proposed gateway.
+added later, certificate-bound tokens, or Kay's proposed gateway.
 
 ## Derived work
 

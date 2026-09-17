@@ -54,7 +54,7 @@ and coordinating generation rollover with deferred local invalidation.
 
 ## Relevance
 
-This is mature implementation evidence for an Atom `ContextTagLease` with a
+This is mature implementation evidence for an Kay `ContextTagLease` with a
 software generation, per-CPU installed-state ledger, explicit rollover, and a
 capacity rule. The design should borrow the invariants, not Linux's internal
 representation or its implicit integration assumptions.
@@ -63,7 +63,7 @@ representation or its implicit integration assumptions.
 
 Source code is implementation precedent, not a formal proof or stable API.
 The exact behavior is AArch64- and Linux-specific and must be read with the
-pinned architecture manual and surrounding kernel code. Atom's CPU lifecycle,
+pinned architecture manual and surrounding kernel code. Kay's CPU lifecycle,
 failure containment, and completion tokens impose additional obligations;
 this file alone does not prove them.
 

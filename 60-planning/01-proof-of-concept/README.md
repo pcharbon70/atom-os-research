@@ -77,7 +77,7 @@ they are not a quota for future revisions or other milestones.
 | Milestone | Detailed definition | Required outcome | Planning dependency |
 | --- | --- | --- | --- |
 | M0 — Boot inputs | [M0 definition](m0-boot-inputs/README.md) | Pinned build/target/firmware inputs, static CLI image contract, console/time ABI, limits, and exercised validation harness. | Existing target decision and research; remaining choices must be resolved explicitly. |
-| M1 — Boot to CLI | [M1 definition](m1-boot-to-cli/README.md) | Atom kernel launches a native user-mode CLI; `help`, `version`, `uptime`, bounded input, invalid commands, and timer progress pass. | M0 contracts and reproducible fixture. |
+| M1 — Boot to CLI | [M1 definition](m1-boot-to-cli/README.md) | Kay kernel launches a native user-mode CLI; `help`, `version`, `uptime`, bounded input, invalid commands, and timer progress pass. | M0 contracts and reproducible fixture. |
 | M2 — Protected service nucleus | [M2 definition](m2-protected-service-nucleus/README.md) | Protected domains, capabilities, accounts, bounded transport, fault delivery, independent recovery, and real CLI inspection/control. | M1 plus concrete lifecycle, authority, and budget contracts. |
 | M3 — Project BEAM runtime | [M3 definition](m3-project-beam-runtime/README.md) | CLI-launched compiler-produced BEAM in the unprivileged project runtime; pinned-profile conformance and automatic local tracing GC. | M2 substrate for guest integration; hosted profile experiments may run earlier when requested. |
 | M4 — Integrated recovery and resource campaign | [M4 definition](m4-integrated-recovery-and-resource-campaign/README.md) | Integrated CLI/actor/service/runtime failures, resource limits, reclamation, generation safety, and repeated recovery evidence. | Integrated M2 and M3 with predeclared test budgets and observables. |
@@ -153,7 +153,7 @@ implementation, rather than require another broad research cycle:
 
 Select and close the exact BEAM workload and compatibility profile in M3 Phase 1
 before dependent interpreter commitments; that work does not block M0 or M1. Retain
-the selected Intel target and start virtual tests small: one CPU, 128 MiB,
+the selected Intel target and start virtual tests small: one CPU, 64 MiB,
 serial I/O, with the full fixture controlled by the linked target profile.
 Do not enlarge QEMU topology simply because the lab machine has two packages.
 

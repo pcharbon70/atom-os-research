@@ -53,7 +53,7 @@ reproduction limits.
 
 The [T7500 target profile](dell-precision-t7500-target-and-minimal-qemu-profile.md)
 remains authoritative: Intel Xeon/Intel 64, initially the minimal Nehalem-v1
-QEMU fixture with one CPU, 128 MiB and serial I/O. Compiler `nehalem` selection
+QEMU fixture with one CPU, 64 MiB and serial I/O. Compiler `nehalem` selection
 and QEMU's named CPU model are different interfaces that must be reconciled.
 The installed Xeon SKUs, firmware and devices are unverified. q35 is a test
 platform, not a faithful T7500 motherboard replica. No AMD-specific feature,
@@ -93,7 +93,7 @@ license to copy Linux's flags, APIs or memory model.
 
 ### Required low-level facilities
 
-| Required mechanism | C/toolchain route | Atom's unresolved responsibility |
+| Required mechanism | C/toolchain route | Kay's unresolved responsibility |
 | --- | --- | --- |
 | Boot and C startup | Assembly entry, linker-defined regions, freestanding C entry function | Bootloader handoff, stack/alignment, initialized data/BSS, mapping and processor state |
 | Port I/O and CPU control | GNU-style inline assembly or external assembly | Correct operands/clobbers, privilege, register/MSR semantics and feature checks |
@@ -140,7 +140,7 @@ undeclared `libatomic` dependencies in critical paths. A compile-time lock-free
 check is useful, but lock-free does not imply wait-free or a bounded retry
 count. IRQ reentrancy matters even before SMP.
 
-These are proposed Atom rules derived from the GCC contracts above, not an
+These are proposed Kay rules derived from the GCC contracts above, not an
 adoption of a hosted threading runtime. The kernel must define the interaction
 between ordinary code, interrupt handlers, CPU memory ordering and later SMP.
 
@@ -161,8 +161,8 @@ impossible, but they expand the contract beyond our tested subset. Serialization
 must define byte layout independently of native padding. Do not expose raw
 kernel pointers as user authority.
 
-The procedure ABI, boot handoff, CPU interrupt frame and Atom syscall ABI
-are separate. A Linux-target compiler does not supply Atom's syscall interface.
+The procedure ABI, boot handoff, CPU interrupt frame and Kay syscall ABI
+are separate. A Linux-target compiler does not supply Kay's syscall interface.
 Likewise, a callback that returns correctly on Linux says nothing about its
 allowed blocking, allocation, cancellation, lifetime or interrupt context
 inside the kernel. Those obligations remain with the component wrapper.
@@ -174,7 +174,7 @@ inside the kernel. Those obligations remain with the component wrapper.
 | Small pure-C algorithms | Strong reuse candidate | Target build, bounds/ownership review, dependency census and negative tests |
 | Compiler support and memory primitives | Necessary when emitted or required by the compiler contract | Reviewed implementations, no recursive helper lowering, exact semantics and codegen audit |
 | Newlib portions | Porting candidate, not free host services | Real bounded system hooks and reentrancy/allocator policy |
-| musl as a whole | Not a drop-in libc for Atom | Its Linux syscall dependency would require a separate compatibility effort |
+| musl as a whole | Not a drop-in libc for Kay | Its Linux syscall dependency would require a separate compatibility effort |
 | Explicit freestanding LZ4 subset | Evidence that bounded C-library profiles exist | Version/macros, memory hooks, input limits and fuzzing; not selected here |
 | Linux/BSD drivers or subsystems | Potential source reuse, not direct ABI reuse | Donor environment, locking, allocation, DMA, address and reset adapters |
 
@@ -196,7 +196,7 @@ is truly supported, explicitly unsupported, or outside the admitted subset.
 
 [OSKit's historical reuse work](../../30-sources/ford-et-al-1997-flux-oskit.md)
 shows why interfaces need execution-environment adapters, not just matching
-function declarations. Atom should prefer narrow unprivileged services for
+function declarations. Kay should prefer narrow unprivileged services for
 larger imported code. Review component licensing and provenance before reuse;
 no third-party implementation is vendored by this study.
 
@@ -231,7 +231,7 @@ author-written technical evidence, not independent certification.
 and [Klein et al.'s verified microkernel](../../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md)
 demonstrate that disciplined C systems can receive substantial assurance.
 Their model, assembly, hardware and configuration boundaries do not transfer
-to Atom. Disassembly inspection is not formal translation validation.
+to Kay. Disassembly inspection is not formal translation validation.
 
 Proposed controls are hosted tests and analysis for portable components,
 compiler/optimization differential checks, explicit checked arithmetic,

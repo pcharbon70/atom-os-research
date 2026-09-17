@@ -62,7 +62,7 @@ changes, and evaluates understandability with a 43-student comparison.
 
 ## Relevance
 
-A small Atom OS coordination service can use a Raft-class replicated log for
+A small Kay OS coordination service can use a Raft-class replicated log for
 authoritative service publications, release decisions, and lease generations
 that must survive node loss. It should not put bulk storage, telemetry, or all
 actor traffic through consensus. Membership suspicion remains a separate input,

@@ -64,7 +64,7 @@ deadlock.
 
 ## Relevance
 
-The result supports a deterministic Atom OS runtime mode whose choice points
+The result supports a deterministic Kay OS runtime mode whose choice points
 include runnable-actor selection, message visibility, timer delivery, failure
 delivery, and selected external completions. The runtime should store a seed
 and compact choice schedule and expose it to shrinking and differential tests.
@@ -74,7 +74,7 @@ Production scheduling remains separate.
 
 Concuerror tests executions reachable through its model and instrumentation;
 it is not a proof of arbitrary Erlang programs. Search pruning and unsupported
-side effects can omit behaviors. Atom OS must combine actor-level exploration
+side effects can omit behaviors. Kay OS must combine actor-level exploration
 with kernel model tests, native-service fault injection, network simulation,
 and hardware/emulator tests.
 

@@ -79,7 +79,7 @@ uncooperative user thread, flush a translation, cancel an IRQ, or drain a DMA
 engine. A stalled reader can delay reclamation, so retained-storage bounds and
 backpressure are part of the design. Current implementation guidance should be
 cross-checked against the [Linux RCU documentation](https://docs.kernel.org/RCU/whatisRCU.html),
-but Atom OS still needs its own memory model and checkpoint proof.
+but Kay OS still needs its own memory model and checkpoint proof.
 
 ## Derived work
 

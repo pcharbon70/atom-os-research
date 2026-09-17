@@ -59,7 +59,7 @@ operational model: a local endpoint identifies a caller out of band, returns
 X.509- or JWT-based SVIDs, streams trust bundles, and treats each update as a
 complete snapshot. It explicitly leaves caller attestation and application
 authorization to the implementation. Its interoperability form can expose an
-unencrypted PKCS#8 key, which Atom should replace with a protected handle where
+unencrypted PKCS#8 key, which Kay should replace with a protected handle where
 both ends are native.
 
 The stable [X.509-SVID
@@ -77,7 +77,7 @@ provide alternative hardware-root profiles for protected keys, measurements,
 and compound identity, but neither converts a measurement into application
 permission.
 
-The Atom-specific kernel-incarnation binding and handle-based native profile
+The Kay-specific kernel-incarnation binding and handle-based native profile
 are proposals. They require an exact target and conformance tests.
 
 ## Authority boundary

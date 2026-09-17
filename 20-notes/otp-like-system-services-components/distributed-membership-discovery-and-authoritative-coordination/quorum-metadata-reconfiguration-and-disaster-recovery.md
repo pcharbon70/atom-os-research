@@ -21,7 +21,7 @@ Research question: Which durable assumptions preserve one authoritative control 
 Raft orders crash-fault metadata under majority and stable-storage assumptions;
 cached reads may be stale. [1](../../../30-sources/ongaro-ousterhout-2014-raft.md) [2](../../../30-sources/etcd-project-2026-api-guarantees.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

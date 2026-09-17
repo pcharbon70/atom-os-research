@@ -66,7 +66,7 @@ Any eventual experiment must record the implementation and specification revisio
 ## Sources
 
 - [Linux NAPI](../../../30-sources/linux-kernel-community-2026-napi-contracts.md) — Budgeted processing and explicit masking/ownership handoff.
-- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Atom proofs.
+- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Kay proofs.
 - [VFIO isolation groups](../../../30-sources/linux-kernel-community-2026-vfio-isolation-groups.md) — Device functions do not necessarily form independent isolation units.
 
 These sources support the constraints above. The proposed object division, transition composition and verification obligations are our synthesis and remain unverified.

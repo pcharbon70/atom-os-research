@@ -26,7 +26,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom use human, workload, device, resource, and environmental facts
+> How can Kay use human, workload, device, resource, and environmental facts
 > in policy without accepting caller self-assertion, stale privilege, namespace
 > collisions, semantic ambiguity, or an invasive universal attribute oracle?
 
@@ -67,7 +67,7 @@ that evidence, verifier appraisal, and relying-party use remain distinct.
 short-lived workload identity and complete-snapshot stream semantics; an SVID
 authenticates an identity but does not authorize it.
 
-Atom's namespace registry, assurance vector, conflict protocol, and privacy
+Kay's namespace registry, assurance vector, conflict protocol, and privacy
 budget are proposed composition rules.
 
 ## Authority partition

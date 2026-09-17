@@ -1,5 +1,5 @@
 ---
-title: "Atom OS Research"
+title: "Kay OS Research"
 kind: map
 created: "2026-08-28"
 tags:
@@ -10,7 +10,7 @@ aliases:
   - "Home"
 ---
 
-# Atom OS Research
+# Kay OS Research
 
 This is the selective entry point to research on a new kernel and operating
 system informed by Erlang/OTP and BEAM principles. See the [archive
@@ -88,7 +88,7 @@ x86-64 processors; its installed components still need inventory.
   traceability, with 18 draft phases and described task dependencies;
   implementation evidence gates remain open.
 - [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) —
-  adopts Nehalem-class, one-CPU, 128 MiB serial bring-up for the selected machine,
+  adopts Nehalem-class, one-CPU, 64 MiB serial bring-up for the selected machine,
   and prioritizes remaining boot, entry, paging and timer work.
 
 - [Proof-of-concept research readiness](../20-notes/proof-of-concept-research-readiness.md) —
@@ -105,13 +105,13 @@ x86-64 processors; its installed components still need inventory.
 
 ## Active inquiries
 
-- [How should Atom OS structure applications and domain
-  services?](../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) —
+- [How should Kay OS structure applications and domain
+  services?](../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) —
   defines falsifiable semantic, identity, invariant, persistence, workflow,
   effect, presentation, collaboration, extension, evolution, tenancy,
   overload, and recovery criteria for Layer 5.
-- [What visual-computing model should Atom OS
-  adopt?](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+- [What visual-computing model should Kay OS
+  adopt?](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   tests whether a user-programmable semantic project can coexist with isolated
   actors, capability-scoped live tools, primary accessibility, and restartable
   presentation services.
@@ -153,7 +153,7 @@ x86-64 processors; its installed components still need inventory.
 - [Alan Kay, Smalltalk, and visual computing](alan-kay-smalltalk-ui.md) —
   routes through the Dynabook metamedium vision, collective Smalltalk
   implementation, Star and HCI analysis, current desktop mechanisms, and a
-  capability-safe Atom OS synthesis.
+  capability-safe Kay OS synthesis.
 - [Authentication and authorization](authentication-and-authorization.md) —
   routes from human, workload, node, and recovery evidence through typed
   policy and bounded grants to capability enforcement, revocation, audit,
@@ -201,7 +201,7 @@ x86-64 processors; its installed components still need inventory.
 - [Visual-computing synthesis component deep
   dives](alan-kay-smalltalk-ui.md#component-implementation-deep-dives) —
   develops evidence-backed implementation contracts for all seven proposed
-  Atom OS visual-computing directions and maps them onto the existing system
+  Kay OS visual-computing directions and maps them onto the existing system
   architecture.
 - [2026-09-04 visual-computing component research
   session](../50-journal/2026-09-04-visual-computing-synthesis-components-deep-dive.md) —

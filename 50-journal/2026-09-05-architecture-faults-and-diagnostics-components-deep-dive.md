@@ -54,7 +54,7 @@ freshness; a fixed operation count cannot bound a wedged MMIO access; and
 software nesting state cannot protect the hardware entry window before the
 first depth store.
 
-All results remain proposed architecture. No Atom kernel, decoder, classifier,
+All results remain proposed architecture. No Kay kernel, decoder, classifier,
 sink, recovery service, emulator campaign, hardware error, reset-survival test,
 or model check was executed.
 
@@ -66,7 +66,7 @@ or model check was executed.
 - Activity: scientific-paper, ratified-specification, official architecture,
   kernel-documentation, source-code, and engineering-practice review;
   cross-source synthesis; archive editing
-- Target kernel: no Atom implementation exists or was built
+- Target kernel: no Kay implementation exists or was built
 - Architecture scope: x86-64, Arm A-profile, and RISC-V privilege/RAS profiles
   were compared; none was executed
 - Firmware and interchange scope: UEFI CPER and ACPI APEI/BERT/ERST/EINJ were

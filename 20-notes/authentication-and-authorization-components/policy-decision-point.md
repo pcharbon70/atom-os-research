@@ -27,7 +27,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom combine session assurance, workload/device facts,
+> How can Kay combine session assurance, workload/device facts,
 > relationships, attributes, action/resource schemas, and context into a
 > reproducible decision whose semantics cannot change during evaluation or be
 > confused with an effect?
@@ -65,7 +65,7 @@ property tests, and generators that found real validator/evaluator defects.
 [XACML 3.0](../../30-sources/oasis-2017-xacml-3-0.md) provides durable
 architectural lessons: separate policy administration/information/decision/
 enforcement roles, four-valued outcomes, explicit combining semantics, and the
-difference between obligations and advice. Atom should not copy its large XML
+difference between obligations and advice. Kay should not copy its large XML
 surface or arbitrary extension points.
 
 [NIST SP
@@ -74,7 +74,7 @@ makes authoritative, timely attribute sources part of decision correctness.
 [Zero Trust
 Architecture](../../30-sources/rose-et-al-2020-zero-trust-architecture.md)
 separates policy decision and enforcement without granting trust based on
-network location. The specific Atom policy language remains unselected.
+network location. The specific Kay policy language remains unselected.
 
 ## Authority boundary
 

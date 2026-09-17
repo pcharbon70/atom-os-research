@@ -8,7 +8,7 @@ tags:
   - proof-of-concept
   - research-program
 aliases:
-  - "From research to a bootable Atom OS prototype"
+  - "From research to a bootable Kay OS prototype"
 ---
 
 # Proof of concept

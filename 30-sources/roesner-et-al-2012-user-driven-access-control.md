@@ -68,7 +68,7 @@ user-owned resources and do not constitute a complete desktop authority model.
 
 ## Relevance
 
-Atom OS should mint short-lived, audience-bound capabilities from brokered
+Kay OS should mint short-lived, audience-bound capabilities from brokered
 focus, selection, drag/drop, clipboard, capture, and secure-confirmation
 gestures. The event delivered to a view is evidence; the capability returned
 by the trusted broker authorizes only the named resource and operation.
@@ -83,4 +83,4 @@ for selected tasks, not universal understanding of capability semantics.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

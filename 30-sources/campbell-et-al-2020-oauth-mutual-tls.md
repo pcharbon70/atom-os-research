@@ -59,7 +59,7 @@ server validation, metadata, and security considerations.
 
 ## Relevance
 
-Atom's federation gateway may accept certificate-bound external tokens or use
+Kay's federation gateway may accept certificate-bound external tokens or use
 mutual TLS between gateways, but it should terminate the protocol and derive a
 new local, audience- and operation-bound grant. The local resource must never
 trust network location or a serialized kernel handle.
@@ -67,7 +67,7 @@ trust network location or a serialized kernel handle.
 ## Limits
 
 The RFC does not define application authorization policy, token-exchange trust,
-gateway confinement, certificate-revocation policy, or Atom's capability
+gateway confinement, certificate-revocation policy, or Kay's capability
 semantics. Certificate-bound tokens limit token replay; they do not make a
 compromised client trustworthy.
 

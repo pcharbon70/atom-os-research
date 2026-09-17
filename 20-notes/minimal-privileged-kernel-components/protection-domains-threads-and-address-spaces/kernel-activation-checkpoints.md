@@ -15,7 +15,7 @@ What must be true before a stopped CPU activation can be acknowledged as safe?
 
 Brown's neutralization analysis makes restartability an explicit assumption rather than a consequence of interrupt delivery. [1](../../../30-sources/brown-2015-reclaiming-lock-free-memory.md), [2](../../../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../protection-domains-threads-and-address-spaces.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../protection-domains-threads-and-address-spaces.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

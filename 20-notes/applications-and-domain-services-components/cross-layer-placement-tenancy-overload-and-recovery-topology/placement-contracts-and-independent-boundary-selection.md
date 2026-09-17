@@ -20,9 +20,9 @@ Research question: Which application boundaries should coincide, and which shoul
 
 The SaaS concern model spans data, customization, placement and performance; one tenant label is not physical isolation. [1](../../../30-sources/krebs-et-al-2012-multi-tenant-saas.md).
 
-Wedge demonstrates reduced-privilege compartments in Linux applications; it does not validate Atom OS isolation costs. [2](../../../30-sources/bittau-et-al-2008-wedge.md).
+Wedge demonstrates reduced-privilege compartments in Linux applications; it does not validate Kay OS isolation costs. [2](../../../30-sources/bittau-et-al-2008-wedge.md).
 
-The model below is proposed Atom OS architecture, not a result demonstrated by
+The model below is proposed Kay OS architecture, not a result demonstrated by
 these sources. Layer 5 owns domain meaning; lower layers enforce authority,
 durability and resource limits. This is full-system research, independent of
 proof-of-concept plans, QEMU configuration and kernel-language implementation.
@@ -55,7 +55,7 @@ arrows.
 
 Shared trusted actor domains preserve cheap communication. Separate domains provide
 stronger enforceable containment at measurable cost. Decide granularity from threats
-and workloads; the current literature cannot supply Atom OS footprint, latency or
+and workloads; the current literature cannot supply Kay OS footprint, latency or
 density results.
 
 ## Verification obligations
@@ -75,7 +75,7 @@ compromised enforcement layer.
 - [Component service index](README.md) — sibling ownership and research boundaries.
 - [Semantic readiness and degraded lifecycle evidence](../application-manifest-composition-and-authority-envelope/semantic-readiness-and-degraded-lifecycle-evidence.md) — a cross-component contract this service must preserve.
 - [Intent-bound grants and compromised-adapter containment](../external-effects-ports-adapters-and-reconciliation/intent-bound-grants-and-compromised-adapter-containment.md) — a cross-component contract this service must preserve.
-- [Open application inquiry](../../../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
+- [Open application inquiry](../../../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
 - [Research session](../../../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) — exhaustive source manifest and reading limits.
 
 ## Sources

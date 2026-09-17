@@ -10,14 +10,14 @@ tags:
   - visual-computing
 aliases:
   - "Visual synthesis component 4"
-  - "Atom OS input authority"
+  - "Kay OS input authority"
 ---
 
 # Input, Focus, and Trusted-Interaction Authority
 
 ## Executive decision
 
-Atom OS should treat authenticated user interaction as a possible source of
+Kay OS should treat authenticated user interaction as a possible source of
 **narrow, short-lived authority**, not as a stream of untrusted callbacks and
 not as ambient permission. A protected user-space input broker combines a
 hardware-originated event with current seat, focus, surface, semantic target,
@@ -36,7 +36,7 @@ replayed input.
 
 ## Question and operational standard
 
-The component asks: **how can Atom OS capture what a person actually selected
+The component asks: **how can Kay OS capture what a person actually selected
 or authorized while preventing spoofing, focus theft, confused-deputy use, and
 replay across independent UI services?**
 
@@ -73,7 +73,7 @@ shows a current hardware-backed confirmation design whose token is bound to
 displayed content.
 
 These sources cover different environments and modalities. None proves the
-complete Atom OS broker. Clickjacking thresholds do not transfer directly to
+complete Kay OS broker. Clickjacking thresholds do not transfer directly to
 voice or switch input, protected confirmation covers narrow high-value
 messages rather than routine desktop use, and trusted UI cannot protect users
 from every deceptive but accurately displayed request.
@@ -421,7 +421,7 @@ expands this component into five authority and transfer responsibilities.
 - [Authentication and authorization across the five-layer architecture](../authentication-and-authorization-across-the-five-layer-architecture.md) —
   supplies exact policy, relationship, grant, revocation, and trusted-path
   services.
-- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   retains the security and usability falsifiers.
 
 ## Sources

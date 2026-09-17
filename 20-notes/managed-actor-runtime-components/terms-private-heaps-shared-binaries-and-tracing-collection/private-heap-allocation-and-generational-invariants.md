@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Process-local collection reduces synchronization scope, but published memory-management work shows that heap organization and collector policy must be evaluated together. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/sagonas-wilhelmsson-2006-efficient-memory-management.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Automatic tracing collection and term interpretation remain unprivileged runtime responsibilities; kernel pages do not encode BEAM object ownership.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

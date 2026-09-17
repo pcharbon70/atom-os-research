@@ -57,7 +57,7 @@ its demonstrations show design possibilities, not general learning outcomes.
 ## Relevance
 
 This essay is a contemporary practitioner bridge from Kay's learning goals to
-concrete UI techniques. Atom OS should evaluate live tools by the explanations
+concrete UI techniques. Kay OS should evaluate live tools by the explanations
 and causal visibility they provide, not simply by whether code can be edited
 while a process runs.
 
@@ -70,4 +70,4 @@ domain, disability, or scale of system.
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

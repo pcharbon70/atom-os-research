@@ -60,7 +60,7 @@ implement the framework, and report integrations and performance.
 
 ## Relevance
 
-Atom's update/release service should require an approved provenance predicate
+Kay's update/release service should require an approved provenance predicate
 and builder identity before treating TUF-authorized bytes as eligible for
 staging. Activation still needs target compatibility, rollback policy,
 quiescence, state-migration, health, and kernel boot authorization checks.

@@ -57,7 +57,7 @@ specific semantics to profiles.
 
 ## Relevance
 
-Atom's revocation service should deliver authenticated, sequence-bearing facts
+Kay's revocation service should deliver authenticated, sequence-bearing facts
 that receivers validate and apply idempotently, then acknowledge with
 watermarks. Gaps require snapshot recovery; a signed event must never invoke
 authority merely because it arrived.

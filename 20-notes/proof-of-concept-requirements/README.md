@@ -25,7 +25,7 @@ The first delivery is a native user-mode CLI. The completed proof of concept als
 
 Requirement-level synthesis and operational tests for the selected proof-of-concept scope. Broader layer/component reports retain alternatives and eventual-system goals. Primary-source records belong in [Sources](../../30-sources/README.md); exact new/reused provenance belongs in the [research journal](../../50-journal/2026-09-06-proof-of-concept-requirements-deep-dive.md).
 
-Each report distinguishes source evidence, proposed Atom contracts and missing experimental evidence. Requirement numbers are navigation identifiers introduced by this research, not pre-existing specification IDs.
+Each report distinguishes source evidence, proposed Kay contracts and missing experimental evidence. Requirement numbers are navigation identifiers introduced by this research, not pre-existing specification IDs.
 
 ## Index
 

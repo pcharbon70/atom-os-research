@@ -15,7 +15,7 @@ How can an inspector traverse changing kernel state without gaining ambient auth
 
 Capability mechanisms support scoped access; safe observation additionally requires explicit lifetime and resource bounds. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md), [2](../../../30-sources/michael-2004-hazard-pointers.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../observability-and-crash-evidence.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../observability-and-crash-evidence.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

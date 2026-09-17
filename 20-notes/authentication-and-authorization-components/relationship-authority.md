@@ -26,7 +26,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom answer relationship questions across replicas without stale
+> How can Kay answer relationship questions across replicas without stale
 > removals, model skew, object-ID reuse, recursive explosion, or an authorization
 > graph that becomes a universal resource authority?
 
@@ -55,7 +55,7 @@ The service is acceptable only when:
 [Zanzibar](../../30-sources/pang-et-al-2019-zanzibar.md) supplies relation
 tuples, set operations, opaque consistency tokens, and the “new enemy” example:
 authorization following a content/ACL mutation may need at least the causal
-revision of that mutation. Its Google/Spanner setting does not establish Atom's
+revision of that mutation. Its Google/Spanner setting does not establish Kay's
 storage or effect-atomicity design.
 
 [Chubby](../../30-sources/burrows-2006-chubby.md) provides engineering
@@ -68,7 +68,7 @@ client effects nor tolerates Byzantine peers.
 [The NIST RBAC
 model](../../30-sources/sandhu-et-al-2000-nist-rbac-model.md) separates users,
 roles, permissions, sessions, hierarchy, and separation-of-duty constraints.
-Atom uses those as possible graph/policy inputs, not as ambient kernel roles.
+Kay uses those as possible graph/policy inputs, not as ambient kernel roles.
 
 ## Authority boundary
 

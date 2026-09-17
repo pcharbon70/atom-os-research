@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Resource containers separate charge principals from threads; scheduling contexts make CPU authority distinct from a runtime worker. [1](../../../30-sources/banga-et-al-1999-resource-containers.md), [2](../../../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The adapter consumes kernel authority; it does not make BEAM terms into capabilities or put the managed runtime in privileged code.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

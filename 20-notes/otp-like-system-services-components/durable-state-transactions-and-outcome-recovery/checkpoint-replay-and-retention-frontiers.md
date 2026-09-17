@@ -21,7 +21,7 @@ Research question: When can log history be reclaimed without invalidating recove
 Crash-aware recovery and retained immutable roots separate creating a checkpoint
 from safely selecting and collecting it. [1](../../../30-sources/chen-et-al-2015-fscq.md) [2](../../../30-sources/dolstra-et-al-2008-nixos.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

@@ -61,7 +61,7 @@ application/OS manifestations with simpler injection models.
 
 ## Relevance
 
-Atom's fake backend should cover every raw-bit combination, while emulator and
+Kay's fake backend should cover every raw-bit combination, while emulator and
 hardware campaigns should include spatially correlated, recurring, and
 multi-component scenarios. Test control and outcome oracles should run outside
 the faulted domain. Classifier validation must include silent-corruption and
@@ -71,7 +71,7 @@ wrong-scope outcomes, not only crash/no-crash.
 
 The system and traces are historical, and virtualization-mediated injection is
 not equivalent to faulty silicon. The paper evaluates susceptibility and error
-models, not Atom's proposed capture or containment protocol.
+models, not Kay's proposed capture or containment protocol.
 
 ## Derived work
 

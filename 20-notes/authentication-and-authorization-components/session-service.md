@@ -25,7 +25,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> What can Atom safely remember after authentication, across process, seat,
+> What can Kay safely remember after authentication, across process, seat,
 > lock, suspend, network, and restart transitions, without turning “logged in”
 > into ambient authorization?
 
@@ -71,7 +71,7 @@ matters. [OAuth token
 revocation](../../30-sources/lodderstedt-et-al-2013-oauth-token-revocation.md)
 makes propagation delay and unsuccessful revocation explicit.
 
-The local process-tree binding and state machine below are Atom proposals, not
+The local process-tree binding and state machine below are Kay proposals, not
 claims that OAuth/OIDC should become the native OS session protocol.
 
 ## Authority boundary
@@ -154,7 +154,7 @@ root.
 Where a client can protect an asymmetric session key, every context use is
 bound to a nonce, intended service/audience, operation/request digest, and
 session generation. DPoP is evidence for the shape, not the native protocol:
-Atom additionally binds IPC peer/domain generation and, for effectful calls,
+Kay additionally binds IPC peer/domain generation and, for effectful calls,
 the canonical body/request digest.
 
 Refresh does not reset the original authentication time or absolute/reauth

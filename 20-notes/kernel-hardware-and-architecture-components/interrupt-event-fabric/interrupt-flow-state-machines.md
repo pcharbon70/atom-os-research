@@ -65,7 +65,7 @@ Any eventual experiment must record the implementation and specification revisio
 
 ## Sources
 
-- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Atom proofs.
+- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Kay proofs.
 - [Relaxed exception semantics for Arm-A](../../../30-sources/simner-et-al-2024-relaxed-exception-semantics.md) — Precise exception transitions are not general memory barriers.
 
 These sources support the constraints above. The proposed object division, transition composition and verification obligations are our synthesis and remain unverified.

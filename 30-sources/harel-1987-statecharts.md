@@ -51,7 +51,7 @@ benchmark or a security proof.
 ## Relevance
 
 Aggregate lifecycles, application readiness, workflows, effects, migration,
-and recovery should be specified as explicit state machines. Atom OS must pin
+and recovery should be specified as explicit state machines. Kay OS must pin
 one operational semantics and test it; “drawn as a statechart” is not itself a
 runtime guarantee.
 

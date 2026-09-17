@@ -45,7 +45,7 @@ not universal library compatibility.
 and [OpenMP integration](../30-sources/kacs-et-al-2024-zig-openmp.md) provide
 different scholarly evidence. [Ymir](../30-sources/smallkirby-2024-writing-hypervisor-in-zig.md)
 shows concrete Intel mechanisms but does not qualify our boot fixture or
-user transitions. None establishes a safe completed Atom kernel.
+user transitions. None establishes a safe completed Kay kernel.
 
 ## Open questions
 

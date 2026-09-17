@@ -80,7 +80,7 @@ all tracing designs nor a proof of complete causal capture.
 
 ## Relevance
 
-**Atom OS inference:** trace context belongs in the managed message and service
+**Kay OS inference:** trace context belongs in the managed message and service
 invocation envelope so that asynchronous actor work, IPC, device calls, and
 remote calls can share one causal model. The runtime can provide propagation,
 bounded local buffers, typed event emission, and accounting. The OTP-like

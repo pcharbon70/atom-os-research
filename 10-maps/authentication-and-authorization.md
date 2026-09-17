@@ -9,7 +9,7 @@ tags:
   - security
   - systems-architecture
 aliases:
-  - "Atom OS security map"
+  - "Kay OS security map"
 ---
 
 # Authentication and authorization
@@ -19,7 +19,7 @@ aliases:
 This map connects the proposed end-to-end security architecture for human,
 machine, workload, service, node, and recovery principals. It follows evidence
 from authentication through policy and capability issuance to effect
-mediation, revocation, audit, and recovery across all five Atom OS layers.
+mediation, revocation, audit, and recovery across all five Kay OS layers.
 
 Authentication, attestation, authorization, capability possession, ownership,
 accounting, and effect completion are deliberately separate facts. The map is
@@ -203,7 +203,7 @@ actual effect boundary authorizes local execution.
   motivates explicit policy decision, administration, and enforcement without
   trusting network location.
 - [Macaroons](../30-sources/birgisson-et-al-2014-macaroons.md) provide an
-  optional caveated-delegation model, but Atom needs proof-of-possession,
+  optional caveated-delegation model, but Kay needs proof-of-possession,
   resource-generation, budget, and revocation bindings.
 - [Zanzibar](../30-sources/pang-et-al-2019-zanzibar.md) supplies causal
   relationship revisions for avoiding stale “new enemy” authorization.
@@ -227,7 +227,7 @@ actual effect boundary authorizes local execution.
   [Rushby's secure-system
   decomposition](../30-sources/rushby-1981-design-verification-secure-systems.md)
   provide proof and assumption disciplines. Their results do not transfer to
-  an unimplemented Atom OS composition.
+  an unimplemented Kay OS composition.
 
 ## Open questions
 

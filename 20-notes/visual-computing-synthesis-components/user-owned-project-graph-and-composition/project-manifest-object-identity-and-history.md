@@ -27,7 +27,7 @@ persistent-state specification rather than a successful-looking reopen.
 [2](../../../30-sources/halasz-schwartz-1994-dexter-hypertext-reference-model.md)
 [3](../../../30-sources/chen-et-al-2015-fscq.md)
 
-The design below is an Atom OS proposal. No project format, recovery proof, or
+The design below is an Kay OS proposal. No project format, recovery proof, or
 long-lived migration corpus has been implemented.
 
 ## Development
@@ -81,7 +81,7 @@ bounds, raw history, and recovery result.
 
 - [Internal-service index](README.md) — sibling project responsibilities.
 - [Durable semantic actors](../durable-semantic-actors-and-disposable-presentation/README.md) — materializes durable identities through replaceable activations.
-- [Open visual-computing inquiry](../../../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) — retains portability and recovery gates.
+- [Open visual-computing inquiry](../../../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) — retains portability and recovery gates.
 - [Research session](../../../50-journal/2026-09-10-visual-computing-internal-services-deep-dive.md) — sources and limitations.
 
 ## Sources

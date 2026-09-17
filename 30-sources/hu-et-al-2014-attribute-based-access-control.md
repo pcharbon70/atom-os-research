@@ -60,7 +60,7 @@ does not benchmark or formally verify a concrete engine.
 
 ## Relevance
 
-Atom's attribute authorities should issue typed, provenance-carrying,
+Kay's attribute authorities should issue typed, provenance-carrying,
 short-lived assertions from declared sources. A policy snapshot must record
 the issuer, schema, validity interval, and revision used for a decision, while
 the kernel sees only the derived capability and never interprets free-form

@@ -37,7 +37,7 @@ The timestamp must be deterministic from source inputs, exported to subprocesses
 
 ## Relevance
 
-Informs the proposed requirement contract and its negative tests. This source does not establish that Atom implements or passes that contract.
+Informs the proposed requirement contract and its negative tests. This source does not establish that Kay implements or passes that contract.
 
 ## Limits
 

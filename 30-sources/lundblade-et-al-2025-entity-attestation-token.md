@@ -57,7 +57,7 @@ and inherited CWT/JWT properties were reviewed.
 
 ## Relevance
 
-Atom OS should define one compact, versioned CBOR/COSE EAT profile for boot and
+Kay OS should define one compact, versioned CBOR/COSE EAT profile for boot and
 workload evidence at network boundaries. Applications should receive a
 privacy-minimized verifier result or its digest, not raw PCR logs or an open
 bag of claims, and policy should bind that result to a fresh session grant.

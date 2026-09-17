@@ -15,7 +15,7 @@ How can quarantine prevent old grants from becoming valid again when memory is e
 
 DMA attacks show why temporal exposure and allocator reuse belong in the protection argument. [1](../../../30-sources/markettos-et-al-2019-thunderclap.md), [2](../../../30-sources/linux-kernel-community-2026-vfio-isolation-groups.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../memory-mappings-and-architecture-resource-bindings.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../memory-mappings-and-architecture-resource-bindings.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

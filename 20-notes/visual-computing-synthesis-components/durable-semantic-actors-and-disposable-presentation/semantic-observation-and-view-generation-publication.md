@@ -26,7 +26,7 @@ while Chromium caches accessibility state outside isolated renderers.
 [2](../../../30-sources/accesskit-project-2026-architecture-and-engineering.md)
 [3](../../../30-sources/chromium-project-2026-multiprocess-graphics-and-accessibility.md)
 
-Atom's observation and publication protocol is a proposal.
+Kay's observation and publication protocol is a proposal.
 
 ## Development
 

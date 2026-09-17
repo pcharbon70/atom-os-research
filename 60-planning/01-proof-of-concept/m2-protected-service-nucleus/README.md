@@ -66,7 +66,7 @@ a plan neither closes a delivery gate nor authorizes implementation or publicati
 ## Entry decisions and dependencies
 
 M1's reproducible ring-3 CLI and reviewed M0 build, image, and ABI contracts
-are prerequisites for guest acceptance. Keep the Nehalem-v1, one-CPU, 128 MiB,
+are prerequisites for guest acceptance. Keep the Nehalem-v1, one-CPU, 64 MiB,
 serial fixture; q35 is not a physical T7500 replica. Hosted models may precede
 guest integration but cannot substitute for it.
 

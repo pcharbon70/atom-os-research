@@ -75,7 +75,7 @@ controlled evaluation of one detector or recovery algorithm.
 
 ## Relevance
 
-Atom OS supervisors, device managers, network services, membership protocols,
+Kay OS supervisors, device managers, network services, membership protocols,
 and operators should carry typed evidence with observer, path, time,
 generation, and confidence. A readiness probe, actor monitor, watchdog, client
 timeout, device completion error, and peer suspicion are separate observations.
@@ -94,7 +94,7 @@ The paper gives no complete taxonomy, detector implementation, formal model,
 or quantitative guarantee. Its evidence comes from cloud systems and may not
 transfer directly to constrained hardware. Differential observation can also
 be produced by overload, malicious reporting, or incompatible versions, not
-only component failure. Atom OS must define evidence authenticity, collection
+only component failure. Kay OS must define evidence authenticity, collection
 cost, decision thresholds, and false-positive consequences for each component
 and then test them under target-specific fault injection.
 

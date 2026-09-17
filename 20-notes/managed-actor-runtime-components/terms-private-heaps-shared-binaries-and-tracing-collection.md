@@ -43,7 +43,7 @@ The question is:
 
 > What term representation and collection design preserves ordinary BEAM
 > values, private actor mutation, automatic tracing reclamation, and message
-> semantics while making every shared or off-heap byte visible to Atom OS
+> semantics while making every shared or off-heap byte visible to Kay OS
 > resource control?
 
 This component owns:
@@ -103,7 +103,7 @@ can overlap unless the runtime classifies storage precisely.
 reference-capability type system can enable zero-copy mutable-object transfer
 and concurrent actor collection. The proof assumptions are the point: ordinary
 compiled BEAM supplies no equivalent uniqueness or immutability certificate.
-Atom OS may later admit certified immutable or unique-transfer terms, but the
+Kay OS may later admit certified immutable or unique-transfer terms, but the
 baseline copies when proof is absent.
 
 | Design | Main advantage | Main cost or incompatibility | Role |
@@ -132,7 +132,7 @@ is:
 | Off-heap message fragment | Receiver queue account | Adopt/copy at visibility | Receiver queue, then actor heap if adopted |
 | Table object | Table owner/account | Copy in and out for compatible baseline | Table account |
 | Native/service resource | Explicit lease and generation | Opaque handle only | Service/request account |
-| Atom/code/global cache | Runtime domain | Indexed immutable/global state | Domain or named subsystem |
+| Kay/code/global cache | Runtime domain | Indexed immutable/global state | Domain or named subsystem |
 
 The term representation should make pointer classes distinguishable with
 cheap, total validation. A heap graph checker must be able to decide whether
@@ -287,7 +287,7 @@ batched deltas are allowed only if teardown can flush or reconstruct them.
   terminal policy.
 - **Shared-binary retention:** expose parent retained size, object age,
   creator, retainers by account, and collection-trigger heuristics.
-- **Atom exhaustion:** input decoding never creates atoms unless authorized and
+- **Kay exhaustion:** input decoding never creates atoms unless authorized and
   within the domain's permanent-atom budget.
 - **Allocator fragmentation:** charge reserved/mapped pages and allocator
   slack separately from live term bytes; periodically reconcile with the

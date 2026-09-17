@@ -15,7 +15,7 @@ How can finite replenishment metadata preserve the promised service envelope?
 
 The scheduling-context paper explicitly bounds replenishment storage and discusses the resulting loss of usable budget. [1](../../../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md), [2](../../../30-sources/ge-et-al-2019-time-protection.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../scheduling-contexts-and-temporal-authority.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../scheduling-contexts-and-temporal-authority.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

@@ -1,4 +1,4 @@
-# Atom OS Research Archive
+# Kay OS Research Archive
 
 This repository researches and develops a new kernel and operating system
 informed by the principles of Erlang/OTP and the BEAM virtual machine. The goal
@@ -8,6 +8,11 @@ system architecture without tying the project to one existing BEAM
 implementation. The platform is required to run compiled BEAM code and retain
 automatic process-local tracing garbage collection; the exact compatible
 runtime and versioned OTP profile remain implementation questions.
+
+The operating system is named **Kay OS**, by user decision on 2026-09-17, in
+honor of Alan Kay. The established research repository and local archive path
+retain the historical `atom-os-research` name; that repository identifier is
+not the operating-system name.
 
 The current proof of concept builds a minimal bootable OS whose first delivery
 is an interactive CLI. Graphical UI and desktop work are outside its scope.
@@ -31,7 +36,7 @@ probes; it does not close compiler, boot or milestone acceptance gates.
 
 The initial physical target is the **Dell Precision T7500**, using
 **Intel Xeon / Intel 64 (x86-64)**. The [active target profile](20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
-defines a Nehalem-class, one-CPU, 128 MiB serial QEMU fixture and the remaining
+defines a Nehalem-class, one-CPU, 64 MiB serial QEMU fixture and the remaining
 installed-unit inventory. The AMD-processor assumption has been corrected;
 its former profile is archived. RISC-V/OpenSBI remains comparative research,
 not the first implementation path.

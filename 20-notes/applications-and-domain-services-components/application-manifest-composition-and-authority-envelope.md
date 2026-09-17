@@ -16,7 +16,7 @@ aliases:
 
 ## Executive decision
 
-Every application generation should enter Atom OS through a **declarative,
+Every application generation should enter Kay OS through a **declarative,
 typed manifest and one explicit composition root**. The manifest says what the
 application is, which bounded contexts and protocols it provides, which
 facilities it requires, which durable schemas it reads and writes, which
@@ -62,7 +62,7 @@ It succeeds only if:
 [TOSCA 2.0](../../30-sources/oasis-2025-tosca-2.md) demonstrates a typed graph
 of nodes, requirements, capabilities, relationships, interfaces, and
 operations, with parsing/resolution separated from orchestration. It is far
-larger than Atom OS needs and does not provide capability security, bounded
+larger than Kay OS needs and does not provide capability security, bounded
 execution, truthful readiness, or crash-atomic publication.
 
 [OTP application documentation](../../30-sources/erlang-otp-team-2026-otp-29-0-6-system-services-documentation.md)
@@ -76,7 +76,7 @@ activation effects remain outside the store switch.
 supports hiding construction and adapter choices. [WASI design
 principles](../../30-sources/wasi-project-2026-design-principles.md) support
 explicit resource imports. Neither source proves that one manifest schema or
-composition tool is secure; the application contract below is an Atom OS
+composition tool is secure; the application contract below is an Kay OS
 synthesis.
 
 ## Manifest object

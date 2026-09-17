@@ -35,7 +35,7 @@ actor supervision to the independent recovery substrate established by
 The milestone includes a project-owned loader and reference interpreter,
 compiler-produced workload and conformance corpus, managed actor semantics,
 private heaps and tracing GC, finite resource accounts, and the adapter to
-Atom's kernel and native services. The interpreter direction follows the
+Kay's kernel and native services. The interpreter direction follows the
 readiness assessment; AtomVM is neither a dependency nor a comparison gate.
 
 The initial deployment retains one CPU, serial operation, and static boot

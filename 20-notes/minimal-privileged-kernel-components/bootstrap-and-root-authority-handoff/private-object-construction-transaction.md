@@ -15,7 +15,7 @@ Where is the boundary between initialization that can roll back and authority th
 
 Verified initialization research supplies a useful model-to-configuration precedent, with explicitly limited implementation assurance. [1](../../../30-sources/boyton-et-al-2013-verified-system-initialisation.md), [2](../../../30-sources/sel4-foundation-2026-capdl-loader-contract.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../bootstrap-and-root-authority-handoff.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../bootstrap-and-root-authority-handoff.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

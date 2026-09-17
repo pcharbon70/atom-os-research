@@ -22,7 +22,7 @@ Cockburn places technology adapters outside semantic ports; the pattern does not
 
 Liskov and Wing treat substitution as preservation of behavioral properties, beyond compatible representation. [2](../../../30-sources/liskov-wing-1994-behavioral-subtyping.md).
 
-The model below is proposed Atom OS architecture, not a result demonstrated by
+The model below is proposed Kay OS architecture, not a result demonstrated by
 these sources. Layer 5 owns domain meaning; lower layers enforce authority,
 durability and resource limits. This is full-system research, independent of
 proof-of-concept plans, QEMU configuration and kernel-language implementation.
@@ -75,7 +75,7 @@ compromised enforcement layer.
 - [Component service index](README.md) — sibling ownership and research boundaries.
 - [Recipient-bound composition and installer retirement](../application-manifest-composition-and-authority-envelope/recipient-bound-composition-and-installer-retirement.md) — a cross-component contract this service must preserve.
 - [Placement contracts and independent boundary selection](../cross-layer-placement-tenancy-overload-and-recovery-topology/placement-contracts-and-independent-boundary-selection.md) — a cross-component contract this service must preserve.
-- [Open application inquiry](../../../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
+- [Open application inquiry](../../../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
 - [Research session](../../../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) — exhaustive source manifest and reading limits.
 
 ## Sources

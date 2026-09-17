@@ -39,7 +39,7 @@ with an authenticated-encryption construction?
 The standard's authenticated-encryption interface, additional authenticated
 data, tag, IV uniqueness, and replay discussion were read as cryptographic
 requirements. The document is not treated as a command to select GCM before an
-Atom target and key lifecycle are defined.
+Kay target and key lifecycle are defined.
 
 ## Findings
 
@@ -57,7 +57,7 @@ Atom target and key lifecycle are defined.
 
 ## Relevance
 
-Atom should pre-provision any crash-export key and nonce/sequence allocation
+Kay should pre-provision any crash-export key and nonce/sequence allocation
 while healthy, authenticate immutable header fields as associated data, and
 never block the minimal local seal on encryption. A protected raw capsule may
 be encrypted during post-seal custody transfer; if safe nonce continuity or a
@@ -68,7 +68,7 @@ report the missing property rather than export plaintext automatically.
 
 NIST has announced revision work for SP 800-38D. The publication specifies a
 mode, not a key-management, crash-consistency, platform-root, or diagnostic
-authorization system. Atom should specify required security properties and
+authorization system. Kay should specify required security properties and
 permit a reviewed profile rather than make one algorithm part of the kernel
 ABI.
 

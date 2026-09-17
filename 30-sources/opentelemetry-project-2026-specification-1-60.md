@@ -41,7 +41,7 @@ The rendered specification index identifies OpenTelemetry 1.60.0 and OTLP
 ## Research question or contribution
 
 OpenTelemetry defines cross-language APIs, SDK behavior, data models,
-propagation, processing, and export for traces, metrics, and logs. For Atom OS,
+propagation, processing, and export for traces, metrics, and logs. For Kay OS,
 the key contribution is not one backend format but an explicit separation of
 signals, correlation context, sampling, finite collection limits, and exporter
 behavior under overload.
@@ -79,7 +79,7 @@ implementation was benchmarked or audited.
 
 ## Relevance
 
-Atom OS can use a small OTel-compatible projection at its export boundary while
+Kay OS can use a small OTel-compatible projection at its export boundary while
 keeping native evidence generation simpler. Every service-domain incarnation
 should supply stable service identity, actor or operation correlation, boot and
 configuration generations, and explicit loss counters. High-volume telemetry
@@ -99,7 +99,7 @@ of instrumentation. It does not prove bounded execution time, durable export,
 tamper evidence, clock correctness, low cardinality, or safe operator actions.
 Resource and attribute data can leak secrets if producers fail to classify it.
 The specification is living and contains sections with different stability
-levels; an Atom OS compatibility profile must pin exact signal and protocol
+levels; an Kay OS compatibility profile must pin exact signal and protocol
 versions rather than claim generic compatibility.
 
 ## Derived work

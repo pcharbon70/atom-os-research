@@ -63,7 +63,7 @@ model and do not cover arbitrary domain actors.
 
 ## Relevance
 
-Atom OS must report convergence, causality, domain validity, authority, and
+Kay OS must report convergence, causality, domain validity, authority, and
 human conflict as separate properties. A project service must not hide a
 meaningful conflict merely because replicas have converged.
 
@@ -77,4 +77,4 @@ to every project object type.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

@@ -39,7 +39,7 @@ Keep invocation, event coalescing and buffer ownership separate. Queue capacity 
 
 ## Limits
 
-This is first-person engineering guidance, not a general latency or security proof. Its advice against cross-core IPC and its suggested payload size are design preferences, not accepted Atom limits. Statements about MCS development describe the article's historical context.
+This is first-person engineering guidance, not a general latency or security proof. Its advice against cross-core IPC and its suggested payload size are design preferences, not accepted Kay limits. Statements about MCS development describe the article's historical context.
 
 ## Derived work
 

@@ -35,10 +35,11 @@ verified by a physical inventory.
 CLI-first scope. **Still unverified:** CPU SKUs/steppings and enabled topology,
 motherboard revision, BIOS version/mode, installed RAM/NUMA, serial settings
 and device IDs. The target is no longer ambiguous; only its installed
-configuration remains to be recorded.
+configuration remains to be recorded. On 2026-09-17 the user fixed the initial
+QEMU memory constraint at 64 MiB, superseding the earlier 128 MiB proposal.
 
 The first delivery remains a minimal bootable OS with a native ring-3 CLI and
-an Atom-owned ring-0 kernel. The completed M0–M4 proof still requires the
+an Kay-owned ring-0 kernel. The completed M0–M4 proof still requires the
 project's compiled-BEAM profile and automatic process-local tracing GC outside
 the kernel. AtomVM, graphics, desktop work, networking and writable storage
 do not enter the minimum boot test.
@@ -56,7 +57,7 @@ from a booted guest.
 | Area | Initial constraint | Evidence still required |
 | --- | --- | --- |
 | ISA and privilege | Intel 64/x86-64; kernel CPL 0, native services CPL 3 | Actual entry state, CPUID feature record and ring-transition trace |
-| Memory | Four-level paging and 4 KiB base pages as the initial design; 128 MiB guest RAM | Entry/allocator layout, reserved ranges, NX availability and enforced permissions |
+| Memory | Four-level paging and 4 KiB base pages as the initial design; 64 MiB guest RAM | Entry/allocator layout, reserved ranges, NX availability and enforced permissions |
 | CPU use | One executing logical CPU; one virtual socket/core/thread | Timer/context tests before enabling concurrency |
 | Firmware | Explicit SeaBIOS for the minimal QEMU fixture | Pin firmware and bootloader; separately discover the physical firmware path |
 | Native images | Static, little-endian ELF64/AMD64 subset proposed | Toolchain, linker, calling convention, helper census and loader tests |
@@ -109,18 +110,18 @@ An eventual launch template, **not executed here**, is:
 
 ```bash
 qemu-system-x86_64 \
-  -machine "${ATOM_QEMU_MACHINE:?set the pinned versioned pc-q35 machine}" \
+  -machine "${KAY_QEMU_MACHINE:?set the pinned versioned pc-q35 machine}" \
   -accel tcg \
   -cpu Nehalem-v1 \
   -smp 1,sockets=1,cores=1,threads=1 \
-  -m 128M \
+  -m 64M \
   -nodefaults \
   -display none \
   -monitor none \
   -serial stdio \
   -nic none \
-  -bios "${ATOM_SEABIOS:?set the pinned SeaBIOS path}" \
-  -drive "file=${ATOM_BOOT_ISO:?set the bootable ISO path},format=raw,if=ide,index=0,media=cdrom,readonly=on" \
+  -bios "${KAY_SEABIOS:?set the pinned SeaBIOS path}" \
+  -drive "file=${KAY_BOOT_ISO:?set the bootable ISO path},format=raw,if=ide,index=0,media=cdrom,readonly=on" \
   -boot order=d \
   -no-reboot \
   -no-shutdown
@@ -183,7 +184,7 @@ serial/debug transport. Redact service tags and other unique identifiers from
 public notes. Firmware menus may be inspected; no firmware update, settings
 change or disk write is authorized by this research decision.
 
-Run the first QEMU CLI test with one CPU and 128 MiB, increasing memory only
+Run the first QEMU CLI test with one CPU and 64 MiB, increasing memory only
 if measured image/allocator requirements justify a recorded change. A
 single-CPU physical CLI boot on the T7500 should follow virtual bring-up once the machine
 and boot media are qualified; it need not wait for SMP or a second ISA.

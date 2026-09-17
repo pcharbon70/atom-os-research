@@ -310,7 +310,7 @@ refine the hypotheses into a staged implementation and verification program:
 The reports strengthen the inquiry's operational standard but do not satisfy
 it. In particular, fixed-depth revocation anchors, product-lineage inheritance,
 whole-domain SMP stop, exact scheduling-context unwind, recovery escrow, unified
-quiescence ledgers, and cross-layer crash-evidence survival remain Atom OS
+quiescence ledgers, and cross-layer crash-evidence survival remain Kay OS
 proposals rather than transferred results from the cited systems.
 
 ### Internal-service decomposition and compositional gaps

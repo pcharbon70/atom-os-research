@@ -55,7 +55,7 @@ credential management, reset, and security considerations were reviewed.
 
 ## Relevance
 
-Atom OS should implement CTAP in an isolated authenticator service behind
+Kay OS should implement CTAP in an isolated authenticator service behind
 exclusive, capability-gated device access. The kernel should provide bounded
 USB/NFC/BLE device and secure-input mechanisms but should not parse CBOR,
 authenticator metadata, PIN/UV, or future CTAP extensions. Local login needs an

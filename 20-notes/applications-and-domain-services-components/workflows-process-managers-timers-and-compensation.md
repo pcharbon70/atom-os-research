@@ -60,7 +60,7 @@ shows that branching, joining, multiple instances, cancellation, and
 synchronization need precise semantics. [Sagas](../../30-sources/garcia-molina-salem-1987-sagas.md)
 decompose long work into committed transactions and compensations, explicitly
 without full outer isolation. Neither paper supplies capability grants or an
-Atom OS actor implementation.
+Kay OS actor implementation.
 
 [Durable Functions semantics](../../30-sources/burckhardt-et-al-2021-durable-functions.md)
 formalize a replay-backed workflow system under specific determinism
@@ -198,7 +198,7 @@ capture, restock reverses shipment, or a published message can be retracted.
 | Pure event choreography | loose coupling and local autonomy | hidden global state machine, hard diagnosis, loops, and incompatible evolution |
 | Hybrid | local reactions for simple facts; explicit manager for business obligation | requires clear ownership so both do not drive the same transition |
 
-Atom OS favors explicit process managers for any workflow with money, scarce
+Kay OS favors explicit process managers for any workflow with money, scarce
 resources, irreversible effects, user-visible pending state, or compensation.
 Choreography remains suitable for idempotent notifications and projections
 whose loss/replay semantics are clear.

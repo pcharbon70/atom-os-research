@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Failure detection distinguishes budget starvation from suspected stalled work; recovery must not depend on trusting the failed runtime. [1](../../../30-sources/chandra-toueg-1996-failure-detectors.md), [2](../../../30-sources/candea-fox-2003-crash-only-software.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Production traces, complete test schedules and crash evidence have different loss and trust contracts, even when they share an event schema.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

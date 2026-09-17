@@ -27,7 +27,7 @@ observation has scheduling, mailbox, and disclosure cost.
 [1](../../../30-sources/cantrill-et-al-2004-dtrace.md)
 [2](../../../30-sources/rein-et-al-2017-living-in-programming-environment.md)
 
-The Atom trace/debug contract and safe-point semantics remain unimplemented.
+The Kay trace/debug contract and safe-point semantics remain unimplemented.
 
 ## Development
 

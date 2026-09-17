@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Actor replay research records external inputs as well as order; Concuerror controls selected concurrency interactions rather than arbitrary native execution. [1](../../../30-sources/aumayr-et-al-2018-actor-record-replay.md), [2](../../../30-sources/christakis-et-al-2013-concuerror.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Production traces, complete test schedules and crash evidence have different loss and trust contracts, even when they share an event schema.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

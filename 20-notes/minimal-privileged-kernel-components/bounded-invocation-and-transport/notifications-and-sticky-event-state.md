@@ -15,7 +15,7 @@ How can a bounded wakeup primitive avoid both lost transitions and a false promi
 
 Notification-oriented IPC guidance separates synchronization from argument transfer. [1](../../../30-sources/heiser-2019-sel4-ipc-design.md), [2](../../../30-sources/sel4-foundation-2026-reference-manual.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../bounded-invocation-and-transport.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../bounded-invocation-and-transport.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

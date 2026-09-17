@@ -51,7 +51,7 @@ selection with capability-based designation.
 
 ## Relevance
 
-Every Atom OS service API should receive the specific authority for the
+Every Kay OS service API should receive the specific authority for the
 requested effect or a tightly scoped grant from which that authority can be
 derived. An authenticated principal, trace context, path, service name, PID, or
 command string is context, not permission. The CLI and managed runtime must not

@@ -16,7 +16,7 @@ aliases:
 
 ## Executive decision
 
-Atom OS should identify every durable entity or aggregate with a stable,
+Kay OS should identify every durable entity or aggregate with a stable,
 tenant-bound `DomainRef` that survives process, runtime, node, service,
 presentation, and code-generation replacement. Resolution may activate or
 locate an actor that serializes decisions for that reference. The actor PID,
@@ -67,7 +67,7 @@ are not the BEAM contract.
 lifecycle modeling. The [managed actor runtime
 research](../managed-actor-runtime-components/actor-identity-lifecycle-and-process-state.md)
 defines PID incarnation and process-state mechanics below this component. The
-Atom OS `DomainRef` and activation protocol remain proposed and unevaluated.
+Kay OS `DomainRef` and activation protocol remain proposed and unevaluated.
 
 ## Identity model
 

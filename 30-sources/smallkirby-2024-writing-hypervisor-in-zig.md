@@ -42,7 +42,7 @@ Existence and mechanism evidence for a small Zig architecture boundary.
 
 ## Limits
 
-QEMU-only reported testing, UEFI/OVMF, KVM/host CPU and 512 MiB; no physical-device, SMP or APIC qualification. The interrupt chapter excludes userland privilege transitions. This differs from Atom's fixture.
+QEMU-only reported testing, UEFI/OVMF, KVM/host CPU and 512 MiB; no physical-device, SMP or APIC qualification. The interrupt chapter excludes userland privilege transitions. This differs from Kay's fixture.
 
 ## Derived work
 

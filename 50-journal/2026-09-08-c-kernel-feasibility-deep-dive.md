@@ -53,7 +53,7 @@ uncertainty was expressible as concrete qualification work.
 | Claim | Evidence basis | Remaining gap |
 | --- | --- | --- |
 | C can run without a host OS | C11 draft; GCC/Clang freestanding records | Actual startup, memory initialization and boot |
-| C has an established kernel route | Linux dialect/build evidence; GCC/Clang attributes | Atom-specific profile and hardware-state correctness |
+| C has an established kernel route | Linux dialect/build evidence; GCC/Clang attributes | Kay-specific profile and hardware-state correctness |
 | C ABI integration is feasible | AMD64 procedure ABI; C-R01 | Broader types, error/cancellation/ownership and cross-language contracts |
 | Static C is not dependency-free | GCC support/link rules; C-R04; library records | Approved implementations and complete helper/service census |
 | Volatile is not general synchronization | GCC asm/volatile/atomic documentation; Intel boundary | IRQ/device ordering and later SMP tests |

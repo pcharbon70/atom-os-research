@@ -21,7 +21,7 @@ Research question: How can the system reject excess demand without confusing ove
 DAGOR uses local queue delay and propagated admission levels; SEDA's measured
 control behavior did not establish hard latency guarantees. [1](../../../30-sources/zhou-et-al-2018-dagor.md) [2](../../../30-sources/welsh-et-al-2001-seda.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 
@@ -53,7 +53,7 @@ worsen its backlog and destroy warm state.
 Static admission is auditable but less adaptive; feedback improves utilization while
 adding oscillation and estimation risks. Degradation must expose its reduced
 freshness, scope or fidelity in the result type. No source's numeric thresholds are
-portable Atom OS defaults.
+portable Kay OS defaults.
 
 ## Verification obligations
 

@@ -15,7 +15,7 @@ What must be reserved before a request can become an accepted service invocation
 
 Small protected-call guidance does not eliminate queue growth or receiver-capacity obligations. [1](../../../30-sources/heiser-2019-sel4-ipc-design.md), [2](../../../30-sources/shapiro-2003-synchronous-ipc-vulnerabilities.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../bounded-invocation-and-transport.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../bounded-invocation-and-transport.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

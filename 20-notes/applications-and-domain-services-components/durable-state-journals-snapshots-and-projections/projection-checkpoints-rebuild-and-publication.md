@@ -22,7 +22,7 @@ Overeem and colleagues report practitioner experience with event evolution and r
 
 The early Elm paper demonstrates asynchronous view composition, not durable application outcomes or protected presentation. [2](../../../30-sources/czaplicki-chong-2013-asynchronous-frp-guis.md).
 
-The model below is proposed Atom OS architecture, not a result demonstrated by
+The model below is proposed Kay OS architecture, not a result demonstrated by
 these sources. Layer 5 owns domain meaning; lower layers enforce authority,
 durability and resource limits. This is full-system research, independent of
 proof-of-concept plans, QEMU configuration and kernel-language implementation.
@@ -76,7 +76,7 @@ compromised enforcement layer.
 - [Component service index](README.md) — sibling ownership and research boundaries.
 - [Aggregate commit bundles and revision validation](../invariants-transactions-and-concurrency-policy/aggregate-commit-bundles-and-revision-validation.md) — a cross-component contract this service must preserve.
 - [Shadow migration checkpoints and validation](../application-evolution-schema-compatibility-and-migration/shadow-migration-checkpoints-and-validation.md) — a cross-component contract this service must preserve.
-- [Open application inquiry](../../../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
+- [Open application inquiry](../../../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
 - [Research session](../../../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) — exhaustive source manifest and reading limits.
 
 ## Sources

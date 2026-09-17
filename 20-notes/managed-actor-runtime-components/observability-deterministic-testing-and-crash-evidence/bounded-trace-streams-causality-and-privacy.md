@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Runtime tracing provides observations, while actor replay requires a stronger completeness contract than sampled production data. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/aumayr-et-al-2018-actor-record-replay.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Production traces, complete test schedules and crash evidence have different loss and trust contracts, even when they share an event schema.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

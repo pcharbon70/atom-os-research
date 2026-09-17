@@ -15,7 +15,7 @@ aliases:
 
 # Can AtomVM serve as the kernel-facing runtime of a new embedded operating system?
 
-Archived on 2026-09-05: the user confirmed AtomVM's rejection as an Atom OS
+Archived on 2026-09-05: the user confirmed AtomVM's rejection as an Kay OS
 implementation foundation. The technical inquiry is paused and preserved as
 historical research; it is not an active candidate or a proof-of-concept gate.
 The [replacement inquiry](../40-inquiries/can-a-minimal-bootable-system-validate-the-architecture.md)
@@ -140,4 +140,4 @@ No rejection rationale beyond that decision was supplied in this session, and
 no new experiment established technical nonviability. The earlier proposed
 reset-to-BEAM, dependency, mailbox, and native-fault experiments remain
 unperformed historical follow-ups. They must not gate the current CLI-based
-Atom OS proof of concept.
+Kay OS proof of concept.

@@ -57,7 +57,7 @@ programming constraints and history growth.
 
 ## Relevance
 
-Atom OS can provide generic durable-workflow mechanisms in Layer 4 while Layer
+Kay OS can provide generic durable-workflow mechanisms in Layer 4 while Layer
 5 owns the business state machine, determinism contract, effects,
 compensations, terminal outcomes, and history-retention policy.
 
@@ -65,7 +65,7 @@ compensations, terminal outcomes, and history-retention policy.
 
 This is a serverless platform with its own storage, scheduling, and programming
 model. The proof does not make arbitrary external effects atomic, supply
-capability security, or establish performance on Atom OS.
+capability security, or establish performance on Kay OS.
 
 ## Derived work
 

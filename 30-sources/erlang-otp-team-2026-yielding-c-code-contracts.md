@@ -41,7 +41,7 @@ YCF transforms selected C functions into coroutine-like routines. The page discu
 
 ## Relevance
 
-Atom OS should give each helper continuation a root schema, work charge, destruction path and shared-operation ownership rule. Compiler transformation cannot substitute for those contracts. This is evidence about C/ERTS practice, not a claim that Zig offers the same transformer.
+Kay OS should give each helper continuation a root schema, work charge, destruction path and shared-operation ownership rule. Compiler transformation cannot substitute for those contracts. This is evidence about C/ERTS practice, not a claim that Zig offers the same transformer.
 
 ## Limits
 

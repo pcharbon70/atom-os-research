@@ -48,7 +48,7 @@ It succeeds only if:
 - event pruning and privacy erasure have explicit authority and audit;
 - unbounded journal, snapshot, outbox, tombstone, and projection growth is
   prevented; and
-- host-filesystem or database behavior is not treated as an Atom OS guarantee
+- host-filesystem or database behavior is not treated as an Kay OS guarantee
   until Layer 4 proves it.
 
 ## Evidence and limits

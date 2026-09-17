@@ -28,7 +28,7 @@ The resulting decision is still conditional readiness to implement. Reading clar
 
 - Repository: /home/ducky/code/atom-os-research, Markdown archive.
 - Host role: source retrieval, archive analysis and document validation only.
-- Proposed guest: one RV64 hart, QEMU virt, Sv39, explicitly identified OpenSBI, S-mode Atom kernel and U-mode services. No release, firmware build, compiler or address layout was adopted or executed.
+- Proposed guest: one RV64 hart, QEMU virt, Sv39, explicitly identified OpenSBI, S-mode Kay kernel and U-mode services. No release, firmware build, compiler or address layout was adopted or executed.
 - First threat profile: trusted host, firmware, kernel and boot images; user domains may fault, loop, exhaust resources or submit unauthorized requests. Hostile actors sharing one runtime, physical attacks and speculative channels are not established claims.
 - Worktree: pre-existing readiness and AtomVM archival edits were preserved. No commit, push or publication was requested.
 
@@ -54,7 +54,7 @@ Official QEMU platform documentation supports a manageable synthetic target, but
 
 The rendered Devicetree “stable” page identified itself as v0.3-dirty. The versioned v0.4 flattened-format source was used instead. The UART walkthrough is helpful but historical: multi-cell addresses require concatenation, and a UART clock is not evidence of CPU/timer frequency.
 
-Freestanding compilation still needs startup, linking, support-library and generated-helper audits. The procedure ABI does not define the kernel syscall ABI. ELF describes segments but does not supply a hostile-input verifier or mandate Atom's strict W^X policy.
+Freestanding compilation still needs startup, linking, support-library and generated-helper audits. The procedure ABI does not define the kernel syscall ABI. ELF describes segments but does not supply a hostile-input verifier or mandate Kay's strict W^X policy.
 
 ### Kernel and runtime composition
 
@@ -79,13 +79,13 @@ Transport flow control does not bound every local buffer or establish durable ap
 | Area | Confidence in responsibility/requirement | Remaining uncertainty and next decisive evidence |
 | --- | --- | --- |
 | Boot/build/CLI | Strong specification and teaching-implementation support | Exact tool/firmware/layout selection; real U-mode prompt and negative parser/protection tests |
-| Bounded kernel operations | Strong precedents; Atom encoding remains proposed | Executable operation table and bounded lifecycle/accounting models |
+| Bounded kernel operations | Strong precedents; Kay encoding remains proposed | Executable operation table and bounded lifecycle/accounting models |
 | BEAM/OTP profile | Strong evidence that dependency closure matters | Compiler-generated corpus, exact supported manifest and hosted/guest conformance |
 | GC and responsiveness | Strong ownership distinction; performance unmeasured | Live-set/allocation/mailbox/budget sweeps and separate actor/domain delays |
 | Independent recovery | Strong topology precedent; composition untested | Four-domain fault campaign, reserve conservation and 1,000 fixed-capacity restarts |
 | Later capabilities | Defensible failure models, no qualified backend/profile | Device, storage, stack, second-target and security/update selection experiments |
 
-“Strong” describes support for the engineering obligation, not confidence that an unimplemented Atom design will pass.
+“Strong” describes support for the engineering obligation, not confidence that an unimplemented Kay design will pass.
 
 ## Retrieval limitations
 

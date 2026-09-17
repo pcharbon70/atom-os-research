@@ -47,7 +47,7 @@ cross-application composition sit behind separate contracts.
 That divergence was not simply a mistake. Modern systems gained fault and
 security isolation, least privilege, trusted composition, GPU scheduling,
 accessibility infrastructure, internationalization, deployment identity, and
-resource lifecycle management. The useful Atom OS conclusion is therefore not
+resource lifecycle management. The useful Kay OS conclusion is therefore not
 to recreate a single globally mutable Smalltalk image. It is to recover Kay's
 semantic continuity and user authorship **above capability and actor
 boundaries**: durable semantic objects served by supervised model actors,
@@ -63,7 +63,7 @@ This report asks four related questions:
 2. Which conceptual and implemented components made that vision concrete in
    the Dynabook and Smalltalk work?
 3. Which parts did the commercial desktop retain, narrow, or improve?
-4. What should an actor-oriented Atom OS inherit without importing a 1970s
+4. What should an actor-oriented Kay OS inherit without importing a 1970s
    trust model?
 
 “Kay's interface” is used as shorthand for his framing and design direction,
@@ -80,7 +80,7 @@ Claims are classified as:
 - **independent analysis** when developed in HCI or media scholarship;
 - **current platform behavior** when stated by official platform
   documentation; and
-- **Atom OS proposal** when it is a cross-source architectural deduction that
+- **Kay OS proposal** when it is a cross-source architectural deduction that
   remains unverified.
 
 A successful conclusion must explain the component relationships, preserve
@@ -119,7 +119,7 @@ Several common summaries obscure the architecture:
 - Smalltalk messages are not BEAM messages. Historical Smalltalk systems used a
   live, shared object world and lightweight processes; BEAM actors have
   process-private heaps, asynchronous signals, explicit failure relationships,
-  and distribution semantics. Atom OS may transfer principles without
+  and distribution semantics. Kay OS may transfer principles without
   pretending the mechanisms are identical.
 
 ## Kay's actual objective: a medium, not a shell
@@ -413,7 +413,7 @@ MVC does not by itself provide:
 - process isolation or capability security; or
 - restart and distributed consistency semantics.
 
-For Atom OS, “model,” “view,” and “controller” should therefore be roles in
+For Kay OS, “model,” “view,” and “controller” should therefore be roles in
 actor protocols, not an excuse to reproduce synchronous shared-object calls.
 
 ## The desktop-metaphor fork
@@ -640,10 +640,10 @@ In a typical modern desktop:
 
 The modern version may be safer, accessible, collaborative, and operationally
 robust. The Kay version offers deeper semantic composition and a shorter path
-from question to new tool. Atom OS should aim to make those properties
+from question to new tool. Kay OS should aim to make those properties
 compatible instead of forcing the user to select one.
 
-## Proposed Atom OS synthesis
+## Proposed Kay OS synthesis
 
 The proposal below is new architecture, not a claim about Smalltalk or a
 current platform.
@@ -800,7 +800,7 @@ report](visual-computing-synthesis-components/capability-scoped-live-tools-and-t
 separates inspection, pure evaluation, tracing, staging, commit, secret
 access, and publication authorities and specifies changeset outcomes.
 
-### Map the idea onto the existing Atom OS layers
+### Map the idea onto the existing Kay OS layers
 
 | Existing layer | UI responsibility |
 | --- | --- |
@@ -953,7 +953,7 @@ debuggers, projects, and change history.
 
 The modern desktop retained the interaction surface and improved the system's
 operational boundaries, but generally moved authorship behind application and
-developer boundaries. For Atom OS, the most productive synthesis is a
+developer boundaries. For Kay OS, the most productive synthesis is a
 **capability-safe metamedium**: the user's durable project is primary; semantic
 models are supervised actors; visual and assistive views are reconstructible;
 renderers and the desktop may crash independently; and live inspection and
@@ -963,12 +963,12 @@ modification are explicit powers rather than ambient privileges.
 
 - [Alan Kay, Smalltalk, and visual computing](../10-maps/alan-kay-smalltalk-ui.md) —
   curated route through the historical, implementation, HCI, modern-platform,
-  and Atom OS evidence.
+  and Kay OS evidence.
 - [Visual-computing synthesis component reports](visual-computing-synthesis-components/README.md) —
   seven detailed architecture and implementation studies for the proposed
-  Atom OS synthesis.
-- [What visual-computing model should Atom OS
-  adopt?](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+  Kay OS synthesis.
+- [What visual-computing model should Kay OS
+  adopt?](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   falsifiable workbench for the proposed project, semantic UI, compositor, and
   live-tool contracts.
 - [BEAM, ERTS, and OTP principles for a new operating

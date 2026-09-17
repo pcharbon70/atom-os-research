@@ -63,7 +63,7 @@ not a benchmark establishing that one graphical style is universally easier.
 ## Relevance
 
 The framework explains why Kay's action-image-symbol continuum is deeper than
-WIMP styling. Atom OS should minimize both distances: semantic UI objects
+WIMP styling. Kay OS should minimize both distances: semantic UI objects
 should correspond to durable domain actors, while visible actions and symbolic
 messages operate the same concepts. It also cautions against making pointing
 the only expressive mode.
@@ -72,9 +72,9 @@ the only expressive mode.
 
 The paper predates current accessibility research, touch interfaces, mobile
 devices, app sandboxing, and distributed state. Its framework is explanatory;
-particular Atom OS protocols still require usability experiments.
+particular Kay OS protocols still require usability experiments.
 
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)
