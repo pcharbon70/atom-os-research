@@ -30,7 +30,7 @@ board revision, memory, firmware and device inventory remain open.
 
 ## Operational question
 
-Can one pinned virtual target boot an Kay-owned privileged kernel into a
+Can one pinned virtual target boot a Kay-owned privileged kernel into a
 native user-mode CLI, then use that CLI to operate protected services and a
 project runtime executing declared compiled BEAM, with automatic process-local
 tracing collection, supervised actor failure, enforced domain resources,
@@ -94,6 +94,13 @@ assembly boundary, helper/import rejection and clean-build reproducibility.
 That non-bootable fixture does not constitute a guest boot or close the gates
 below.
 
+The subsequent [M0 Phase 1 virtual-integration run](../50-journal/2026-09-17-m0-phase-01-virtual-integration.md)
+assembled that fixture and the pinned tool/firmware checks under one finite
+driver. All nine registered positive, negative and boundary cases passed on
+clean implementation commit `b350de9`. This supports the preliminary virtual
+portions of M0-T01 and M0-T02, while the Phase 1 acceptance review, boot and
+complete M0 cases remain open.
+
 Current gate state:
 
 The [requirement deep dives](../20-notes/proof-of-concept-requirements/README.md)
@@ -128,7 +135,7 @@ profile independently permits Phase 1 integration and Phase 2 contract work.
 
 | Gate | State |
 | --- | --- |
-| M0: pinned boot inputs | Open; T7500 / Intel x86-64, virtual binary pins and bounded Zig build closure are evidenced; exact installed-unit inventory, firmware/bootloader handoff, boot image, console/time ABI, phase integration and review remain open |
+| M0: pinned boot inputs | Open; T7500 / Intel x86-64, virtual binary pins, bounded Zig build closure and Phase 1 virtual integration are evidenced; acceptance review, exact installed-unit inventory, firmware/bootloader handoff, boot image, console/time ABI and complete milestone cases remain open |
 | M1: first boot into a native user-mode CLI | Open; no interactive Kay OS boot is recorded |
 | M2: protected service nucleus and CLI control | Open |
 | M3: CLI-launched compiled BEAM and tracing GC | Open |

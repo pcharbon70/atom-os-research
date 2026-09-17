@@ -92,8 +92,9 @@ push, PR, device write, QEMU execution, or Phase 2 implementation.
 
 ## Follow-ups
 
-- Run [Phase 1 Integration Tests](../60-planning/01-proof-of-concept/m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
-  against the independent pinned virtual fixture.
+- [Phase 1 virtual integration](2026-09-17-m0-phase-01-virtual-integration.md)
+  subsequently passed against the independent pinned fixture at implementation
+  commit `b350de9`.
 - Collect the redacted T7500 installed-unit record in Phase 3 when the physical
   operator makes the machine available.
 - Assign an acceptance reviewer before `m0-p01-handoff` can decide closure.

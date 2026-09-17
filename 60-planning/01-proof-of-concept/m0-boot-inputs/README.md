@@ -49,12 +49,14 @@ This milestone has a draft phased implementation plan and Phase 1 entered
 provisional execution on 2026-09-17. The public Kay OS repository, Zig 0.16.0
 LLVM/LLD profile, QEMU 8.2.2 `pc-q35-8.2`/`Nehalem-v1` fixture, SeaBIOS 1.16.3,
 and 64 MiB limit are selected and pass baseline identity checks. Freestanding
-build qualification passed at implementation commit `be4a230`. The
+build qualification passed at implementation commit `be4a230`, and the clean
+Phase 1 virtual integration suite passed all nine registered cases at
+implementation commit `b350de9`. The
 user-deferred physical inventory is now owned by Phase 3 and does not block
-virtual Phase 1 integration or Phase 2 contract work. Phase integration,
-acceptance review, and every milestone acceptance case remain open. Writing or
-reviewing a plan neither closes a delivery gate nor substitutes for retained
-execution evidence.
+virtual Phase 1 integration or Phase 2 contract work. Phase 1 handoff review,
+the remaining phases, and every complete milestone acceptance case remain
+open. Writing or reviewing a plan neither closes a delivery gate nor
+substitutes for retained execution evidence.
 
 ## Authoritative inputs
 
@@ -66,6 +68,7 @@ These inputs define the existing scope and the research behind its tests:
 - [Zig feasibility and C interoperability](../../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — accepted language decision and research basis for the now-exercised bounded 0.16.0 freestanding profile; later interfaces still require their own qualification.
 - [Kay OS implementation repository](https://github.com/pcharbon70/kay-os) — owns executable manifests, scripts, fixtures and retained implementation evidence for the selected profile.
 - [Phase 1 build-closure record](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) — exact tested revision, environment, artifact hash, audits, negative cases and limitations for `m0-p01-build`.
+- [Phase 1 virtual-integration record](../../../50-journal/2026-09-17-m0-phase-01-virtual-integration.md) — clean tested revision, registered cases, finite deadlines, hashes and the explicit physical-inventory boundary for `m0-p01-integration`.
 - [Serial CLI, R04](../../../20-notes/proof-of-concept-requirements/serial-console-and-minimal-cli.md) and [time, R05](../../../20-notes/proof-of-concept-requirements/time-preemption-and-cpu-budgets.md) — interfaces that must be fixed before M1 implements them.
 - [Measurement and harness, R13](../../../20-notes/proof-of-concept-requirements/models-fault-injection-and-measurement.md) — exact inputs, negative checks, and retained evidence.
 - [T7500 target profile](../../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) and [configuration intent](../../../assets/qemu-minimal-x86-64.json) — adopted constraints, not qualified binaries or a working launcher.
@@ -178,7 +181,7 @@ unresolved gates before execution.
 
 | Phase | Integrated outcome | Entry dependency | State / evidence |
 | --- | --- | --- | --- |
-| [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) | Turn the selected Intel target into a versioned, reproducible virtual development fixture. This phase qualifies build inputs and native link fixtures, not a user-mode OS or physical machine. | accepted-scope-entry | In progress; virtual baseline and freestanding build closure pass; virtual integration is next; [evidence](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) |
+| [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) | Turn the selected Intel target into a versioned, reproducible virtual development fixture. This phase qualifies build inputs and native link fixtures, not a user-mode OS or physical machine. | accepted-scope-entry | In progress; virtual baseline, freestanding build closure and nine-case virtual integration pass; handoff review remains open; [integration evidence](../../../50-journal/2026-09-17-m0-phase-01-virtual-integration.md) |
 | [Phase 2 — Boot, image, and interface contracts](phase-02-boot-image-and-interface-contracts.md) | Specify and exercise the handoff, native image, console/time, and initial authority contracts before the guest kernel implements them. | m0-p01-handoff | Draft; not started; tests not run |
 | [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) | Collect the physical inventory, deliver an exercised unattended acceptance harness and close the complete M0 input gate using real build and fixture evidence. | m0-p02-handoff | Draft; physical inventory deferred; other work not started; tests not run |
 
@@ -209,7 +212,7 @@ above and close only after all required environments and dependent portions pass
 
 | Phase gate | Artifact contributions | Acceptance coverage | Owning tasks | Entry dependency | Evidence / state |
 | --- | --- | --- | --- | --- | --- |
-| [M0-P01](phase-01-target-toolchain-and-build-baseline.md) | M0-A01, M0-A02 | M0-T01, M0-T02 virtual-input portions | m0-p01-decisions, m0-p01-build; m0-p01-integration; m0-p01-handoff | accepted-scope-entry | In progress; selected virtual inputs and [build closure](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) pass; virtual integration and handoff remain open |
+| [M0-P01](phase-01-target-toolchain-and-build-baseline.md) | M0-A01, M0-A02 | M0-T01, M0-T02 virtual-input portions | m0-p01-decisions, m0-p01-build; m0-p01-integration; m0-p01-handoff | accepted-scope-entry | In progress; selected virtual inputs, [build closure](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) and [virtual integration](../../../50-journal/2026-09-17-m0-phase-01-virtual-integration.md) pass; handoff review remains open |
 | [M0-P02](phase-02-boot-image-and-interface-contracts.md) | M0-A03, M0-A04, M0-A05 | M0-T02, M0-T03, M0-T04 | m0-p02-decisions, m0-p02-fixtures; m0-p02-integration; m0-p02-handoff | m0-p01-handoff | Not run; evidence absent |
 | [M0-P03](phase-03-acceptance-harness-and-input-qualification.md) | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07 | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | m0-p03-decisions, m0-p03-harness, m0-p03-inventory, m0-p03-qualify; m0-p03-integration; m0-p03-handoff | m0-p02-handoff | Not run; physical inventory explicitly deferred; evidence absent |
 

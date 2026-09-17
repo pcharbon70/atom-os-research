@@ -23,13 +23,15 @@ Back to milestone: [M0 definition and plan](README.md).
 Accepted CLI-first scope, T7500 target, public Kay OS implementation repository,
 Zig 0.16.0 LLVM/LLD profile and the pinned virtual fixture. The freestanding
 ABI/helper and reproducibility qualification passed on implementation commit
-`be4a230`; virtual integration and acceptance review remain open. Physical
-inventory is independently deferred to Phase 3 and does not gate this phase.
+`be4a230`; virtual integration passed on implementation commit `b350de9` and
+acceptance review remains open. Physical inventory is independently deferred
+to Phase 3 and does not gate this phase.
 
 Entry gate `accepted-scope-entry`: the milestone's accepted Intel target and CLI-first scope; this is not a prerequisite implementation task.
 
 Plan state: draft. Implementation: provisionally in progress since 2026-09-17.
-The selected virtual-input verifier passes; phase integration tests are not run.
+The selected virtual-input verifier and registered integration driver pass;
+the handoff review has not run.
 The implementation repository is [pcharbon70/kay-os](https://github.com/pcharbon70/kay-os).
 The implementation agent is assigned through the current execution request;
 the acceptance reviewer remains unassigned.
@@ -63,6 +65,7 @@ The governing [milestone definition](README.md) retains the full artifact and ac
 - [Zig feasibility and C interoperability](../../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — selected language and evidence behind the pinned 0.16.0 profile; later kernel interfaces retain their own qualification work.
 - [Kay OS implementation repository](https://github.com/pcharbon70/kay-os) — owns the selected-input manifest, verifier, physical inventory collector, build fixtures and implementation evidence.
 - [2026-09-17 build-closure evidence](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) — clean committed build result, hashes, negative cases and explicit non-boot/physical limits for `m0-p01-build`.
+- [2026-09-17 virtual-integration evidence](../../../50-journal/2026-09-17-m0-phase-01-virtual-integration.md) — clean committed run, nine registered cases, finite deadlines, hashes and physical-boundary result for `m0-p01-integration`.
 
 Follow the [planning convention](../../README.md). Retain results in [dated journal evidence](../../../50-journal/README.md), using the optional [execution-record template](../../../templates/phase-execution-record.md), with indexed [assets](../../../assets/README.md) or exact artifacts in the selected implementation repository.
 
@@ -74,7 +77,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 | --- | --- | --- | --- | --- | --- |
 | m0-p01-decisions | atom-os-research + kay-os | Implementation agent; acceptance reviewer unassigned | accepted-scope-entry | M0-A01, M0-A02; phase cases below | Repository/profile/fixture and Section 1.2 choices recorded; baseline identity and freestanding qualification pass; acceptance review remains open |
 | m0-p01-build | kay-os | Implementation agent; acceptance reviewer unassigned | m0-p01-decisions | M0-A02; phase cases below | Passed at implementation `be4a230`; [journal](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md); acceptance review pending |
-| m0-p01-integration | kay-os | Implementation agent; test reviewer unassigned | m0-p01-build | M0-T01, M0-T02 virtual-input portions | Registered driver, raw positive/negative results; not run |
+| m0-p01-integration | kay-os | Implementation agent; test reviewer unassigned | m0-p01-build | M0-T01, M0-T02 virtual-input portions | Passed at implementation `b350de9`; [journal](../../../50-journal/2026-09-17-m0-phase-01-virtual-integration.md); acceptance review pending |
 | m0-p01-handoff | atom-os-research | Unassigned acceptance reviewer | m0-p01-integration | M0-A01, M0-A02; M0-T01, M0-T02 virtual-input portions | Dated evidence and proceed/revise/blocked review; not run |
 
 The uncompleted `m0-p01-inventory` task was removed from this phase before
@@ -146,14 +149,14 @@ remains open.
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 1.3.1 Task [id: m0-p01-integration] [repo: kay-os] [after: m0-p01-build] — Verify the integrated outcome and regressions.
+    - [x] 1.3.1 Task [id: m0-p01-integration] [repo: kay-os] [after: m0-p01-build] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for
       missing observations or watchdog expiry; an unspecified future command cannot close this
       task.
 
-      - [ ] 1.3.1.1 Subtask — Register and run the acceptance path.
+      - [x] 1.3.1.1 Subtask — Register and run the acceptance path.
 
         Record exact setup, command, binary/fixture hashes, case IDs, seeds and numerical
         limits before execution. Run environment resolution and clean native fixture builds
@@ -161,7 +164,7 @@ remains open.
         inventory nor represents q35 as T7500 evidence. M0-T01/T02 are preliminary here where
         image/ABI inputs are completed in Phase 2 and rerun in Phase 3.
 
-      - [ ] 1.3.1.2 Subtask — Exercise failures and inherited behavior.
+      - [x] 1.3.1.2 Subtask — Exercise failures and inherited behavior.
 
         Remove a pinned input, request unavailable CPU/machine features, introduce an
         undefined helper, and alter instruction flags. Each must fail explicitly. Verify the
@@ -175,7 +178,7 @@ remains open.
       physical inventory keeps final M0 and physical acceptance open but does not prevent this
       virtual handoff.
 
-      - [ ] 1.3.2.1 Subtask — Record reproducible execution evidence.
+      - [x] 1.3.2.1 Subtask — Record reproducible execution evidence.
 
         Create a dated journal record linked to the task/artifact/case IDs, full tested commit
         and dirty state, host/guest or physical configuration, tools, commands, raw logs,

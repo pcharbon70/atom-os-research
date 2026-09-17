@@ -124,11 +124,12 @@ still apply and are called out above and in the milestone definitions.
 ## Next decision and execution work
 
 Continue [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
-in the selected Kay OS repository. The repository, Zig profile, and virtual
-fixture are selected, and the freestanding build qualification passed. Continue
-with Phase 1 virtual integration; the physical inventory has moved to Phase 3
-and blocks only final M0 and physical qualification claims. Later plans are
-deliberately conditional on their actual inputs and predecessor evidence.
+in the selected Kay OS repository. The repository, Zig profile, virtual fixture,
+freestanding build qualification, and nine-case virtual integration now pass.
+Assign and complete the Phase 1 acceptance review before entering Phase 2; the
+physical inventory has moved to Phase 3 and blocks only final M0 and physical
+qualification claims. Later plans are deliberately conditional on their actual
+inputs and predecessor evidence.
 Before executing each phase, review its decision register and bind accepted
 interface versions; revise affected dependencies and tests together if a
 decision changes the planned mechanism.
