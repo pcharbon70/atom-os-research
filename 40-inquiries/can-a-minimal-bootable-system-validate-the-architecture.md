@@ -87,8 +87,12 @@ satisfied.
 
 The user subsequently selected Zig as the kernel language. The
 [Zig qualification inquiry](can-zig-meet-the-kernel-qualification-contract.md)
-tracks the remaining compiler/ABI/entry evidence; its narrow research probes
-do not constitute a guest boot or close the gates below.
+tracks the remaining privileged-kernel evidence. The bounded
+[M0 build-closure run](../50-journal/2026-09-17-m0-phase-01-build-closure.md)
+now demonstrates the pinned compiler, static link, fixed-signature Zig/C/
+assembly boundary, helper/import rejection and clean-build reproducibility.
+That non-bootable fixture does not constitute a guest boot or close the gates
+below.
 
 Current gate state:
 
@@ -118,7 +122,7 @@ below remain open, and unresolved inputs still block dependent work.
 
 | Gate | State |
 | --- | --- |
-| M0: pinned boot inputs | Open; T7500 / Intel x86-64 selected, but exact installed-unit inventory, virtual binary pins, toolchain, firmware/bootloader, static image and console/time ABI need concrete artifacts |
+| M0: pinned boot inputs | Open; T7500 / Intel x86-64, virtual binary pins and bounded Zig build closure are evidenced; exact installed-unit inventory, firmware/bootloader handoff, boot image, console/time ABI, phase integration and review remain open |
 | M1: first boot into a native user-mode CLI | Open; no interactive Kay OS boot is recorded |
 | M2: protected service nucleus and CLI control | Open |
 | M3: CLI-launched compiled BEAM and tracing GC | Open |

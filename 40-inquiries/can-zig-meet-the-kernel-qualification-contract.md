@@ -32,10 +32,11 @@ panic and memory behavior satisfy the existing M0–M4 contracts?
 
 ## Paths to explore
 
-1. Resolve the remaining compiler/backend/linker/translator, repository and
-   ownership choices in [M0 Phase 1](../60-planning/01-proof-of-concept/m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md).
-2. Expand ABI/helper/generated-code fixtures and establish controlled clean
-   builds; translation command success alone is insufficient.
+1. Preserve and rerun the selected compiler/backend/linker, repository and
+   ownership record in [M0 Phase 1](../60-planning/01-proof-of-concept/m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
+   when an input changes.
+2. Extend the demonstrated fixed-signature ABI/helper fixtures only as later
+   kernel interfaces require; do not generalize the bounded closure result.
 3. Define boot, trap, syscall, stack/FP and panic contracts, then demonstrate
    the exact minimum QEMU boot and native user-mode CLI.
 4. Exercise privilege, interrupt, preemption, allocation, callback lifetime and
@@ -49,6 +50,16 @@ link. It found current header-generation and translation limitations, and did
 not demonstrate reproducible images, boot, privilege transitions or timing.
 The [Zig map](../10-maps/zig-kernel-development.md) separates specifications,
 scholarly evidence and practitioner examples.
+
+The [2026-09-17 M0 build-closure run](../50-journal/2026-09-17-m0-phase-01-build-closure.md)
+then pinned Zig 0.16.0/LLVM/LLD and exercised a non-bootable static ELF64
+fixture at a fixed address. Assembly called Zig, Zig consumed the C header and
+called C, and C called a Zig callback. Two clean absolute-path builds produced
+the same stripped ELF; the audit found no dynamic/unresolved dependency or
+FP/SIMD use. Deliberate compiler-helper, host-import and CPU-profile drift all
+failed. This closes the bounded M0 build task, not interrupt transitions,
+privileged execution, boot, allocation/reclamation, user mode or the full
+kernel qualification question.
 
 ## Outcome
 

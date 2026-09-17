@@ -34,7 +34,9 @@ study](20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-an
 supports bounded implementation qualification and records local research
 probes. M0 uses a pinned Zig 0.16.0 LLVM/LLD profile in the public
 [Kay OS implementation repository](https://github.com/pcharbon70/kay-os); that
-selection does not close ABI, boot, or milestone acceptance gates.
+profile's bounded [freestanding build qualification](50-journal/2026-09-17-m0-phase-01-build-closure.md)
+passes, without closing boot, physical, phase-integration, or milestone
+acceptance gates.
 
 The initial physical target is the **Dell Precision T7500**, using
 **Intel Xeon / Intel 64 (x86-64)**. The [active target profile](20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)

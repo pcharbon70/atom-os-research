@@ -51,9 +51,10 @@ Zig as the kernel language on 2026-09-08; the [feasibility study](../../20-notes
 records its evidence and remaining compiler/ABI qualification. The public
 [Kay OS implementation repository](https://github.com/pcharbon70/kay-os), Zig
 0.16.0 LLVM/LLD profile, QEMU 8.2.2 `pc-q35-8.2` fixture, and SeaBIOS 1.16.3
-were selected on 2026-09-17. Their baseline identity checks pass, but
-freestanding closure, physical inventory, phase integration, and all milestone
-acceptance remain open. The bootloader remains an M0 Phase 2 decision.
+were selected on 2026-09-17. Their baseline identity checks and the bounded
+freestanding [build closure](../../50-journal/2026-09-17-m0-phase-01-build-closure.md)
+pass, but physical inventory, phase integration, acceptance review, and all
+milestone acceptance remain open. The bootloader remains an M0 Phase 2 decision.
 
 ## Authoritative inputs
 
@@ -122,12 +123,13 @@ still apply and are called out above and in the milestone definitions.
 
 Continue [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
 in the selected Kay OS repository. The repository, Zig profile, and virtual
-fixture are selected; complete freestanding build qualification and retain the
-physical inventory as an explicit blocker after its user-approved deferral.
-Later plans are deliberately conditional on those inputs and predecessor
-evidence. Before executing each phase, review its decision register and bind
-accepted interface versions; revise affected dependencies and tests together
-if a decision changes the planned mechanism.
+fixture are selected, and the freestanding build qualification passed. The
+physical inventory remains an explicit blocker after its user-approved
+deferral, so Phase 1 integration and handoff have not run. Later plans are
+deliberately conditional on those inputs and predecessor evidence. Before
+executing each phase, review its decision register and bind accepted interface
+versions; revise affected dependencies and tests together if a decision
+changes the planned mechanism.
 
 M1 Phase 3 is the first virtual CLI delivery. M1 Phase 4 is its separate physical
 T7500 qualification branch; M2 virtual acceptance depends on M1 Phase 3, not
@@ -144,9 +146,6 @@ do not turn the artifact tables into an arbitrary one-artifact-per-phase quota.
 The authored decision tasks must settle these open choices before dependent
 implementation, rather than require another broad research cycle:
 
-- Freestanding Zig ABI, C translator/helper closure, instruction audit and
-  reproducible build evidence for the selected Zig 0.16.0 LLVM/LLD profile and
-  Kay OS repository.
 - Bootloader/handoff, static kernel and user image format, startup memory map,
   and pinned QEMU machine/firmware versions.
 - Minimum user/kernel console and time ABI, privilege transition, exception

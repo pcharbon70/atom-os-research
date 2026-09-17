@@ -51,9 +51,12 @@ for the evidence and remaining qualification. Narrow, audited C/assembly
 boundaries may supply missing facilities; C ABI compatibility does not remove
 library OS dependencies. Zig 0.16.0 with the LLVM/LLD path is the selected M0
 compiler profile by user decision on 2026-09-17; its exact binary identity is
-pinned in the Kay OS implementation repository. ABI, helper, panic, allocation
-and processor-state contracts still require executable qualification. The language decision neither
-selects a managed runtime nor supplies its required tracing GC.
+pinned in the Kay OS implementation repository. The initial fixed-signature
+Zig/C/assembly ABI, helper rejection, terminal panic, no-allocation and
+integer-only processor-state profile passed the bounded M0 Section 1.2
+qualification on 2026-09-17. This does not qualify later kernel interfaces,
+boot transitions, interrupt state or user-mode ABI. The language decision
+neither selects a managed runtime nor supplies its required tracing GC.
 
 The initial physical target is the Dell Precision T7500 with Intel Xeon
 processors and Intel 64/x86-64. The user explicitly corrected the AMD-processor

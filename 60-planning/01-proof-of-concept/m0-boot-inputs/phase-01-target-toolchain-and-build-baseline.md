@@ -21,8 +21,9 @@ Back to milestone: [M0 definition and plan](README.md).
 ## Entry, scope, and dependencies
 
 Accepted CLI-first scope, T7500 target, public Kay OS implementation repository,
-Zig 0.16.0 LLVM/LLD profile and the pinned virtual fixture. Freestanding
-ABI/helper qualification, physical inventory and acceptance review remain open.
+Zig 0.16.0 LLVM/LLD profile and the pinned virtual fixture. The freestanding
+ABI/helper and reproducibility qualification passed on implementation commit
+`be4a230`; physical inventory and acceptance review remain open.
 
 Entry gate `accepted-scope-entry`: the milestone's accepted Intel target and CLI-first scope; this is not a prerequisite implementation task.
 
@@ -35,9 +36,10 @@ the acceptance reviewer remains unassigned.
 Decision M0-D01 is partially executed. The repository, Zig compiler profile,
 LLVM/LLD path, QEMU package and executable, versioned Q35 machine, Nehalem CPU,
 SeaBIOS image and 64 MiB limit are selected and identity-checked. Section 1.2
-must still establish freestanding C ABI/helper closure, instruction control and
-reproducibility. The user deferred installed-unit inventory; virtual work may
-proceed provisionally, but Section 1.1 and the phase gate remain open.
+established the bounded freestanding C ABI/helper closure, instruction control
+and reproducibility recorded in the [2026-09-17 execution record](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md).
+The user deferred installed-unit inventory; Section 1.1, integration and the
+phase gate remain open.
 
 The host owns build tools, validation fixtures, emulation and capture; M0 does not claim
 kernel enforcement. Firmware/loader/kernel ownership is fixed in the contract.
@@ -56,6 +58,7 @@ The governing [milestone definition](README.md) retains the full artifact and ac
 - [freestanding build and static images](../../../20-notes/proof-of-concept-requirements/freestanding-build-and-static-images.md) — contract and failure-case input for this phase.
 - [Zig feasibility and C interoperability](../../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — selected language and evidence behind the pinned 0.16.0 profile; remaining qualification is executable work.
 - [Kay OS implementation repository](https://github.com/pcharbon70/kay-os) — owns the selected-input manifest, verifier, physical inventory collector, build fixtures and implementation evidence.
+- [2026-09-17 build-closure evidence](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) — clean committed build result, hashes, negative cases and explicit non-boot/physical limits for `m0-p01-build`.
 
 Follow the [planning convention](../../README.md). Retain results in [dated journal evidence](../../../50-journal/README.md), using the optional [execution-record template](../../../templates/phase-execution-record.md), with indexed [assets](../../../assets/README.md) or exact artifacts in the selected implementation repository.
 
@@ -65,9 +68,9 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 
 | Task ID | Repository/location | Responsible role | Requires | Artifact / acceptance contribution | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
-| m0-p01-decisions | atom-os-research + kay-os | Implementation agent; acceptance reviewer unassigned | accepted-scope-entry | M0-A01, M0-A02; phase cases below | Repository/profile/fixture decisions recorded; identity verifier passes; freestanding qualification remains open |
+| m0-p01-decisions | atom-os-research + kay-os | Implementation agent; acceptance reviewer unassigned | accepted-scope-entry | M0-A01, M0-A02; phase cases below | Repository/profile/fixture and Section 1.2 choices recorded; baseline identity and freestanding qualification pass; physical evidence/review remain open |
 | m0-p01-inventory | kay-os | Implementation agent; physical operator unavailable | m0-p01-decisions | M0-A07; phase cases below | Redacted read-only collector exists; collection deferred by user; not run |
-| m0-p01-build | kay-os | Implementation agent; acceptance reviewer unassigned | m0-p01-decisions | M0-A02; phase cases below | Build and audit freestanding fixtures output and verification; not run |
+| m0-p01-build | kay-os | Implementation agent; acceptance reviewer unassigned | m0-p01-decisions | M0-A02; phase cases below | Passed at implementation `be4a230`; [journal](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md); acceptance review pending |
 | m0-p01-integration | kay-os | Implementation agent; test reviewer unassigned | m0-p01-build, m0-p01-inventory | M0-T01, M0-T02, M0-T06 | Registered driver, raw positive/negative results; not run |
 | m0-p01-handoff | atom-os-research | Unassigned acceptance reviewer | m0-p01-integration | M0-A01, M0-A02, M0-A07; M0-T01, M0-T02, M0-T06 | Dated evidence and proceed/revise/blocked review; not run |
 
@@ -88,12 +91,12 @@ logical independence statement, not authorization for parallel agents.
 
     Resolve inputs before later code assumes a compiler, loader, or installed processor.
 
-    - [ ] 1.1.1 Task [id: m0-p01-decisions] [repo: atom-os-research + kay-os] [after: accepted-scope-entry] — Select and record the development baseline.
+    - [x] 1.1.1 Task [id: m0-p01-decisions] [repo: atom-os-research + kay-os] [after: accepted-scope-entry] — Select and record the development baseline.
 
       Produce the M0-D01 decision record and bind the locations and owners used by every later
       task.
 
-      - [ ] 1.1.1.1 Subtask — Qualify the selected Zig development profile.
+      - [x] 1.1.1.1 Subtask — Qualify the selected Zig development profile.
 
         Preserve the user's Zig kernel-language decision. Evaluate the researched 0.16.0
         candidate and any justified pinned profile revision through freestanding compile/link
@@ -122,17 +125,17 @@ logical independence statement, not authorization for parallel agents.
         Document the physical boot-media prerequisites and additional-CPU policy. Verify the
         record never claims q35 reproduces T7500 wiring or qualifies physical timing.
 
-  - [ ] 1.2 Section — Build closure.
+  - [x] 1.2 Section — Build closure.
 
     Make the chosen build reproduce outside the author’s checkout and expose every guest
     dependency.
 
-    - [ ] 1.2.1 Task [id: m0-p01-build] [repo: kay-os] [after: m0-p01-decisions] — Build and audit freestanding fixtures.
+    - [x] 1.2.1 Task [id: m0-p01-build] [repo: kay-os] [after: m0-p01-decisions] — Build and audit freestanding fixtures.
 
       Deliver M0-A02 with actual compiler/linker results and a machine-checkable dependency
       census.
 
-      - [ ] 1.2.1.1 Subtask — Constrain code generation.
+      - [x] 1.2.1.1 Subtask — Constrain code generation.
 
         Create the selected flags/linker layout and native fixture; enumerate symbols,
         compiler helpers, calling convention, FP/SIMD policy, and unsupported instructions.
@@ -141,7 +144,7 @@ logical independence statement, not authorization for parallel agents.
         compile consumers of the intended translated declarations. Retain fixed-signature
         wrappers for unqualified interfaces and a custom panic/stack-support contract.
 
-      - [ ] 1.2.1.2 Subtask — Reproduce independent builds.
+      - [x] 1.2.1.2 Subtask — Reproduce independent builds.
 
         Build in two clean absolute directories, compare hashes/maps, and explain any narrowly
         permitted nondeterminism. Preserve commands and binary identities rather than claiming

@@ -29,6 +29,9 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
 - [Zig kernel-development map](zig-kernel-development.md) connects the accepted
   kernel-language decision to its feasibility evidence and remaining M0/M1
   compiler, ABI and privilege-transition qualification.
+- [M0 build-closure execution](../50-journal/2026-09-17-m0-phase-01-build-closure.md)
+  records the demonstrated bounded compiler/ABI/reproducibility result without
+  treating the non-bootable ELF as kernel or guest evidence.
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
   provides five detailed M0–M4 definitions and maps the readiness gaps to their
   required artifacts and acceptance cases. The
