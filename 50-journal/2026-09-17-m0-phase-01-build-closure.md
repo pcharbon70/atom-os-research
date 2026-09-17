@@ -76,8 +76,13 @@ execution of the ELF.
 Implementation-agent review supports checking `m0-p01-build`, both Section
 1.2 subtasks, and the compiler-qualification subtask under
 `m0-p01-decisions`. Acceptance review is unassigned, so no phase handoff is
-approved. The phase remains in progress and blocked from its integration task
-by the user-deferred `m0-p01-inventory` evidence.
+approved.
+
+At the time of this run, the plan made the user-deferred `m0-p01-inventory`
+evidence an integration dependency. The subsequent user clarification moved
+that obligation to `m0-p03-inventory`: it still blocks final M0 and physical
+claims, but no longer blocks Phase 1 virtual integration or Phase 2 planning.
+This planning correction does not change the build observations above.
 
 Changes to Zig version or executable identity, target/CPU/features, build flags,
 linker layout, ABI header, native signatures, panic/stack contract, negative
@@ -87,8 +92,8 @@ push, PR, device write, QEMU execution, or Phase 2 implementation.
 
 ## Follow-ups
 
-- Collect the redacted T7500 installed-unit record when the physical operator
-  makes the machine available.
 - Run [Phase 1 Integration Tests](../60-planning/01-proof-of-concept/m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
-  only after the inventory dependency is satisfied.
+  against the independent pinned virtual fixture.
+- Collect the redacted T7500 installed-unit record in Phase 3 when the physical
+  operator makes the machine available.
 - Assign an acceptance reviewer before `m0-p01-handoff` can decide closure.

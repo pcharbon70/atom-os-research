@@ -120,6 +120,12 @@ M1 virtual CLI acceptance and physical T7500 qualification are separate gates.
 No implementation or test execution accompanied that decomposition; all gates
 below remain open, and unresolved inputs still block dependent work.
 
+The user later clarified that Kay OS must discover differing machine
+configurations rather than use one installed T7500 as a virtual-development
+prerequisite. The plan therefore moves installed-unit collection to M0 Phase 3:
+it remains mandatory for final M0 and physical claims, while the pinned QEMU
+profile independently permits Phase 1 integration and Phase 2 contract work.
+
 | Gate | State |
 | --- | --- |
 | M0: pinned boot inputs | Open; T7500 / Intel x86-64, virtual binary pins and bounded Zig build closure are evidenced; exact installed-unit inventory, firmware/bootloader handoff, boot image, console/time ABI, phase integration and review remain open |

@@ -55,6 +55,8 @@ were selected on 2026-09-17. Their baseline identity checks and the bounded
 freestanding [build closure](../../50-journal/2026-09-17-m0-phase-01-build-closure.md)
 pass, but physical inventory, phase integration, acceptance review, and all
 milestone acceptance remain open. The bootloader remains an M0 Phase 2 decision.
+The physical inventory is an independent Phase 3/final-M0 obligation; it does
+not block virtual Phase 1 integration or Phase 2 contract implementation.
 
 ## Authoritative inputs
 
@@ -123,13 +125,13 @@ still apply and are called out above and in the milestone definitions.
 
 Continue [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
 in the selected Kay OS repository. The repository, Zig profile, and virtual
-fixture are selected, and the freestanding build qualification passed. The
-physical inventory remains an explicit blocker after its user-approved
-deferral, so Phase 1 integration and handoff have not run. Later plans are
-deliberately conditional on those inputs and predecessor evidence. Before
-executing each phase, review its decision register and bind accepted interface
-versions; revise affected dependencies and tests together if a decision
-changes the planned mechanism.
+fixture are selected, and the freestanding build qualification passed. Continue
+with Phase 1 virtual integration; the physical inventory has moved to Phase 3
+and blocks only final M0 and physical qualification claims. Later plans are
+deliberately conditional on their actual inputs and predecessor evidence.
+Before executing each phase, review its decision register and bind accepted
+interface versions; revise affected dependencies and tests together if a
+decision changes the planned mechanism.
 
 M1 Phase 3 is the first virtual CLI delivery. M1 Phase 4 is its separate physical
 T7500 qualification branch; M2 virtual acceptance depends on M1 Phase 3, not

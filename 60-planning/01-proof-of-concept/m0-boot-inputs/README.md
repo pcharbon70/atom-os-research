@@ -50,9 +50,11 @@ provisional execution on 2026-09-17. The public Kay OS repository, Zig 0.16.0
 LLVM/LLD profile, QEMU 8.2.2 `pc-q35-8.2`/`Nehalem-v1` fixture, SeaBIOS 1.16.3,
 and 64 MiB limit are selected and pass baseline identity checks. Freestanding
 build qualification passed at implementation commit `be4a230`. The
-user-deferred physical inventory, phase integration, acceptance review, and
-every milestone acceptance case remain open. Writing or reviewing a plan
-neither closes a delivery gate nor substitutes for retained execution evidence.
+user-deferred physical inventory is now owned by Phase 3 and does not block
+virtual Phase 1 integration or Phase 2 contract work. Phase integration,
+acceptance review, and every milestone acceptance case remain open. Writing or
+reviewing a plan neither closes a delivery gate nor substitutes for retained
+execution evidence.
 
 ## Authoritative inputs
 
@@ -84,7 +86,7 @@ accepted selections:
 | Bootloader and handoff | Select a loader compatible with the fixture and record entry mode, long-mode ownership, retained memory, firmware tables, and additional-CPU policy. | Kernel entry and memory initialization. |
 | Native execution contract | Select the static image subset, layout, calling convention, stack policy, enabled register state, and syscall mechanism. | Native loader, exception entry, and validated ring-3 return. |
 | Console, time, and failures | Define bounded calls, clock units/conversion, input framing, error results, interrupts/waits, and initial fault halt/reset behavior. | CLI and unattended pass/fail interpretation. |
-| Physical qualification prerequisites | Record the installed T7500 configuration and identify safe boot/debug media and transport. | Later physical M1 qualification, not a demand for a two-CPU QEMU test. |
+| Physical qualification prerequisites | Record the installed T7500 configuration and identify safe boot/debug media and transport during Phase 3 final input qualification. | Final M0 and later physical M1 qualification, not virtual Phase 1/2 work or a demand for a two-CPU QEMU test. |
 
 The compiler profile must not inherit host-native instruction selection or
 Linux syscalls accidentally. If bring-up restricts FP/SIMD, describe and check
@@ -170,14 +172,15 @@ later unprivileged placement and a bounded way to package modules.
 
 3 phases separate independently verifiable outcomes; their section/task/sub-task
 counts follow the work rather than a quota. Phase 1 is provisionally in progress;
-later phases are draft/not started. Review dependencies and unresolved gates
-before execution.
+Phase 3 owns the independently deferred physical inventory and final M0
+qualification. Later phases are draft/not started. Review dependencies and
+unresolved gates before execution.
 
 | Phase | Integrated outcome | Entry dependency | State / evidence |
 | --- | --- | --- | --- |
-| [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) | Turn the selected Intel target into a versioned, reproducible development fixture and installed-unit record. This phase qualifies inputs and native link fixtures, not a user-mode OS. | accepted-scope-entry | In progress; virtual baseline and freestanding build closure pass; physical inventory deferred; integration not run; [evidence](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) |
+| [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) | Turn the selected Intel target into a versioned, reproducible virtual development fixture. This phase qualifies build inputs and native link fixtures, not a user-mode OS or physical machine. | accepted-scope-entry | In progress; virtual baseline and freestanding build closure pass; virtual integration is next; [evidence](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) |
 | [Phase 2 — Boot, image, and interface contracts](phase-02-boot-image-and-interface-contracts.md) | Specify and exercise the handoff, native image, console/time, and initial authority contracts before the guest kernel implements them. | m0-p01-handoff | Draft; not started; tests not run |
-| [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) | Deliver an exercised unattended acceptance harness and close the complete M0 input gate using real build and fixture evidence. | m0-p02-handoff | Draft; not started; tests not run |
+| [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) | Collect the physical inventory, deliver an exercised unattended acceptance harness and close the complete M0 input gate using real build and fixture evidence. | m0-p02-handoff | Draft; physical inventory deferred; other work not started; tests not run |
 
 Work within each phase follows its task dependencies. The serial order provides
 a conservative baseline, not authorization for parallel agents. Independent
@@ -193,7 +196,7 @@ M0-D01 owns the initial implementation repository and toolchain selection.
 
 | Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
 | --- | --- | --- | --- | --- | --- |
-| M0-D01 | Preserve Zig as the kernel language; select the implementation repository and qualify the compiler/backend/linker/translator using freestanding support, ABI/helper closure, instruction control, reproducibility, and maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability and installed-unit inventory rather than relying on family specifications. | [m0-p01-decisions](phase-01-target-toolchain-and-build-baseline.md) | Implementation agent assigned; acceptance reviewer unassigned | Remaining Phase 1 work and its dependent gates | Partially executed: public `pcharbon70/kay-os`, Zig 0.16.0 LLVM/LLD, QEMU 8.2.2 and SeaBIOS 1.16.3 selected; virtual identity and [freestanding closure](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) pass; deferred T7500 inventory and acceptance review remain open |
+| M0-D01 | Preserve Zig as the kernel language; select the implementation repository and qualify the compiler/backend/linker/translator using freestanding support, ABI/helper closure, instruction control, reproducibility, and maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability and installed-unit inventory rather than relying on family specifications. | [m0-p01-decisions](phase-01-target-toolchain-and-build-baseline.md); inventory superseded by [m0-p03-inventory](phase-03-acceptance-harness-and-input-qualification.md) | Implementation agent assigned; acceptance reviewer and physical operator unassigned | Virtual Phase 1 depends only on selected virtual/build inputs; inventory blocks final M0 and physical claims | Partially executed: public `pcharbon70/kay-os`, Zig 0.16.0 LLVM/LLD, QEMU 8.2.2 and SeaBIOS 1.16.3 selected; virtual identity and [freestanding closure](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) pass; deferred T7500 inventory and acceptance review remain open |
 | M0-D02 | Choose loader/long-mode ownership, static image subset, native calling and register-state policy, syscall mechanism, console framing, clock units, and initial fault policy using bounded validation and T7500/fixture compatibility. | [m0-p02-decisions](phase-02-boot-image-and-interface-contracts.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 2 work and its dependent gates | Open; no decision evidence |
 | M0-D03 | Freeze watchdog deadlines, serial assertions, output retention, cleanup rules, and physical qualification prerequisites before interpreting runs. | [m0-p03-decisions](phase-03-acceptance-harness-and-input-qualification.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 3 work and its dependent gates | Open; no decision evidence |
 
@@ -206,9 +209,9 @@ above and close only after all required environments and dependent portions pass
 
 | Phase gate | Artifact contributions | Acceptance coverage | Owning tasks | Entry dependency | Evidence / state |
 | --- | --- | --- | --- | --- | --- |
-| [M0-P01](phase-01-target-toolchain-and-build-baseline.md) | M0-A01, M0-A02, M0-A07 | M0-T01, M0-T02, M0-T06 | m0-p01-decisions, m0-p01-inventory, m0-p01-build; m0-p01-integration; m0-p01-handoff | accepted-scope-entry | In progress; selected virtual inputs and [build closure](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) pass; physical inventory, integration and handoff remain open |
+| [M0-P01](phase-01-target-toolchain-and-build-baseline.md) | M0-A01, M0-A02 | M0-T01, M0-T02 virtual-input portions | m0-p01-decisions, m0-p01-build; m0-p01-integration; m0-p01-handoff | accepted-scope-entry | In progress; selected virtual inputs and [build closure](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) pass; virtual integration and handoff remain open |
 | [M0-P02](phase-02-boot-image-and-interface-contracts.md) | M0-A03, M0-A04, M0-A05 | M0-T02, M0-T03, M0-T04 | m0-p02-decisions, m0-p02-fixtures; m0-p02-integration; m0-p02-handoff | m0-p01-handoff | Not run; evidence absent |
-| [M0-P03](phase-03-acceptance-harness-and-input-qualification.md) | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07 | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | m0-p03-decisions, m0-p03-harness, m0-p03-qualify; m0-p03-integration; m0-p03-handoff | m0-p02-handoff | Not run; evidence absent |
+| [M0-P03](phase-03-acceptance-harness-and-input-qualification.md) | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07 | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | m0-p03-decisions, m0-p03-harness, m0-p03-inventory, m0-p03-qualify; m0-p03-integration; m0-p03-handoff | m0-p02-handoff | Not run; physical inventory explicitly deferred; evidence absent |
 
 The final phase reruns all M0 acceptance cases for milestone closure.
 Earlier contract, fixture, model or hosted results remain partial where guest
@@ -225,9 +228,9 @@ changes, missing required evidence or a violated invariant.
 
 ### Documents
 
-- [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) — Turn the selected Intel target into a versioned, reproducible development fixture and installed-unit record. This phase qualifies inputs and native link fixtures, not a user-mode OS.
+- [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) — Turn the selected Intel target into a versioned, reproducible virtual development fixture and qualify native build inputs without making a physical-machine claim.
 - [Phase 2 — Boot, image, and interface contracts](phase-02-boot-image-and-interface-contracts.md) — Specify and exercise the handoff, native image, console/time, and initial authority contracts before the guest kernel implements them.
-- [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) — Deliver an exercised unattended acceptance harness and close the complete M0 input gate using real build and fixture evidence.
+- [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) — Collect the physical inventory, deliver an exercised unattended acceptance harness and close the complete M0 input gate using real evidence.
 
 ## Maintaining this index
 
