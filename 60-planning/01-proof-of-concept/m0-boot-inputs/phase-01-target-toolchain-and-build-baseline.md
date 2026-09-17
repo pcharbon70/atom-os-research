@@ -20,24 +20,24 @@ Back to milestone: [M0 definition and plan](README.md).
 
 ## Entry, scope, and dependencies
 
-Accepted CLI-first scope, T7500 target and Zig kernel language decision;
-repository, compiler/backend/linker/translator pins and individual owners remain open.
+Accepted CLI-first scope, T7500 target, public Kay OS implementation repository,
+Zig 0.16.0 LLVM/LLD profile and the pinned virtual fixture. Freestanding
+ABI/helper qualification, physical inventory and acceptance review remain open.
 
 Entry gate `accepted-scope-entry`: the milestone's accepted Intel target and CLI-first scope; this is not a prerequisite implementation task.
 
-Plan state: draft, requiring decision review before execution. Implementation: not started.
-All tests: not run. Implementation repository and individual owners remain unassigned; M0-D01
-resolves the source location and initial roles, and this phase's decisions task assigns its
-execution/review roles before dependent work. The label unresolved-implementation is a
-recorded blocker, not a selected repository.
+Plan state: draft. Implementation: provisionally in progress since 2026-09-17.
+The selected virtual-input verifier passes; phase integration tests are not run.
+The implementation repository is [pcharbon70/kay-os](https://github.com/pcharbon70/kay-os).
+The implementation agent is assigned through the current execution request;
+the acceptance reviewer remains unassigned.
 
-Decision M0-D01 is partially decided: Zig is the selected kernel language.
-Resolve the remaining choices through m0-p01-decisions: select the implementation
-repository and qualify the Zig compiler/backend/linker/translator using
-freestanding support, C ABI/helper closure, instruction control, reproducibility, and
-maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability and
-installed-unit inventory rather than relying on family specifications. Until resolution,
-downstream code and passing acceptance claims are blocked.
+Decision M0-D01 is partially executed. The repository, Zig compiler profile,
+LLVM/LLD path, QEMU package and executable, versioned Q35 machine, Nehalem CPU,
+SeaBIOS image and 64 MiB limit are selected and identity-checked. Section 1.2
+must still establish freestanding C ABI/helper closure, instruction control and
+reproducibility. The user deferred installed-unit inventory; virtual work may
+proceed provisionally, but Section 1.1 and the phase gate remain open.
 
 The host owns build tools, validation fixtures, emulation and capture; M0 does not claim
 kernel enforcement. Firmware/loader/kernel ownership is fixed in the contract.
@@ -54,7 +54,8 @@ The governing [milestone definition](README.md) retains the full artifact and ac
 
 - [target firmware and boot handoff](../../../20-notes/proof-of-concept-requirements/target-firmware-and-boot-handoff.md) — contract and failure-case input for this phase.
 - [freestanding build and static images](../../../20-notes/proof-of-concept-requirements/freestanding-build-and-static-images.md) — contract and failure-case input for this phase.
-- [Zig feasibility and C interoperability](../../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — selected language, candidate profile and limited research evidence; neither the compiler pin nor this phase is accepted by those probes.
+- [Zig feasibility and C interoperability](../../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — selected language and evidence behind the pinned 0.16.0 profile; remaining qualification is executable work.
+- [Kay OS implementation repository](https://github.com/pcharbon70/kay-os) — owns the selected-input manifest, verifier, physical inventory collector, build fixtures and implementation evidence.
 
 Follow the [planning convention](../../README.md). Retain results in [dated journal evidence](../../../50-journal/README.md), using the optional [execution-record template](../../../templates/phase-execution-record.md), with indexed [assets](../../../assets/README.md) or exact artifacts in the selected implementation repository.
 
@@ -64,10 +65,10 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 
 | Task ID | Repository/location | Responsible role | Requires | Artifact / acceptance contribution | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
-| m0-p01-decisions | atom-os-research | Unassigned; resolve in m0-p01-decisions | accepted-scope-entry | M0-A01, M0-A02; phase cases below | Select and record the development baseline output and verification; not run |
-| m0-p01-inventory | unresolved-implementation | Unassigned; resolve in m0-p01-decisions | m0-p01-decisions | M0-A07; phase cases below | Inventory the installed T7500 output and verification; not run |
-| m0-p01-build | unresolved-implementation | Unassigned; resolve in m0-p01-decisions | m0-p01-decisions | M0-A02; phase cases below | Build and audit freestanding fixtures output and verification; not run |
-| m0-p01-integration | unresolved-implementation | Unassigned test reviewer | m0-p01-build, m0-p01-inventory | M0-T01, M0-T02, M0-T06 | Registered driver, raw positive/negative results; not run |
+| m0-p01-decisions | atom-os-research + kay-os | Implementation agent; acceptance reviewer unassigned | accepted-scope-entry | M0-A01, M0-A02; phase cases below | Repository/profile/fixture decisions recorded; identity verifier passes; freestanding qualification remains open |
+| m0-p01-inventory | kay-os | Implementation agent; physical operator unavailable | m0-p01-decisions | M0-A07; phase cases below | Redacted read-only collector exists; collection deferred by user; not run |
+| m0-p01-build | kay-os | Implementation agent; acceptance reviewer unassigned | m0-p01-decisions | M0-A02; phase cases below | Build and audit freestanding fixtures output and verification; not run |
+| m0-p01-integration | kay-os | Implementation agent; test reviewer unassigned | m0-p01-build, m0-p01-inventory | M0-T01, M0-T02, M0-T06 | Registered driver, raw positive/negative results; not run |
 | m0-p01-handoff | atom-os-research | Unassigned acceptance reviewer | m0-p01-integration | M0-A01, M0-A02, M0-A07; M0-T01, M0-T02, M0-T06 | Dated evidence and proceed/revise/blocked review; not run |
 
 Build fixtures and read-only inventory both depend on the decisions task, but
@@ -87,7 +88,7 @@ logical independence statement, not authorization for parallel agents.
 
     Resolve inputs before later code assumes a compiler, loader, or installed processor.
 
-    - [ ] 1.1.1 Task [id: m0-p01-decisions] [repo: atom-os-research] [after: accepted-scope-entry] — Select and record the development baseline.
+    - [ ] 1.1.1 Task [id: m0-p01-decisions] [repo: atom-os-research + kay-os] [after: accepted-scope-entry] — Select and record the development baseline.
 
       Produce the M0-D01 decision record and bind the locations and owners used by every later
       task.
@@ -100,13 +101,13 @@ logical independence statement, not authorization for parallel agents.
         license constraints, instruction controls, ownership and source location. Language
         selection does not accept those remaining inputs or close this subtask.
 
-      - [ ] 1.1.1.2 Subtask — Pin the virtual fixture.
+      - [x] 1.1.1.2 Subtask — Pin the virtual fixture.
 
         Record exact QEMU and versioned q35, Nehalem-v1, TCG, SeaBIOS, one CPU, 64 MiB,
         serial and read-only media identities. Reject missing versions and host-native feature
         drift in the launch manifest.
 
-    - [ ] 1.1.2 Task [id: m0-p01-inventory] [repo: unresolved-implementation] [after: m0-p01-decisions] — Inventory the installed T7500.
+    - [ ] 1.1.2 Task [id: m0-p01-inventory] [repo: kay-os] [after: m0-p01-decisions] — Inventory the installed T7500.
 
       Deliver M0-A07 from observations, with explicit unknowns and a safe qualification path.
 
@@ -116,7 +117,7 @@ logical independence statement, not authorization for parallel agents.
         devices, and serial/debug availability using read-only inspection. Redact service
         identifiers; unavailable hardware leaves this obligation open.
 
-      - [ ] 1.1.2.2 Subtask — Separate virtual and physical assumptions.
+      - [x] 1.1.2.2 Subtask — Separate virtual and physical assumptions.
 
         Document the physical boot-media prerequisites and additional-CPU policy. Verify the
         record never claims q35 reproduces T7500 wiring or qualifies physical timing.
@@ -126,7 +127,7 @@ logical independence statement, not authorization for parallel agents.
     Make the chosen build reproduce outside the author’s checkout and expose every guest
     dependency.
 
-    - [ ] 1.2.1 Task [id: m0-p01-build] [repo: unresolved-implementation] [after: m0-p01-decisions] — Build and audit freestanding fixtures.
+    - [ ] 1.2.1 Task [id: m0-p01-build] [repo: kay-os] [after: m0-p01-decisions] — Build and audit freestanding fixtures.
 
       Deliver M0-A02 with actual compiler/linker results and a machine-checkable dependency
       census.
@@ -152,7 +153,7 @@ logical independence statement, not authorization for parallel agents.
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 1.3.1 Task [id: m0-p01-integration] [repo: unresolved-implementation] [after: m0-p01-build, m0-p01-inventory] — Verify the integrated outcome and regressions.
+    - [ ] 1.3.1 Task [id: m0-p01-integration] [repo: kay-os] [after: m0-p01-build, m0-p01-inventory] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for

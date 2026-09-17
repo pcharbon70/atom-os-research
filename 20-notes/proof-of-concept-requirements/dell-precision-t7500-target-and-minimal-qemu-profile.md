@@ -82,18 +82,20 @@ register state.
 
 ## QEMU configuration intent
 
-The [JSON record](../../assets/qemu-minimal-x86-64.json) records project intent.
-It is **not QEMU's `-readconfig` format**, an implemented launcher, or a
-qualified run manifest.
+The [JSON record](../../assets/qemu-minimal-x86-64.json) records the selected
+virtual inputs and their checked identities. It is **not QEMU's `-readconfig`
+format**, an implemented launcher, a guest boot result, or a qualified run
+manifest.
 
-Use `qemu-system-x86_64`, a pinned versioned `pc-q35-...` machine and TCG.
+The selected baseline uses distribution QEMU 8.2.2 package
+`1:8.2.2+ds-0ubuntu1.18`, the versioned `pc-q35-8.2` machine and TCG.
 Start with `Nehalem-v1` as an older-generation Intel instruction fixture,
 not an exact emulation of the installed Xeon SKU. This replaces the Opteron
 model. The named model is listed in
 [QEMU's CPU/configuration documentation](../../30-sources/qemu-project-2026-x86-pc-test-configuration.md).
-Its availability and required features must be checked in the chosen binary
-before accepting a run. Do not silently substitute `max`, `host` or a
-different CPU when a feature is missing.
+Its name and the machine version are available in the selected binary; each
+run must recheck the pinned executable and firmware identities. Do not silently
+substitute `max`, `host` or a different CPU when a feature is missing.
 
 Q35 is a synthetic PC fixture, not a T7500/Intel 5520 motherboard replica.
 Its chipset and boot-media controller do not validate the physical storage,
@@ -200,10 +202,12 @@ Second-ISA portability remains later work without a selected second target.
 
 ## Evidence status and connections
 
-No QEMU installation or guest launch was performed. No physical inventory,
-boot, timing, containment or conformance result is claimed. Board and architecture
-selection narrow M0; exact binary identities, ABI and executable evidence
-remain open.
+QEMU 8.2.2, `pc-q35-8.2`, `Nehalem-v1`, and SeaBIOS 1.16.3 availability and
+hashes were checked on 2026-09-17. The executable verifier lives in the
+[Kay OS implementation repository](https://github.com/pcharbon70/kay-os).
+No guest launch or physical inventory was performed, and no boot, timing,
+containment or conformance result is claimed. Board and architecture selection
+narrow M0; freestanding ABI and later executable evidence remain open.
 
 - [Requirements inventory](README.md) maps all nineteen requirement groups.
 - [Boot contract](target-firmware-and-boot-handoff.md) and [user return](privilege-entry-memory-and-user-return.md) own first-entry responsibilities.

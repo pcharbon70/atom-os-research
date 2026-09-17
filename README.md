@@ -32,7 +32,9 @@ delivery gates remain open; authored plans are not implementation evidence.
 The selected kernel language is **Zig**. The [feasibility and C-interoperability
 study](20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
 supports bounded implementation qualification and records local research
-probes; it does not close compiler, boot or milestone acceptance gates.
+probes. M0 uses a pinned Zig 0.16.0 LLVM/LLD profile in the public
+[Kay OS implementation repository](https://github.com/pcharbon70/kay-os); that
+selection does not close ABI, boot, or milestone acceptance gates.
 
 The initial physical target is the **Dell Precision T7500**, using
 **Intel Xeon / Intel 64 (x86-64)**. The [active target profile](20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)

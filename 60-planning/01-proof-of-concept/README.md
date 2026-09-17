@@ -42,14 +42,18 @@ boundary, exclusions, and handoff evidence. Each now includes a draft phased
 implementation plan: M0 has 3 phases, M1 has 4 (including separate physical
 qualification), M2 has 4, M3 has 4, and M4 has 3. The 18 phases map artifacts and
 acceptance cases to described tasks, dependencies, and final integration gates.
-These are conditional plans, not accepted technical decisions or executed work.
+These are conditional plans. M0 Phase 1 entered provisional execution on
+2026-09-17; later phases remain plans rather than executed work.
 
 All M0–M4 delivery gates remain open and all acceptance cases are not run.
 Writing or reviewing these definitions closes none of them. The user selected
 Zig as the kernel language on 2026-09-08; the [feasibility study](../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
-records its evidence and remaining compiler/ABI qualification. The bootloader
-and exact toolchain profile remain open. Research probes do not initiate or
-complete the planned OS implementation.
+records its evidence and remaining compiler/ABI qualification. The public
+[Kay OS implementation repository](https://github.com/pcharbon70/kay-os), Zig
+0.16.0 LLVM/LLD profile, QEMU 8.2.2 `pc-q35-8.2` fixture, and SeaBIOS 1.16.3
+were selected on 2026-09-17. Their baseline identity checks pass, but
+freestanding closure, physical inventory, phase integration, and all milestone
+acceptance remain open. The bootloader remains an M0 Phase 2 decision.
 
 ## Authoritative inputs
 
@@ -116,8 +120,10 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Begin with [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
-and resolve its repository, Zig toolchain profile, fixture, and inventory decisions.
+Continue [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
+in the selected Kay OS repository. The repository, Zig profile, and virtual
+fixture are selected; complete freestanding build qualification and retain the
+physical inventory as an explicit blocker after its user-approved deferral.
 Later plans are deliberately conditional on those inputs and predecessor
 evidence. Before executing each phase, review its decision register and bind
 accepted interface versions; revise affected dependencies and tests together
@@ -138,9 +144,9 @@ do not turn the artifact tables into an arbitrary one-artifact-per-phase quota.
 The authored decision tasks must settle these open choices before dependent
 implementation, rather than require another broad research cycle:
 
-- Freestanding Zig compiler/backend, C translator/helper closure, linker,
-  reproducible build environment, and implementation-repository location;
-  the kernel language itself is selected.
+- Freestanding Zig ABI, C translator/helper closure, instruction audit and
+  reproducible build evidence for the selected Zig 0.16.0 LLVM/LLD profile and
+  Kay OS repository.
 - Bootloader/handoff, static kernel and user image format, startup memory map,
   and pinned QEMU machine/firmware versions.
 - Minimum user/kernel console and time ABI, privilege transition, exception
