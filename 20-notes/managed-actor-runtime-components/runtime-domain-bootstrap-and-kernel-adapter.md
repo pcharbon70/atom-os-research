@@ -19,7 +19,7 @@ aliases:
 
 The best-supported implementation is a **transactional runtime bootstrap plus
 one capability-confined kernel adapter**. The adapter is the only runtime
-component allowed to invoke the Atom OS kernel ABI. It converts kernel objects
+component allowed to invoke the Kay OS kernel ABI. It converts kernel objects
 into runtime-private typed records, never into ordinary BEAM terms, and gives
 the rest of the runtime asynchronous, bounded operations for pages, execution
 contexts, deadlines, events, code publication, and cross-domain transport.
@@ -32,7 +32,7 @@ host assumptions explicit and replace them with the smaller native adapter.
 This is a proposed composition. Research on scheduler activations, explicit
 scheduling contexts, exokernels, library operating systems, and capability
 kernels supports the division of responsibility; no reviewed work validates
-this exact bootstrap protocol on Atom OS.
+this exact bootstrap protocol on Kay OS.
 
 ## Question, scope, and operational standard
 
@@ -300,7 +300,7 @@ the adapter alone keeps the kernel handle.
 ### Scheduler-activation-style arbitrary upcalls
 
 The historical work demonstrates the information problem but also the cost of
-asynchronous scheduler reentrancy. Atom OS should prefer explicit event records
+asynchronous scheduler reentrancy. Kay OS should prefer explicit event records
 and kernel pre-emption plus safe-point reconciliation. If urgent revocation
 needs an upcall, constrain it to preallocated adapter state with no actor heap
 access.
@@ -347,7 +347,7 @@ finds no leaked object or reopened admission path.
 Exit condition: runtime code outside the adapter contains no direct host API
 call and the log is complete enough to reproduce bootstrap/shutdown.
 
-### Stage 2: native Atom OS adapter
+### Stage 2: native Kay OS adapter
 
 - Replace memory, scheduling, deadline, event, code, and transport backends with
   kernel objects.

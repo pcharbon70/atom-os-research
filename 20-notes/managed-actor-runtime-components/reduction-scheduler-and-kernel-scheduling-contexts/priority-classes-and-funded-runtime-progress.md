@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 OTP priority and kernel budget are different mechanisms; overload studies show that feedback and finite queues do not automatically guarantee latency. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md), [3](../../../30-sources/welsh-et-al-2001-seda.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Runtime reductions select actors; kernel contexts enforce CPU authority. Neither is a hard real-time guarantee by itself.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

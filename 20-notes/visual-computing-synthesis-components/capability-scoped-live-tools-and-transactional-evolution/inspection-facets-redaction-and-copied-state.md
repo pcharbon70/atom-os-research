@@ -27,7 +27,7 @@ for production tracing at a different layer.
 [2](../../../30-sources/miller-et-al-2003-capability-myths.md)
 [3](../../../30-sources/cantrill-et-al-2004-dtrace.md)
 
-The Atom inspection schema and disclosure policy remain proposed.
+The Kay inspection schema and disclosure policy remain proposed.
 
 ## Development
 

@@ -62,7 +62,7 @@ and design rationale.
 ## Relevance
 
 This article corrects single-inventor narratives and explains how integration
-felt in practice. Atom OS can reinterpret uninterrupted work state as durable
+felt in practice. Kay OS can reinterpret uninterrupted work state as durable
 model actors and project contexts that outlive replaceable UI processes.
 
 ## Limits

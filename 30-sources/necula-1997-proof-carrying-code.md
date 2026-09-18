@@ -61,7 +61,7 @@ checker rather than on the code producer.
 
 ## Relevance
 
-The result supports keeping the Atom OS BEAM loader's trusted admission path
+The result supports keeping the Kay OS BEAM loader's trusted admission path
 small and explicit. Ordinary BEAM modules will initially be checked by a
 structural verifier rather than carrying PCC proofs, but the same division
 applies: parse into private staging memory, derive obligations for control

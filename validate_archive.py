@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the Atom OS Research archive's structural invariants."""
+"""Validate the Kay OS Research archive's structural invariants."""
 
 from __future__ import annotations
 

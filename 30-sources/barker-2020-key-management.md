@@ -55,7 +55,7 @@ module.
 
 ## Relevance
 
-Atom's key and secret service should expose opaque handles with narrow
+Kay's key and secret service should expose opaque handles with narrow
 operation facets, protected metadata, explicit lifecycle transitions, and
 auditable rotation/destruction. Recovery policy must distinguish replacing an
 authentication key from recovering a data-encryption key because the latter
@@ -65,7 +65,7 @@ is decryption authority.
 
 SP 800-57 is general guidance and assumes a larger organizational setting. It
 does not define an IPC interface, guarantee non-exportability, solve side
-channels, or select a hardware root and cryptographic profile for Atom.
+channels, or select a hardware root and cryptographic profile for Kay.
 
 ## Derived work
 

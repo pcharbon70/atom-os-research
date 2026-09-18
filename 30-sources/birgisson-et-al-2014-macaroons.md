@@ -61,7 +61,7 @@ measure cryptographic and request-processing costs.
 
 ## Relevance
 
-Macaroon-like attenuation is useful at Atom OS distribution gateways and for
+Macaroon-like attenuation is useful at Kay OS distribution gateways and for
 explicitly delegated, disconnected workflows. It should not replace local
 kernel capabilities. Any portable token profile must require audience,
 resource, action, expiry, nonce or request binding, delegation-depth, and

@@ -59,13 +59,13 @@ against the contemporary BEAM implementation.
 HiPE demonstrates that an optimized tier must preserve the managed-runtime
 contract at every safe point. It also provides contrast with the later
 BeamAsm choice to translate every loaded module simply and avoid mixed-mode
-complexity. Atom OS should measure both code speed and system-level latency,
+complexity. Kay OS should measure both code speed and system-level latency,
 memory, upgrade, and assurance costs.
 
 ## Limits
 
 The compiler, VM, hardware, and benchmarks are more than two decades old and
-do not predict current OTP or Atom OS. The paper does not address capability
+do not predict current OTP or Kay OS. The paper does not address capability
 boundaries, W^X publication, deterministic replay, or kernel CPU budgets.
 
 ## Derived work

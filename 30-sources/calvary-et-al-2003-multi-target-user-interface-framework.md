@@ -66,7 +66,7 @@ user study.
 
 ## Relevance
 
-The framework helps Atom OS split durable domain actors, semantic interaction
+The framework helps Kay OS split durable domain actors, semantic interaction
 records, concrete renderer plans, and transient surfaces. It also provides a
 taxonomy for deciding whether a change belongs in the model, semantic view,
 renderer, or user preference service.
@@ -75,10 +75,10 @@ renderer, or user preference service.
 
 The framework does not prescribe a consistency algorithm, authority model,
 distributed state protocol, resource budget, or failure recovery mechanism.
-Atom OS needs those operational contracts rather than treating model
+Kay OS needs those operational contracts rather than treating model
 transformations as inherently safe or reversible.
 
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

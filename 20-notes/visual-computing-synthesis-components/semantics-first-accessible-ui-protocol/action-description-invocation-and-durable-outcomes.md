@@ -28,7 +28,7 @@ questions across failure.
 [3](../../../30-sources/roesner-et-al-2012-user-driven-access-control.md)
 [4](../../../30-sources/lee-et-al-2015-rifl.md)
 
-The common Atom command-outcome profile remains proposed.
+The common Kay command-outcome profile remains proposed.
 
 ## Development
 

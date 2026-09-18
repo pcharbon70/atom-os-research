@@ -1,5 +1,5 @@
 ---
-title: "What Visual-Computing Model Should Atom OS Adopt?"
+title: "What Visual-Computing Model Should Kay OS Adopt?"
 kind: inquiry
 created: "2026-09-04"
 status: open
@@ -10,15 +10,15 @@ tags:
   - live-programming
   - visual-computing
 aliases:
-  - "Atom OS visual UI contract"
+  - "Kay OS visual UI contract"
   - "Capability-safe metamedium inquiry"
 ---
 
-# What Visual-Computing Model Should Atom OS Adopt?
+# What Visual-Computing Model Should Kay OS Adopt?
 
 ## Why this matters
 
-Atom OS aims to preserve actor isolation, supervision, fault containment, and
+Kay OS aims to preserve actor isolation, supervision, fault containment, and
 distribution while building a complete operating system. A conventional
 application-and-window desktop would fit those mechanisms, but it could miss
 Alan Kay's stronger goal: a personal medium in which users can understand,
@@ -32,7 +32,7 @@ capabilities.
 
 ## Operational question
 
-Can Atom OS make a durable user-owned project, rather than an application
+Can Kay OS make a durable user-owned project, rather than an application
 package, the primary visual unit of work while satisfying all of these tests?
 
 1. Non-expert users can inspect an unfamiliar object, relate a visible action

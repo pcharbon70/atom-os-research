@@ -56,7 +56,7 @@ collector-flooding analysis, not its dated cryptographic suite.
 
 ## Relevance
 
-Atom audit producers should bind sequence numbers to an anti-rollback boot
+Kay audit producers should bind sequence numbers to an anti-rollback boot
 epoch, make gaps explicit, and reserve bounded append capacity. Modern
 algorithms and a forward-secure evolution scheme are required; the RFC's
 protocol is evidence about semantics, not an implementation prescription.

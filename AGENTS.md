@@ -21,6 +21,12 @@ the principles embodied by Erlang/OTP and the BEAM virtual machine. It is not
 tied to a particular BEAM implementation or intended merely to run an existing
 runtime as an application on top of another operating system.
 
+The operating system is named **Kay OS**, by user decision on 2026-09-17, in
+honor of Alan Kay. Use Kay OS, Kay kernel, `kay>` and `KAY_*` for project-facing
+names. The research repository and local archive path deliberately retain the
+historical `atom-os-research` identifier; do not treat that repository name as
+the operating-system name. AtomVM remains a separate proper name.
+
 Running compiled BEAM code is a platform requirement. Preserve BEAM's managed
 execution contract, including automatic process-local tracing garbage
 collection, while keeping the collector and ordinary BEAM processes outside
@@ -43,16 +49,20 @@ Zig is the selected kernel implementation language, by user decision on
 2026-09-08. Use the [Zig feasibility study](20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
 for the evidence and remaining qualification. Narrow, audited C/assembly
 boundaries may supply missing facilities; C ABI compatibility does not remove
-library OS dependencies. Zig 0.16.0 is a researched candidate, not an accepted
-M0 compiler pin. Exact toolchain, ABI, helper, panic, allocation and processor
-state contracts still require qualification. The language decision neither
-selects a managed runtime nor supplies its required tracing GC.
+library OS dependencies. Zig 0.16.0 with the LLVM/LLD path is the selected M0
+compiler profile by user decision on 2026-09-17; its exact binary identity is
+pinned in the Kay OS implementation repository. The initial fixed-signature
+Zig/C/assembly ABI, helper rejection, terminal panic, no-allocation and
+integer-only processor-state profile passed the bounded M0 Section 1.2
+qualification on 2026-09-17. This does not qualify later kernel interfaces,
+boot transitions, interrupt state or user-mode ABI. The language decision
+neither selects a managed runtime nor supplies its required tracing GC.
 
 The initial physical target is the Dell Precision T7500 with Intel Xeon
 processors and Intel 64/x86-64. The user explicitly corrected the AMD-processor
 assumption. Follow the target profile in
 `20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md`.
-Start QEMU tests with the Nehalem-v1 fixture, one CPU, 128 MiB and serial I/O;
+Start QEMU tests with the Nehalem-v1 fixture, one CPU, 64 MiB and serial I/O;
 add SMP, socket/SMT topology and NUMA only when their tests require them.
 Two multicore packages are user-reported; exact Xeon SKUs, enabled threads,
 RAM, board revision, firmware and device inventory remain unverified.

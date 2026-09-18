@@ -54,7 +54,7 @@ then measure local-network operation costs.
 
 ## Relevance
 
-The ambiguity applies equally to actor gateway requests. Atom OS should expose
+The ambiguity applies equally to actor gateway requests. Kay OS should expose
 `NotAccepted`, `Completed`, or `Indeterminate`, bind correlation to a session
 and service incarnation, and leave stronger exactly-once effects to durable
 idempotency or transaction protocols.

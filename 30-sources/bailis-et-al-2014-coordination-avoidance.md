@@ -58,7 +58,7 @@ common invariants, and evaluate a prototype on several workloads.
 
 ## Relevance
 
-Atom OS should default to conservative local serializability for non-mergeable
+Kay OS should default to conservative local serializability for non-mergeable
 invariants and permit coordination-free collaboration only after an explicit
 invariant-confluence argument or executable check for the declared model.
 
@@ -66,7 +66,7 @@ invariant-confluence argument or executable check for the declared model.
 
 Incomplete invariants make the analysis unsound for the real domain. The
 formal and performance results do not transfer automatically to actors,
-external effects, authorization, or Atom OS targets.
+external effects, authorization, or Kay OS targets.
 
 ## Derived work
 

@@ -69,7 +69,7 @@ This paper establishes that Kay's visual interface cannot be reduced to
 windows and icons. Those visible techniques serve a larger architectural goal:
 a personal dynamic medium whose owner can understand and extend the mechanisms
 behind the presentation. It is the earliest primary anchor for comparing that
-goal with application-centered modern desktops and for asking how Atom OS
+goal with application-centered modern desktops and for asking how Kay OS
 might make user-owned projects programmable without dissolving isolation.
 
 ## Limits
@@ -83,4 +83,4 @@ system delivered strong isolation, persistence, or distributed actor semantics.
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

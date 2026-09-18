@@ -58,7 +58,7 @@ does not report a production-scale performance evaluation.
 
 ## Relevance
 
-Atom OS may use a nested replicated type for selected project records, but
+Kay OS may use a nested replicated type for selected project records, but
 must version the merge algebra, validate domain invariants, and surface
 semantic conflicts. Provider bindings, authority, revocation, and irreversible
 commands remain fenced rather than merged.
@@ -72,4 +72,4 @@ not imply authorization, confidentiality, or user satisfaction.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

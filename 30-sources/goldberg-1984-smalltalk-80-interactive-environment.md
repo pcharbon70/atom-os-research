@@ -69,7 +69,7 @@ experimental comparison of usability or reliability.
 
 This book makes Kay's “user as author” principle concrete. It shows the
 components needed for a live visual environment and the operational costs of
-making them one mutable world. Atom OS should preserve inspectors, browsers,
+making them one mutable world. Kay OS should preserve inspectors, browsers,
 change history, immediate evaluation, and reconstructible work contexts while
 replacing global implicit authority with capabilities and supervision.
 

@@ -10,13 +10,13 @@ tags:
   - research-assessment
   - systems-architecture
 aliases:
-  - "Atom OS implementation readiness"
+  - "Kay OS implementation readiness"
 ---
 
 # Proof-of-concept research readiness
 
 The archive contains enough research to start implementing a minimal bootable
-Atom OS whose first delivery is an interactive CLI. The user has explicitly
+Kay OS whose first delivery is an interactive CLI. The user has explicitly
 rejected AtomVM and excluded graphical UI from this proof of concept. Its
 implementation and validation plan must have no AtomVM dependency, reuse
 experiment, or comparison gate.
@@ -163,8 +163,8 @@ decision. Freeze one target and document its complete execution environment.
 The adopted first physical target is **Dell Precision T7500**, using
 **Intel Xeon / Intel 64 (x86-64)**. The [active target and QEMU profile](proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
 replaces the provisional RV64/OpenSBI route and the corrected AMD-processor
-detour. Start with Nehalem-v1, one virtual CPU, 128 MiB, an explicit PC/firmware
-fixture and serial console; the Atom kernel runs at ring 0 and services at
+detour. Start with Nehalem-v1, one virtual CPU, 64 MiB, an explicit PC/firmware
+fixture and serial console; the Kay kernel runs at ring 0 and services at
 ring 3.
 
 This is a selected machine and architecture, not a binary pin or demonstrated
@@ -187,10 +187,10 @@ The first target/build record must specify:
   handling, and a failing exit status for unattended test runs.
 
 The host provides emulation, building, debugging, and evidence capture.
-Firmware remains a named higher-privilege dependency. Atom must own the
+Firmware remains a named higher-privilege dependency. Kay must own the
 claimed guest protection, page management, scheduling, IPC, and fault
 mechanisms. A runtime running as a Linux process is valuable semantic
-evidence but cannot establish those Atom-owned mechanisms.
+evidence but cannot establish those Kay-owned mechanisms.
 
 The proposed initial threat profile trusts the development boot image,
 firmware, emulator, and kernel implementation. User domains may crash, loop,
@@ -208,7 +208,7 @@ validation; static packaging does not remove their trust boundary.
 ### First delivery: boot into the CLI
 
 The first successful boot should follow a reproducible path from the emulator
-or firmware entry through the Atom kernel into a native user-mode command loop.
+or firmware entry through the Kay kernel into a native user-mode command loop.
 Use serial input/output first, so graphical display, keyboard-device stacks,
 and a compositor do not become prerequisites. An early privileged diagnostic
 monitor may help bring-up, but the first delivered CLI should cross the real
@@ -239,7 +239,7 @@ must use explicit guest-machine control authority.
 
 First-boot acceptance is concrete:
 
-1. A documented clean build boots the actual kernel and reaches `atom>` in
+1. A documented clean build boots the actual kernel and reaches `kay>` in
    user mode, with no guest host OS supplying the kernel mechanisms.
 2. A serial test harness submits commands and verifies their responses and
    return to the prompt; a boot banner alone is insufficient.
@@ -304,7 +304,7 @@ concept plan proceeds with the independent-interpreter direction unless a
 subsequent implementation decision changes it explicitly.
 
 After native CLI bring-up, implement the smallest workload's dependency
-closure and test it on a hosted harness and then inside an Atom user domain.
+closure and test it on a hosted harness and then inside an Kay user domain.
 The CLI should start the real workload through `run <module>` and report
 unsupported profiles honestly. Long-lived allocation and process-local tracing
 GC are required at this runtime milestone. A principles-only actor library
@@ -421,7 +421,7 @@ reset after runtime failure; the interface must say so. A response from a
 dead generation cannot become a new command,
 and timeout after acceptance cannot automatically mean that no effect occurred.
 
-Suggested initial campaign sizes are one virtual CPU, 128 MiB of configured
+Suggested initial campaign sizes are one virtual CPU, 64 MiB of configured
 guest RAM, 128 managed actors, at least one million transient allocations, and
 1,000 child-domain restart cycles. These are proposed test inputs, not measured
 capacity or performance predictions. Sweep smaller resource limits to exercise
@@ -431,7 +431,7 @@ reserves, and workload seeds before running the campaign.
 | Milestone | Exit evidence |
 | --- | --- |
 | M0: boot inputs | Adopted T7500 / Intel x86-64 target plus a still-required pinned build/target/firmware record, static CLI image format, minimal console/time ABI, memory limits, and automated boot/command checks; full runtime compatibility need not be complete |
-| M1: boot to CLI | The real Atom kernel launches a native user-mode CLI; `help`, `version`, and `uptime` work; bounded serial input, invalid-command handling, and timer progress pass the first-boot criteria |
+| M1: boot to CLI | The real Kay kernel launches a native user-mode CLI; `help`, `version`, and `uptime` work; bounded serial input, invalid-command handling, and timer progress pass the first-boot criteria |
 | M2: protected service nucleus | Capabilities, domains, memory/CPU accounts, bounded transport, fault delivery, and independent recovery work; CLI inspection/control commands report real state; selected lifecycle models and stale-handle tests pass |
 | M3: project BEAM runtime | The CLI launches compiler-produced BEAM modules in the unprivileged project runtime; the declared corpus matches pinned OTP; automatic local tracing GC reclaims long-lived-process garbage; all guest substrate calls are inventoried |
 | M4: integrated recovery and resource campaign | CLI, actor, native-service, and runtime-domain failure have distinct contained outcomes; predeclared limits hold; repeated restart reclaims clean resources; old generations cannot affect replacements |

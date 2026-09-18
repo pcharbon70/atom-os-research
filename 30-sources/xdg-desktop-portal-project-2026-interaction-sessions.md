@@ -67,7 +67,7 @@ and revocable remote-control/capture profiles.
 
 ## Limits
 
-Portal object paths and restore tokens are desktop API handles, not durable Atom
+Portal object paths and restore tokens are desktop API handles, not durable Kay
 capabilities. Backend trust, prompt integrity, data-format parsing, accessibility,
 and post-grant policy vary by desktop. The documentation does not guarantee
 complete revocation of already disclosed pixels or clipboard bytes.

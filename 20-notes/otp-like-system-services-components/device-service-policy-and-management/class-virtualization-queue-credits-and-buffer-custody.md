@@ -21,7 +21,7 @@ Research question: How can untrusted clients share I/O without forging descripto
 sDDF uses selectively shared ownership queues; queue-based modularity still needs
 explicit resource and overload contracts. [1](../../../30-sources/heiser-et-al-2026-sddf-design.md) [2](../../../30-sources/welsh-et-al-2001-seda.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

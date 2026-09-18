@@ -66,7 +66,7 @@ on the paper's PowerPC platform.
 
 The typed architecture facade should be divided by semantic family and should
 make its binding, context, and completion mode explicit. Static composition is
-the recommended baseline for Atom OS; Think supports the value of typed
+the recommended baseline for Kay OS; Think supports the value of typed
 boundaries without requiring its runtime component model.
 
 ## Limits

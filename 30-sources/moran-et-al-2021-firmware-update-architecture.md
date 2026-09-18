@@ -60,7 +60,7 @@ responsibilities and analyzes device classes and update flows.
 
 ## Relevance
 
-Atom should separate release signers from node installers and keep a small boot
+Kay should separate release signers from node installers and keep a small boot
 verifier below the Layer-4 updater. Quiescence, dependency closure, trial
 activation, and recovery remain explicit even after a manifest is authentic.
 
@@ -68,7 +68,7 @@ activation, and recovery remain explicit even after a manifest is authentic.
 
 The RFC is informational and IoT-oriented. It does not select a manifest
 encoding, repository security protocol, transactional installer, health model,
-or Atom-specific kernel/runtime/BEAM compatibility contract.
+or Kay-specific kernel/runtime/BEAM compatibility contract.
 
 ## Derived work
 

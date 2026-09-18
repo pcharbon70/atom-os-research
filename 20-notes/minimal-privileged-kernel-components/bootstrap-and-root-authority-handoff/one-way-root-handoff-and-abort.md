@@ -15,7 +15,7 @@ What evidence permits a root service to begin ordinary operation, and what happe
 
 Microkit's initialization caveat shows why service eligibility cannot be inferred from an assumed global initialization barrier. [1](../../../30-sources/sel4-foundation-2026-microkit-system-contracts.md), [2](../../../30-sources/sel4-foundation-2026-capdl-loader-contract.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../bootstrap-and-root-authority-handoff.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../bootstrap-and-root-authority-handoff.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

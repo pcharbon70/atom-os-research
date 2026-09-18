@@ -70,7 +70,7 @@ modify protected counters. It also reports contemporary performance data.
 
 This work supplies the historical foundation for separating an invalidation
 plan from a shootdown coordinator and for classifying mapping changes by the
-danger of stale translations. Its stress test also inspires Atom's requirement
+danger of stale translations. Its stress test also inspires Kay's requirement
 to race permission reduction against actual access, not only inspect tables.
 
 ## Limits

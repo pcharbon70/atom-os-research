@@ -27,7 +27,7 @@ limits. [1](../../../30-sources/calvary-et-al-2003-multi-target-user-interface-f
 [2](../../../30-sources/gajos-et-al-2010-personalized-user-interfaces-supple.md)
 [3](../../../30-sources/accesskit-project-2026-architecture-and-engineering.md)
 
-The Atom provider contract and registry are not implemented.
+The Kay provider contract and registry are not implemented.
 
 ## Development
 

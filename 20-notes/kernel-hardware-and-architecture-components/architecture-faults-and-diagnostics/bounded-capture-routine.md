@@ -34,7 +34,7 @@ a failed bus. Otherwise the truthful guarantee is bounded issued software work
 plus an independent watchdog/terminal path, not bounded return latency. Merely
 calling the path lock-free or nonblocking is insufficient.
 
-This is proposed Atom architecture. No implementation or worst-case bound has
+This is proposed Kay architecture. No implementation or worst-case bound has
 yet been demonstrated.
 
 ## Question, scope, and operational standard
@@ -106,7 +106,7 @@ A candidate passes only if:
 
 The evidence supports strict context, preallocation, source-order, and
 publication requirements. The exact object schema and generated program below
-are Atom synthesis.
+are Kay synthesis.
 
 ## Capture profile and generated program
 
@@ -239,7 +239,7 @@ The fixed acknowledgement program reads status back and publishes one of
 record yields `ValidRecordStillPending` and is preserved. Without an additional
 target-specific identity/version contract, that state means either that the
 conditional clear was not accepted and the prior record remains or that a
-concurrent replacement/update is visible; Atom does not label it a new record.
+concurrent replacement/update is visible; Kay does not label it a new record.
 Only `ObservedCleared` can satisfy the acknowledgement premise of an
 `AsynchronousNonDisruptive` return rule.
 

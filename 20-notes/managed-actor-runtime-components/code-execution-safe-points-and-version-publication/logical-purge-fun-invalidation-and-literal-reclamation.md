@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 The pinned parent audit separates direct old-code references from fun/literal retention; cheap shared literal access can require later global reclamation work. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/erlang-otp-team-2026-thread-progress-contracts.md), [3](../../../30-sources/larsson-2019-persistent-term.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Language execution and code-version visibility belong to the runtime; executable-page publication consumes the lower kernel's complete W^X and instruction-fetch contract.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

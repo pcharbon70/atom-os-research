@@ -18,9 +18,9 @@ Requirement R02, M0–M1, extended at M3. The build must produce identifiable ke
 
 [GCC's freestanding documentation](../../30-sources/gnu-project-2026-gcc-freestanding-environment.md) explicitly leaves startup and linking to the environment and requires memory-support routines. Thus a freestanding flag is only one part of the dependency contract.
 
-The [ELF program-loading reference](../../30-sources/xinuos-2026-elf-program-loading.md) describes loadable segments, memory/file lengths, alignment and permissions. Its visible edition is 4.3 DRAFT. Atom should declare a stricter image subset rather than infer that every valid ELF image is acceptable.
+The [ELF program-loading reference](../../30-sources/xinuos-2026-elf-program-loading.md) describes loadable segments, memory/file lengths, alignment and permissions. Its visible edition is 4.3 DRAFT. Kay should declare a stricter image subset rather than infer that every valid ELF image is acceptable.
 
-The [AMD64 procedure ABI](../../30-sources/x86-psabi-project-2026-amd64-procedure-abi.md) provides the relevant calling-convention and stack model. Atom must separately specify its syscall ABI; neither a procedure ABI nor a Linux target triple supplies it. [NixOS's published deployment work](../../30-sources/dolstra-et-al-2008-nixos.md) provides implementation evidence for explicit build-input closures and immutable outputs; a declared input graph still requires reproduction checks. [SOURCE_DATE_EPOCH](../../30-sources/lamb-luo-2017-source-date-epoch.md) addresses timestamp variation, not the entire build environment.
+The [AMD64 procedure ABI](../../30-sources/x86-psabi-project-2026-amd64-procedure-abi.md) provides the relevant calling-convention and stack model. Kay must separately specify its syscall ABI; neither a procedure ABI nor a Linux target triple supplies it. [NixOS's published deployment work](../../30-sources/dolstra-et-al-2008-nixos.md) provides implementation evidence for explicit build-input closures and immutable outputs; a declared input graph still requires reproduction checks. [SOURCE_DATE_EPOCH](../../30-sources/lamb-luo-2017-source-date-epoch.md) addresses timestamp variation, not the entire build environment.
 
 ## Proposed implementation profile
 

@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Failure-detector theory distinguishes suspicion from fact; OTP compatibility requires its documented term-valued exit observations. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/chandra-toueg-1996-failure-detectors.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The runtime implements observations and actor termination; OTP-like services choose restart policy, and an outer service handles runtime corruption.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

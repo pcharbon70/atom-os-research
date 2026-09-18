@@ -21,7 +21,7 @@ Research question: What observation is strong enough to expand a release without
 Google's canary guidance stresses representative attributed metrics; sampled traces
 cannot establish complete outcome coverage. [1](../../../30-sources/warner-davidovic-2018-canarying-releases.md) [2](../../../30-sources/sigelman-et-al-2010-dapper.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

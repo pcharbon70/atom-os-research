@@ -10,7 +10,7 @@ tags:
   - research-method
   - visual-computing
 aliases:
-  - "Atom OS visual-computing internal-service research session"
+  - "Kay OS visual-computing internal-service research session"
 ---
 
 # 2026-09-10 visual-computing internal services deep dive
@@ -39,7 +39,7 @@ The decomposition makes five boundaries explicit:
   effects; and
 - visual recovery depends on externally held revocation and resource reserve.
 
-No Atom OS project format, semantic protocol, compositor, input broker,
+No Kay OS project format, semantic protocol, compositor, input broker,
 accessibility adapter, live tool, multimodal manager, or visual recovery path
 was implemented or tested.
 
@@ -70,7 +70,7 @@ privilege or disclosure boundary, restart lifecycle, terminal outcome,
 overload policy, compatibility profile, or qualification method differed.
 Every study identifies owned state, source limits, transitions, adversarial
 behavior, alternatives, and unexecuted falsifiers. All remain developing
-because no Atom implementation was evaluated.
+because no Kay implementation was evaluated.
 
 ### Search and selection method
 
@@ -130,9 +130,9 @@ Formal results retain their authors' models. Project documentation establishes
 intended or implemented architecture, not independent security. First-party
 engineering articles provide constraints and experience, not universal
 behavior. Existing browser, Wayland, Qubes, Android, and capability-system
-mechanisms are precedents rather than selected Atom OS dependencies. No
+mechanisms are precedents rather than selected Kay OS dependencies. No
 compatibility, performance, security, accessibility, usability, or recovery
-result has transferred to Atom OS.
+result has transferred to Kay OS.
 
 ## Source manifest
 
@@ -204,7 +204,7 @@ result has transferred to Atom OS.
 ## Threads
 
 - [Visual-computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Open visual-computing inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Open visual-computing inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)
 - [Visual-computing component index](../20-notes/visual-computing-synthesis-components/README.md)
 - [Earlier component session](2026-09-04-visual-computing-synthesis-components-deep-dive.md)
 

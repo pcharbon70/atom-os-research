@@ -51,7 +51,7 @@ meaning of active state.
 
 ## Relevance
 
-For critical remote grants, an Atom enforcement point may require an
+For critical remote grants, an Kay enforcement point may require an
 authenticated freshness check against a named epoch/watermark. The response
 must bind the exact audience and token digest, and cache duration must be part
 of the stated revocation exposure rather than an invisible implementation

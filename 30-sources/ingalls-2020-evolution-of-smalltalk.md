@@ -68,7 +68,7 @@ strong primary evidence; broad outcome claims remain retrospective.
 
 ## Relevance
 
-The source supplies both the attractive and hazardous sides of liveness. Atom
+The source supplies both the attractive and hazardous sides of liveness. Kay
 OS can seek a semantic continuum between running objects and visual tools
 without recreating a single shared failure and authority domain. Projects can
 be rebuilt as capability graphs of supervised actors; live changes can be
@@ -83,4 +83,4 @@ transfer directly to a contemporary distributed operating system.
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

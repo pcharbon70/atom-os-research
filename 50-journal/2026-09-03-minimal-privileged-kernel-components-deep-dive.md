@@ -77,7 +77,7 @@ For every component, the question was:
 A recommendation was accepted only when the report:
 
 - separated claims demonstrated by a source from cross-source synthesis and
-  Atom OS-specific proposal;
+  Kay OS-specific proposal;
 - identified protected objects, authority facets, generations, payer and
   lifetime ownership, linearization points, terminal outcomes, and teardown
   obligations;
@@ -199,7 +199,7 @@ ring-buffer design.
 
 ### Evidence gaps and falsifiers
 
-The strongest unresolved claims are the Atom OS-specific composition points:
+The strongest unresolved claims are the Kay OS-specific composition points:
 
 - verified manifest-to-installed-graph relation including recovery and resource
   objects;

@@ -64,7 +64,7 @@ interface, implements several intra-kernel policies, and evaluates overhead.
 
 This is direct evidence for making the page-table encoder a completely
 mediated boundary and for preventing ordinary mappings of translation-
-structure pages. Atom can achieve a smaller TCB through its microkernel
+structure pages. Kay can achieve a smaller TCB through its microkernel
 structure rather than the paper's same-ring nesting, but must still enumerate
 boot, fault, recovery, and diagnostic mutation paths.
 
@@ -72,7 +72,7 @@ boot, fault, recovery, and diagnostic mutation paths.
 
 The prototype is FreeBSD/x86-64-specific, primarily uniprocessor in scope, and
 does not fully cover DMA, SMI, or every execute-protection case. Its measured
-overheads do not establish the cost of Atom's capability and multicore
+overheads do not establish the cost of Kay's capability and multicore
 transaction protocols.
 
 ## Derived work

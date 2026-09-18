@@ -42,14 +42,21 @@ boundary, exclusions, and handoff evidence. Each now includes a draft phased
 implementation plan: M0 has 3 phases, M1 has 4 (including separate physical
 qualification), M2 has 4, M3 has 4, and M4 has 3. The 18 phases map artifacts and
 acceptance cases to described tasks, dependencies, and final integration gates.
-These are conditional plans, not accepted technical decisions or executed work.
+These are conditional plans. M0 Phase 1 entered provisional execution on
+2026-09-17; later phases remain plans rather than executed work.
 
 All M0–M4 delivery gates remain open and all acceptance cases are not run.
 Writing or reviewing these definitions closes none of them. The user selected
 Zig as the kernel language on 2026-09-08; the [feasibility study](../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
-records its evidence and remaining compiler/ABI qualification. The bootloader
-and exact toolchain profile remain open. Research probes do not initiate or
-complete the planned OS implementation.
+records its evidence and remaining compiler/ABI qualification. The public
+[Kay OS implementation repository](https://github.com/pcharbon70/kay-os), Zig
+0.16.0 LLVM/LLD profile, QEMU 8.2.2 `pc-q35-8.2` fixture, and SeaBIOS 1.16.3
+were selected on 2026-09-17. Their baseline identity checks and the bounded
+freestanding [build closure](../../50-journal/2026-09-17-m0-phase-01-build-closure.md)
+pass, but physical inventory, phase integration, acceptance review, and all
+milestone acceptance remain open. The bootloader remains an M0 Phase 2 decision.
+The physical inventory is an independent Phase 3/final-M0 obligation; it does
+not block virtual Phase 1 integration or Phase 2 contract implementation.
 
 ## Authoritative inputs
 
@@ -77,7 +84,7 @@ they are not a quota for future revisions or other milestones.
 | Milestone | Detailed definition | Required outcome | Planning dependency |
 | --- | --- | --- | --- |
 | M0 — Boot inputs | [M0 definition](m0-boot-inputs/README.md) | Pinned build/target/firmware inputs, static CLI image contract, console/time ABI, limits, and exercised validation harness. | Existing target decision and research; remaining choices must be resolved explicitly. |
-| M1 — Boot to CLI | [M1 definition](m1-boot-to-cli/README.md) | Atom kernel launches a native user-mode CLI; `help`, `version`, `uptime`, bounded input, invalid commands, and timer progress pass. | M0 contracts and reproducible fixture. |
+| M1 — Boot to CLI | [M1 definition](m1-boot-to-cli/README.md) | Kay kernel launches a native user-mode CLI; `help`, `version`, `uptime`, bounded input, invalid commands, and timer progress pass. | M0 contracts and reproducible fixture. |
 | M2 — Protected service nucleus | [M2 definition](m2-protected-service-nucleus/README.md) | Protected domains, capabilities, accounts, bounded transport, fault delivery, independent recovery, and real CLI inspection/control. | M1 plus concrete lifecycle, authority, and budget contracts. |
 | M3 — Project BEAM runtime | [M3 definition](m3-project-beam-runtime/README.md) | CLI-launched compiler-produced BEAM in the unprivileged project runtime; pinned-profile conformance and automatic local tracing GC. | M2 substrate for guest integration; hosted profile experiments may run earlier when requested. |
 | M4 — Integrated recovery and resource campaign | [M4 definition](m4-integrated-recovery-and-resource-campaign/README.md) | Integrated CLI/actor/service/runtime failures, resource limits, reclamation, generation safety, and repeated recovery evidence. | Integrated M2 and M3 with predeclared test budgets and observables. |
@@ -116,12 +123,16 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Begin with [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
-and resolve its repository, Zig toolchain profile, fixture, and inventory decisions.
-Later plans are deliberately conditional on those inputs and predecessor
-evidence. Before executing each phase, review its decision register and bind
-accepted interface versions; revise affected dependencies and tests together
-if a decision changes the planned mechanism.
+Continue [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
+in the selected Kay OS repository. The repository, Zig profile, virtual fixture,
+freestanding build qualification, and nine-case virtual integration now pass.
+Assign and complete the Phase 1 acceptance review before entering Phase 2; the
+physical inventory has moved to Phase 3 and blocks only final M0 and physical
+qualification claims. Later plans are deliberately conditional on their actual
+inputs and predecessor evidence.
+Before executing each phase, review its decision register and bind accepted
+interface versions; revise affected dependencies and tests together if a
+decision changes the planned mechanism.
 
 M1 Phase 3 is the first virtual CLI delivery. M1 Phase 4 is its separate physical
 T7500 qualification branch; M2 virtual acceptance depends on M1 Phase 3, not
@@ -138,9 +149,6 @@ do not turn the artifact tables into an arbitrary one-artifact-per-phase quota.
 The authored decision tasks must settle these open choices before dependent
 implementation, rather than require another broad research cycle:
 
-- Freestanding Zig compiler/backend, C translator/helper closure, linker,
-  reproducible build environment, and implementation-repository location;
-  the kernel language itself is selected.
 - Bootloader/handoff, static kernel and user image format, startup memory map,
   and pinned QEMU machine/firmware versions.
 - Minimum user/kernel console and time ABI, privilege transition, exception
@@ -153,7 +161,7 @@ implementation, rather than require another broad research cycle:
 
 Select and close the exact BEAM workload and compatibility profile in M3 Phase 1
 before dependent interpreter commitments; that work does not block M0 or M1. Retain
-the selected Intel target and start virtual tests small: one CPU, 128 MiB,
+the selected Intel target and start virtual tests small: one CPU, 64 MiB,
 serial I/O, with the full fixture controlled by the linked target profile.
 Do not enlarge QEMU topology simply because the lab machine has two packages.
 

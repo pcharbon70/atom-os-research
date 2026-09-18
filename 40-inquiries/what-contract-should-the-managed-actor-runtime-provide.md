@@ -20,7 +20,7 @@ aliases:
 
 ## Why this matters
 
-Atom OS requires compiled-BEAM execution and automatic process-local tracing
+Kay OS requires compiled-BEAM execution and automatic process-local tracing
 collection, but those requirements do not choose a runtime architecture.
 Current ERTS combines language execution, process scheduling, signals,
 collection, shared tables, timers, ports, native extensions, code loading,
@@ -30,7 +30,7 @@ base. Replacing it with a principles-only actor library would fail the platform
 compatibility requirement.
 
 The runtime contract must preserve enough observable behavior for useful BEAM
-and OTP software while allowing a new implementation to use Atom OS protection,
+and OTP software while allowing a new implementation to use Kay OS protection,
 budget, publication, and recovery mechanisms. It must also state honestly where
 ordinary actors cease to be fault or security boundaries.
 
@@ -103,7 +103,7 @@ without kernel time, or reconciliation overhead exceeds its containment value.
 
 Compatible sends should reserve and publish atomically. Soft thresholds can
 trigger supervisor overload policy. Terminating or quarantining an actor at a
-hard threshold is a candidate Atom OS resource-profile extension, while a
+hard threshold is a candidate Kay OS resource-profile extension, while a
 strict compatibility mode may need bounded buffering, spill, or
 distribution-like suspension. New cross-domain/stream protocols may use
 explicit credits or refusal.
@@ -150,7 +150,7 @@ initial OTP profile without unsafe ambient trust.
 
 1. Build a deterministic one-thread interpreter with copying sends, selective
    receive, automatic tracing GC, links, monitors, aliases, timers, and replay.
-2. Place it in one Atom OS domain and remove every undeclared host-service
+2. Place it in one Kay OS domain and remove every undeclared host-service
    dependency.
 3. Add kernel-charged scheduler threads and compare one queue, local queues,
    random stealing, and local-first hierarchical stealing.
@@ -209,7 +209,7 @@ The component research adds a common implementation discipline:
 
 - every externally visible object follows reserve, private preparation,
   generation-checked publication, terminal disposition, and rollback rules;
-- every Atom OS native/gateway request binds actor, runtime, service/gateway,
+- every Kay OS native/gateway request binds actor, runtime, service/gateway,
   and object incarnations, and its internal protocol reports `Indeterminate`
   when loss occurs after publication without stronger completion/nonexecution
   evidence, even if acceptance was never acknowledged;

@@ -18,7 +18,7 @@ aliases:
 
 ## Scope
 
-This map covers the fourth layer in the proposed Atom OS decomposition:
+This map covers the fourth layer in the proposed Kay OS decomposition:
 unprivileged operational policy built over the managed actor runtime and the
 minimal capability kernel. It includes behaviours, supervision, application
 lifecycle, naming, configuration and identity, durable state, device and
@@ -210,7 +210,7 @@ New evidence routes include [Lifeguard](../30-sources/dadgar-et-al-2018-lifeguar
 [Canarying Releases](../30-sources/warner-davidovic-2018-canarying-releases.md)
 and [queue backlog engineering](../30-sources/yanacek-2019-avoiding-queue-backlogs.md).
 The existing [in-toto study](../30-sources/torres-arias-et-al-2019-in-toto.md)
-now directly informs release decomposition. None is an Atom OS implementation
+now directly informs release decomposition. None is an Kay OS implementation
 result, a PoC requirement or evidence that the open inquiry is resolved.
 
 ## Architectural boundaries

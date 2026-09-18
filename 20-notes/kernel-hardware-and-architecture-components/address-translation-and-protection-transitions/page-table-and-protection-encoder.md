@@ -29,7 +29,7 @@ encoder owns representation; the mapping validator owns admissibility, the
 transaction owns sequencing, and the architecture-primitives capsule owns the
 few instructions or stores that require unsafe implementation.
 
-This is an evidence-backed proposal. No Atom encoder, generated table, or
+This is an evidence-backed proposal. No Kay encoder, generated table, or
 hardware test exists yet.
 
 ## Question, scope, and operational standard
@@ -88,8 +88,8 @@ A candidate implementation is adequate only if:
 | [Mach machine-independent VM](../../../30-sources/rashid-et-al-1987-machine-independent-virtual-memory.md) and [SVR4.2 HAT](../../../30-sources/balan-gollhardt-1992-scalable-virtual-memory-hat-layer.md) | Most VM semantics can remain machine independent while a small module owns MMU-dependent representation | Historical modules do not establish modern safety or complete mediation |
 | [Nested Kernel](../../../30-sources/dautenhahn-et-al-2015-nested-kernel.md) | Protecting table pages and mediating every MMU update can isolate the translation reference monitor | Its same-ring x86 prototype is primarily uniprocessor and incomplete for DMA/SMI |
 | [Secure memory management](../../../30-sources/achermann-et-al-2020-secure-memory-management.md) | Every translation engine and name-resolution path must be inside or mediated by the reference monitor | The preprint does not define this encoder API |
-| [SecVisor retrospective](../../../30-sources/franklin-et-al-2008-secvisor-retrospective.md) | Unvalidated physical provenance and writable physical aliases defeat an apparently narrow mapping policy | Bounded old-x86 case study, not a proof of Atom |
-| [seL4 RISC-V page-map defect](../../../30-sources/sel4-foundation-2020-risc-v-page-map-defect.md) | Rights masking can transform a supposed leaf into a table link when raw fields encode contextual type | One historical defect; typed constructors are the Atom deduction |
+| [SecVisor retrospective](../../../30-sources/franklin-et-al-2008-secvisor-retrospective.md) | Unvalidated physical provenance and writable physical aliases defeat an apparently narrow mapping policy | Bounded old-x86 case study, not a proof of Kay |
+| [seL4 RISC-V page-map defect](../../../30-sources/sel4-foundation-2020-risc-v-page-map-defect.md) | Rights masking can transform a supposed leaf into a table link when raw fields encode contextual type | One historical defect; typed constructors are the Kay deduction |
 | [Asterinas verification report](../../../30-sources/asterinas-community-2025-practical-page-table-verification.md) | Page purpose, table mode, entry type, paging constants, cursors, and tree/flat refinement are useful proof units | Work remains on concurrency and verified-binary linkage |
 | Current [Intel](../../../30-sources/intel-2026-system-programming-documentation.md), [Arm](../../../30-sources/arm-2026-a-profile-system-architecture-documentation.md), and [RISC-V](../../../30-sources/risc-v-international-2026-privileged-architecture.md) documents | Entry kinds, levels, rights, memory types, hardware-owned bits, invalidation, and ordering differ materially | Normative specifications do not prove an implementation or shared abstraction |
 

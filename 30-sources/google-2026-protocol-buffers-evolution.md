@@ -51,7 +51,7 @@ compatibility. This is product documentation, not a comparative experiment.
 
 ## Relevance
 
-Atom OS needs stable IDs, explicit critical/optional variants, unknown-field
+Kay OS needs stable IDs, explicit critical/optional variants, unknown-field
 policy, fixtures in both directions, and compatibility matrices for commands,
 queries, events, state, snapshots, and outcomes. Protocol Buffers is an
 example, not the mandated encoding.

@@ -71,7 +71,7 @@ capabilities.
 
 ## Relevance
 
-Atom OS should treat bootstrap as a transaction from validated architecture
+Kay OS should treat bootstrap as a transaction from validated architecture
 facts and a trusted manifest to an inspectable authority graph. The design can
 borrow the paper's declarative target and refinement structure while extending
 the configuration with resource accounts, CPU reserves, recovery/reset escrow,
@@ -85,7 +85,7 @@ seL4 component systems. It does not verify this project's boot parser,
 architecture adapter, generated binary, manifest signature path, hardware
 state, handoff acknowledgement, or recovery-escrow extensions. The current
 capDL loader documentation also distinguishes verified model results from
-implementation and feature coverage. Atom OS must preserve that distinction
+implementation and feature coverage. Kay OS must preserve that distinction
 and cannot inherit the proof by using a similar manifest.
 
 ## Derived work

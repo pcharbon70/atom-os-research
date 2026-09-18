@@ -29,7 +29,7 @@ different TCB trade-offs.
 [4](../../../30-sources/chromium-project-2026-multiprocess-graphics-and-accessibility.md)
 [5](../../../30-sources/qubes-project-2026-gui-virtualization.md)
 
-The topology is proposed and has no measured Atom TCB.
+The topology is proposed and has no measured Kay TCB.
 
 ## Development
 

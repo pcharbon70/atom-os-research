@@ -39,7 +39,7 @@ Useful explanatory companion to empirical work and current versioned compiler co
 
 ## Limits
 
-Historical engineering explanation, not a normative standard, measured Atom performance or memory-safety guarantee. Historical volatile-null advice and performance estimates are not adopted.
+Historical engineering explanation, not a normative standard, measured Kay performance or memory-safety guarantee. Historical volatile-null advice and performance estimates are not adopted.
 
 ## Derived work
 

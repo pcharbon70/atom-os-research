@@ -21,7 +21,7 @@ Research question: What must be verified before signed bytes are eligible for de
 TUF authenticates delivered targets; in-toto constrains signed supply-chain steps
 and artifact relationships, not software correctness. [1](../../../30-sources/tuf-project-2026-specification-1-0-36.md) [2](../../../30-sources/torres-arias-et-al-2019-in-toto.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

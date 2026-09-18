@@ -41,7 +41,7 @@ The design uses caller request IDs, atomic mutation/result recording, parameter 
 
 ## Relevance
 
-Atom OS inference: keep one logical execution with advancing pending status, and reject expired identities rather than silently re-admitting forgotten requests. User-session loss needs a durable client-action binding beyond transport retries.
+Kay OS inference: keep one logical execution with advancing pending status, and reject expired identities rather than silently re-admitting forgotten requests. User-session loss needs a durable client-action binding beyond transport retries.
 
 ## Limits
 

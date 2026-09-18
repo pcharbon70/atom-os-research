@@ -69,7 +69,7 @@ benchmarks.
 
 ## Relevance
 
-Atom OS should adopt Cedar-like design constraints, not necessarily Cedar’s
+Kay OS should adopt Cedar-like design constraints, not necessarily Cedar’s
 syntax unchanged: total deterministic evaluation, no network or time I/O inside
 the evaluator, typed schemas, explicit deny precedence, versioned policy and
 entity snapshots, explainable decision identifiers, and analyzable
@@ -79,7 +79,7 @@ than returning an ambient boolean to be trusted indefinitely.
 ## Limits
 
 The proofs apply to the modeled language and the paper’s connection to its
-implementation, not to an Atom OS port, policy data provenance, deployment,
+implementation, not to an Kay OS port, policy data provenance, deployment,
 resource service, or entire authorization lifecycle. Expressiveness,
 administrative usability, and benchmark comparisons are workload-dependent.
 

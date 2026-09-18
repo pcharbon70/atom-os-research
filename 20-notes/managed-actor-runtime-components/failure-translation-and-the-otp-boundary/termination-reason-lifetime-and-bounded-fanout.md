@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Visible-resource release and process death do not imply all memory has vanished; causal accounting includes deferred cleanup after actor execution ends. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/banga-et-al-1999-resource-containers.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The runtime implements observations and actor termination; OTP-like services choose restart policy, and an outer service handles runtime corruption.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

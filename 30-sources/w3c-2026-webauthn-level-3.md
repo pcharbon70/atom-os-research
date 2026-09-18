@@ -58,7 +58,7 @@ attestation, security considerations, and privacy boundaries were reviewed.
 
 ## Relevance
 
-The Atom OS authenticator service should implement a WebAuthn-compatible
+The Kay OS authenticator service should implement a WebAuthn-compatible
 ceremony for remote relying parties and reuse its core properties locally:
 fresh challenge, verifier or operation binding, explicit user gesture, scoped
 keys, and no disclosure of a reusable OS password. A native local protocol can

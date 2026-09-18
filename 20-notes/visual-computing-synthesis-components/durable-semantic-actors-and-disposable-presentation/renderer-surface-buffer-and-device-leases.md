@@ -26,7 +26,7 @@ documents renderer/GPU-process separation plus software fallback.
 [2](../../../30-sources/feske-helmuth-2005-nitpicker.md)
 [3](../../../30-sources/chromium-project-2026-multiprocess-graphics-and-accessibility.md)
 
-No Atom display or GPU lease implementation exists.
+No Kay display or GPU lease implementation exists.
 
 ## Development
 

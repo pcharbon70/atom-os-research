@@ -25,7 +25,7 @@ local capability-tree/object-generation checks and bounded revoke traversal.
 
 ## Question, scope, and operational standard
 
-> How can Atom stop new uses, bound remote stale use, handle already-running
+> How can Kay stop new uses, bound remote stale use, handle already-running
 > effects, and prevent authority resurrection across partitions, crashes,
 > rollbacks, cloned images, and object reuse?
 
@@ -65,7 +65,7 @@ does not use clocks alone as event order.
 [Zanzibar](../../30-sources/pang-et-al-2019-zanzibar.md) contributes causal
 revisions for relationship freshness. The [seL4 reference
 manual](../../30-sources/sel4-foundation-2026-reference-manual.md) contributes
-local capability derivation and descendant revoke semantics; an Atom kernel
+local capability derivation and descendant revoke semantics; an Kay kernel
 needs its own bounded traversal and proof. [EAT](../../30-sources/lundblade-et-al-2025-entity-attestation-token.md)
 provides boot-count/seed claim precedents but not trustworthy monotonic storage.
 

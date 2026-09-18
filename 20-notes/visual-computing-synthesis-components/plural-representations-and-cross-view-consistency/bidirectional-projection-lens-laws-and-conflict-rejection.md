@@ -27,7 +27,7 @@ intention preservation.
 [2](../../../30-sources/litt-et-al-2020-cambria.md)
 [3](../../../30-sources/sun-et-al-1998-cooperative-editing-consistency.md)
 
-No Atom lens language, proof profile, or destructive-edit experiment exists.
+No Kay lens language, proof profile, or destructive-edit experiment exists.
 
 ## Development
 

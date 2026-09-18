@@ -21,7 +21,7 @@ Research question: Which failures does a successful persistence acknowledgement 
 FSCQ's guarantees depend on a disk model; isolated device queues do not establish
 durable media completion. [1](../../../30-sources/chen-et-al-2015-fscq.md) [2](../../../30-sources/heiser-et-al-2026-sddf-design.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

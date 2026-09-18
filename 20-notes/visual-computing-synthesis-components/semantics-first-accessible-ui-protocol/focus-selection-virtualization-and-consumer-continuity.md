@@ -28,7 +28,7 @@ Core-AAM shows platform mappings can differ.
 [3](../../../30-sources/accesskit-project-2026-architecture-and-engineering.md)
 [4](../../../30-sources/w3c-2026-core-accessibility-api-mappings-1-2.md)
 
-No large-collection or real-assistive-client Atom experiment exists.
+No large-collection or real-assistive-client Kay experiment exists.
 
 ## Development
 

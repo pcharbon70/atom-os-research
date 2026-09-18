@@ -54,7 +54,7 @@ event reporting.
 
 ## Relevance
 
-Atom's Layer-4 recovery coordinator can request and report platform recovery,
+Kay's Layer-4 recovery coordinator can request and report platform recovery,
 but it cannot be the sole recovery root when the OS may be compromised. The
 hardware/firmware/boot layers must authenticate a narrowly selected recovery
 image and protect rollback state independently.

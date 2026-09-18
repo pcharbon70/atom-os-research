@@ -64,10 +64,10 @@ requirements.
 
 ## Relevance
 
-Atom should profile this workflow for all signed release artifacts and preserve
+Kay should profile this workflow for all signed release artifacts and preserve
 the boundary between verification and typed inactive-slot installation. Root
 high-water state, exact resource bounds, algorithms, time, and offline recovery
-need an Atom-specific POUF-like profile.
+need an Kay-specific POUF-like profile.
 
 ## Limits
 

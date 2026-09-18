@@ -69,7 +69,7 @@ protocol rather than maintain unrelated CPU masks.
 The design and preliminary measurements target early-1990s SVR4.2, i386, and
 small cache-coherent SMP systems. The paper says the measurements are not final.
 Its lazy policy and locking choices cannot be transferred without re-proving
-them for modern walkers, weak virtual-memory semantics, CPU hotplug, and Atom's
+them for modern walkers, weak virtual-memory semantics, CPU hotplug, and Kay's
 quiescence contract.
 
 ## Derived work

@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 The archive distinguishes its OTP 29.0.6 public-contract baseline from its OTP 29.0.5 source audit; internal constants are not compatibility requirements. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/erlang-otp-team-2026-otp-29-source-tree.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Compatibility is a versioned language/runtime claim. A validated container or signed module is not proof of hostile-code isolation.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

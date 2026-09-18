@@ -46,7 +46,7 @@ and lifecycle requirements at three authentication assurance levels (AALs).
 ## Method
 
 This is normative U.S. federal guidance developed through NIST’s public process,
-not an Atom OS threat model or an authorization specification. Requirements for
+not an Kay OS threat model or an authorization specification. Requirements for
 AALs, phishing resistance, password verification, authenticator binding,
 recovery, and session timeouts were inspected directly.
 
@@ -70,7 +70,7 @@ recovery, and session timeouts were inspected directly.
 
 ## Relevance
 
-Atom OS should make phishing-resistant public-key authenticators the normal
+Kay OS should make phishing-resistant public-key authenticators the normal
 human-authentication path and a hardware-bound, non-exportable authenticator the
 high-assurance path. Assurance must be recorded in authentication evidence and
 checked by policy for each sensitive grant; “logged in” is too coarse. Passwords

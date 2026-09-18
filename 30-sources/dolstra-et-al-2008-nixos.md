@@ -103,7 +103,7 @@ Build-time dependency identity should be distinct from runtime service state,
 and release preparation should finish before activation mutates the live
 system.
 
-For Atom OS, this is a system-services concern above the managed runtime, not a
+For Kay OS, this is a system-services concern above the managed runtime, not a
 reason to move a package manager or release policy into the kernel. The kernel
 may help enforce hermetic builders through capabilities, restricted namespaces,
 deterministic clocks, and denied network access. An unprivileged release

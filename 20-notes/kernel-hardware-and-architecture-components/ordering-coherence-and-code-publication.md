@@ -1368,7 +1368,7 @@ late-join rule; a rollback removes the RX relation to
 
 Exact instruction sequences belong in versioned backend documentation and
 generated-code tests. The table is a semantic map, not assembly to copy.
-For RISC-V, `RemoteFetchSynchronized` additionally requires an Atom target-
+For RISC-V, `RemoteFetchSynchronized` additionally requires an Kay target-
 handler acknowledgement or a separately specified platform completion emitted
 causally after the exact fence and bound to request plus hart incarnation.
 `SBI_SUCCESS` alone cannot satisfy that proof.
@@ -1571,7 +1571,7 @@ performance details.
 
 ### Kernel memory model
 
-Create a versioned Atom OS kernel memory-model document and executable litmus
+Create a versioned Kay OS kernel memory-model document and executable litmus
 suite for:
 
 - message passing with release/acquire;

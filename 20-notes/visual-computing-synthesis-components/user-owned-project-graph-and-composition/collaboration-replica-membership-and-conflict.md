@@ -29,7 +29,7 @@ ownership goals while preserving open access and history problems.
 [3](../../../30-sources/cherif-et-al-2014-access-control-collaborative-editors.md)
 [4](../../../30-sources/kleppmann-et-al-2019-local-first-software.md)
 
-No Atom OS replication profile has been modeled or tested.
+No Kay OS replication profile has been modeled or tested.
 
 ## Development
 

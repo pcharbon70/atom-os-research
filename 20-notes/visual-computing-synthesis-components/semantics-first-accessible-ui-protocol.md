@@ -10,14 +10,14 @@ tags:
   - visual-computing
 aliases:
   - "Visual synthesis component 3"
-  - "Atom OS semantic UI protocol"
+  - "Kay OS semantic UI protocol"
 ---
 
 # Semantics-First Accessible UI Protocol
 
 ## Executive decision
 
-Atom OS should define a native, versioned **semantic interaction graph** as the
+Kay OS should define a native, versioned **semantic interaction graph** as the
 common publication boundary between domain models and visual, assistive,
 automation, voice, testing, and remote-view services. It must contain logical
 identity, role, names, typed values and state, relationships, actions, focus,
@@ -31,7 +31,7 @@ defined by the logical objects, available meaning, authorized actions, and
 observable domain effects—not by identical hierarchy or interaction steps.
 
 The protocol must extend, not merely copy, WAI-ARIA. WAI-ARIA provides a mature
-minimum vocabulary, while Atom OS additionally needs durable model identity,
+minimum vocabulary, while Kay OS additionally needs durable model identity,
 view generations, capability requirements, typed outcomes, coherent
 snapshots, replay/gap recovery, least-disclosure filtering, and overload rules.
 
@@ -434,7 +434,7 @@ unexecuted conformance obligations; they do not claim accessibility compliance.
   defines equivalence and editable projections above this protocol.
 - [Input and trusted-interaction authority](input-focus-and-trusted-interaction-authority.md) —
   binds action invocation to authentic interaction and live capabilities.
-- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md) —
+- [Visual-computing model inquiry](../../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md) —
   retains the unresolved interoperability and user-study criteria.
 
 ## Sources

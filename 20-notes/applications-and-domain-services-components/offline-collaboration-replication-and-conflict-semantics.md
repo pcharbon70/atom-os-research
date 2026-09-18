@@ -74,7 +74,7 @@ argues for offline use and user ownership, while acknowledging important access
 and longevity questions. These sources do not justify offline money transfer,
 device actuation, identity minting, or arbitrary side effects.
 
-Atom OS therefore distinguishes operation/delta replication from a state-based
+Kay OS therefore distinguishes operation/delta replication from a state-based
 CRDT profile. Operation- and delta-based profiles retain the attributable
 records below. A state-based merge is supported only when a separate,
 authenticated operation/provenance journal supplies equivalent authorization,

@@ -75,7 +75,7 @@ precedent for making that authority graph data rather than implicit boot code.
 It also motivates comparing the manifest's desired graph with a post-handoff
 enumeration from protected kernel state.
 
-The Atom OS manifest must additionally describe resource accounts, scheduling
+The Kay OS manifest must additionally describe resource accounts, scheduling
 reserves, recovery escrows, hardware profiles, and lifecycle gates. Those are
 project proposals rather than capDL results.
 

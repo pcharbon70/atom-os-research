@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Hosted ERTS and CleanQ expose different layers: the former needs many OS services; the latter specifies ownership transfer rather than a complete host environment. [1](../../../30-sources/erlang-otp-team-2026-otp-29-source-tree.md), [2](../../../30-sources/haecki-et-al-2019-cleanq.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The adapter consumes kernel authority; it does not make BEAM terms into capabilities or put the managed runtime in privileged code.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

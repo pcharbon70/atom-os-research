@@ -73,7 +73,7 @@ measurements of usability, reliability, or adoption.
 Apple's frameworks illustrate both continuity and divergence: object-oriented
 views, MVC, declarative state updates, and immediate previews resemble parts of
 Smalltalk, but these capabilities normally remain inside a developer-built,
-sandboxed application. Atom OS can apply declarative reconstruction and
+sandboxed application. Kay OS can apply declarative reconstruction and
 semantic accessibility at the project and actor-protocol level rather than
 only within one app.
 
@@ -86,4 +86,4 @@ continuously revised; the access date is part of the evidence.
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

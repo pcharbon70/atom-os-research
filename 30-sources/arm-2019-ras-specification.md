@@ -72,7 +72,7 @@ The Arm capture backend must be generated from a pinned node/profile table that
 fixes access path, register count, ordering, validity prerequisites, and exact
 clear program. The decoder must preserve unknown and overflow. Arm's
 recoverable labels may support a classifier premise but cannot independently
-mint an Atom resume proof.
+mint an Kay resume proof.
 
 ## Limits
 

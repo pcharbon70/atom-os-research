@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Actor scheduling research finds locality benefits and affinity-induced contention; progress protocols require a defined participant set. [1](../../../30-sources/barghi-karsten-2018-locality-aware-actor-scheduling.md), [2](../../../30-sources/erlang-otp-team-2026-thread-progress-contracts.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Runtime reductions select actors; kernel contexts enforce CPU authority. Neither is a hard real-time guarantee by itself.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

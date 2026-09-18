@@ -27,7 +27,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom verify human or recovery authenticators without placing complex
+> How can Kay verify human or recovery authenticators without placing complex
 > protocol parsers, password work factors, transport quirks, or reusable
 > authentication assertions inside the kernel or grant issuer?
 
@@ -71,7 +71,7 @@ verifier compromise, throttling, and authenticator assurance. [RFC
 memory-hard password primitive and also exposes the verifier-side denial-of-
 service cost.
 
-Atom's typed evidence, challenge finalization, and worker isolation are
+Kay's typed evidence, challenge finalization, and worker isolation are
 architectural proposals. Passing protocol conformance does not prove native
 trusted-path composition or authorization correctness.
 
@@ -162,7 +162,7 @@ creation or the named one-shot operation.
 For WebAuthn, validation includes ceremony type, exact challenge, trusted
 origin/top-origin policy, RP ID hash, credential and subject mapping, UP/UV,
 algorithm and signature, extensions, backup-state consistency, and counter
-signal. Native login needs an Atom-specific verifier-name/RP-ID profile; simply
+signal. Native login needs an Kay-specific verifier-name/RP-ID profile; simply
 calling a browser API does not define it.
 
 ## Password compatibility profile

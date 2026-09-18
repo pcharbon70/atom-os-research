@@ -28,7 +28,7 @@ invent policy, broaden rights, repair an alias silently, or infer authority
 from a physical address.
 
 This design is proposed. It has not been model checked, fuzzed, or run on an
-Atom kernel.
+Kay kernel.
 
 ## Question, scope, and operational standard
 
@@ -82,19 +82,19 @@ A candidate passes only if:
 | Evidence | Supported conclusion | Limit |
 | --- | --- | --- |
 | [Protection of information](../../../30-sources/saltzer-schroeder-1975-protection-information.md) | Complete mediation, least privilege, economy of mechanism, and fail-safe defaults are durable design principles | Principles do not define modern PTEs or a concrete capability ABI |
-| [Least-privilege memory protection](../../../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md) | Translator-configuration authority and memory-access authority must both be represented | Atom's exact authority intersection remains proposed |
-| [seL4 reference manual](../../../30-sources/sel4-foundation-2026-reference-manual.md) | VSpace/paging-structure/frame objects and mapping relations can be capability-mediated; a Page capability carries frame authority and mapping state when mapped | The manual does not establish Atom's distinct `Mapping` object/`MappingRef`, and seL4's proof does not transfer |
+| [Least-privilege memory protection](../../../30-sources/achermann-et-al-2019-least-privilege-memory-protection.md) | Translator-configuration authority and memory-access authority must both be represented | Kay's exact authority intersection remains proposed |
+| [seL4 reference manual](../../../30-sources/sel4-foundation-2026-reference-manual.md) | VSpace/paging-structure/frame objects and mapping relations can be capability-mediated; a Page capability carries frame authority and mapping state when mapped | The manual does not establish Kay's distinct `Mapping` object/`MappingRef`, and seL4's proof does not transfer |
 | [Asterinas page-table verification](../../../30-sources/asterinas-community-2025-practical-page-table-verification.md) | Alignment preconditions, page-purpose types, range cursors, and flat/tree refinement can be made verification targets | Work-in-progress proof does not cover this admission transaction |
-| [Secure memory management](../../../30-sources/achermann-et-al-2020-secure-memory-management.md) | Typed translation objects and authority derivation can expose memory-management invariants across hardware and software layers | The framework does not instantiate Atom's validator or transaction protocol |
-| [SecVisor retrospective](../../../30-sources/franklin-et-al-2008-secvisor-retrospective.md) | Physical-frame provenance and executable-page policy must be mediated across aliases, not inferred from one virtual mapping | The prototype's hypervisor threat model and platform differ from Atom |
+| [Secure memory management](../../../30-sources/achermann-et-al-2020-secure-memory-management.md) | Typed translation objects and authority derivation can expose memory-management invariants across hardware and software layers | The framework does not instantiate Kay's validator or transaction protocol |
+| [SecVisor retrospective](../../../30-sources/franklin-et-al-2008-secvisor-retrospective.md) | Physical-frame provenance and executable-page policy must be mediated across aliases, not inferred from one virtual mapping | The prototype's hypervisor threat model and platform differ from Kay |
 | [seL4 RISC-V page-map defect](../../../30-sources/sel4-foundation-2020-risc-v-page-map-defect.md) | Attenuating permissions can change a would-be leaf into another descriptor interpretation, so final encoded semantics must be revalidated | One historical defect is evidence of the hazard, not a complete validation method |
-| [ret2dir](../../../30-sources/kemerlis-et-al-2014-ret2dir.md) | A supervisor alias of a user-controlled frame can bypass virtual-address-based access defenses | Historical exploits require an additional corruption primitive and do not evaluate Atom |
+| [ret2dir](../../../30-sources/kemerlis-et-al-2014-ret2dir.md) | A supervisor alias of a user-controlled frame can bypass virtual-address-based access defenses | Historical exploits require an additional corruption primitive and do not evaluate Kay |
 | [Nested Kernel](../../../30-sources/dautenhahn-et-al-2015-nested-kernel.md) | Declaring and protecting page-table pages and mediating every MMU-control path can narrow the trusted admission boundary | The same-ring x86 prototype is primarily uniprocessor and does not cover all DMA or SMI paths |
-| [CertiKOS](../../../30-sources/gu-et-al-2016-certikos.md) and [Serval](../../../30-sources/nelson-et-al-2019-serval.md) | Validator assurance should state its abstraction boundary and omitted hardware behavior, and executable ISA-level checks can expose implementation and compiler defects | Neither work verifies Atom's mapping policy, contemporary translation caches, or this proposed validator |
+| [CertiKOS](../../../30-sources/gu-et-al-2016-certikos.md) and [Serval](../../../30-sources/nelson-et-al-2019-serval.md) | Validator assurance should state its abstraction boundary and omitted hardware behavior, and executable ISA-level checks can expose implementation and compiler defects | Neither work verifies Kay's mapping policy, contemporary translation caches, or this proposed validator |
 | Current [Intel](../../../30-sources/intel-2026-system-programming-documentation.md), [Arm](../../../30-sources/arm-2026-a-profile-system-architecture-documentation.md), and [RISC-V](../../../30-sources/risc-v-international-2026-privileged-architecture.md) manuals | Legal addresses, descriptor bits, page sizes, memory attributes, and transition restrictions depend on the pinned ISA profile | Manuals specify mechanisms, not a common validator or capability policy |
 
 The exact validation order, error algebra, physical-extent W^X rule, and
-reservation scheme below are Atom proposals. They are deliberately more
+reservation scheme below are Kay proposals. They are deliberately more
 restrictive than some hardware permits so the first profile has a small
 security argument.
 

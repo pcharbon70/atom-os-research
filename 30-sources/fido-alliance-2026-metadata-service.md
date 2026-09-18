@@ -57,7 +57,7 @@ keys.
 
 ## Relevance
 
-Atom's credential registrar can record the exact signed metadata revision and
+Kay's credential registrar can record the exact signed metadata revision and
 status that informed enrollment/use, reduce assurance on new warnings, and
 avoid treating synchronized and device-bound credentials as equivalent.
 

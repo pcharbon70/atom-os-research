@@ -66,7 +66,7 @@ services on Microsoft Azure.
 
 ## Relevance
 
-Orleans is useful comparative evidence for Atom OS distribution gateways and
+Orleans is useful comparative evidence for Kay OS distribution gateways and
 service naming. Stable logical service names can live above the runtime, while
 runtime PIDs remain incarnation-specific. Gateways should make reconnect,
 duplicate, refusal, and ambiguous completion visible and should not silently
@@ -81,7 +81,7 @@ exactly-once or failure-detector result. It targets Azure middle-tier
 applications, not BEAM compatibility, capability security, or embedded/bare-
 metal systems. Delivery defaults have also changed since the 2014 report, so
 its historical semantics must not be presented as the current Orleans default.
-Reported performance cannot be transferred to Atom OS.
+Reported performance cannot be transferred to Kay OS.
 
 ## Derived work
 

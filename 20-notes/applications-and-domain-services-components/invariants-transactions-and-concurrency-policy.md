@@ -16,7 +16,7 @@ aliases:
 
 ## Executive decision
 
-Atom OS should choose transaction and coordination policy **from explicit
+Kay OS should choose transaction and coordination policy **from explicit
 domain invariants**, not from a universal preference for strong consistency,
 eventual consistency, actors, CRDTs, or transactions. The conservative native
 profile is one non-reentrant aggregate decision followed by one serializable
@@ -58,7 +58,7 @@ as a recoverable consistency-preserving state transformation and identifies
 limits of flat, long-lived work. [Coordination
 avoidance](../../30-sources/bailis-et-al-2014-coordination-avoidance.md) proves
 invariant confluence necessary and sufficient for coordination-free execution
-under its model. Its 25-fold TPC-C result cannot be transferred to Atom OS.
+under its model. Its 25-fold TPC-C result cannot be transferred to Kay OS.
 
 [Helland](../../30-sources/helland-2007-life-beyond-distributed-transactions.md)
 and [Sagas](../../30-sources/garcia-molina-salem-1987-sagas.md) motivate
@@ -68,7 +68,7 @@ shows how stable request identity and durable results strengthen retry
 semantics within a participating store; it does not cover arbitrary external
 sinks.
 
-No source proves the complete Atom OS invariant catalog. The catalog and
+No source proves the complete Kay OS invariant catalog. The catalog and
 profiles below must be validated on real applications.
 
 ## Invariant record

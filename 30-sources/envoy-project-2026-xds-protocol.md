@@ -71,7 +71,7 @@ are part of the record.
 
 ## Relevance
 
-Atom OS should publish a typed immutable `ConfigSnapshot` and distinguish at
+Kay OS should publish a typed immutable `ConfigSnapshot` and distinguish at
 least `received`, `validated`, `prepared`, and `active`. An acknowledgement
 records the candidate a service can accept, while the service reports its
 active digest only after reaching a declared safe point. The configuration
@@ -90,7 +90,7 @@ xDS is designed for Envoy's network-proxy resources and accepts a large,
 evolving API surface. It is not a proof of atomic multi-service activation,
 bounded memory, secrecy, or safe device configuration. ACK is intentionally
 weaker than completed application, and transport recovery still depends on
-the implementation. Atom OS should reuse the semantic distinctions, not the
+the implementation. Kay OS should reuse the semantic distinctions, not the
 full protocol or its deployment assumptions.
 
 ## Derived work

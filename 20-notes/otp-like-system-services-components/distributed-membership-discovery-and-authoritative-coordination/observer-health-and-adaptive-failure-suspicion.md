@@ -21,7 +21,7 @@ Research question: How can a slow failure detector avoid blaming healthy peers?
 Lifeguard adjusts probing and suspicion using local-health heuristics; DAGOR
 distinguishes local queue delay from downstream response time. [1](../../../30-sources/dadgar-et-al-2018-lifeguard.md) [2](../../../30-sources/zhou-et-al-2018-dagor.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

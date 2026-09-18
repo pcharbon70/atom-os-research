@@ -44,7 +44,7 @@ upgrade.
 The authoritative Markdown OASIS Standard was read for graph validation,
 parser/resolver/orchestrator separation, dependency traversal, lifecycle
 change, type/version behavior, and stated security limits. This is a broad
-interoperability language. Atom OS uses its graph lessons, not its entire YAML
+interoperability language. Kay OS uses its graph lessons, not its entire YAML
 surface or cloud platform assumptions.
 
 ## Findings
@@ -70,7 +70,7 @@ surface or cloud platform assumptions.
 
 ## Relevance
 
-Atom OS should adopt a deliberately smaller binary or term-encoded manifest
+Kay OS should adopt a deliberately smaller binary or term-encoded manifest
 schema with the same separation of parser, resolver, planner, and executor. A
 node declares artifact and configuration digests, required and provided
 interfaces, delegated capability facets, resource and recovery budgets,
@@ -81,7 +81,7 @@ derived or service started.
 Lifecycle edges should remain typed: a service can require another service's
 interface without necessarily requiring synchronized start, continuing health,
 or reverse-order drain. Old/new graph comparison yields an explicit plan, but
-publication still occurs only after Atom OS readiness and authority checks;
+publication still occurs only after Kay OS readiness and authority checks;
 irreversible external effects remain outside generic rollback.
 
 ## Limits
@@ -91,7 +91,7 @@ architecture are non-prescriptive. An implementation need not support every
 possible lifecycle phase. The standard does not provide capability security,
 crash consistency, bounded execution, truthful readiness, exactly-once effects,
 or safe compensation. Its large extensible language would be excessive for an
-early trusted service bootstrap. Atom OS should borrow the typed-graph
+early trusted service bootstrap. Kay OS should borrow the typed-graph
 discipline while keeping a small pinned profile.
 
 ## Derived work

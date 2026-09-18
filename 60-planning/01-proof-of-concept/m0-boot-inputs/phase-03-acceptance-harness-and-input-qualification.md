@@ -12,23 +12,23 @@ aliases: []
 
 # M0 Phase 3 — Acceptance harness and input qualification
 
-Deliver an exercised unattended acceptance harness and close the complete M0 input gate using
-real build and fixture evidence.
+Collect the physical qualification inventory, deliver an exercised unattended acceptance
+harness and close the complete M0 input gate using real build and fixture evidence.
 
 Back to milestone: [M0 definition and plan](README.md).
 
 ## Entry, scope, and dependencies
 
-M0 Phase 2 contract/build bundle and Phase 1 inventory; missing obligations remain visible at
-final review.
+M0 Phase 2 contract/build bundle. This phase collects the physical inventory independently
+before final M0 qualification; missing observations remain visible at final review.
 
 Required predecessor: [M0 Phase 2](phase-02-boot-image-and-interface-contracts.md), task `m0-p02-handoff`.
 
 Plan state: draft, requiring decision review before execution. Implementation: not started.
-All tests: not run. Implementation repository and individual owners remain unassigned; M0-D01
-resolves the source location and initial roles, and this phase's decisions task assigns its
-execution/review roles before dependent work. The label unresolved-implementation is a
-recorded blocker, not a selected repository.
+All tests: not run. The implementation repository is the selected public
+[Kay OS repository](https://github.com/pcharbon70/kay-os); individual Phase 3
+execution and review roles remain unassigned and are bound by this phase's
+decisions task before dependent work.
 
 Decision M0-D03 is resolved by m0-p03-decisions: Freeze watchdog deadlines, serial assertions,
 output retention, cleanup rules, and physical qualification prerequisites before interpreting
@@ -38,7 +38,7 @@ The host owns build tools, validation fixtures, emulation and capture; M0 does n
 kernel enforcement. Firmware/loader/kernel ownership is fixed in the contract.
 
 Unless explicitly identified as the physical qualification phase, guest checks use the
-M0-pinned QEMU/SeaBIOS, versioned q35, Nehalem-v1, TCG, one CPU, 128 MiB and serial fixture.
+M0-pinned QEMU/SeaBIOS, versioned q35, Nehalem-v1, TCG, one CPU, 64 MiB and serial fixture.
 Do not add writable storage, networking, SMP/NUMA or graphical UI to satisfy a failing case.
 AtomVM remains excluded. No command, commit, PR, installation or device write is authorized by
 this plan.
@@ -49,6 +49,7 @@ The governing [milestone definition](README.md) retains the full artifact and ac
 
 - [models fault injection and measurement](../../../20-notes/proof-of-concept-requirements/models-fault-injection-and-measurement.md) — contract and failure-case input for this phase.
 - [serial console and minimal cli](../../../20-notes/proof-of-concept-requirements/serial-console-and-minimal-cli.md) — contract and failure-case input for this phase.
+- [T7500 target and minimal QEMU profile](../../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) — separates installed-unit observations from the portable x86-64 and pinned virtual profiles.
 
 Follow the [planning convention](../../README.md). Retain results in [dated journal evidence](../../../50-journal/README.md), using the optional [execution-record template](../../../templates/phase-execution-record.md), with indexed [assets](../../../assets/README.md) or exact artifacts in the selected implementation repository.
 
@@ -58,29 +59,30 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 
 | Task ID | Repository/location | Responsible role | Requires | Artifact / acceptance contribution | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
-| m0-p03-decisions | atom-os-research | Unassigned; resolve in m0-p03-decisions | m0-p02-handoff | M0-A06; phase cases below | Fix the acceptance envelope output and verification; not run |
-| m0-p03-harness | unresolved-implementation | Unassigned; resolve in m0-p03-decisions | m0-p03-decisions | M0-A01, M0-A06; phase cases below | Implement and exercise the launch-and-capture driver output and verification; not run |
-| m0-p03-qualify | unresolved-implementation | Unassigned; resolve in m0-p03-decisions | m0-p03-harness | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; phase cases below | Assemble the M1 input bundle output and verification; not run |
-| m0-p03-integration | unresolved-implementation | Unassigned test reviewer | m0-p03-qualify | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Registered driver, raw positive/negative results; not run |
+| m0-p03-decisions | atom-os-research | Unassigned; resolve in m0-p03-decisions | m0-p02-handoff | M0-A06, M0-A07; phase cases below | Fix the acceptance and safe physical-inventory envelope; not run |
+| m0-p03-harness | kay-os | Unassigned; resolve in m0-p03-decisions | m0-p03-decisions | M0-A01, M0-A06; phase cases below | Implement and exercise the launch-and-capture driver output and verification; not run |
+| m0-p03-inventory | kay-os | Physical operator and reviewer unassigned | m0-p03-decisions | M0-A07, M0-T06 | Collect and review the redacted installed-unit record; deferred, not run |
+| m0-p03-qualify | kay-os | Unassigned; resolve in m0-p03-decisions | m0-p03-harness, m0-p03-inventory | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; phase cases below | Assemble the M1 input bundle output and verification; not run |
+| m0-p03-integration | kay-os | Unassigned test reviewer | m0-p03-qualify | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Registered driver, raw positive/negative results; not run |
 | m0-p03-handoff | atom-os-research | Unassigned acceptance reviewer | m0-p03-integration | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Dated evidence and proceed/revise/blocked review; not run |
 
 ## Planned work
 
 - [ ] 3 Phase — Acceptance harness and input qualification.
 
-  Deliver an exercised unattended acceptance harness and close the complete M0 input gate
-  using real build and fixture evidence. Completion requires the assembled phase gate below,
-  not just its component tasks.
+  Collect the installed-unit record, deliver an exercised unattended acceptance harness and
+  close the complete M0 input gate using real build and fixture evidence. Completion requires
+  the assembled phase gate below, not just its component tasks.
 
   - [ ] 3.1 Section — Harness and qualification.
 
-    Make both positive and negative run interpretation repeatable before the real guest is
-    available.
+    Make positive and negative run interpretation repeatable, collect the separately scoped
+    physical facts, and assemble the final input bundle.
 
     - [ ] 3.1.1 Task [id: m0-p03-decisions] [repo: atom-os-research] [after: m0-p02-handoff] — Fix the acceptance envelope.
 
-      Resolve M0-D03 and make every assertion and timeout a recorded input rather than a
-      post-failure adjustment.
+      Resolve M0-D03 and make every assertion, timeout and physical collection prerequisite a
+      recorded input rather than a post-failure adjustment.
 
       - [ ] 3.1.1.1 Subtask — Define harness outcomes.
 
@@ -88,7 +90,13 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         stalled output, cleanup completion, and nonzero failure statuses. Identify which
         streams are controlled fixtures rather than OS output.
 
-    - [ ] 3.1.2 Task [id: m0-p03-harness] [repo: unresolved-implementation] [after: m0-p03-decisions] — Implement and exercise the launch-and-capture driver.
+      - [ ] 3.1.1.2 Subtask — Define safe physical collection prerequisites.
+
+        Bind the physical operator, read-only commands, redaction rules, permitted removable
+        media and serial/debug access. Explicitly prohibit firmware changes and persistent
+        device writes without separate authorization.
+
+    - [ ] 3.1.2 Task [id: m0-p03-harness] [repo: kay-os] [after: m0-p03-decisions] — Implement and exercise the launch-and-capture driver.
 
       Deliver M0-A06 and a runnable entry point with explicit version checks, finite cleanup,
       and per-run manifests.
@@ -105,18 +113,36 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         missing/incorrect prompt, stalled stream, and unexpected process exit. Preserve both
         successful and failing logs.
 
-    - [ ] 3.1.3 Task [id: m0-p03-qualify] [repo: unresolved-implementation] [after: m0-p03-harness] — Assemble the M1 input bundle.
+    - [ ] 3.1.3 Task [id: m0-p03-inventory] [repo: kay-os] [after: m0-p03-decisions] — Inventory the physical qualification target.
+
+      Deliver M0-A07 from observations immediately before final M0 qualification. This task
+      characterizes the installed T7500 and safe test path; it does not configure virtual
+      development or define Kay OS around one motherboard.
+
+      - [ ] 3.1.3.1 Subtask — Collect installed-unit evidence.
+
+        Run the existing read-only collector with a physical operator. Record CPU
+        SKU/stepping/features, enabled topology, RAM, board, firmware, relevant devices, and
+        serial/debug availability. Redact unique service identifiers and preserve unknowns.
+
+      - [ ] 3.1.3.2 Subtask — Review portability and physical prerequisites.
+
+        Separate discovered platform data from x86-64 architectural requirements and from the
+        q35 fixture. Confirm safe boot/debug media, additional-CPU policy, unsupported-device
+        handling and the exact physical claims the record can support.
+
+    - [ ] 3.1.4 Task [id: m0-p03-qualify] [repo: kay-os] [after: m0-p03-harness, m0-p03-inventory] — Assemble the M1 input bundle.
 
       Bind all seven artifacts and their identities so another checkout can repeat the
       qualification.
 
-      - [ ] 3.1.3.1 Subtask — Reconcile the full input set.
+      - [ ] 3.1.4.1 Subtask — Reconcile the full input set.
 
         Verify virtual pins, build closure, contract validators, authority, and installed
         inventory are complete and mutually consistent. Keep physical observations separate
         from emulator assumptions.
 
-      - [ ] 3.1.3.2 Subtask — Reproduce the handoff.
+      - [ ] 3.1.4.2 Subtask — Reproduce the handoff.
 
         Package manifests, symbols, fixtures, launcher, commands, hashes, and limits at named
         revisions. Repeat from a clean environment and leave any unavailable required input
@@ -128,7 +154,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 3.2.1 Task [id: m0-p03-integration] [repo: unresolved-implementation] [after: m0-p03-qualify] — Verify the integrated outcome and regressions.
+    - [ ] 3.2.1 Task [id: m0-p03-integration] [repo: kay-os] [after: m0-p03-qualify] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for

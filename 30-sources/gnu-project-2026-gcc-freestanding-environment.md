@@ -38,7 +38,7 @@ The C section documents -ffreestanding, separate startup/linking obligations, co
 
 ## Relevance
 
-Informs the proposed requirement contract and its negative tests. This source does not establish that Atom implements or passes that contract.
+Informs the proposed requirement contract and its negative tests. This source does not establish that Kay implements or passes that contract.
 
 ## Limits
 

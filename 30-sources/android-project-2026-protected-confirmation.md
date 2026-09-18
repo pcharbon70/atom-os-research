@@ -40,7 +40,7 @@ cryptographic confirmation token for a critical transaction.
 ## Method
 
 These are first-party architecture and implementation documents for supported
-Android devices, not a peer-reviewed security proof or an evaluation of Atom.
+Android devices, not a peer-reviewed security proof or an evaluation of Kay.
 The review focused on protected rendering/input, message binding, interruption,
 and the boundary between ordinary Android and TEE components.
 
@@ -56,8 +56,8 @@ and the boundary between ordinary Android and TEE components.
 
 ## Relevance
 
-Atom can use this as an implementation precedent for full-render-before-arm,
-abort-on-route-change, and an operation-bound confirmation receipt. The Atom
+Kay can use this as an implementation precedent for full-render-before-arm,
+abort-on-route-change, and an operation-bound confirmation receipt. The Kay
 broker still needs its own hardware profile, canonical schemas, accessibility,
 multi-seat handling, and independent verification.
 

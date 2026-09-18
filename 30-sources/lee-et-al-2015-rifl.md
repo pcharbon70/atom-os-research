@@ -116,7 +116,7 @@ once unless the actual effect sink participates in the same atomic protocol or
 offers equivalent durable deduplication.
 
 RIFL's numeric client identifier is uniqueness machinery, not proof of the
-caller's identity. An Atom OS adaptation would need to bind request identity
+caller's identity. An Kay OS adaptation would need to bind request identity
 and retained results to an authenticated service incarnation and the capability
 authorizing the operation. Even then, authenticated identity answers who
 presented a credential; it does not itself authorize the requested action.
@@ -135,7 +135,7 @@ Long disruptions trade lease safety against retained metadata and availability,
 and client loss remains an end-to-end ambiguity. The RAMCloud measurements use
 2015-era datacenter hardware and a specialized in-memory store, so they provide
 no direct evidence about embedded footprint, flash endurance, actor-mailbox
-traffic, or Atom OS scheduling interference.
+traffic, or Kay OS scheduling interference.
 
 ## Derived work
 

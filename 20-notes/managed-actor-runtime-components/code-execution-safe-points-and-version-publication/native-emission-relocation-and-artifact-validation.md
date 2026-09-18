@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Load-time translation offers a simpler alternative to adaptive tracing; PCC cautions that code safety depends on the modeled policy and trusted checker. [1](../../../30-sources/gustavsson-2020-road-to-the-jit.md), [2](../../../30-sources/necula-1997-proof-carrying-code.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Language execution and code-version visibility belong to the runtime; executable-page publication consumes the lower kernel's complete W^X and instruction-fetch contract.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

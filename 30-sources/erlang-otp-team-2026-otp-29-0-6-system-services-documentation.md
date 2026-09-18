@@ -73,7 +73,7 @@ documentation. Behaviour callback protocols, supervisor flags, application
 start and stop rules, registry guarantees, release workflows, distribution
 warnings, and Logger overload controls were compared with the older pinned OTP
 29.0.5 documentation and source audit already in this archive. Statements were
-classified as public behavior, documented implementation, or Atom OS
+classified as public behavior, documented implementation, or Kay OS
 inference. No OTP node was started, no benchmark was run, and no implementation
 detail was inferred solely from a module name.
 
@@ -175,7 +175,7 @@ detail was inferred solely from a module name.
 
 ## Relevance
 
-These pages define the compatibility vocabulary for an OTP-like Atom OS
+These pages define the compatibility vocabulary for an OTP-like Kay OS
 service layer, but they do not require copying OTP's current application
 controller, global registry, release scripts, ambient node trust, or mutable
 configuration model. The proposed layer can preserve behaviour protocols and

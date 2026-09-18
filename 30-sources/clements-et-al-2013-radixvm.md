@@ -69,7 +69,7 @@ and operation locality.
 RadixVM grounds the distinction among a logical mapping ledger, encoded page
 tables, target-set derivation, acknowledged invalidation, and reclamation. It
 also motivates range-local concurrency as an optional later implementation,
-after Atom proves a simpler single-writer baseline.
+after Kay proves a simpler single-writer baseline.
 
 ## Limits
 

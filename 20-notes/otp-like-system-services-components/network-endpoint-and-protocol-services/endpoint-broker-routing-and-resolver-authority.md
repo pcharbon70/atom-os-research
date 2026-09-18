@@ -21,7 +21,7 @@ Research question: How are network destinations selected without making connecti
 Capability delegation scopes permitted operations; a transport connection does not
 define application authorization. [1](../../../30-sources/miller-et-al-2003-capability-myths.md) [2](../../../30-sources/iyengar-thomson-2021-quic.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

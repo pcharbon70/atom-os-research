@@ -15,7 +15,7 @@ How can administrative suspension preserve a thread's logical wait state without
 
 Scheduling-context mechanisms separate possession of time authority from thread execution state. [1](../../../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md), [2](../../../30-sources/sel4-foundation-2026-reference-manual.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../protection-domains-threads-and-address-spaces.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../protection-domains-threads-and-address-spaces.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

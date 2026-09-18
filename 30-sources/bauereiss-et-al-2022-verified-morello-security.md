@@ -62,7 +62,7 @@ development.
 
 ## Relevance
 
-A future CHERI-enabled Atom OS target could strengthen memory safety and
+A future CHERI-enabled Kay OS target could strengthen memory safety and
 fine-grained compartmentalization inside the kernel, runtime, and native
 services. The architecture should nevertheless express its security contract
 in ISA-independent typed kernel capabilities first, with CHERI as a stronger
@@ -72,7 +72,7 @@ hardware profile rather than a prerequisite.
 
 Morello is a prototype architecture, and the proof is not a proof of an entire
 processor, compiler, kernel, allocator, temporal-memory-safety discipline, or
-Atom OS. Reachable capability monotonicity does not supply human authentication,
+Kay OS. Reachable capability monotonicity does not supply human authentication,
 policy, revocation, availability, side-channel freedom, or distributed trust.
 
 ## Derived work

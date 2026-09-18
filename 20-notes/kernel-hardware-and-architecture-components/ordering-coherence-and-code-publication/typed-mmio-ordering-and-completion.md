@@ -66,6 +66,6 @@ Any eventual experiment must record the implementation and specification revisio
 ## Sources
 
 - [Linux device-I/O contracts](../../../30-sources/linux-kernel-community-2026-device-io-contracts.md) — Posted-write receipt differs from CPU-side ordering.
-- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Atom proofs.
+- [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Kay proofs.
 
 These sources support the constraints above. The proposed object division, transition composition and verification obligations are our synthesis and remain unverified.

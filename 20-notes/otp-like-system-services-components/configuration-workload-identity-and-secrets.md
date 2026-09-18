@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS deliver ordinary configuration, attest a workload
+How should Kay OS deliver ordinary configuration, attest a workload
 incarnation, and rotate sensitive credentials without merging those concerns
 into a global environment or long-lived shared secret?
 
@@ -62,7 +62,7 @@ as well as their trust and availability assumptions. Neither source turns an
 authenticated identity into authorization or guarantees instant revocation of
 a copied bearer credential.
 
-The Atom OS synthesis separates a `ConfigStore` from a `CredentialBroker`,
+The Kay OS synthesis separates a `ConfigStore` from a `CredentialBroker`,
 even if both use the same lower durable-state service.
 
 ## Recommended architecture

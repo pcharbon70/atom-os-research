@@ -41,7 +41,7 @@ of what is fitted to this unit.
 Evidence: [later specification sheet](../../30-sources/dell-2026-precision-t7500-specification-sheet.md),
 [original technical guide](../../30-sources/dell-2026-precision-t5500-t7500-technical-guide.md)
 and [service manual](../../30-sources/dell-2026-precision-t7500-service-manual.md).
-Maximums are manufacturer configuration claims, not Atom capacity results.
+Maximums are manufacturer configuration claims, not Kay capacity results.
 
 [Dell's A18 release](../../30-sources/dell-2018-precision-t7500-bios-a18.md)
 is dated 2018-11-02. The installed version is unknown. This decision does not
@@ -61,7 +61,7 @@ packages; no physical inspection or command output has verified that topology.
 A18's publication is not evidence that it is installed or should be flashed.
 The maximum memory and power-supply rating are manufacturer specifications,
 not recommended first-test allocations or measured consumption. The first
-virtual test remains one CPU and 128 MiB under the active profile.
+virtual test remains one CPU and 64 MiB under the active profile.
 
 ## Connections
 

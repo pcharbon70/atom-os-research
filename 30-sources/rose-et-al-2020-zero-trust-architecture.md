@@ -56,7 +56,7 @@ specification, implementation proof, or product benchmark.
 
 ## Relevance
 
-Atom OS should apply the principle below the network: no process, actor, user,
+Kay OS should apply the principle below the network: no process, actor, user,
 service, driver, node, recovery path, or debug tool gains authority merely by
 being local, booted, named, supervised, or authenticated. The policy plane can
 evaluate changing evidence, while resource services and the kernel remain the
@@ -67,7 +67,7 @@ enforcement points for bounded capabilities and generation fences.
 The document is enterprise-network guidance. Its logical components do not
 select a microkernel capability representation, solve distributed consistency,
 define a trusted human path, or prove that continuous re-evaluation is complete
-or race-free. Atom OS must translate the principles rather than copy the
+or race-free. Kay OS must translate the principles rather than copy the
 enterprise reference diagrams.
 
 ## Derived work

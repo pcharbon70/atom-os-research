@@ -85,7 +85,7 @@ cover to cover.
 
 No new measurements or exact performance constants are transferred from old
 papers. No current seL4 verification claim is inferred for every configuration.
-The Microkit protected-call scheduling prose is not used to establish Atom's
+The Microkit protected-call scheduling prose is not used to establish Kay's
 donation semantics; the versioned seL4 manual and scheduling-context paper are
 the comparative sources for that question. Full specification/code refinement
 of any selected implementation still remains to be done.
@@ -120,7 +120,7 @@ stopped, a device quiescent or memory reusable.
 | --- | --- | --- | --- |
 | Initialization | capDL construction and policy correctness are different questions | Validate structure and security predicates before private construction; audit and seal authority separately | Manifest adversarial corpus and implementation-refinement argument |
 | Resources | Explicit-memory and resource-container work separate backing and attribution | One payer, explicit indirect costs and independently consented charge transfer | Conservation under constructor/transfer/close races |
-| Capability products | Existing capability mechanisms do not prove Atom's proposed multi-input algebra | Classify effect-bearing inputs, transient guards and durable detachment consent | Executable authority model and counterexamples for every product schema |
+| Capability products | Existing capability mechanisms do not prove Kay's proposed multi-input algebra | Classify effect-bearing inputs, transient guards and durable detachment consent | Executable authority model and counterexamples for every product schema |
 | Domain stop | Stalled-participant algorithms require a legitimate recovery/checkpoint contract | Never acknowledge an abandoned lock-holding activation merely because a CPU halted | Complete checkpoint invariants and SMP membership/stop model |
 | Calls and time | Donated time can remain with a non-replying server | Finite passive admission, preauthorized abort scope and drain before return | Reply/cancel/stop/suspend interleavings and exact budget ownership |
 | Temporal claims | Budget conservation, response bounds and timing channels are distinct | Separate admission/refill, recovery-reserve and timing-protection studies | Profile-specific timing and confidentiality evidence |
@@ -131,7 +131,7 @@ stopped, a device quiescent or memory reusable.
 | Evidence | Lockless snapshots and prepared crash resources have limited assumptions | Protect reader lifetime; enrich the lower layer's one sealed fatal record | Memory-model analysis, interrupted-writer and partial-record tests |
 
 These are cross-source and parent-contract syntheses, not claims that any cited
-system implements the combined Atom protocol. At-most-once outcome selection
+system implements the combined Kay protocol. At-most-once outcome selection
 does not guarantee eventual progress. Fixed-work gate publication does not
 bound total descendant traversal, CPU response or device completion.
 

@@ -59,7 +59,7 @@ heavy workloads.
 
 ## Relevance
 
-Midas provides a strong upper bound for an Atom user-access profile: one
+Midas provides a strong upper bound for an Kay user-access profile: one
 operation may require snapshot consistency, not merely fault safety. The
 baseline should obtain it cheaply by copying small control inputs once; a
 page-snapshot or fetch-cache profile remains optional for compatibility paths.
@@ -69,7 +69,7 @@ page-snapshot or fetch-cache profile remains optional for compatibility paths.
 Midas is a Linux prototype rather than a proof, and complete coverage depends
 on mediating all relevant reads. Stable data does not preserve object
 generation or authority. Reported overheads and attack coverage do not
-transfer automatically to Atom's microkernel and capability boundaries. The
+transfer automatically to Kay's microkernel and capability boundaries. The
 paper explicitly excludes device/DMA modification from the protected threat
 model; it notes a possible IOMMU extension but does not implement or
 evaluate device-complete snapshot protection.

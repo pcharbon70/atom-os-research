@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS authenticate a release graph, stage compatible service
+How should Kay OS authenticate a release graph, stage compatible service
 generations, migrate state, activate one generation, and retain a truthful
 rollback or roll-forward path across crashes?
 
@@ -57,7 +57,7 @@ explicit update points and compatibility constraints. It does not make
 arbitrary concurrent state transformation safe. [FSCQ](../../30-sources/chen-et-al-2015-fscq.md)
 supports crash-specified shadow/durable state transitions. [TOSCA
 2.0](../../30-sources/oasis-2025-tosca-2.md) contributes typed dependency and
-orchestration concepts, but a first Atom OS profile should remain much smaller.
+orchestration concepts, but a first Kay OS profile should remain much smaller.
 
 The synthesis treats update as a transaction over several independently
 fallible domains, with one small public activation point and explicit

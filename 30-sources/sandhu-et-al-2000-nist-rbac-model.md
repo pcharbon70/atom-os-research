@@ -57,7 +57,7 @@ comparative security or performance evaluation.
 
 ## Relevance
 
-Atom can use roles as policy input for job functions and separation of duty,
+Kay can use roles as policy input for job functions and separation of duty,
 but the relationship or attribute authority must not turn a role string into a
 kernel power. The policy decision point evaluates versioned role facts and the
 grant issuer compiles only the permitted subset into an attenuated capability.

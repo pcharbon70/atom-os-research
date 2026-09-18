@@ -62,7 +62,7 @@ Windows treatment.
 
 ## Relevance
 
-Atom OS needs a secure-attention mechanism and a tiny trusted interaction
+Kay OS needs a secure-attention mechanism and a tiny trusted interaction
 service, but also a credential-use rule: no application, browser, CLI plugin,
 or compatibility environment may receive the device-login secret. Sensitive
 approval must display the principal, requester, exact resource/action, scope,
@@ -73,7 +73,7 @@ specific grant request.
 
 The participants, operating systems, interfaces, and password-centric threat
 model are from 2012. The study does not evaluate passkeys, hardware tokens,
-modern platform authenticators, or the proposed Atom OS UI. Its result supports
+modern platform authenticators, or the proposed Kay OS UI. Its result supports
 the architectural need for trusted interaction, not one timeless visual design.
 
 ## Derived work

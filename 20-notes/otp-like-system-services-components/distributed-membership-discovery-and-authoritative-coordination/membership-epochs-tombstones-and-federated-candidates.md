@@ -21,7 +21,7 @@ Research question: How can delayed advertisements remain harmless across reboot,
 Weak membership and authenticated workload identity provide observations and
 identity, not authoritative resource ownership. [1](../../../30-sources/dadgar-et-al-2018-lifeguard.md) [2](../../../30-sources/spiffe-project-2026-workload-api.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

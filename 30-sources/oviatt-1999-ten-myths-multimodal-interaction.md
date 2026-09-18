@@ -59,7 +59,7 @@ research synthesis from 1999 rather than a current whole-population study.
 
 ## Relevance
 
-Atom OS should preserve one semantic object and command space while permitting
+Kay OS should preserve one semantic object and command space while permitting
 modality-specific interaction sessions, context, timing, confidence, and
 confirmation. A voice view is not a spoken serialization of a visual tree, and
 cross-view equivalence must concern available meaning and effects rather than
@@ -75,4 +75,4 @@ complete multimodal protocol.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

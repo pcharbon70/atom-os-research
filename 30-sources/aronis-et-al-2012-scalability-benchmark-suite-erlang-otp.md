@@ -81,7 +81,7 @@ while degrading responsiveness or resource efficiency.
 The suite and illustrative results reflect 2012-era Erlang/OTP, hardware, and
 distributed infrastructure. It does not supply hard real-time, security,
 energy, garbage-collection-pause, or hostile-overload guarantees. Its workload
-set is a starting point for an Atom OS evaluation matrix, not proof that a new
+set is a starting point for an Kay OS evaluation matrix, not proof that a new
 runtime is compatible or scalable.
 
 ## Derived work

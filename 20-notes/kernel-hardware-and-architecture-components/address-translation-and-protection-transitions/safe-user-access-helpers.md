@@ -29,7 +29,7 @@ not authenticate a caller, authorize an operation, freeze concurrent user
 writes, or turn a pin into a coherent snapshot. Those semantics must be
 explicit at the API boundary.
 
-This is proposed Atom architecture. Its fault-table ABI, access-window
+This is proposed Kay architecture. Its fault-table ABI, access-window
 mechanism, and cross-ISA implementations remain unverified.
 
 ## Question, scope, and operational standard
@@ -77,18 +77,18 @@ memory. A baseline passes only if:
 
 | Evidence | Supported conclusion | Limit |
 | --- | --- | --- |
-| [Linux VM implementation contracts](../../../30-sources/linux-kernel-community-2026-virtual-memory-implementation-contracts.md) | Mature user-copy APIs distinguish access checks, faultable copy, uncopied-byte results, destination zeroing, and pin semantics | Linux's large API surface and architecture details are precedent, not Atom's contract |
+| [Linux VM implementation contracts](../../../30-sources/linux-kernel-community-2026-virtual-memory-implementation-contracts.md) | Mature user-copy APIs distinguish access checks, faultable copy, uncopied-byte results, destination zeroing, and pin semantics | Linux's large API surface and architecture details are precedent, not Kay's contract |
 | [SafeFetch](../../../30-sources/duta-et-al-2024-safefetch.md) | Compiler instrumentation plus a byte-granular per-system-call cache can replay the first value for later overlapping fetches | Whole-kernel mediation and caching are not as small as copy-once API discipline |
 | [Midas](../../../30-sources/bhattacharyya-et-al-2022-midas.md) | Page-table-mediated guarantees can stop double-fetch attacks with modest reported overhead | The mechanism modifies Linux and relies on evaluated hardware/workloads |
 | [ret2dir](../../../30-sources/kemerlis-et-al-2014-ret2dir.md) | A privileged direct physical map can provide an alias around user/supervisor isolation and be exploitable | Attack demonstrations cover particular Linux kernels and mitigations have evolved |
 | [Ephemeral mapping management](../../../30-sources/elmeleegy-et-al-2005-ephemeral-mapping-management.md) | Temporary kernel mappings need explicit lifetime, ownership, and bounded resource management | Historical x86 implementation does not establish modern security or concurrency |
-| [Secure memory management](../../../30-sources/achermann-et-al-2020-secure-memory-management.md) | Typed mappings and explicit authority can make cross-layer memory operations auditable and least-privileged | The framework is not an implementation of Atom's copy API |
-| [Nested Kernel](../../../30-sources/dautenhahn-et-al-2015-nested-kernel.md) | Protecting page-table and isolation machinery from the rest of a privileged kernel can preserve complete mediation under compromise | Threat model and x86 prototype differ from Atom |
+| [Secure memory management](../../../30-sources/achermann-et-al-2020-secure-memory-management.md) | Typed mappings and explicit authority can make cross-layer memory operations auditable and least-privileged | The framework is not an implementation of Kay's copy API |
+| [Nested Kernel](../../../30-sources/dautenhahn-et-al-2015-nested-kernel.md) | Protecting page-table and isolation machinery from the rest of a privileged kernel can preserve complete mediation under compromise | Threat model and x86 prototype differ from Kay |
 | [Intel system-programming documentation](../../../30-sources/intel-2026-system-programming-documentation.md), [Arm A-profile documentation](../../../30-sources/arm-2026-a-profile-system-architecture-documentation.md), and [RISC-V privileged architecture](../../../30-sources/risc-v-international-2026-privileged-architecture.md) | SMAP-like, PAN-like, and SUM-like controls can make supervisor access to user mappings normally unavailable | Exact control, fault, speculation, and interrupt behavior is architecture/profile specific |
 
 The evidence supports explicit access mediation, copy-once parsing, guarded
 hardware windows, and avoidance of ambient aliases. The handle types and
-snapshot contract below are Atom synthesis.
+snapshot contract below are Kay synthesis.
 
 ## Authority-bearing access guard
 
@@ -339,7 +339,7 @@ CopyOutResult = Complete(bytes)
               | Interrupted(bytes_copied)
 ```
 
-Atom's safe `copy_from_user` baseline should zero the uncopied destination tail
+Kay's safe `copy_from_user` baseline should zero the uncopied destination tail
 on any partial result, including failures from later vector elements. An
 internal raw primitive may report “bytes not copied,” as Linux does, but it is
 not a general kernel API and can write only into a buffer whose initialization
@@ -609,7 +609,7 @@ A SafeFetch-like first-fetch cache can serve as a compatibility profile for
 code that cannot yet obey copy-once discipline; separate instrumentation can
 report those repeated-fetch sites. Midas-like page-table enforcement is a
 possible stronger deployment profile, not a substitute for a small default API
-until its portability and interaction with Atom's mapper are demonstrated.
+until its portability and interaction with Kay's mapper are demonstrated.
 
 ## Staged implementation
 

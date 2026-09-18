@@ -55,6 +55,6 @@ where distinct state, trust or completion obligations justify it. Preserve
 unexecuted tests and unresolved choices as such.
 
 Continue through the [application topic map](../../../10-maps/applications-and-domain-services.md)
-and [open inquiry](../../../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md);
+and [open inquiry](../../../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md);
 neither literature coverage nor this decomposition closes architectural
 qualification.

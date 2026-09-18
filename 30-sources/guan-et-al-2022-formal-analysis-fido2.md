@@ -55,7 +55,7 @@ registration, assertion, rebinding, and parallel sessions.
 
 ## Relevance
 
-Atom OS should model its exact native-login and step-up ceremony—including the
+Kay OS should model its exact native-login and step-up ceremony—including the
 authenticator transport, trusted UI, session issuer, parallel requests, reset,
 and credential rebinding—rather than cite FIDO2 conformance as an end-to-end
 proof. Every challenge must bind the requester, target, operation, boot epoch,

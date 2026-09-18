@@ -63,7 +63,7 @@ the normative source for today's architecture semantics.
 
 ## Relevance
 
-Atom's x86 capture program should be fixed, nonallocating, lock-independent,
+Kay's x86 capture program should be fixed, nonallocating, lock-independent,
 and limited to raw bank collection, acknowledgement, sealing, and a typed
 disposition. Decoder and classifier code should execute later against a pinned
 CPU/profile table. Interrupted thread identity must be recorded separately
@@ -75,7 +75,7 @@ The paper describes an early Linux x86-64 handler and predates current machine-
 check extensions, memory-failure recovery, virtualization, and many vendor
 errata. It is neither a formal proof nor evidence that continuation is safe
 after arbitrary corruption. Its data structure and policy are precedents, not
-an Atom ABI.
+an Kay ABI.
 
 ## Derived work
 

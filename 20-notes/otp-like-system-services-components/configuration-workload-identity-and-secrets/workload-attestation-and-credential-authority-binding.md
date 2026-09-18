@@ -21,7 +21,7 @@ Research question: How does the broker identify its caller without trusting a se
 SPIFFE relies on endpoint-side caller attribution; identity material does not itself
 authorize resource operations. [1](../../../30-sources/spiffe-project-2026-workload-api.md) [2](../../../30-sources/miller-et-al-2003-capability-myths.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

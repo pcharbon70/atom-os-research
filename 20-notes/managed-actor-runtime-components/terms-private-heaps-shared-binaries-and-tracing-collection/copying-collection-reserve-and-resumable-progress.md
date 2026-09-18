@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 The incremental Erlang study couples collection progress to allocation; resource-container work motivates charging collector work to the activity that causes it. [1](../../../30-sources/sagonas-wilhelmsson-2006-efficient-memory-management.md), [2](../../../30-sources/banga-et-al-1999-resource-containers.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Automatic tracing collection and term interpretation remain unprivileged runtime responsibilities; kernel pages do not encode BEAM object ownership.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

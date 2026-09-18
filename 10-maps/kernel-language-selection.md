@@ -26,7 +26,7 @@ qualification. This is not a new language-comparison implementation milestone.
 
 The [Zig route](zig-kernel-development.md) and [C route](c-kernel-development.md)
 both establish plausible low-level mechanisms. Neither has demonstrated
-Atom's boot or protected execution. The comparison evaluates their different
+Kay's boot or protected execution. The comparison evaluates their different
 source, compiler, integration and assurance risks without treating either
 small ELF as a working kernel.
 

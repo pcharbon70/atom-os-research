@@ -175,7 +175,7 @@ never an unsupported claim about chronology inside failing hardware.
 and production memory-error studies from [Facebook](../../30-sources/meza-et-al-2015-revisiting-memory-errors.md)
 and [Li et al.](../../30-sources/li-et-al-2010-realistic-memory-error-evaluation.md)
 show why correction, consumption, precision, recurrence, and containment scope
-must remain independent facts. They do not establish that Atom can safely
+must remain independent facts. They do not establish that Kay can safely
 resume any concrete case; every such rule still needs a pinned target profile
 and its own falsification evidence.
 

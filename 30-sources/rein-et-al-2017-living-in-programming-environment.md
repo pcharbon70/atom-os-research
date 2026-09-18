@@ -64,17 +64,17 @@ builders rather than a controlled novice study.
 ## Relevance
 
 The report connects Smalltalk-style live tools to practical project work while
-showing why Atom OS needs capability-scoped object access, explicit remote
+showing why Kay OS needs capability-scoped object access, explicit remote
 provenance, durable staging, and conflict policy around the live experience.
 
 ## Limits
 
 Eight months of builder use does not establish safety, non-expert
 learnability, or comparative productivity. The environment's shared object
-world and web-service assumptions should not be copied as Atom OS trust or
+world and web-service assumptions should not be copied as Kay OS trust or
 failure boundaries.
 
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

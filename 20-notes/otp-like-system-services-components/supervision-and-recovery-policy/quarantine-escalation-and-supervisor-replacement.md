@@ -21,7 +21,7 @@ Research question: Who retains responsibility when local recovery cannot safely 
 Revocation limits future authority, while recovery escalation requires a holder
 outside the scope being destroyed. [1](../../../30-sources/miller-et-al-2003-capability-myths.md) [2](../../../30-sources/candea-et-al-2004-microreboot.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

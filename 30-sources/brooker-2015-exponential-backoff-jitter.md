@@ -64,7 +64,7 @@ benchmark.
 
 ## Relevance
 
-Atom OS native supervisors and reconcilers should use capped Full Jitter as an
+Kay OS native supervisors and reconcilers should use capped Full Jitter as an
 initial default after a restartable transient failure, with the cap, random
 source, retry budget, deadline, and cooldown recorded in policy. Siblings that
 fail from one dependency outage must not all restart at the same deterministic
@@ -82,7 +82,7 @@ The simulation is narrow and assumes one style of contention and network
 delay. It does not prove Full Jitter optimal for local actors, establish hard
 latency bounds, model adversarial randomness, or include client deadlines and
 priorities. Randomness can also harm deterministic replay unless choices are
-recorded. Atom OS must benchmark failure bursts and suspend/resume behavior on
+recorded. Kay OS must benchmark failure bursts and suspend/resume behavior on
 its own scheduler and monotonic-clock profiles.
 
 ## Derived work

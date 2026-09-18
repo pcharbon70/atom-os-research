@@ -15,7 +15,7 @@ Which work must remain attributable, and what resource independence makes recove
 
 Resource containers motivate following work across protection boundaries rather than billing only the executing thread. [1](../../../30-sources/banga-et-al-1999-resource-containers.md), [2](../../../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../scheduling-contexts-and-temporal-authority.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../scheduling-contexts-and-temporal-authority.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

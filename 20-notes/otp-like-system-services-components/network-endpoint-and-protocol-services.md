@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS expose local network endpoints and protocol sessions while
+How should Kay OS expose local network endpoints and protocol sessions while
 keeping drivers and parsers isolated, propagating finite flow control, binding
 peer identity to the current session, and reporting remote outcomes without
 RPC illusions?
@@ -218,7 +218,7 @@ Standard Erlang distribution may run as a confined gateway for a deliberately
 trusted cell. The gateway terminates the distribution protocol, maps approved
 names and operations to native capabilities, enforces connection and atom/data
 limits, and isolates parsing and decoding. It does not make every authenticated
-distribution peer a trusted Atom OS node.
+distribution peer a trusted Kay OS node.
 
 The gateway profile pins OTP/ERTS versions, handshake and encryption choices,
 atom-cache limits, process/link/monitor semantics, failure translation, and

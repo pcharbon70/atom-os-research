@@ -71,7 +71,7 @@ supervision, cancellation, teardown, and lease renewal. It is evidence that
 merely sending control information into the same FIFO backlog as ordinary work
 can make the control loop ineffective.
 
-Priority delivery is a useful runtime mechanism, but the Atom OS proposal adds
+Priority delivery is a useful runtime mechanism, but the Kay OS proposal adds
 service-layer policy: narrow authority to use the control path, finite reserved
 capacity, per-class admission, accounting, and an explicit response when that
 capacity is exhausted. Those additions are architectural proposals, not claims
@@ -85,7 +85,7 @@ priority messages impose no performance penalty is not accompanied by a
 benchmark method, workloads, measurements, or tail-latency data. The article
 does not establish bounded memory, fair service between priority classes,
 starvation freedom, admission control, or resource reservation. Current OTP 29
-documentation remains the compatibility authority, and any Atom OS control
+documentation remains the compatibility authority, and any Kay OS control
 queue requires independent overload and adversarial testing.
 
 ## Derived work

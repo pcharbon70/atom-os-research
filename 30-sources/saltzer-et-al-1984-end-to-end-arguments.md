@@ -73,7 +73,7 @@ moved upward.
 
 ## Relevance
 
-Atom OS network services should expose what the transport actually knows:
+Kay OS network services should expose what the transport actually knows:
 local rejection, bytes accepted for transmission, authenticated session state,
 stream acknowledgement, peer close, or loss. They must not translate those
 facts into “the remote service committed the operation.” Effectful protocols
@@ -84,7 +84,7 @@ than blindly retrying.
 The same rule applies to durable state and audit. A WAL commit proves only the
 effects enclosed by its transaction, and a telemetry exporter acknowledgement
 does not prove that a protected audit record is durably retained by an
-independent verifier. Atom OS can still use reliable streams, checksums,
+independent verifier. Kay OS can still use reliable streams, checksums,
 authenticated encryption, and bounded retry as useful lower mechanisms while
 keeping their guarantee labels precise.
 
@@ -95,7 +95,7 @@ large-scale service meshes, and capability kernels. It provides no wire
 protocol, algorithm, quantitative placement rule, or Byzantine threat model.
 Some functions are cheaper or safer when partly duplicated across layers, and
 strictly following a slogan instead of evaluating cost and failure scope would
-misapply the work. Atom OS must measure where a lower optimization belongs
+misapply the work. Kay OS must measure where a lower optimization belongs
 while retaining endpoint-level correctness.
 
 ## Derived work

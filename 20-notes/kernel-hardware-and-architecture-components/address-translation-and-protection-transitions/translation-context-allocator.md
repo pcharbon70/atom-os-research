@@ -29,7 +29,7 @@ profile. It should not manufacture isolation by assuming all CPUs interpret a
 numeric tag globally or by wrapping a counter silently.
 
 This is proposed architecture. Linux supplies strong implementation precedent,
-but no Atom allocator has been modeled or measured.
+but no Kay allocator has been modeled or measured.
 
 ## Question, scope, and operational standard
 
@@ -82,12 +82,12 @@ A candidate passes only if:
 | [Arm A-profile documentation](../../../30-sources/arm-2026-a-profile-system-architecture-documentation.md) | ASID width, translation regime, CnP/sharing, TLBI scope, and barriers determine tag meaning and reuse | Exact rules depend on architecture revision and configured regime |
 | [RISC-V privileged architecture](../../../30-sources/risc-v-international-2026-privileged-architecture.md) | ASID length can be zero, is probed, is bounded by mode, and `SFENCE.VMA` is local with ASID-scoped forms | Platform and SBI behavior still determine remote completion |
 | [RISC-V supervisor binary interface](../../../30-sources/risc-v-international-2025-supervisor-binary-interface.md) | RFENCE supplies remote-fence request transport, but its success result alone does not prove that every target executed the fence | A platform-specific adapter may offer stronger evidence only if it specifies and validates that causal completion |
-| [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) | CPU hotplug is an ordered lifecycle with callbacks, failures, and rollback rather than a Boolean online/offline fact | Linux's lifecycle is implementation precedent, not Atom's incarnation or retained-tag proof |
-| [Address-space object evidence](address-space-object.md#evidence-and-limits) | Object identity, active membership, hardware representation, and tags are distinct state | The proposed lease schema and wrap policy remain Atom synthesis |
+| [Linux low-level core APIs](../../../30-sources/linux-kernel-community-2026-low-level-core-apis.md) | CPU hotplug is an ordered lifecycle with callbacks, failures, and rollback rather than a Boolean online/offline fact | Linux's lifecycle is implementation precedent, not Kay's incarnation or retained-tag proof |
+| [Address-space object evidence](address-space-object.md#evidence-and-limits) | Object identity, active membership, hardware representation, and tags are distinct state | The proposed lease schema and wrap policy remain Kay synthesis |
 
 The sources establish that tags are finite and context-dependent. The exact
 state machine, root fingerprint, quarantine, and capacity invariant below are
-proposed for Atom.
+proposed for Kay.
 
 ### Evidence gap
 
@@ -96,7 +96,7 @@ the complete finite ASID/PCID allocation problem modeled here: multiple
 hardware sharing scopes, rollover, concurrent installation, CPU hotplug,
 failure quarantine, and safe eventual reuse in one protocol. The Linux
 implementations and architecture manuals are therefore implementation and ISA
-precedent, not proof of this allocator. Atom should treat the protocol as a
+precedent, not proof of this allocator. Kay should treat the protocol as a
 research hypothesis until its state machine is model-checked and exercised
 under deliberately tiny namespaces and adversarial lifecycle schedules.
 
@@ -554,7 +554,7 @@ broader invalidation before reuse.
 The profile records implemented ASID width, translation regime, TTBR
 association, CnP/shareability promises, KPTI-like pairing, relevant
 virtualization stage, TLBI scopes, and CPU errata. Linux arm64 demonstrates one
-generation/bitmap/reserved-active design, but Atom must map it to its own CPU
+generation/bitmap/reserved-active design, but Kay must map it to its own CPU
 lifecycle and completion semantics.
 
 An ASID cannot be interpreted apart from the root and translation controls.
@@ -571,7 +571,7 @@ rollover involving global ancestry may require all-ASID scope.
 Because ASID meaning is hart-local, a per-hart namespace is a natural baseline
 unless the platform declares stronger sharing. In standardized SBI RFENCE,
 `SBI_SUCCESS` proves successful request transmission to the targeted harts, not
-their execution of the fence. Reuse therefore requires either an Atom target
+their execution of the fence. Reuse therefore requires either an Kay target
 handler invoked by IPI that executes and acknowledges its own local fence, or a
 separately specified platform completion causally emitted after the exact
 RFENCE and bound to request plus hart incarnation. An unrelated OS

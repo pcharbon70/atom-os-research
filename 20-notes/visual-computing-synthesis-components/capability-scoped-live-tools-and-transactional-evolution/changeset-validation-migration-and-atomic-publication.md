@@ -28,7 +28,7 @@ from domain compensation. [1](../../../30-sources/stoyle-et-al-2005-safe-predict
 [4](../../../30-sources/mohan-et-al-1992-aries.md)
 [5](../../../30-sources/garcia-molina-salem-1987-sagas.md)
 
-No Atom changeset state machine has been implemented.
+No Kay changeset state machine has been implemented.
 
 ## Development
 

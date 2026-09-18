@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 OTP distinguishes signal receipt from priority-message placement; aliases constrain insertion without canceling the source operation. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/hogberg-2021-message-passing.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Physical enqueue order, ordered signal delivery and selective mailbox placement are three separate contracts.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

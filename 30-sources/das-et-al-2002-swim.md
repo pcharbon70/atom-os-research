@@ -61,7 +61,7 @@ period, incarnation numbers, and a round-robin target-selection variant.
 
 ## Relevance
 
-Atom OS can use a SWIM-like service as a scalable source of reachability
+Kay OS can use a SWIM-like service as a scalable source of reachability
 observations and cluster-view hints. Its output must remain typed as
 `Suspect`, `Alive`, or `ProtocolDeclaredFailed`, with observer and time
 evidence, and must not call the last state a confirmed physical crash or

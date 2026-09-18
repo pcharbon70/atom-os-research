@@ -16,7 +16,7 @@ Requirement R04, first delivered at M1 and extended through M3. Boot into a nati
 
 ## Evidence and placement
 
-The [xv6 console chapter](../../30-sources/cox-et-al-2026-xv6-risc-v-book.md) demonstrates buffered UART I/O and wakeups. Its sleep/wakeup discussion explains the lost-event race between testing a condition and becoming a waiter. Atom can reuse that reasoning while placing line editing and command parsing in user space.
+The [xv6 console chapter](../../30-sources/cox-et-al-2026-xv6-risc-v-book.md) demonstrates buffered UART I/O and wakeups. Its sleep/wakeup discussion explains the lost-event race between testing a condition and becoming a waiter. Kay can reuse that reasoning while placing line editing and command parsing in user space.
 
 [twilco's first-party UART walkthrough](../../30-sources/twilco-2019-risc-v-uart-driver.md) is useful evidence for inspecting a generated DTB and validating startup/linker assumptions. Its initial driver is intentionally incomplete and avoids interrupts. It is not an implementation of the CLI's idle-progress requirement.
 
@@ -30,7 +30,7 @@ A polled early diagnostic console is reasonable scaffolding. For delivery, choos
 
 ## Proposed command and byte protocol
 
-The first CLI offers exactly `help`, `version` and `uptime`. `help` describes admitted syntax; `version` identifies executed kernel and CLI artifacts; `uptime` reports elapsed time in a declared unit through the kernel interface. The prompt is `atom>`. Shell pipelines, arbitrary executable paths and expression evaluation are unnecessary.
+The first CLI offers exactly `help`, `version` and `uptime`. `help` describes admitted syntax; `version` identifies executed kernel and CLI artifacts; `uptime` reports elapsed time in a declared unit through the kernel interface. The prompt is `kay>`. Shell pipelines, arbitrary executable paths and expression evaluation are unnecessary.
 
 Adopt a proposed initial maximum of 256 input bytes excluding the terminator, an ASCII command vocabulary, a fixed argument count and a bounded output formatter. These are test-profile choices, not empirical capacity results. Define CR, LF and CRLF handling, backspace/delete at an empty line, tabs, NUL and other control bytes. Unknown commands and invalid arguments produce a bounded diagnostic and return to the prompt.
 

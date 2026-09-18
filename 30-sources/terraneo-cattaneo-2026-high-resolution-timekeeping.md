@@ -65,7 +65,7 @@ rate on an STM32F469 and a dual-core RP2040.
 
 The result supports an interface with a globally qualified counter domain and
 CPU-local one-shot deadline channels. It also warns against embedding scheduler
-quantum policy into the raw-time component. Atom OS can multiplex wakeups,
+quantum policy into the raw-time component. Kay OS can multiplex wakeups,
 budget expiry, and runtime scheduling above the architecture layer while the
 backend supplies only measurement and one-shot programming.
 

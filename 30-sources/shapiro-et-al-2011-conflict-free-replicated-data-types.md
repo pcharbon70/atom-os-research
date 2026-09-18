@@ -62,7 +62,7 @@ than general application correctness.
 
 ## Relevance
 
-Atom OS may offer CRDT-backed project object profiles, but every object and
+Kay OS may offer CRDT-backed project object profiles, but every object and
 edge must name its merge algebra. Capability grants, revocation, unique
 ownership, provider selection, and irreversible effects require separately
 fenced protocols.
@@ -76,4 +76,4 @@ appropriate conflict semantics or schema-evolution behavior.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

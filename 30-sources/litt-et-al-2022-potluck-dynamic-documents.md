@@ -64,7 +64,7 @@ mostly programmers familiar with JavaScript.
 
 ## Relevance
 
-Potluck supplies a concrete design pattern for Atom OS project tools: durable
+Potluck supplies a concrete design pattern for Kay OS project tools: durable
 source objects, separately derived semantics and annotations, explicit
 user-triggered writes, reusable recognizers, and plural views. It also provides
 negative evidence against one universal graphical or textual representation.
@@ -79,4 +79,4 @@ is a research vision, not demonstrated architecture.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

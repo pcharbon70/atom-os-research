@@ -27,7 +27,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom accept software, firmware, policy, configuration, and state-
+> How can Kay accept software, firmware, policy, configuration, and state-
 schema releases despite compromised mirrors or online keys, interrupted
 downloads, rollback/freeze/mix-and-match attacks, malicious bundles, power
 loss, incompatible migrations, and false self-reported health?
@@ -79,7 +79,7 @@ and secure time explicit.
 [NixOS](../../30-sources/dolstra-et-al-2008-nixos.md) provides immutable store
 paths/generations and atomic profile switching, but activation and mutable data
 are not automatically transactional. These sources motivate the composition;
-they do not prove an Atom multi-component state migration safe.
+they do not prove an Kay multi-component state migration safe.
 
 ## Authority split
 

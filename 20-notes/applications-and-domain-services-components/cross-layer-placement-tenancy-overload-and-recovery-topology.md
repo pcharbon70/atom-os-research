@@ -74,7 +74,7 @@ capability-actor OS boundary.
 demonstrate reduced privilege and explicit capability restriction in UNIX
 settings. [seL4 design principles](../../30-sources/heiser-2020-sel4-design-principles.md)
 and [L4 lessons](../../30-sources/elphinstone-heiser-2013-l4-lessons.md) support
-small privileged mechanisms and user-space policy. The exact Atom OS domain
+small privileged mechanisms and user-space policy. The exact Kay OS domain
 cost and assurance profile remains unmeasured.
 
 [Crash-only software](../../30-sources/candea-fox-2003-crash-only-software.md)

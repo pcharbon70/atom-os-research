@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Focused tests for Atom OS Research archive validation."""
+"""Focused tests for Kay OS Research archive validation."""
 
 import json
 import tempfile

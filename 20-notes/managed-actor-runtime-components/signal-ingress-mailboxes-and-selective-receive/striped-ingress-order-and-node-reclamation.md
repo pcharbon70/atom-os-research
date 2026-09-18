@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Sender-striped ingress is an ERTS contention optimization; safe reclamation remains a separate obligation from queue linearization. [1](../../../30-sources/winblad-2021-parallel-signal-sending.md), [2](../../../30-sources/michael-2004-hazard-pointers.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Physical enqueue order, ordered signal delivery and selective mailbox placement are three separate contracts.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

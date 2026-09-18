@@ -57,7 +57,7 @@ Argon2 research; it is not an evaluation of an OS authentication service.
 
 ## Relevance
 
-Passwords should be an explicit compatibility profile in Atom's authentication
+Passwords should be an explicit compatibility profile in Kay's authentication
 verifier, not the root architecture. The verifier should store a versioned
 algorithm-and-parameter record, run hashing in a budgeted worker pool, rate
 limit and admission-control expensive work where safe, bound concurrency, and

@@ -21,7 +21,7 @@ Research question: How can a controller distinguish a valid candidate from the c
 xDS ACK expresses validity and intent, not successful application; NACK need not
 mean every resource was rejected. [1](../../../30-sources/envoy-project-2026-xds-protocol.md) [2](../../../30-sources/sun-et-al-2024-anvil.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

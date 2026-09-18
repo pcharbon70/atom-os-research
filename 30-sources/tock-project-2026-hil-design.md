@@ -69,7 +69,7 @@ requirements.
 These rules strongly support typed operation tokens, explicit acceptance,
 returned ownership, and split control/data facets in the kernel-facing
 architecture facade. Exactly-once terminal completion is this archive's
-stronger synthesis, not a claim made by the Tock document. Atom OS should use
+stronger synthesis, not a claim made by the Tock document. Kay OS should use
 bounded event queues rather than callback stacks, but the acceptance and
 ownership lessons transfer.
 

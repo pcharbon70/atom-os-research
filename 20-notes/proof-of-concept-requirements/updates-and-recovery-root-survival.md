@@ -20,7 +20,7 @@ Requirement R19, after M4. Safely select and activate a new system image, preser
 
 [The firmware-update architecture](../../30-sources/moran-et-al-2021-firmware-update-architecture.md) discusses verification and recovery-image arrangements. It is architectural guidance, not a universally safe A/B activation protocol.
 
-[FSCQ's crash-aware approach](../../30-sources/chen-et-al-2015-fscq.md) reinforces the need to include recovery interruptions in state-transition reasoning. Its filesystem proof does not establish Atom update correctness.
+[FSCQ's crash-aware approach](../../30-sources/chen-et-al-2015-fscq.md) reinforces the need to include recovery interruptions in state-transition reasoning. Its filesystem proof does not establish Kay update correctness.
 
 Compare immutable image replacement with in-place live patching. Prefer a proposed inactive-image/trial-boot approach first: it limits live mutation, but still requires durable selection, health confirmation and rollback rules.
 

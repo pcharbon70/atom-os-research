@@ -47,11 +47,11 @@ Rights are distributed and consumed locally; transfer and merge conserve the bou
 
 ## Relevance
 
-Atom OS inference: separate numerical rights from authentication, and require an explicit replica-generation and anti-rollback contract before allowing offline scarce-resource spending. Prototype cloning, lost transfer replies and backup restoration are decisive adversarial cases.
+Kay OS inference: separate numerical rights from authentication, and require an explicit replica-generation and anti-rollback contract before allowing offline scarce-resource spending. Prototype cloning, lost transfer replies and backup restoration are decisive adversarial cases.
 
 ## Limits
 
-The model assumes crash failures with persistent state intact. Unreachable allocations become unavailable; they are not safely recreated by timeout. The evaluation does not establish malicious-replica safety or Atom OS performance.
+The model assumes crash failures with persistent state intact. Unreachable allocations become unavailable; they are not safely recreated by timeout. The evaluation does not establish malicious-replica safety or Kay OS performance.
 
 ## Derived work
 

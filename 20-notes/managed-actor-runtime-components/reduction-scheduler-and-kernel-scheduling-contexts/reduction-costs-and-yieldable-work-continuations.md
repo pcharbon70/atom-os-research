@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 ERTS's yielding helper machinery demonstrates explicit continuation/destructor needs; resource attribution must include work outside instruction dispatch. [1](../../../30-sources/erlang-otp-team-2026-yielding-c-code-contracts.md), [2](../../../30-sources/banga-et-al-1999-resource-containers.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Runtime reductions select actors; kernel contexts enforce CPU authority. Neither is a hard real-time guarantee by itself.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

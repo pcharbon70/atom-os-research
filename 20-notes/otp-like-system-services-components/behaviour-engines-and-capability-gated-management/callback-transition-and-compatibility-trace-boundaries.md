@@ -21,7 +21,7 @@ Research question: Which evidence is needed before replacing an engine callback 
 OTP exposes explicit code-change hooks; F1 illustrates why valid endpoints do not
 imply safe intermediate schemas. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-system-services-documentation.md) [2](../../../30-sources/rae-et-al-2013-online-schema-change-f1.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

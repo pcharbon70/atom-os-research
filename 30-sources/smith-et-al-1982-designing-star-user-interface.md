@@ -72,7 +72,7 @@ controlled comparison with Smalltalk or later desktops.
 The source identifies one historical fork inherited by mainstream desktops:
 the visible office metaphor became dominant and was later joined by
 application-centric delivery, while Smalltalk's deeper continuity between
-media, code, and tools did not. Atom OS can reuse Star's consistency and
+media, code, and tools did not. Kay OS can reuse Star's consistency and
 discoverability without making an application package or simulated paper the
 only unit of work.
 

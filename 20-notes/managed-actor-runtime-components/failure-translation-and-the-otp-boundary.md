@@ -75,7 +75,7 @@ A credible implementation must guarantee:
 [Armstrong's thesis](../../30-sources/armstrong-2003-making-reliable-distributed-systems.md)
 supports isolated processes, explicit links, exit signals, supervisors, and
 the separation of stable error-handling structure from transient workers. It
-is conceptual and predates modern multicore, hostile native code, and the Atom
+is conceptual and predates modern multicore, hostile native code, and the Kay
 OS kernel boundary; it does not prove that any particular restart policy is
 safe for durable effects.
 

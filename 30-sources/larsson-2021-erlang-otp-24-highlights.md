@@ -67,7 +67,7 @@ current OTP 29 manuals were read separately for exact compatibility semantics.
 
 ## Relevance
 
-The process-alias example preserves an important contract boundary for Atom OS:
+The process-alias example preserves an important contract boundary for Kay OS:
 a call timeout can revoke a reply destination without cancelling work or
 proving whether an effect occurred. That supports generation-bound reply
 handles and explicit cancellation/outcome protocols rather than treating

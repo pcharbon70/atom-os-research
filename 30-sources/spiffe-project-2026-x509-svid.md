@@ -65,17 +65,17 @@ changes do not silently alter the evidence.
 
 ## Relevance
 
-Atom's X.509 compatibility profile should enforce these constraints at both
+Kay's X.509 compatibility profile should enforce these constraints at both
 issuance and relying-party validation, pin the exact bundle revision and trust
 domain, and keep signing credentials from being accepted as workload leaves.
 The native local identity handle remains preferable where both endpoints are
-Atom-aware because it can keep the private key outside the managed heap.
+Kay-aware because it can keep the private key outside the managed heap.
 
 ## Limits
 
 The specification defines certificate syntax and validation, not caller
 attestation, registration policy, authorization, private-key confinement,
-revocation service levels, transport security, or Atom's incarnation binding.
+revocation service levels, transport security, or Kay's incarnation binding.
 It is a living standard, so the pinned revision—not a moving branch—is the
 evidence used here.
 

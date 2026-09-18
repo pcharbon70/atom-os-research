@@ -55,7 +55,7 @@ the protocol in F1, and report operational findings.
 
 ## Relevance
 
-Atom OS application migrations should declare compatible intermediate states,
+Kay OS application migrations should declare compatible intermediate states,
 reader/writer matrices, checkpoints, and irreversible boundaries. Layer 4 can
 stage and publish generations; Layer 5 owns semantic transforms and invariant
 checks.

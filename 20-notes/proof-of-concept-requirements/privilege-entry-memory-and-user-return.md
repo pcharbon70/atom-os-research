@@ -12,7 +12,7 @@ aliases: []
 
 # Privilege entry, memory protection, and user return
 
-Requirement R03, M1–M2. The first CLI delivery must execute in a real user protection domain. Atom's kernel must own page allocation, mappings, trap entry and validated return, even when only one user program exists.
+Requirement R03, M1–M2. The first CLI delivery must execute in a real user protection domain. Kay's kernel must own page allocation, mappings, trap entry and validated return, even when only one user program exists.
 
 ## Evidence and architectural choice
 
@@ -20,7 +20,7 @@ The [active T7500 / Intel x86-64 profile](dell-precision-t7500-target-and-minima
 
 The [AMD64 procedure ABI](../../30-sources/x86-psabi-project-2026-amd64-procedure-abi.md) is useful for calls from assembly to compiled code. Its callee-save convention is not enough for interruption at an arbitrary instruction; interrupted code may own every live register.
 
-For the first Atom profile, choose one documented mapping arrangement: a minimal supervisor-only entry mapping present in user address spaces, followed by a switch to the kernel table, is an understandable baseline. A shared kernel mapping can simplify entry but increases the privileged alias surface and later mitigation obligations. Neither arrangement establishes resistance to speculative attacks; the current PoC threat profile does not claim that protection.
+For the first Kay profile, choose one documented mapping arrangement: a minimal supervisor-only entry mapping present in user address spaces, followed by a switch to the kernel table, is an understandable baseline. A shared kernel mapping can simplify entry but increases the privileged alias surface and later mitigation obligations. Neither arrangement establishes resistance to speculative attacks; the current PoC threat profile does not claim that protection.
 
 ## Proposed memory and context contract
 

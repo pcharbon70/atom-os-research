@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS turn lower-layer MMIO, interrupt, DMA, queue, buffer, and
+How should Kay OS turn lower-layer MMIO, interrupt, DMA, queue, buffer, and
 reset mechanisms into recoverable application-facing device services without
 placing driver policy in the kernel or pretending a driver restart undoes
 hardware effects?
@@ -43,7 +43,7 @@ The design is acceptable only if:
 6. no compromised driver can invoke the reset/recovery authority that contains
    it.
 
-No Atom OS driver, benchmark, or device reset experiment exists yet.
+No Kay OS driver, benchmark, or device reset experiment exists yet.
 
 ## Evidence and limitations
 
@@ -65,7 +65,7 @@ all discovery, initialization, or crash recovery. [Gray
 failure](../../30-sources/huang-et-al-2017-gray-failure.md) explains why partial
 and perspective-dependent faults evade simple binary health checks.
 
-The Atom OS synthesis adds generation fencing, a persistent in-flight ledger,
+The Kay OS synthesis adds generation fencing, a persistent in-flight ledger,
 and outcome classes to the isolated queue architecture.
 
 ## Recommended architecture
@@ -270,7 +270,7 @@ turns an unknown hardware outcome into an automatic retry.
 The evidence supports isolated drivers, separate virtualizers, selective
 shared memory, explicit ownership rings, IOMMU-confined DMA, generation-bound
 sessions, an external recovery manager, and a persistent outcome ledger. It
-does not prove one universal driver model or the cost on Atom OS hardware.
+does not prove one universal driver model or the cost on Kay OS hardware.
 
 Open questions include which first device best exercises reset and DMA
 semantics, how much class validation can be generated from specifications,

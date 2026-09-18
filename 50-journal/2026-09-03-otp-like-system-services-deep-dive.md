@@ -17,7 +17,7 @@ aliases:
 
 ## Observations
 
-The fourth proposed Atom OS layer was researched as ordinary system policy
+The fourth proposed Kay OS layer was researched as ordinary system policy
 above the managed actor runtime, not as a larger privileged kernel. The
 strongest design is a federation of capability-confined service domains rather
 than one immortal application controller. OTP behaviours and supervision
@@ -82,7 +82,7 @@ Existing evidence reused includes:
 - Trinder et al. and PARTISAN on distributed Erlang topology and scale;
 - Nooks, driver recovery, and CuriOS on isolated device services;
 - DTrace on dynamic observability; and
-- the lower-layer Atom OS reports on capability, domain, resource, failure,
+- the lower-layer Kay OS reports on capability, domain, resource, failure,
   teardown, and runtime contracts.
 
 ### Current official OTP documentation
@@ -151,7 +151,7 @@ revision `99470b9abc825f14aa364dfa2c3b53b02ba5db5b` for local workload
 credential delivery, caller attribution, update streaming, private-key
 handling, and trust-bundle distribution. Its authenticated identity contract
 was kept separate from authorization, attestation policy, issuer availability,
-and Atom OS capability derivation.
+and Kay OS capability derivation.
 
 The Update Framework paper and project model informed signed artifact metadata,
 threshold roles, version/freshness checks, and compromise recovery. Current OTP
@@ -205,7 +205,7 @@ Each claim was classified as:
 3. result reported by a primary research source;
 4. assumption required by that result;
 5. cross-source interpretation; or
-6. proposed Atom OS design requiring tests.
+6. proposed Kay OS design requiring tests.
 
 The component boundary was then checked against the existing architecture:
 

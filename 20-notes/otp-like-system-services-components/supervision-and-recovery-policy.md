@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS preserve OTP's hierarchical supervision while adding the
+How should Kay OS preserve OTP's hierarchical supervision while adding the
 information and bounds an operating system needs for safe recovery of actors,
 domains, resources, and external effects?
 
@@ -60,7 +60,7 @@ delay reduces correlated work; it is engineering evidence, not a proof of
 stability for arbitrary services.
 
 [Armstrong](../../30-sources/armstrong-2003-making-reliable-distributed-systems.md)
-supports links, monitors, failure isolation, and supervisor trees. The Atom OS
+supports links, monitors, failure isolation, and supervisor trees. The Kay OS
 synthesis retains these relationships but treats “let it crash” as permission
 to replace disposable execution only after state, authority, and effects have
 explicit recovery rules.

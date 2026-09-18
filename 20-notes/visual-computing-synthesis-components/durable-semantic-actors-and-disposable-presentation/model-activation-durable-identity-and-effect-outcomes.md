@@ -26,7 +26,7 @@ identity and result lookup in a defined distributed model.
 [2](../../../30-sources/birrell-nelson-1984-remote-procedure-calls.md)
 [3](../../../30-sources/lee-et-al-2015-rifl.md)
 
-The Atom OS activation and effect protocol remains unimplemented.
+The Kay OS activation and effect protocol remains unimplemented.
 
 ## Development
 

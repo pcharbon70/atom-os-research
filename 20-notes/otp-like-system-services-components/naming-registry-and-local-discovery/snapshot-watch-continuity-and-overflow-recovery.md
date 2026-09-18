@@ -21,7 +21,7 @@ Research question: How can bounded subscribers reconstruct state without silentl
 etcd orders watch revisions within retained history, while delivery delay is
 unbounded and compaction limits replay. [1](../../../30-sources/etcd-project-2026-api-guarantees.md) [2](../../../30-sources/welsh-et-al-2001-seda.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

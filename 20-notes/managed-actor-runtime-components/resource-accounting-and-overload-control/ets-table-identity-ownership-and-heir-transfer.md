@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 ETS is explicit shared state with ownership rules; it is not a communal actor heap or an uncharged runtime utility. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/banga-et-al-1999-resource-containers.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Runtime ledgers attribute consumption beneath hard kernel domain limits; actor policy cannot mint memory, CPU or cleanup reserve.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

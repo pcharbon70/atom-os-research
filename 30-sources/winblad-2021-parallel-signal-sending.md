@@ -62,7 +62,7 @@ many-to-one microbenchmark on a 32-core, 64-hardware-thread machine.
 
 ## Relevance
 
-The result recommends a semantic-first mailbox design. Atom OS should specify
+The result recommends a semantic-first mailbox design. Kay OS should specify
 only the ordering applications require, then allow striped ingress queues,
 batching, and adaptive contention control behind that contract. The benchmark
 also shows why send throughput, queue admission, and receiver drain rate must

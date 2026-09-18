@@ -91,7 +91,7 @@ UEFI standardizes an interface, not firmware correctness. It does not prove
 that descriptors are mutually consistent, that configuration tables are safe
 to parse, or that reported topology matches hardware. Platform errata and
 secure-boot policy are outside the memory-handoff contract. The specification
-does not prove that firmware completes a fatal-context write within Atom's
+does not prove that firmware completes a fatal-context write within Kay's
 deadline or that a stored CPER record is truthful, confidential, authentic, or
 fresh.
 

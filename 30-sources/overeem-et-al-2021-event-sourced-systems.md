@@ -55,7 +55,7 @@ event-sourced systems.
 
 ## Relevance
 
-Atom OS should make event sourcing an opt-in domain policy, never the universal
+Kay OS should make event sourcing an opt-in domain policy, never the universal
 Layer 5 store. A selected context must own versioning, replay fixtures,
 projection rebuild, retention, and privacy/erasure policy explicitly.
 
@@ -63,7 +63,7 @@ projection rebuild, retention, and privacy/erasure policy explicitly.
 
 The evidence is qualitative and self-reported, with a modest sample. It does
 not establish causal performance or reliability benefits, a universal event
-model, or Atom OS suitability.
+model, or Kay OS suitability.
 
 ## Derived work
 

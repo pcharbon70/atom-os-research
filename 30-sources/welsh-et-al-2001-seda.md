@@ -71,7 +71,7 @@ and a Gnutella packet router under changing load.
 ## Relevance
 
 OTP supervision needs a sibling resource-governance policy rather than using
-crash and restart as the only overload response. Atom OS services should expose
+crash and restart as the only overload response. Kay OS services should expose
 finite queues, credits, queue age, admission outcomes, and explicit degraded
 modes while the kernel and runtime enforce underlying CPU and memory limits.
 

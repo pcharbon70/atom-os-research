@@ -29,7 +29,7 @@ routing outside clients.
 [3](../../../30-sources/chromium-project-2026-multiprocess-graphics-and-accessibility.md)
 [4](../../../30-sources/wayland-project-2026-architecture-and-protocol.md)
 
-No end-to-end generation algebra has been modeled for Atom.
+No end-to-end generation algebra has been modeled for Kay.
 
 ## Development
 

@@ -62,14 +62,14 @@ peer-reviewed end-to-end proof.
 This is practical evidence for typed page-table pages, mode-specific roots,
 range-scoped mutation objects, and a refinement relation from hardware trees
 to a flat semantic mapping ledger. The discovered lifetime race is a useful
-falsifier for Atom's encoder and reclamation design.
+falsifier for Kay's encoder and reclamation design.
 
 ## Limits
 
 This is a first-party work-in-progress report, not a peer-reviewed completed
 verification. Three listed targets, concurrency reasoning, and reliable
 linkage between verified artifacts and the evolving kernel remained open. Its
-claims do not establish Atom memory safety or hardware-level TLB completion.
+claims do not establish Kay memory safety or hardware-level TLB completion.
 
 ## Derived work
 

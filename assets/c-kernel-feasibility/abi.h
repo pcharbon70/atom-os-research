@@ -1,5 +1,5 @@
-#ifndef ATOM_C_RESEARCH_ABI_H
-#define ATOM_C_RESEARCH_ABI_H
+#ifndef KAY_C_RESEARCH_ABI_H
+#define KAY_C_RESEARCH_ABI_H
 #include <stddef.h>
 #include <stdint.h>
 struct record { uint32_t kind; uint64_t value; };

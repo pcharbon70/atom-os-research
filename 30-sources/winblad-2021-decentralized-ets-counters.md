@@ -41,7 +41,7 @@ Scheduler-striped counters reduce update contention. Coherent observation swaps 
 
 ## Relevance
 
-Separate diagnostic estimates from hard quota admission. Atom OS can explore local credits bounded by an authoritative parent reservation, but cannot enforce a hard limit by independently summing changing telemetry shards. Counter-array retirement belongs to the same charged progress model as other shared metadata.
+Separate diagnostic estimates from hard quota admission. Kay OS can explore local credits bounded by an authoritative parent reservation, but cannot enforce a hard limit by independently summing changing telemetry shards. Counter-array retirement belongs to the same charged progress model as other shared metadata.
 
 ## Limits
 

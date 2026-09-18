@@ -62,7 +62,7 @@ isolation.
 
 The abstraction maps directly to a runtime where actors are scheduling
 entities but applications, supervisors, gateways, and requests can be the
-resource principals. Atom OS should carry an explicit `ChargeContext` through
+resource principals. Kay OS should carry an explicit `ChargeContext` through
 message copying, garbage collection, timers, table work, native requests, and
 trace generation, then roll actor ledgers into kernel-enforced domain accounts.
 Protection domains and accounting domains deliberately remain distinct.

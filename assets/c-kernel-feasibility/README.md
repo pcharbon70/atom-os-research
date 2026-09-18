@@ -12,7 +12,7 @@ aliases: []
 
 Original research probes for the [C feasibility assessment](../../20-notes/proof-of-concept-requirements/c-kernel-language-feasibility-and-low-level-compatibility.md).
 They examine C compiler interoperability and freestanding code generation,
-not a bootable Atom kernel or a change from the selected Zig language.
+not a bootable Kay kernel or a change from the selected Zig language.
 
 ## What belongs here
 

@@ -58,14 +58,14 @@ approaches.
 
 ## Relevance
 
-Atom should separate a bounded local append path from asynchronous tree
+Kay should separate a bounded local append path from asynchronous tree
 construction, witness publication, search, and retention. A witness verifies
 commitment continuity; it cannot certify that a compromised producer emitted
 every required event or described the effect honestly.
 
 ## Limits
 
-The workload and 2009 prototype do not predict Atom's performance, crash
+The workload and 2009 prototype do not predict Kay's performance, crash
 behavior, privacy requirements, or distributed witness availability. The
 scheme detects evidence inconsistencies under its audit model but does not
 prevent an attack or reconstruct omitted events.

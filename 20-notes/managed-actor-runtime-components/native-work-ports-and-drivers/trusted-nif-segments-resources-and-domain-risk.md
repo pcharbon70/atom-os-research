@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 NIF scheduling class is per function/segment; dirty scheduling changes availability, not memory containment. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/erlang-otp-team-2026-yielding-c-code-contracts.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Protected service domains are the default native boundary. Regular and dirty NIFs remain inside the runtime memory-failure domain.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

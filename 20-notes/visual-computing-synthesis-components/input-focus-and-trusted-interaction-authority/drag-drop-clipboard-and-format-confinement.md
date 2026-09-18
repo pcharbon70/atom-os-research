@@ -27,7 +27,7 @@ sandboxed remote/input sessions.
 [2](../../../30-sources/qubes-project-2026-gui-virtualization.md)
 [3](../../../30-sources/xdg-desktop-portal-project-2026-interaction-sessions.md)
 
-No Atom transfer format or confinement test exists.
+No Kay transfer format or confinement test exists.
 
 ## Development
 

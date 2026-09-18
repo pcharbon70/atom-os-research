@@ -71,7 +71,7 @@ supports reachable-reference authority and explicit delegation.
 The [OTP managed-runtime documentation](../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md)
 records current BEAM/OTP execution and native-code boundaries; existing secure-
 coding guidance treats loaded code as trusted. That implementation behavior is
-not an unavoidable future BEAM contract, but Atom OS must not promise a sandbox
+not an unavoidable future BEAM contract, but Kay OS must not promise a sandbox
 without a new enforced design and evaluation.
 
 ## Extension descriptor

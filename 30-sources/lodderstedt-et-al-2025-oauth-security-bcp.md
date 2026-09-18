@@ -58,7 +58,7 @@ sender-constrained tokens were reviewed.
 
 ## Relevance
 
-OAuth may be useful at Atom OS web/federation gateways, never as the local
+OAuth may be useful at Kay OS web/federation gateways, never as the local
 kernel authority model. A gateway must terminate and validate the complete
 protocol, bind the result to its issuer, audience, client key, session, request,
 and policy revision, then mint a shorter-lived local capability. Raw access or

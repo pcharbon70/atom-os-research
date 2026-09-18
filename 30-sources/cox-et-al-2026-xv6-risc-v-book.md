@@ -34,11 +34,11 @@ Read the authors' online organization, trap, interrupt and sleep/wakeup chapters
 
 ## Findings
 
-Chapters 2, 4, 6 and 9 explain protection, software trap entry, buffered UART I/O, and atomic sleep/wakeup. xv6 keeps console line editing inside its monolithic kernel; Atom's proposed user-space parser is a different placement.
+Chapters 2, 4, 6 and 9 explain protection, software trap entry, buffered UART I/O, and atomic sleep/wakeup. xv6 keeps console line editing inside its monolithic kernel; Kay's proposed user-space parser is a different placement.
 
 ## Relevance
 
-Informs the proposed requirement contract and its negative tests. This source does not establish that Atom implements or passes that contract.
+Informs the proposed requirement contract and its negative tests. This source does not establish that Kay implements or passes that contract.
 
 ## Limits
 

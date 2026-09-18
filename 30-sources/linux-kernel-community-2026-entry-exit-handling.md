@@ -60,7 +60,7 @@ as portable ISA semantics.
 
 ## Relevance
 
-Atom component 1 should own audited assembly leaves, component 2 should own
+Kay component 1 should own audited assembly leaves, component 2 should own
 entry stacks/nesting/context tokens, and component 9 should receive only a
 bounded raw-frame view after the minimum safe state exists. Capture and
 recursive-guard code should be `noinstr`-equivalent, with generated call-graph
@@ -69,7 +69,7 @@ and disassembly checks excluding unapproved helpers.
 ## Limits
 
 This is Linux implementation documentation. It does not define x86 IST, Arm
-stack selection, RISC-V scratch-register behavior, Atom's language subset, or a
+stack selection, RISC-V scratch-register behavior, Kay's language subset, or a
 worst-case execution bound. Online text can change after the access date.
 
 ## Derived work

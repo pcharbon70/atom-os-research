@@ -40,7 +40,7 @@ This historical design note's memory-failure overview,
 background-versus-consumed-error distinction,
 early/late kill modes, injection interfaces, and documented limitations were
 read as implementation precedent. Linux signals and VM internals are not
-adopted as an Atom ABI.
+adopted as an Kay ABI.
 
 ## Findings
 

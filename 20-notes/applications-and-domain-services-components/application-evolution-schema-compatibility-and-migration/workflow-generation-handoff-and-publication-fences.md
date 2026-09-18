@@ -22,7 +22,7 @@ Sagas permit visible intermediate commits and semantic compensation; they do not
 
 NixOS separates immutable configuration generations from mutable activation effects; selecting an old generation does not undo domain state. [2](../../../30-sources/dolstra-et-al-2008-nixos.md).
 
-The model below is proposed Atom OS architecture, not a result demonstrated by
+The model below is proposed Kay OS architecture, not a result demonstrated by
 these sources. Layer 5 owns domain meaning; lower layers enforce authority,
 durability and resource limits. This is full-system research, independent of
 proof-of-concept plans, QEMU configuration and kernel-language implementation.
@@ -74,7 +74,7 @@ compromised enforcement layer.
 - [Component service index](README.md) — sibling ownership and research boundaries.
 - [Retention, erasure, and recovery dependency closure](../durable-state-journals-snapshots-and-projections/retention-erasure-and-recovery-dependency-closure.md) — a cross-component contract this service must preserve.
 - [Compensation, pivots, and manual repair](../workflows-process-managers-timers-and-compensation/compensation-pivots-and-manual-repair.md) — a cross-component contract this service must preserve.
-- [Open application inquiry](../../../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
+- [Open application inquiry](../../../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) — unresolved evidence and competing designs.
 - [Research session](../../../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) — exhaustive source manifest and reading limits.
 
 ## Sources

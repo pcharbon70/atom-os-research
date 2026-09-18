@@ -59,7 +59,7 @@ reviewed.
 
 ## Relevance
 
-The remote Atom OS gateway should use holder-of-key credentials, mTLS, or a
+The remote Kay OS gateway should use holder-of-key credentials, mTLS, or a
 DPoP-like request binding rather than unrestricted bearer tokens. The validated
 proof should be consumed at the gateway and converted to an operation-specific
 local grant; it should never be mistaken for a kernel capability or evidence

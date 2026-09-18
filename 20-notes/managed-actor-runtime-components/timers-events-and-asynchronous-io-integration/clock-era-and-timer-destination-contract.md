@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Timer data structures do not define language timer semantics; the selected OTP contract distinguishes PID and registered-name destinations. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md), [2](../../../30-sources/varghese-lauck-1987-timing-wheels.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The runtime owns timer and actor semantics; the kernel supplies qualified time and deadline events, not one kernel timer per actor.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

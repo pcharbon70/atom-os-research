@@ -26,7 +26,7 @@ set](README.md).
 
 ## Question, scope, and operational standard
 
-> How can Atom generate, use, rotate, revoke, recover, and destroy keys and
+> How can Kay generate, use, rotate, revoke, recover, and destroy keys and
 secrets while preventing raw material from escaping through messages, heaps,
 traces, dumps, backups, broad HSM sessions, plugins, or confused-deputy calls?
 
@@ -64,9 +64,9 @@ encryption key, authentication key, and wrapping key are different powers.
 objects, handles, attributes, mechanisms, and sensitive/extractable controls.
 The [PKCS #11 usage
 guide](../../30-sources/oasis-2025-pkcs11-usage-guide-3-2.md) exposes an
-important limit: a logged-in Cryptoki session generally does not provide Atom-
+important limit: a logged-in Cryptoki session generally does not provide Kay-
 style per-object least authority, and OS/application compromise can steal
-activation input or misuse operations. Atom therefore uses a narrow broker,
+activation input or misuse operations. Kay therefore uses a narrow broker,
 not the full token API as a kernel ABI.
 
 [TPM 2.0](../../30-sources/trusted-computing-group-2026-tpm-2-0-library.md)
@@ -80,7 +80,7 @@ operational comparison for returned TTLs, renewal, revocation lineage, dynamic
 credentials, and the crucial limit that a copied static secret is not recalled
 merely because a broker later marks a nominal lease revoked. These are product
 semantics and engineering lessons, not evidence that Vault's host/plugin trust
-model should be imported into Atom.
+model should be imported into Kay.
 
 ## Authority and process split
 

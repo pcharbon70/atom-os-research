@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 SEDA supplies explicit overload boundaries but also negative latency and queue-growth results; accounting identifies who must pay when work is deferred. [1](../../../30-sources/welsh-et-al-2001-seda.md), [2](../../../30-sources/banga-et-al-1999-resource-containers.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Runtime ledgers attribute consumption beneath hard kernel domain limits; actor policy cannot mint memory, CPU or cleanup reserve.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

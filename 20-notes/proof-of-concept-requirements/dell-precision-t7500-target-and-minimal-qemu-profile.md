@@ -35,10 +35,11 @@ verified by a physical inventory.
 CLI-first scope. **Still unverified:** CPU SKUs/steppings and enabled topology,
 motherboard revision, BIOS version/mode, installed RAM/NUMA, serial settings
 and device IDs. The target is no longer ambiguous; only its installed
-configuration remains to be recorded.
+configuration remains to be recorded. On 2026-09-17 the user fixed the initial
+QEMU memory constraint at 64 MiB, superseding the earlier 128 MiB proposal.
 
 The first delivery remains a minimal bootable OS with a native ring-3 CLI and
-an Atom-owned ring-0 kernel. The completed M0–M4 proof still requires the
+an Kay-owned ring-0 kernel. The completed M0–M4 proof still requires the
 project's compiled-BEAM profile and automatic process-local tracing GC outside
 the kernel. AtomVM, graphics, desktop work, networking and writable storage
 do not enter the minimum boot test.
@@ -56,7 +57,7 @@ from a booted guest.
 | Area | Initial constraint | Evidence still required |
 | --- | --- | --- |
 | ISA and privilege | Intel 64/x86-64; kernel CPL 0, native services CPL 3 | Actual entry state, CPUID feature record and ring-transition trace |
-| Memory | Four-level paging and 4 KiB base pages as the initial design; 128 MiB guest RAM | Entry/allocator layout, reserved ranges, NX availability and enforced permissions |
+| Memory | Four-level paging and 4 KiB base pages as the initial design; 64 MiB guest RAM | Entry/allocator layout, reserved ranges, NX availability and enforced permissions |
 | CPU use | One executing logical CPU; one virtual socket/core/thread | Timer/context tests before enabling concurrency |
 | Firmware | Explicit SeaBIOS for the minimal QEMU fixture | Pin firmware and bootloader; separately discover the physical firmware path |
 | Native images | Static, little-endian ELF64/AMD64 subset proposed | Toolchain, linker, calling convention, helper census and loader tests |
@@ -81,18 +82,20 @@ register state.
 
 ## QEMU configuration intent
 
-The [JSON record](../../assets/qemu-minimal-x86-64.json) records project intent.
-It is **not QEMU's `-readconfig` format**, an implemented launcher, or a
-qualified run manifest.
+The [JSON record](../../assets/qemu-minimal-x86-64.json) records the selected
+virtual inputs and their checked identities. It is **not QEMU's `-readconfig`
+format**, an implemented launcher, a guest boot result, or a qualified run
+manifest.
 
-Use `qemu-system-x86_64`, a pinned versioned `pc-q35-...` machine and TCG.
+The selected baseline uses distribution QEMU 8.2.2 package
+`1:8.2.2+ds-0ubuntu1.18`, the versioned `pc-q35-8.2` machine and TCG.
 Start with `Nehalem-v1` as an older-generation Intel instruction fixture,
 not an exact emulation of the installed Xeon SKU. This replaces the Opteron
 model. The named model is listed in
 [QEMU's CPU/configuration documentation](../../30-sources/qemu-project-2026-x86-pc-test-configuration.md).
-Its availability and required features must be checked in the chosen binary
-before accepting a run. Do not silently substitute `max`, `host` or a
-different CPU when a feature is missing.
+Its name and the machine version are available in the selected binary; each
+run must recheck the pinned executable and firmware identities. Do not silently
+substitute `max`, `host` or a different CPU when a feature is missing.
 
 Q35 is a synthetic PC fixture, not a T7500/Intel 5520 motherboard replica.
 Its chipset and boot-media controller do not validate the physical storage,
@@ -109,18 +112,18 @@ An eventual launch template, **not executed here**, is:
 
 ```bash
 qemu-system-x86_64 \
-  -machine "${ATOM_QEMU_MACHINE:?set the pinned versioned pc-q35 machine}" \
+  -machine "${KAY_QEMU_MACHINE:?set the pinned versioned pc-q35 machine}" \
   -accel tcg \
   -cpu Nehalem-v1 \
   -smp 1,sockets=1,cores=1,threads=1 \
-  -m 128M \
+  -m 64M \
   -nodefaults \
   -display none \
   -monitor none \
   -serial stdio \
   -nic none \
-  -bios "${ATOM_SEABIOS:?set the pinned SeaBIOS path}" \
-  -drive "file=${ATOM_BOOT_ISO:?set the bootable ISO path},format=raw,if=ide,index=0,media=cdrom,readonly=on" \
+  -bios "${KAY_SEABIOS:?set the pinned SeaBIOS path}" \
+  -drive "file=${KAY_BOOT_ISO:?set the bootable ISO path},format=raw,if=ide,index=0,media=cdrom,readonly=on" \
   -boot order=d \
   -no-reboot \
   -no-shutdown
@@ -183,7 +186,7 @@ serial/debug transport. Redact service tags and other unique identifiers from
 public notes. Firmware menus may be inspected; no firmware update, settings
 change or disk write is authorized by this research decision.
 
-Run the first QEMU CLI test with one CPU and 128 MiB, increasing memory only
+Run the first QEMU CLI test with one CPU and 64 MiB, increasing memory only
 if measured image/allocator requirements justify a recorded change. A
 single-CPU physical CLI boot on the T7500 should follow virtual bring-up once the machine
 and boot media are qualified; it need not wait for SMP or a second ISA.
@@ -199,10 +202,12 @@ Second-ISA portability remains later work without a selected second target.
 
 ## Evidence status and connections
 
-No QEMU installation or guest launch was performed. No physical inventory,
-boot, timing, containment or conformance result is claimed. Board and architecture
-selection narrow M0; exact binary identities, ABI and executable evidence
-remain open.
+QEMU 8.2.2, `pc-q35-8.2`, `Nehalem-v1`, and SeaBIOS 1.16.3 availability and
+hashes were checked on 2026-09-17. The executable verifier lives in the
+[Kay OS implementation repository](https://github.com/pcharbon70/kay-os).
+No guest launch or physical inventory was performed, and no boot, timing,
+containment or conformance result is claimed. Board and architecture selection
+narrow M0; freestanding ABI and later executable evidence remain open.
 
 - [Requirements inventory](README.md) maps all nineteen requirement groups.
 - [Boot contract](target-firmware-and-boot-handoff.md) and [user return](privilege-entry-memory-and-user-return.md) own first-entry responsibilities.

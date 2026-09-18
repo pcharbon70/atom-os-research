@@ -82,12 +82,12 @@ privileged ISA.
 
 ## Relevance
 
-Atom should define a versioned RERI raw-block decoder, preserve bank/profile
+Kay should define a versioned RERI raw-block decoder, preserve bank/profile
 identity and overwrite/lost-evidence state, and map every field into independently valid
 normalized facts. `containable` should contribute evidence to a conservative
 classifier but must never mint `LocalResumePostcondition` by itself. Discovery
 must distinguish `reri-v1.0` from `ras = none` and from vendor firmware records.
-As a proposed Atom protocol, an Atom-initiated injection is labeled only when
+As a proposed Kay protocol, an Kay-initiated injection is labeled only when
 authenticated out-of-band session metadata binds it to the captured record;
 without such evidence, origin remains unknown. This does not exclude an
 implementation-specific mechanism with its own independently validated

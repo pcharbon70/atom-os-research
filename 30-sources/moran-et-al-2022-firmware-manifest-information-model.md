@@ -60,7 +60,7 @@ and delegation-chain elements.
 
 ## Relevance
 
-Atom's release plan should authenticate hardware/boot/runtime/BEAM/OTP/policy/
+Kay's release plan should authenticate hardware/boot/runtime/BEAM/OTP/policy/
 schema compatibility, target generation, dependencies, payload bounds, and the
 intended inactive destination. Operational rollback must not lower the security
 sequence.

@@ -61,9 +61,9 @@ risks.
 
 ## Relevance
 
-Atom's RATS verifier should pin accepted conceptual types and inner profiles,
+Kay's RATS verifier should pin accepted conceptual types and inner profiles,
 dispatch opaque bounded payloads to confined handlers, and reject unsupported
-or ambiguously protected collections. Its Atom profile should impose hard
+or ambiguously protected collections. Its Kay profile should impose hard
 depth, item-count, and byte-size limits. Explicit typing is a parser boundary,
 not an authorization result.
 

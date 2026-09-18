@@ -1,7 +1,7 @@
 {
   "format_version": 1,
   "profile_id": "t7500-poc-minimal-x86-64",
-  "status": "adopted-configuration-intent-not-execution-qualified",
+  "status": "selected-virtual-inputs-identity-qualified-boot-unqualified",
   "specification": "../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md",
   "physical_target": {
     "model": "Dell Precision T7500",
@@ -18,17 +18,19 @@
   },
   "qemu": {
     "executable": "qemu-system-x86_64",
-    "release": null,
-    "binary_sha256": null,
+    "release": "8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)",
+    "package": "qemu-system-x86",
+    "package_version": "1:8.2.2+ds-0ubuntu1.18",
+    "binary_sha256": "8a35ccba41582fc6c38b9df85fc9e35fa1d42f414d2d7d8090ee9b2f5e7c0854",
     "machine_family": "q35",
-    "versioned_machine": null,
+    "versioned_machine": "pc-q35-8.2",
     "accelerator": "tcg",
     "cpu_model": "Nehalem-v1",
     "vcpus": 1,
     "sockets": 1,
     "cores_per_socket": 1,
     "threads_per_core": 1,
-    "memory_mib": 128,
+    "memory_mib": 64,
     "base_arguments": [
       "-accel",
       "tcg",
@@ -37,7 +39,7 @@
       "-smp",
       "1,sockets=1,cores=1,threads=1",
       "-m",
-      "128M",
+      "64M",
       "-nodefaults",
       "-display",
       "none",
@@ -55,9 +57,11 @@
   },
   "firmware": {
     "family": "SeaBIOS",
-    "version": null,
-    "path": null,
-    "sha256": null
+    "version": "1.16.3",
+    "package": "seabios",
+    "package_version": "1.16.3-2",
+    "path": "/usr/share/seabios/bios.bin",
+    "sha256": "4d597f68e06a0e28498e12e96e1f2ce64aee88a519685c61da92eb775c95a445"
   },
   "boot": {
     "format": "bios-bootable-iso",
@@ -75,8 +79,8 @@
     }
   },
   "execution_requirements": [
-    "Resolve versioned_machine and pass it with -machine; do not silently use the q35 alias for acceptance runs.",
-    "Resolve and hash firmware.path; pass it with -bios.",
+    "Pass versioned_machine with -machine and reject drift; do not silently use the q35 alias for acceptance runs.",
+    "Verify the recorded firmware path and hash before passing it with -bios.",
     "Build and hash boot.image_path; attach with the recorded read-only drive options.",
     "Keep actual hardware inventory distinct from emulator settings.",
     "Use a serial harness with a finite watchdog and explicit assertions; QEMU exit is not test success.",

@@ -17,7 +17,7 @@ aliases:
 ## Observations
 
 The research question began with preventing unauthenticated access and
-providing authorization across the five-layer Atom OS architecture. The search
+providing authorization across the five-layer Kay OS architecture. The search
 quickly showed that a login subsystem alone would leave the important problems
 unsolved: secure interaction, credential lifecycle, workload and node identity,
 attestation, policy semantics, capability enforcement, distributed freshness,
@@ -62,7 +62,7 @@ semantics.
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
 - Work type: literature and standards review plus architectural synthesis
 - Hardware or simulator target: none selected
-- Atom OS implementation, benchmark, or fault-injection run: none
+- Kay OS implementation, benchmark, or fault-injection run: none
 - External material: scientific papers, standards, official project
   specifications, government guidance, and selected empirical security studies
 
@@ -82,7 +82,7 @@ Primary papers, normative standards, official project specifications, and
 government publications were preferred. Each substantively used work received
 a source note with bibliographic metadata, claims, relevance, and limitations.
 Architecture decisions were accepted only after the relevant slot had direct
-evidence or was explicitly labeled an Atom-specific proposal.
+evidence or was explicitly labeled an Kay-specific proposal.
 
 Three independent review lanes examined capability/kernel placement,
 human/trusted-path/recovery design, and distributed policy/revocation/audit
@@ -116,7 +116,7 @@ reported as source evidence.
   sources](../10-maps/authentication-and-authorization.md#human-authentication-and-trusted-interaction)
   support phishing-resistant public-key authentication, strong lifecycle
   management, protocol-composition analysis, and an OS-owned trusted path;
-  they do not prove a future Atom UI or native login profile.
+  they do not prove a future Kay UI or native login profile.
 - [Workload, attestation, and hardware-root
   sources](../10-maps/authentication-and-authorization.md#workloads-devices-and-boot-evidence)
   support role separation and evidence appraisal but explicitly leave
@@ -124,7 +124,7 @@ reported as source evidence.
 - [Policy and distributed-system
   sources](../10-maps/authentication-and-authorization.md#distribution-delegation-and-consistency)
   support typed analyzable policy, attenuation, sender constraints, and causal
-  relationship revisions; Atom's combination and failure semantics remain a
+  relationship revisions; Kay's combination and failure semantics remain a
   proposal.
 - [Audit, update, and formal-assurance
   sources](../10-maps/authentication-and-authorization.md#recovery-audit-update-and-assurance)
@@ -141,7 +141,7 @@ reported as source evidence.
 
 ### Evidence boundary
 
-No Atom OS code, hardware, firmware, authenticator, trusted display/input path,
+No Kay OS code, hardware, firmware, authenticator, trusted display/input path,
 TPM/DICE integration, policy engine, capability grant compiler, distributed
 relation store, recovery process, audit witness, or update flow was built or
 tested in this session. The work is an evidence-backed architecture proposal,

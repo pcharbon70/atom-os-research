@@ -66,7 +66,7 @@ new bugs, and reproduced 51 known bugs.
 
 ## Relevance
 
-Atom should assign stable IDs to capture phases and injected conditions, derive
+Kay should assign stable IDs to capture phases and injected conditions, derive
 deterministic schedules from model counterexamples, and assert both local
 record invariants and global quarantine/custody outcomes. The matrix should
 include compound failures such as nested entry plus full queue, sink failure
@@ -77,7 +77,7 @@ plus missing CPU, and recovery-service restart plus a lost receipt.
 The evaluated systems are application-level distributed stores, not kernels or
 hardware RAS paths. Aspect-oriented I/O injection does not reproduce corrupted
 registers, caches, DMA, firmware, power loss, or stack failure. The work
-supports the test architecture and coverage discipline, not specific Atom
+supports the test architecture and coverage discipline, not specific Kay
 fault semantics.
 
 ## Derived work

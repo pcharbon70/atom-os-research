@@ -19,6 +19,7 @@ roadmap or an endorsement of a pre-existing OS foundation.
 - [Zig versus C comparison](../20-notes/proof-of-concept-requirements/zig-versus-c-kernel-language-comparison.md) — conditional recommendation and strongest alternative case; separate from the recorded selection.
 - [Feasibility assessment](../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — conclusion, low-level coverage, C fallback, local results and prioritized qualification.
 - [Qualification inquiry](../40-inquiries/can-zig-meet-the-kernel-qualification-contract.md) — what remains falsifiable after language selection.
+- [M0 build-closure execution](../50-journal/2026-09-17-m0-phase-01-build-closure.md) — the first clean committed Zig/C/assembly fixture, reproducibility result, dependency/instruction audit and bounded limitations.
 - [Session evidence](../50-journal/2026-09-08-zig-kernel-feasibility-deep-dive.md) — exact source manifest and probe limits.
 
 ## Trails
@@ -45,7 +46,7 @@ not universal library compatibility.
 and [OpenMP integration](../30-sources/kacs-et-al-2024-zig-openmp.md) provide
 different scholarly evidence. [Ymir](../30-sources/smallkirby-2024-writing-hypervisor-in-zig.md)
 shows concrete Intel mechanisms but does not qualify our boot fixture or
-user transitions. None establishes a safe completed Atom kernel.
+user transitions. None establishes a safe completed Kay kernel.
 
 ## Open questions
 

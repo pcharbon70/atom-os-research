@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 A hosted runtime's native interfaces carry dependencies beyond an ABI; ownership queues do not themselves authenticate or authorize a service. [1](../../../30-sources/haecki-et-al-2019-cleanq.md), [2](../../../30-sources/erlang-otp-team-2026-otp-29-source-tree.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Protected service domains are the default native boundary. Regular and dirty NIFs remain inside the runtime memory-failure domain.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

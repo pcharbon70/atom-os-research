@@ -7,7 +7,7 @@ tags:
   - human-computer-interaction
   - visual-computing
 aliases:
-  - "Atom OS visual-computing component reports"
+  - "Kay OS visual-computing component reports"
 ---
 
 # Visual Computing Synthesis Components
@@ -15,7 +15,7 @@ aliases:
 ## Purpose
 
 This directory contains the detailed implementation research for the seven
-aspects of the Atom OS visual-computing synthesis proposed in [Alan Kay's
+aspects of the Kay OS visual-computing synthesis proposed in [Alan Kay's
 Smalltalk visual interface and the modern
 desktop](../alan-kay-smalltalk-visual-interface-and-modern-desktop.md). Each
 report turns one design direction into explicit objects, protocols, layer
@@ -60,7 +60,7 @@ belongs in the parent synthesis; source-specific evidence belongs in
   confines inspection, evaluation, tracing, editing, migration, publication,
   rollback, and reusable-tool release.
 - [Cross-layer placement and recovery topology](cross-layer-placement-and-recovery-topology.md) —
-  assigns every visual-computing mechanism and policy to the existing Atom OS
+  assigns every visual-computing mechanism and policy to the existing Kay OS
   architecture and defines its failure and restart dependencies.
 - [Plural representations and cross-view consistency](plural-representations-and-cross-view-consistency.md) —
   supports coexisting visual, textual, programmatic, voice, assistive, and

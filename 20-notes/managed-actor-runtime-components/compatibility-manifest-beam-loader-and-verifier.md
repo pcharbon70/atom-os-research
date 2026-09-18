@@ -29,7 +29,7 @@ sealing alone do not make it current or callable.
 The loader cannot truthfully promise a hostile-code sandbox merely because a
 module is well formed. Current ERTS documentation and source treat loaded BEAM
 code as trusted, and no complete formal semantics or proof covers the OTP 29
-instruction set, BIFs, signals, code loading, and native surface. Atom OS should
+instruction set, BIFs, signals, code loading, and native surface. Kay OS should
 therefore publish at least two admission profiles: a trusted compatibility
 profile and a narrower restricted profile whose imports and dynamic features
 are explicitly constrained.
@@ -194,7 +194,7 @@ unless the profile says so.
 ### 2. Private parse
 
 Build temporary symbols, atoms, literals, imports, exports, labels, and
-instruction records in a staging arena charged to the load operation. Atom
+instruction records in a staging arena charged to the load operation. Kay
 names are validated and deduplicated in staging; permanent atom-table insertion
 waits until the publication transaction has reserved and accepted the full
 set.
@@ -359,7 +359,7 @@ portable image and interpreter is the safer first oracle.
 - Extract external opcodes and runtime-call descriptors from the pinned OTP
   toolchain and current source audit.
 - Classify every supported feature as normative compatibility, current ERTS
-  implementation, Atom OS extension, or unsupported.
+  implementation, Kay OS extension, or unsupported.
 
 Exit condition: two runtimes can reject or accept a fixture using only the
 profile and module, and every unsupported feature has a stable reason code.

@@ -11,7 +11,7 @@ tags:
   - operating-systems
   - security
 aliases:
-  - "Atom OS authentication and authorization contract"
+  - "Kay OS authentication and authorization contract"
 ---
 
 # What contract should system-wide authentication and authorization provide?
@@ -31,7 +31,7 @@ and therefore unresolved.
 
 ## Operational question
 
-What minimal, testable contract lets Atom OS accept human, workload, node, and
+What minimal, testable contract lets Kay OS accept human, workload, node, and
 recovery evidence; issue only justified attenuated authority; mediate every
 protected effect; revoke and drain that authority under crash and partition;
 and preserve useful audit evidence without placing identity policy or complex
@@ -73,7 +73,7 @@ unreported universal decryption or administrator key.
 - An explicit anonymous principal with manifest-declared public/bootstrap
   capabilities is safer and easier to test than a missing-login special case.
 - Human login should be phishing-resistant public-key authentication over a
-  protected Atom-specific ceremony; privileged actions need request-bound
+  protected Kay-specific ceremony; privileged actions need request-bound
   hardware-key step-up and sometimes threshold approval.
 - PIDs, names, UIDs, paths, roles, attributes, certificates, and attestation
   measurements designate or describe; only a bounded capability presented at
@@ -176,7 +176,7 @@ records the exact new and reused evidence for that expansion, as well as the
 cross-service lifecycle model, evaluation program, falsifiers, and unresolved
 hardware, usability, consistency, and proof obligations.
 
-The literature supports the components but does not settle their Atom-specific
+The literature supports the components but does not settle their Kay-specific
 composition. In particular, WebAuthn does not specify a native OS trusted path;
 TPM/DICE and RATS do not decide resource policy; Cedar does not provide kernel
 enforcement; Zanzibar's consistency design does not solve every offline or

@@ -44,14 +44,14 @@ should explain why its links belong together rather than merely list files.
 - [Alan Kay, Smalltalk, and visual computing](alan-kay-smalltalk-ui.md) —
   connects the Dynabook and metamedium vision, implemented Smalltalk tools,
   Star and direct-manipulation lineage, modern desktop mechanisms, and the
-  proposed Atom OS visual-computing model.
+  proposed Kay OS visual-computing model.
 - [Authentication and authorization](authentication-and-authorization.md) —
   routes from human, workload, node, and recovery evidence through versioned
   policy and bounded grants to capability enforcement, revocation, audit, and
   recovery across all five layers.
 - [BEAM, ERTS, and OTP](beam-erts-and-otp.md) — separates the instruction
   machine, runtime, and OTP policy and connects them to the new kernel design.
-- [Atom OS Research](home.md) — the selective entry point to the archive.
+- [Kay OS Research](home.md) — the selective entry point to the archive.
 - [Kernel hardware and architecture support](kernel-hardware-and-architecture-support.md) —
   routes through kernel-level privilege, context, translation, ordering,
   interrupts, time, CPU lifecycle, protected I/O, fault and assurance work,

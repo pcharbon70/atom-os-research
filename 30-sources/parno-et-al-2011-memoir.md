@@ -60,7 +60,7 @@ modeled in TLA+ and evaluated with TPM-backed storage constraints.
 
 ## Relevance
 
-A crash record can be encrypted and authenticated yet still be stale. Atom's
+A crash record can be encrypted and authenticated yet still be stale. Kay's
 sink metadata should separate `integrity`, `confidentiality`, and `freshness`.
 If a platform monotonic anchor is unavailable or unsafe in fatal context, the
 record must say `freshness = unverified` and rely on boot generation plus later
@@ -71,7 +71,7 @@ correlation rather than overclaim rollback resistance.
 Memoir protects modules against software-controlled persistent storage; it is
 not a crash logger and does not prove record capture under machine corruption.
 Its TPM assumptions and performance do not transfer automatically to every
-Atom target.
+Kay target.
 
 ## Derived work
 

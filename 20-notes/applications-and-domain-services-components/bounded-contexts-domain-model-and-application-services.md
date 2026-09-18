@@ -65,7 +65,7 @@ domain.
 [Hexagonal architecture](../../30-sources/cockburn-2005-hexagonal-architecture.md)
 supplies a practical inside/outside and port/adapter pattern. It does not
 specify distributed failure, authority, consistency, or actor supervision.
-Atom OS adds those contracts explicitly rather than assuming architectural
+Kay OS adds those contracts explicitly rather than assuming architectural
 purity is enough.
 
 ## Bounded-context catalog

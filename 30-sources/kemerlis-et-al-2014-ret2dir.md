@@ -60,7 +60,7 @@ user mappings and a privileged direct map.
 
 ## Relevance
 
-Atom's safe-access helper cannot claim isolation merely because SMAP, PAN, or
+Kay's safe-access helper cannot claim isolation merely because SMAP, PAN, or
 SUM is normally restrictive. User-owned frames should not have an ambient
 dereferenceable privileged alias; a temporary alias must be capability-bound,
 non-executable, lexically scoped, and closed before its frame can change role.
@@ -69,7 +69,7 @@ non-executable, lexically scoped, and closed before its frame can change role.
 
 The exploits assume another memory-corruption or control primitive and target
 historical Linux designs. They do not show that every direct map is exploitable
-or measure Atom's proposed approach. Exclusive ownership and temporary aliases
+or measure Kay's proposed approach. Exclusive ownership and temporary aliases
 still need proofs covering DMA, speculative behavior, and teardown.
 
 ## Derived work

@@ -294,7 +294,7 @@ The next work should proceed by falsification rather than feature accumulation:
 
 These historical steps are retained in the paused [operational
 inquiry](../90-archive/can-atomvm-serve-as-a-kernel-facing-runtime.md).
-They are not prerequisites or active work for Atom OS.
+They are not prerequisites or active work for Kay OS.
 
 ## Confidence and unresolved points
 

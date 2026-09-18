@@ -64,7 +64,7 @@ adaptation.
 
 ## Relevance
 
-The Atom OS service layer should use generation-fenced leases for leader or
+The Kay OS service layer should use generation-fenced leases for leader or
 device ownership, versioned watches with resynchronization, and separate
 high-volume data paths. A consensus-backed metadata service can anchor a small
 distributed namespace, but applications should not confuse a name or a lock

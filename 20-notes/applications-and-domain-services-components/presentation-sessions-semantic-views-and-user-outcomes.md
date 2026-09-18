@@ -65,7 +65,7 @@ support model/view separation and several coordinated representations.
 [WAI-ARIA](../../30-sources/w3c-2023-wai-aria-1-2.md) and [Core AAM](../../30-sources/w3c-2026-core-accessibility-api-mappings-1-2.md)
 show that semantic roles, states, properties, relations, and actions can be
 mapped into platform accessibility trees whose structure differs from the
-render tree. These web standards inform the Atom OS protocol but are not its
+render tree. These web standards inform the Kay OS protocol but are not its
 complete schema or security model.
 
 The detailed visual architecture remains in the [visual-computing component

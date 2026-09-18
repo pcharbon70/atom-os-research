@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should an Atom OS process resolve a stable logical service name to the
+How should an Kay OS process resolve a stable logical service name to the
 current local incarnation without treating the name as authority, leaking
 unbounded namespace state, or missing replacement events between a snapshot
 and a watch?
@@ -54,7 +54,7 @@ unbounded pause.
 The [etcd API guarantee
 contract](../../30-sources/etcd-project-2026-api-guarantees.md) demonstrates a
 useful revisioned snapshot/watch model and makes compaction recovery explicit.
-Atom OS can use those semantics without embedding a replicated database in the
+Kay OS can use those semantics without embedding a replicated database in the
 local fast path. The [OTP 29 system-services
 documentation](../../30-sources/erlang-otp-team-2026-otp-29-0-6-system-services-documentation.md)
 supplies compatibility behavior for process registration and groups; its atom

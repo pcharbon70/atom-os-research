@@ -54,7 +54,7 @@ changes intended to improve parallelism.
 
 ## Relevance
 
-The study argues for workload-explicit table kinds and metrics in Atom OS,
+The study argues for workload-explicit table kinds and metrics in Kay OS,
 separate accounting for metadata and deferred reclamation, and benchmarks that
 include hot keys, disjoint ranges, traversal, resize, and owner death.
 

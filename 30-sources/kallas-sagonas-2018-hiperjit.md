@@ -61,7 +61,7 @@ ahead-of-time HiPE, and Pyrlang across their benchmark set.
 
 ## Relevance
 
-HiPErJiT provides positive and negative evidence for Atom OS. Native lowering
+HiPErJiT provides positive and negative evidence for Kay OS. Native lowering
 can preserve important Erlang behavior, but profiles, deoptimization state,
 compiler memory, hot-code generations, roots, and publication add failure and
 latency surface. The recommended sequence is therefore an auditable
@@ -71,7 +71,7 @@ optimization only if measured workloads justify the additional trusted state.
 ## Limits
 
 The comparison predates current BeamAsm and current OTP workloads, and the
-benchmarks do not include the Atom OS kernel boundary, W^X publication,
+benchmarks do not include the Kay OS kernel boundary, W^X publication,
 reproducible failure injection, or hard memory/CPU accounts. Reported speedups
 must not be carried forward as target predictions.
 

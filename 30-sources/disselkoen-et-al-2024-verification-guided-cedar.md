@@ -64,7 +64,7 @@ parts are subjected to property-based testing.
 
 ## Relevance
 
-Atom OS should build its policy evaluator and capability-grant compiler from a
+Kay OS should build its policy evaluator and capability-grant compiler from a
 small executable semantics, prove fail-closed and non-amplification properties
 there, and continually differentially test the production implementation. The
 same method should compare a decision with the exact grant installed at a

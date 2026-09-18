@@ -27,7 +27,7 @@ shows how current interaction can help select a narrow object grant.
 [2](../../../30-sources/miller-et-al-2003-capability-myths.md)
 [3](../../../30-sources/roesner-et-al-2012-user-driven-access-control.md)
 
-Atom OS rehydration and revocation semantics remain proposed.
+Kay OS rehydration and revocation semantics remain proposed.
 
 ## Development
 

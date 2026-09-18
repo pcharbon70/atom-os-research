@@ -21,7 +21,7 @@ Research question: When may the old generation and its evidence actually be dest
 Retained immutable generations enable selection rollback only while required
 artifacts and compatible state remain available. [1](../../../30-sources/dolstra-et-al-2008-nixos.md) [2](../../../30-sources/chen-et-al-2015-fscq.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

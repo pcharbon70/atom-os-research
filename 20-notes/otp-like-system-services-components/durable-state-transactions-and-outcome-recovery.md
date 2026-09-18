@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-What is the smallest unprivileged persistence service Atom OS needs to recover
+What is the smallest unprivileged persistence service Kay OS needs to recover
 service metadata and request outcomes honestly after process, domain, or power
 failure?
 
@@ -39,14 +39,14 @@ The first implementation is acceptable only if:
 6. effects outside the durability domain remain explicitly indeterminate or
    compensated.
 
-No Atom OS storage implementation, power-cut test, or filesystem proof exists.
+No Kay OS storage implementation, power-cut test, or filesystem proof exists.
 
 ## Evidence and its boundaries
 
 [ARIES](../../30-sources/mohan-et-al-1992-aries.md) provides the classic
 analysis/redo/undo structure, page LSNs, physiological logging, and
 compensation records for concurrent in-place databases. It is powerful but
-brings locking, buffer, and page assumptions the first Atom OS metadata store
+brings locking, buffer, and page assumptions the first Kay OS metadata store
 may not need. [FSCQ](../../30-sources/chen-et-al-2015-fscq.md) demonstrates how
 a crash specification and write-ahead logging can support machine-checked
 filesystem guarantees. It models asynchronous disk writes and builds a

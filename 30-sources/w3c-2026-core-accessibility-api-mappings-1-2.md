@@ -59,7 +59,7 @@ technology user outcomes.
 
 ## Relevance
 
-Atom OS can treat Core-AAM adapters as replaceable consumers of its native
+Kay OS can treat Core-AAM adapters as replaceable consumers of its native
 semantic protocol. This avoids choosing one existing platform API as the
 system's internal truth while providing concrete compatibility targets and
 event behavior for assistive clients.
@@ -74,4 +74,4 @@ recovery after publisher or adapter failure.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

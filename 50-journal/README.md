@@ -35,6 +35,16 @@ provenance record.
 
 ### Documents
 
+- [2026-09-17 M0 phase 01 virtual integration](2026-09-17-m0-phase-01-virtual-integration.md) —
+  records the clean `b350de9` virtual gate, nine passing registered cases,
+  finite watchdog, exact artifact/manifest hashes, physical-inventory boundary
+  and pending acceptance review.
+
+- [2026-09-17 M0 phase 01 build closure](2026-09-17-m0-phase-01-build-closure.md) —
+  records the clean Zig/C/assembly freestanding fixture builds, reproducible
+  stripped ELF, dependency and instruction audits, three required negative
+  cases, and the still-blocked inventory/integration handoff.
+
 - [2026-09-10 visual-computing internal services](2026-09-10-visual-computing-internal-services-deep-dive.md) —
   records 34 studies across all seven synthesis components, five new and
   54 reused sources, explicit non-PoC scope, evidence gaps, and

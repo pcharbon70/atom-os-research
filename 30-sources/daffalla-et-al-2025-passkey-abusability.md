@@ -59,7 +59,7 @@ passkey-supporting services to validate hypothesized abuse vectors.
 
 ## Relevance
 
-Atom OS must expose every bound authenticator and session with provenance,
+Kay OS must expose every bound authenticator and session with provenance,
 exportability or synchronization status, last use, assurance ceiling, and
 revocation state. Removal must close future sessions and trigger independent
 notification. Recovery and ownership transfer must consider coercion and
@@ -69,7 +69,7 @@ periodic unlocked-device access, not only remote attackers.
 
 The study evaluates early deployments and application UX, not WebAuthn’s
 cryptography or every service. Results are scoped to its threat models and
-testing dates. Atom OS still needs its own user studies and red-team exercises.
+testing dates. Kay OS still needs its own user studies and red-team exercises.
 
 ## Derived work
 

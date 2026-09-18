@@ -26,7 +26,7 @@ control motivates binding selection to authentic user interaction.
 [1](../../../30-sources/xdg-desktop-portal-project-2026-interaction-sessions.md)
 [2](../../../30-sources/roesner-et-al-2012-user-driven-access-control.md)
 
-The Atom remote-seat, capture, and indicator protocols are unimplemented.
+The Kay remote-seat, capture, and indicator protocols are unimplemented.
 
 ## Development
 

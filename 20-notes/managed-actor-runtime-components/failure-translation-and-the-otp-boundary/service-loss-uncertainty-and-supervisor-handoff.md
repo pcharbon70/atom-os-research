@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Crash-only design needs state and retry assumptions; failure suspicion does not justify replaying arbitrary external effects. [1](../../../30-sources/chandra-toueg-1996-failure-detectors.md), [2](../../../30-sources/candea-fox-2003-crash-only-software.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. The runtime implements observations and actor termination; OTP-like services choose restart policy, and an outer service handles runtime corruption.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

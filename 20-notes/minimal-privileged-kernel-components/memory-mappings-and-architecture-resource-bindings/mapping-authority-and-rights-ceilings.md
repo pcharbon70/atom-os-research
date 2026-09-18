@@ -13,9 +13,9 @@ Which authorities bound a mapping throughout its lifetime, including later prote
 
 ## Research basis and status
 
-The seL4 mapping API intersects requested access with frame rights; Atom adds an explicit persistent binding ceiling. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md)
+The seL4 mapping API intersects requested access with frame rights; Kay adds an explicit persistent binding ceiling. [1](../../../30-sources/sel4-foundation-2026-reference-manual.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../memory-mappings-and-architecture-resource-bindings.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../memory-mappings-and-architecture-resource-bindings.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

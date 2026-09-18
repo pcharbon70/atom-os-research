@@ -39,11 +39,11 @@ Queue age, first-attempt latency, workload isolation, delayed retries and backlo
 
 ## Relevance
 
-Proposed Atom OS use: independently budget fresh, retry and retained work without dropping accepted semantic obligations.
+Proposed Kay OS use: independently budget fresh, retry and retained work without dropping accepted semantic obligations.
 
 ## Limits
 
-Patterns depend on workload semantics. Fresh-first scheduling and backpressure are not universally appropriate, and the article supplies no Atom OS fairness or hard-latency proof.
+Patterns depend on workload semantics. Fresh-first scheduling and backpressure are not universally appropriate, and the article supplies no Kay OS fairness or hard-latency proof.
 
 ## Derived work
 

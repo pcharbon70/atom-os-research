@@ -21,7 +21,7 @@ Research question: How can recovery tooling remain powerful without becoming per
 Capability attenuation limits delegation; DTrace demonstrates constrained
 instrumentation rather than a universal worst-case execution proof. [1](../../../30-sources/miller-et-al-2003-capability-myths.md) [2](../../../30-sources/cantrill-et-al-2004-dtrace.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

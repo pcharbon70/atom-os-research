@@ -37,7 +37,7 @@ musl is a C library built on the Linux system-call API.
 
 ## Relevance
 
-A statically linked Linux/musl executable cannot be assumed to run on Atom merely because its machine code and C calling convention match.
+A statically linked Linux/musl executable cannot be assumed to run on Kay merely because its machine code and C calling convention match.
 
 ## Limits
 

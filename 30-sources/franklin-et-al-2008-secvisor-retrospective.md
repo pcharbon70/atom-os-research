@@ -64,10 +64,10 @@ mapping design; and model check and benchmark the repair.
 
 ## Relevance
 
-Atom's validator must resolve canonical physical provenance and current
+Kay's validator must resolve canonical physical provenance and current
 authority before constructing an executable entry, and its extent index must
 exclude writable aliases of the same executable bytes. The paper does not
-establish Atom's memory-type or post-attenuation descriptor rules; those come
+establish Kay's memory-type or post-attenuation descriptor rules; those come
 from architecture specifications and the separate seL4 defect evidence.
 
 ## Limits
@@ -75,7 +75,7 @@ from architecture specifications and the separate seL4 defect evidence.
 The implementation and bounded model concern an older, uniprocessor x86/SVM
 SecVisor design. The model's bounds and abstractions limit its assurance. It
 includes a simplified Device Exclusion Vector, but does not model modern IOMMU
-translation, device-lifecycle completion, weak virtual memory, or Atom's exact
+translation, device-lifecycle completion, weak virtual memory, or Kay's exact
 capability protocol.
 
 ## Derived work

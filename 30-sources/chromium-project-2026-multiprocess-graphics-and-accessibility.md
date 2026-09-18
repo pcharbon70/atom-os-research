@@ -68,7 +68,7 @@ routing, GPU mediation, and independent software fallback.
 ## Limits
 
 Chromium's browser process remains a large trusted coordinator, its documents
-describe evolving implementations, and web-origin policy is not Atom OS
+describe evolving implementations, and web-origin policy is not Kay OS
 capability policy. Renderer restart does not by itself prove durable application
 meaning or exactly-once domain effects.
 

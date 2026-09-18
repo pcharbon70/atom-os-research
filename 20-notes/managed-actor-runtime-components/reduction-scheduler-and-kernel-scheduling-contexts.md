@@ -100,7 +100,7 @@ activations](../../30-sources/anderson-et-al-1992-scheduler-activations.md)
 establish the need to coordinate kernel processor allocation with user-level
 parallelism. [Scheduling-context
 capabilities](../../30-sources/lyons-et-al-2018-scheduling-context-capabilities.md)
-make temporal budgets explicit and delegable. Atom OS takes the division of
+make temporal budgets explicit and delegable. Kay OS takes the division of
 responsibility but avoids importing historical upcall APIs or treating an
 ordinary actor message as synchronous priority donation.
 

@@ -39,7 +39,7 @@ A named C standard is only one part of an engineered kernel compilation contract
 
 ## Limits
 
-Linux flags, memory model and internal APIs are Linux-specific. They are evidence of feasibility, not an Atom configuration to copy wholesale or a stable reusable driver ABI.
+Linux flags, memory model and internal APIs are Linux-specific. They are evidence of feasibility, not an Kay configuration to copy wholesale or a stable reusable driver ABI.
 
 ## Derived work
 

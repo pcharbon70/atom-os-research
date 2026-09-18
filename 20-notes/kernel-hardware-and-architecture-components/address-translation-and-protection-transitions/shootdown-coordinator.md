@@ -29,7 +29,7 @@ bounded nonblocking interrupt handlers, conservative coalescing, and a CPU
 lifecycle handshake. It should favor a protocol whose safety and liveness can
 be modeled over one that depends on scheduler folklore.
 
-This is a proposed Atom protocol. It has not yet been proved against weak
+This is a proposed Kay protocol. It has not yet been proved against weak
 memory, nested interrupts, CPU hotplug, or real platform firmware.
 
 ## Question, scope, and operational standard
@@ -82,20 +82,20 @@ candidate coordinator passes only if:
 | --- | --- | --- |
 | [TLB consistency](../../../30-sources/black-et-al-1989-tlb-consistency.md) | A practical multiprocessor protocol can queue address work per target, notify once, wait for acknowledgement, and upgrade overflow to a full flush | Historical machines had simpler CPU and memory-order behavior |
 | [SVR4.2 HAT layer](../../../30-sources/balan-gollhardt-1992-scalable-virtual-memory-hat-layer.md) | Per-address-space processor accounting can restrict shootdown to CPUs that may hold the context, provided activation and mutation share one protocol | Its small-SMP design and lazy decisions are not a modern completion proof |
-| [Intel system-programming documentation](../../../30-sources/intel-2026-system-programming-documentation.md) | Every logical processor that may use modified structures must participate before affected pages are reused; stale translation state can affect speculative accesses | Intel documents local mechanisms, not Atom's interprocessor protocol |
+| [Intel system-programming documentation](../../../30-sources/intel-2026-system-programming-documentation.md) | Every logical processor that may use modified structures must participate before affected pages are reused; stale translation state can affect speculative accesses | Intel documents local mechanisms, not Kay's interprocessor protocol |
 | [RISC-V privileged architecture](../../../30-sources/risc-v-international-2026-privileged-architecture.md) | `SFENCE.VMA` orders and invalidates only on the executing hart | Platform interrupt and firmware completion semantics remain external |
 | [RISC-V SBI](../../../30-sources/risc-v-international-2025-supervisor-binary-interface.md) | RFENCE provides standardized remote-fence request interfaces whose `SBI_SUCCESS` reports successful transmission to targeted harts | The standard return alone does not establish target execution or architectural completion |
 | [Optimizing TLB shootdown](../../../30-sources/amit-2017-optimizing-tlb-shootdown.md) | Tracking can omit targets only when its evidence proves they cannot cache the translation; otherwise the conservative target set remains necessary | The technique relies on x86 page-access behavior and does not prove safe reuse after an unresponsive CPU |
 | [Don't shoot down TLB shootdowns](../../../30-sources/amit-et-al-2020-dont-shoot-down-tlb-shootdowns.md) | Early/deferred acknowledgement can work only with explicit user-return, interrupt, and privileged user-access constraints | It does not make detached table pages reclaimable and was evaluated on Linux/x86 |
 | [TLB shootdown liveness case study](../../../30-sources/padon-et-al-2018-reducing-liveness-to-safety.md) | Shootdown correctness includes liveness and depends on accurately modeled atomic regions and fairness | The verified protocol abstracts real ISA instructions and failed hardware |
 | [Unreliable failure detectors](../../../30-sources/chandra-toueg-1996-failure-detectors.md) | Timing can provide suspicion useful for progress policy, but not proof that a participant cannot later act | Distributed process failures are an analogy, not a CPU-hotplug specification |
-| [RadixVM](../../../30-sources/clements-et-al-2013-radixvm.md) | Precise per-range CPU tracking can reduce fanout, while unmap still waits for every selected response before releasing references | Its research-kernel protocol couples concerns that Atom assigns to separate coordinator and reclamation services |
-| [Linux VM implementation contracts](../../../30-sources/linux-kernel-community-2026-virtual-memory-implementation-contracts.md) | TLB rendezvous, lockless software-reader lifetime, and secondary-MMU notification are distinct implementation obligations | Linux precedent does not prove Atom's completion classes or a portable CPU protocol |
+| [RadixVM](../../../30-sources/clements-et-al-2013-radixvm.md) | Precise per-range CPU tracking can reduce fanout, while unmap still waits for every selected response before releasing references | Its research-kernel protocol couples concerns that Kay assigns to separate coordinator and reclamation services |
+| [Linux VM implementation contracts](../../../30-sources/linux-kernel-community-2026-virtual-memory-implementation-contracts.md) | TLB rendezvous, lockless software-reader lifetime, and secondary-MMU notification are distinct implementation obligations | Linux precedent does not prove Kay's completion classes or a portable CPU protocol |
 | [HATRIC](../../../30-sources/yan-et-al-2017-hatric.md) | Hardware coherence can replace some software IPI traffic while preserving the need for a precisely specified completion boundary | HATRIC is a simulated design rather than an available baseline mechanism |
 
 The sources justify explicit remote execution, activation exclusion, and
 liveness modeling. The request tuple, acknowledgement lattice, and mailbox
-protocol below are Atom synthesis.
+protocol below are Kay synthesis.
 
 ## Accepted request and target slots
 
@@ -586,7 +586,7 @@ only.
 
 ## Synchronous baseline
 
-The first Atom implementation should be synchronous for restrictive changes:
+The first Kay implementation should be synchronous for restrictive changes:
 
 1. reserve the complete request and every target slot;
 2. enqueue work and notify all remote targets;
@@ -640,7 +640,7 @@ documents and tests:
 - error and partial-completion reporting; and
 - the virtualization layer at which completion is observed.
 
-Atom may use SBI IPI only as transport to an Atom target handler that executes
+Kay may use SBI IPI only as transport to an Kay target handler that executes
 and acknowledges the local fence. If firmware itself executes RFENCE, completion
 must be emitted causally after that exact fence and bind the request and hart
 incarnation through a separately specified platform primitive. An unrelated OS
@@ -661,7 +661,7 @@ Stopping a CPU is a terminal protocol:
 5. execute the platform power-off handshake; and
 6. publish `LifecycleExcluded(target_cpu)` only after nonreturn is guaranteed.
 
-A CPU that stops responding before step 6 remains a target. Atom may isolate
+A CPU that stops responding before step 6 remains a target. Kay may isolate
 it through a platform reset/fencing mechanism that gives equivalent evidence;
 otherwise dependent operations and memory enter quarantine. A failure detector
 can choose when to escalate but cannot create the safety fact.
@@ -681,7 +681,7 @@ The model states rather than hides these assumptions:
 - a CPU-stop authority eventually supplies success or explicit failure; and
 - requesters waiting for completion continue servicing inbound work.
 
-Padon et al. show why atomic-region details can change a liveness proof. Atom's
+Padon et al. show why atomic-region details can change a liveness proof. Kay's
 TLA+/Ivy-style model should include simultaneous requests, bounded queues,
 notification-bit races, activation, deactivation, timeout observation, CPU
 stop/start, duplicate delivery, and unfair executions. Safety must hold even
@@ -829,7 +829,7 @@ authority.
 - **Lazy invalidation on next schedule** avoids IPIs only when every possible
   old-access path is gated and no resource needs stronger completion.
 - **Hardware coherence/broadcast** may simplify software, but the hardware
-  contract must expose target and completion semantics at Atom's boundary.
+  contract must expose target and completion semantics at Kay's boundary.
 
 ## Unresolved questions
 
@@ -841,7 +841,7 @@ authority.
 - Which NMI/debug/machine-check paths can touch user frames, and how are they
   brought under the access-closed predicate?
 - Can the first RISC-V platform supply a separately specified remote-execution
-  primitive beyond standard RFENCE transmission, or must Atom always layer its
+  primitive beyond standard RFENCE transmission, or must Kay always layer its
   own incarnation-bound target acknowledgement?
 - What bounded handler budget avoids starvation while keeping teardown
   progress acceptable under adversarial mapping churn?

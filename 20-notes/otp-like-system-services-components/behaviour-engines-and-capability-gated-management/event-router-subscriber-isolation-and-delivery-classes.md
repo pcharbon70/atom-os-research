@@ -21,7 +21,7 @@ Research question: What does event publication mean when subscribers have differ
 OTP gen_event shares a manager process; independently queued subscribers are a
 different native abstraction. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-system-services-documentation.md) [2](../../../30-sources/welsh-et-al-2001-seda.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

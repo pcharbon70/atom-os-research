@@ -66,7 +66,7 @@ shows why shape alone is insufficient for substitution. [Protocol Buffers
 evolution guidance](../../30-sources/google-2026-protocol-buffers-evolution.md)
 and [RFC 9413](../../30-sources/thomson-schinazi-2023-maintaining-robust-protocols.md)
 provide concrete structural and robustness lessons. Protocol Buffers is an
-example encoding, not an Atom OS selection.
+example encoding, not an Kay OS selection.
 
 Classic [RPC](../../30-sources/birrell-nelson-1984-remote-procedure-calls.md),
 [RIFL](../../30-sources/lee-et-al-2015-rifl.md), and [fault tolerance via

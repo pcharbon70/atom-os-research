@@ -12,7 +12,7 @@ tags:
   - security
   - systems-architecture
 aliases:
-  - "Atom OS security architecture"
+  - "Kay OS security architecture"
   - "System-wide authentication and authorization"
 ---
 
@@ -20,7 +20,7 @@ aliases:
 
 ## Conclusion
 
-Atom OS should use a **two-plane security architecture** rather than put login
+Kay OS should use a **two-plane security architecture** rather than put login
 logic in the kernel or rely on a global logged-in user:
 
 1. An unprivileged **identity and policy control plane** verifies evidence,
@@ -64,7 +64,7 @@ Sensitive objects are structurally unreachable until an authorized issuer
 derives a capability from its own predeclared envelope.
 
 This is a proposed architecture supported by literature and standards. It is
-not yet an implementation result, a proof about Atom OS, or evidence that a
+not yet an implementation result, a proof about Kay OS, or evidence that a
 particular authenticator, policy engine, hardware root, or user interface is
 secure in the eventual system.
 
@@ -228,7 +228,7 @@ study](../30-sources/anderson-1972-computer-security-technology-planning-study.m
 while complete mediation, least privilege, economy of mechanism, and fail-safe
 defaults come from [Saltzer and
 Schroeder](../30-sources/saltzer-schroeder-1975-protection-information.md).
-Atom OS still has to show that all relevant effect paths actually traverse the
+Kay OS still has to show that all relevant effect paths actually traverse the
 mechanism.
 
 ## Placement across the five layers
@@ -270,7 +270,7 @@ CBOR, and policy parsers stay outside privilege.
 CHERI-like tagged capabilities can strengthen native memory safety and
 compartmentalization. The [Morello proof
 work](../30-sources/bauereiss-et-al-2022-verified-morello-security.md) is
-valuable evidence about a particular architecture model, not proof about Atom
+valuable evidence about a particular architecture model, not proof about Kay
 OS and not a replacement for authentication or policy.
 
 ### Layer 2 — minimal privileged kernel
@@ -306,7 +306,7 @@ analysis](../30-sources/hardy-1988-confused-deputy.md), and systems such as
 [KeyKOS](../30-sources/hardy-1990-keykos-architecture.md),
 [EROS](../30-sources/shapiro-et-al-1999-eros.md), and
 [Capsicum](../30-sources/watson-et-al-2010-capsicum.md) support this direction.
-They do not establish the security of Atom OS's future object model.
+They do not establish the security of Kay OS's future object model.
 
 Secure-attention kernel code should only validate the unforgeable event,
 freeze or revoke competing display/input leases, and transfer exclusive
@@ -430,7 +430,7 @@ The baseline should follow the intent of [NIST SP
 without pretending that NIST's federation and identity-proofing ecosystem is
 the OS architecture itself:
 
-| Operation profile | Atom OS recommendation |
+| Operation profile | Kay OS recommendation |
 | --- | --- |
 | Public/bootstrap | Explicit anonymous principal, no reusable credential, narrow capabilities and strict budgets |
 | Ordinary low-risk local use | AAL2-like session, preferably phishing-resistant public-key authentication, with device/workload context according to deployment policy |
@@ -442,7 +442,7 @@ the OS architecture itself:
 2.2](../30-sources/fido-alliance-2025-ctap-2-2.md) are strong bases for
 public-key authenticators. Native OS login is not automatically WebAuthn: a
 browser origin and a native trusted-path ceremony are different protocol
-contexts. Atom OS needs a formally specified, domain-separated local relying-
+contexts. Kay OS needs a formally specified, domain-separated local relying-
 party profile whose challenge binds at least:
 
 ```text
@@ -452,7 +452,7 @@ expiry, nonce, trusted-interaction transcript digest
 ```
 
 User presence or user verification does not mean that an authenticator
-understood or displayed the transaction. Atom OS therefore needs one canonical
+understood or displayed the transaction. Kay OS therefore needs one canonical
 request encoding. Its digest is atomically rendered by the trusted OS surface,
 placed in the native/WebAuthn challenge, signed, and checked by the final
 policy-enforcement point. For the highest-value actions, the deployment
@@ -463,7 +463,7 @@ channel that can itself display and verify the transaction.
 The [formal FIDO2
 analysis](../30-sources/guan-et-al-2022-formal-analysis-fido2.md) is a warning
 that individually analyzed subprotocols can fail when composed or run in
-parallel. Atom OS must model its precise WebAuthn/CTAP/native-client composition
+parallel. Kay OS must model its precise WebAuthn/CTAP/native-client composition
 and test concurrent ceremonies, PIN or user-verification state, credential
 management, and downgrade paths.
 
@@ -551,7 +551,7 @@ credentials in spoofable application surfaces. In the [Operating System
 Framed study](../30-sources/bravo-lillo-et-al-2012-operating-system-framed.md),
 even strong visual treatments did not eliminate spoofing; [Nitpicker's secure
 GUI](../30-sources/feske-helmuth-2005-nitpicker.md) shows how trusted labeling,
-focus, input, and display can be separated into a small service. Atom OS needs
+focus, input, and display can be separated into a small service. Kay OS needs
 its own usability and red-team evidence.
 
 Trusted interaction is bound to a physical seat and an authenticated
@@ -610,7 +610,7 @@ fresh policy, revocation, or time evidence is unavailable.
 Pre-boot storage unlock is a separate trust boundary. Full-disk or volume keys
 should be sealed to an accepted boot state plus an appropriate user or recovery
 factor, with rollback-resistant anti-hammering. Firmware or boot-loader UI is
-not automatically the Atom trusted path, and unlocking storage does not
+not automatically the Kay trusted path, and unlocking storage does not
 automatically establish an OS login session. A product that offers single
 sign-on passes a one-shot cryptographic proof into the measured OS ceremony,
 never the password or PIN itself.
@@ -697,7 +697,7 @@ while remaining analyzable. The [Cedar
 paper](../30-sources/cutler-et-al-2024-cedar.md) and [verification-guided
 development work](../30-sources/disselkoen-et-al-2024-verification-guided-cedar.md)
 support pure semantics, explicit validation, mechanized properties, and
-differential testing. Atom OS's evaluator should be:
+differential testing. Kay OS's evaluator should be:
 
 - pure, deterministic, total, typed, side-effect free, and bounded;
 - default-deny with explicit forbid-overrides semantics;
@@ -710,7 +710,7 @@ differential testing. Atom OS's evaluator should be:
 The [Harrison-Ruzzo-Ullman
 result](../30-sources/harrison-et-al-1976-protection-in-operating-systems.md)
 warns that unrestricted protection-state transition systems make general
-right-leakage safety undecidable. Atom OS should deliberately restrict its
+right-leakage safety undecidable. Kay OS should deliberately restrict its
 authority algebra and policy language instead of promising a universal safety
 analyzer.
 
@@ -826,7 +826,7 @@ its own bounded envelope. The gateway checks:
 
 [NIST's zero-trust architecture](../30-sources/rose-et-al-2020-zero-trust-architecture.md)
 supports separating policy decision, administration, and enforcement and not
-trusting network location. Atom OS should adopt those principles without
+trusting network location. Kay OS should adopt those principles without
 making a central policy engine an all-powerful runtime dependency.
 
 ### OAuth and sender-constrained tokens
@@ -841,13 +841,13 @@ not expose OAuth semantics inside the kernel.
 [DPoP](../30-sources/fett-et-al-2023-dpop.md) is useful where mutual TLS is
 impractical, but it only demonstrates possession of a key associated with an
 application-layer request. It does not authenticate the user, decide policy,
-or bind the request body. Atom's profile must add exact issuer, audience,
+or bind the request body. Kay's profile must add exact issuer, audience,
 subject, actor, method, URI, request digest where needed, nonce/replay, session,
 and resource bindings.
 
 [Macaroons](../30-sources/birgisson-et-al-2014-macaroons.md) offer useful
 monotonic caveat-based attenuation for delegated or partly disconnected
-workflows. If supported, Atom's profile must require holder binding, exact
+workflows. If supported, Kay's profile must require holder binding, exact
 audience, resource generation, action, expiry, request digest, depth, budget,
 and revocation caveats. A bearer macaroon is not the default local authority
 format.
@@ -1257,7 +1257,7 @@ literature](../30-sources/klein-et-al-2014-comprehensive-sel4-verification.md),
 and [Rushby's separation-kernel
 analysis](../30-sources/rushby-1981-design-verification-secure-systems.md)
 show useful proof structures and assumption discipline. They do not transfer
-to Atom OS without refinement proofs from its specification through source,
+to Kay OS without refinement proofs from its specification through source,
 compiler, binary, target architecture, boot configuration, and devices.
 
 ### Verification and test program
@@ -1335,7 +1335,7 @@ and audit-loss tests.
 
 ### Stage 5 — hardware roots, update, and recovery
 
-Add measured boot, TPM profile and DICE fallback, RATS verification, Atom's EAT
+Add measured boot, TPM profile and DICE fallback, RATS verification, Kay's EAT
 profile, signed updates, rollback protection, threshold recovery, and
 restricted boot modes.
 
@@ -1425,7 +1425,7 @@ compromise.
   data.
 - A trusted path can make the requester and action clearer, but no UI removes
   coercion, habituation, or all spoofing.
-- Native Atom OS login needs a new formal and usability analysis; conformance
+- Native Kay OS login needs a new formal and usability analysis; conformance
   to WebAuthn or CTAP alone is insufficient.
 - Existing seL4, CHERI, Cedar, FIDO, Zanzibar, TPM, and RATS results constrain
   the design but do not prove its composition.

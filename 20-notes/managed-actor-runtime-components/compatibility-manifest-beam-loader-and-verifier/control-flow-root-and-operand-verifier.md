@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 PCC makes assurance conditional on an explicit policy; the source audit shows that BEAM loading and runtime execution jointly enforce conventions. [1](../../../30-sources/necula-1997-proof-carrying-code.md), [2](../../../30-sources/erlang-otp-team-2026-otp-29-source-tree.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Compatibility is a versioned language/runtime claim. A validated container or signed module is not proof of hostile-code isolation.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

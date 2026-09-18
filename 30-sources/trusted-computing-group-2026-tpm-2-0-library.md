@@ -59,7 +59,7 @@ inferred for an unspecified implementation.
 
 ## Relevance
 
-The Atom OS hardware profile should expose a narrow root-of-trust service:
+The Kay OS hardware profile should expose a narrow root-of-trust service:
 non-exportable key handles, fresh quote requests, measured-boot registers,
 rollback-resistant epochs where available, and device entropy. A confined
 system service—not the kernel—should parse TPM wire structures, manage

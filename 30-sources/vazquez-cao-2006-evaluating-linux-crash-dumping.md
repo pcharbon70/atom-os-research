@@ -63,7 +63,7 @@ device state on Linux 2.6.16-era x86 systems.
 
 ## Relevance
 
-Atom should define outcome classes for detection, local seal, terminal
+Kay should define outcome classes for detection, local seal, terminal
 handoff, sink acceptance, persistence, and recovered-on-next-boot instead of a
 single crash-log success. Its test matrix must cross every capture phase with
 stack corruption, nesting, masked interrupts, DMA, CPU loss, storage failure,

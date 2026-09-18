@@ -67,7 +67,7 @@ mechanisms but does not provide controlled usability or reliability results.
 ## Relevance
 
 This source distinguishes Kay's aspiration from an implemented architecture.
-For Atom OS, it motivates a common semantic protocol by which models, views,
+For Kay OS, it motivates a common semantic protocol by which models, views,
 tools, and inspectors remain causally connected, while leaving room to replace
 the historical widgets and single-address-space assumptions.
 

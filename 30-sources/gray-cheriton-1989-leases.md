@@ -74,7 +74,7 @@ file-cache reads and writes, not service leadership or external devices.
 
 ## Relevance
 
-The paper provides the minimum discipline for Atom OS cached registry entries,
+The paper provides the minimum discipline for Kay OS cached registry entries,
 configuration snapshots, credentials, and coordination leases: name the
 grantor, resource, holder, generation, issue evidence, holder deadline, and
 grantor deadline; state the drift and scheduling-pause bounds; and enter a
@@ -92,7 +92,7 @@ does not replace sink enforcement.
 
 The model excludes Byzantine failures, including dangerous clock behavior,
 and assumes persistent server state. Its synchronization and delay assumptions
-must be re-established for target Atom OS timekeeping, scheduler pauses, sleep
+must be re-established for target Kay OS timekeeping, scheduler pauses, sleep
 states, and network paths. Trace-driven simulation of V file access is not a
 service-ownership benchmark. The paper does not address quorum
 reconfiguration, authenticated lease proofs, revocation of copied secrets, or

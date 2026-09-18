@@ -50,7 +50,7 @@ experience rather than a peer-reviewed experiment.
 ## Relevance
 
 Layer 5 should own typed domain ports and context translators while Layer 4
-provides generic storage, network, device, and identity mechanisms. Atom OS
+provides generic storage, network, device, and identity mechanisms. Kay OS
 extends each port contract with authority, deadline, backpressure, generation,
 idempotency, and outcome semantics.
 

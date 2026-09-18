@@ -41,13 +41,13 @@ binds dynamic credentials and service tokens to renewable, revocable
 time-to-live leases; authenticates and authorizes requests; encrypts backend
 state; rotates internal keys; and records accountable access. It is used here
 as practitioner evidence about credential lifecycle, not as a blueprint for an
-Atom OS root authority.
+Kay OS root authority.
 
 ## Method
 
 The current rendered pages were read together because a lease without its
 security and token context is easy to misinterpret. Documented behavior was
-separated from the stronger properties Atom OS would need to prove. No Vault
+separated from the stronger properties Kay OS would need to prove. No Vault
 instance, storage backend, plugin, benchmark, failure injection, or source-code
 audit was performed. The pages are living product documentation and therefore
 record the access date and displayed version family.
@@ -81,7 +81,7 @@ record the access date and displayed version family.
 
 ## Relevance
 
-Atom OS should keep ordinary immutable configuration separate from sensitive
+Kay OS should keep ordinary immutable configuration separate from sensitive
 credential delivery. A confined identity/secret broker derives caller identity
 from a generation-bound local channel, authorizes a narrowly scoped request,
 and returns a non-exportable key handle where possible or a protected secret
@@ -91,7 +91,7 @@ expiry and must tolerate issuer unavailability according to an explicit
 service profile.
 
 Vault's limitations are equally instructive. Revocation becomes effective only
-where enforcement occurs, so Atom OS must name the validating sink and its
+where enforcement occurs, so Kay OS must name the validating sink and its
 freshness behavior. A copied bearer secret cannot be recalled by deleting a
 registry row. The broker needs an outer recovery holder and reserved resources,
 while no service should receive a universal root token merely because it is a
@@ -102,7 +102,7 @@ supervisor or operator tool.
 These pages document one evolving product. They are not a formal model or an
 independent security evaluation, and some features vary by edition and storage
 backend. Vault assumes an underlying host, TLS stack, storage system,
-administrative ceremony, and plugin boundary unlike Atom OS. Its explicit
+administrative ceremony, and plugin boundary unlike Kay OS. Its explicit
 threat-model exclusions prevent inferring protection after host compromise or
 client secret exfiltration. TTL expiry and requested revocation do not prove
 instant external invalidation. The version must be repinned if product

@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS turn a validated bundle graph into privately prepared,
+How should Kay OS turn a validated bundle graph into privately prepared,
 ready, published, drained, and retired service generations without confusing
 dependency order with readiness or promising rollback of irreversible effects?
 
@@ -197,7 +197,7 @@ itself authorized, logged, fallible work.
 
 The strict adapter preserves documented application semantics, including
 library applications with no callback process and top processes that are not
-supervisors. Native Atom OS bundles instead require an explicit lifecycle root
+supervisors. Native Kay OS bundles instead require an explicit lifecycle root
 and manifest membership.
 
 `application:start` checks that required applications are already running and
@@ -207,7 +207,7 @@ completion boundary unless the bundle explicitly opts into native readiness.
 
 Application `restart_type` describes what happens when an application
 terminates. Callback `start_type` explains whether a new start is `normal`,
-`takeover`, or `failover`. They are independent. Atom OS translates an OTP
+`takeover`, or `failover`. They are independent. Kay OS translates an OTP
 node-wide consequence to a declared root-domain escalation; neither field is
 proof of a distributed lease or fencing token.
 

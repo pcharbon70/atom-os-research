@@ -64,7 +64,7 @@ flush or deactivate.
 
 ## Relevance
 
-Atom should model the shootdown and activation product state before optimizing
+Kay should model the shootdown and activation product state before optimizing
 it, prove safety independently from liveness, and list interrupt-delivery,
 scheduler, lock, CPU-lifecycle, and reset fairness assumptions. Timeout and
 quarantine behavior must remain valid when liveness assumptions fail.
@@ -73,7 +73,7 @@ quarantine behavior must remain valid when liveness assumptions fail.
 
 The case study is an abstract Mach protocol, not a model of current ISA page-
 table walkers, firmware, DMA, or malfunctioning CPUs. The paper validates a
-verification method; it does not prove the proposed Atom algorithm.
+verification method; it does not prove the proposed Kay algorithm.
 
 ## Derived work
 

@@ -65,7 +65,7 @@ manufacturer defaults for particular tasks and motor abilities.
 ## Relevance
 
 SUPPLE is experimental support for deriving multiple accessible presentations
-from shared action and data semantics. Atom OS should borrow the separation
+from shared action and data semantics. Kay OS should borrow the separation
 between semantic task model and renderer, not place an optimizer in the
 trusted path or promise that automatic adaptation replaces designed views.
 
@@ -79,4 +79,4 @@ latency-critical whole-desktop generation.
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

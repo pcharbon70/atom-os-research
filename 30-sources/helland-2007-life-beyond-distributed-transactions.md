@@ -59,12 +59,12 @@ examples rather than a formal proof or controlled evaluation.
 ## Relevance
 
 The paper supports aggregate-local transactions and explicit Layer 5 process
-managers. Atom OS should not mistake actor messaging for atomic distributed
+managers. Kay OS should not mistake actor messaging for atomic distributed
 business work. Its fault-escalation channel should likewise qualify
 at-least-once retention by durability domain, bind items to stable event and
 boot/recovery generations, and require idempotent or deduplicated recovery
 actions. The stronger boundary—claim exactly-once only when action and receipt
-commit atomically in one durability domain—is Atom synthesis. Device resets and
+commit atomically in one durability domain—is Kay synthesis. Device resets and
 other accepted-with-lost-completion operations can remain indeterminate, as
 also illustrated by [recovering device drivers](swift-et-al-2004-recovering-device-drivers.md).
 

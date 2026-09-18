@@ -1,5 +1,5 @@
 ---
-title: "How Should Atom OS Structure Applications and Domain Services?"
+title: "How Should Kay OS Structure Applications and Domain Services?"
 kind: inquiry
 created: "2026-09-05"
 status: open
@@ -12,11 +12,11 @@ aliases:
   - "Layer 5 contract inquiry"
 ---
 
-# How Should Atom OS Structure Applications and Domain Services?
+# How Should Kay OS Structure Applications and Domain Services?
 
 ## Why this matters
 
-The first four Atom OS layers now have detailed research contracts for
+The first four Kay OS layers now have detailed research contracts for
 hardware/architecture mechanisms, a minimal privileged capability kernel, a
 BEAM-compatible managed actor runtime, and OTP-like system policy. Without an
 equally explicit fifth layer, applications could collapse these distinctions:
@@ -274,7 +274,7 @@ layer](../20-notes/applications-and-domain-services-layer.md).
 - A realistic invariant catalog and coordination analysis from several
   application domains.
 - Event-sourcing recovery/evolution/privacy cost compared with current-state
-  persistence on Atom OS.
+  persistence on Kay OS.
 - Offline authorization, revocation, tombstone, metadata-privacy, and malicious-
   replica experiments.
 - Protected-domain and extension-host security/performance measurements.

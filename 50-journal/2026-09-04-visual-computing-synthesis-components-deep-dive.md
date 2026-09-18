@@ -10,14 +10,14 @@ tags:
   - research-method
   - visual-computing
 aliases:
-  - "Atom OS visual-computing component research session"
+  - "Kay OS visual-computing component research session"
 ---
 
 # 2026-09-04 visual-computing synthesis components deep dive
 
 ## Observations
 
-This session expanded the seven directions in the [Atom OS visual-interface
+This session expanded the seven directions in the [Kay OS visual-interface
 synthesis](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
 into detailed reports under the [visual-computing synthesis components
 directory](../20-notes/visual-computing-synthesis-components/README.md).
@@ -47,7 +47,7 @@ The strongest cross-component distinctions are:
 - replica convergence, causality, user intent, authorization, domain
   invariants, and external-effect safety are separate properties.
 
-These are evidence-backed architectural proposals. No Atom OS visual service,
+These are evidence-backed architectural proposals. No Kay OS visual service,
 project store, semantic protocol, trusted-input broker, compositor, live-tool
 service, accessibility adapter, or collaborative projection was implemented or
 tested during this session.
@@ -78,13 +78,13 @@ For every proposed aspect, the research asked:
 
 > What implementable object, protocol, authority, failure, persistence, and
 > recovery contract would preserve the desired visual-computing property while
-> respecting Atom OS actor isolation and the current layer boundaries?
+> respecting Kay OS actor isolation and the current layer boundaries?
 
 A recommendation was retained only when its report:
 
 - states the exact responsibility and what remains outside the component;
 - distinguishes historical precedent, demonstrated source behavior, current
-  platform behavior, and Atom-specific proposal;
+  platform behavior, and Kay-specific proposal;
 - names identities, generations, capabilities, durable outcomes, state
   transitions, and resynchronization rules precisely enough to test;
 - separates semantic authority from its visual, assistive, voice, textual,
@@ -96,7 +96,7 @@ A recommendation was retained only when its report:
 - compares alternatives and preserves negative evidence and scope limits;
 - defines staged implementation work and experiments that could falsify the
   recommendation; and
-- remains `maturity: developing` because no Atom implementation was evaluated.
+- remains `maturity: developing` because no Kay implementation was evaluated.
 
 ### Search and selection method
 
@@ -197,7 +197,7 @@ The synthesis is falsified by an implementation that:
 
 No cited experiment or user study was reproduced. Formal results apply only to
 their stated models, and no external proof, security property, accessibility
-conformance result, or production-recovery result transfers to Atom OS. The
+conformance result, or production-recovery result transfers to Kay OS. The
 reports specify hypotheses and evaluation programs rather than implementation
 facts.
 
@@ -267,7 +267,7 @@ facts.
 ## Threads
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [What visual-computing model should Atom OS adopt?](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [What visual-computing model should Kay OS adopt?](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)
 - [BEAM, ERTS, and OTP principles for a new operating system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
 - [Authentication and authorization across the five-layer architecture](../20-notes/authentication-and-authorization-across-the-five-layer-architecture.md)
 

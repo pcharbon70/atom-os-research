@@ -54,7 +54,7 @@ verification, secure time, metadata ordering, and attack mitigations.
 
 ## Relevance
 
-Atom should bind a release plan to the exact device/service inventory,
+Kay should bind a release plan to the exact device/service inventory,
 compatible state schema, boot and policy epochs, artifact digests, and
 activation cohort. The Uptane split is a useful precedent for checking both
 artifact authorization and target-specific assignment under intermittent
@@ -64,7 +64,7 @@ connectivity.
 
 The standard targets automotive deployments and intentionally permits
 deployment-specific formats and choices. It assumes other controls for some
-on-device and supply-chain threats and does not specify Atom's actor quiescence,
+on-device and supply-chain threats and does not specify Kay's actor quiescence,
 state transfer, health criteria, or recovery semantics.
 
 ## Derived work

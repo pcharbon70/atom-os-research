@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Atom OS Research frontmatter",
-  "description": "The YAML frontmatter contract for documents in the Atom OS Research archive.",
+  "title": "Kay OS Research frontmatter",
+  "description": "The YAML frontmatter contract for documents in the Kay OS Research archive.",
   "oneOf": [
     { "$ref": "#/$defs/note" },
     { "$ref": "#/$defs/source" },

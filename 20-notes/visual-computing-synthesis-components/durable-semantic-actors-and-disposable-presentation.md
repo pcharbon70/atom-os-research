@@ -10,14 +10,14 @@ tags:
   - visual-computing
 aliases:
   - "Visual synthesis component 2"
-  - "Restartable Atom OS presentation"
+  - "Restartable Kay OS presentation"
 ---
 
 # Durable Semantic Actors and Disposable Presentation
 
 ## Executive decision
 
-An Atom OS application with a UI should be a supervised semantic system that
+An Kay OS application with a UI should be a supervised semantic system that
 *publishes* presentation, not a process whose identity is its window. Live
 model actors, the project store, and durable effect ledgers jointly preserve
 application meaning; an actor's heap alone is never treated as durable.

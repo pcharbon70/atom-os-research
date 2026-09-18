@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Message-passing engineering separates signal transport from receiver-owned messages; resource attribution must survive asynchronous execution. [1](../../../30-sources/hogberg-2021-message-passing.md), [2](../../../30-sources/banga-et-al-1999-resource-containers.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Physical enqueue order, ordered signal delivery and selective mailbox placement are three separate contracts.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

@@ -17,7 +17,7 @@ aliases:
 
 ## Question, scope, and operational standard
 
-How should Atom OS retain the compositional value of OTP behaviours while
+How should Kay OS retain the compositional value of OTP behaviours while
 keeping callbacks unprivileged, bounding every queue and management action,
 and avoiding semantic claims that OTP itself does not make?
 
@@ -59,7 +59,7 @@ server setting does not prove that every actor needs a separate thread or
 queue. [Capability myths
 demolished](../../30-sources/miller-et-al-2003-capability-myths.md) supports
 object-capability authority and attenuation, but the engine still needs an
-Atom OS-specific mapping from capabilities to actor management operations.
+Kay OS-specific mapping from capabilities to actor management operations.
 
 The resulting synthesis is deliberately dual-profile: strict adapters preserve
 documented OTP interactions for admitted traffic; native engines add finite
@@ -148,7 +148,7 @@ starvation.
 
 ### Event dissemination
 
-Atom OS needs two deliberately different forms:
+Kay OS needs two deliberately different forms:
 
 - The OTP `gen_event` adapter preserves one manager invoking every installed
   handler serially in the manager's failure domain. A slow handler can delay

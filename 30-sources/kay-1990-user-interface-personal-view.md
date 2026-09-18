@@ -67,7 +67,7 @@ a contemporary experimental validation of the cited cognitive theory.
 
 The chapter explains why a screenshot-level comparison is insufficient. Kay's
 visible components form a learning gradient from concrete manipulation to
-symbolic authorship. Atom OS can preserve that gradient only if visual objects,
+symbolic authorship. Kay OS can preserve that gradient only if visual objects,
 their semantic descriptions, and live programming tools remain connected;
 copying window chrome would preserve the least distinctive part.
 
@@ -82,4 +82,4 @@ privacy, or adversarial-code problems.
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

@@ -67,7 +67,7 @@ visualizer to diagnose the resulting schedules.
 
 ## Relevance
 
-The Atom OS runtime should expose a deterministic test mode below OTP policy:
+The Kay OS runtime should expose a deterministic test mode below OTP policy:
 seeded actor scheduling, controllable timers, message and failure injection,
 and replayable event identities. This is not the production scheduler. It is a
 verification interface for per-sender ordering, monitor/link races, aliases,

@@ -49,14 +49,14 @@ the moving source has not been pinned to an implementation commit.
 
 ## Relevance
 
-Atom must declare its native procedure subset, maintain stack discipline and
+Kay must declare its native procedure subset, maintain stack discipline and
 audit generated state use. An interruptible kernel should not assume a
 user-space red-zone guarantee on its own stack. A restricted integer-only
 bring-up is not full ordinary AMD64 ABI support.
 
 ## Limits
 
-A procedure convention is not Atom's syscall ABI or an OS implementation.
+A procedure convention is not Kay's syscall ABI or an OS implementation.
 This source cannot select firmware, a CPU SKU, privileged return instructions,
 or physical memory and interrupt-controller behavior.
 

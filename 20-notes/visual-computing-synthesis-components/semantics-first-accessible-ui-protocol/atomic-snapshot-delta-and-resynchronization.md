@@ -27,7 +27,7 @@ demonstrates a production retained projection.
 [2](../../../30-sources/cai-et-al-2014-theory-of-changes.md)
 [3](../../../30-sources/chromium-project-2026-multiprocess-graphics-and-accessibility.md)
 
-No Atom wire format or interoperability test exists.
+No Kay wire format or interoperability test exists.
 
 ## Development
 

@@ -21,7 +21,7 @@ Research question: How can many legal restart policies coexist without exhaustin
 Jitter reduces synchronized contention in Brooker's simulation; it does not reserve
 capacity or prove controller stability. [1](../../../30-sources/brooker-2015-exponential-backoff-jitter.md) [2](../../../30-sources/welsh-et-al-2001-seda.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

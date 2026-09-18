@@ -142,7 +142,7 @@ records the complete source manifest and reading limitations. New comparisons
 include [Microkit's static system contract](../30-sources/sel4-foundation-2026-microkit-system-contracts.md),
 [Composite's capability-table alternative](../30-sources/parmer-2016-capability-based-os-design.md)
 and [Brown's stalled-participant reclamation analysis](../30-sources/brown-2015-reclaiming-lock-free-memory.md).
-None supplies a proof of the combined Atom design.
+None supplies a proof of the combined Kay design.
 
 ## Selected contract
 

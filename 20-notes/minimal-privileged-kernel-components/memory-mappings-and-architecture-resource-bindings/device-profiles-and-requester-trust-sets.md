@@ -15,7 +15,7 @@ What deployment facts are required before separate device handles can be adverti
 
 VFIO documentation identifies isolation groups that may exceed apparent function boundaries. [1](../../../30-sources/linux-kernel-community-2026-vfio-isolation-groups.md), [2](../../../30-sources/markettos-et-al-2019-thunderclap.md)
 
-The contract below is an Atom OS architectural proposal refining the [parent component](../memory-mappings-and-architecture-resource-bindings.md). It is not an implemented service, a transferred proof, or a milestone plan.
+The contract below is an Kay OS architectural proposal refining the [parent component](../memory-mappings-and-architecture-resource-bindings.md). It is not an implemented service, a transferred proof, or a milestone plan.
 
 ## Development
 

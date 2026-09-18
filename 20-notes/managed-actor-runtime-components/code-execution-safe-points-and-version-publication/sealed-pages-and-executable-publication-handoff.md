@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Runtime index progress and native-page publication address different observers; a software grace period does not prove instruction-fetch coherence. [1](../../../30-sources/erlang-otp-team-2026-otp-29-source-tree.md), [2](../../../30-sources/erlang-otp-team-2026-thread-progress-contracts.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Language execution and code-version visibility belong to the runtime; executable-page publication consumes the lower kernel's complete W^X and instruction-fetch contract.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

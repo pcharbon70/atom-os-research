@@ -21,7 +21,7 @@ Research question: What remains valid when credentials rotate or issuance become
 SPIFFE streams complete credential/trust snapshots; revocation cannot recall copied
 bearer bytes or undo prior effects. [1](../../../30-sources/spiffe-project-2026-workload-api.md) [2](../../../30-sources/miller-et-al-2003-capability-myths.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

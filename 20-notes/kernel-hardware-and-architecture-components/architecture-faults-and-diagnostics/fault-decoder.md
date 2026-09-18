@@ -31,7 +31,7 @@ generated `CaptureDispositionClassifier` operates first on sealed raw/profile
 facts and acknowledgement state. No later decoded view can retroactively mint a
 local-return proof.
 
-This is a proposed Atom service. It has not been implemented, fuzzed, or
+This is a proposed Kay service. It has not been implemented, fuzzed, or
 validated against a concrete processor errata set.
 
 ## Question, scope, and operational standard
@@ -82,7 +82,7 @@ A decoder passes only if:
 | --- | --- | --- |
 | [UEFI 2.11](../../../30-sources/uefi-forum-2024-uefi-2-11.md) | CPER uses versioned headers, length-delimited descriptors/sections, field validity, record/creator identity, severity, notification type, and standard or nonstandard sections | A valid CPER is not proof that firmware reported truthfully or completely |
 | [ACPI 6.6](../../../30-sources/uefi-forum-2025-acpi-6-6.md) | APEI separates source description, generic error status, raw data, serialized records, boot records, and injection | Firmware methods and tables enlarge the trust boundary |
-| [Linux RAS documentation](../../../30-sources/linux-kernel-community-2026-ras-documentation.md) | Mature reporting retains architecture/vendor evidence while exposing normalized events; source, severity, correction, and containment remain separate | Linux's compatibility surface is broader than the initial Atom profile |
+| [Linux RAS documentation](../../../30-sources/linux-kernel-community-2026-ras-documentation.md) | Mature reporting retains architecture/vendor evidence while exposing normalized events; source, severity, correction, and containment remain separate | Linux's compatibility surface is broader than the initial Kay profile |
 | [Intel system-programming documentation](../../../30-sources/intel-2026-system-programming-documentation.md) | MCA bank validity, overflow, address/misc validity, processor-context corruption, restartability, and precision are independent | Exact recovery matrices are model and erratum dependent |
 | [Arm RAS specification](../../../30-sources/arm-2019-ras-specification.md) | Fields can be architecturally unknown without prerequisite validity; error class, poison, overflow, and uncorrected type are distinct | A processor/platform profile must supply node and extended-code interpretation |
 | [RISC-V RERI](../../../30-sources/risc-v-international-2024-ras-error-record-interface.md) | Version/layout live at stable locations; address type, transaction, standardized/custom code, loss and containability are explicit | Optional/implementation-specific fields can make a conforming record sparse |
@@ -91,7 +91,7 @@ A decoder passes only if:
 
 The sources strongly support versioned raw-plus-normalized representations.
 The epistemic tags, provenance graph, view history, and conflict rules below are
-Atom synthesis.
+Kay synthesis.
 
 ## Decoder identity and immutable inputs
 
@@ -1821,7 +1821,7 @@ Decode `V`, `AV`, `MV`, `UE`, `DE`, `CE`, `OF`, poison, uncorrected type, and
 primary/implementation-defined syndrome independently. Preserve whether the
 record was accessed through system registers, memory-mapped nodes, or
 firmware. SError delivery precision is a separate fact from an error record's
-address validity. An Arm “signaled/recoverable” producer value is not an Atom
+address validity. An Arm “signaled/recoverable” producer value is not an Kay
 resume result.
 
 ### RISC-V traps and optional RERI
@@ -1832,8 +1832,8 @@ implementation and instance identity, CE/UED/UEC, containable, priority,
 address-information type, transaction type, standardized/custom code,
 validity, and `rdip`. RERI exposes a control operation that can inject a record,
 but no persistent status bit proves that a captured record was injected and the
-record contains no Atom boot generation. Injection-session and reset provenance
-therefore come only from separately authenticated Atom-owned metadata bound to
+record contains no Kay boot generation. Injection-session and reset provenance
+therefore come only from separately authenticated Kay-owned metadata bound to
 the raw block; otherwise both are `Unknown`.
 
 ### CPER/APEI

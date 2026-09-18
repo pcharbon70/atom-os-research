@@ -62,7 +62,7 @@ range-update workloads.
 ## Relevance
 
 The result supplies a strong implementation candidate for an ETS-compatible
-`ordered_set` with write concurrency, but the public Atom OS contract should
+`ordered_set` with write concurrency, but the public Kay OS contract should
 name ordering, operation atomicity, traversal consistency, ownership, and
 resource limits rather than “CA tree.” Bulk operations and adaptation must
 yield in slices and charge deferred reclamation to the table account.

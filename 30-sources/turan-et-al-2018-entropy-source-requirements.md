@@ -38,11 +38,11 @@ The specification separates noise-source modeling, entropy assessment, condition
 
 ## Relevance
 
-Informs the proposed requirement contract and its negative tests. This source does not establish that Atom implements or passes that contract.
+Informs the proposed requirement contract and its negative tests. This source does not establish that Kay implements or passes that contract.
 
 ## Limits
 
-Passing health tests does not guarantee unpredictability of every sample or repair a compromised source. The document does not choose an Atom hardware entropy source, DRBG or emulator trust policy.
+Passing health tests does not guarantee unpredictability of every sample or repair a compromised source. The document does not choose an Kay hardware entropy source, DRBG or emulator trust policy.
 
 ## Derived work
 

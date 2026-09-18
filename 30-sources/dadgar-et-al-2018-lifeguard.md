@@ -41,11 +41,11 @@ Local-health feedback reduces false suspicion in the evaluated settings. Indepen
 
 ## Relevance
 
-Proposed Atom OS use: qualify observer progress before triggering recovery; keep suspicion separate from ownership.
+Proposed Kay OS use: qualify observer progress before triggering recovery; keep suspicion separate from ownership.
 
 ## Limits
 
-The controlled experiments use Consul agents sharing a Linux VM and loopback. Results do not prove arbitrary network behavior, Byzantine safety or an Atom OS detection deadline.
+The controlled experiments use Consul agents sharing a Linux VM and loopback. Results do not prove arbitrary network behavior, Byzantine safety or an Kay OS detection deadline.
 
 ## Derived work
 

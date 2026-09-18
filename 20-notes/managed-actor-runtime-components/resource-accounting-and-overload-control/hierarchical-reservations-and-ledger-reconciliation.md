@@ -21,7 +21,7 @@ silently widening compatibility, authority or the failure boundary.
 
 Resource containers separate principals from execution contexts; decentralized counters trade fast updates for more expensive coherent reads. [1](../../../30-sources/banga-et-al-1999-resource-containers.md), [2](../../../30-sources/winblad-2021-decentralized-ets-counters.md).
 
-The protocols below are **proposed Atom OS architecture**, not upstream
+The protocols below are **proposed Kay OS architecture**, not upstream
 implementation facts or completed tests. Runtime ledgers attribute consumption beneath hard kernel domain limits; actor policy cannot mint memory, CPU or cleanup reserve.
 This is full-system research, not a proof-of-concept phase or platform setup.
 

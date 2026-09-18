@@ -21,7 +21,7 @@ Research question: How can state-machine features remain bounded without claimin
 OTP specifies postponed events and timeout actions; explicit queues expose resource
 costs but do not automatically impose bounds. [1](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-system-services-documentation.md) [2](../../../30-sources/welsh-et-al-2001-seda.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 

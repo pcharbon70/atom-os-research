@@ -31,7 +31,7 @@ generic “user clicked Allow” bit.
 
 ## Question, scope, and operational standard
 
-> How can Atom obtain trustworthy evidence of human intent when every ordinary
+> How can Kay obtain trustworthy evidence of human intent when every ordinary
 > application surface, window title, command prompt, and network peer may be
 > malicious or misleading?
 
@@ -78,8 +78,8 @@ provides a contemporary first-party precedent for binding a cryptographic
 confirmation token to text rendered through a hardware-protected path and for
 aborting incomplete or interrupted presentation.
 
-The Atom state machine and receipt below are a synthesis. None of those
-sources proves that a future Atom compositor, device driver, firmware, or
+The Kay state machine and receipt below are a synthesis. None of those
+sources proves that a future Kay compositor, device driver, firmware, or
 accessibility bridge meets the proposed boundary.
 
 ## Trust boundary and authority

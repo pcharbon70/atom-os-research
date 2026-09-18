@@ -9,14 +9,14 @@ tags:
   - operating-systems
   - research-method
 aliases:
-  - "Atom OS Layer 5 research session"
+  - "Kay OS Layer 5 research session"
 ---
 
 # 2026-09-05 Applications and Domain Services Deep Dive
 
 ## Observations
 
-This session completed the first research decomposition of the fifth Atom OS
+This session completed the first research decomposition of the fifth Kay OS
 layer. It created an integrated [applications and domain services
 report](../20-notes/applications-and-domain-services-layer.md) and fourteen
 detailed reports in the [component
@@ -51,7 +51,7 @@ types, protected extension profiles, and hot upgrade were retained as optional
 tools. Each applies only when its stated assumptions and costs match the domain.
 No one persistence or consistency ideology was promoted to a Layer 5 mandate.
 
-These are literature-derived architectural proposals. No Atom OS Layer 5
+These are literature-derived architectural proposals. No Kay OS Layer 5
 implementation, storage engine, protocol model, fault-injection campaign,
 benchmark, accessibility evaluation, security test, or user study was
 performed during this session.
@@ -80,7 +80,7 @@ performed during this session.
 For the layer and every component, the research asked:
 
 > What semantic, identity, protocol, authority, persistence, failure, overload,
-> evolution, and recovery contract would let an Atom OS application produce
+> evolution, and recovery contract would let an Kay OS application produce
 > honest domain outcomes while preserving the four lower-layer boundaries?
 
 A recommendation was retained only when its report:
@@ -100,7 +100,7 @@ A recommendation was retained only when its report:
 - compares alternatives and preserves negative evidence and scope limits;
 - defines implementation stages and experiments that could falsify the
   proposal; and
-- remains `maturity: developing` because no Atom OS experiment validated it.
+- remains `maturity: developing` because no Kay OS experiment validated it.
 
 ### Search and selection method
 
@@ -228,7 +228,7 @@ The synthesis is falsified by an implementation that:
 
 Formal results apply only to their stated models. System evaluations apply only
 to their implementations, workloads, and hardware. Practitioner patterns are
-design evidence, not proof. No external result transfers automatically to Atom
+design evidence, not proof. No external result transfers automatically to Kay
 OS, and no experiment in this session demonstrated the proposed guarantees.
 
 ## Source manifest
@@ -315,7 +315,7 @@ OS, and no experiment in this session demonstrated the proposed guarantees.
 ## Threads
 
 - [Applications and domain services map](../10-maps/applications-and-domain-services.md)
-- [How should Atom OS structure applications and domain services?](../40-inquiries/how-should-atom-os-structure-applications-and-domain-services.md)
+- [How should Kay OS structure applications and domain services?](../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md)
 - [BEAM, ERTS, and OTP principles for a new operating system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md)
 - [OTP-like system services layer](../20-notes/otp-like-system-services-layer.md)
 - [Authentication and authorization across the five-layer architecture](../20-notes/authentication-and-authorization-across-the-five-layer-architecture.md)

@@ -33,7 +33,7 @@ formats and permissions.
 Modern separation is not merely loss. It adds fault containment, least
 privilege, trusted composition, hardware-efficient rendering, accessibility,
 internationalization, deployment provenance, and lifecycle policy. The
-resulting Atom OS proposal therefore combines durable semantic actor models and
+resulting Kay OS proposal therefore combines durable semantic actor models and
 user-owned project graphs with disposable renderers, a narrow compositor,
 primary accessibility semantics, and capability-scoped live tools.
 
@@ -101,7 +101,7 @@ The synthesis applied these controls:
 2. credit Ingalls and the Smalltalk team for implementation, Reenskaug for MVC,
    and the named Star team for the office desktop;
 3. separate historical proposal, implemented behavior, later interpretation,
-   current platform contract, and new Atom OS design;
+   current platform contract, and new Kay OS design;
 4. distinguish Smalltalk's shared object world and processes from BEAM actors;
 5. report mixed educational evidence and the hazards of globally mutable live
    state;
@@ -150,7 +150,7 @@ or experimental evidence was produced.
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [What visual-computing model should Atom OS adopt?](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [What visual-computing model should Kay OS adopt?](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)
 - [BEAM, ERTS, and OTP map](../10-maps/beam-erts-and-otp.md)
 - [Managed actor runtime map](../10-maps/managed-actor-runtime.md)
 - [OTP-like system services map](../10-maps/otp-like-system-services.md)

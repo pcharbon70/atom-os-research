@@ -29,7 +29,7 @@ authority.
 
 ## Question, scope, and operational standard
 
-> How can Atom add, inspect, rotate, suspend, and remove authenticators without
+> How can Kay add, inspect, rotate, suspend, and remove authenticators without
 > letting registrar compromise, enrollment races, synchronization, recovery,
 > or snapshot rollback become an impersonation path?
 
@@ -73,8 +73,8 @@ Metadata Service](../../30-sources/fido-alliance-2026-metadata-service.md)
 supplies signed authenticator characteristics and security status, but vendor
 metadata remains an input whose provenance and freshness must be visible.
 
-Atom's ledger, transaction, and tombstone design are proposals. None of these
-sources proves crash consistency or rollback resistance for Atom storage.
+Kay's ledger, transaction, and tombstone design are proposals. None of these
+sources proves crash consistency or rollback resistance for Kay storage.
 
 ## Authority boundary
 

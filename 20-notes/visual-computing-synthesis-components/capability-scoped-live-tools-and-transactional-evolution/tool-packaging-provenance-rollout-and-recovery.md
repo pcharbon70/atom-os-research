@@ -28,7 +28,7 @@ cohorts and attribution from rollout confidence.
 [3](../../../30-sources/torres-arias-et-al-2019-in-toto.md)
 [4](../../../30-sources/warner-davidovic-2018-canarying-releases.md)
 
-No Atom tool registry, package profile, or rollout evidence exists.
+No Kay tool registry, package profile, or rollout evidence exists.
 
 ## Development
 

@@ -45,7 +45,7 @@ Keep a generation-qualified participant set and tracked native leases. Removing 
 
 ## Limits
 
-The guide is implementation precedent, not verification of Atom OS. A stalled participant can retain resources. No progress algorithm, weak-memory model or worker-lifecycle test was executed.
+The guide is implementation precedent, not verification of Kay OS. A stalled participant can retain resources. No progress algorithm, weak-memory model or worker-lifecycle test was executed.
 
 ## Derived work
 

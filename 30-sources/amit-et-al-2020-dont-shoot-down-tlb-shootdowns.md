@@ -67,8 +67,8 @@ aggressive batching.
 
 ## Relevance
 
-The work forces Atom to name different completion facts. Under the paper's
-strict return gates, an early response can at most support Atom's weaker
+The work forces Kay to name different completion facts. Under the paper's
+strict return gates, an early response can at most support Kay's weaker
 `CpuUserReturnClosed`; it does not establish `CpuAccessQuiescent` for privileged
 helper borrows, `CpuTranslationQuiescent`, table-specific
 `HardwareWalkerQuiescent(table)`, or safe reclamation. Every optimization must
@@ -79,7 +79,7 @@ undifferentiated “flush complete” result.
 
 The implementation and measurements are Linux/x86-specific and depend on the
 kernel's interrupt, NMI, uaccess, scheduler, and page-table conventions. The
-performance percentages are not portable. The proposed Atom proof classes and
+performance percentages are not portable. The proposed Kay proof classes and
 state machine are cross-source synthesis, not constructs evaluated by the
 paper.
 

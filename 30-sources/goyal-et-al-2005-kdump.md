@@ -64,7 +64,7 @@ through standard ELF core structures.
 
 ## Relevance
 
-Atom OS should prepare a small crash sink and its memory, entry state, and
+Kay OS should prepare a small crash sink and its memory, entry state, and
 metadata layout during healthy boot. The immediate fatal path should only seal
 bounded CPU-local records and transfer to that prepared environment. Bulk
 memory collection, compression, storage, and symbolization belong outside the

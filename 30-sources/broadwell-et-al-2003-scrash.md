@@ -62,13 +62,13 @@ and privacy limitations.
 
 ## Relevance
 
-Atom should keep the sealed capture capsule protected and derive separately
+Kay should keep the sealed capture capsule protected and derive separately
 versioned operational and forensic views. Export authority, redaction policy,
 key generation, retention, and recipient are part of the sink/escalation
 contract. Raw addresses, registers, capability identities, BEAM heap fragments,
 and event correlations must be treated as potentially sensitive.
 
-That protected-source/derived-view split is Atom synthesis motivated by
+That protected-source/derived-view split is Kay synthesis motivated by
 Scrash's privacy problem; Scrash itself cleans the generated core in place and
 does not demonstrate authorization-derived views over an intact protected raw
 source.

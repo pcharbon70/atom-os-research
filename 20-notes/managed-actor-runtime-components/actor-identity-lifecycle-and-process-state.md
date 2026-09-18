@@ -30,7 +30,7 @@ native state in bounded cleanup slices. A slot is not reusable until every
 route and retained reference to the old generation is gone.
 
 OTP specifies important observable ordering but not this exact internal
-layout, generation width, or reservation protocol. Those are Atom OS
+layout, generation width, or reservation protocol. Those are Kay OS
 strengthenings intended to make stale-reference and partial-creation failures
 explicit.
 
@@ -97,7 +97,7 @@ expired BEAM PID to resolve silently to a successor incarnation.
 
 The synthesis is:
 
-| Concern | Compatibility floor | Atom OS strengthening |
+| Concern | Compatibility floor | Kay OS strengthening |
 | --- | --- | --- |
 | PID meaning | Identifies a process route in a node incarnation | Explicit runtime epoch and slot generation checked on every resolution |
 | Spawn relation | `spawn_link`/`spawn_monitor` provide atomic observable relation | Reserve all mandatory memory/queue/account state before publication |

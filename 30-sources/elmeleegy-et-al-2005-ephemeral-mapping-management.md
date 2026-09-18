@@ -63,7 +63,7 @@ workloads.
 This work supports a lexical, opaque access-window abstraction and shows why
 its backend should be free to use a private temporary slot, a safe existing
 alias, or another architecture-specific mechanism. The optimization choice
-must remain subordinate to Atom's authority and alias-isolation requirements.
+must remain subordinate to Kay's authority and alias-isolation requirements.
 
 ## Limits
 

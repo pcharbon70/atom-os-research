@@ -62,7 +62,7 @@ operational rollback or distributed effect consistency.
 
 ## Relevance
 
-Atom OS live tools should stage a typed change, validate target generation and
+Kay OS live tools should stage a typed change, validate target generation and
 migration, reach an explicit safe point, and publish one new generation. The
 paper supports separating edit authority from commit authority and treating
 state transformation as first-class rather than promising unrestricted
@@ -72,10 +72,10 @@ Smalltalk-style mutation.
 
 Proteus models C-like programs, not BEAM modules, supervised actor graphs,
 capabilities, replicated projects, or GPU resources. Its guarantees must be
-combined with Atom OS code-generation rules, effect journals, schema
+combined with Kay OS code-generation rules, effect journals, schema
 compatibility, and recovery policy.
 
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

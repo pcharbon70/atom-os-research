@@ -63,7 +63,7 @@ experience but does not compare usability or performance experimentally.
 
 ## Relevance
 
-This source provides a concrete component vocabulary for reconstructible Atom
+This source provides a concrete component vocabulary for reconstructible Kay
 OS visual services: semantic models, multiple views, input policies,
 dependency/change streams, nested layout, and reusable editors. The historical
 global object graph should be replaced by versioned actor identities and
@@ -79,4 +79,4 @@ control, and compositor restart unspecified.
 ## Derived work
 
 - [Alan Kay's Smalltalk visual interface and the modern desktop](../20-notes/alan-kay-smalltalk-visual-interface-and-modern-desktop.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

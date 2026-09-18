@@ -121,7 +121,7 @@ No implementation tests were run. Validator code and schema were unchanged, so v
 - [Timecounters](../30-sources/kamp-2002-timecounters.md) — Wrap-aware conversion and matched source/anchor publication.
 - [LazyFP](../30-sources/stecklina-prescher-2018-lazyfp.md) — Negative evidence for fault-triggered extended-state isolation.
 - [Limine boot protocol](../30-sources/limine-project-2026-limine-boot-protocol.md) — Versioned provider handoff, not a kernel ABI.
-- [Linux low-level core APIs](../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Atom proofs.
+- [Linux low-level core APIs](../30-sources/linux-kernel-community-2026-low-level-core-apis.md) — Engineering precedent; Linux contracts are not Kay proofs.
 - [Concurrency in the Linux kernel](../30-sources/alglave-et-al-2018-linux-kernel-concurrency.md) — Executable litmus models and reclamation reasoning.
 - [Meltdown](../30-sources/lipp-et-al-2018-meltdown.md) — Architectural access denial is not a complete transient-execution boundary.
 - [The Multikernel](../30-sources/baumann-et-al-2009-multikernel.md) — Explicit inter-core protocols and replicated-state tradeoffs.

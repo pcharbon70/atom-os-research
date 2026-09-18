@@ -37,7 +37,7 @@ A bare-board port must provide the service hooks used by the selected library fu
 
 ## Relevance
 
-A portable libc can be adapted, but its hooks must map to real bounded Atom services or explicitly unsupported operations.
+A portable libc can be adapted, but its hooks must map to real bounded Kay services or explicitly unsupported operations.
 
 ## Limits
 

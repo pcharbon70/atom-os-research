@@ -60,11 +60,11 @@ trust relationships to profiles.
 
 ## Relevance
 
-Atom should preserve separate subject, actor, issuer, audience, and bounded
+Kay should preserve separate subject, actor, issuer, audience, and bounded
 delegation provenance at the federation gateway. Exchange terminates in a new
 local policy decision and capability derivation inside a preconfigured issuer
 envelope; it is never byte-for-byte conversion of external claims into kernel
-authority. Atom must impose a finite chain depth even though RFC 8693 does not.
+authority. Kay must impose a finite chain depth even though RFC 8693 does not.
 
 ## Limits
 

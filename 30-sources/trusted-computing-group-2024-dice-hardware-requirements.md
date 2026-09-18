@@ -57,7 +57,7 @@ were inspected directly.
 
 ## Relevance
 
-DICE is a plausible embedded Atom OS profile: derive boot-instance key material
+DICE is a plausible embedded Kay OS profile: derive boot-instance key material
 from hardware secret plus the measured loader/kernel, then hand only an opaque
 derivation or signing context to the next trusted layer. It can ground device
 and boot identity without turning a human account, service name, or measurement

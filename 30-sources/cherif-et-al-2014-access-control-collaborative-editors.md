@@ -59,7 +59,7 @@ not a suitable default for secrets or irreversible effects.
 
 ## Relevance
 
-Atom OS must bind a collaborative edit to the policy, relationship, object,
+Kay OS must bind a collaborative edit to the policy, relationship, object,
 and revocation generations under which it was admitted. Offline edits without
 current authority may be stored as private proposals, but must not become
 published grants or irreversible effects through ordinary data merge.
@@ -67,10 +67,10 @@ published grants or irreversible effects through ordinary data merge.
 ## Limits
 
 The paper's repair approach is unacceptable where data already escaped or an
-effect cannot be compensated. It does not supply Atom OS capability issuance,
+effect cannot be compensated. It does not supply Kay OS capability issuance,
 trusted interaction, project import, or provider-update semantics.
 
 ## Derived work
 
 - [Alan Kay, Smalltalk, and visual computing map](../10-maps/alan-kay-smalltalk-ui.md)
-- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-atom-os-adopt.md)
+- [Visual-computing model inquiry](../40-inquiries/what-visual-computing-model-should-kay-os-adopt.md)

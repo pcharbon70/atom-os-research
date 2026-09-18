@@ -38,7 +38,7 @@ studies. RISC-V and Arm research remains useful comparative evidence, not a
 prerequisite or active first-port commitment.
 
 The first delivery remains a minimal bootable OS with a native ring-3 CLI and
-an Atom-owned ring-0 kernel. The completed M0–M4 proof still requires the
+an Kay-owned ring-0 kernel. The completed M0–M4 proof still requires the
 project's compiled-BEAM compatibility profile and automatic process-local
 tracing GC outside the kernel. AtomVM, graphics, desktop work, networking and
 writable storage do not enter the minimum boot test.
@@ -110,7 +110,7 @@ An eventual launch template, **not executed here**, is:
 
 ```bash
 qemu-system-x86_64 \
-  -machine "${ATOM_QEMU_MACHINE:?set the pinned versioned pc-q35 machine}" \
+  -machine "${KAY_QEMU_MACHINE:?set the pinned versioned pc-q35 machine}" \
   -accel tcg \
   -cpu Opteron_G1-v1 \
   -smp 1,sockets=1,cores=1,threads=1 \
@@ -120,8 +120,8 @@ qemu-system-x86_64 \
   -monitor none \
   -serial stdio \
   -nic none \
-  -bios "${ATOM_SEABIOS:?set the pinned SeaBIOS path}" \
-  -drive "file=${ATOM_BOOT_ISO:?set the bootable ISO path},format=raw,if=ide,index=0,media=cdrom,readonly=on" \
+  -bios "${KAY_SEABIOS:?set the pinned SeaBIOS path}" \
+  -drive "file=${KAY_BOOT_ISO:?set the bootable ISO path},format=raw,if=ide,index=0,media=cdrom,readonly=on" \
   -boot order=d \
   -no-reboot \
   -no-shutdown

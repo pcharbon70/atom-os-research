@@ -55,7 +55,7 @@ not a security proof or empirical evaluation.
 
 ## Relevance
 
-Atom OS should represent protection state explicitly while refusing to make a
+Kay OS should represent protection state explicitly while refusing to make a
 user name, BEAM PID, service name, or authenticated session equal to a row of
 ambient power. Policy may reason in access-matrix terms, but the kernel should
 install typed, object-specific capabilities in protected domains. CPU, memory,

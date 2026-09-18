@@ -21,7 +21,7 @@ Research question: How can remote messaging preserve uncertainty and limit compa
 RIFL requires durable result rendezvous; standard Erlang distribution assumes a
 trusted peer set rather than per-operation confinement. [1](../../../30-sources/lee-et-al-2015-rifl.md) [2](../../../30-sources/erlang-otp-team-2026-otp-29-0-6-system-services-documentation.md)
 
-The Development section is an Atom OS proposal, not a source guarantee or an
+The Development section is an Kay OS proposal, not a source guarantee or an
 implemented result. Evidence applies only within each source's stated model;
 the references below retain those limits.
 
@@ -44,7 +44,7 @@ rules. Preserve outcome identity even though the transport correlation changes.
 ### Failure and adversarial behavior
 
 A transport acknowledgement cannot prove that a request parsed or committed. Gateway
-death leaves accepted remote work unresolved. Atom-table growth, forged references
+death leaves accepted remote work unresolved. Kay-table growth, forged references
 and ambient spawn/inspection operations require explicit limits or rejection; TLS
 authentication alone does not remove distribution's trust assumptions.
 

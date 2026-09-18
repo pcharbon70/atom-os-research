@@ -61,7 +61,7 @@ resource bounds, reserved control paths, and restart invalidation.
   synthesis; archive editing
 - Subject: sixteen Layer-4 security services and their Layer-1/2/3/5 contracts
 - Hardware or simulator target: none selected
-- Atom kernel, runtime, authenticator, policy engine, or security service
+- Kay kernel, runtime, authenticator, policy engine, or security service
   implemented: none
 - Benchmarks, user studies, formal proofs, or fault injection performed: none
 - Local artifacts: sixteen component reports, thirty-one new source notes, one
@@ -92,10 +92,10 @@ A component recommendation was retained only when its report:
   and tenant bounds where hostile traffic enters;
 - gives explicit behavior for crash, restart, partition, stale state, rollback,
   clone, replay, compromise, and overload;
-- records what sources demonstrated versus Atom-specific synthesis;
+- records what sources demonstrated versus Kay-specific synthesis;
 - includes verification, fault-injection, measurement, and staged-
   implementation work that could falsify the proposal; and
-- remains `maturity: developing` because no Atom implementation was tested.
+- remains `maturity: developing` because no Kay implementation was tested.
 
 ### Search and selection method
 
@@ -227,11 +227,11 @@ The baseline is falsified by any implementation that:
 
 ### Evidence boundary
 
-No Atom OS code, trusted UI, authenticator, hardware root, workload issuer,
+No Kay OS code, trusted UI, authenticator, hardware root, workload issuer,
 RATS profile, relation store, attribute issuer, policy language, grant compiler,
 revocation stream, key broker, audit witness, recovery ceremony, updater, or
 federation gateway was implemented or run. No cited experiment was reproduced,
-and no external system's proof or certification transfers to Atom. The reports
+and no external system's proof or certification transfers to Kay. The reports
 are evidence-backed architectural hypotheses and test programs.
 
 ## Source manifest

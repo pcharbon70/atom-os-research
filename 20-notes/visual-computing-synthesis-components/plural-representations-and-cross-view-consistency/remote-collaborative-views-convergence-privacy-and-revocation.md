@@ -28,7 +28,7 @@ example of separately requested observation and control channels.
 [3](../../../30-sources/cherif-et-al-2014-access-control-collaborative-editors.md)
 [4](../../../30-sources/xdg-desktop-portal-project-2026-interaction-sessions.md)
 
-No Atom remote-view protocol or privacy evaluation exists.
+No Kay remote-view protocol or privacy evaluation exists.
 
 ## Development
 

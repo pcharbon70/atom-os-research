@@ -28,7 +28,7 @@ principals and explicit consequential authorization.
 [2](../../../30-sources/hosn-et-al-2001-single-application-model-multiple-views.md)
 [3](../../../30-sources/yee-2002-user-interaction-design-secure-systems.md)
 
-No Atom fusion policy or accessibility study exists.
+No Kay fusion policy or accessibility study exists.
 
 ## Development
 

@@ -63,7 +63,7 @@ recovery from injected faults in core kernel paths.
 
 ## Relevance
 
-Atom's classifier can use a request/domain scope only when the capture evidence
+Kay's classifier can use a request/domain scope only when the capture evidence
 and object ledgers prove that all affected state and outputs are inside that
 scope. `ContainmentRequirement` should name those dependencies and carry an
 `external_effect_status` of none, committed, or indeterminate. Unknown scope or
