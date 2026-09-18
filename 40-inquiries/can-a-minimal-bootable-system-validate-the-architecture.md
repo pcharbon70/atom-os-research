@@ -101,6 +101,12 @@ clean implementation commit `b350de9`. This supports the preliminary virtual
 portions of M0-T01 and M0-T02, while the Phase 1 acceptance review, boot and
 complete M0 cases remain open.
 
+The [merged-baseline closeout](../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md)
+then reran all nine cases on clean merged implementation revision `bc4c998`.
+The user/project owner accepted the proceed decision on 2026-09-18, closing
+the Phase 1 gate and admitting Phase 2 decision work. No guest boot or complete
+M0 acceptance case was added by that closeout.
+
 Current gate state:
 
 The [requirement deep dives](../20-notes/proof-of-concept-requirements/README.md)
@@ -135,7 +141,7 @@ profile independently permits Phase 1 integration and Phase 2 contract work.
 
 | Gate | State |
 | --- | --- |
-| M0: pinned boot inputs | Open; T7500 / Intel x86-64, virtual binary pins, bounded Zig build closure and Phase 1 virtual integration are evidenced; acceptance review, exact installed-unit inventory, firmware/bootloader handoff, boot image, console/time ABI and complete milestone cases remain open |
+| M0: pinned boot inputs | Open; Phase 1 virtual/build inputs passed merged-main validation and handoff review; exact installed-unit inventory, firmware/bootloader handoff, boot image, console/time ABI and complete milestone cases remain open |
 | M1: first boot into a native user-mode CLI | Open; no interactive Kay OS boot is recorded |
 | M2: protected service nucleus and CLI control | Open |
 | M3: CLI-launched compiled BEAM and tracing GC | Open |

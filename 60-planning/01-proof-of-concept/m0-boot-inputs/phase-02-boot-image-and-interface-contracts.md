@@ -19,16 +19,16 @@ Back to milestone: [M0 definition and plan](README.md).
 
 ## Entry, scope, and dependencies
 
-M0 Phase 1 accepted virtual/build inputs; unresolved physical evidence is not a successful M0
-exit.
+M0 Phase 1 accepted its virtual/build inputs on 2026-09-18; unresolved physical
+evidence is not a successful M0 exit.
 
 Required predecessor: [M0 Phase 1](phase-01-target-toolchain-and-build-baseline.md), task `m0-p01-handoff`.
 
 Plan state: draft, requiring decision review before execution. Implementation: not started.
-All tests: not run. Implementation repository and individual owners remain unassigned; M0-D01
-resolves the source location and initial roles, and this phase's decisions task assigns its
-execution/review roles before dependent work. The label unresolved-implementation is a
-recorded blocker, not a selected repository.
+All tests: not run. The implementation repository is the selected public
+[Kay OS repository](https://github.com/pcharbon70/kay-os); individual Phase 2
+execution and review roles remain unassigned and must be assigned by this
+phase's decisions task before dependent work.
 
 Decision M0-D02 is resolved by m0-p02-decisions: Choose loader/long-mode ownership, static
 image subset, native calling and register-state policy, syscall mechanism, console framing,
@@ -62,8 +62,8 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 | Task ID | Repository/location | Responsible role | Requires | Artifact / acceptance contribution | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
 | m0-p02-decisions | atom-os-research | Unassigned; resolve in m0-p02-decisions | m0-p01-handoff | M0-A03, M0-A04, M0-A05; phase cases below | Freeze boot and native interface choices output and verification; not run |
-| m0-p02-fixtures | unresolved-implementation | Unassigned; resolve in m0-p02-decisions | m0-p02-decisions | M0-A03, M0-A04, M0-A05; phase cases below | Implement contract validators and malformed fixtures output and verification; not run |
-| m0-p02-integration | unresolved-implementation | Unassigned test reviewer | m0-p02-fixtures | M0-T02, M0-T03, M0-T04 | Registered driver, raw positive/negative results; not run |
+| m0-p02-fixtures | kay-os | Unassigned; resolve in m0-p02-decisions | m0-p02-decisions | M0-A03, M0-A04, M0-A05; phase cases below | Implement contract validators and malformed fixtures output and verification; not run |
+| m0-p02-integration | kay-os | Unassigned test reviewer | m0-p02-fixtures | M0-T02, M0-T03, M0-T04 | Registered driver, raw positive/negative results; not run |
 | m0-p02-handoff | atom-os-research | Unassigned acceptance reviewer | m0-p02-integration | M0-A03, M0-A04, M0-A05; M0-T02, M0-T03, M0-T04 | Dated evidence and proceed/revise/blocked review; not run |
 
 ## Planned work
@@ -95,7 +95,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         halt/reset behavior. Assign only required console/time grants; a trusted operator does
         not grant the CLI physical-memory access.
 
-    - [ ] 2.1.2 Task [id: m0-p02-fixtures] [repo: unresolved-implementation] [after: m0-p02-decisions] — Implement contract validators and malformed fixtures.
+    - [ ] 2.1.2 Task [id: m0-p02-fixtures] [repo: kay-os] [after: m0-p02-decisions] — Implement contract validators and malformed fixtures.
 
       Deliver M0-A03/A04 executable checks and M0-A05 authority consistency evidence without
       claiming guest protection.
@@ -124,7 +124,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 2.2.1 Task [id: m0-p02-integration] [repo: unresolved-implementation] [after: m0-p02-fixtures] — Verify the integrated outcome and regressions.
+    - [ ] 2.2.1 Task [id: m0-p02-integration] [repo: kay-os] [after: m0-p02-fixtures] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for

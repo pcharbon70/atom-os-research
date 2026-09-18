@@ -26,6 +26,7 @@ insufficient. Record source, creator, license, provenance, and use.
 ### Subdirectories
 
 - [C kernel feasibility](c-kernel-feasibility/README.md) — original C ABI, compile/link and missing-helper research probes with transcripts; no boot or privileged execution.
+- [M0 Phase 01 merged-baseline evidence](m0-phase-01-merged-baseline/README.md) — retained textual output, negative diagnostics and file identities from the clean `bc4c998` Phase 1 integration rerun.
 - [Zig kernel feasibility](zig-kernel-feasibility/README.md) — original hosted ABI and compile/link research fixtures, reproduction script and observed output; no boot or physical qualification claim.
 
 ### Files

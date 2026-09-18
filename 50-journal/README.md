@@ -35,6 +35,10 @@ provenance record.
 
 ### Documents
 
+- [2026-09-18 M0 phase 01 merged-baseline closeout](2026-09-18-m0-phase-01-merged-baseline-closeout.md) —
+  records the clean `bc4c998` merged-main rerun, nine passing registered cases,
+  user-approved proceed decision, exact hashes and Phase 2 handoff boundary.
+
 - [2026-09-17 M0 phase 01 virtual integration](2026-09-17-m0-phase-01-virtual-integration.md) —
   records the clean `b350de9` virtual gate, nine passing registered cases,
   finite watchdog, exact artifact/manifest hashes, physical-inventory boundary
