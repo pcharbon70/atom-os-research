@@ -43,7 +43,10 @@ implementation plan: M0 has 3 phases, M1 has 4 (including separate physical
 qualification), M2 has 4, M3 has 4, and M4 has 3. The 18 phases map artifacts and
 acceptance cases to described tasks, dependencies, and final integration gates.
 These are conditional plans. M0 Phase 1 completed with a user-approved proceed
-decision on 2026-09-18; later phases remain plans rather than executed work.
+decision on 2026-09-18. M0 Phase 2 Section 2.1 now has accepted decisions and
+executable contract fixtures; its clean integration evidence, independent
+review and handoff remain open. Later phases remain plans rather than executed
+work.
 
 All M0–M4 milestone delivery gates remain open; no complete milestone
 acceptance case has passed. Writing or reviewing these definitions closes none
@@ -56,7 +59,9 @@ were selected on 2026-09-17. Their baseline identity checks and the bounded
 freestanding [build closure](../../50-journal/2026-09-17-m0-phase-01-build-closure.md)
 and merged-main [Phase 1 closeout](../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md)
 pass. Physical inventory and all complete milestone acceptance remain open.
-The bootloader remains an M0 Phase 2 decision.
+M0 Phase 2 selected Limine v12.9.0/base protocol revision 6 and the bounded
+handoff, static higher-half ELF, native ABI, console, clock, authority, fault
+and read-only ISO contracts on 2026-09-18.
 The physical inventory is an independent Phase 3/final-M0 obligation; it does
 not block virtual Phase 1 integration or Phase 2 contract implementation.
 
@@ -125,11 +130,12 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Begin [M0 Phase 2](m0-boot-inputs/phase-02-boot-image-and-interface-contracts.md)
-with task `m0-p02-decisions`. Phase 1's repository, Zig profile, virtual fixture,
-freestanding build qualification, merged-main integration and handoff review
-pass. Phase 2 must freeze its loader, handoff, image, console/time, syscall,
-register-state and initial-authority choices before dependent implementation.
+Continue [M0 Phase 2](m0-boot-inputs/phase-02-boot-image-and-interface-contracts.md)
+with the clean committed `m0-p02-integration` rerun and independent review.
+Phase 1's repository, Zig profile, virtual fixture, freestanding build
+qualification, merged-main integration and handoff review pass. Phase 2 has
+frozen its loader, handoff, image, console/time, syscall, register-state and
+initial-authority choices and completed its executable-contract section.
 The physical inventory remains in Phase 3 and blocks only final M0 and physical
 qualification claims. Later plans are deliberately conditional on their actual
 inputs and predecessor evidence.

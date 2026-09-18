@@ -24,16 +24,36 @@ evidence is not a successful M0 exit.
 
 Required predecessor: [M0 Phase 1](phase-01-target-toolchain-and-build-baseline.md), task `m0-p01-handoff`.
 
-Plan state: draft, requiring decision review before execution. Implementation: not started.
-All tests: not run. The implementation repository is the selected public
-[Kay OS repository](https://github.com/pcharbon70/kay-os); individual Phase 2
-execution and review roles remain unassigned and must be assigned by this
-phase's decisions task before dependent work.
+Plan state: executing. Section 2.1 decisions and executable contract work are
+implemented in the selected public [Kay OS repository](https://github.com/pcharbon70/kay-os)
+and passed a working-tree qualification run on 2026-09-18. Independent review
+then found reconciliation, overlap, authority, manifest and evidence gaps. The
+implementation corrections are in progress; a clean amended revision, follow-up
+review, retained integration evidence, and user acceptance remain required.
 
-Decision M0-D02 is resolved by m0-p02-decisions: Choose loader/long-mode ownership, static
-image subset, native calling and register-state policy, syscall mechanism, console framing,
-clock units, and initial fault policy using bounded validation and T7500/fixture
-compatibility. Until resolution, downstream code and passing acceptance claims are blocked.
+Decision M0-D02 was resolved by the user on 2026-09-18. Limine v12.9.0 owns the
+BIOS-to-long-mode path; Kay validates and copies a bounded handoff. The selected
+native image is a fixed higher-half static ELF64 `ET_EXEC` with a narrow load
+subset and no relocations. Native calls use a restricted integer-only System V
+AMD64 profile without red zone or FP/SIMD state. The later user transition uses
+a dedicated DPL3 interrupt gate, TSS kernel stack and `iretq`. Console transfers
+are copy-based byte streams capped at 256 bytes with separate endpoint grants;
+time is checked `u64` monotonic nanoseconds with absolute waits and separate
+read/wait grants. Fatal faults emit a bounded emergency serial record then halt.
+Boot media is a deterministic read-only BIOS ISO. These selections do not claim
+guest enforcement.
+
+## Accepted decision record
+
+| Contract area | Accepted selection | Implementation record |
+| --- | --- | --- |
+| Loader and supply chain | Limine v12.9.0, protocol base revision 6; exact archive/signature hashes, signing-key fingerprint and protocol-header revision/hash | `config/m0/phase-02-contracts.json`, `src/m0/limine.zig`, `scripts/m0/verify-limine-release.sh` in Kay OS |
+| Boot ownership | Limine establishes long mode; Kay bounds, validates and copies its normalized snapshot; no borrowed pointers survive | `src/m0/contracts.zig` boot-snapshot cases |
+| Native image | Higher-half static ELF64 `ET_EXEC`; maximum eight page-aligned segments; no dynamic linking, relocations or write-execute mapping | `linker/x86_64-m0-higher-half.ld` and ELF audit driver |
+| Native/user entry | Restricted integer-only System V AMD64, no red zone/FP/SIMD; later DPL3 interrupt gate with TSS stack and `iretq` | Build contract now; ring-3 mechanism explicitly deferred to M1 |
+| Console and time | Copy-based 1–256 byte stream with separate read/write grants; checked monotonic `u64` nanoseconds and absolute waits with separate grants | Authority and conversion cases in `src/m0/contracts.zig` |
+| Fatal failure | Bounded emergency serial record then stable halt | Policy selected; guest path remains unimplemented |
+| Media | Deterministic read-only BIOS ISO | `scripts/m0/build-boot-image.sh`; working-tree two-build match on 2026-09-18 |
 
 The host owns build tools, validation fixtures, emulation and capture; M0 does not claim
 kernel enforcement. Firmware/loader/kernel ownership is fixed in the contract.
@@ -61,10 +81,10 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 
 | Task ID | Repository/location | Responsible role | Requires | Artifact / acceptance contribution | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
-| m0-p02-decisions | atom-os-research | Unassigned; resolve in m0-p02-decisions | m0-p01-handoff | M0-A03, M0-A04, M0-A05; phase cases below | Freeze boot and native interface choices output and verification; not run |
-| m0-p02-fixtures | kay-os | Unassigned; resolve in m0-p02-decisions | m0-p02-decisions | M0-A03, M0-A04, M0-A05; phase cases below | Implement contract validators and malformed fixtures output and verification; not run |
-| m0-p02-integration | kay-os | Unassigned test reviewer | m0-p02-fixtures | M0-T02, M0-T03, M0-T04 | Registered driver, raw positive/negative results; not run |
-| m0-p02-handoff | atom-os-research | Unassigned acceptance reviewer | m0-p02-integration | M0-A03, M0-A04, M0-A05; M0-T02, M0-T03, M0-T04 | Dated evidence and proceed/revise/blocked review; not run |
+| m0-p02-decisions | atom-os-research | Codex implementation agent; user decision owner | m0-p01-handoff | M0-A03, M0-A04, M0-A05; phase cases below | Accepted selections above and Kay OS machine-readable record; complete 2026-09-18 |
+| m0-p02-fixtures | kay-os | Codex implementation agent | m0-p02-decisions | M0-A03, M0-A04, M0-A05; phase cases below | Initial review gaps corrected in working tree; 24-case manifest and clean amended revision pending |
+| m0-p02-integration | kay-os | Codex execution agent; independent review agent | m0-p02-fixtures | M0-T02, M0-T03, M0-T04 | Driver exists; corrected working-tree 24-case run passed; clean committed rerun and follow-up review pending |
+| m0-p02-handoff | atom-os-research | User acceptance reviewer | m0-p02-integration | M0-A03, M0-A04, M0-A05; M0-T02, M0-T03, M0-T04 | Dated evidence and user proceed/revise/blocked decision pending |
 
 ## Planned work
 
@@ -74,45 +94,45 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
   contracts before the guest kernel implements them. Completion requires the assembled phase
   gate below, not just its component tasks.
 
-  - [ ] 2.1 Section — Executable contracts.
+  - [x] 2.1 Section — Executable contracts.
 
     Agree ownership and failure rules, then make contradictions executable test failures.
 
-    - [ ] 2.1.1 Task [id: m0-p02-decisions] [repo: atom-os-research] [after: m0-p01-handoff] — Freeze boot and native interface choices.
+    - [x] 2.1.1 Task [id: m0-p02-decisions] [repo: atom-os-research] [after: m0-p01-handoff] — Freeze boot and native interface choices.
 
       Resolve M0-D02 before dependent image/startup code; preserve explicit host, loader,
       kernel, and user responsibilities.
 
-      - [ ] 2.1.1.1 Subtask — Select the entry and image contracts.
+      - [x] 2.1.1.1 Subtask — Select the entry and image contracts.
 
         Compare loader support and entry guarantees; record reset-to-entry ownership,
         stack/register state, memory reservations, image segments/relocations, BSS,
         permissions, and enabled register policy.
 
-      - [ ] 2.1.1.2 Subtask — Define bounded console/time authority.
+      - [x] 2.1.1.2 Subtask — Define bounded console/time authority.
 
         Record operation encodings, buffer limits, errors, waits, time conversion, and
         halt/reset behavior. Assign only required console/time grants; a trusted operator does
         not grant the CLI physical-memory access.
 
-    - [ ] 2.1.2 Task [id: m0-p02-fixtures] [repo: kay-os] [after: m0-p02-decisions] — Implement contract validators and malformed fixtures.
+    - [x] 2.1.2 Task [id: m0-p02-fixtures] [repo: kay-os] [after: m0-p02-decisions] — Implement contract validators and malformed fixtures.
 
       Deliver M0-A03/A04 executable checks and M0-A05 authority consistency evidence without
       claiming guest protection.
 
-      - [ ] 2.1.2.1 Subtask — Normalize handoff and image fixtures.
+      - [x] 2.1.2.1 Subtask — Normalize handoff and image fixtures.
 
         Create valid and malformed snapshots/segments covering truncation, arithmetic
         overflow, overlap, invalid entry points, unsupported features, and reserved memory.
         Verify failure publishes no runnable image descriptor.
 
-      - [ ] 2.1.2.2 Subtask — Cross-check interface ownership.
+      - [x] 2.1.2.2 Subtask — Cross-check interface ownership.
 
         Check every exposed operation has rights, payer/bounds, expected errors, and enforcing
         owner. Link each requirement to a validator case; reconcile generated constants with
         fixture layouts.
 
-      - [ ] 2.1.2.3 Subtask — Rebuild under the frozen contract.
+      - [x] 2.1.2.3 Subtask — Rebuild under the frozen contract.
 
         Repeat native fixture builds using accepted layout and state policies. Verify initial
         data, zero-fill descriptions, stack alignment, and reservation rules agree with the

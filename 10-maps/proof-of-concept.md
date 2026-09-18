@@ -32,13 +32,18 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
 - [M0 build-closure execution](../50-journal/2026-09-17-m0-phase-01-build-closure.md)
   records the demonstrated bounded compiler/ABI/reproducibility result without
   treating the non-bootable ELF as kernel or guest evidence.
+- [M0 Phase 2 boot, image, and interface contracts](../60-planning/01-proof-of-concept/m0-boot-inputs/phase-02-boot-image-and-interface-contracts.md)
+  records the accepted Limine, higher-half ELF, restricted ABI, bounded
+  console/time authority, fault, and deterministic read-only ISO decisions and
+  tracks their executable integration evidence.
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
   provides five detailed M0–M4 definitions and maps the readiness gaps to their
   required artifacts and acceptance cases. The
   [planning convention](../60-planning/README.md) requires descriptions
   at all four work levels and integration tests at the end of every phase;
-  18 draft phase plans now provide that hierarchy, while implementation
-  evidence and accepted decisions remain outstanding.
+  18 phase plans now provide that hierarchy. M0 Phase 1 is complete and M0
+  Phase 2 is executing its reviewed contract/integration work; later delivery
+  evidence and milestone decisions remain outstanding.
 - [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
   controls the first architecture, minimum virtual test and next hardware research.
 - [T7500 target-correction journal](../50-journal/2026-09-06-t7500-target-correction.md)
@@ -140,7 +145,8 @@ and update/root survival as distinct evidence gates.
 
 ## Open questions
 
-- Which installed Xeon SKUs and exact T7500 build, firmware, bootloader and console/time ABI should M0 freeze?
+- Which installed Xeon SKUs, exact T7500 build and firmware must Phase 3 qualify
+  against M0's now-frozen loader and console/time contracts?
 - Does the first native CLI pass interactive and malformed-input tests?
 - Which minimum BEAM profile supports the first CLI-launched workload?
 - Can the selected GC, mailbox, and scheduler design meet measured resource
