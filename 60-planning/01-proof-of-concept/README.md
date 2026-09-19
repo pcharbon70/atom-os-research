@@ -42,19 +42,27 @@ boundary, exclusions, and handoff evidence. Each now includes a draft phased
 implementation plan: M0 has 3 phases, M1 has 4 (including separate physical
 qualification), M2 has 4, M3 has 4, and M4 has 3. The 18 phases map artifacts and
 acceptance cases to described tasks, dependencies, and final integration gates.
-These are conditional plans. M0 Phase 1 entered provisional execution on
-2026-09-17; later phases remain plans rather than executed work.
+These are conditional plans. M0 Phase 1 completed with a user-approved proceed
+decision on 2026-09-18. M0 Phase 2 Section 2.1 and its clean 24-case hosted
+integration are complete at Kay OS commit `f85571e`; the independent follow-up
+review found no blocker and [evidence is retained](../../50-journal/2026-09-18-m0-phase-02-contract-integration.md).
+The user/project owner selected proceed on 2026-09-19, completing Phase 2.
+Later phases remain plans rather than executed work.
 
-All M0–M4 delivery gates remain open and all acceptance cases are not run.
-Writing or reviewing these definitions closes none of them. The user selected
+All M0–M4 milestone delivery gates remain open; no complete milestone
+acceptance case has passed. Writing or reviewing these definitions closes none
+of them. The user selected
 Zig as the kernel language on 2026-09-08; the [feasibility study](../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
 records its evidence and remaining compiler/ABI qualification. The public
 [Kay OS implementation repository](https://github.com/pcharbon70/kay-os), Zig
 0.16.0 LLVM/LLD profile, QEMU 8.2.2 `pc-q35-8.2` fixture, and SeaBIOS 1.16.3
 were selected on 2026-09-17. Their baseline identity checks and the bounded
 freestanding [build closure](../../50-journal/2026-09-17-m0-phase-01-build-closure.md)
-pass, but physical inventory, phase integration, acceptance review, and all
-milestone acceptance remain open. The bootloader remains an M0 Phase 2 decision.
+and merged-main [Phase 1 closeout](../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md)
+pass. Physical inventory and all complete milestone acceptance remain open.
+M0 Phase 2 selected Limine v12.9.0/base protocol revision 6 and the bounded
+handoff, static higher-half ELF, native ABI, console, clock, authority, fault
+and read-only ISO contracts on 2026-09-18.
 The physical inventory is an independent Phase 3/final-M0 obligation; it does
 not block virtual Phase 1 integration or Phase 2 contract implementation.
 
@@ -123,11 +131,16 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Continue [M0 Phase 1](m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md)
-in the selected Kay OS repository. The repository, Zig profile, virtual fixture,
-freestanding build qualification, and nine-case virtual integration now pass.
-Assign and complete the Phase 1 acceptance review before entering Phase 2; the
-physical inventory has moved to Phase 3 and blocks only final M0 and physical
+Prepare [M0 Phase 3](m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
+by reviewing its open decisions and entry dependencies. The accepted Phase 2
+[clean integration evidence](../../50-journal/2026-09-18-m0-phase-02-contract-integration.md)
+provides its predecessor handoff.
+Phase 1's repository, Zig profile, virtual fixture, freestanding build
+qualification, merged-main integration and handoff review pass. Phase 2 has
+frozen its loader, handoff, image, console/time, syscall, register-state and
+initial-authority choices and completed its executable-contract and hosted
+integration work.
+The physical inventory remains in Phase 3 and blocks only final M0 and physical
 qualification claims. Later plans are deliberately conditional on their actual
 inputs and predecessor evidence.
 Before executing each phase, review its decision register and bind accepted

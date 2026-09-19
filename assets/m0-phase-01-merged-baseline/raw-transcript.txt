@@ -1,0 +1,119 @@
+Kay OS M0 Phase 1 merged-baseline evidence
+Tested revision: bc4c9984d776d75f23cb85193c9e3e3ff3270d61
+Completed at UTC: 2026-09-18T13:24:07Z
+
+== result.txt ==
+task_id=m0-p01-integration
+result=pass
+scope=virtual-input-and-build-integration
+tested_revision=bc4c9984d776d75f23cb85193c9e3e3ff3270d61
+dirty_file_count=0
+case_manifest_sha256=83b01b41a7eafa210a698033b42d688ac7b15094a89075023d155e426733f4aa
+artifact_sha256=e94b127fcc4388e73b4620a8b0908dcdeed0c3a08fbf0052d92cce58a3baf31a
+physical_inventory=deferred-to-m0-p03-inventory-not-consumed
+completed_at_utc=2026-09-18T13:24:07Z
+
+== case-results.tsv ==
+case_id	result	observation
+m0-p01-t01-baseline	pass	pinned development inputs resolved
+m0-p01-t02-clean-builds	pass	clean builds, maps and build negative cases passed
+m0-p01-n05-build-closure	pass	helper, host import and CPU option drift were rejected
+m0-p01-n01-missing-qemu	pass	missing pinned QEMU was rejected
+m0-p01-n02-missing-firmware	pass	changed firmware path was rejected
+m0-p01-n03-unavailable-machine	pass	unavailable machine was rejected
+m0-p01-n04-unavailable-cpu	pass	unavailable CPU was rejected
+m0-p01-n06-watchdog	pass	deadline returned status 124
+m0-p01-b01-physical-boundary	pass	physical inventory deferred to m0-p03-inventory and not consumed
+
+== baseline.log ==
+profile=kay-os-m0-x86-64
+zig_version=0.16.0
+zig_path=/home/ducky/.asdf/installs/zig/0.16.0/zig
+zig_sha256=2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c
+lld_version=LLD 21.1.0 (compatible with GNU linkers)
+qemu_package_version=1:8.2.2+ds-0ubuntu1.18
+qemu_version=QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+qemu_path=/usr/bin/qemu-system-x86_64
+qemu_sha256=8a35ccba41582fc6c38b9df85fc9e35fa1d42f414d2d7d8090ee9b2f5e7c0854
+qemu_machine=pc-q35-8.2
+qemu_cpu=Nehalem-v1
+seabios_package_version=1.16.3-2
+seabios_path=/usr/share/seabios/bios.bin
+seabios_sha256=4d597f68e06a0e28498e12e96e1f2ce64aee88a519685c61da92eb775c95a445
+
+== build-closure.log ==
+m0-p01-build verification passed; evidence: /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure
+
+== negative-missing-qemu.log ==
+baseline verification failed: missing command: /kay-os/missing/qemu
+
+== negative-missing-firmware.log ==
+baseline verification failed: SeaBIOS path /kay-os/missing/bios.bin does not match /usr/share/seabios/bios.bin
+
+== negative-unavailable-machine.log ==
+qemu-system-x86_64: unsupported machine type
+Use -machine help to list supported machines
+
+== negative-unavailable-cpu.log ==
+qemu-system-x86_64: unable to find CPU model 'kay-os-missing-cpu'
+
+== negative-watchdog.log ==
+timeout_status=124
+
+== build-closure/result.txt ==
+task_id=m0-p01-build
+result=pass
+zig_version=0.16.0
+zig_sha256=2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c
+artifact_sha256=e94b127fcc4388e73b4620a8b0908dcdeed0c3a08fbf0052d92cce58a3baf31a
+absolute_build_a=/tmp/kay-m0-build-closure.4er33C/a/source
+absolute_build_b=/tmp/kay-m0-build-closure.4er33C/b/source
+negative_cases=undefined-helper,host-syscall,cpu-option-drift
+
+== build-closure/reproducibility.txt ==
+Two clean source copies were built from distinct absolute directories with
+independent local and global Zig caches. The unstripped audit ELFs may differ
+only because DWARF records each absolute source directory. The acceptance ELF is
+produced directly by Zig's -fstrip target; its bytes and the audit targets'
+symbol and ELF maps must compare equal. No other nondeterminism is permitted.
+
+== build-closure/negative-undefined-helper.log ==
+error: ld.lld: undefined symbol: __udivti3
+    note: referenced by undefined-helper.c
+    note:               /tmp/kay-m0-build-closure.4er33C/negative-undefined-helper/local/o/3d4be08a9062d28e4b1e02b1423c56e1/undefined-helper.o:(_start)
+
+== build-closure/negative-host-syscall.log ==
+error: ld.lld: undefined symbol: write
+    note: referenced by host-syscall.c
+    note:               /tmp/kay-m0-build-closure.4er33C/negative-host-syscall/local/o/69562c6839d3e36bd4390cd8611ee728/host-syscall.o:(_start)
+
+== build-closure/negative-cpu-option.log ==
+error: invalid option: -Dcpu
+error:   access the help menu with 'zig build -h'
+error: the following build command failed with exit code 1:
+/tmp/kay-m0-build-closure.4er33C/negative-cpu-option/local/o/877006de4db2c07ac564655088cb9298/build /home/ducky/.asdf/installs/zig/0.16.0/zig /home/ducky/.asdf/installs/zig/0.16.0/lib /tmp/kay-os-phase1.S2I6ey/repo /tmp/kay-m0-build-closure.4er33C/negative-cpu-option/local /tmp/kay-m0-build-closure.4er33C/negative-cpu-option/global --seed 0xfcba42bc -Zce44bbf6c9943a13 -Dcpu=haswell --prefix /tmp/kay-m0-build-closure.4er33C/negative-cpu-option/prefix
+
+== evidence.sha256 ==
+80d7348db641beda3e02ad4888aa36024c0bcae8b7a3d5ef43bf2b7540debcb1  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/baseline.log
+5190b770c5809a7ddddddda5ec03e12ea6e7f7a755bb2177867532c70ca582d0  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure.log
+5aebdda5cb3f6256bfbd121f1822dec564aabf6a8e6725f7c511e82e7432b903  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/audit-builds.sha256
+53aa5dd826cc6b17376db98ab939bb76c945f71ffe61e80d7c0ba53aef7e48d9  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/build-a.log
+08af7cdd46382f4529d9b037710627e21c169abb7c373d4421efc7806f4ff5dc  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/build-b.log
+c25e850cbfb36fb00bd0f3b138b5d48bd3dc84ee523f339a7127b6ff28e2b62a  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/canonical-builds.sha256
+1d7729de05436a39f4132f5783c9f0bac51cfdee14ae54c8605cb1f40911e187  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/disassembly.txt
+14dcfeb0dbf005654fba57a250cff19f7371cbeba5e79a4d4d05380b26bdf164  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/elf.map
+e94b127fcc4388e73b4620a8b0908dcdeed0c3a08fbf0052d92cce58a3baf31a  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/kay-m0-fixture.elf
+29fca40888a71e64fb7fc8ae803d2dd93a0eb2616b57c8d98467444bda66406d  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/negative-cpu-option.log
+db4837e178c1f7f5a4028f36c610f4f7f02bbca5da1dd6113ea565d3661fa4d1  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/negative-host-syscall.log
+f2b805e0b2da320fe7e6fc9cf45d2d328a1121a76be13a9640cc1f3504454901  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/negative-undefined-helper.log
+45e8e50fb75ad35214f2007c4057398180b92a58a0a06152f3c5ac4944fe560c  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/reproducibility.txt
+1cd3660fb1316e06ead73de0a1e53a2108c65912dab2b16a7b9b29a1ecb11117  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/result.txt
+de1933ea8b36faf76b95ce5dc5910238faa72a1756a3d27432b93abf3e26dd24  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/build-closure/symbols.map
+9c88ef9f1f67c5de0a0054c75f5398c84f3811a6eb673ff392831678c5b9a794  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/case-results.tsv
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/git-status.txt
+808e8ab3be50db3fb64f53c64d3e0813c1a0dbdbff554f2bf1761813a1eb706c  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/negative-missing-firmware.log
+4d165be2bfcd21ccc36fc79e0fa4d4ef7fd6a817a4f063204ebe8dc5d63d4ebb  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/negative-missing-qemu.log
+2583f955835f0c99c81b88c944e3ff89d8ed4af574d771d2010720e0aece6cb1  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/negative-unavailable-cpu.log
+f8f429c8507b9b22f7c3b10b7f1b88b9091c189d741915dea909399458ef6fbb  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/negative-unavailable-machine.log
+3c49fc022bb0c9afb8d48e97f579cb4d895442c7c51d62333870a442c15f4926  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/negative-watchdog.log
+83b01b41a7eafa210a698033b42d688ac7b15094a89075023d155e426733f4aa  /tmp/kay-m0-phase-01-merged-bc4c998-rerun/phase-01-cases.json

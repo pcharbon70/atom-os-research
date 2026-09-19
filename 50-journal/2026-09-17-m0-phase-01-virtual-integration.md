@@ -105,8 +105,9 @@ that the merged tree passed without its own evidence.
 
 ## Follow-ups
 
-- Assign the `m0-p01-handoff` acceptance reviewer and record the Phase 1
-  proceed/revise/blocked decision.
+- The [merged-baseline closeout](2026-09-18-m0-phase-01-merged-baseline-closeout.md)
+  subsequently reran the complete suite at merged implementation revision
+  `bc4c998` and recorded the user-approved proceed decision.
 - Keep `m0-p03-inventory` open until physical final-M0 qualification.
-- If Phase 1 is accepted, resolve Phase 2's bootloader, handoff, static-image,
+- Resolve Phase 2's bootloader, handoff, static-image,
   console/time and initial-authority decisions before dependent implementation.

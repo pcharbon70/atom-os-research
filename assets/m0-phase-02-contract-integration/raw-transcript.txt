@@ -1,0 +1,90 @@
+Kay OS M0 Phase 2 contract-integration evidence
+Tested revision: f85571e2f2bb036c258fd596552731422cb41b38
+Completed at UTC: 2026-09-18T18:28:44Z
+Original evidence directory: /tmp/kay-p02-final-clean.iOr4jf
+
+== result.txt ==
+task_id=m0-p02-integration
+result=pass
+tested_revision=f85571e2f2bb036c258fd596552731422cb41b38
+dirty_file_count=0
+case_count=24
+iso_sha256=3ffad1d85539911981121c65b8a4bdcfb7cd1d09fc14aa01fbb075debe74bc1f
+guest_boot=not-tested
+ring3_enforcement=not-tested
+physical_t7500=not-tested
+completed_at_utc=2026-09-18T18:28:44Z
+
+== case-results.tsv ==
+case_id	result	observation
+m0-p02-t05-authenticated-limine-release	pass	pinned hashes, fingerprint and detached signature passed
+m0-p02-n12-invalid-limine-signature	pass	truncated detached signature was rejected
+m0-p02-t01-valid-boot-snapshot	pass	Zig contract case passed
+m0-p02-t02-valid-static-image	pass	Zig contract case passed
+m0-p02-t03-bounded-authorized-interfaces	pass	Zig contract case passed
+m0-p02-n01-truncated-snapshot	pass	Zig contract case passed
+m0-p02-n02-overlapping-memory	pass	Zig contract case passed
+m0-p02-n03-arithmetic-overflow	pass	Zig contract case passed
+m0-p02-n04-invalid-entry	pass	Zig contract case passed
+m0-p02-n05-write-execute-segment	pass	Zig contract case passed
+m0-p02-n06-overlapping-virtual-segments	pass	Zig contract case passed
+m0-p02-n07-image-outside-kernel-reservation	pass	Zig contract case passed
+m0-p02-n08-oversized-console-buffer	pass	Zig contract case passed
+m0-p02-n09-missing-grant-cross-product	pass	Zig contract case passed
+m0-p02-n10-past-deadline	pass	Zig contract case passed
+m0-p02-n11-time-conversion-overflow	pass	Zig contract case passed
+m0-p02-n14-overlapping-physical-segments	pass	Zig contract case passed
+m0-p02-n15-overlapping-file-segments	pass	Zig contract case passed
+m0-p02-n16-wrong-endpoint-and-caller	pass	Zig contract case passed
+m0-p02-t04-reproducible-higher-half-image	pass	two absolute-directory ELF builds were byte-identical
+m0-p02-t08-emitted-elf-contract	pass	emitted ELF passed the boot snapshot and image contract
+m0-p02-n13-missing-iso-tool	pass	missing xorriso was rejected before image construction
+m0-p02-t06-deterministic-read-only-iso	pass	two signed-input ISO builds were byte-identical
+m0-p02-t07-phase-01-regression	pass	all Phase 1 baseline and failure-detection cases passed
+
+== tool-identities.tsv ==
+tool	invocation_path	invocation_sha256	resolved_path	resolved_sha256	version
+zig	/home/ducky/.asdf/shims/zig	46408dedf41095032c6d23fa4ece1909a42048326be662320f20dfc46785569a	/home/ducky/.asdf/installs/zig/0.16.0/bin/zig	2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c	0.16.0
+qemu	/usr/bin/qemu-system-x86_64	8a35ccba41582fc6c38b9df85fc9e35fa1d42f414d2d7d8090ee9b2f5e7c0854	/usr/bin/qemu-system-x86_64	8a35ccba41582fc6c38b9df85fc9e35fa1d42f414d2d7d8090ee9b2f5e7c0854	QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+xorriso	/tmp/kay-xorriso-root/usr/bin/xorriso	c66a5be11a674e97ed8983af520eae8fad900b47d104c92bc63e5cf254391922	/tmp/kay-xorriso-root/usr/bin/xorriso	c66a5be11a674e97ed8983af520eae8fad900b47d104c92bc63e5cf254391922	xorriso 1.5.6 : RockRidge filesystem manipulator, libburnia project.
+gpg	/usr/bin/gpg	126a62759650363364a3c3cc182c1ac7f7498e325229ef2dfe6057fe73566ee7	/usr/bin/gpg	126a62759650363364a3c3cc182c1ac7f7498e325229ef2dfe6057fe73566ee7	gpg (GnuPG) 2.4.4
+tar	/usr/bin/tar	6453fce2cf2dde32b86557bb44f533afb3b5171b59b8d21cc797b9b20d9c7b06	/usr/bin/tar	6453fce2cf2dde32b86557bb44f533afb3b5171b59b8d21cc797b9b20d9c7b06	tar (GNU tar) 1.35
+make	/usr/bin/make	d78b8f1d099fbcfb6f2f49ab87223b9b68fb3956642f92d6ec6de812e8afa965	/usr/bin/make	d78b8f1d099fbcfb6f2f49ab87223b9b68fb3956642f92d6ec6de812e8afa965	GNU Make 4.3
+cc	/usr/bin/cc	6117c52522997d2aaccb2b52b3c6bf42c0a6c5edb1d718431fed6b2fc5fec234	/usr/bin/x86_64-linux-gnu-gcc-13	6117c52522997d2aaccb2b52b3c6bf42c0a6c5edb1d718431fed6b2fc5fec234	cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+readelf	/usr/bin/readelf	679e40228577f6c92c3824c78468f8a6d4574dcae6f38b464ac8ce782d1892f0	/usr/bin/x86_64-linux-gnu-readelf	679e40228577f6c92c3824c78468f8a6d4574dcae6f38b464ac8ce782d1892f0	GNU readelf (GNU Binutils for Ubuntu) 2.42
+python3	/home/ducky/.asdf/shims/python3	883fe5c09dba061b18ec9a384b52896332bcd660f1194bbbc246f05364d5d1ff	/home/ducky/.asdf/installs/python/3.12.12/bin/python3	7960acf7a77624badfb1e4326dfa373a754854aaffb52420e641d53add83bea2	Python 3.12.12
+limine	/tmp/kay-p02-final-clean.iOr4jf/limine/limine-binary/limine	5fbaf5a4710322518c87849b059d638b5212919a309eb38e153fa06026902db4	/tmp/kay-p02-final-clean.iOr4jf/limine/limine-binary/limine	5fbaf5a4710322518c87849b059d638b5212919a309eb38e153fa06026902db4	Limine 12.9.0
+
+== artifacts.sha256 ==
+3ffad1d85539911981121c65b8a4bdcfb7cd1d09fc14aa01fbb075debe74bc1f  image-a/kay-m0.iso
+e3b317cabe4fd16e573fc86477ae06a96e1cec9ed33178b1519c71185f06244e  image-a/iso-root/boot/kay-m0-kernel.elf
+9a738586bff5790bd8bfef4a4868a2939cba3f81f22f121306d668c97f1c85d8  limine-binary-12.9.0.tar.xz
+c2ece24344e8b59350d8e7d9b70ce46b71f2c0cda3668096c14ff83f1f773e3d  limine-binary-12.9.0.tar.xz.sig
+4a373671781ae7297b511df7d82836f3b46000a542b6a8e3a882b85a26627194  config/m0/phase-02-cases.json
+
+== image-contract.log ==
+image-contract=pass segments=2 entry=0xffffffff80000000 physical=0x200000..0x206000 limine-base-revision=6
+
+== limine/verification.txt ==
+release=v12.9.0
+archive_sha256=9a738586bff5790bd8bfef4a4868a2939cba3f81f22f121306d668c97f1c85d8
+signature_sha256=c2ece24344e8b59350d8e7d9b70ce46b71f2c0cda3668096c14ff83f1f773e3d
+signing_key_fingerprint=05D29860D0A0668AAEFB9D691F3C021BECA23821
+signature=valid
+
+== phase-01-regression/result.txt ==
+task_id=m0-p01-integration
+result=pass
+scope=virtual-input-and-build-integration
+tested_revision=f85571e2f2bb036c258fd596552731422cb41b38
+dirty_file_count=0
+case_manifest_sha256=83b01b41a7eafa210a698033b42d688ac7b15094a89075023d155e426733f4aa
+artifact_sha256=e94b127fcc4388e73b4620a8b0908dcdeed0c3a08fbf0052d92cce58a3baf31a
+physical_inventory=deferred-to-m0-p03-inventory-not-consumed
+completed_at_utc=2026-09-18T18:28:44Z
+
+== declared evidence boundary ==
+The run exercised hosted Zig contract validators, a host ELF audit, signed
+Limine supply-chain verification, deterministic ISO construction and the Phase
+1 hosted/build regression. It did not start the ISO in QEMU, execute ring 3,
+enforce these contracts in a guest kernel, or test the Dell Precision T7500.
