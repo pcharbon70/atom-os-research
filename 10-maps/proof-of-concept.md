@@ -36,14 +36,18 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
   records the accepted Limine, higher-half ELF, restricted ABI, bounded
   console/time authority, fault, and deterministic read-only ISO decisions and
   tracks their executable integration evidence.
+- [M0 Phase 2 contract-integration execution](../50-journal/2026-09-18-m0-phase-02-contract-integration.md)
+  records the clean 24-case hosted result, independent no-blocker review,
+  exact identities, explicit guest/physical boundary and accepted handoff.
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
   provides five detailed M0–M4 definitions and maps the readiness gaps to their
   required artifacts and acceptance cases. The
   [planning convention](../60-planning/README.md) requires descriptions
   at all four work levels and integration tests at the end of every phase;
   18 phase plans now provide that hierarchy. M0 Phase 1 is complete and M0
-  Phase 2 is executing its reviewed contract/integration work; later delivery
-  evidence and milestone decisions remain outstanding.
+  Phase 2 completed after its reviewed clean contract integration and the
+  user's proceed decision; later delivery evidence and milestone decisions
+  remain outstanding.
 - [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
   controls the first architecture, minimum virtual test and next hardware research.
 - [T7500 target-correction journal](../50-journal/2026-09-06-t7500-target-correction.md)

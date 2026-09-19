@@ -43,10 +43,11 @@ implementation plan: M0 has 3 phases, M1 has 4 (including separate physical
 qualification), M2 has 4, M3 has 4, and M4 has 3. The 18 phases map artifacts and
 acceptance cases to described tasks, dependencies, and final integration gates.
 These are conditional plans. M0 Phase 1 completed with a user-approved proceed
-decision on 2026-09-18. M0 Phase 2 Section 2.1 now has accepted decisions and
-executable contract fixtures; its clean integration evidence, independent
-review and handoff remain open. Later phases remain plans rather than executed
-work.
+decision on 2026-09-18. M0 Phase 2 Section 2.1 and its clean 24-case hosted
+integration are complete at Kay OS commit `f85571e`; the independent follow-up
+review found no blocker and [evidence is retained](../../50-journal/2026-09-18-m0-phase-02-contract-integration.md).
+The user/project owner selected proceed on 2026-09-19, completing Phase 2.
+Later phases remain plans rather than executed work.
 
 All M0–M4 milestone delivery gates remain open; no complete milestone
 acceptance case has passed. Writing or reviewing these definitions closes none
@@ -130,12 +131,15 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Continue [M0 Phase 2](m0-boot-inputs/phase-02-boot-image-and-interface-contracts.md)
-with the clean committed `m0-p02-integration` rerun and independent review.
+Prepare [M0 Phase 3](m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
+by reviewing its open decisions and entry dependencies. The accepted Phase 2
+[clean integration evidence](../../50-journal/2026-09-18-m0-phase-02-contract-integration.md)
+provides its predecessor handoff.
 Phase 1's repository, Zig profile, virtual fixture, freestanding build
 qualification, merged-main integration and handoff review pass. Phase 2 has
 frozen its loader, handoff, image, console/time, syscall, register-state and
-initial-authority choices and completed its executable-contract section.
+initial-authority choices and completed its executable-contract and hosted
+integration work.
 The physical inventory remains in Phase 3 and blocks only final M0 and physical
 qualification claims. Later plans are deliberately conditional on their actual
 inputs and predecessor evidence.

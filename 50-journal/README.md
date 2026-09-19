@@ -35,6 +35,11 @@ provenance record.
 
 ### Documents
 
+- [2026-09-18 M0 phase 02 contract integration](2026-09-18-m0-phase-02-contract-integration.md) —
+  records the clean `f85571e` 24-case hosted contract/image run, exact tool and
+  artifact identities, independent no-blocker follow-up review, explicit
+  non-boot boundaries and the user's 2026-09-19 proceed decision.
+
 - [2026-09-18 M0 phase 01 merged-baseline closeout](2026-09-18-m0-phase-01-merged-baseline-closeout.md) —
   records the clean `bc4c998` merged-main rerun, nine passing registered cases,
   user-approved proceed decision, exact hashes and Phase 2 handoff boundary.
