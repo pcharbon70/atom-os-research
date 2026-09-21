@@ -61,8 +61,9 @@ resolved on 2026-09-20 with fixed harness timing, protocol, retention, cleanup
 and observation-only physical-fixture collection decisions. Section 3.1 is
 complete at clean Kay OS revision `8206deb`: all nine controlled harness cases
 passed, the publication boundary behaved as declared, and the virtual M1 input
-bundle was assembled without physical inventory. Full phase integration and
-every complete milestone acceptance case remain open. Writing or reviewing a plan
+bundle was assembled without physical inventory. The full assembled gate then
+passed at clean revision `2d41f39`, covering all M0-T01 through M0-T06 rows;
+the owner handoff decision remains open. Writing or reviewing a plan
 neither closes a delivery gate nor substitutes for retained execution evidence.
 
 ## Authoritative inputs
@@ -193,7 +194,7 @@ dependencies and unresolved gates before execution.
 | --- | --- | --- | --- |
 | [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) | Turn the generic Intel-compatible x86-64 envelope into a versioned, reproducible virtual baseline. This phase qualifies build inputs and native link fixtures, not a user-mode OS or physical machine. | accepted-scope-entry | Complete; merged-main nine-case rerun passed and user recorded proceed; [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) |
 | [Phase 2 — Boot, image, and interface contracts](phase-02-boot-image-and-interface-contracts.md) | Specify and exercise the handoff, native image, console/time, and initial authority contracts before the guest kernel implements them. | m0-p01-handoff | Complete; clean `f85571e` integration passed 24/24 registered cases, independent review found no blocker and user selected proceed on 2026-09-19; [evidence](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md) |
-| [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) | Deliver an exercised unattended acceptance harness, assemble the virtual M1 input bundle, and prove that physical inventory is not consumed as configuration. | m0-p02-handoff | In progress; Section 3.1 passed at clean `8206deb` and assembled the inventory-free virtual bundle; [evidence](../../../50-journal/2026-09-21-m0-phase-03-section-31-qualification.md); full integration not run |
+| [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) | Deliver an exercised unattended acceptance harness, assemble the virtual M1 input bundle, and prove that physical inventory is not consumed as configuration. | m0-p02-handoff | In progress; Section 3.1 passed at clean `8206deb`; full integration passed at clean `2d41f39`; [evidence](../../../50-journal/2026-09-21-m0-phase-03-integration.md); owner handoff decision pending |
 
 Work within each phase follows its task dependencies. The serial order provides
 a conservative baseline, not authorization for parallel agents. Independent
@@ -224,7 +225,7 @@ above and close only after all required environments and dependent portions pass
 | --- | --- | --- | --- | --- | --- |
 | [M0-P01](phase-01-target-toolchain-and-build-baseline.md) | M0-A01, M0-A02 | M0-T01, M0-T02 virtual-input portions | m0-p01-decisions, m0-p01-build; m0-p01-integration; m0-p01-handoff | accepted-scope-entry | Complete; merged-main [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) passed and handoff decision is proceed |
 | [M0-P02](phase-02-boot-image-and-interface-contracts.md) | M0-A03, M0-A04, M0-A05 | M0-T02, M0-T03, M0-T04 | m0-p02-decisions, m0-p02-fixtures; m0-p02-integration; m0-p02-handoff | m0-p01-handoff | Complete for the declared pre-boot phase scope: clean `f85571e` integration passed 24/24 registered cases, independent review found no blocker and user selected proceed on 2026-09-19; [evidence retained](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md) |
-| [M0-P03](phase-03-acceptance-harness-and-input-qualification.md) | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07 | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | m0-p03-decisions, m0-p03-harness, m0-p03-qualify; m0-p03-integration; m0-p03-handoff | m0-p02-handoff | In progress: Section 3.1 passed at clean `8206deb`, including the inventory-free virtual bundle; [evidence](../../../50-journal/2026-09-21-m0-phase-03-section-31-qualification.md); full integration and handoff remain open; `m0-p03-inventory` was superseded before execution by M1 Phase 4 |
+| [M0-P03](phase-03-acceptance-harness-and-input-qualification.md) | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07 | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | m0-p03-decisions, m0-p03-harness, m0-p03-qualify; m0-p03-integration; m0-p03-handoff | m0-p02-handoff | In progress: Section 3.1 passed at clean `8206deb`; the assembled M0-T01–M0-T06 gate passed at clean `2d41f39`; [evidence](../../../50-journal/2026-09-21-m0-phase-03-integration.md); owner handoff remains open; `m0-p03-inventory` was superseded before execution by M1 Phase 4 |
 
 The final phase reruns all M0 acceptance cases for milestone closure.
 Earlier contract, fixture, model or hosted results remain partial where guest

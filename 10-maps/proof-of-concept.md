@@ -41,8 +41,12 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
   exact identities, explicit guest/physical boundary and accepted handoff.
 - [M0 Phase 3 acceptance harness and input qualification](../60-planning/01-proof-of-concept/m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
   records the accepted fixed watchdog, controlled PTY protocol, evidence,
-  process cleanup and virtual/physical boundary; implementation is in progress
-  and the virtual M1 bundle no longer depends on a physical inventory.
+  process cleanup and virtual/physical boundary; its clean assembled gate
+  passes and the owner handoff decision remains open.
+- [M0 Phase 3 integration evidence](../50-journal/2026-09-21-m0-phase-03-integration.md)
+  records the clean 24 inherited, nine harness and seven assembled results,
+  bundle identities, retained tool-runtime failure and physical-inventory
+  exclusion.
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
   provides five detailed M0–M4 definitions and maps the readiness gaps to their
   required artifacts and acceptance cases. The
@@ -50,8 +54,8 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
   at all four work levels and integration tests at the end of every phase;
   18 phase plans now provide that hierarchy. M0 Phase 1 is complete and M0
   Phase 2 completed after its reviewed clean contract integration and the
-  user's proceed decision; later delivery evidence and milestone decisions
-  remain outstanding.
+  user's proceed decision; M0 Phase 3 integration now passes while its owner
+  handoff decision and later milestone evidence remain outstanding.
 - [x86-64 compatibility envelope and test fixtures](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
   controls the generic target, runtime discovery, minimum virtual baseline,
   capability-driven matrix and independent physical fixtures.

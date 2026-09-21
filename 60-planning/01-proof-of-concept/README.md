@@ -134,19 +134,21 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Execute [M0 Phase 3](m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
-under the M0-D03 protocol, deadline, retention, cleanup and virtual/physical
-boundary decisions accepted on 2026-09-20 and clarified on 2026-09-21. The accepted Phase 2
-[clean integration evidence](../../50-journal/2026-09-18-m0-phase-02-contract-integration.md)
-provides its predecessor handoff.
+Review the [M0 Phase 3](m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
+handoff under the M0-D03 protocol, deadline, retention, cleanup and
+virtual/physical boundary decisions accepted on 2026-09-20 and clarified on
+2026-09-21. The clean Phase 3
+[integration evidence](../../50-journal/2026-09-21-m0-phase-03-integration.md)
+now provides the technical basis for the owner decision.
 Phase 1's repository, Zig profile, virtual fixture, freestanding build
 qualification, merged-main integration and handoff review pass. Phase 2 has
 frozen its loader, handoff, image, console/time, syscall, register-state and
 initial-authority choices and completed its executable-contract and hosted
 integration work.
-The controlled harness and inventory-publication development fixtures pass.
-Phase 3 must now assemble and integrate the clean virtual M1 bundle without any
-physical inventory. Later plans are deliberately conditional on their actual
+The controlled harness, clean virtual bundle and assembled M0-T01 through
+M0-T06 gate pass without consuming physical inventory. The user/project owner
+must now select proceed, revise, blocked, or independent review before
+`m0-p03-handoff` and M0 close. Later plans remain conditional on their actual
 inputs and predecessor evidence.
 Before executing each phase, review its decision register and bind accepted
 interface versions; revise affected dependencies and tests together if a

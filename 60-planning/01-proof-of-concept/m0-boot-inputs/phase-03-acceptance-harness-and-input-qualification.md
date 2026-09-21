@@ -26,9 +26,9 @@ enters the virtual M1 bundle.
 
 Required predecessor: [M0 Phase 2](phase-02-boot-image-and-interface-contracts.md), task `m0-p02-handoff`.
 
-Plan state: reviewed for execution. Implementation: Section 3.1 complete at
-clean Kay OS revision `8206deb`; full phase integration and handoff remain not
-run. The implementation repository is the selected public
+Plan state: reviewed for execution. Implementation: Section 3.1 and the full
+integration task passed at clean Kay OS revisions `8206deb` and `2d41f39`;
+the owner handoff decision remains pending. The implementation repository is the selected public
 [Kay OS repository](https://pushin.eu/pcharbon70/kay-os). Codex is the Section
 3.1 implementation role, the user/project owner is the decision and acceptance
 reviewer. A later non-identifying lab operator role belongs to M1 Phase 4.
@@ -91,8 +91,8 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 | m0-p03-harness | kay-os | Codex implementer; independent final reviewer pending | m0-p03-decisions | M0-A01, M0-A06; phase cases below | Driver and nine controlled cases passed at clean `8206deb`; [Section 3.1 evidence](../../../50-journal/2026-09-21-m0-phase-03-section-31-qualification.md) |
 | m0-p03-inventory | atom-os-research | Codex implementer; user/project owner scope reviewer | m0-p03-decisions | M0-A07, M0-T06 | Superseded before collection: physical observation moved to `m1-p04-inventory`; M0 non-consumption boundary recorded |
 | m0-p03-qualify | kay-os | Codex implementer; independent final reviewer pending | m0-p03-harness, m0-p03-inventory | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; phase cases below | Clean `8206deb` bundle assembled without physical inventory; [Section 3.1 evidence](../../../50-journal/2026-09-21-m0-phase-03-section-31-qualification.md) |
-| m0-p03-integration | kay-os | Unassigned test reviewer | m0-p03-qualify | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Registered driver, raw positive/negative results; not run |
-| m0-p03-handoff | atom-os-research | Unassigned acceptance reviewer | m0-p03-integration | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Dated evidence and proceed/revise/blocked review; not run |
+| m0-p03-integration | kay-os | Codex implementer/tester; owner review pending | m0-p03-qualify | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Clean `2d41f39` assembled gate passed 24 inherited, nine harness and seven Phase 3 results; [integration evidence](../../../50-journal/2026-09-21-m0-phase-03-integration.md) |
+| m0-p03-handoff | atom-os-research | User/project owner acceptance reviewer | m0-p03-integration | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Dated evidence complete; proceed/revise/blocked/independent-review decision pending |
 
 ## Planned work
 
@@ -184,14 +184,14 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 3.2.1 Task [id: m0-p03-integration] [repo: kay-os] [after: m0-p03-qualify] — Verify the integrated outcome and regressions.
+    - [x] 3.2.1 Task [id: m0-p03-integration] [repo: kay-os] [after: m0-p03-qualify] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for
       missing required virtual observations or watchdog expiry; an unspecified future command cannot close this
       task.
 
-      - [ ] 3.2.1.1 Subtask — Register and run the acceptance path.
+      - [x] 3.2.1.1 Subtask — Register and run the acceptance path.
 
         Record exact setup, command, binary/fixture hashes, case IDs, seeds and numerical
         limits before execution. Execute all M0-T01–M0-T06 on the combined bundle, including
@@ -199,7 +199,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         artifact has actual output, no unresolved pin is accepted, and no
         physical inventory is consumed.
 
-      - [ ] 3.2.1.2 Subtask — Exercise failures and inherited behavior.
+      - [x] 3.2.1.2 Subtask — Exercise failures and inherited behavior.
 
         Repeat invalid handoff/image/authority and harness-death cases with the final pins.
         Verify logs identify the exact failure and that a smoke image or simulated prompt
@@ -211,7 +211,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
       Close M0 only after required decisions and tests pass. Hand the immutable input bundle
       to M1; no compiled-BEAM profile or physical OS boot is claimed.
 
-      - [ ] 3.2.2.1 Subtask — Record reproducible execution evidence.
+      - [x] 3.2.2.1 Subtask — Record reproducible execution evidence.
 
         Create a dated journal record linked to the task/artifact/case IDs, full tested commit
         and dirty state, host/guest or physical configuration, tools, commands, raw logs,
