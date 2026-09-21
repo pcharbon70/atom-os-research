@@ -26,9 +26,9 @@ enters the virtual M1 bundle.
 
 Required predecessor: [M0 Phase 2](phase-02-boot-image-and-interface-contracts.md), task `m0-p02-handoff`.
 
-Plan state: reviewed for execution. Implementation: Section 3.1 and the full
+Plan state: complete and accepted for handoff. Section 3.1 and the full
 integration task passed at clean Kay OS revisions `8206deb` and `2d41f39`;
-the owner handoff decision remains pending. The implementation repository is the selected public
+the user/project owner selected proceed on 2026-09-21. The implementation repository is the selected public
 [Kay OS repository](https://pushin.eu/pcharbon70/kay-os). Codex is the Section
 3.1 implementation role, the user/project owner is the decision and acceptance
 reviewer. A later non-identifying lab operator role belongs to M1 Phase 4.
@@ -92,11 +92,11 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 | m0-p03-inventory | atom-os-research | Codex implementer; user/project owner scope reviewer | m0-p03-decisions | M0-A07, M0-T06 | Superseded before collection: physical observation moved to `m1-p04-inventory`; M0 non-consumption boundary recorded |
 | m0-p03-qualify | kay-os | Codex implementer; independent final reviewer pending | m0-p03-harness, m0-p03-inventory | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; phase cases below | Clean `8206deb` bundle assembled without physical inventory; [Section 3.1 evidence](../../../50-journal/2026-09-21-m0-phase-03-section-31-qualification.md) |
 | m0-p03-integration | kay-os | Codex implementer/tester; owner review pending | m0-p03-qualify | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Clean `2d41f39` assembled gate passed 24 inherited, nine harness and seven Phase 3 results; [integration evidence](../../../50-journal/2026-09-21-m0-phase-03-integration.md) |
-| m0-p03-handoff | atom-os-research | User/project owner acceptance reviewer | m0-p03-integration | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | Dated evidence complete; proceed/revise/blocked/independent-review decision pending |
+| m0-p03-handoff | atom-os-research | User/project owner acceptance reviewer | m0-p03-integration | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07; M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | [Dated evidence](../../../50-journal/2026-09-21-m0-phase-03-integration.md) and owner proceed decision recorded 2026-09-21 |
 
 ## Planned work
 
-- [ ] 3 Phase — Acceptance harness and input qualification.
+- [x] 3 Phase — Acceptance harness and input qualification.
 
   Deliver an exercised unattended acceptance harness, close the virtual M0
   input gate using real build and fixture evidence, and prove that physical
@@ -178,7 +178,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         limits at named revisions. Repeat from a clean environment and leave
         any unavailable required virtual input blocked.
 
-  - [ ] 3.2 Section — Phase 3 Integration Tests.
+  - [x] 3.2 Section — Phase 3 Integration Tests.
 
     Test the assembled outputs and inherited behavior using the exact entry fixture, declared
     case envelope and finite failure policy. These tests control handoff; required failures,
@@ -206,7 +206,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         cannot be labelled a delivered native CLI. Retain actual observations and finite
         watchdog outcomes, not only intended commands.
 
-    - [ ] 3.2.2 Task [id: m0-p03-handoff] [repo: atom-os-research] [after: m0-p03-integration] — Record evidence and decide phase handoff.
+    - [x] 3.2.2 Task [id: m0-p03-handoff] [repo: atom-os-research] [after: m0-p03-integration] — Record evidence and decide phase handoff.
 
       Close M0 only after required decisions and tests pass. Hand the immutable input bundle
       to M1; no compiled-BEAM profile or physical OS boot is claimed.
@@ -219,7 +219,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         versus guest evidence distinct. Index attachments and link the record from this phase
         and milestone.
 
-      - [ ] 3.2.2.2 Subtask — Review closure and update the milestone.
+      - [x] 3.2.2.2 Subtask — Review closure and update the milestone.
 
         An assigned reviewer checks every child and required gate against evidence and records
         proceed, revise or blocked. Preserve unresolved decisions, limits and reopening

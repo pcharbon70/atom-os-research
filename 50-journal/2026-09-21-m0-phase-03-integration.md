@@ -14,9 +14,10 @@ aliases: []
 The clean Phase 3 driver passed all seven registered assembled results after
 rerunning the 24-case Phase 2 gate, its Phase 1 regression, the nine-case host
 harness, clean virtual M1 bundle assembly, and a missing-harness negative
-probe. This closes `m0-p03-integration` at the tested revision. The
-user/project-owner handoff decision remains pending, so Phase 3 and M0 are not
-declared accepted by this record alone.
+probe. This closes `m0-p03-integration` at the tested revision. On 2026-09-21,
+the user/project owner accepted the implementation agent's recommendation to
+**proceed**. That decision closes `m0-p03-handoff`, Phase 3 and M0 against the
+tested feature-branch revision while leaving later merge provenance distinct.
 
 ## Plan and acceptance baseline
 
@@ -76,10 +77,11 @@ result. Its evidence remains separate from the successful clean run.
 ## Review and handoff
 
 The implementation agent reviewed the exact result set, clean revision,
-evidence boundary, hashes and failure history. The technical recommendation is
-**proceed**: `m0-p03-integration` and the evidence-recording subtask are
-complete, while final `m0-p03-handoff` acceptance remains assigned to the
-user/project owner.
+evidence boundary, hashes and failure history and recommended **proceed**. The
+user/project owner selected proceed on 2026-09-21. `m0-p03-integration`, the
+evidence-recording subtask and `m0-p03-handoff` are therefore accepted, and M1
+may consume the immutable virtual input bundle after the two open pull requests
+are merged and their main branches synchronized.
 
 Any change to the selected compiler/firmware/loader inputs, Phase 2 contracts,
 harness protocol or limits, required virtual-input list, clean-tree rule, or
@@ -89,8 +91,6 @@ recorded separately and is not automatically covered by this run.
 
 ## Follow-ups
 
-- Obtain the user/project-owner proceed, revise, blocked, or independent-review
-  decision for `m0-p03-handoff`.
 - After merge, record merge provenance without relabelling this pre-merge run
   as merged-baseline evidence.
 - Enter M1 only after the accepted handoff reproduces the immutable virtual
