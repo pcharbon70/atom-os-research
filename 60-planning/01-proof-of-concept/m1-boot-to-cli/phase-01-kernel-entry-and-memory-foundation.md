@@ -12,8 +12,8 @@ aliases: []
 
 # M1 Phase 1 — Kernel entry and memory foundation
 
-Bring up the real ring-0 kernel and validated boot-memory state on the M0 fixture, with
-bounded diagnostics and no host OS inside the guest.
+Bring up the real ring-0 kernel, validated boot-memory state and bounded runtime
+hardware-discovery report on the M0 baseline, with no host OS inside the guest.
 
 Back to milestone: [M1 definition and plan](README.md).
 
@@ -46,7 +46,7 @@ this plan.
 
 ## Research and acceptance traceability
 
-The governing [milestone definition](README.md) retains the full artifact and acceptance wording. This phase contributes to M1-A01, M1-A06; its case coverage is M1-T06, M1-T07, M1-T08. Partial/model/hosted results do not close a case requiring later guest integration.
+The governing [milestone definition](README.md) retains the full artifact and acceptance wording. This phase contributes to M1-A01, M1-A06; its case coverage is M1-T06, M1-T07, M1-T08 and the discovery portion of M1-T09. Partial/model/hosted results do not close a case requiring later guest integration.
 
 - [target firmware and boot handoff](../../../20-notes/proof-of-concept-requirements/target-firmware-and-boot-handoff.md) — contract and failure-case input for this phase.
 - [privilege entry memory and user return](../../../20-notes/proof-of-concept-requirements/privilege-entry-memory-and-user-return.md) — contract and failure-case input for this phase.
@@ -61,16 +61,17 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 | --- | --- | --- | --- | --- | --- |
 | m1-p01-decisions | atom-os-research | Unassigned; resolve in m1-p01-decisions | m0-p03-handoff | M1-A01; phase cases below | Bind the exact M0 execution contract output and verification; not run |
 | m1-p01-memory | unresolved-implementation | Unassigned; resolve in m1-p01-decisions | m1-p01-decisions | M1-A01, M1-A06; phase cases below | Implement boot parsing and memory reservation output and verification; not run |
-| m1-p01-integration | unresolved-implementation | Unassigned test reviewer | m1-p01-memory | M1-T06, M1-T07, M1-T08 | Registered driver, raw positive/negative results; not run |
-| m1-p01-handoff | atom-os-research | Unassigned acceptance reviewer | m1-p01-integration | M1-A01, M1-A06; M1-T06, M1-T07, M1-T08 | Dated evidence and proceed/revise/blocked review; not run |
+| m1-p01-discovery | unresolved-implementation | Unassigned; resolve in m1-p01-decisions | m1-p01-memory | M1-A01, M1-A06; M1-T09 | Implement bounded CPUID/ACPI/APIC and relevant-resource discovery output and verification; not run |
+| m1-p01-integration | unresolved-implementation | Unassigned test reviewer | m1-p01-discovery | M1-T06, M1-T07, M1-T08, M1-T09 discovery portion | Registered driver, raw positive/negative results; not run |
+| m1-p01-handoff | atom-os-research | Unassigned acceptance reviewer | m1-p01-integration | M1-A01, M1-A06; M1-T06, M1-T07, M1-T08, M1-T09 discovery portion | Dated evidence and proceed/revise/blocked review; not run |
 
 ## Planned work
 
 - [ ] 1 Phase — Kernel entry and memory foundation.
 
-  Bring up the real ring-0 kernel and validated boot-memory state on the M0 fixture, with
-  bounded diagnostics and no host OS inside the guest. Completion requires the assembled phase
-  gate below, not just its component tasks.
+  Bring up the real ring-0 kernel, validated boot-memory state and runtime
+  discovery report on the M0 baseline, with bounded diagnostics and no host OS
+  inside the guest. Completion requires the assembled phase gate below.
 
   - [ ] 1.1 Section — Controlled kernel startup.
 
@@ -113,13 +114,31 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         Feed malformed handoffs and forced initialization failure through a test boot. Confirm
         bounded diagnostics and no continued execution on ambiguous memory.
 
+    - [ ] 1.1.3 Task [id: m1-p01-discovery] [repo: unresolved-implementation] [after: m1-p01-memory] — Discover and report the presented platform.
+
+      Establish the minimum generic x86-64 discovery path without consulting a
+      physical-fixture inventory or hard-coding the QEMU baseline's values.
+
+      - [ ] 1.1.3.1 Subtask — Validate CPU and firmware descriptions.
+
+        Query CPUID, validate the Limine-provided ACPI root, parse only the
+        bounded tables needed for the current APIC/timer/console path, and
+        reject absent or malformed mandatory data with explicit diagnostics.
+
+      - [ ] 1.1.3.2 Subtask — Emit a bounded discovery report.
+
+        Record the discovered CPU feature subset, logical topology, usable and
+        reserved memory summary, ACPI/APIC identities and relevant early
+        console/timer resources. Bound lengths and counts so malformed firmware
+        cannot create unbounded serial output or work.
+
   - [ ] 1.2 Section — Phase 1 Integration Tests.
 
     Test the assembled outputs and inherited behavior using the exact entry fixture, declared
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 1.2.1 Task [id: m1-p01-integration] [repo: unresolved-implementation] [after: m1-p01-memory] — Verify the integrated outcome and regressions.
+    - [ ] 1.2.1 Task [id: m1-p01-integration] [repo: unresolved-implementation] [after: m1-p01-discovery] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for
@@ -131,7 +150,8 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         Record exact setup, command, binary/fixture hashes, case IDs, seeds and numerical
         limits before execution. Boot the actual kernel using M0's driver and correlate serial
         startup markers with debugger state and memory ledgers. Run the startup portions of
-        M1-T06/T07/T08; these are not yet full CLI acceptance.
+        M1-T06/T07/T08 and the discovery portion of M1-T09; these are not yet
+        full CLI or matrix acceptance.
 
       - [ ] 1.2.1.2 Subtask — Exercise failures and inherited behavior.
 

@@ -12,7 +12,7 @@ aliases: []
 
 # Multicore and platform portability
 
-Requirement R17, SMP and second-ISA work after M4. The [T7500 profile](dell-precision-t7500-target-and-minimal-qemu-profile.md) allows an earlier single-CPU physical CLI check after virtual bring-up. Validate concurrency, physical platform behavior and second-ISA portability as separate claims.
+Requirement R17, SMP and second-ISA work after M4. The [x86-64 compatibility profile](x86-64-compatibility-envelope-and-test-fixtures.md) allows earlier single-CPU checks on independently named physical fixtures after virtual bring-up. Validate concurrency, physical platform behavior and second-ISA portability as separate claims.
 
 ## Evidence and architectural differences
 
@@ -48,7 +48,9 @@ Run two CPUs with forced preemption during capability revocation, page unmapping
 
 Use architecture-appropriate memory-model litmus tests alongside executable lifecycle models and guest stress tests. Retain exact compiler, atomic implementation and hardware/emulator configuration.
 
-Repeat the relevant CLI, protection, IPC, GC and recovery corpus on the qualified physical T7500, and later on any selected second ISA. Report which assumptions changed and which tests no longer exercise the same path.
+Repeat the relevant CLI, protection, IPC, GC and recovery corpus on each
+qualified physical fixture, and later on any selected second ISA. Report which
+assumptions changed and which tests no longer exercise the same path.
 
 The next artifact after M4 is the two-CPU stop/shootdown protocol. No SMP correctness, second-ISA port or physical-hardware validation was performed here.
 

@@ -45,7 +45,7 @@ M1 submits help, version and uptime, validates the prompt and parser error cases
 
 M4 separately injects CLI, actor, native-service and whole-runtime failure. Test delayed/duplicate replies, timer cancellation, failed construction, cleanup interruption, fixed-capacity repeated restart and quota failures during fault reporting.
 
-The [T7500-oriented Intel x86-64 fixture](dell-precision-t7500-target-and-minimal-qemu-profile.md) adopts one virtual CPU and 64 MiB RAM for initial tests. Workload sizes remain proposals: 128 actors, one million transient allocations and 1,000 child restarts. Smaller limits are essential for reaching failure paths. Freeze workload seeds and policy values before comparing builds.
+The [minimal Intel-compatible x86-64 baseline](x86-64-compatibility-envelope-and-test-fixtures.md) adopts one virtual CPU and 64 MiB RAM for initial tests. Workload sizes remain proposals: 128 actors, one million transient allocations and 1,000 child restarts. Smaller limits are essential for reaching failure paths. Freeze workload seeds and policy values before comparing builds.
 
 ## Measurement protocol
 

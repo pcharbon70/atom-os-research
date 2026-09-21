@@ -21,7 +21,7 @@ The [xv6 console chapter](../../30-sources/cox-et-al-2026-xv6-risc-v-book.md) de
 [twilco's first-party UART walkthrough](../../30-sources/twilco-2019-risc-v-uart-driver.md) is useful evidence for inspecting a generated DTB and validating startup/linker assumptions. Its initial driver is intentionally incomplete and avoids interrupts. It is not an implementation of the CLI's idle-progress requirement.
 
 These RISC-V examples supply queue/startup reasoning, not the active board's
-UART discovery or register-address contract. The [T7500 profile](dell-precision-t7500-target-and-minimal-qemu-profile.md)
+UART discovery or register-address contract. The [generic x86-64 profile](x86-64-compatibility-envelope-and-test-fixtures.md)
 requires an explicitly configured virtual serial port and separately verified
 physical serial/debug transport. Do not copy a generated DTB address into the
 PC backend.

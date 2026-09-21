@@ -14,16 +14,18 @@ aliases: []
 
 ## Status and provenance
 
-The user has explicitly confirmed the **Dell Precision T7500** as the initial
-physical target and corrected the intervening AMD-processor assumption.
-The [T7500 target and QEMU profile](dell-precision-t7500-target-and-minimal-qemu-profile.md)
+The user identified a **Dell Precision T7500** available in the laboratory and
+corrected the intervening AMD-processor assumption. It is now candidate
+physical fixture **P1**, not the Kay OS platform definition. The
+[x86-64 compatibility envelope](x86-64-compatibility-envelope-and-test-fixtures.md)
 controls implementation planning.
 
-This reference records the selected platform's manufacturer specifications:
+This reference records the candidate fixture family's manufacturer specifications:
 Intel Xeon processors, Intel 5520 chipset and Intel 64/x86-64 architecture.
-Machine selection is settled. Installed CPU models, enabled topology, memory,
-firmware and devices still require inventory; published options are not proof
-of what is fitted to this unit.
+Its use as P1 remains subject to safe access and observation. Installed CPU
+models, enabled topology, memory, firmware and devices still require inventory;
+published options are not proof of what is fitted to this unit or what Kay OS
+may assume on another machine.
 
 ## Physical platform specification
 
@@ -51,7 +53,7 @@ The actual firmware boot modes require inspection. Neither a generic Dell
 firmware-update instruction nor the processor ISA establishes UEFI support
 or its absence on this unit.
 
-## Required installed-unit inventory
+## Physical-fixture observation record
 
 Record exact CPU models and enabled threads, motherboard revision, populated
 DIMMs and memory distribution, firmware revision/mode, PCI vendor/device IDs,
@@ -65,5 +67,5 @@ virtual test remains one CPU and 64 MiB under the active profile.
 
 ## Connections
 
-- [T7500 target and minimum tests](dell-precision-t7500-target-and-minimal-qemu-profile.md) separates ISA, emulator fixture and physical inventory.
+- [x86-64 compatibility envelope and test fixtures](x86-64-compatibility-envelope-and-test-fixtures.md) separates architecture, virtual baselines and physical-fixture evidence.
 - [Target-correction journal](../../50-journal/2026-09-06-t7500-target-correction.md) records the confirmed machine and supersession.

@@ -23,7 +23,7 @@ features as prerequisites or prematurely resolving the wider inquiries.
 The confirmed first delivery boots into a minimal CLI. AtomVM is rejected;
 graphical UI and desktop work are excluded from the proof of concept.
 
-The [T7500 target decision](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+The [generic x86-64 target decision](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
 fixes the initial physical machine and Intel x86-64 architecture. The user's
 AMD-processor assumption has been corrected. Exact installed Xeon models,
 board revision, memory, firmware and device inventory remain open.
@@ -117,7 +117,7 @@ executable: the boot record, operation/lifecycle contract, generated BEAM
 closure, and integrated resource/recovery campaign. Finite OTP calls require
 careful alias/monitor coverage; kernel preemption and same-runtime GC latency
 remain separate obligations. No model or guest experiment was run in that
-session. The corrected T7500 / Intel x86-64 selection narrows M0 but provides no executable
+session. The corrected generic Intel-compatible x86-64 selection narrows M0 but provides no executable
 boot evidence. A qualified physical single-CPU CLI check can follow virtual
 M1 before SMP or second-ISA work. All gates below therefore remain open.
 
@@ -129,19 +129,19 @@ was delivered by that writing pass. The gate state is unchanged.
 
 The subsequent M0–M4 planning pass added 18 draft phases, explicit decision and
 task dependencies, artifact/case mappings, and phase-ending integration tests.
-M1 virtual CLI acceptance and physical T7500 qualification are separate gates.
+M1 virtual CLI acceptance and per-fixture physical qualification are separate gates.
 No implementation or test execution accompanied that decomposition; all gates
 below remain open, and unresolved inputs still block dependent work.
 
 The user later clarified that Kay OS must discover differing machine
 configurations rather than use one installed T7500 as a virtual-development
-prerequisite. The plan therefore moves installed-unit collection to M0 Phase 3:
-it remains mandatory for final M0 and physical claims, while the pinned QEMU
-profile independently permits Phase 1 integration and Phase 2 contract work.
+prerequisite. The 2026-09-21 plan revision therefore moves installed-unit
+collection to M1 Phase 4 immediately before each physical test. It is mandatory
+for that fixture's support claim but does not gate virtual M0 or M1.
 
 | Gate | State |
 | --- | --- |
-| M0: pinned boot inputs | Open; Phase 1 virtual/build inputs passed merged-main validation and handoff review; exact installed-unit inventory, firmware/bootloader handoff, boot image, console/time ABI and complete milestone cases remain open |
+| M0: pinned boot inputs | Open; Phase 1 virtual/build inputs and Phase 2 contracts passed their reviewed gates; the clean virtual bundle and complete milestone cases remain open, with no physical-inventory dependency |
 | M1: first boot into a native user-mode CLI | Open; no interactive Kay OS boot is recorded |
 | M2: protected service nucleus and CLI control | Open |
 | M3: CLI-launched compiled BEAM and tracing GC | Open |

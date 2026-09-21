@@ -39,6 +39,10 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
 - [M0 Phase 2 contract-integration execution](../50-journal/2026-09-18-m0-phase-02-contract-integration.md)
   records the clean 24-case hosted result, independent no-blocker review,
   exact identities, explicit guest/physical boundary and accepted handoff.
+- [M0 Phase 3 acceptance harness and input qualification](../60-planning/01-proof-of-concept/m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
+  records the accepted fixed watchdog, controlled PTY protocol, evidence,
+  process cleanup and virtual/physical boundary; implementation is in progress
+  and the virtual M1 bundle no longer depends on a physical inventory.
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
   provides five detailed M0–M4 definitions and maps the readiness gaps to their
   required artifacts and acceptance cases. The
@@ -48,8 +52,9 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
   Phase 2 completed after its reviewed clean contract integration and the
   user's proceed decision; later delivery evidence and milestone decisions
   remain outstanding.
-- [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
-  controls the first architecture, minimum virtual test and next hardware research.
+- [x86-64 compatibility envelope and test fixtures](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
+  controls the generic target, runtime discovery, minimum virtual baseline,
+  capability-driven matrix and independent physical fixtures.
 - [T7500 target-correction journal](../50-journal/2026-09-06-t7500-target-correction.md)
   records the confirmed Intel platform, archived AMD detour and remaining inventory.
 - [Research readiness](../20-notes/proof-of-concept-research-readiness.md)
@@ -84,10 +89,11 @@ Read the [architecture implementation
 sequence](../20-notes/kernel-hardware-and-architecture-support-layer.md#suggested-implementation-sequence)
 and [bootstrap authority
 contract](../20-notes/minimal-privileged-kernel-components/bootstrap-and-root-authority-handoff.md)
-when implementing the selected T7500 / Intel x86-64 backend. The earlier
+when implementing the selected generic Intel-compatible x86-64 backend. The earlier
 [QEMU RISC-V candidate](../30-sources/qemu-project-2026-risc-v-virt-platform.md)
 is retained as comparative evidence, not the active first target. A qualified
-physical single-CPU CLI check can follow virtual bring-up without waiting for SMP.
+physical single-CPU CLI check on a named fixture can follow virtual bring-up
+without waiting for SMP; the T7500 is only candidate P1.
 
 ### Make compatibility an executable input
 
@@ -149,8 +155,9 @@ and update/root survival as distinct evidence gates.
 
 ## Open questions
 
-- Which installed Xeon SKUs, exact T7500 build and firmware must Phase 3 qualify
-  against M0's now-frozen loader and console/time contracts?
+- Which physical fixture should M1 Phase 4 qualify first, and which installed
+  CPU, firmware, board and device facts must its external and Kay OS reports
+  reconcile against the declared compatibility envelope?
 - Does the first native CLI pass interactive and malformed-input tests?
 - Which minimum BEAM profile supports the first CLI-launched workload?
 - Can the selected GC, mailbox, and scheduler design meet measured resource

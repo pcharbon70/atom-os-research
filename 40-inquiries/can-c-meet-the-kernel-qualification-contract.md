@@ -36,7 +36,7 @@ unapproved host-OS services?
 2. Qualify memory helpers, aggregate/callback boundaries, compiler defaults,
    repeatable input closure and failure diagnostics.
 3. Demonstrate real boot, exception/IRQ handling and user return under the
-   existing minimum guest profile, then separately on the inventoried T7500.
+   existing minimum guest profile, then separately on each qualified physical fixture.
 4. Test resource/lifetime failures and preserve compiled-BEAM/GC requirements.
    Investigate a concrete candidate library only when it supplies required work.
 

@@ -87,7 +87,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 | --- | --- | --- | --- | --- | --- |
 | m0-p02-decisions | atom-os-research | Codex implementation agent; user decision owner | m0-p01-handoff | M0-A03, M0-A04, M0-A05; phase cases below | Accepted selections above and Kay OS machine-readable record; complete 2026-09-18 |
 | m0-p02-fixtures | kay-os | Codex implementation agent | m0-p02-decisions | M0-A03, M0-A04, M0-A05; phase cases below | Complete at clean implementation commit `f85571e`; independent follow-up review found no blocker; [evidence](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md) |
-| m0-p02-integration | kay-os | Codex execution agent; independent review agent | m0-p02-fixtures | M0-T02, M0-T03, M0-T04 | Complete for declared pre-boot scope: 24/24 registered cases passed clean at `f85571e`; guest/ring-3/T7500 explicitly not tested; [evidence](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md) |
+| m0-p02-integration | kay-os | Codex execution agent; independent review agent | m0-p02-fixtures | M0-T02, M0-T03, M0-T04 | Complete for declared pre-boot scope: 24/24 registered cases passed clean at `f85571e`; guest/ring-3/physical fixtures explicitly not tested; [evidence](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md) |
 | m0-p02-handoff | atom-os-research | User acceptance reviewer | m0-p02-integration | M0-A03, M0-A04, M0-A05; M0-T02, M0-T03, M0-T04 | Complete: evidence retained and user/project owner selected proceed on 2026-09-19 |
 
 ## Planned work

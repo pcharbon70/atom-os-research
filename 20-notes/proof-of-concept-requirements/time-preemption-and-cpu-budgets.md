@@ -20,7 +20,7 @@ Requirement R05, M1–M4. Define who receives processor time, who pays for kerne
 
 [Blackham and colleagues](../../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md) found nonpreemptible paths requiring redesign even in a small protected kernel. Their target-specific timing analysis cannot supply a bound for this implementation.
 
-The [T7500 / Intel x86-64 target](dell-precision-t7500-target-and-minimal-qemu-profile.md) replaces the SBI TIME dependency with a qualified x86 clock and interrupt-timer path. Investigate a local-APIC timer and an available calibration reference; TSC invariance, cross-CPU synchronization, frequency discovery and TSC-deadline support must not be assumed. Clock reading and deadline delivery are separate contracts. Exact sources and interrupt routing remain M0–M1 decisions; neither architecture documentation nor QEMU timing supplies Kay's scheduling policy or physical latency bounds.
+The [generic Intel-compatible x86-64 target](x86-64-compatibility-envelope-and-test-fixtures.md) replaces the SBI TIME dependency with a discovered and qualified x86 clock and interrupt-timer path. Investigate a local-APIC timer and an available calibration reference; TSC invariance, cross-CPU synchronization, frequency discovery and TSC-deadline support must not be assumed. Clock reading and deadline delivery are separate contracts. Exact sources and interrupt routing remain M0–M1 decisions; neither architecture documentation nor QEMU timing supplies Kay's scheduling policy or physical latency bounds.
 
 ## Proposed time and scheduling contract
 

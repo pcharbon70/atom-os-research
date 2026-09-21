@@ -17,7 +17,7 @@ aliases: []
 
 After this session, the user confirmed the Dell Precision T7500 and stated
 that the AMD assumption was wrong. The [target-correction journal](2026-09-06-t7500-target-correction.md)
-and [current T7500 specification](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+and [current T7500 specification](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
 supersede the target choice below. This session's original findings, failed
 retrievals and source-introduction manifest remain historical evidence. Its
 linked JSON record has since been updated; the archived profile retains the

@@ -80,16 +80,17 @@ does not change the selected Zig language.
 
 The proof of concept is a minimal bootable OS with a CLI as its first delivery.
 AtomVM is rejected; graphical UI and desktop work are outside this scope.
-The initial physical target is the Dell Precision T7500 with Intel Xeon
-x86-64 processors; its installed components still need inventory.
+The initial platform target is a generic Intel-compatible x86-64 PC envelope.
+The Dell Precision T7500 is only candidate physical fixture P1; its installed
+components still need observation before that separate qualification run.
 
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md) —
   provides detailed M0–M4 milestone definitions and coverage-to-artifact
   traceability, with 18 draft phases and described task dependencies;
   implementation evidence gates remain open.
-- [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) —
-  adopts Nehalem-class, one-CPU, 64 MiB serial bring-up for the selected machine,
-  and prioritizes remaining boot, entry, paging and timer work.
+- [x86-64 compatibility envelope and test fixtures](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md) —
+  adopts Nehalem-class, one-CPU, 64 MiB serial bring-up as the smallest baseline,
+  requires runtime discovery, and separates virtual and physical fixtures.
 
 - [Proof-of-concept research readiness](../20-notes/proof-of-concept-research-readiness.md) —
   assesses why a bounded prototype can start now, identifies the remaining

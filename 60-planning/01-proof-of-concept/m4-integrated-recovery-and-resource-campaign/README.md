@@ -53,7 +53,7 @@ a plan neither closes a delivery gate nor authorizes implementation or publicati
 - [Measurement study](../../../20-notes/proof-of-concept-requirements/models-fault-injection-and-measurement.md) — R13 model limits, campaign cases and reproducible measurements.
 - [Lifecycle](../../../20-notes/proof-of-concept-requirements/domain-lifecycle-and-safe-reclamation.md) and [independent recovery](../../../20-notes/proof-of-concept-requirements/supervision-and-independent-recovery.md) — R07/R12 quiescence, generations, resource reserves and restart topology.
 - [Accounting](../../../20-notes/proof-of-concept-requirements/resource-accounting-and-mailbox-overload.md), [time](../../../20-notes/proof-of-concept-requirements/time-preemption-and-cpu-budgets.md) and [tracing GC](../../../20-notes/proof-of-concept-requirements/private-heaps-and-tracing-garbage-collection.md) — R05/R10/R11 load, ownership and responsiveness obligations.
-- [T7500 target profile](../../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) and [M0](../m0-boot-inputs/README.md) — adopted Intel x86-64 constraints and still-required exact executable fixture.
+- [x86-64 compatibility envelope](../../../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md) and [M0](../m0-boot-inputs/README.md) — adopted generic backend constraints and exact executable virtual baseline.
 
 These are existing research inputs, not newly executed experiments. Prior
 milestone evidence must be linked at entry once it exists.
@@ -206,7 +206,7 @@ hashes, host/acceleration configuration, commands and limitations in dated
 [assets](../../../assets/README.md) or the selected implementation repository.
 Label maxima “maximum observed”; QEMU regression timing is not physical WCET.
 
-The T7500's installed inventory and physical qualification remain distinct from
+Every physical fixture's inventory and qualification remain distinct from
 virtual results. Physical single-CPU CLI qualification can occur after M1;
 M4 neither requires SMP nor silently cancels a required physical test when the
 machine is unavailable. Any physical claim needs its own qualified fixture and

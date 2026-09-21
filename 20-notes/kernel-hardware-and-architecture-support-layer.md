@@ -45,14 +45,14 @@ usable interface, latency, portability, and failure behavior.
 
 ## Active implementation target
 
-The [T7500 / Intel x86-64 profile](proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
-now selects the first machine, ISA and minimal virtual fixture. Prioritize its boot,
-entry, paging, serial and timer obligations before SMP, DMA or a second ISA.
+The [generic Intel-compatible x86-64 profile](proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
+selects the first ISA/backend envelope and minimal virtual fixture. Prioritize
+runtime discovery, boot, entry, paging, serial and timer obligations before
+SMP, DMA or a second ISA.
 This synthesis retains cross-architecture comparisons and broader acceptance
-criteria; those do not all gate the first CLI. Intel SDM and processor-family
-references guide this backend, with features qualified for the installed
-Xeons and chipset. Exact installed-unit inventory remains open; the former
-AMD-manual dependency is removed.
+criteria; those do not all gate the first CLI. Intel SDM references guide this
+backend, while processor-family and chipset references qualify individual
+physical fixtures. The former AMD-manual dependency is removed.
 
 ## Question and operational standard
 
@@ -2048,10 +2048,11 @@ architecture layer does not decide which module version is current.
 ## Suggested implementation sequence
 
 This is the broader hardware-contract program, not the narrower PoC gate
-order. Its first target is the Intel x86-64 T7500 under the [active profile](proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md).
-A single-CPU physical CLI check can follow virtual bring-up before SMP or a
-second ISA. The machine model is selected; its board revision, installed
-components and exact firmware still need qualification.
+order. Its first target is the generic Intel-compatible x86-64 envelope under
+the [active profile](proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md).
+A single-CPU physical CLI check on candidate fixture P1 can follow virtual
+bring-up before SMP or a second ISA. Every physical fixture retains its own
+board, installed-component and firmware qualification record.
 
 ### Phase 0: contract and model
 

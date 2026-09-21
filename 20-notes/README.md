@@ -55,7 +55,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   layer. These are full-system proposals with unexecuted falsifiers.
 - [Proof-of-concept requirements](proof-of-concept-requirements/README.md) —
   contains nineteen requirement studies, the Zig and C kernel-language feasibility
-  studies and comparison, and the T7500 target and manufacturer reference, covering CLI boot, bounded kernel
+  studies and comparison, the generic x86-64 envelope, and a T7500 physical-fixture reference, covering CLI boot, bounded kernel
   contracts, BEAM/GC, integrated recovery and all six later capability gates,
   with evidence, alternatives, failure cases and next experiments.
 - [Visual computing synthesis components](visual-computing-synthesis-components/README.md) —

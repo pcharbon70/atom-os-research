@@ -11,7 +11,7 @@ aliases: ["C kernel feasibility assessment"]
 
 ## Conclusion and decision boundary
 
-C is technically feasible for the Dell Precision T7500 kernel. No fundamental
+C is technically feasible for the generic Intel-compatible x86-64 Kay kernel. No fundamental
 language/toolchain facility gap was identified for our minimum Intel x86-64
 boot, protection, interrupt, scheduling, memory and CLI substrate. The practical
 implementation is **C plus a documented compiler-extension profile, audited
@@ -51,12 +51,12 @@ The [journal](../../50-journal/2026-09-08-c-kernel-feasibility-deep-dive.md)
 contains the claim ledger, search scope, exact new/reused source manifest and
 reproduction limits.
 
-The [T7500 target profile](dell-precision-t7500-target-and-minimal-qemu-profile.md)
-remains authoritative: Intel Xeon/Intel 64, initially the minimal Nehalem-v1
-QEMU fixture with one CPU, 64 MiB and serial I/O. Compiler `nehalem` selection
+The [generic x86-64 target profile](x86-64-compatibility-envelope-and-test-fixtures.md)
+remains authoritative: Intel-compatible x86-64, initially the minimal
+Nehalem-v1 QEMU fixture with one CPU, 64 MiB and serial I/O. Compiler `nehalem` selection
 and QEMU's named CPU model are different interfaces that must be reconciled.
-The installed Xeon SKUs, firmware and devices are unverified. q35 is a test
-platform, not a faithful T7500 motherboard replica. No AMD-specific feature,
+Physical-fixture CPUs, firmware and devices require separate evidence. q35 is a
+test platform, not a faithful motherboard replica. No AMD-specific feature,
 AtomVM path or graphical UI enters this assessment.
 
 ## What C provides—and what the kernel must provide
@@ -297,7 +297,8 @@ phased plan or newly completed work.
    data/BSS and stack alignment, then real exception/IRQ frames, register
    preservation, safe user return, timer progress and the native user-mode CLI.
    Include wrong/error-code frames, invalid user input and fault diagnostics.
-   The physical T7500 requires a separately recorded inventory and boot check.
+   Every physical fixture requires its own external observation, Kay OS
+   discovery comparison and boot check; the T7500 is only candidate P1.
 3. **M2: test authority and lifetime.** Exercise bounds, stale handles, allocator
    exhaustion, cancellation, IRQ reentrancy and teardown/reuse. C does not
    supply capability enforcement or protect ring 0 from a bad pointer.
