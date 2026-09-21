@@ -58,18 +58,25 @@ qualification on 2026-09-17. This does not qualify later kernel interfaces,
 boot transitions, interrupt state or user-mode ABI. The language decision
 neither selects a managed runtime nor supplies its required tracing GC.
 
-The initial physical target is the Dell Precision T7500 with Intel Xeon
-processors and Intel 64/x86-64. The user explicitly corrected the AMD-processor
-assumption. Follow the target profile in
-`20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md`.
+The initial platform target is a documented generic Intel-compatible x86-64 PC
+envelope, not a particular motherboard. Follow
+`20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md`.
 Start QEMU tests with the Nehalem-v1 fixture, one CPU, 64 MiB and serial I/O;
-add SMP, socket/SMT topology and NUMA only when their tests require them.
-Two multicore packages are user-reported; exact Xeon SKUs, enabled threads,
-RAM, board revision, firmware and device inventory remain unverified.
-Use Intel architecture and processor-family references for this target.
-“AMD64” remains valid in shared ISA/ABI names, but AMD-specific processor
-research and the former Opteron fixture do not gate this PoC. RISC-V/OpenSBI
-remains comparative and historical first-target research.
+add pinned CPU, chipset, memory, firmware and topology variations only when
+their tests exercise implemented discovery or fallback behavior. Kay OS must
+discover CPU features, memory, ACPI/APIC data and relevant devices at boot;
+never compile a laboratory inventory into the kernel.
+
+The Dell Precision T7500 is only the first available physical-fixture
+candidate (P1). Its two multicore packages are user-reported; exact Xeon SKUs,
+enabled threads, RAM, board revision, firmware and devices remain unverified.
+Collect its external inventory immediately before physical qualification in M1
+Phase 4, compare it with Kay OS's own discovery report, and keep that evidence
+separate from QEMU results. Additional machines become independent P2/P3
+fixtures without redefining the target. “AMD64” remains valid in shared
+ISA/ABI names, but AMD-specific processor research and the former Opteron
+fixture do not gate this PoC. RISC-V/OpenSBI remains comparative and historical
+first-target research.
 
 Keep research and implementation work oriented toward carrying principles such
 as lightweight isolated processes, message passing, supervision, fault

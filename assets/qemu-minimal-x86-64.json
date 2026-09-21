@@ -1,20 +1,20 @@
 {
   "format_version": 1,
-  "profile_id": "t7500-poc-minimal-x86-64",
+  "profile_id": "kay-os-poc-minimal-x86-64",
   "status": "selected-virtual-inputs-identity-qualified-boot-unqualified",
-  "specification": "../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md",
-  "physical_target": {
-    "model": "Dell Precision T7500",
-    "architecture": "x86-64 (Intel 64)",
-    "processor_models": null,
-    "cores_per_package": null,
-    "threads_per_core": null,
-    "installed_memory_mib": null,
-    "numa_layout": null,
-    "bios_version": null,
-    "processor_vendor": "Intel",
-    "processor_packages_user_reported": 2,
-    "processor_packages_verified": null
+  "specification": "../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md",
+  "target_envelope": {
+    "architecture": "generic Intel-compatible x86-64 PC",
+    "runtime_discovery_required": true,
+    "physical_inventory_is_configuration": false
+  },
+  "candidate_physical_fixtures": {
+    "P1-candidate": {
+      "model": "Dell Precision T7500",
+      "qualification_status": "not-run",
+      "processor_packages_user_reported": 2,
+      "processor_packages_verified": null
+    }
   },
   "qemu": {
     "executable": "qemu-system-x86_64",
@@ -82,9 +82,9 @@
     "Pass versioned_machine with -machine and reject drift; do not silently use the q35 alias for acceptance runs.",
     "Verify the recorded firmware path and hash before passing it with -bios.",
     "Build and hash boot.image_path; attach with the recorded read-only drive options.",
-    "Keep actual hardware inventory distinct from emulator settings.",
+    "Never consume physical-fixture inventory as emulator or kernel configuration.",
     "Use a serial harness with a finite watchdog and explicit assertions; QEMU exit is not test success.",
-    "Qualify the CPU feature contract against the installed processors before physical acceptance."
+    "Have Kay OS discover CPU and platform features at boot; compare its report with external observations only during per-fixture physical qualification."
   ],
   "excluded": [
     "network-devices",

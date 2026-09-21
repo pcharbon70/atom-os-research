@@ -35,6 +35,16 @@ provenance record.
 
 ### Documents
 
+- [2026-09-21 M0 phase 03 integration](2026-09-21-m0-phase-03-integration.md) —
+  records the clean `2d41f39` assembled gate, 24 inherited, nine harness and
+  seven Phase 3 passing results, the retained `xorriso` runtime failure,
+  inventory-free M1 bundle identities and the owner's proceed decision.
+
+- [2026-09-21 M0 phase 03 section 3.1 qualification](2026-09-21-m0-phase-03-section-31-qualification.md) —
+  records the clean `8206deb` nine-case harness run, controlled publication
+  boundary checks, virtual M1 input-bundle identities, physical-inventory
+  exclusion and the still-open full phase integration and handoff.
+
 - [2026-09-18 M0 phase 02 contract integration](2026-09-18-m0-phase-02-contract-integration.md) —
   records the clean `f85571e` 24-case hosted contract/image run, exact tool and
   artifact identities, independent no-blocker follow-up review, explicit

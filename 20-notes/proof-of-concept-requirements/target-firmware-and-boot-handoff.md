@@ -14,22 +14,23 @@ aliases: []
 
 Requirement R01, M0–M1. Establish a reproducible path from reset to an
 Kay-owned Intel x86-64 ring-0 kernel and then a ring-3 CLI. The
-[active lab/QEMU profile](dell-precision-t7500-target-and-minimal-qemu-profile.md)
-selects the Dell Precision T7500 and supersedes the earlier RV64/OpenSBI
-proposal and AMD-processor assumption. Begin with one virtual CPU, 64 MiB
-and serial I/O; installed-unit inventory and binary pins remain unconfirmed.
+[active architecture/fixture profile](x86-64-compatibility-envelope-and-test-fixtures.md)
+selects a generic Intel-compatible x86-64 envelope and supersedes the earlier
+RV64/OpenSBI proposal and AMD-processor assumption. Begin with one virtual CPU,
+64 MiB and serial I/O; runtime discovery and physical-fixture evidence remain
+separate from binary pins.
 
 ## Evidence and alternatives
 
 [QEMU's PC configuration study](../../30-sources/qemu-project-2026-x86-pc-test-configuration.md)
 supports an explicit machine, CPU, firmware and device fixture. It does not
-establish fidelity to the selected T7500's complete chipset or firmware.
+establish fidelity to any physical machine's complete chipset or firmware.
 
 The [Intel system-programming study](../../30-sources/intel-2026-system-programming-documentation.md)
-is the primary architecture reference for the selected Xeon platform.
+is the primary architecture reference for the first Intel-compatible backend.
 It identifies long-mode, descriptor, interrupt, translation and context
 concerns. Qualify exact SDM sequences and CPU-family errata before coding;
-modern documented features are not automatically available on this T7500.
+modern documented features are not automatically available on every fixture.
 The former AMD-manual audit is no longer a first-target dependency.
 
 The [ACPI study](../../30-sources/uefi-forum-2025-acpi-6-6.md) supplies the
@@ -41,7 +42,7 @@ The earlier [QEMU RISC-V](../../30-sources/qemu-project-2026-risc-v-virt-platfor
 [OpenSBI](../../30-sources/opensbi-project-2026-firmware-handoff.md) and
 [Devicetree](../../30-sources/devicetree-org-2023-devicetree-specification-0-4.md)
 work remains comparative research. SBI, hart IDs, Sv39 and a mandatory DTB are
-not the T7500 first-boot contract.
+not the generic x86-64 first-boot contract.
 
 ## Proposed boot contract
 

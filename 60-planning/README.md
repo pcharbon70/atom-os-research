@@ -131,7 +131,7 @@ outputs and rejection of contradictory inputs; it does not need to pretend
 the OS already boots. A code phase must test the relevant components together;
 unit tests and archive validation alone are not OS integration evidence.
 Keep virtual, hosted, and physical results distinct. Passing QEMU checks does
-not qualify the T7500 motherboard or establish physical timing guarantees.
+not qualify a physical motherboard or establish physical timing guarantees.
 
 ## Status, evidence, and review
 

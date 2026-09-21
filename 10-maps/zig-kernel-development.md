@@ -29,7 +29,7 @@ roadmap or an endorsement of a pre-existing OS foundation.
 Read the [versioned language reference](../30-sources/zig-project-2026-language-reference-0-16.md),
 [release changes](../30-sources/zig-project-2026-release-0-16.md) and
 [tagged build/runtime definitions](../30-sources/zig-project-2026-freestanding-source-profile.md)
-together. Then compare the selected [T7500 target](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+together. Then compare the selected [x86-64 compatibility envelope](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
 with the actual emitted instructions and native-state contract.
 
 ### Reuse C without importing another OS

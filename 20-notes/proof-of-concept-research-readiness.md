@@ -48,7 +48,11 @@ not guarantee same-runtime latency; and safe recovery needs funded cleanup and
 quiescence before reuse. No target pin, ABI, compiled corpus or experiment was
 produced, so none of M0–M4 is closed by the additional reading.
 
-The corrected [T7500 target](proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) fixes the initial physical machine and Intel x86-64 architecture. It supersedes the AMD-processor assumption without turning any prior research session into a successful boot or complete M0.
+The corrected [generic x86-64 envelope](proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
+fixes the initial architecture and smallest virtual baseline without defining
+the OS around a laboratory machine. The T7500 is candidate physical fixture P1.
+This supersedes the AMD-processor assumption without turning any prior research
+session into a successful boot or complete M0.
 
 On 2026-09-08 the user selected **Zig as the kernel language**. The
 [language feasibility study](proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md)
@@ -160,19 +164,18 @@ The hardware inquiry intentionally excluded choosing a board or firmware stack.
 That was a reasonable research boundary, but it leaves a real implementation
 decision. Freeze one target and document its complete execution environment.
 
-The adopted first physical target is **Dell Precision T7500**, using
-**Intel Xeon / Intel 64 (x86-64)**. The [active target and QEMU profile](proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
-replaces the provisional RV64/OpenSBI route and the corrected AMD-processor
-detour. Start with Nehalem-v1, one virtual CPU, 64 MiB, an explicit PC/firmware
-fixture and serial console; the Kay kernel runs at ring 0 and services at
-ring 3.
+The adopted initial target is a **generic Intel-compatible x86-64 PC
+envelope**. The [active target and fixture profile](proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
+replaces the provisional RV64/OpenSBI route and corrected AMD-processor detour.
+Start with Nehalem-v1, one virtual CPU, 64 MiB, an explicit PC/firmware fixture
+and serial console; the Kay kernel runs at ring 0 and services at ring 3.
 
-This is a selected machine and architecture, not a binary pin or demonstrated
-boot. Exact QEMU/firmware/bootloader/toolchain identities and the installed
-T7500's Xeon SKUs, enabled topology, memory and devices remain M0 inputs.
-The reported two multicore packages do not require SMP for the first test.
-Intel manuals and the actual processor-family errata now guide the backend;
-AMD-specific research is no longer an implementation prerequisite.
+This is an architecture and compatibility contract, not a demonstrated boot or
+claim about every x86-64 PC. Kay OS must discover CPU, memory, ACPI/APIC and
+relevant device properties during boot. Exact QEMU/firmware/bootloader/toolchain
+identities remain M0 inputs. Physical-machine observations move to M1's
+physical-fixture qualification and never become kernel configuration. The
+reported two T7500 packages do not require SMP for the first physical test.
 
 The first target/build record must specify:
 
@@ -430,8 +433,8 @@ reserves, and workload seeds before running the campaign.
 
 | Milestone | Exit evidence |
 | --- | --- |
-| M0: boot inputs | Adopted T7500 / Intel x86-64 target plus a still-required pinned build/target/firmware record, static CLI image format, minimal console/time ABI, memory limits, and automated boot/command checks; full runtime compatibility need not be complete |
-| M1: boot to CLI | The real Kay kernel launches a native user-mode CLI; `help`, `version`, and `uptime` work; bounded serial input, invalid-command handling, and timer progress pass the first-boot criteria |
+| M0: boot inputs | Adopted generic Intel-compatible x86-64 envelope plus pinned virtual build/firmware inputs, static CLI image format, minimal console/time ABI, memory limits, and automated boot/command checks; no physical inventory is consumed |
+| M1: boot to CLI | The real Kay kernel discovers its presented CPU/memory/ACPI/APIC environment, launches a native user-mode CLI, and passes `help`, `version`, `uptime`, bounded serial, timer and virtual-matrix criteria |
 | M2: protected service nucleus | Capabilities, domains, memory/CPU accounts, bounded transport, fault delivery, and independent recovery work; CLI inspection/control commands report real state; selected lifecycle models and stale-handle tests pass |
 | M3: project BEAM runtime | The CLI launches compiler-produced BEAM modules in the unprivileged project runtime; the declared corpus matches pinned OTP; automatic local tracing GC reclaims long-lived-process garbage; all guest substrate calls are inventoried |
 | M4: integrated recovery and resource campaign | CLI, actor, native-service, and runtime-domain failure have distinct contained outcomes; predeclared limits hold; repeated restart reclaims clean resources; old generations cannot affect replacements |
@@ -506,7 +509,7 @@ record, linked beside each finding. Direct primary-source inputs were:
 - [OTP 29.0.6 runtime documentation](../30-sources/erlang-otp-team-2026-otp-29-0-6-managed-runtime-documentation.md)
 - [Pinned OTP 29.0.5 source audit](../30-sources/erlang-otp-team-2026-otp-29-source-tree.md)
 
-The RISC-V sources below supported the original candidate evaluation, not the adopted T7500 / Intel x86-64 backend:
+The RISC-V sources below supported the original candidate evaluation, not the adopted generic Intel-compatible x86-64 backend:
 
 - [RISC-V privileged architecture](../30-sources/risc-v-international-2026-privileged-architecture.md)
 - [RISC-V SBI](../30-sources/risc-v-international-2025-supervisor-binary-interface.md)

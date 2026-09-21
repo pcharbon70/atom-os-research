@@ -38,10 +38,12 @@ profile's bounded [freestanding build qualification](50-journal/2026-09-17-m0-ph
 passes, without closing boot, physical, phase-integration, or milestone
 acceptance gates.
 
-The initial physical target is the **Dell Precision T7500**, using
-**Intel Xeon / Intel 64 (x86-64)**. The [active target profile](20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
-defines a Nehalem-class, one-CPU, 64 MiB serial QEMU fixture and the remaining
-installed-unit inventory. The AMD-processor assumption has been corrected;
+The initial platform target is a documented **generic Intel-compatible x86-64
+PC envelope**. The [active target profile](20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
+defines a Nehalem-class, one-CPU, 64 MiB serial QEMU baseline, runtime hardware
+discovery expectations, a capability-driven virtual matrix, and independent
+physical fixtures. The Dell Precision T7500 is candidate fixture P1 rather
+than the OS target. The AMD-processor assumption has been corrected;
 its former profile is archived. RISC-V/OpenSBI remains comparative research,
 not the first implementation path.
 

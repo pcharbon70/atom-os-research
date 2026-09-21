@@ -47,4 +47,4 @@ A q35 virtual platform is not a Dell T7500 / Intel 5520 motherboard replica. Doc
 
 ## Derived work
 
-- [Dell Precision T7500 target and minimal QEMU profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+- [x86-64 compatibility envelope and test fixtures](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)

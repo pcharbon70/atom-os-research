@@ -10,7 +10,7 @@ aliases: []
 
 ## Scope
 
-Compare Zig and C against the same Intel T7500 kernel contract. Separate the
+Compare Zig and C against the same generic Intel-compatible x86-64 kernel contract. Separate the
 operative language decision, engineering recommendation and executable
 qualification. This is not a new language-comparison implementation milestone.
 

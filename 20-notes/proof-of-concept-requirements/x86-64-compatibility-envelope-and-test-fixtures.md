@@ -1,5 +1,5 @@
 ---
-title: "Dell Precision T7500 target and minimal QEMU profile"
+title: "x86-64 compatibility envelope and test fixtures"
 kind: note
 created: "2026-09-06"
 maturity: developing
@@ -12,31 +12,36 @@ tags:
   - x86-64
 aliases:
   - "Active architecture target"
+  - "Generic x86-64 PC target"
 ---
 
-# Dell Precision T7500 target and minimal QEMU profile
+# x86-64 compatibility envelope and test fixtures
 
 ## Decision and scope
 
-The initial physical target is specifically the **Dell Precision T7500**,
-using **Intel Xeon processors and Intel 64/x86-64**. The user explicitly
-corrected the intervening AMD-processor assumption. This decision supersedes
-both that [archived detour](../../90-archive/amd64-lab-target-and-minimal-qemu-profile.md)
-and the earlier provisional RV64/QEMU virt/Sv39/OpenSBI path.
+Kay OS initially targets a documented **generic Intel-compatible x86-64 PC
+envelope**, not a particular motherboard or workstation. A machine is a
+physical qualification fixture only after its observed configuration and Kay
+OS result are recorded. The Dell Precision T7500 in the laboratory is the
+first available candidate, designated **physical fixture P1**, but it neither
+defines the architecture nor blocks virtual implementation.
 
-The [platform reference](dell-precision-t7500-platform-reference.md) records
-Dell's Xeon 5500-era and later 5600-era options, Intel 5520 chipset, memory,
-serial and device capabilities. The exact installed Xeon models are unknown;
-do not infer cores, enabled Hyper-Threading or feature bits from the T7500
-name alone. Two multicore processor packages are user-reported, not yet
-verified by a physical inventory.
+This scope preserves the user's correction from an AMD processor assumption to
+the available Intel/x86-64 laboratory hardware while superseding the later,
+overly narrow interpretation that the T7500 itself was the OS target. The
+[archived AMD detour](../../90-archive/amd64-lab-target-and-minimal-qemu-profile.md)
+and earlier provisional RV64/QEMU virt/Sv39/OpenSBI path remain historical.
 
-**Confirmed:** T7500 model, Intel processor platform, x86-64 architecture and
-CLI-first scope. **Still unverified:** CPU SKUs/steppings and enabled topology,
-motherboard revision, BIOS version/mode, installed RAM/NUMA, serial settings
-and device IDs. The target is no longer ambiguous; only its installed
-configuration remains to be recorded. On 2026-09-17 the user fixed the initial
-QEMU memory constraint at 64 MiB, superseding the earlier 128 MiB proposal.
+The [T7500 platform reference](dell-precision-t7500-platform-reference.md)
+records family capabilities useful when P1 is eventually qualified. Published
+family options are not installed-unit facts and are not kernel configuration.
+Other x86-64 machines may become P2, P3, and later fixtures without changing
+the architecture contract.
+
+On 2026-09-17 the user fixed the initial QEMU baseline at 64 MiB, superseding
+the earlier 128 MiB proposal. That number constrains the smallest development
+fixture; it is not a maximum supported physical memory size or a statement
+about the T7500.
 
 The first delivery remains a minimal bootable OS with a native ring-3 CLI and
 an Kay-owned ring-0 kernel. The completed M0–M4 proof still requires the
@@ -46,8 +51,32 @@ do not enter the minimum boot test.
 
 “AMD64” in an ELF machine identifier or the System V AMD64 ABI is a shared
 architecture/ABI name, not a requirement for an AMD processor. Those valid
-technical references remain; AMD-specific MSRs, SVM/SEV, AMD IOMMU and AMD
-processor-family research do not gate this Intel target.
+technical references remain. The first backend and test fixtures use
+Intel-compatible behavior; AMD-specific MSRs, SVM/SEV, AMD IOMMU and AMD
+processor-family work are outside the initial envelope unless a future fixture
+and capability require them.
+
+## Initial compatibility envelope
+
+Kay OS must discover machine properties during boot instead of compiling a
+fixture inventory into the kernel. The initial envelope is deliberately
+bounded and grows only through explicit capability and test evidence:
+
+- x86-64 long mode and the declared compiler instruction subset;
+- Limine's selected x86-64 handoff and validated memory-map information;
+- CPUID-based feature detection rather than model-name inference;
+- ACPI root/table validation and APIC discovery needed by the implemented
+  single-CPU interrupt and timer path;
+- a supported early serial-console path for the CLI-first proof of concept;
+- runtime discovery of memory, CPU topology and relevant platform resources;
+- rejection of missing mandatory facilities with bounded diagnostics; and
+- safe ignoring or reporting of unsupported devices that are not required for
+  boot, memory protection, interrupts, time or the selected console.
+
+The initial proof does not claim every x86-64 PC, every firmware path, arbitrary
+USB input, graphics, storage, networking, SMP, NUMA or hotplug. Each newly
+claimed facility expands the envelope only after its discovery, fallback and
+failure behavior are tested.
 
 ## Minimal execution profile
 
@@ -56,20 +85,20 @@ from a booted guest.
 
 | Area | Initial constraint | Evidence still required |
 | --- | --- | --- |
-| ISA and privilege | Intel 64/x86-64; kernel CPL 0, native services CPL 3 | Actual entry state, CPUID feature record and ring-transition trace |
+| ISA and privilege | Intel-compatible x86-64 subset; kernel CPL 0, native services CPL 3 | Actual entry state, CPUID discovery report and ring-transition trace |
 | Memory | Four-level paging and 4 KiB base pages as the initial design; 64 MiB guest RAM | Entry/allocator layout, reserved ranges, NX availability and enforced permissions |
 | CPU use | One executing logical CPU; one virtual socket/core/thread | Timer/context tests before enabling concurrency |
-| Firmware | Explicit SeaBIOS for the minimal QEMU fixture | Pin firmware and bootloader; separately discover the physical firmware path |
+| Firmware | Explicit SeaBIOS for the minimal QEMU baseline | Pin firmware and bootloader; qualify each additional BIOS/UEFI path separately |
 | Native images | Static, little-endian ELF64/AMD64 subset proposed | Toolchain, linker, calling convention, helper census and loader tests |
 | I/O | Explicit emulated serial, headless display, no NIC or writable data disk | Bounded serial input/output and unattended test harness |
 | Runtime | Independent user-space interpreter and process-local tracing GC | Compiled fixtures, feature closure and guest conformance tests |
 
-Do not require later-generation features such as AVX/AVX2 or five-level
-paging on this older platform. PCID, x2APIC, timer modes, extended-state
-facilities and VT-d must be qualified against the installed CPUs, chipset
-and firmware before use. Intel virtualization support is not a first-boot
-dependency. A modern Intel manual is not evidence that the T7500 implements
-every feature it describes.
+Do not require later-generation features such as AVX/AVX2 or five-level paging
+for the initial envelope. PCID, x2APIC, timer modes, extended-state facilities
+and IOMMU support must be discovered and independently qualified before use.
+Intel virtualization support is not a first-boot dependency. A modern Intel
+manual is not evidence that any particular fixture implements every feature it
+describes.
 
 The [AMD64 psABI study](../../30-sources/x86-psabi-project-2026-amd64-procedure-abi.md)
 separates the baseline from later microarchitecture levels. A full ordinary
@@ -90,23 +119,24 @@ manifest.
 The selected baseline uses distribution QEMU 8.2.2 package
 `1:8.2.2+ds-0ubuntu1.18`, the versioned `pc-q35-8.2` machine and TCG.
 Start with `Nehalem-v1` as an older-generation Intel instruction fixture,
-not an exact emulation of the installed Xeon SKU. This replaces the Opteron
+not as an exact emulation of any physical CPU. This replaces the Opteron
 model. The named model is listed in
 [QEMU's CPU/configuration documentation](../../30-sources/qemu-project-2026-x86-pc-test-configuration.md).
 Its name and the machine version are available in the selected binary; each
 run must recheck the pinned executable and firmware identities. Do not silently
 substitute `max`, `host` or a different CPU when a feature is missing.
 
-Q35 is a synthetic PC fixture, not a T7500/Intel 5520 motherboard replica.
+Q35 is a synthetic PC fixture, not a physical motherboard replica.
 Its chipset and boot-media controller do not validate the physical storage,
 network or interrupt wiring. TCG keeps initial execution independent of
 host-vendor hardware acceleration. KVM/host passthrough can be a separately
 recorded later acceleration profile, not the reproducible baseline.
 
-If inventory later identifies Xeon 5600 processors, a separately pinned
-Westmere feature profile may be added for tests that require it. Do not
-silently expand the baseline. First compare exposed CPUID features with the
-actual CPU and keep compiler instruction selection within the agreed subset.
+Additional pinned CPU, machine, memory, topology and firmware profiles form a
+capability-driven compatibility matrix. Add a profile only when it tests an
+implemented discovery or fallback path. Do not silently expand the baseline or
+use host CPU passthrough as portable evidence. Keep compiler instruction
+selection within the agreed subset and record every profile independently.
 
 An eventual launch template, **not executed here**, is:
 
@@ -145,9 +175,9 @@ reboot loop; `-no-shutdown` can leave the emulator stopped. A future host
 harness must impose a finite watchdog, assert serial outcomes, capture errors
 and clean up the process. QEMU's exit status alone cannot establish M1.
 
-## Research retargeting and next artifacts
+## Compatibility work and next artifacts
 
-| Priority | Requirement | T7500 / Intel x86-64 work to finish | Acceptance artifact |
+| Priority | Requirement | Generic x86-64 work to finish | Acceptance artifact |
 | --- | --- | --- | --- |
 | First | R01 boot | Pin firmware/bootloader handoff; normalize memory reservations and ACPI roots; validate CPU features and long-mode entry ownership | Reset-to-ring-0 trace, immutable boot snapshot, malformed-handoff tests |
 | First | R02 build | Pin ELF64/AMD64 and assembly/compiler conventions; stack alignment, red-zone policy, code model and FP/SIMD restrictions | Link map, dependency census, two matching clean builds |
@@ -158,56 +188,68 @@ and clean up the process. QEMU's exit status alone cannot establish M1.
 | When DMA enters scope | R16 devices | Actual chipset/device manuals and vendor-specific remapping/reset semantics | Device-specific quiescence and buffer-reuse evidence |
 
 The [Intel system-programming study](../../30-sources/intel-2026-system-programming-documentation.md)
-is now the primary architecture reference. Before coding entry, paging, APIC,
-timers or MSRs, qualify the exact sequences against the relevant Intel SDM
-sections and the installed Xeon family's specification updates/errata. This
-correction is not a completed processor-specific audit. The earlier failed
-AMD-manual retrieval is historical and no longer a blocker.
+is the primary architecture reference for the first backend. Before coding
+entry, paging, APIC, timers or MSRs, qualify the exact sequences against the
+relevant Intel SDM sections and discover required facilities at runtime. A
+physical fixture may also require its processor-family specification update
+and errata; those fixture-specific inputs do not redefine the generic backend.
 
 The [ACPI study](../../30-sources/uefi-forum-2025-acpi-6-6.md) supplies platform
 discovery context; actual tables and firmware revisions still require
 inspection. The kernel remains responsible for validating those descriptions.
-For later DMA isolation, investigate the actual Intel 5520/VT-d capabilities,
-firmware DMAR description, requester paths and device reset rules; do not
-assume modern VT-d features or working isolation from the CPU family name.
+For later DMA isolation, investigate the chipset/IOMMU capabilities, firmware
+DMAR description, requester paths and device reset rules of each claimed
+fixture; do not assume modern VT-d features or working isolation from a CPU or
+product-family name.
 
 BEAM loading, actor semantics, process-local GC, bounded IPC, authority,
 accounting and supervision keep their requirements. Retarget their native
 adapter and context implementation, not their language semantics. Deferred
 durability, networking, authentication and updates remain separate gates.
 
-## Lab qualification and staged tests
+## Qualification ladder and staged tests
 
-Inventory the selected T7500's CPU SKUs and motherboard revision. On that machine, use
-read-only inventory such as `lscpu`, `lscpu -e` and `lspci -nn` if a
-Linux environment is available. Record firmware version and boot mode,
-memory distribution, CPU feature output, ACPI table identities, and available
-serial/debug transport. Redact service tags and other unique identifiers from
-public notes. Firmware menus may be inspected; no firmware update, settings
-change or disk write is authorized by this research decision.
+Run the first QEMU CLI test with one CPU and 64 MiB. This is the reproducible
+baseline, not the whole compatibility claim. As Kay OS implements relevant
+discovery or fallback behavior, add independently named and pinned matrix rows
+that vary one or more of CPU feature profile, machine/chipset, memory size,
+firmware path, topology and device layout. Every row records whether it is
+expected to pass, fail as unsupported, or exercise a degraded path. A matrix
+row cannot be added after observing its result merely to turn a failure into a
+pass.
 
-Run the first QEMU CLI test with one CPU and 64 MiB, increasing memory only
-if measured image/allocator requirements justify a recorded change. A
-single-CPU physical CLI boot on the T7500 should follow virtual bring-up once the machine
-and boot media are qualified; it need not wait for SMP or a second ISA.
-Additional physical CPUs must remain unstarted or safely parked under the
-chosen bootloader/kernel contract, not physically removed.
+After virtual acceptance, qualify physical fixtures one at a time. Before a
+physical boot, collect a read-only external observation record with CPU,
+firmware, memory and relevant device facts, redacting unique identifiers. Kay
+OS must independently emit its own discovered-hardware report during boot.
+Compare the two records and investigate discrepancies; the external inventory
+is a test oracle and safety aid, not kernel input.
+
+The T7500 may serve as P1 when access, boot media and debug recovery are ready.
+Future fixtures should be selected for diversity in CPU generation, chipset,
+firmware mode, topology and devices. A single-CPU physical CLI boot need not
+wait for SMP or a second ISA. Additional physical CPUs must remain unstarted or
+safely parked under the chosen bootloader/kernel contract, not physically
+removed. Nothing here authorizes a firmware update, settings change or disk
+write.
 
 Keep M2–M4 single-CPU. Then add two virtual CPUs on one socket, followed by a
 separate two-socket test if it exercises a required path. Add explicit NUMA
 memory/node relationships only for a NUMA test: sockets do not automatically
 define NUMA, and virtual topology does not pin host threads to physical CPUs.
-Match full lab topology only after inventory and the small-SMP tests.
-Second-ISA portability remains later work without a selected second target.
+Match a fixture's full topology only after its observation record and the
+small-SMP tests. Second-ISA portability remains later work without a selected
+second architecture.
 
 ## Evidence status and connections
 
 QEMU 8.2.2, `pc-q35-8.2`, `Nehalem-v1`, and SeaBIOS 1.16.3 availability and
 hashes were checked on 2026-09-17. The executable verifier lives in the
 [Kay OS implementation repository](https://github.com/pcharbon70/kay-os).
-No guest launch or physical inventory was performed, and no boot, timing,
-containment or conformance result is claimed. Board and architecture selection
-narrow M0; freestanding ABI and later executable evidence remain open.
+No guest launch or physical qualification was performed, and no boot, timing,
+containment or conformance result is claimed. The generic envelope and minimal
+baseline narrow M0; runtime discovery, a compatibility matrix and later
+physical evidence remain open.
 
 - [Requirements inventory](README.md) maps all nineteen requirement groups.
 - [Boot contract](target-firmware-and-boot-handoff.md) and [user return](privilege-entry-memory-and-user-return.md) own first-entry responsibilities.

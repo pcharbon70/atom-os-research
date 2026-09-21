@@ -17,7 +17,7 @@ aliases:
 
 ## Purpose
 
-M0 turns the selected machine and architectural intent into concrete inputs
+M0 turns the x86-64 compatibility envelope and architectural intent into concrete inputs
 that someone else can build, inspect, and run. Its question is: **Do we know
 exactly what will boot, how control reaches our kernel, what that kernel may
 assume, and how a failed run will be detected?** A list of preferred tools or a
@@ -31,11 +31,11 @@ only work in the author's shell environment.
 
 ## What belongs here
 
-This milestone owns the initial virtual fixture, build inputs, firmware and
+This milestone owns the initial virtual baseline, build inputs, firmware and
 loader handoff, native image contract, minimal console/time interface, test
-harness, and installed-unit inventory needed to relate the virtual work to the
-Dell Precision T7500. It also makes the trusted-local-development boundary
-explicit before privileged code depends on it.
+harness, and the boundary that keeps virtual evidence separate from later
+physical-fixture qualification. It also makes the trusted-local-development
+boundary explicit before privileged code depends on it.
 
 M0 does not implement the protected service nucleus, complete BEAM profile,
 collector, persistent filesystem, NIC stack, SMP/NUMA, human login, or GUI.
@@ -52,12 +52,19 @@ and 64 MiB limit are selected and pass baseline identity checks. Freestanding
 build qualification passed at implementation commit `be4a230`, and the clean
 Phase 1 virtual integration suite passed all nine registered cases at
 implementation commit `b350de9` and merged `main` revision `bc4c998`. The
-user-deferred physical inventory is now owned by Phase 3 and does not block
-Phase 2 contract work. Phase 2 Section 2.1 and its clean 24-case integration are
+former physical-inventory dependency did not block Phase 2 contract work and
+has now been moved to M1 Phase 4. Phase 2 Section 2.1 and its clean 24-case integration are
 complete at implementation commit `f85571e`; independent follow-up review
 found no blocker, [evidence is retained](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md),
-and the user/project owner selected proceed on 2026-09-19. Phase 3 and every
-complete milestone acceptance case remain open. Writing or reviewing a plan
+and the user/project owner selected proceed on 2026-09-19. Phase 3 M0-D03 was
+resolved on 2026-09-20 with fixed harness timing, protocol, retention, cleanup
+and observation-only physical-fixture collection decisions. Section 3.1 is
+complete at clean Kay OS revision `8206deb`: all nine controlled harness cases
+passed, the publication boundary behaved as declared, and the virtual M1 input
+bundle was assembled without physical inventory. The full assembled gate then
+passed at clean revision `2d41f39`, covering all M0-T01 through M0-T06 rows,
+and the user/project owner selected proceed on 2026-09-21. M0 is accepted for
+handoff to M1; merge provenance remains to be recorded separately. Writing or reviewing a plan
 neither closes a delivery gate nor substitutes for retained execution evidence.
 
 ## Authoritative inputs
@@ -75,12 +82,12 @@ These inputs define the existing scope and the research behind its tests:
 - [Phase 2 contract-integration record](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md) — clean `f85571e` run, all 24 registered results, exact supply-chain/tool/artifact identities, independent review and explicit hosted-only boundary.
 - [Serial CLI, R04](../../../20-notes/proof-of-concept-requirements/serial-console-and-minimal-cli.md) and [time, R05](../../../20-notes/proof-of-concept-requirements/time-preemption-and-cpu-budgets.md) — interfaces that must be fixed before M1 implements them.
 - [Measurement and harness, R13](../../../20-notes/proof-of-concept-requirements/models-fault-injection-and-measurement.md) — exact inputs, negative checks, and retained evidence.
-- [T7500 target profile](../../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) and [configuration intent](../../../assets/qemu-minimal-x86-64.json) — adopted constraints, not qualified binaries or a working launcher.
+- [x86-64 compatibility envelope](../../../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md) and [configuration intent](../../../assets/qemu-minimal-x86-64.json) — generic platform boundary and minimal virtual baseline, not a claim about a physical motherboard.
 - [Parent stream](../README.md) and [planning convention](../../README.md) — milestone order, evidence rules, and later phase structure.
 
 ## Entry decisions and dependencies
 
-The T7500 / Intel Xeon target, CLI-first scope, rejection of AtomVM, Zig
+The generic Intel-compatible x86-64 envelope, CLI-first scope, rejection of AtomVM, Zig
 kernel language, public Kay OS repository, Zig 0.16.0 LLVM/LLD profile and
 initial virtual fixture are decided. M0 must finish qualifying these inputs and
 resolve the remaining contracts without mistaking prior research examples for
@@ -93,7 +100,7 @@ accepted selections:
 | Bootloader and handoff | Select a loader compatible with the fixture and record entry mode, long-mode ownership, retained memory, firmware tables, and additional-CPU policy. | Kernel entry and memory initialization. |
 | Native execution contract | Select the static image subset, layout, calling convention, stack policy, enabled register state, and syscall mechanism. | Native loader, exception entry, and validated ring-3 return. |
 | Console, time, and failures | Define bounded calls, clock units/conversion, input framing, error results, interrupts/waits, and initial fault halt/reset behavior. | CLI and unattended pass/fail interpretation. |
-| Physical qualification prerequisites | Record the installed T7500 configuration and identify safe boot/debug media and transport during Phase 3 final input qualification. | Final M0 and later physical M1 qualification, not virtual Phase 1/2 work or a demand for a two-CPU QEMU test. |
+| Physical qualification boundary | Preserve a reusable read-only observation/publication procedure, but collect a fixture's actual inventory only in M1 Phase 4 immediately before its physical test. | Later physical-fixture qualification only; never virtual M0/M1 handoff or kernel configuration. |
 
 The compiler profile must not inherit host-native instruction selection or
 Linux syscalls accidentally. If bring-up restricts FP/SIMD, describe and check
@@ -117,7 +124,7 @@ M1's running implementation, not substitutes for it.
 | M0-A04 | Static native image and initial ABI specification | Supported headers/segments/relocations, entry and permission rules, initialized-data/BSS handling, stack/register-state policy, and minimal console/time operation definitions with bounded buffers and errors. Include machine-checkable descriptors or validation fixtures. |
 | M0-A05 | Development trust and initial authority profile | Trusted host/firmware/loader/kernel, potentially faulty user domain, permitted console/time grants, private kernel state, and deliberate exclusions. Input from a trusted local operator is not authentication evidence. |
 | M0-A06 | Executable host acceptance harness | Version-checking launch wrapper, serial input/capture/assertions, finite watchdog and cleanup, nonzero failure results, and per-run artifact manifest. Demonstrate both success interpretation and failure detection using explicitly labelled harness fixtures. |
-| M0-A07 | T7500 installed-unit and qualification record | Observed CPU SKUs/steppings/features, enabled topology, board/firmware, RAM, relevant devices, and debug path; separate observed facts from unknowns and document boot-media prerequisites. Redact unique service identifiers from public records. |
+| M0-A07 | Physical-fixture qualification boundary and safe-observation procedure | Versioned read-only collection/publication rules, explicit transfer to M1 Phase 4, and a prohibition on consuming physical inventory as virtual configuration. Actual fixture observations and Kay OS discovery comparison are M1 evidence. |
 
 An image hash identifies bytes, not authority to execute them. Initial native
 images and later BEAM bundles need separate authority/resource descriptors.
@@ -133,10 +140,9 @@ handoff; a firmware memory claim is still input to validate.
 
 Read-only physical inventory does not authorize a firmware update, persistent
 BIOS change, or disk overwrite. Unknown installed hardware must remain unknown
-in the record, not be filled from the product family specification. Exploratory
-virtual work may use its independently qualified fixture while physical
-inventory is pending, but that does not close the missing M0 obligation or
-establish T7500 qualification.
+in a fixture record, not be filled from a product-family specification.
+Physical observations are test-oracle and safety evidence for M1 Phase 4; they
+are neither M0 inputs nor evidence that Kay OS discovered the same facts.
 
 ## Integration acceptance
 
@@ -151,7 +157,7 @@ success at M0 must be labelled separately from a real user-mode boot at M1.
 | M0-T03 | Reconcile handoff with image layout | A03, A04 | Valid fixture reservations and segments agree; truncated records, overflow/overlap, invalid entry points, unsupported image features, and conflicting memory claims are rejected without publishing an executable image. Guest enforcement is tested in M1. |
 | M0-T04 | Check interface and authority consistency | A04, A05 | Every initial operation has a bounded request/response, defined error/time semantics, a permitted caller, and an enforcing owner. No CLI grant implies arbitrary physical-memory or root authority. |
 | M0-T05 | Prove the harness can detect failure | A01, A06 | Controlled prompt/response fixtures pass; missing prompt, incorrect response, launch failure, stalled serial stream, timeout, and early process death fail and leave useful logs. No hang is mistaken for success. |
-| M0-T06 | Review the physical/virtual distinction | A01, A03, A07 | Installed-unit evidence and boot/debug prerequisites are documented; q35 assumptions are not claimed as T7500 wiring or timing evidence, and additional physical CPUs have an explicit later bring-up policy. |
+| M0-T06 | Review the physical/virtual distinction | A01, A03, A07 | The M1 bundle consumes no physical inventory; q35 is not claimed as motherboard evidence; the safe observation procedure and successor M1 Phase 4 tasks are explicit. |
 
 The required startup/link smoke tests and parser/harness fixtures must have
 real outputs. If a reset-to-entry smoke image is used, state precisely which
@@ -166,8 +172,9 @@ passes with retained evidence. Keep each artifact linked to its checks and
 retain commands, hashes, outputs, environment, and limitations in dated
 [journal evidence](../../../50-journal/README.md), with artifacts in
 [assets](../../../assets/README.md) or the selected implementation repository.
-A required missing pin or inventory is open, not a pass; moving an obligation
-requires an explicit reviewed scope decision.
+A required missing virtual pin is open, not a pass. The 2026-09-21 scope
+decision moves installed-unit observation and comparison to M1 Phase 4 without
+waiving that later physical evidence.
 
 The M1 handoff includes the manifests, native/boot contracts, malformed-input
 fixtures, working build and harness entry points, symbol association, and
@@ -180,15 +187,15 @@ later unprivileged placement and a bounded way to package modules.
 3 phases separate independently verifiable outcomes; their section/task/sub-task
 counts follow the work rather than a quota. Phase 1 is complete. Phase 2 has
 completed its decision, executable-contract and clean integration work and
-received the user's proceed decision on 2026-09-19. Phase 3 owns the
-independently deferred physical inventory and final M0 qualification. Review
+received the user's proceed decision on 2026-09-19. Phase 3 owns the unattended
+harness, virtual M1 input bundle and final M0 qualification. Review
 dependencies and unresolved gates before execution.
 
 | Phase | Integrated outcome | Entry dependency | State / evidence |
 | --- | --- | --- | --- |
-| [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) | Turn the selected Intel target into a versioned, reproducible virtual development fixture. This phase qualifies build inputs and native link fixtures, not a user-mode OS or physical machine. | accepted-scope-entry | Complete; merged-main nine-case rerun passed and user recorded proceed; [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) |
+| [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) | Turn the generic Intel-compatible x86-64 envelope into a versioned, reproducible virtual baseline. This phase qualifies build inputs and native link fixtures, not a user-mode OS or physical machine. | accepted-scope-entry | Complete; merged-main nine-case rerun passed and user recorded proceed; [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) |
 | [Phase 2 — Boot, image, and interface contracts](phase-02-boot-image-and-interface-contracts.md) | Specify and exercise the handoff, native image, console/time, and initial authority contracts before the guest kernel implements them. | m0-p01-handoff | Complete; clean `f85571e` integration passed 24/24 registered cases, independent review found no blocker and user selected proceed on 2026-09-19; [evidence](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md) |
-| [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) | Collect the physical inventory, deliver an exercised unattended acceptance harness and close the complete M0 input gate using real build and fixture evidence. | m0-p02-handoff | Draft; physical inventory deferred; other work not started; tests not run |
+| [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) | Deliver an exercised unattended acceptance harness, assemble the virtual M1 input bundle, and prove that physical inventory is not consumed as configuration. | m0-p02-handoff | Complete; Section 3.1 passed at clean `8206deb`; full integration passed at clean `2d41f39`; [evidence](../../../50-journal/2026-09-21-m0-phase-03-integration.md); owner selected proceed on 2026-09-21 |
 
 Work within each phase follows its task dependencies. The serial order provides
 a conservative baseline, not authorization for parallel agents. Independent
@@ -204,9 +211,9 @@ M0-D01 owns the initial implementation repository and toolchain selection.
 
 | Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
 | --- | --- | --- | --- | --- | --- |
-| M0-D01 | Preserve Zig as the kernel language; select the implementation repository and qualify the compiler/backend/linker/translator using freestanding support, ABI/helper closure, instruction control, reproducibility, and maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability and installed-unit inventory rather than relying on family specifications. | [m0-p01-decisions](phase-01-target-toolchain-and-build-baseline.md); inventory superseded by [m0-p03-inventory](phase-03-acceptance-harness-and-input-qualification.md) | Phase 1 implementation agent and user acceptance reviewer; physical operator unassigned | Virtual Phase 1 depends only on selected virtual/build inputs; inventory blocks final M0 and physical claims | Phase 1 accepted: public `pcharbon70/kay-os`, Zig 0.16.0 LLVM/LLD, QEMU 8.2.2 and SeaBIOS 1.16.3 selected; merged-main [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) passed; deferred T7500 inventory remains open under Phase 3 |
-| M0-D02 | Choose loader/long-mode ownership, static image subset, native calling and register-state policy, syscall mechanism, console framing, clock units, and initial fault policy using bounded validation and T7500/fixture compatibility. | [m0-p02-decisions](phase-02-boot-image-and-interface-contracts.md) | Codex implementation agent, independent review agent, and user acceptance reviewer | Remaining Phase 2 work and its dependent gates | Resolved 2026-09-18: Limine v12.9.0/base revision 6, fixed higher-half static ELF64, restricted System V AMD64, later DPL3 interrupt gate/TSS/`iretq`, bounded copy console, monotonic-nanosecond clock, bounded emergency serial then halt, deterministic read-only BIOS ISO |
-| M0-D03 | Freeze watchdog deadlines, serial assertions, output retention, cleanup rules, and physical qualification prerequisites before interpreting runs. | [m0-p03-decisions](phase-03-acceptance-harness-and-input-qualification.md) | Unassigned implementer/reviewer; assign before dependent execution | Remaining Phase 3 work and its dependent gates | Open; no decision evidence |
+| M0-D01 | Preserve Zig as the kernel language; select the implementation repository and qualify the compiler/backend/linker/translator using freestanding support, ABI/helper closure, instruction control, reproducibility, and maintenance cost; assign execution/review roles. Verify exact QEMU/firmware availability without relying on physical-family specifications. | [m0-p01-decisions](phase-01-target-toolchain-and-build-baseline.md) | Phase 1 implementation agent and user acceptance reviewer | Virtual Phase 1 and later native work | Phase 1 accepted: public `pcharbon70/kay-os`, Zig 0.16.0 LLVM/LLD, QEMU 8.2.2 and SeaBIOS 1.16.3 selected; merged-main [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) passed |
+| M0-D02 | Choose loader/long-mode ownership, static image subset, native calling and register-state policy, syscall mechanism, console framing, clock units, and initial fault policy using bounded validation and generic x86-64/baseline compatibility. | [m0-p02-decisions](phase-02-boot-image-and-interface-contracts.md) | Codex implementation agent, independent review agent, and user acceptance reviewer | Remaining Phase 2 work and its dependent gates | Resolved 2026-09-18: Limine v12.9.0/base revision 6, fixed higher-half static ELF64, restricted System V AMD64, later DPL3 interrupt gate/TSS/`iretq`, bounded copy console, monotonic-nanosecond clock, bounded emergency serial then halt, deterministic read-only BIOS ISO |
+| M0-D03 | Freeze watchdog deadlines, serial assertions, output retention, cleanup rules, and the virtual/physical qualification boundary before interpreting runs. | [m0-p03-decisions](phase-03-acceptance-harness-and-input-qualification.md) | Codex implementer and user/project owner decision reviewer | Remaining Phase 3 work and its dependent gates | Resolved 2026-09-20 and revised 2026-09-21: Python host harness; versioned ASCII PTY fixture; 5/2/3/30/5-second limits; complete per-run retention; process-group TERM/KILL cleanup; physical collection procedure transferred to M1 Phase 4 and does not gate M0 |
 
 ## Gate-to-phase and artifact mapping
 
@@ -219,12 +226,12 @@ above and close only after all required environments and dependent portions pass
 | --- | --- | --- | --- | --- | --- |
 | [M0-P01](phase-01-target-toolchain-and-build-baseline.md) | M0-A01, M0-A02 | M0-T01, M0-T02 virtual-input portions | m0-p01-decisions, m0-p01-build; m0-p01-integration; m0-p01-handoff | accepted-scope-entry | Complete; merged-main [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) passed and handoff decision is proceed |
 | [M0-P02](phase-02-boot-image-and-interface-contracts.md) | M0-A03, M0-A04, M0-A05 | M0-T02, M0-T03, M0-T04 | m0-p02-decisions, m0-p02-fixtures; m0-p02-integration; m0-p02-handoff | m0-p01-handoff | Complete for the declared pre-boot phase scope: clean `f85571e` integration passed 24/24 registered cases, independent review found no blocker and user selected proceed on 2026-09-19; [evidence retained](../../../50-journal/2026-09-18-m0-phase-02-contract-integration.md) |
-| [M0-P03](phase-03-acceptance-harness-and-input-qualification.md) | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07 | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | m0-p03-decisions, m0-p03-harness, m0-p03-inventory, m0-p03-qualify; m0-p03-integration; m0-p03-handoff | m0-p02-handoff | Not run; physical inventory explicitly deferred; evidence absent |
+| [M0-P03](phase-03-acceptance-harness-and-input-qualification.md) | M0-A01, M0-A02, M0-A03, M0-A04, M0-A05, M0-A06, M0-A07 | M0-T01, M0-T02, M0-T03, M0-T04, M0-T05, M0-T06 | m0-p03-decisions, m0-p03-harness, m0-p03-qualify; m0-p03-integration; m0-p03-handoff | m0-p02-handoff | Complete: Section 3.1 passed at clean `8206deb`; the assembled M0-T01–M0-T06 gate passed at clean `2d41f39`; [evidence](../../../50-journal/2026-09-21-m0-phase-03-integration.md); owner selected proceed on 2026-09-21; `m0-p03-inventory` was superseded before execution by M1 Phase 4 |
 
 The final phase reruns all M0 acceptance cases for milestone closure.
 Earlier contract, fixture, model or hosted results remain partial where guest
-integration is required. Scope exclusions and physical obligations in this
-definition are unchanged. An acceptance reviewer must retain failure history,
+integration is required. Physical evidence stays visible under M1 Phase 4 but
+does not gate virtual M0. An acceptance reviewer must retain failure history,
 record the accepted tested revision, and reopen gates on incompatible input
 changes, missing required evidence or a violated invariant.
 
@@ -236,9 +243,9 @@ changes, missing required evidence or a violated invariant.
 
 ### Documents
 
-- [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) — Turn the selected Intel target into a versioned, reproducible virtual development fixture and qualify native build inputs without making a physical-machine claim.
+- [Phase 1 — Target, toolchain, and build baseline](phase-01-target-toolchain-and-build-baseline.md) — Turn the generic Intel-compatible x86-64 envelope into a versioned, reproducible virtual baseline and qualify native build inputs without making a physical-machine claim.
 - [Phase 2 — Boot, image, and interface contracts](phase-02-boot-image-and-interface-contracts.md) — Specify and exercise the handoff, native image, console/time, and initial authority contracts before the guest kernel implements them.
-- [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) — Collect the physical inventory, deliver an exercised unattended acceptance harness and close the complete M0 input gate using real evidence.
+- [Phase 3 — Acceptance harness and input qualification](phase-03-acceptance-harness-and-input-qualification.md) — Deliver an exercised unattended acceptance harness, assemble the virtual M1 input bundle and enforce the physical-fixture boundary.
 
 ## Maintaining this index
 

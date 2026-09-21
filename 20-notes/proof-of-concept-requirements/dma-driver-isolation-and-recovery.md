@@ -22,7 +22,7 @@ As comparative evidence, the [RISC-V IOMMU specification](../../30-sources/risc-
 
 Choose one device and actual requester/reset topology. Begin with mediated buffers and no ATS/PRI or peer-to-peer DMA unless the selected hardware contract requires them. These are proposed restrictions; device support must be verified.
 
-For the selected T7500, investigate the Intel 5520 platform and the actual [VT-d capabilities](../../30-sources/intel-2024-vt-d-architecture.md), firmware DMAR tables, requester coverage and device reset rules. The modern VT-d 5.0 reference is not proof that this older platform implements those features or has remapping enabled. AMD IOMMU is not the backend for this target. The initial serial-only virtual profile makes no DMA-isolation claim.
+For any selected DMA fixture, investigate its chipset and actual [VT-d capabilities](../../30-sources/intel-2024-vt-d-architecture.md), firmware DMAR tables, requester coverage and device reset rules. If the T7500 becomes that fixture, its Intel 5520 platform requires its own qualification. The modern VT-d 5.0 reference is not proof that an older platform implements those features or has remapping enabled. AMD IOMMU is outside the first backend envelope. The initial serial-only virtual profile makes no DMA-isolation claim.
 
 ## Proposed authority and ownership model
 

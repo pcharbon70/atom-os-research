@@ -61,7 +61,7 @@ a plan neither closes a delivery gate nor authorizes implementation or publicati
 - [Private heaps and tracing garbage collection](../../../20-notes/proof-of-concept-requirements/private-heaps-and-tracing-garbage-collection.md) — R10, roots, automatic reclamation, and latency limits.
 - [Resource accounting and mailbox overload](../../../20-notes/proof-of-concept-requirements/resource-accounting-and-mailbox-overload.md) — R11, complete charging and explicit overload outcomes.
 - [Supervision and independent recovery](../../../20-notes/proof-of-concept-requirements/supervision-and-independent-recovery.md) — R12, actor failure versus protection-domain failure.
-- [T7500 target and QEMU profile](../../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) — Intel x86-64 target and controlled guest fixture.
+- [x86-64 compatibility envelope and QEMU fixtures](../../../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md) — generic backend and controlled guest profiles.
 
 ## Entry decisions and dependencies
 
@@ -173,7 +173,7 @@ isolation, reductions, signal processing, and GC. A native function linked into
 the interpreter shares its failure boundary; the native test service resides
 in another domain. Outer recovery must remain outside the runtime it replaces.
 Upstream OTP supplies compiler/oracle evidence on the host, not guest kernel
-services. QEMU evidence does not qualify the physical T7500.
+services. QEMU evidence does not qualify a physical fixture.
 
 ## Integrated acceptance cases
 

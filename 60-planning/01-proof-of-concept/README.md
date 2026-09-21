@@ -59,12 +59,14 @@ records its evidence and remaining compiler/ABI qualification. The public
 were selected on 2026-09-17. Their baseline identity checks and the bounded
 freestanding [build closure](../../50-journal/2026-09-17-m0-phase-01-build-closure.md)
 and merged-main [Phase 1 closeout](../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md)
-pass. Physical inventory and all complete milestone acceptance remain open.
+pass. Runtime hardware discovery, the virtual compatibility matrix and all
+complete milestone acceptance remain open.
 M0 Phase 2 selected Limine v12.9.0/base protocol revision 6 and the bounded
 handoff, static higher-half ELF, native ABI, console, clock, authority, fault
 and read-only ISO contracts on 2026-09-18.
-The physical inventory is an independent Phase 3/final-M0 obligation; it does
-not block virtual Phase 1 integration or Phase 2 contract implementation.
+Physical inventory is not an M0 input. It is collected per fixture in M1 Phase
+4 immediately before physical qualification and does not block virtual M0, M1
+or M2 work.
 
 ## Authoritative inputs
 
@@ -72,8 +74,9 @@ not block virtual Phase 1 integration or Phase 2 contract implementation.
   defines the M0–M4 outcomes, first CLI delivery, and limits of the PoC claim.
 - [Minimal bootable-system inquiry](../../40-inquiries/can-a-minimal-bootable-system-validate-the-architecture.md) —
   tracks open acceptance gates and demonstrated evidence.
-- [Dell Precision T7500 target and minimal QEMU profile](../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) —
-  controls the Intel Xeon / Intel 64 target and minimum virtual fixture.
+- [x86-64 compatibility envelope and test fixtures](../../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md) —
+  controls the generic Intel-compatible target, runtime discovery, minimum
+  virtual baseline, matrix growth and physical-fixture boundary.
 - [Requirement studies](../../20-notes/proof-of-concept-requirements/README.md) —
   supplies proposed contracts, failure cases, and remaining experiments.
 - [Proof-of-concept map](../../10-maps/proof-of-concept.md) —
@@ -112,7 +115,7 @@ not implemented artifacts, phase/task IDs, or recorded passing tests.
 
 | Coverage area | Owning milestone artifacts | Required evidence or explicit boundary |
 | --- | --- | --- |
-| Hardware and architecture | [M0](m0-boot-inputs/README.md): A01–A04, A06–A07 fix the fixture, build, handoff, ABI, harness, and installed-unit record. [M1](m1-boot-to-cli/README.md): A01–A06 supply the actual boot image, protected entry, serial path, and timer. | M0-T01–T06 check executable inputs; M1-T01–T08 check the real guest. Physical T7500 qualification remains separately evidenced; neither q35 nor a second ISA is a motherboard qualification result. |
+| Hardware and architecture | [M0](m0-boot-inputs/README.md): A01–A07 fix the virtual baseline, build, handoff, ABI, harness and physical-evidence boundary. [M1](m1-boot-to-cli/README.md): A01–A06 supply runtime discovery, the actual boot image, protected entry, serial path and timer. | M0-T01–T06 check executable virtual inputs; M1-T01–T09 check the real guest and capability-driven virtual matrix. M1 Phase 4 separately compares each physical fixture's external record with Kay OS discovery; neither q35 nor one motherboard establishes generic hardware support. |
 | Minimal kernel | [M2](m2-protected-service-nucleus/README.md): A01–A02 are the executable object/ABI specification and bounded lifecycle/accounting models; A03–A05 implement their protection, transport, and reclamation contract, extending M0/M1. | M2-T01–T06 require contract/model, authority, race, exhaustion, CPU, and reuse evidence. [M4](m4-integrated-recovery-and-resource-campaign/README.md)-T02 and T04–T06 exercise their integrated behavior under pressure. |
 | Managed runtime | [M3](m3-project-beam-runtime/README.md): A01–A06 cover the machine-readable BEAM/OTP profile, compiled corpus, project runtime, automatic process-local tracing GC, guest adapter, and resource ledger. | M3-T01–T07 require actual conformance, loader rejection, GC, asynchronous-call, overload, recovery, and substrate evidence. M4-T02–T05 test the admitted profile under combined load. AtomVM remains excluded. |
 | System services | [M2](m2-protected-service-nucleus/README.md): A06–A07 deliver the running volatile supervisor/registry nucleus and real CLI control. [M3](m3-project-beam-runtime/README.md): A07 adds actor and whole-runtime recovery demonstrations. | M2-T07–T08, M3-T06, and M4-T01/T06 distinguish child, actor, CLI, and whole-runtime recovery. Root failure may reset; persistence and universal supervisor survival are not implied. |
@@ -131,26 +134,27 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Prepare [M0 Phase 3](m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
-by reviewing its open decisions and entry dependencies. The accepted Phase 2
-[clean integration evidence](../../50-journal/2026-09-18-m0-phase-02-contract-integration.md)
-provides its predecessor handoff.
+Merge and synchronize the accepted [M0 Phase 3](m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
+handoff, then reproduce its immutable input bundle at M1 entry. The clean
+Phase 3 [integration evidence](../../50-journal/2026-09-21-m0-phase-03-integration.md)
+passed at `2d41f39`, and the user/project owner selected proceed on 2026-09-21.
 Phase 1's repository, Zig profile, virtual fixture, freestanding build
 qualification, merged-main integration and handoff review pass. Phase 2 has
 frozen its loader, handoff, image, console/time, syscall, register-state and
 initial-authority choices and completed its executable-contract and hosted
 integration work.
-The physical inventory remains in Phase 3 and blocks only final M0 and physical
-qualification claims. Later plans are deliberately conditional on their actual
-inputs and predecessor evidence.
+The controlled harness, clean virtual bundle and assembled M0-T01 through
+M0-T06 gate pass without consuming physical inventory. `m0-p03-handoff` and
+M0 are accepted. Later plans remain conditional on their actual inputs,
+merged-baseline synchronization and predecessor evidence.
 Before executing each phase, review its decision register and bind accepted
 interface versions; revise affected dependencies and tests together if a
 decision changes the planned mechanism.
 
-M1 Phase 3 is the first virtual CLI delivery. M1 Phase 4 is its separate physical
-T7500 qualification branch; M2 virtual acceptance depends on M1 Phase 3, not
-physical qualification or SMP. All physical obligations stay visible and open
-until supported by their own evidence.
+M1 Phase 3 is the first virtual CLI delivery and owns the capability-driven
+QEMU compatibility matrix. M1 Phase 4 is the separate per-fixture physical
+branch; the T7500 is candidate P1, not the target definition. M2 virtual
+acceptance depends on M1 Phase 3, not physical qualification or SMP.
 
 Every artifact and acceptance case has a phase mapping; its task and evidence
 ownership must stay synchronized as decisions resolve. Use the mandatory
@@ -168,13 +172,15 @@ implementation, rather than require another broad research cycle:
   handling, interrupt/timer strategy, and initial context-switch requirements.
 - Serial test harness, success/failure criteria, resource bounds, and evidence
   artifacts for the first native CLI boot.
-- Installed T7500 inventory and the safety/readiness criteria for a later
-  physical single-CPU check. Hardware qualification remains distinct from the
-  minimal virtual fixture; q35 is not a motherboard replica.
+- Runtime CPU/memory/ACPI/APIC/device discovery, capability-driven virtual
+  matrix rows, and the safety/readiness criteria for later per-fixture physical
+  checks. Hardware qualification remains distinct from the minimal virtual
+  baseline; q35 is not a motherboard replica.
 
 Select and close the exact BEAM workload and compatibility profile in M3 Phase 1
-before dependent interpreter commitments; that work does not block M0 or M1. Retain
-the selected Intel target and start virtual tests small: one CPU, 64 MiB,
+before dependent interpreter commitments; that work does not block M0 or M1.
+Retain the generic Intel-compatible x86-64 envelope and start virtual tests
+small: one CPU, 64 MiB,
 serial I/O, with the full fixture controlled by the linked target profile.
 Do not enlarge QEMU topology simply because the lab machine has two packages.
 
@@ -193,8 +199,8 @@ counts, and a privileged boot banner are not substitutes for that evidence.
 
 ### Subdirectories
 
-- [M0 — Boot inputs](m0-boot-inputs/README.md) — executable fixture, build,
-  handoff, interface, harness, and physical-inventory obligations.
+- [M0 — Boot inputs](m0-boot-inputs/README.md) — executable virtual baseline,
+  build, handoff, interface, harness, and physical-evidence boundary.
 - [M1 — Boot to CLI](m1-boot-to-cli/README.md) — first real user-mode CLI,
   protected boot, serial/time behavior, and guest acceptance.
 - [M2 — Protected service nucleus](m2-protected-service-nucleus/README.md) —

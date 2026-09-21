@@ -32,8 +32,8 @@ insufficient. Record source, creator, license, provenance, and use.
 
 ### Files
 
-- [Minimal T7500 / Intel x86-64 QEMU configuration intent](qemu-minimal-x86-64.json) —
-  project-authored companion to the [active target specification](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md),
+- [Minimal Intel-compatible x86-64 QEMU baseline intent](qemu-minimal-x86-64.json) —
+  project-authored companion to the [active target specification](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md),
   created 2026-09-06 for future tests. It is not QEMU readconfig syntax, a
   launcher or an executed run manifest; unresolved pins remain null. No
   third-party binary or downloaded attachment is included.

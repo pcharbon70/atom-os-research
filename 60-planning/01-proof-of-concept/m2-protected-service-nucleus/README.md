@@ -61,13 +61,13 @@ a plan neither closes a delivery gate nor authorizes implementation or publicati
 - [Resource accounting](../../../20-notes/proof-of-concept-requirements/resource-accounting-and-mailbox-overload.md) — supplies the capacity/payer ledger and failure-path obligations.
 - [Serial CLI](../../../20-notes/proof-of-concept-requirements/serial-console-and-minimal-cli.md) — specifies truthful inspection and narrowly authorized restart commands.
 - [Administration profile](../../../20-notes/proof-of-concept-requirements/authentication-and-administration-profile.md) — distinguishes local development authority from later identity/security claims.
-- [T7500 target](../../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) — controls Intel x86-64 and the minimal virtual fixture.
+- [x86-64 compatibility envelope](../../../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md) — controls the generic backend and minimal virtual baseline.
 
 ## Entry decisions and dependencies
 
 M1's reproducible ring-3 CLI and reviewed M0 build, image, and ABI contracts
 are prerequisites for guest acceptance. Keep the Nehalem-v1, one-CPU, 64 MiB,
-serial fixture; q35 is not a physical T7500 replica. Hosted models may precede
+serial baseline; q35 is not a physical motherboard replica. Hosted models may precede
 guest integration but cannot substitute for it.
 
 The following decisions remain unresolved. Their implementing owner is not
