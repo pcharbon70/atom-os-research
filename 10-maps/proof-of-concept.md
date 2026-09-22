@@ -47,6 +47,11 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
   records the clean 24 inherited, nine harness and seven assembled results,
   bundle identities, retained tool-runtime failure and physical-inventory
   exclusion.
+- [M1 boot-to-CLI plan](../60-planning/01-proof-of-concept/m1-boot-to-cli/README.md)
+  is accepted for execution. Phase 1 binds the merged M0 baseline, immediate
+  Kay ownership of stacks/descriptors/paging and conservative memory release;
+  Section 1.1 implementation is complete at Kay OS commit `6474054`, while the
+  separately recorded integration evidence controls phase closure.
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
   provides five detailed M0–M4 definitions and maps the readiness gaps to their
   required artifacts and acceptance cases. The
@@ -54,8 +59,8 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
   at all four work levels and integration tests at the end of every phase;
   18 phase plans now provide that hierarchy. M0 Phase 1 is complete and M0
   Phase 2 completed after its reviewed clean contract integration and the
-  user's proceed decision; M0 Phase 3 integration and owner handoff now pass,
-  while merge provenance and later milestone evidence remain outstanding.
+  user's proceed decision; M0 is merged and M1's entry plan is accepted,
+  while all M1 implementation and later milestone evidence remain outstanding.
 - [x86-64 compatibility envelope and test fixtures](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
   controls the generic target, runtime discovery, minimum virtual baseline,
   capability-driven matrix and independent physical fixtures.

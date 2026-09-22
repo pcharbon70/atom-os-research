@@ -23,11 +23,10 @@ M1 Phase 1 accepted kernel/memory baseline.
 
 Required predecessor: [M1 Phase 1](phase-01-kernel-entry-and-memory-foundation.md), task `m1-p01-handoff`.
 
-Plan state: draft, requiring decision review before execution. Implementation: not started.
-All tests: not run. Implementation repository and individual owners remain unassigned; M0-D01
-resolves the source location and initial roles, and this phase's decisions task assigns its
-execution/review roles before dependent work. The label unresolved-implementation is a
-recorded blocker, not a selected repository.
+Plan state: reviewed draft awaiting its predecessor and M1-D02. Implementation:
+not started. All tests: not run. Implementation lives in the public Kay OS
+repository; Codex is the implementation/test role and the user/project owner
+is the decision and acceptance reviewer.
 
 Decision M1-D02 is resolved by m1-p02-decisions: Freeze image permissions, state preservation,
 syscall buffer rules, and return validation against M0; restricted FP/SIMD remains explicit
@@ -59,11 +58,11 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 
 | Task ID | Repository/location | Responsible role | Requires | Artifact / acceptance contribution | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
-| m1-p02-decisions | atom-os-research | Unassigned; resolve in m1-p02-decisions | m1-p01-handoff | M1-A02, M1-A03; phase cases below | Resolve user-context enforcement details output and verification; not run |
-| m1-p02-images | unresolved-implementation | Unassigned; resolve in m1-p02-decisions | m1-p02-decisions | M1-A02; phase cases below | Implement atomic static-image admission output and verification; not run |
-| m1-p02-transitions | unresolved-implementation | Unassigned; resolve in m1-p02-decisions | m1-p02-images | M1-A03, M1-A06; phase cases below | Implement entry, copying, and safe return output and verification; not run |
-| m1-p02-integration | unresolved-implementation | Unassigned test reviewer | m1-p02-transitions | M1-T01, M1-T05, M1-T06, M1-T07 | Registered driver, raw positive/negative results; not run |
-| m1-p02-handoff | atom-os-research | Unassigned acceptance reviewer | m1-p02-integration | M1-A02, M1-A03, M1-A06; M1-T01, M1-T05, M1-T06, M1-T07 | Dated evidence and proceed/revise/blocked review; not run |
+| m1-p02-decisions | atom-os-research | Codex implementer; user/project owner decision reviewer | m1-p01-handoff | M1-A02, M1-A03; phase cases below | Resolve user-context enforcement details output and verification; not run |
+| m1-p02-images | kay-os | Codex implementer/tester | m1-p02-decisions | M1-A02; phase cases below | Implement atomic static-image admission output and verification; not run |
+| m1-p02-transitions | kay-os | Codex implementer/tester | m1-p02-images | M1-A03, M1-A06; phase cases below | Implement entry, copying, and safe return output and verification; not run |
+| m1-p02-integration | kay-os | Codex implementer/tester; user/project owner acceptance review | m1-p02-transitions | M1-T01, M1-T05, M1-T06, M1-T07 | Registered driver, raw positive/negative results; not run |
+| m1-p02-handoff | atom-os-research | User/project owner acceptance reviewer | m1-p02-integration | M1-A02, M1-A03, M1-A06; M1-T01, M1-T05, M1-T06, M1-T07 | Dated evidence and proceed/revise/blocked review; not run |
 
 ## Planned work
 
@@ -87,7 +86,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         registers, and exception-stack ownership. Associate each invalid condition with a
         rejection or fault test.
 
-    - [ ] 2.1.2 Task [id: m1-p02-images] [repo: unresolved-implementation] [after: m1-p02-decisions] — Implement atomic static-image admission.
+    - [ ] 2.1.2 Task [id: m1-p02-images] [repo: kay-os] [after: m1-p02-decisions] — Implement atomic static-image admission.
 
       Load the chosen image subset without exposing partially validated executable state.
 
@@ -103,7 +102,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         page-accounting ownership. Verify text writes, data execution, kernel access, and
         stack overflow follow the declared fault policy.
 
-    - [ ] 2.1.3 Task [id: m1-p02-transitions] [repo: unresolved-implementation] [after: m1-p02-images] — Implement entry, copying, and safe return.
+    - [ ] 2.1.3 Task [id: m1-p02-transitions] [repo: kay-os] [after: m1-p02-images] — Implement entry, copying, and safe return.
 
       Deliver the selected syscall/exception path without trusting user-supplied context.
 
@@ -125,7 +124,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 2.2.1 Task [id: m1-p02-integration] [repo: unresolved-implementation] [after: m1-p02-transitions] — Verify the integrated outcome and regressions.
+    - [ ] 2.2.1 Task [id: m1-p02-integration] [repo: kay-os] [after: m1-p02-transitions] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for
