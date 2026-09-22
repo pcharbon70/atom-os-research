@@ -34,7 +34,7 @@ It does not replace the [M0–M4 plan](../../60-planning/01-proof-of-concept/REA
 
 ## Scope and standard of evidence
 
-The target remains the [Dell Precision T7500 / Intel x86-64](dell-precision-t7500-target-and-minimal-qemu-profile.md).
+The target remains the [generic Intel-compatible x86-64 envelope](x86-64-compatibility-envelope-and-test-fixtures.md); the T7500 is only a candidate physical fixture.
 Initial guest tests must use the planned versioned q35/SeaBIOS/TCG,
 `Nehalem-v1`, one CPU, 64 MiB and serial fixture. A compiler CPU name is not
 a bit-for-bit match to a QEMU CPU model; reconcile their feature sets.
@@ -310,7 +310,7 @@ work is qualification of the chosen language on our actual contracts:
 | First | Accepted Zig/compiler/backend/linker/translator and source-location manifest | [M0 Phase 1](../../60-planning/01-proof-of-concept/m0-boot-inputs/phase-01-target-toolchain-and-build-baseline.md), `m0-p01-decisions`: pin inputs and roles; record every departure from this research candidate |
 | First | Expanded ABI and helper regression corpus | Same phase, `m0-p01-build`: compile all intended boundary types, callbacks, allocation/helper cases; compare layout and both call directions; reject undeclared imports/instructions; achieve controlled clean-build reproduction |
 | Before real boot acceptance | Boot/image/native procedure and syscall contracts | [M0 Phase 2](../../60-planning/01-proof-of-concept/m0-boot-inputs/phase-02-boot-image-and-interface-contracts.md): separate loader, ordinary calls, interrupt entry and user return; fix stack/FP/panic policies |
-| Before claiming M1 | Reset-to-CLI trace plus register/stack/protection negative tests | [M1](../../60-planning/01-proof-of-concept/m1-boot-to-cli/README.md): exact QEMU fixture first; physical T7500 qualification remains separate |
+| Before claiming M1 | Reset-to-CLI trace plus register/stack/protection negative tests | [M1](../../60-planning/01-proof-of-concept/m1-boot-to-cli/README.md): exact QEMU baseline/matrix first; per-fixture physical qualification remains separate |
 | Before claiming containment | IRQ/preemption, lifetime, quota, reclamation and callback teardown tests | [M2](../../60-planning/01-proof-of-concept/m2-protected-service-nucleus/README.md): demonstrate the kernel invariants that Zig cannot guarantee |
 | Before claiming completed PoC | Compiled-BEAM compatibility, local tracing GC and integrated failure campaign | [M3](../../60-planning/01-proof-of-concept/m3-project-beam-runtime/README.md) and [M4](../../60-planning/01-proof-of-concept/m4-integrated-recovery-and-resource-campaign/README.md): language choice does not close managed-runtime obligations |
 

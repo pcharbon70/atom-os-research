@@ -1,0 +1,41 @@
+{
+  "case_count": 6,
+  "case_ids": [
+    "m1-p01-t01-entry-memory-discovery",
+    "m1-p01-n01-missing-memory-map",
+    "m1-p01-n02-memory-range-overflow",
+    "m1-p01-n03-overlapping-memory",
+    "m1-p01-n04-missing-cpu-feature",
+    "m1-p01-n05-invalid-acpi-checksum"
+  ],
+  "dirty_file_count": 0,
+  "evidence_boundary": {
+    "compatibility_matrix": false,
+    "guest_ring0_entry": true,
+    "interactive_console": false,
+    "kay_owned_page_tables": true,
+    "native_cli": false,
+    "physical_machine": false,
+    "ring3": false
+  },
+  "fixture": {
+    "accelerator": "tcg",
+    "cpu": "Nehalem-v1",
+    "cpus": 1,
+    "firmware": "/usr/share/seabios/bios.bin",
+    "machine": "pc-q35-8.2",
+    "media": "read-only-iso",
+    "memory_mib": 64,
+    "serial": "stdio"
+  },
+  "limits": {
+    "boot_seconds": 8,
+    "build_seconds": 120,
+    "cleanup_seconds": 3,
+    "maximum_protocol_lines": 24,
+    "maximum_serial_bytes": 32768
+  },
+  "result": "pass",
+  "task_id": "m1-p01-integration",
+  "tested_revision": "4766582e5ddff36b141b8787a29569e31c76ace6"
+}

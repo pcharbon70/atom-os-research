@@ -40,7 +40,7 @@ panic and memory behavior satisfy the existing M0–M4 contracts?
 3. Define boot, trap, syscall, stack/FP and panic contracts, then demonstrate
    the exact minimum QEMU boot and native user-mode CLI.
 4. Exercise privilege, interrupt, preemption, allocation, callback lifetime and
-   reclamation failures; qualify the physical T7500 separately.
+   reclamation failures; qualify every physical fixture separately.
 
 ## Findings
 

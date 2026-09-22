@@ -32,7 +32,7 @@ inbox or should be removed.
 
 - [Superseded AMD lab target and QEMU profile](amd64-lab-target-and-minimal-qemu-profile.md) —
   retains the mistaken AMD-processor target and Opteron fixture after the
-  user's 2026-09-06 correction; replaced by the [T7500 / Intel x86-64 profile](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md).
+  user's 2026-09-06 correction; replaced by the [generic Intel-compatible x86-64 profile](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md).
 
 - [AtomVM foundation](atomvm-foundation.md) — preserves the former candidate's
   conceptual map after AtomVM's rejection was confirmed on 2026-09-05; the

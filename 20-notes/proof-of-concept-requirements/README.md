@@ -17,7 +17,11 @@ aliases:
 
 Deep-dive studies of every requirement group in the [readiness assessment](../proof-of-concept-research-readiness.md). The 19 requirement reports cover the four implementation work packages, integrated acceptance criteria and all six deferred capability rows. They translate papers, specifications, implementation articles and blogs into proposed contracts, failure cases and next experiments.
 
-Research supports starting a bounded implementation. The T7500 with Intel x86-64 is now the adopted target, but this does not supply an executable target pin, a working kernel, an executable ABI, a compiled compatibility corpus or measured containment. None of M0–M4 is closed by this writing pass.
+Research supports starting a bounded implementation. A generic
+Intel-compatible x86-64 PC envelope is the adopted target; the T7500 is only
+candidate physical fixture P1. This does not supply a working kernel, an
+executable ABI, a compiled compatibility corpus or measured containment. None
+of M0–M4 is closed by this writing pass.
 
 The first delivery is a native user-mode CLI. The completed proof of concept also requires the project's compiled-BEAM profile and automatic process-local tracing GC outside the privileged kernel. AtomVM and graphical UI are excluded.
 
@@ -40,8 +44,8 @@ The two language feasibility studies, their comparison and two target records co
 - [Zig versus C for the kernel](zig-versus-c-kernel-language-comparison.md) — evidence-weighted pros/cons, conditional recommendation, fair-comparison limits and circumstances favoring C.
 - [C kernel feasibility and low-level compatibility](c-kernel-language-feasibility-and-low-level-compatibility.md) — alternative/fallback assessment, C/compiler/ABI/library contracts and local research probes; preserves the selected Zig decision.
 - [Zig kernel feasibility and C interoperability](zig-kernel-language-feasibility-and-c-interoperability.md) — selected kernel language, scientific/practitioner evidence, bounded local probes and remaining compiler/ABI qualification; extends R02 without closing M0.
-- [Dell Precision T7500 target and minimal QEMU profile](dell-precision-t7500-target-and-minimal-qemu-profile.md) — active architecture decision, minimum configuration and prioritized remaining hardware research.
-- [Dell Precision T7500 platform reference](dell-precision-t7500-platform-reference.md) — manufacturer capabilities for the selected machine; installed components still require inventory.
+- [x86-64 compatibility envelope and test fixtures](x86-64-compatibility-envelope-and-test-fixtures.md) — active architecture decision, runtime-discovery contract, minimal QEMU baseline and qualification ladder.
+- [Dell Precision T7500 platform reference](dell-precision-t7500-platform-reference.md) — manufacturer capabilities for candidate physical fixture P1; installed components still require observation.
 
 The table inventories all requirement reports and their traceability. M0–M4 refer to the assessment's existing milestones; “After M4” is explicitly outside the minimum proof.
 
@@ -75,13 +79,19 @@ The table inventories all requirement reports and their traceability. M0–M4 re
 4. Operate the four-domain demonstration through the CLI and run the M4 campaign with declared capacities and response thresholds.
 5. Read R14 first for a durable local service after M4. R15–R19 are additional capability gates, not reasons to postpone the CLI.
 
-The [T7500 / Intel x86-64 target](dell-precision-t7500-target-and-minimal-qemu-profile.md) supersedes the earlier RV64/QEMU/OpenSBI hypothesis and the corrected AMD-processor assumption. Exact binary pins, native ABI and physical inventory remain open. Fixed-period budgets require an explicit boundary-burst rule. Finite OTP calls can require aliases and monitors. Private heaps do not guarantee same-runtime latency, and a timeout does not prove absence of an accepted effect. These are cross-report constraints that implementation must preserve.
+The [generic x86-64 envelope](x86-64-compatibility-envelope-and-test-fixtures.md)
+supersedes the earlier RV64/QEMU/OpenSBI hypothesis and corrected AMD-processor
+assumption. Exact binary pins, native ABI, runtime discovery and physical
+fixture evidence remain separate obligations. Fixed-period budgets require an
+explicit boundary-burst rule. Finite OTP calls can require aliases and
+monitors. Private heaps do not guarantee same-runtime latency, and a timeout
+does not prove absence of an accepted effect.
 
 ## Evidence strength and remaining artifacts
 
 | Decision | Research result | Decisive artifact still missing |
 | --- | --- | --- |
-| First boot | T7500 / Intel x86-64, Zig kernel language and minimum virtual constraints adopted; responsibilities specified | Qualified Zig/build/ABI profile, exact tool/firmware/image identities and reset-to-user trace |
+| First boot | Generic Intel-compatible x86-64 envelope, Zig kernel language and minimum virtual baseline adopted; responsibilities specified | Runtime discovery report, compatibility-matrix evidence and reset-to-user trace |
 | Kernel contract | Bounded admission, payment, generations and reclamation have defensible precedents | Operation table, lifecycle/accounting models and negative protection tests |
 | BEAM compatibility | A narrow project interpreter is a coherent route; selected OTP paths enlarge its closure | Compiler-produced corpus, generated manifest and hosted/guest differential results |
 | Responsiveness and recovery | Domain protection and actor responsiveness are distinct tests | Predeclared limits, raw delay/resource traces and repeated restart results |

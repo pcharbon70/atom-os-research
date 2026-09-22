@@ -20,7 +20,7 @@ motherboard. Two multicore processor packages remain user-reported;
 installed SKUs, enabled cores/threads, board revision, memory, BIOS and device
 IDs remain unverified.
 
-The [active specification](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+The [active specification](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
 now controls research and tests. Its
 [manufacturer reference](../20-notes/proof-of-concept-requirements/dell-precision-t7500-platform-reference.md)
 distinguishes supported configurations from installed-unit evidence.

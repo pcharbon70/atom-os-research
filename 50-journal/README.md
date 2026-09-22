@@ -35,6 +35,30 @@ provenance record.
 
 ### Documents
 
+- [2026-09-22 M1 phase 01 execution](2026-09-22-m1-phase-01-execution.md) —
+  records the clean Kay OS `4766582` six-case QEMU gate, Kay-owned
+  GDT/IDT/TSS/CR3 state, signed loader and pinned tool identities, bounded
+  failure paths, retained transcripts and proceed-to-Phase-2 boundary.
+
+- [2026-09-21 M0 phase 03 integration](2026-09-21-m0-phase-03-integration.md) —
+  records the clean `2d41f39` assembled gate, 24 inherited, nine harness and
+  seven Phase 3 passing results, the retained `xorriso` runtime failure,
+  inventory-free M1 bundle identities and the owner's proceed decision.
+
+- [2026-09-21 M0 phase 03 section 3.1 qualification](2026-09-21-m0-phase-03-section-31-qualification.md) —
+  records the clean `8206deb` nine-case harness run, controlled publication
+  boundary checks, virtual M1 input-bundle identities, physical-inventory
+  exclusion and the still-open full phase integration and handoff.
+
+- [2026-09-18 M0 phase 02 contract integration](2026-09-18-m0-phase-02-contract-integration.md) —
+  records the clean `f85571e` 24-case hosted contract/image run, exact tool and
+  artifact identities, independent no-blocker follow-up review, explicit
+  non-boot boundaries and the user's 2026-09-19 proceed decision.
+
+- [2026-09-18 M0 phase 01 merged-baseline closeout](2026-09-18-m0-phase-01-merged-baseline-closeout.md) —
+  records the clean `bc4c998` merged-main rerun, nine passing registered cases,
+  user-approved proceed decision, exact hashes and Phase 2 handoff boundary.
+
 - [2026-09-17 M0 phase 01 virtual integration](2026-09-17-m0-phase-01-virtual-integration.md) —
   records the clean `b350de9` virtual gate, nine passing registered cases,
   finite watchdog, exact artifact/manifest hashes, physical-inventory boundary

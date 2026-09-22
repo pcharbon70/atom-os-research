@@ -20,32 +20,34 @@ Back to milestone: [M0 definition and plan](README.md).
 
 ## Entry, scope, and dependencies
 
-Accepted CLI-first scope, T7500 target, public Kay OS implementation repository,
+Accepted CLI-first scope, generic Intel-compatible x86-64 envelope, public Kay OS implementation repository,
 Zig 0.16.0 LLVM/LLD profile and the pinned virtual fixture. The freestanding
 ABI/helper and reproducibility qualification passed on implementation commit
 `be4a230`; virtual integration passed on implementation commit `b350de9` and
-acceptance review remains open. Physical inventory is independently deferred
-to Phase 3 and does not gate this phase.
+again on merged `main` revision `bc4c998`. The user accepted the Phase 1
+proceed decision on 2026-09-18. At that time physical inventory was deferred
+to Phase 3; the 2026-09-21 scope clarification moved actual collection to M1
+Phase 4 and confirmed that it does not gate virtual M0.
 
 Entry gate `accepted-scope-entry`: the milestone's accepted Intel target and CLI-first scope; this is not a prerequisite implementation task.
 
-Plan state: draft. Implementation: provisionally in progress since 2026-09-17.
-The selected virtual-input verifier and registered integration driver pass;
-the handoff review has not run.
+Plan state: reviewed for the declared Phase 1 scope. Implementation: complete
+on 2026-09-18. The selected virtual-input verifier and registered integration
+driver pass on merged `main`; the handoff review records proceed.
 The implementation repository is [pcharbon70/kay-os](https://github.com/pcharbon70/kay-os).
-The implementation agent is assigned through the current execution request;
-the acceptance reviewer remains unassigned.
+The implementation agent executed the work; the user/project owner supplied
+the acceptance decision.
 
 The Phase 1 portion of decision M0-D01 is executed. The repository, Zig compiler profile,
 LLVM/LLD path, QEMU package and executable, versioned Q35 machine, Nehalem CPU,
 SeaBIOS image and 64 MiB limit are selected and identity-checked. Section 1.2
 established the bounded freestanding C ABI/helper closure, instruction control
 and reproducibility recorded in the [2026-09-17 execution record](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md).
-The user clarified that an installed-unit inventory must qualify physical
-hardware rather than gate portable virtual development. The former
-`m0-p01-inventory` task is explicitly superseded by
-[`m0-p03-inventory`](phase-03-acceptance-harness-and-input-qualification.md),
-which remains required for final M0 and physical claims.
+The user clarified that installed-unit observations qualify physical hardware
+rather than portable virtual development. The former `m0-p01-inventory` task
+was first superseded by the Phase 3 boundary task and, on 2026-09-21, actual
+collection moved to M1 Phase 4. M0 now verifies non-consumption instead of
+requiring a physical record.
 
 The host owns build tools, validation fixtures, emulation and capture; M0 does not claim
 kernel enforcement. Firmware/loader/kernel ownership is fixed in the contract.
@@ -63,9 +65,10 @@ The governing [milestone definition](README.md) retains the full artifact and ac
 - [target firmware and boot handoff](../../../20-notes/proof-of-concept-requirements/target-firmware-and-boot-handoff.md) — contract and failure-case input for this phase.
 - [freestanding build and static images](../../../20-notes/proof-of-concept-requirements/freestanding-build-and-static-images.md) — contract and failure-case input for this phase.
 - [Zig feasibility and C interoperability](../../../20-notes/proof-of-concept-requirements/zig-kernel-language-feasibility-and-c-interoperability.md) — selected language and evidence behind the pinned 0.16.0 profile; later kernel interfaces retain their own qualification work.
-- [Kay OS implementation repository](https://github.com/pcharbon70/kay-os) — owns the selected-input manifest, verifier, physical inventory collector, build fixtures and implementation evidence.
+- [Kay OS implementation repository](https://github.com/pcharbon70/kay-os) — owns the selected-input manifest, verifier, build fixtures and implementation evidence; later physical-fixture tooling is outside this phase.
 - [2026-09-17 build-closure evidence](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md) — clean committed build result, hashes, negative cases and explicit non-boot/physical limits for `m0-p01-build`.
 - [2026-09-17 virtual-integration evidence](../../../50-journal/2026-09-17-m0-phase-01-virtual-integration.md) — clean committed run, nine registered cases, finite deadlines, hashes and physical-boundary result for `m0-p01-integration`.
+- [2026-09-18 merged-baseline closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) — exact merged revisions, clean nine-case rerun and user-approved proceed decision for `m0-p01-handoff`.
 
 Follow the [planning convention](../../README.md). Retain results in [dated journal evidence](../../../50-journal/README.md), using the optional [execution-record template](../../../templates/phase-execution-record.md), with indexed [assets](../../../assets/README.md) or exact artifacts in the selected implementation repository.
 
@@ -75,22 +78,21 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 
 | Task ID | Repository/location | Responsible role | Requires | Artifact / acceptance contribution | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
-| m0-p01-decisions | atom-os-research + kay-os | Implementation agent; acceptance reviewer unassigned | accepted-scope-entry | M0-A01, M0-A02; phase cases below | Repository/profile/fixture and Section 1.2 choices recorded; baseline identity and freestanding qualification pass; acceptance review remains open |
-| m0-p01-build | kay-os | Implementation agent; acceptance reviewer unassigned | m0-p01-decisions | M0-A02; phase cases below | Passed at implementation `be4a230`; [journal](../../../50-journal/2026-09-17-m0-phase-01-build-closure.md); acceptance review pending |
-| m0-p01-integration | kay-os | Implementation agent; test reviewer unassigned | m0-p01-build | M0-T01, M0-T02 virtual-input portions | Passed at implementation `b350de9`; [journal](../../../50-journal/2026-09-17-m0-phase-01-virtual-integration.md); acceptance review pending |
-| m0-p01-handoff | atom-os-research | Unassigned acceptance reviewer | m0-p01-integration | M0-A01, M0-A02; M0-T01, M0-T02 virtual-input portions | Dated evidence and proceed/revise/blocked review; not run |
+| m0-p01-decisions | atom-os-research + kay-os | Implementation agent; user acceptance reviewer | accepted-scope-entry | M0-A01, M0-A02; phase cases below | Repository/profile/fixture and Section 1.2 choices accepted; [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) |
+| m0-p01-build | kay-os | Implementation agent; user acceptance reviewer | m0-p01-decisions | M0-A02; phase cases below | Passed at implementation `be4a230` and merged `bc4c998`; [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) |
+| m0-p01-integration | kay-os | Implementation agent; user acceptance reviewer | m0-p01-build | M0-T01, M0-T02 virtual-input portions | Passed at implementation `b350de9` and merged `bc4c998`; [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) |
+| m0-p01-handoff | atom-os-research | User/project owner | m0-p01-integration | M0-A01, M0-A02; M0-T01, M0-T02 virtual-input portions | Proceed on 2026-09-18; [closeout](../../../50-journal/2026-09-18-m0-phase-01-merged-baseline-closeout.md) |
 
 The uncompleted `m0-p01-inventory` task was removed from this phase before
-integration ran. Its acceptance obligation and collector are preserved under
-`m0-p03-inventory`; no physical result is implied. Phase 1 and Phase 2 may
-advance on the versioned virtual fixture while the required final-M0 inventory
-remains open.
+integration ran. Its ID is preserved historically; `m0-p03-inventory` now
+records the scope transfer and `m1-p04-inventory` owns actual collection. No
+physical result is implied by Phase 1.
 
 ## Planned work
 
-- [ ] 1 Phase — Target, toolchain, and build baseline.
+- [x] 1 Phase — Target, toolchain, and build baseline.
 
-  Turn the selected Intel target into a versioned, reproducible virtual development fixture.
+  Turn the generic Intel-compatible x86-64 envelope into a versioned, reproducible virtual development fixture.
   This phase qualifies inputs and native link fixtures, not a user-mode OS or physical
   machine. Completion requires the assembled phase gate below, not just its component tasks.
 
@@ -143,7 +145,7 @@ remains open.
         permitted nondeterminism. Preserve commands and binary identities rather than claiming
         reproducibility from one build.
 
-  - [ ] 1.3 Section — Phase 1 Integration Tests.
+  - [x] 1.3 Section — Phase 1 Integration Tests.
 
     Test the assembled outputs and inherited behavior using the exact entry fixture, declared
     case envelope and finite failure policy. These tests control handoff; required failures,
@@ -161,7 +163,7 @@ remains open.
         Record exact setup, command, binary/fixture hashes, case IDs, seeds and numerical
         limits before execution. Run environment resolution and clean native fixture builds
         against the exact virtual manifest. Confirm the run neither consumes physical
-        inventory nor represents q35 as T7500 evidence. M0-T01/T02 are preliminary here where
+        inventory nor represents q35 as physical-machine evidence. M0-T01/T02 are preliminary here where
         image/ABI inputs are completed in Phase 2 and rerun in Phase 3.
 
       - [x] 1.3.1.2 Subtask — Exercise failures and inherited behavior.
@@ -172,11 +174,12 @@ remains open.
         brochure or treating it as a virtual input. Retain actual observations and finite
         watchdog outcomes, not only intended commands.
 
-    - [ ] 1.3.2 Task [id: m0-p01-handoff] [repo: atom-os-research] [after: m0-p01-integration] — Record evidence and decide phase handoff.
+    - [x] 1.3.2 Task [id: m0-p01-handoff] [repo: atom-os-research] [after: m0-p01-integration] — Record evidence and decide phase handoff.
 
-      Release the accepted virtual build/fixture inputs to Phase 2. The separately deferred
-      physical inventory keeps final M0 and physical acceptance open but does not prevent this
-      virtual handoff.
+      Release the accepted virtual build/fixture inputs to Phase 2. The run
+      recorded physical inventory as deferred under the plan then in force; the
+      later scope decision preserves that historical result while moving actual
+      collection to M1 Phase 4.
 
       - [x] 1.3.2.1 Subtask — Record reproducible execution evidence.
 
@@ -186,7 +189,7 @@ remains open.
         versus guest evidence distinct. Index attachments and link the record from this phase
         and milestone.
 
-      - [ ] 1.3.2.2 Subtask — Review closure and update the milestone.
+      - [x] 1.3.2.2 Subtask — Review closure and update the milestone.
 
         An assigned reviewer checks every child and required gate against evidence and records
         proceed, revise or blocked. Preserve unresolved decisions, limits and reopening

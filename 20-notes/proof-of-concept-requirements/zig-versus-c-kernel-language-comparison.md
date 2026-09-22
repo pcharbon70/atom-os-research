@@ -40,7 +40,7 @@ repeating those inventories.
 
 ## Decision frame
 
-Both languages must satisfy the same [T7500 / Intel x86-64 contract](dell-precision-t7500-target-and-minimal-qemu-profile.md):
+Both languages must satisfy the same [generic Intel-compatible x86-64 contract](x86-64-compatibility-envelope-and-test-fixtures.md):
 minimal QEMU first, using the planned Nehalem-v1, one-CPU, 128-MiB serial
 fixture; separately inventoried physical hardware later. Neither compiler CPU
 selection nor a hosted target support tier proves that the Dell boots.

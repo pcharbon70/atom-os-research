@@ -38,12 +38,55 @@ profile's bounded [freestanding build qualification](50-journal/2026-09-17-m0-ph
 passes, without closing boot, physical, phase-integration, or milestone
 acceptance gates.
 
-The initial physical target is the **Dell Precision T7500**, using
-**Intel Xeon / Intel 64 (x86-64)**. The [active target profile](20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
-defines a Nehalem-class, one-CPU, 64 MiB serial QEMU fixture and the remaining
-installed-unit inventory. The AMD-processor assumption has been corrected;
+The initial platform target is a documented **generic Intel-compatible x86-64
+PC envelope**. The [active target profile](20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
+defines a Nehalem-class, one-CPU, 64 MiB serial QEMU baseline, runtime hardware
+discovery expectations, a capability-driven virtual matrix, and independent
+physical fixtures. The Dell Precision T7500 is candidate fixture P1 rather
+than the OS target. The AMD-processor assumption has been corrected;
 its former profile is archived. RISC-V/OpenSBI remains comparative research,
 not the first implementation path.
+
+## Five-layer architecture
+
+Kay OS separates hardware mechanism, privileged enforcement, managed
+execution, reusable system policy, and application meaning. Only the minimal
+kernel in Layer 2 is privileged; the managed runtime, system services, and
+applications in Layers 3–5 remain outside the kernel.
+
+```mermaid
+flowchart TB
+    L5["5. Applications and domain services<br/>domain meaning, invariants, workflows, outcomes"]
+    L4["4. OTP-like system services<br/>lifecycle, persistence, identity, devices, network, policy"]
+    L3["3. Managed actor runtime<br/>BEAM execution, actors, messages, timers, tracing GC"]
+    L2["2. Minimal privileged kernel<br/>capabilities, IPC, isolation, budgets, revocation"]
+    L1["1. Hardware and architecture support<br/>CPU entry, memory, time, interrupts, DMA, faults"]
+
+    L5 -->|"typed service requests"| L4
+    L4 -->|"managed services and grants"| L5
+    L4 --> L3
+    L3 --> L2
+    L2 --> L1
+```
+
+1. **Hardware and architecture support** discovers and normalizes processor,
+   memory, interrupt, time, DMA, fault, and device mechanisms without deciding
+   higher-level policy.
+2. **Minimal privileged kernel** turns those mechanisms into protected
+   domains, capabilities, IPC, mappings, resource accounts, revocation, and
+   teardown.
+3. **Managed actor runtime** supplies BEAM-compatible processes, messaging,
+   scheduling, process-local heaps and tracing garbage collection, timers,
+   code generations, and monitored execution.
+4. **OTP-like system services** provide unprivileged lifecycle, naming,
+   persistence, identity and policy, device and network brokering, updates,
+   admission control, telemetry, audit, and operator services.
+5. **Applications and domain services** own domain identities, invariants,
+   commands, workflows, external effects, semantic views, collaboration rules,
+   compatibility, and user-visible outcomes.
+
+The detailed [applications and domain-services synthesis](20-notes/applications-and-domain-services-layer.md#position-in-the-five-layer-architecture)
+defines the boundaries and responsibilities of all five layers.
 
 Start at the [home map](10-maps/home.md). Repository-wide authoring and
 maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).

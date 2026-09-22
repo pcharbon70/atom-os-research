@@ -50,7 +50,7 @@ this plan.
 The governing [milestone definition](README.md) retains the full artifact and acceptance wording. This phase contributes to M4-A01, M4-A02, M4-A03, M4-A04, M4-A05, M4-A06; its case coverage is M4-T01, M4-T02, M4-T03, M4-T04, M4-T05, M4-T06, M4-T07. Partial/model/hosted results do not close a case requiring later guest integration.
 
 - [models fault injection and measurement](../../../20-notes/proof-of-concept-requirements/models-fault-injection-and-measurement.md) — contract and failure-case input for this phase.
-- [dell precision t7500 target and minimal qemu profile](../../../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md) — contract and failure-case input for this phase.
+- [x86-64 compatibility envelope and test fixtures](../../../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md) — contract and failure-case input for this phase.
 
 Follow the [planning convention](../../README.md). Retain results in [dated journal evidence](../../../50-journal/README.md), using the optional [execution-record template](../../../templates/phase-execution-record.md), with indexed [assets](../../../assets/README.md) or exact artifacts in the selected implementation repository.
 

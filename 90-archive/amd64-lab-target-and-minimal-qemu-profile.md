@@ -20,7 +20,7 @@ aliases:
 
 Archived on 2026-09-06. The user confirmed the **Dell Precision T7500 and its
 Intel Xeon x86-64 architecture**; the AMD-processor assumption was wrong.
-The [T7500 target specification](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+The [current generic x86-64 target specification](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
 replaces this document. The former Opteron fixture and AMD-manual dependency
 below are inactive. The term AMD64 remains valid in shared ISA/ABI names;
 it does not identify this machine's processor vendor.

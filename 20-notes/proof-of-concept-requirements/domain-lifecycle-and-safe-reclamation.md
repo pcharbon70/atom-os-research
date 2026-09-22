@@ -18,7 +18,7 @@ Requirement R07, M2–M4. Domain restart must reclaim safe resources without adm
 
 [Read-copy update](../../30-sources/mckenney-slingwine-1998-read-copy-update.md) separates removal from reclamation after earlier readers become quiescent. This is a useful lifecycle principle, not a complete domain-destruction algorithm: software-reader quiescence does not establish device, translation or timer completion.
 
-[Kernel timing analysis](../../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md) shows why deletion and lazy cleanup deserve explicit bounded-work analysis. The [x86 system-programming study](../../30-sources/intel-2026-system-programming-documentation.md) supplies translation-invalidation context. The [T7500 / Intel x86-64 profile](dell-precision-t7500-target-and-minimal-qemu-profile.md) requires qualifying the exact Intel local invalidation sequence for the installed Xeon and integrating it into address-space reuse; a RISC-V fence is not the current backend.
+[Kernel timing analysis](../../30-sources/blackham-et-al-2011-timing-analysis-protected-kernel.md) shows why deletion and lazy cleanup deserve explicit bounded-work analysis. The [x86 system-programming study](../../30-sources/intel-2026-system-programming-documentation.md) supplies translation-invalidation context. The [generic Intel-compatible x86-64 profile](x86-64-compatibility-envelope-and-test-fixtures.md) requires qualifying the local invalidation sequence for the active backend and each claimed processor family; a RISC-V fence is not the current backend.
 
 The first profile is single-CPU and has no untrusted bus-mastering device. That removes remote shootdown and DMA obligations from this test envelope, not interrupt races or local stale translations.
 

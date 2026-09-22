@@ -62,5 +62,5 @@ or physical memory and interrupt-controller behavior.
 
 ## Derived work
 
-- [T7500 / Intel x86-64 target](../20-notes/proof-of-concept-requirements/dell-precision-t7500-target-and-minimal-qemu-profile.md)
+- [Generic Intel-compatible x86-64 target](../20-notes/proof-of-concept-requirements/x86-64-compatibility-envelope-and-test-fixtures.md)
 - [Freestanding build](../20-notes/proof-of-concept-requirements/freestanding-build-and-static-images.md)

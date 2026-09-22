@@ -1,0 +1,12 @@
+limine: Loading executable `boot():/boot/kay-m1-kernel.elf`...
+KAY-M1/1 milestone entry
+KAY-M1/1 milestone descriptors
+KAY-M1/1 milestone handoff
+KAY-M1/1 milestone paging
+KAY-M1/1 milestone memory
+KAY-M1/1 memory entries=19 usable-pages=15936 reserved-bytes=274310144 highest=0x0000000100000000
+KAY-M1/1 cpu vendor=GenuineIntel logical=1 leaf1-edx=0x078bfbfd ext-edx=0x20100800 nx=1
+KAY-M1/1 acpi revision=0 cpus=1 lapic=0x00000000fee00000 ioapic-id=0 ioapic=0xfec00000 gsi-base=0 legacy-pic=1
+KAY-M1/1 resources console=configured-com1:03f8 timer=configured-pit:0040
+KAY-M1/1 milestone discovery-ready
+KAY-M1/1 result pass case=normal
