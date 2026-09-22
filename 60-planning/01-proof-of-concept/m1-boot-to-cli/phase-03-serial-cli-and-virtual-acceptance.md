@@ -24,11 +24,10 @@ M1 Phase 2 protected images/entry, M0 pinned console/time contract, and reproduc
 
 Required predecessor: [M1 Phase 2](phase-02-protected-images-and-user-transitions.md), task `m1-p02-handoff`.
 
-Plan state: draft, requiring decision review before execution. Implementation: not started.
-All tests: not run. Implementation repository and individual owners remain unassigned; M0-D01
-resolves the source location and initial roles, and this phase's decisions task assigns its
-execution/review roles before dependent work. The label unresolved-implementation is a
-recorded blocker, not a selected repository.
+Plan state: reviewed draft awaiting its predecessor and M1-D03. Implementation:
+not started. All tests: not run. Implementation lives in the public Kay OS
+repository; Codex is the implementation/test role and the user/project owner
+is the decision and acceptance reviewer.
 
 Decision M1-D03 is resolved by m1-p03-decisions: Select framing, line limit,
 overflow resynchronization, timer source/units, interrupts/waits, finite output
@@ -63,12 +62,12 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 
 | Task ID | Repository/location | Responsible role | Requires | Artifact / acceptance contribution | Completion evidence |
 | --- | --- | --- | --- | --- | --- |
-| m1-p03-decisions | atom-os-research | Unassigned; resolve in m1-p03-decisions | m1-p02-handoff | M1-A03, M1-A04, M1-A05; phase cases below | Freeze CLI and timing limits output and verification; not run |
-| m1-p03-io | unresolved-implementation | Unassigned; resolve in m1-p03-decisions | m1-p03-decisions | M1-A03, M1-A04; phase cases below | Implement serial and elapsed-time operations output and verification; not run |
-| m1-p03-cli | unresolved-implementation | Unassigned; resolve in m1-p03-decisions | m1-p03-io | M1-A05, M1-A06; phase cases below | Implement the parser and three commands output and verification; not run |
-| m1-p03-matrix | unresolved-implementation | Unassigned; resolve in m1-p03-decisions | m1-p03-cli | M1-A01, M1-A06; M1-T09 | Versioned matrix and per-row discovery/boot results; not run |
-| m1-p03-integration | unresolved-implementation | Unassigned test reviewer | m1-p03-matrix | M1-T01, M1-T02, M1-T03, M1-T04, M1-T05, M1-T06, M1-T07, M1-T08, M1-T09 | Registered driver, raw positive/negative results; not run |
-| m1-p03-handoff | atom-os-research | Unassigned acceptance reviewer | m1-p03-integration | M1-A01, M1-A03, M1-A04, M1-A05, M1-A06; M1-T01–M1-T09 | Dated evidence and proceed/revise/blocked review; not run |
+| m1-p03-decisions | atom-os-research | Codex implementer; user/project owner decision reviewer | m1-p02-handoff | M1-A03, M1-A04, M1-A05; phase cases below | Freeze CLI and timing limits output and verification; not run |
+| m1-p03-io | kay-os | Codex implementer/tester | m1-p03-decisions | M1-A03, M1-A04; phase cases below | Implement serial and elapsed-time operations output and verification; not run |
+| m1-p03-cli | kay-os | Codex implementer/tester | m1-p03-io | M1-A05, M1-A06; phase cases below | Implement the parser and three commands output and verification; not run |
+| m1-p03-matrix | kay-os | Codex implementer/tester | m1-p03-cli | M1-A01, M1-A06; M1-T09 | Versioned matrix and per-row discovery/boot results; not run |
+| m1-p03-integration | kay-os | Codex implementer/tester; user/project owner acceptance review | m1-p03-matrix | M1-T01, M1-T02, M1-T03, M1-T04, M1-T05, M1-T06, M1-T07, M1-T08, M1-T09 | Registered driver, raw positive/negative results; not run |
+| m1-p03-handoff | atom-os-research | User/project owner acceptance reviewer | m1-p03-integration | M1-A01, M1-A03, M1-A04, M1-A05, M1-A06; M1-T01–M1-T09 | Dated evidence and proceed/revise/blocked review; not run |
 
 ## Planned work
 
@@ -92,7 +91,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         fixture. Record units, conversion, framing, buffer/line capacities, overflow, and
         halt/reset criteria.
 
-    - [ ] 3.1.2 Task [id: m1-p03-io] [repo: unresolved-implementation] [after: m1-p03-decisions] — Implement serial and elapsed-time operations.
+    - [ ] 3.1.2 Task [id: m1-p03-io] [repo: kay-os] [after: m1-p03-decisions] — Implement serial and elapsed-time operations.
 
       Make console/time syscalls obey complete-buffer checks and bounded privileged work.
 
@@ -112,7 +111,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
     Use the actual native CLI to expose only mechanisms that exist and qualify the assembled
     virtual system.
 
-    - [ ] 3.2.1 Task [id: m1-p03-cli] [repo: unresolved-implementation] [after: m1-p03-io] — Implement the parser and three commands.
+    - [ ] 3.2.1 Task [id: m1-p03-cli] [repo: kay-os] [after: m1-p03-io] — Implement the parser and three commands.
 
       Deliver M1-A05 without simulated service inspection or a privileged shell.
 
@@ -132,7 +131,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         Adapt M0's runner to submit commands, verify CPL traces and canaries, and retain the
         boot image, symbols, transcripts, and negative-test outcomes from two clean builds.
 
-    - [ ] 3.2.2 Task [id: m1-p03-matrix] [repo: unresolved-implementation] [after: m1-p03-cli] — Exercise the virtual compatibility matrix.
+    - [ ] 3.2.2 Task [id: m1-p03-matrix] [repo: kay-os] [after: m1-p03-cli] — Exercise the virtual compatibility matrix.
 
       Demonstrate that Kay OS discovers the machine presented at boot instead
       of reproducing constants from the baseline or a physical inventory.
@@ -156,7 +155,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 3.3.1 Task [id: m1-p03-integration] [repo: unresolved-implementation] [after: m1-p03-matrix] — Verify the integrated outcome and regressions.
+    - [ ] 3.3.1 Task [id: m1-p03-integration] [repo: kay-os] [after: m1-p03-matrix] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for

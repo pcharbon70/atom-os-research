@@ -26,11 +26,10 @@ branch, not an added dependency on SMP or a blocker to virtual M2 work.
 
 Required predecessor: [M1 Phase 3](phase-03-serial-cli-and-virtual-acceptance.md), task `m1-p03-handoff`.
 
-Plan state: draft, requiring decision review before execution. Implementation: not started.
-All tests: not run. Implementation repository and individual owners remain unassigned; M0-D01
-resolves the source location and initial roles, and this phase's decisions task assigns its
-execution/review roles before dependent work. The label unresolved-implementation is a
-recorded blocker, not a selected repository.
+Plan state: reviewed optional branch awaiting its predecessor, fixture access
+and M1-D04. Implementation: not started. All tests: not run. Kay OS owns the
+executable tooling; the lab operator and physical-test reviewer remain to be
+assigned when a fixture is deliberately selected.
 
 Decision M1-D04 is resolved by m1-p04-decisions: assign a fixture ID; select
 safe observation, boot media, actual firmware path, serial/debug transport and
@@ -151,7 +150,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 4.2.1 Task [id: m1-p04-integration] [repo: unresolved-implementation] [after: m1-p04-physical] — Verify the integrated outcome and regressions.
+    - [ ] 4.2.1 Task [id: m1-p04-integration] [repo: kay-os] [after: m1-p04-physical] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for

@@ -134,10 +134,12 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Merge and synchronize the accepted [M0 Phase 3](m0-boot-inputs/phase-03-acceptance-harness-and-input-qualification.md)
-handoff, then reproduce its immutable input bundle at M1 entry. The clean
-Phase 3 [integration evidence](../../50-journal/2026-09-21-m0-phase-03-integration.md)
-passed at `2d41f39`, and the user/project owner selected proceed on 2026-09-21.
+Begin M1-D02 review for accepted
+[M1 Phase 2](m1-boot-to-cli/phase-02-protected-images-and-user-transitions.md)
+using the completed Phase 1 handoff. Research `main` is at M0
+merge `9c0653b`; Kay OS `main` is at M0 merge `28408e8`. The user/project
+owner accepted M1-D01 immediate Kay ownership and the M1 entry plan on
+2026-09-21.
 Phase 1's repository, Zig profile, virtual fixture, freestanding build
 qualification, merged-main integration and handoff review pass. Phase 2 has
 frozen its loader, handoff, image, console/time, syscall, register-state and
@@ -145,8 +147,10 @@ initial-authority choices and completed its executable-contract and hosted
 integration work.
 The controlled harness, clean virtual bundle and assembled M0-T01 through
 M0-T06 gate pass without consuming physical inventory. `m0-p03-handoff` and
-M0 are accepted. Later plans remain conditional on their actual inputs,
-merged-baseline synchronization and predecessor evidence.
+M0 are accepted and merged. M1 Phase 1 passed six registered guest boots at
+clean Kay OS commit `4766582` and has a proceed handoff; Phase 2 still requires
+M1-D02 before execution. Later phase decisions remain conditional on their actual inputs and
+predecessor evidence.
 Before executing each phase, review its decision register and bind accepted
 interface versions; revise affected dependencies and tests together if a
 decision changes the planned mechanism.
