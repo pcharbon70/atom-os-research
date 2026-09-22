@@ -23,8 +23,9 @@ M1 Phase 1 accepted kernel/memory baseline.
 
 Required predecessor: [M1 Phase 1](phase-01-kernel-entry-and-memory-foundation.md), task `m1-p01-handoff`.
 
-Plan state: reviewed draft awaiting its predecessor and M1-D02. Implementation:
-not started. All tests: not run. Implementation lives in the public Kay OS
+Plan state: accepted plan; Phase 1 predecessor passed at clean Kay OS revision
+`4766582` with a proceed handoff. M1-D02 remains the entry blocker.
+Implementation: not started. All tests: not run. Implementation lives in the public Kay OS
 repository; Codex is the implementation/test role and the user/project owner
 is the decision and acceptance reviewer.
 

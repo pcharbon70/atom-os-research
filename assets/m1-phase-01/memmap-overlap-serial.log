@@ -1,0 +1,4 @@
+limine: Loading executable `boot():/boot/kay-m1-kernel.elf`...
+KAY-M1/1 milestone entry
+KAY-M1/1 milestone descriptors
+KAY-M1/1 failure last=descriptors reason=injected_overlap

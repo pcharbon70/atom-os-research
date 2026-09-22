@@ -134,9 +134,9 @@ still apply and are called out above and in the milestone definitions.
 
 ## Next decision and execution work
 
-Continue the accepted [M1 Phase 1](m1-boot-to-cli/phase-01-kernel-entry-and-memory-foundation.md)
-from its completed controlled-startup section into the recorded integration
-and handoff. Research `main` is at M0
+Begin M1-D02 review for accepted
+[M1 Phase 2](m1-boot-to-cli/phase-02-protected-images-and-user-transitions.md)
+using the completed Phase 1 handoff. Research `main` is at M0
 merge `9c0653b`; Kay OS `main` is at M0 merge `28408e8`. The user/project
 owner accepted M1-D01 immediate Kay ownership and the M1 entry plan on
 2026-09-21.
@@ -147,9 +147,9 @@ initial-authority choices and completed its executable-contract and hosted
 integration work.
 The controlled harness, clean virtual bundle and assembled M0-T01 through
 M0-T06 gate pass without consuming physical inventory. `m0-p03-handoff` and
-M0 are accepted and merged. M1 Phase 1 Section 1.1 is implemented at Kay OS
-commit `6474054`; its separately recorded integration evidence controls the
-Phase 2 handoff. Later phase decisions remain conditional on their actual inputs and
+M0 are accepted and merged. M1 Phase 1 passed six registered guest boots at
+clean Kay OS commit `4766582` and has a proceed handoff; Phase 2 still requires
+M1-D02 before execution. Later phase decisions remain conditional on their actual inputs and
 predecessor evidence.
 Before executing each phase, review its decision register and bind accepted
 interface versions; revise affected dependencies and tests together if a

@@ -27,9 +27,11 @@ Required predecessor: [M0 Phase 3](../m0-boot-inputs/phase-03-acceptance-harness
 
 Plan state: accepted for execution; M1-D01 was selected by the user/project
 owner on 2026-09-21. Section 1.1 implementation completed at Kay OS commit
-`64740540e04b862336a70cc65a5dd02d1eb61240`; its positive boot and five
-fault-injected development boots passed. Section 1.2 evidence and handoff are
-recorded separately. Implementation lives in the
+`64740540e04b862336a70cc65a5dd02d1eb61240`. The clean Section 1.2 gate passed
+six registered boots at Kay OS commit
+`4766582e5ddff36b141b8787a29569e31c76ace6`; the
+[execution record](../../../50-journal/2026-09-22-m1-phase-01-execution.md)
+records the proceed handoff. Implementation lives in the
 public [Kay OS repository](https://pushin.eu/pcharbon70/kay-os). Codex is the
 implementation/test role; the user/project owner is the decision and acceptance
 reviewer. Later execution still requires the accepted M1-D01 record.
@@ -108,12 +110,12 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
 | m1-p01-decisions | atom-os-research | Codex implementer; user/project owner decision reviewer | m0-p03-handoff | M1-A01; phase cases below | M1-D01 immediate Kay ownership accepted 2026-09-21; profile recorded above |
 | m1-p01-memory | kay-os | Codex implementer/tester | m1-p01-decisions | M1-A01, M1-A06; phase cases below | Kay `6474054`: copied 19-entry map, 15,936 usable pages, Kay CR3/GDT/IDT/TSS and bounded failure boots |
 | m1-p01-discovery | kay-os | Codex implementer/tester | m1-p01-memory | M1-A01, M1-A06; M1-T09 | Kay `6474054`: CPUID and RSDT/MADT report reached `discovery-ready` on the declared baseline |
-| m1-p01-integration | kay-os | Codex implementer/tester; user/project owner acceptance review | m1-p01-discovery | M1-T06, M1-T07, M1-T08, M1-T09 discovery portion | Registered driver, raw positive/negative results; not run |
-| m1-p01-handoff | atom-os-research | User/project owner acceptance reviewer | m1-p01-integration | M1-A01, M1-A06; M1-T06, M1-T07, M1-T08, M1-T09 discovery portion | Dated evidence and proceed/revise/blocked review; not run |
+| m1-p01-integration | kay-os | Codex implementer/tester; user/project owner acceptance review | m1-p01-discovery | M1-T06, M1-T07, M1-T08, M1-T09 discovery portion | Clean Kay `4766582`: six registered boots passed with retained serial, register, artifact and inherited-M0 evidence |
+| m1-p01-handoff | atom-os-research | User/project owner acceptance reviewer | m1-p01-integration | M1-A01, M1-A06; M1-T06, M1-T07, M1-T08, M1-T09 discovery portion | [2026-09-22 execution record](../../../50-journal/2026-09-22-m1-phase-01-execution.md): proceed under merge instruction; full milestone cases remain open |
 
 ## Planned work
 
-- [ ] 1 Phase — Kernel entry and memory foundation.
+- [x] 1 Phase — Kernel entry and memory foundation.
 
   Bring up the real ring-0 kernel, validated boot-memory state and runtime
   discovery report on the M0 baseline, with bounded diagnostics and no host OS
@@ -178,20 +180,20 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         console/timer resources. Bound lengths and counts so malformed firmware
         cannot create unbounded serial output or work.
 
-  - [ ] 1.2 Section — Phase 1 Integration Tests.
+  - [x] 1.2 Section — Phase 1 Integration Tests.
 
     Test the assembled outputs and inherited behavior using the exact entry fixture, declared
     case envelope and finite failure policy. These tests control handoff; required failures,
     missing inputs and unrun cases remain open.
 
-    - [ ] 1.2.1 Task [id: m1-p01-integration] [repo: kay-os] [after: m1-p01-discovery] — Verify the integrated outcome and regressions.
+    - [x] 1.2.1 Task [id: m1-p01-integration] [repo: kay-os] [after: m1-p01-discovery] — Verify the integrated outcome and regressions.
 
       Create or extend the executable phase driver, bind its invocation to a versioned case
       manifest, and run positive and negative cases. The driver must return failure for
       missing observations or watchdog expiry; an unspecified future command cannot close this
       task.
 
-      - [ ] 1.2.1.1 Subtask — Register and run the acceptance path.
+      - [x] 1.2.1.1 Subtask — Register and run the acceptance path.
 
         Record exact setup, command, binary/fixture hashes, case IDs, seeds and numerical
         limits before execution. Boot the actual kernel using M0's driver and correlate serial
@@ -199,19 +201,19 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         M1-T06/T07/T08 and the discovery portion of M1-T09; these are not yet
         full CLI or matrix acceptance.
 
-      - [ ] 1.2.1.2 Subtask — Exercise failures and inherited behavior.
+      - [x] 1.2.1.2 Subtask — Exercise failures and inherited behavior.
 
         Truncate/overlap reservations and remove required features. Confirm safe failure and
         watchdog detection; repeat M0 build/version/handoff checks so a fixture change cannot
         mask a kernel defect. Retain actual observations and finite watchdog outcomes, not
         only intended commands.
 
-    - [ ] 1.2.2 Task [id: m1-p01-handoff] [repo: atom-os-research] [after: m1-p01-integration] — Record evidence and decide phase handoff.
+    - [x] 1.2.2 Task [id: m1-p01-handoff] [repo: atom-os-research] [after: m1-p01-integration] — Record evidence and decide phase handoff.
 
       Pass a reproducible kernel-entry and memory baseline to Phase 2. Do not close M1-T01
       merely because a ring-0 banner appears.
 
-      - [ ] 1.2.2.1 Subtask — Record reproducible execution evidence.
+      - [x] 1.2.2.1 Subtask — Record reproducible execution evidence.
 
         Create a dated journal record linked to the task/artifact/case IDs, full tested commit
         and dirty state, host/guest or physical configuration, tools, commands, raw logs,
@@ -219,7 +221,7 @@ IDs below are symbolic, not Markdown anchors. The predecessor document above res
         versus guest evidence distinct. Index attachments and link the record from this phase
         and milestone.
 
-      - [ ] 1.2.2.2 Subtask — Review closure and update the milestone.
+      - [x] 1.2.2.2 Subtask — Review closure and update the milestone.
 
         An assigned reviewer checks every child and required gate against evidence and records
         proceed, revise or blocked. Preserve unresolved decisions, limits and reopening

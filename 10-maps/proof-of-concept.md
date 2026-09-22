@@ -50,8 +50,9 @@ proof of concept. Broader layer inquiries retain their evidence requirements.
 - [M1 boot-to-CLI plan](../60-planning/01-proof-of-concept/m1-boot-to-cli/README.md)
   is accepted for execution. Phase 1 binds the merged M0 baseline, immediate
   Kay ownership of stacks/descriptors/paging and conservative memory release;
-  Section 1.1 implementation is complete at Kay OS commit `6474054`, while the
-  separately recorded integration evidence controls phase closure.
+  Phase 1 completed six registered guest boots at clean Kay OS commit
+  `4766582`, retained its ring-0/paging evidence, and has a proceed handoff to
+  Phase 2 decision M1-D02.
 - [Proof-of-concept implementation planning](../60-planning/01-proof-of-concept/README.md)
   provides five detailed M0–M4 definitions and maps the readiness gaps to their
   required artifacts and acceptance cases. The

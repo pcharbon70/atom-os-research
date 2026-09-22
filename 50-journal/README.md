@@ -35,6 +35,11 @@ provenance record.
 
 ### Documents
 
+- [2026-09-22 M1 phase 01 execution](2026-09-22-m1-phase-01-execution.md) —
+  records the clean Kay OS `4766582` six-case QEMU gate, Kay-owned
+  GDT/IDT/TSS/CR3 state, signed loader and pinned tool identities, bounded
+  failure paths, retained transcripts and proceed-to-Phase-2 boundary.
+
 - [2026-09-21 M0 phase 03 integration](2026-09-21-m0-phase-03-integration.md) —
   records the clean `2d41f39` assembled gate, 24 inherited, nine harness and
   seven Phase 3 passing results, the retained `xorriso` runtime failure,

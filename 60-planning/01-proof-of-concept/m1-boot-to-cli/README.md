@@ -53,10 +53,10 @@ the delivered interface.
 This milestone has an accepted four-phase implementation plan. The Kay OS
 implementation repository, merged M0 inputs, implementation/acceptance roles
 and M1-D01 immediate Kay ownership profile are bound by the user/project
-owner's 2026-09-21 decision. Phase 1 Section 1.1 is implemented at Kay OS
-commit `6474054`; controlled startup, memory ownership and discovery tasks are
-complete, while the separately recorded integration/handoff state controls
-phase closure. Later decisions remain explicit blockers only for
+owner's 2026-09-21 decision. Phase 1 is complete: Section 1.1 is implemented
+at Kay OS commit `6474054`, and the clean six-case integration passed at
+`4766582` with a [proceed handoff](../../../50-journal/2026-09-22-m1-phase-01-execution.md).
+Later decisions remain explicit blockers only for
 their dependent phases. Plan acceptance neither closes a delivery gate nor
 substitutes for execution evidence.
 
@@ -226,8 +226,8 @@ execution evidence. Review dependencies and resolve decisions before execution.
 
 | Phase | Integrated outcome | Entry dependency | State / evidence |
 | --- | --- | --- | --- |
-| [Phase 1 — Kernel entry and memory foundation](phase-01-kernel-entry-and-memory-foundation.md) | Bring up the real ring-0 kernel, validated boot-memory state and bounded runtime discovery report on the M0 baseline. | m0-p03-handoff | Section 1.1 complete at Kay `6474054`; Section 1.2 evidence and handoff recorded separately |
-| [Phase 2 — Protected images and user transitions](phase-02-protected-images-and-user-transitions.md) | Install validated native images and demonstrate safe ring-3 execution, traps, and return with kernel-owned context and protected memory. | m1-p01-handoff | Accepted plan; predecessor and M1-D02 remain open; implementation not started |
+| [Phase 1 — Kernel entry and memory foundation](phase-01-kernel-entry-and-memory-foundation.md) | Bring up the real ring-0 kernel, validated boot-memory state and bounded runtime discovery report on the M0 baseline. | m0-p03-handoff | Complete; clean Kay `4766582` six-case gate passed; proceed to Phase 2 after merge |
+| [Phase 2 — Protected images and user transitions](phase-02-protected-images-and-user-transitions.md) | Install validated native images and demonstrate safe ring-3 execution, traps, and return with kernel-owned context and protected memory. | m1-p01-handoff | Accepted plan; Phase 1 predecessor complete; M1-D02 remains open; implementation not started |
 | [Phase 3 — Serial CLI and virtual acceptance](phase-03-serial-cli-and-virtual-acceptance.md) | Deliver the native user-mode `kay>` prompt, bounded serial/time behavior, runtime discovery and the capability-driven virtual compatibility matrix. | m1-p02-handoff | Accepted plan; predecessor and M1-D03 remain open; implementation not started |
 | [Phase 4 — Physical fixture qualification](phase-04-physical-fixture-qualification.md) | Qualify one observed physical fixture at a time by comparing its external record with Kay OS discovery and repeating applicable CLI checks. | m1-p03-handoff | Accepted optional plan; predecessor, fixture access and M1-D04 remain open; T7500 is candidate P1 |
 
@@ -251,7 +251,7 @@ toolchain and initial virtual fixture; those selections are not reopened here.
 | Decision ID | Choice and criteria | Resolution task and phase | Responsible role | Blocks | State |
 | --- | --- | --- | --- | --- | --- |
 | M1-D01 | Reconcile M0 entry/feature/register policies with the implementation; assign exception-stack and reserved-memory ownership before admitting any user image. | [m1-p01-decisions](phase-01-kernel-entry-and-memory-foundation.md) | Codex implementer/tester; user/project owner decision and acceptance reviewer | Remaining Phase 1 work and its dependent gates | Accepted 2026-09-21: immediate Kay ownership; kernel stack/GDT/IDT/TSS/IST before allocation, copied handoff, Kay page tables before general allocation, conservative release rules and bounded milestone diagnostics |
-| M1-D02 | Freeze image permissions, state preservation, syscall buffer rules, and return validation against M0; restricted FP/SIMD remains explicit rather than full ABI support. | [m1-p02-decisions](phase-02-protected-images-and-user-transitions.md) | Codex implementer/tester; user/project owner decision and acceptance reviewer | Remaining Phase 2 work and its dependent gates | Open; resolve after `m1-p01-handoff` |
+| M1-D02 | Freeze image permissions, state preservation, syscall buffer rules, and return validation against M0; restricted FP/SIMD remains explicit rather than full ABI support. | [m1-p02-decisions](phase-02-protected-images-and-user-transitions.md) | Codex implementer/tester; user/project owner decision and acceptance reviewer | Remaining Phase 2 work and its dependent gates | Open and ready for review after completed `m1-p01-handoff` |
 | M1-D03 | Select framing, line limit, overflow resynchronization, timer source/units, interrupts/waits, finite output behavior, and the initial capability-driven QEMU matrix before acceptance; the proposed 256-byte limit and any extra matrix row are not automatically selected. | [m1-p03-decisions](phase-03-serial-cli-and-virtual-acceptance.md) | Codex implementer/tester; user/project owner decision and acceptance reviewer | Remaining Phase 3 work and its dependent gates | Open; resolve after `m1-p02-handoff` |
 | M1-D04 | Assign a physical fixture ID and select its read-only observation, safe boot media, actual firmware path, serial/debug transport, comparison criteria, test boundaries, and explicit permission for any persistent-device writes. | [m1-p04-decisions](phase-04-physical-fixture-qualification.md) | Unassigned implementer/reviewer and lab operator; assign before dependent execution | Remaining Phase 4 work and its dependent gates | Open; no decision evidence; T7500 is candidate P1 only |
 
@@ -264,8 +264,8 @@ above and close only after all required environments and dependent portions pass
 
 | Phase gate | Artifact contributions | Acceptance coverage | Owning tasks | Entry dependency | Evidence / state |
 | --- | --- | --- | --- | --- | --- |
-| [M1-P01](phase-01-kernel-entry-and-memory-foundation.md) | M1-A01, M1-A06 | M1-T06, M1-T07, M1-T08, M1-T09 discovery portion | m1-p01-decisions, m1-p01-memory, m1-p01-discovery; m1-p01-integration; m1-p01-handoff | m0-p03-handoff | Section 1.1 complete at Kay `6474054`; phase evidence and handoff recorded in Section 1.2 |
-| [M1-P02](phase-02-protected-images-and-user-transitions.md) | M1-A02, M1-A03, M1-A06 | M1-T01, M1-T05, M1-T06, M1-T07 | m1-p02-decisions, m1-p02-images, m1-p02-transitions; m1-p02-integration; m1-p02-handoff | m1-p01-handoff | Not run; evidence absent |
+| [M1-P01](phase-01-kernel-entry-and-memory-foundation.md) | M1-A01, M1-A06 | M1-T06, M1-T07, M1-T08, M1-T09 discovery portion | m1-p01-decisions, m1-p01-memory, m1-p01-discovery; m1-p01-integration; m1-p01-handoff | m0-p03-handoff | Complete at clean Kay `4766582`; six registered boots passed; full milestone cases remain open |
+| [M1-P02](phase-02-protected-images-and-user-transitions.md) | M1-A02, M1-A03, M1-A06 | M1-T01, M1-T05, M1-T06, M1-T07 | m1-p02-decisions, m1-p02-images, m1-p02-transitions; m1-p02-integration; m1-p02-handoff | m1-p01-handoff | Entry predecessor complete; M1-D02 open; implementation and tests not run |
 | [M1-P03](phase-03-serial-cli-and-virtual-acceptance.md) | M1-A01, M1-A03, M1-A04, M1-A05, M1-A06 | M1-T01, M1-T02, M1-T03, M1-T04, M1-T05, M1-T06, M1-T07, M1-T08, M1-T09 | m1-p03-decisions, m1-p03-io, m1-p03-cli, m1-p03-matrix; m1-p03-integration; m1-p03-handoff | m1-p02-handoff | Not run; evidence absent |
 | [M1-P04](phase-04-physical-fixture-qualification.md) | M1-P04-A01, M1-P04-A02 | M1-P04-T01, M1-P04-T02 | m1-p04-decisions, m1-p04-inventory, m1-p04-physical; m1-p04-integration; m1-p04-handoff | m1-p03-handoff | Optional physical branch not run; no physical support claim |
 
