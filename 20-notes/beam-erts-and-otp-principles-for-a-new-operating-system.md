@@ -473,6 +473,34 @@ belongs in the kernel only when it is required to enforce isolation or resource
 ownership across mutually distrustful components, to control hardware safely,
 or to recover the machine before ordinary services can run.
 
+### Adopted requirement: safe delegation to agents
+
+By user decision on 2026-09-26, Kay OS must support useful delegation to an AI
+agent even when that agent's reasoning, generated code, runtime, or tools
+become compromised within the declared threat model. The [delegation
+architecture](safe-agent-delegation-and-execution.md) applies the five-layer
+separation to this requirement: the kernel enforces deterministic capabilities,
+domain isolation, resource ceilings, and revocation mechanisms; separately
+protected user-space services validate grants, mediate effects and credentials,
+and preserve provenance and audit evidence. Agents remain unprivileged.
+
+The subject authorizing work, the actor executing it, the task, and the
+delegation chain must remain distinct. An agent receives bounded authority for
+that task, and any permitted descendants share its aggregate limits. Neither
+natural-language intent nor a model's interpretation can expand authority.
+Protected checks must cover every reachable tool, shell, GUI, and network
+route. The trusted services are part of the security trust base despite
+running outside the kernel; cheap actor isolation alone does not contain a
+compromised runtime or native helper.
+
+OTP supervision supplies recovery structure, while current authorization and
+effect evidence determine what a replacement may do. A restart cannot restore
+revoked rights or reverse an external effect. The [threat and assurance
+study](agent-delegation-threat-model-and-assurance.md) defines falsifiable
+containment and useful-delegation criteria. This is an adopted architectural
+direction with unverified implementation, not a change to delivered evidence,
+the BEAM/GC compatibility requirement, or existing proof-of-concept gates.
+
 ## Implementation strategies under the compatibility requirement
 
 ### Port unmodified or lightly modified ERTS

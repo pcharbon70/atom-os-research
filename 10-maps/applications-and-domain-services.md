@@ -36,6 +36,8 @@ The route deliberately separates:
 
 ## Start here
 
+- [Safe agent delegation](safe-agent-delegation.md) — connects useful task scopes, protected human decisions, staged artifacts,
+  publication effects, and honest recovery.
 - [Applications and domain services layer](../20-notes/applications-and-domain-services-layer.md) —
   the integrated Layer 5 architecture, shared identity/outcome model, fourteen
   components, cross-layer contract, implementation stages, and falsifiers.

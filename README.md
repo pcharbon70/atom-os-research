@@ -88,6 +88,22 @@ flowchart TB
 The detailed [applications and domain-services synthesis](20-notes/applications-and-domain-services-layer.md#position-in-the-five-layer-architecture)
 defines the boundaries and responsibilities of all five layers.
 
+### Safe delegation to AI agents
+
+By user decision on 2026-09-26, Kay OS must support useful work delegated to
+potentially compromised agents. The [agent delegation architecture](20-notes/safe-agent-delegation-and-execution.md)
+defines task-scoped authority, constrained descendants, aggregate budgets,
+protected memory provenance, explicit model/provider disclosure, human
+approval, and revocation. The kernel enforces deterministic protection;
+separately protected system services bind policy to actual effects. Models
+and semantic classifiers remain unprivileged.
+
+The [research map](10-maps/safe-agent-delegation.md) connects the primary
+sources and layer contracts. The [threat model and assurance study](20-notes/agent-delegation-threat-model-and-assurance.md)
+specifies adversarial cases and useful-work comparisons. These are adopted
+requirements and proposed mechanisms with no agent-containment implementation
+evidence yet; they do not change the existing proof-of-concept delivery gates.
+
 Start at the [home map](10-maps/home.md). Repository-wide authoring and
 maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 

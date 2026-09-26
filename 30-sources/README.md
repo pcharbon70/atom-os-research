@@ -38,6 +38,7 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| Safe agent delegation | [Safe agent delegation](../10-maps/safe-agent-delegation.md) | [2026-09-26 architecture and assurance](../50-journal/2026-09-26-safe-agent-delegation-deep-dive.md) |
 | Visual-computing internal services | [Alan Kay, Smalltalk, and visual computing](../10-maps/alan-kay-smalltalk-ui.md) | [2026-09-10 all seven components](../50-journal/2026-09-10-visual-computing-internal-services-deep-dive.md) |
 | OTP-like system-service internal services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-10 all thirteen components](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md) |
 | Application and domain-service internal services | [Applications and domain services](../10-maps/applications-and-domain-services.md) | [2026-09-09 all fourteen components](../50-journal/2026-09-09-application-domain-internal-services-deep-dive.md) |
@@ -86,6 +87,16 @@ not retroactively labeled as introduced by it:
 
 ### Documents
 
+- [AgentKernel](zou-et-al-2026-agentkernel.md) — lifecycle security proposal,
+  host-kernel dependence, trust assumptions, and pending evaluation.
+- [Landlock](linux-kernel-2026-landlock.md) — official Linux confinement,
+  inheritance, ABI, and pre-existing descriptor limits.
+- [Indirect prompt injection](greshake-et-al-2023-indirect-prompt-injection.md) —
+  qualitative attacks through retrieved content, network reads, and persistence.
+- [AgentDojo](debenedetti-et-al-2024-agentdojo.md) — benchmark methods for
+  useful tasks and adversarial outcomes, with explicit persistence limits.
+- [CaMeL](debenedetti-et-al-2025-camel.md) — controlled execution and data-flow
+  policy prototype, benchmark evidence, and threat/channel restrictions.
 - [AccessKit architecture and engineering notes](accesskit-project-2026-architecture-and-engineering.md) — serializable semantic trees, atomic updates, adapter limits, subtrees, and memory trade-offs.
 - [Chromium multi-process graphics and accessibility](chromium-project-2026-multiprocess-graphics-and-accessibility.md) — renderer, GPU, input, accessibility-cache, fallback, and restart boundaries.
 - [Fault-tolerant live update](giuffrida-et-al-2013-fault-tolerant-live-update.md) — isolated versions, migration validation, and recovery from state-transfer faults.

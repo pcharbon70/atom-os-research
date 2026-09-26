@@ -103,6 +103,40 @@ recovery powers.
 
 ## Threat model
 
+### Delegated agent work
+
+The user decision of 2026-09-26 adopts [safe delegation to potentially
+compromised agents](safe-agent-delegation-and-execution.md) as a full-system
+requirement. The existing subject/actor distinction applies to a human
+authorizing work and the agent workload performing it. Add the protected task
+ID/generation and delegation lineage to the authorization context; task names,
+conversation text, artifact signatures, and authenticated agent identity
+remain evidence or routing context rather than permission.
+
+Each task's effective authority intersects the human or standing-task grant,
+operator policy, issuer envelope, approved service profile, data-flow rules,
+and current epochs and budgets. Semantic classification can recommend or
+narrow a request but cannot widen this deterministic ceiling. Policy and
+broker services remain inside the relevant trust base despite user-mode
+execution, and each holds only its predeclared capability envelope.
+
+The task must have no ambient route to human credentials, broader service
+authority, or external providers. Inference uploads, search queries, stored
+summaries, and telemetry require disclosure policy as well as ordinary object
+access. Trusted metadata records provenance; a model's source attribution
+does not prove complete information flow. Human approval binds the canonical
+effect and cannot be synthesized by agent-controlled interfaces.
+
+Children attenuate authority and consume shared aggregate reservations.
+Revocation is checked at actual admission boundaries, including deferred
+effects and restarted workloads. Capped expiry alone does not propagate an
+early revocation. Evidence distinguishes planned work, authorization,
+admission, completion, and indeterminacy. The [agent threat and assurance
+study](agent-delegation-threat-model-and-assurance.md) owns the explicit
+cross-layer cases; the requirement adds no claim of completed implementation.
+
+### General system adversaries
+
 The architecture should contain or bound:
 
 - a malicious or compromised application, shell command, BEAM actor, runtime

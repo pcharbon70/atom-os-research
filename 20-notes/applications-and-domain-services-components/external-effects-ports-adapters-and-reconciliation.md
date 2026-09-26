@@ -274,6 +274,13 @@ port.
 
 ## Internal-service research decomposition
 
+The [agent delegation architecture](../safe-agent-delegation-and-execution.md)
+extends these effect contracts to hostile agent workloads. The grant and
+adapter study below binds task lineage and reviewed publication artifacts,
+keeps provider credentials behind an enforcing broker, and retains explicit
+outcomes across revocation and restart. Its [adversarial assurance cases](../agent-delegation-threat-model-and-assurance.md)
+remain unexecuted.
+
 The [internal-service index](external-effects-ports-adapters-and-reconciliation/README.md) develops
 the following independently reviewable responsibilities. These are proposed
 full-system contracts and unexecuted falsifiers, not proof-of-concept tasks

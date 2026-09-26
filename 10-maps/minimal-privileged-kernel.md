@@ -25,6 +25,8 @@ restart policy, device protocols, filesystems, and physical board design.
 
 ## Start here
 
+- [Safe agent delegation](safe-agent-delegation.md) — makes agent tasks an explicit consumer of deterministic domain, capability,
+  budget, and revocation enforcement, with no semantic policy in privilege.
 - [Minimal privileged kernel
   layer](../20-notes/minimal-privileged-kernel-layer.md) — proposes the full
   capability-microkernel contract, object model, component boundaries,

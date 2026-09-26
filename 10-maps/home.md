@@ -27,6 +27,14 @@ one existing VM implementation the kernel foundation.
 
 ## Full-system architecture research
 
+The [safe agent delegation research](safe-agent-delegation.md) applies the
+user's 2026-09-26 requirement for bounded delegation to potentially compromised
+agents. Its [architecture](../20-notes/safe-agent-delegation-and-execution.md)
+connects task authority, memory provenance, effects, resources, human approval,
+and revocation across the five layers. The [assurance study](../20-notes/agent-delegation-threat-model-and-assurance.md)
+contains unexecuted adversarial cases; native enforcement and usability still
+require evidence. This is full-system design work, not a change to PoC gates.
+
 The [kernel architecture service decompositions](../20-notes/kernel-hardware-and-architecture-components/README.md)
 now cover the internals of all eleven components. The latest research adds
 55 reports across nine components, preserving the existing translation and
@@ -106,6 +114,9 @@ components still need observation before that separate qualification run.
 
 ## Active inquiries
 
+- [How can Kay OS safely delegate work to agents?](../40-inquiries/how-can-kay-os-safely-delegate-work-to-agents.md) —
+  asks which profiles, policy/flow mechanisms, provider boundaries, human
+  controls, and comparative evidence can qualify the adopted requirement.
 - [How should Kay OS structure applications and domain
   services?](../40-inquiries/how-should-kay-os-structure-applications-and-domain-services.md) —
   defines falsifiable semantic, identity, invariant, persistence, workflow,
@@ -183,6 +194,9 @@ components still need observation before that separate qualification run.
 
 ## Recently developed
 
+- [2026-09-26 safe agent delegation deep dive](../50-journal/2026-09-26-safe-agent-delegation-deep-dive.md)
+  — records five new and six reused sources, the architecture integration,
+  independent review, and unexecuted security qualification obligations.
 - [Applications and domain services component deep
   dives](applications-and-domain-services.md#component-route) — develops
   evidence-backed architecture, implementation, failure, authority, overload,

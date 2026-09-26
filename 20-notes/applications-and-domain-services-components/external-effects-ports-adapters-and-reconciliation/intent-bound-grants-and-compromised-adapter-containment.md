@@ -59,12 +59,53 @@ cost. Long-lived narrow credentials are operationally simpler yet create a large
 residual effect domain. Select the profile from consequence and actual provider
 capabilities, not from the word sandbox.
 
+### Delegated agents and publication effects
+
+The user decision of 2026-09-26 applies this adapter boundary to [safe agent
+delegation](../../safe-agent-delegation-and-execution.md). The agent, generated
+program, or tool adapter may be fully compromised. The trusted grant issuer
+and effect sink must therefore validate authority independently, in protection
+domains that the agent cannot corrupt. They bind the human subject, executing
+workload and incarnation, task and parent delegation, operation ID, target and
+endpoint generation, exact payload or artifact digest, destination, expiry,
+and resource limits. Identifiers in an agent-generated request are claims
+until authenticated against the protected delegation record.
+
+Preparation authority does not imply publication authority. Where policy
+requires human approval, a separate grant binds the reviewed artifact and
+destination through the trusted interaction path. Changing the artifact,
+recipient, or relevant target version invalidates that binding. An agent may
+submit a proposal but cannot approve it through synthetic GUI input or a
+forged conversation. Shells, browser automation, MCP tools, raw sockets, and
+cloud APIs must not offer an alternate route around the enforcing sink.
+
+The adapter must not hold an ambient user credential that defeats those
+constraints. If a remote provider accepts only a broad credential, keep it in
+a separately protected broker and restrict the adapter to validated requests.
+The broker remains trusted for that credential's scope, and the provider's
+participation and retention semantics remain explicit assumptions. Inference
+requests that disclose data to a remote model also require a scoped effect
+grant; model output cannot authorize a later action.
+
+At revocation, close new admissions and invalidate descendants within the
+declared revocation scope. Record the race with requests already accepted by
+the sink. Cancellation, restart, or grant expiry does not prove those requests
+had no effect. Persist operation identity and reconcile an uncertain outcome
+before any non-idempotent retry; compensation is a separately authorized
+effect. The [assurance study](../../agent-delegation-threat-model-and-assurance.md)
+specifies the adversarial evidence needed for this proposed contract.
+
 ## Verification obligations
 
 These are unexecuted falsifiers, not passing tests:
 
 - Compromise the adapter in a model and mutate target, amount, digest or generation; the enforcing sink must reject each unauthorized variation.
 - Attempt a direct provider call bypassing the broker; either prove it unavailable or record the adapter as trusted for that credential scope.
+- Replace an approved artifact, destination, task identity, or delegation
+  parent; require sink rejection. Revoke while dispatch and child delegation
+  race, then restart the agent and adapter; no stale grant may admit a new
+  effect, while previously accepted work retains a queryable or explicitly
+  indeterminate outcome.
 
 Record the exact protocol and storage profile, tested revision, input/history
 bounds, observed results and residual uncertainty. A semantic test does not

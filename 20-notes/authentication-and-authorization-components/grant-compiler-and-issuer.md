@@ -174,6 +174,31 @@ terminal state; it never creates a second budget/one-shot branch.
 
 ## Delegation and remote exchange
 
+### Agent task bindings and aggregate reservations
+
+For the adopted [agent delegation contract](../safe-agent-delegation-and-execution.md),
+issuance also binds the protected task ID/generation, executing workload
+incarnation, approved service revision, and required disclosure/flow profile.
+The task goal is explanatory text; only an authenticated structured permit
+within held authority can produce a grant. A model or tool manifest cannot
+approve itself. These are logical extensions to the grant contract, not a
+new privileged agent ABI.
+
+Reserve aggregate resources across descendants. Subset checks on each child
+alone would let many children each spend the full parent's allowance. Use a
+shared authoritative account or disjoint reserved subaccounts, and reuse
+reservation identities across retries. Provider spend needs its own enforced
+reservation and bounded in-flight exposure; CPU accounting is insufficient.
+
+Where human approval is required, bind the exact artifact/request digest,
+target generation/version, destination, lifetime, and scope. Changes invalidate
+the receipt or require revalidation under its explicit bounds. Keep early
+revocation lineage through children, queued work, and restart; matching expiry
+times alone cannot revoke a still-unexpired child. Protected sinks atomically
+validate current fences, one-shot state, and operation parameters at admission.
+
+### Attenuation and federation
+
 A delegated child repeats the intersection against its parent and decrements
 depth/use/budget ceilings. A third-party caveat/discharge, if supported, is an
 additional constraint and cannot replace audience, generation, expiry, PoP,

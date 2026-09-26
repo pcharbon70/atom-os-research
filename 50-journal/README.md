@@ -35,6 +35,11 @@ provenance record.
 
 ### Documents
 
+- [2026-09-26 safe agent delegation](2026-09-26-safe-agent-delegation-deep-dive.md) —
+  records the adopted architecture requirement, five new and six reused
+  sources, integrated layer contracts, independent review, and documentation
+  validation without an agent-containment implementation claim.
+
 - [2026-09-22 M1 phase 01 execution](2026-09-22-m1-phase-01-execution.md) —
   records the clean Kay OS `4766582` six-case QEMU gate, Kay-owned
   GDT/IDT/TSS/CR3 state, signed loader and pinned tool identities, bounded

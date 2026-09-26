@@ -39,6 +39,8 @@ holder outside its own failure boundary.
 
 ## Start here
 
+- [Safe agent delegation](safe-agent-delegation.md) — connects protected task/grant, memory, inference/tool, credential, and
+  evidence services to the adopted agent requirement.
 - [OTP-like system services layer: architecture, evidence, and implementation
   plan](../20-notes/otp-like-system-services-layer.md) — the integrated
   synthesis, thirteen-component architecture, lifecycle and failure

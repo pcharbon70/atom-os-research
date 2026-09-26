@@ -40,6 +40,7 @@ system syntheses in the parent notes directory.
 - [0. Trusted-interaction broker](trusted-interaction-broker.md) — develops a
   secure-attention-mediated, request-bound, one-shot human confirmation path
   with explicit abort and overload semantics.
+  Agent-task requests cannot supply their own confirmation through automation.
 - [1. Credential registrar and inventory](credential-registrar-and-inventory.md) —
   develops an auditable principal-to-authenticator binding ledger with
   transactional enrollment, visible lifecycle, and rollback-resistant
@@ -68,6 +69,8 @@ system syntheses in the parent notes directory.
 - [9. Grant compiler and issuer](grant-compiler-and-issuer.md) — compiles one
   authenticated permit into an attenuated local capability or sender-
   constrained remote grant inside a fixed issuer envelope.
+  Agent bindings preserve task generations, exact approvals, early revocation,
+  and shared aggregate reservations across descendants.
 - [10. Revocation and epoch service](revocation-and-epoch-service.md) — makes
   committed, distributed, enforced, quiesced, and sanitized revocation stages
   explicit and binds authority to rollback-resistant epochs.

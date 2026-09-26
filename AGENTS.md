@@ -86,6 +86,18 @@ abstraction and drivers, scheduling, memory management, isolation and
 capabilities, persistence, networking, tooling, and the path from a research
 prototype to a bootable system.
 
+Safe delegation to potentially compromised AI agents is a full-system
+architectural requirement, by user decision on 2026-09-26. Follow
+`20-notes/safe-agent-delegation-and-execution.md` and its linked threat model.
+Preserve explicit task authority, complete effect mediation, constrained
+subdelegation and aggregate budgets, protected provenance, trusted human
+control, and revocation through restart. Keep models and semantic classifiers
+outside the privileged kernel; separately protected policy and resource
+services remain part of the trust base for their guarantees. Neither agent
+identity nor natural-language intent creates authority. Treat the contracts
+and adversarial cases as unverified until evidence exists; this requirement
+does not by itself change existing PoC gates or select an agent implementation.
+
 Distinguish clearly among:
 
 - principles inherited from OTP and the BEAM model;

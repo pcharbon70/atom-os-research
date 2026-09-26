@@ -38,6 +38,8 @@ kernel ABI, and the project is not committed to one existing VM implementation.
 
 ## Start here
 
+- [Safe agent delegation](safe-agent-delegation.md) — applies the five-layer separation to potentially compromised agents while
+  retaining compiled-BEAM and process-local-GC semantics.
 - [BEAM, ERTS, and OTP principles for a new operating
   system](../20-notes/beam-erts-and-otp-principles-for-a-new-operating-system.md) —
   the current synthesis, required compiled-BEAM and process-local-GC contract,

@@ -194,6 +194,31 @@ evidence from the authenticator, not a portable identity claim.
 
 ## Failure, abuse, and availability analysis
 
+### Agent-generated requests and independent human control
+
+The [safe agent delegation contract](../safe-agent-delegation-and-execution.md)
+requires the broker to distinguish the originating human, executing agent,
+task, and actual requested effect. A conversation transcript or model-generated
+statement of consent cannot replace a receipt from the protected ceremony.
+Bind the operation/artifact digest, object/version, destination, duration,
+budget, and any authority expansion in the canonical request.
+
+Agent-controlled GUI, accessibility, remote-control, and synthetic-input paths
+must be unable to approve the agent's own request. A qualified assistive or
+remote human-input path requires a separately authenticated human-control
+binding and must not be reachable through the agent's automation authority.
+The CLI profile needs an authentic protected input/output route too; an
+ordinary command prompt cannot claim the ceremony's guarantees.
+
+Routine work inside an existing task grant need not trigger another ceremony.
+New authority or policy-required publication does. Bound repeated requests and
+reserve stop/cancel capacity independently of the agent and its descendants.
+The [agent assurance study](../agent-delegation-threat-model-and-assurance.md)
+requires spoof, replay, changed-artifact, prompt-flood, and user-comprehension
+evidence before a usable trusted-agent interface can be claimed.
+
+### General ceremony failures
+
 | Hazard | Required response |
 | --- | --- |
 | Overlay, focus steal, or synthetic input | Prevent in Layer 2; abort on any route transition |

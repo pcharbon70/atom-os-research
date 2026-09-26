@@ -28,6 +28,8 @@ unauthenticated bypass.
 
 ## Start here
 
+- [Safe agent delegation](safe-agent-delegation.md) — specializes subject/actor, grants, disclosure, human approval, and
+  revocation for potentially compromised agent tasks.
 - [Main authentication and authorization synthesis](../20-notes/authentication-and-authorization-across-the-five-layer-architecture.md)
   is the main synthesis. It proposes an unprivileged identity/policy control
   plane and a kernel-enforced capability data plane, then specifies human and

@@ -168,6 +168,41 @@ user-level fine-grained scheduling. Their expensive upcall path and reentrant
 scheduler complexity are warnings against copying that API. Kay OS needs the
 division of responsibility, not the historical mechanism verbatim.
 
+### Runtime contract for delegated agents
+
+The user decision of 2026-09-26 makes [safe delegation to potentially
+compromised agents](safe-agent-delegation-and-execution.md) an architectural
+requirement. Its implementation and [assurance
+obligations](agent-delegation-threat-model-and-assurance.md) remain unverified.
+An agent may use ordinary BEAM actors, but its human subject, executing
+workload, task, and delegation chain are distinct from its PID. A message may
+carry references to that context; receiving or copying those references does
+not install authority. Protected service endpoints authenticate the executing
+domain and validate the applicable grant independently of actor claims.
+
+Actors whose different permissions must survive a compromised runtime belong
+in separate protected runtime domains. An actor-local broker cannot protect
+one actor's credentials or capabilities from a corrupted loader, collector,
+JIT, or native helper in the same domain. Model inference, generated code,
+tool parsing, and their native libraries therefore receive only the domain's
+explicit authority; none may share the protected authorization service's
+address space merely for convenience.
+
+Spawn, native-work launch, cross-domain requests, and delegated child agents
+must preserve the admitted task's resource accounting. Runtime soft quotas
+feed the enclosing kernel and service accounts; spawning children or restarting
+a domain cannot replenish an aggregate delegation budget. A child's authority
+must be an explicitly permitted attenuation, never the supervisor's ambient
+authority. Standard BEAM messages and process-local tracing GC retain their
+declared compatibility semantics; these security checks belong at protected
+service and domain boundaries rather than changing the meaning of a term.
+
+Agent memory, summaries, retrieved messages, and checkpoints are untrusted
+inputs on restoration. Their provenance is evidence for policy and diagnosis,
+not proof of correct reasoning or permission to act. Restart creates a new
+incarnation and requires current grant validation; it cannot restore a revoked
+grant from a saved heap, message, configuration, or supervisor child spec.
+
 ## What is inherited, implemented, and deliberately changed
 
 | Concern | Principle to preserve | Current ERTS evidence | Kay OS placement |
@@ -890,6 +925,12 @@ system.
   `give_away/3` with unchanged heir configuration;
 - atom, binary, table, timer, link, trace, and code-generation exhaustion; and
 - complete kernel reclamation and stale-incarnation rejection after restart.
+
+The agent profile additionally requires deliberate runtime/native compromise,
+forged actor attribution, child-spawn budget amplification, and restoration of
+revoked grants from checkpoints. Enforcement outside the compromised domain
+must reject unauthorized effects and preserve aggregate ceilings. These are
+unexecuted obligations, not consequences proved by ordinary BEAM conformance.
 
 ## Decisions supported by current evidence
 
