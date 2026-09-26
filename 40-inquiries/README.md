@@ -30,6 +30,9 @@ resolution criteria here. Promote independently useful conclusions to
 
 ### Documents
 
+- [How can Kay OS safely delegate work to agents?](how-can-kay-os-safely-delegate-work-to-agents.md) —
+  tracks agent profile, policy, provenance, provider, human-control, and
+  comparative qualification decisions under the adopted architectural requirement.
 - [What evidence would change the kernel language choice?](what-evidence-would-change-the-kernel-language-choice.md) — explicit assumptions and falsifiable conditions for reconsidering Zig versus C.
 - [Can C meet the kernel qualification contract?](can-c-meet-the-kernel-qualification-contract.md) — alternative/fallback compiler, ABI, library and privileged-execution qualification; Zig remains selected.
 - [Can Zig meet the kernel qualification contract?](can-zig-meet-the-kernel-qualification-contract.md) — chosen-language compiler, C ABI, dependency closure and privileged-execution evidence still needed.

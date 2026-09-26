@@ -45,6 +45,8 @@ managed execution. Proposed guarantees remain conditional on those contracts.
 - [Semantic port profiles and endpoint qualification](semantic-port-profiles-and-endpoint-qualification.md) — Which completion guarantees can a particular external endpoint honestly support?
 - [Outbox, inbox coupling, and deduplication retention](outbox-inbox-coupling-and-deduplication-retention.md) — How do committed domain changes cross a message boundary without losing or duplicating accepted intent?
 - [Intent-bound grants and compromised-adapter containment](intent-bound-grants-and-compromised-adapter-containment.md) — What prevents a compromised adapter from using its legitimate access for a different effect?
+  Includes agent-task bindings, protected publication approval, exclusive
+  credential brokering, and honest revoke/restart outcomes.
 - [Effect reconciliation and unqueryable repair](effect-reconciliation-and-unqueryable-repair.md) — How can the system preserve useful truth when no component knows whether an effect happened?
 
 ## Maintaining this index

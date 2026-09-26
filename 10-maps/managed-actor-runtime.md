@@ -34,6 +34,8 @@ JIT, or in-process NIF.
 
 ## Start here
 
+- [Safe agent delegation](safe-agent-delegation.md) — connects task context and aggregate accounting to protection against
+  compromised runtimes and native helpers.
 - [Managed actor runtime layer: evidence, contract, and implementation
   plan](../20-notes/managed-actor-runtime-layer.md) — the detailed synthesis,
   proposed component model, critical paths, implementation stages, and

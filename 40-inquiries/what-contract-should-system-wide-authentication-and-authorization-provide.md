@@ -98,6 +98,12 @@ unreported universal decryption or administrator key.
 
 ## Paths to explore
 
+The [safe agent delegation inquiry](how-can-kay-os-safely-delegate-work-to-agents.md)
+specializes this shared security contract for the user requirement adopted on
+2026-09-26. It owns task, memory, provider, and agent-compromise experiments;
+this inquiry retains ownership of the general policy, grant, trusted-path,
+and revocation mechanisms. Both remain open pending implementation evidence.
+
 ### Formal and executable models
 
 - Use the [sixteen component implementation

@@ -449,6 +449,42 @@ not claimed.
 
 ## Presentation contract
 
+### Delegated agents and human authorization
+
+The user decision of 2026-09-26 requires applications to support [safe agent
+delegation](safe-agent-delegation-and-execution.md). Applications expose typed
+task and effect requests whose meaning can be reviewed by a human and checked
+by protected services. The human subject, agent workload, task, delegation,
+and operation are separate identities. A command referring to these identities
+must carry a service-validated binding; an agent-supplied identifier or claimed
+conversation history is insufficient authorization.
+
+A task can permit substantial autonomous work within a declared envelope:
+selected objects and project versions, operations, destinations, data classes,
+duration, and aggregate resource limits. Child agents and generated tools stay
+within that envelope. Applications must not grant broader authority merely
+because an agent requests another tool, changes its plan, or resumes a saved
+session. Retrieved documents and persistent memories retain provenance through
+summaries and reuse; their content never becomes permission to act.
+
+For effects requiring a separate human decision, the application presents the
+exact target, action, artifact or request digest, destination, and relevant
+version through the protected interaction path. Approval is bound to those
+values and expires or requires revalidation when they change. An agent may
+prepare a publication, but its own rendered button, simulated input, or claim
+that the human approved cannot satisfy the publication gate. Browser, GUI,
+shell, and API paths must converge on the same effect authorization boundary.
+
+Private working copies and staged changes support useful recovery, but the
+interface must distinguish discarding local work from compensating an already
+published effect. It reports accepted, committed, denied, cancelled, and
+indeterminate outcomes from protected evidence. Authority containment does
+not prove that an authorized edit is correct; review, semantic checks, and
+recovery remain application responsibilities under the [agent assurance
+contract](agent-delegation-threat-model-and-assurance.md).
+
+### Disposable views and durable outcomes
+
 The durable application model is independent of a window, toolkit, desktop,
 accessibility bridge, voice session, or remote client. A view opens with:
 
@@ -689,6 +725,11 @@ queried by operation ID before retry.
 - Restart the compositor, presentation session, query projection, aggregate
   actor, adapter, Layer 4 service, and full application generation separately;
   compare the observed recovery group with the manifest.
+- Give an agent a malicious document, forged approval transcript, and poisoned
+  saved memory; attempt unauthorized publication through both semantic APIs
+  and browser/GUI automation. Change the reviewed artifact after approval and
+  require rejection or a new decision. Also exercise a harmful but authorized
+  edit to establish the remaining review and recovery boundary.
 
 The architecture is falsified if correct application operation requires
 serializing a PID or live capability; if a transport acknowledgement is used

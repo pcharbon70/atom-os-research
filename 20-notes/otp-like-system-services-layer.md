@@ -361,6 +361,51 @@ load. Each service manifest reserves bounded recovery CPU, memory, capability
 slots, and control-queue capacity outside the workload's reach. Reserved
 capacity is itself bounded and charged to the owning service domain.
 
+### Protected services mediate delegated agent work
+
+The user decision of 2026-09-26 adopts [safe agent
+delegation](safe-agent-delegation-and-execution.md) as a full-system
+requirement. Layer 4 owns the protected services that turn a human's
+authorization into task-scoped grants, maintain delegation and revocation
+state, broker credentials and effects, and preserve audit and memory
+provenance. These services remain unprivileged but belong to the trusted
+computing base for the guarantees they enforce. Their authority, protection
+domains, failure policy, and recovery holders must be declared separately.
+
+The authorization record distinguishes the human subject, executing workload
+and domain incarnation, task, parent delegation, resource ceiling, and exact
+permitted effects. Natural-language instructions and agent-produced policy
+proposals cannot mint grants. The protected decision service validates a
+structured request against existing authority, while a trusted interaction
+path obtains any required human decision. Credentials stay in the qualified
+broker or enforcing sink; an agent does not inherit its human's login session,
+credential store, or general network authority.
+
+Mediation must cover local services, shells, generated programs, Model Context
+Protocol (MCP) tools, browser and GUI automation, raw network paths, and remote
+model or tool providers. The selected profile must enumerate every reachable
+path and prevent a direct alternative from bypassing the broker. A remote
+model request is itself a data-disclosure effect, with an authorized provider,
+payload scope, and budget. Kay OS can enforce its local boundary; a remote
+provider's execution and retention require separately stated trust assumptions.
+
+Subdelegation may only reduce allowed resources, operations, destinations,
+duration, and further-delegation rights. Concurrent children consume a shared
+aggregate budget; they cannot each obtain the parent's original allowance.
+Revocation closes new admissions and fences stale generations at effect sinks.
+Work already accepted retains its honest committed, cancelled, or indeterminate
+outcome until reconciliation. Supervision cannot recreate revoked authority or
+claim that stopping an agent undoes an external effect.
+
+Persistent agent memory records authenticated origin where available, content
+identity, transformations, and trust classification. Summarization and reuse
+must not silently promote untrusted content to instructions or authority.
+Classification can inform restrictions, but neither a label nor an LLM judge
+proves an inference correct. The [threat model and assurance
+study](agent-delegation-threat-model-and-assurance.md) defines the remaining
+enforcement and usability experiments; no existing proof-of-concept gate is
+closed or enlarged by this architecture requirement.
+
 ## Proposed components
 
 Each summary below is expanded in the [OTP-like system services component
@@ -1320,6 +1365,7 @@ committed, aborted, cancelled-before-commit, or explicitly indeterminate.
 | Overload | Fan-in, dependency saturation, false priority/cost claims, long low-priority load, retry storm, telemetry storm | Bounded queues/memory, useful control latency, server-derived class, measured starvation/priority inversion bounds, explicit shedding |
 | Observability | High event rate, handler crash, cross-host trace, audit storage/export loss, crash between control intent and effect | Declared telemetry loss; bounded trace context and clock uncertainty; durable intent/outcome pairing or explicit indeterminate result; protected audit continuity or alarmed gap |
 | Security | Compromised app, service, authenticated peer, or operator token | Authority remains within facets; caller-supplied class and trace context confer no authority; sensitive control is durably audited or refused under its declared fail-closed policy |
+| Agent delegation | Compromised agent, forged approval, direct tool/network bypass, parallel descendants, poisoned memory, revoke/restart races | Endpoint-enforced grant bindings, no ambient credentials, aggregate accounting, preserved provenance, and no stale authority restoration; externally accepted effects retain explicit outcomes |
 
 Performance reporting should include medians only as context. The decision
 metrics are high-percentile admission and completion latency, queue residency,

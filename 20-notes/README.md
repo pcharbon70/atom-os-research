@@ -65,6 +65,13 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 
 ### Documents
 
+- [Safe agent delegation and execution](safe-agent-delegation-and-execution.md) —
+  adopts bounded human delegation to potentially compromised agents across
+  the five layers, with twelve requirements for authority, memory, tools,
+  disclosure, resources, human control, revocation, and evidence.
+- [Agent delegation threat model and assurance](agent-delegation-threat-model-and-assurance.md) —
+  specifies protection profiles, fourteen unexecuted adversarial case
+  families, useful-work controls, and reproducible qualification criteria.
 - [Proof-of-concept research readiness](proof-of-concept-research-readiness.md) —
   assesses research coverage and missing implementation evidence, proposes a
   minimal bootable OS with the CLI as its first delivery, excludes AtomVM and
@@ -75,6 +82,7 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   operation identities, invariant-selected consistency, explicit workflows
   and external outcomes, disposable presentation, confined extensions,
   migration, semantic assurance, and cross-layer recovery.
+  Its agent contract binds human approval to exact staged/publication effects.
 - [Alan Kay's Smalltalk visual interface and the modern desktop](alan-kay-smalltalk-visual-interface-and-modern-desktop.md) —
   reconstructs Kay's metamedium and learning vision, distinguishes it from the
   collective Smalltalk and Star implementations, compares it with current
@@ -84,14 +92,19 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   plane, then defines human and workload authentication, exact grant contracts,
   trusted interaction, revocation, recovery, audit, and assurance across every
   layer.
+  The agent extension binds protected task authority and disclosure to the
+  existing subject/actor, grant, and revocation model.
 - [BEAM, ERTS, and OTP principles for a new operating system](beam-erts-and-otp-principles-for-a-new-operating-system.md) —
   separates the three layers, makes compiled-BEAM compatibility and
   process-local tracing collection explicit, identifies needed security and
   resource-control changes, and proposes a layered architecture.
+  Safe agent delegation is an adopted consumer of that five-layer contract.
 - [Managed actor runtime layer](managed-actor-runtime-layer.md) — develops the
   unprivileged BEAM-compatible runtime contract, thirteen component design,
   critical execution paths, implementation stages, and conformance,
   responsiveness, overload, and fault evaluation plan.
+  It also specifies the runtime/domain boundary and accounting for compromised
+  agent workloads.
 - [Kernel hardware and architecture support layer](kernel-hardware-and-architecture-support-layer.md) —
   develops the kernel-level contracts for privileged entry, execution context,
   translation, ordering and code publication, interrupts, time, logical CPUs,
@@ -101,12 +114,16 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
   execution-stop domains, bounded IPC and CPU budgets, revocation anchors,
   structured fault routes, and quiescence- or quarantine-gated recovery, with
   each component linked to its detailed evidence and implementation report.
+  Agent tasks use these deterministic mechanisms under the new delegation
+  requirements without moving semantic policy into privilege.
 - [OTP-like system services layer](otp-like-system-services-layer.md) —
   develops thirteen unprivileged policy components for lifecycle, behaviours,
   supervision, naming, configuration and identity, durable outcomes, device
   and network services, distributed coordination, updates, overload, and
   operations, with each component linked to a detailed evidence and
   implementation report.
+  Protected task, memory, inference/tool, and credential brokering apply those
+  services to agent work.
 
 ## Maintaining this index
 

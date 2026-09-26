@@ -154,6 +154,35 @@ processes with expensive hardware protection domains.
 
 ## Why a capability microkernel
 
+### Agent workloads and complete mediation
+
+The user decision of 2026-09-26 makes [safe agent delegation](safe-agent-delegation-and-execution.md)
+an explicit consumer of this kernel contract. Its `AGD-*` requirements use
+ordinary protection domains, capability lineage, bounded IPC, resource
+accounts, and revocation. The privileged kernel does not interpret prompts,
+classify content, manage agent memory, or grant rights from a claimed goal.
+Protected user-space services translate authenticated task authorization into
+the existing kernel and resource-server mechanisms.
+
+Before executing an agent or hostile native tool, install its complete
+authority and resource envelope, including inherited handles, shared memory,
+and reachable endpoints. Descendants cannot bypass the envelope through
+alternate tool, shell, network, or device paths. Runtime compromise is bounded
+by its kernel domain, so mutually distrustful agents and security brokers
+cannot rely on separate BEAM actors within one compromised runtime.
+
+Task lineage persists through derivation and resource products. Parent
+revocation rejects requests whose effect admission would linearize after the
+current sink fence, including previously authorized work still waiting in a
+queue; already admitted effects retain their completion obligations. Sibling tasks
+share an aggregate budget or consume charged reservations, and recovery
+capacity remains outside their control. None of these requirements implies
+that a granted operation is semantically correct. The [agent assurance
+cases](agent-delegation-threat-model-and-assurance.md) add hostile-workload
+falsifiers without asserting that the kernel currently passes them.
+
+### Kernel organization alternatives
+
 The literature does not identify one universally best kernel organization.
 It does expose the trade-offs relevant to this platform.
 
