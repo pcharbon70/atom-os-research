@@ -31,15 +31,17 @@ advantage that cannot be represented within the current five layers?
 Evidence must include useful completion and cost, hostile-code attempts to
 bypass protected brokers, duplicate delivery, crash/restart, revocation, and
 multi-tenant/child accounting. The [native framework study](../20-notes/native-agent-behavior-framework.md)
-proposes `NAB-01` through `NAB-09` as additional behavior and lifecycle
-falsifiers. Those cases are specified but unrun.
+proposes `NAB-01` through `NAB-16` as additional behavior, infrastructure,
+and lifecycle falsifiers. Those cases are specified but unrun.
 
 ## Working hypotheses
 
 - The preferred placement is a **Layer 4 user-mode agent host service** plus
-  **Layer 5 behavior definitions and SDK**. Layer 3 contributes actors, and
-  Layer 2 enforces existing domain and resource primitives. This needs no
-  sixth layer or agent reasoning syscall.
+  **Layer 5 behavior definitions and SDK**. A Layer 4 subsystem needs a
+  registry, instance lifecycle, event fabric, executor, extension host,
+  persistence, scheduling, topology control, and observation. Layer 3
+  contributes actors, and Layer 2 enforces existing domain and resource
+  primitives. This needs no sixth layer or agent reasoning syscall.
 - The agent host can be untrusted for authorization if protected grant,
   context, inference, effect, approval, and audit brokers independently check
   its requests. The host's own durability and queue guarantees still require
@@ -66,8 +68,9 @@ falsifiers. Those cases are specified but unrun.
 5. Compare local versus cloud inference: disclosure, accounting, latency,
    cancellation, hidden state, and provider trust. Keep a no-model provider
    working throughout.
-6. Run `NAB-*` behavior cases and applicable `AGT-*` security cases against a
-   Kay build, then compare with a competently confined hosted service. Record
+6. Run `NAB-*` behavior and infrastructure cases and applicable `AGT-*`
+   security cases against a Kay build, then compare with a competently
+   confined hosted service. Record
    raw sink observations and useful completion.
 
 ## Findings
@@ -75,8 +78,11 @@ falsifiers. Those cases are specified but unrun.
 The [2026-09-28 deep dive](../50-journal/2026-09-28-native-agent-behavior-deep-dive.md)
 found that Jido v3's useful contribution is the distinction between
 immutable Agent values, live OTP actors, typed events and actions, and
-post-commit directives. Its own pinned guides assign authorization,
-durability of general workflows, and external-effect recovery to the host.
+post-commit directives. A follow-up component audit also found four-facet
+Plugins, named instances, persistence, input and scheduling Plugins,
+topology control, child ownership, and observability. Its pinned guides
+assign authorization, durability of general workflows, and external-effect
+recovery to the host.
 AIOS provides hosted evidence for shared agent-serving services, while
 CoALA, ReAct, and AgentSpeak expose multiple decision models. None shows
 that Kay requires a sixth privilege or semantic layer.

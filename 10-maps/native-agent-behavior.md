@@ -20,8 +20,8 @@ implementation is selected.
 ## Start here
 
 - [Native agent behavior framework](../20-notes/native-agent-behavior-framework.md)
-  — layer decision, model-neutral data contract, turn/effect protocol, and
-  unexecuted interoperability cases.
+  — the Jido-wide component map, Kay subsystem ownership, model-neutral data
+  contract, turn/effect protocol, and unexecuted infrastructure cases.
 - [Placement and qualification inquiry](../40-inquiries/where-should-native-agent-behavior-live-in-kay-os.md)
   — open profile, storage, registry, provider, and evidence choices.
 - [2026-09-28 deep dive](../50-journal/2026-09-28-native-agent-behavior-deep-dive.md)
@@ -31,18 +31,27 @@ implementation is selected.
 
 ## Trails
 
-### Behavior patterns without a package dependency
+### Framework infrastructure without a package dependency
 
 - [Jido v3](../30-sources/agentjido-2026-jido-v3-beta-1.md) separates
-  immutable state, live actor, committed turn, and proposed directives.
+  definitions and instances, Plugin facets, AgentServer and named instance,
+  persistence, input resources, scheduling, topology, children, and
+  observation as well as Turns and Directives.
 - [Jido Action v3](../30-sources/agentjido-2026-jido-action-v3-beta-11.md)
-  supplies inspectable action/plan composition and exposes its host-owned
-  security and durability limits.
+  supplies Actions, Instructions, Flow graphs, trusted stored-plan registries,
+  in-memory execution, graph inspection, and telemetry.
 - [Jido Signal v3](../30-sources/agentjido-2026-jido-signal-v3-beta-4.md)
-  illustrates event envelopes and at-least-once delivery that still need
-  protected origin and deduplication.
+  supplies event envelopes, type routing, Dispatch adapters, and a local Bus
+  with at-least-once replay; Kay still needs protected origin and deduplication.
 - [Behavior-first architecture](../30-sources/agentjido-2026-behavior-first-architecture.md)
   gives the project's rationale for contract-first OTP-like design.
+
+The [component and service mapping](../20-notes/native-agent-behavior-framework.md#jido-v3-infrastructure-as-the-primary-reference)
+shows how those package boundaries become Kay's definition registry, instance
+directory, event fabric, executor, extension/input host, persistence,
+topology controller, and observation interface. The pinned Jido core-scope
+guide distinguishes these supported components from deferred cluster and
+transport services.
 
 ### Decision models and system ownership
 

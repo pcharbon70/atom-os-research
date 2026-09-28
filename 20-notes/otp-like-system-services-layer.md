@@ -409,14 +409,21 @@ closed or enlarged by this architecture requirement.
 ### Native agent behavior host
 
 The proposed [native agent behavior framework](native-agent-behavior-framework.md)
-adds a model-neutral Layer 4 host for versioned behavior registration,
-bounded event intake, serialized turns, checkpoint/outcome coordination, and
-provider routing. It uses existing protected grant, context, inference,
-effect, approval, and audit services at their established boundaries. The
+adds a model-neutral Layer 4 subsystem: versioned definition registry,
+instance directory/supervisor, bounded Signal-like event fabric, Action/Flow
+executor, Plugin and sensor host, scheduler, checkpoint/outcome coordinator,
+topology controller, and observation interface. These are framework service
+contracts inspired by Jido v3's complete infrastructure, not one
+all-powerful process. The subsystem uses existing protected grant, context,
+inference, effect, approval, and audit services at their established
+boundaries. The
 host never gains ambient task credentials from an Agent, Action, Signal, or
 stored plan; its requests still face independent sink checks. Behaviors and
 domain success criteria belong to Layer 5. This is a proposed service
-contract, not an implemented sixth layer or a Jido `.beam` port.
+contract, not an implemented sixth layer or a Jido `.beam` port. The
+[component mapping](native-agent-behavior-framework.md#jido-v3-infrastructure-as-the-primary-reference)
+states which Jido beta facilities are documented as supported, deferred, or
+owned by Kay's application and security services.
 
 ## Proposed components
 

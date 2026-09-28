@@ -88,12 +88,14 @@ not retroactively labeled as introduced by it:
 
 ### Documents
 
-- [Jido v3 beta.1](agentjido-2026-jido-v3-beta-1.md) — pinned state, actor,
-  turn, effect, ownership, and durability contracts.
+- [Jido v3 beta.1](agentjido-2026-jido-v3-beta-1.md) — pinned Agent, Plugin,
+  instance, persistence, input, scheduling, topology, child, and observation
+  infrastructure, with supported/deferred boundaries.
 - [Jido Action v3 beta.11](agentjido-2026-jido-action-v3-beta-11.md) —
-  validated Actions, declarative Flows, registry, and host security duties.
+  Actions, Instructions, Flows, Exec, inspection, stored registry, and host
+  security duties.
 - [Jido Signal v3 beta.4](agentjido-2026-jido-signal-v3-beta-4.md) — typed
-  event envelope, replay cursor, delivery, and origin limits.
+  envelope, Router, Dispatch, local Bus, cursor replay, and origin limits.
 - [Jido behavior-first architecture](agentjido-2026-behavior-first-architecture.md) —
   practitioner account of reusable behavior contracts above OTP actors.
 - [AIOS](mei-et-al-2025-aios.md) — hosted agent-service architecture,

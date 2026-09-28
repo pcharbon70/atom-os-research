@@ -62,9 +62,9 @@ this standard.
 
 | Work | Demonstrated or documented contribution | Kay interpretation and limit |
 | --- | --- | --- |
-| [Jido v3](../30-sources/agentjido-2026-jido-v3-beta-1.md) | Immutable Agent value, live OTP Agent Server, explicit turn/commit/directive stages; beta documents external effect and durability gaps | Copy the separation of state, actor, and proposed effect as a concept; do not reuse packages or infer kernel confinement |
-| [Jido Action v3](../30-sources/agentjido-2026-jido-action-v3-beta-11.md) | Validated Actions, declarative Flow, trusted registry for stored plans, in-memory Exec | Use allowlisted declarative plan data; schema validity cannot grant authority; Kay owns durable execution |
-| [Jido Signal v3](../30-sources/agentjido-2026-jido-signal-v3-beta-4.md) | Typed event envelope, local ordering, durable cursor and at-least-once replay | Define a versioned OS event profile; bind origin at protected ingress; do not infer rights from fields |
+| [Jido v3](../30-sources/agentjido-2026-jido-v3-beta-1.md) | Agent definitions/instances, four-facet Plugins, AgentServer and Jido instance, Turns/Directives, persistence, input resources, scheduling, topology, child ownership, and observability | Treat the whole supported infrastructure as the primary decomposition reference; redesign each component at Kay's existing protection boundaries |
+| [Jido Action v3](../30-sources/agentjido-2026-jido-action-v3-beta-11.md) | Actions/Instructions, declarative Flow graph, trusted stored-plan registry, in-memory Exec, inspection, and telemetry | Recreate reviewable plans and controlled execution; schemas and graph validity do not grant authority or durability |
+| [Jido Signal v3](../30-sources/agentjido-2026-jido-signal-v3-beta-4.md) | Typed envelope, Router, Dispatch adapters, local Bus, cursor replay, and at-least-once delivery | Build a bounded Kay event fabric; bind origin at protected ingress and check every delivery/effect boundary |
 | [Jido's behavior-first article](../30-sources/agentjido-2026-behavior-first-architecture.md) | Reusable behavioral contracts above OTP processes | Adopt framework-neutral roles, with Kay's security meaning defined separately |
 | [AgentSpeak communication semantics](../30-sources/vieira-et-al-2007-speech-act-agent-programming.md) | Explicit message and decision transitions for symbolic agents | Non-LLM decision procedures deserve first-class support; a claimed performative is not a grant |
 | [CoALA](../30-sources/sumers-et-al-2024-cognitive-architectures-language-agents.md) and [ReAct](../30-sources/yao-et-al-2023-react.md) | Distinct memory, decision, and action functions; one LLM thought/action/observation loop | LLMs are optional decision providers; generated steps remain proposals |
@@ -77,6 +77,65 @@ The earlier [AgentKernel](../30-sources/zou-et-al-2026-agentkernel.md),
 [AgentDojo](../30-sources/debenedetti-et-al-2024-agentdojo.md) research remains
 the relevant security, flow, and utility baseline. Those studies do not
 qualify the proposed Kay implementation either.
+
+## Jido v3 infrastructure as the primary reference
+
+The three pinned packages form a **framework stack**, not merely an Agent
+Turn loop. Jido Signal supplies event values, routing, delivery adapters,
+and a local Bus. Jido Action supplies validated executable units, Flow
+composition, an in-memory executor, and stored-plan inspection. Jido core
+adds Agent definitions and instances, a supervised live actor, Plugin
+facets, persistent state, inputs and schedules, topology, children, and
+operational observation. The [Jido core](../30-sources/agentjido-2026-jido-v3-beta-1.md),
+[Action](../30-sources/agentjido-2026-jido-action-v3-beta-11.md), and
+[Signal](../30-sources/agentjido-2026-jido-signal-v3-beta-4.md) source notes
+inventory the supported beta contracts with direct links to their tagged
+guides. This component map is the central design input for Kay; the other
+scientific and practitioner sources test its generality and limitations.
+
+### End-to-end component model
+
+```text
+definition + schema + routes + Plugins + trusted executable registry
+  -> identified instance under a named, supervised host
+authenticated ingress -> typed event -> route -> Command/admission
+  -> Action or Flow execution -> complete candidate state + proposals
+  -> validate + persist revision -> live commit -> effect dispatch/settlement
+  -> outcome event, audit, telemetry, checkpoint and possible next input
+```
+
+Jido's source Signal and route are an application messaging contract; Kay's
+**authenticated ingress** and grant checks are new protected boundaries.
+Likewise Jido's Directives are post-commit work requests, not equivalent to
+Kay authority or durable effect receipts. The flow above does not imply a
+transaction across Agent state and external systems.
+
+| Jido v3 infrastructure | Kay analogue and owner | Security and reliability adaptation |
+| --- | --- | --- |
+| Agent module/definition, complete state schema, DSL, Builder, Codec | Layer 5 publishes versioned behavior definitions; Layer 4 definition registry validates and pins installed versions | Stored or agent-authored definitions are data; a trusted registry resolves only reviewed executable IDs. Definition signatures identify publishers, not authorized tasks. |
+| Agent instance, stable Ref, partition, named Jido instance | Layer 4 instance directory, supervisor, and activation records over Layer 3 actors | Keep definition, instance, incarnation, executing domain, tenant, and task grant separate. A partition or PID is never a security principal. |
+| Signal envelope, typed data, Router, Dispatch, Bus and cursor Store | Layer 4 protected ingress and bounded event fabric; Layer 5 selects domain event types and routes | Authenticate origin before assigning task context; treat `source` and payload as untrusted; bound producer mailboxes and retained records; deduplicate at effects, not by Signal ID alone. |
+| Action, Instruction, Flow graph, expressions, Exec and inspection | Layer 5 owns domain Actions, declarative plans, and success meaning; Layer 4 runs a bounded execution engine | Preinspect dependencies and target registry; bound graph fan-out and runtime work; route effectful reads/writes through brokers even during candidate evaluation. |
+| Pure Agent Plugin facet and Plugin-owned state reducer | Layer 5 extension declaration; Layer 4 framework validates namespaced state updates at the Turn boundary | Plugin-owned fields prevent accidental overwrite but do not isolate hostile code. Execute untrusted extensions in their own domain and revalidate resulting data. |
+| Live AgentServer Plugin facet and supervised runtime resources | Layer 4 extension host for admission, readiness, sensors, and dispatch over Layer 3 supervision | A live plugin's callback/credentials are explicit trust dependencies. No plugin receives issuer or sink authority through the host; plugin failure is separately reported. |
+| Persistence and Topology Plugin facets | Layer 4 checkpoint converter and static topology expander | A converter sees only its declared state slice; topology expansion cannot start processes or grant rights before protected admission. |
+| AgentServer serial Turn, cancellation, deadlines, Directives and Outcome | Layer 4 instance executor, commit coordinator, and effect-intent ledger | Preserve committed versus settled results, check current grants at sinks, and offer an independent stop path. A caller timeout or cancelled actor does not undo completed I/O. |
+| Optional persistence adapters, checkpoints, CAS revisions, tombstones, hibernate/thaw | Layer 4 durable state service plus existing storage brokers | Save only portable data; bind restore to definition and current grant/epoch. CAS prevents stale writes but is not a distributed lease or exactly-once effect protocol. |
+| Heartbeat, Bus input, SensorManager and Scheduler Plugin | Layer 4 admitted input-resource and schedule services | Sensors can propose events only. Recurring work retains stable occurrence IDs and aggregate budget; offline slots and retry policy are explicit. |
+| Topology definition, groups, resources, plan, Controller, repair and exact-node placement | Layer 5 declares an application graph; Layer 4 validates and activates a bounded desired state | Limit graph expansion and concurrency; placement requires node authority and fence checks. Jido's local repair and exact-node mechanism do not supply cluster membership or exclusive ownership. |
+| Tagged children, ownership/orphan policy, bounded worker patterns | Layer 4 child-instance lifecycle and Layer 5 job semantics | Child grants attenuate parent rights, share aggregate budgets, and survive/reconcile uncertain remote starts without inventing new authority. |
+| Semantic telemetry, debug, tracing, structured errors and Audit Plugin | Layer 4 observability and separately protected audit service | Redact state, prompts, credentials, and raw errors; telemetry is best effort and cannot certify protected effect completion. |
+
+The beta's [core-scope guide](https://github.com/agentjido/jido/blob/v3.0.0-beta.1/guides/core-scope.md)
+and [design index](https://github.com/agentjido/jido/blob/v3.0.0-beta.1/docs/design/README.md)
+are important status checks. Local Agent/topology mechanics are documented
+as supported; cluster authority, membership discovery, automatic rebalance,
+transport authentication, durable inboxes, and a general recovery queue are
+deferred or host-owned. The names `jido_durable`, `jido_cluster`, and
+`jido_fabric` describe possible extensions, not beta.1 facilities. LLM
+inference and agent policy are likewise outside the three production package
+contracts. Kay must design those interfaces explicitly, without mistaking a
+prototype's future package map for implemented infrastructure.
 
 ## Layer placement decision
 
@@ -107,6 +166,35 @@ unrecovered agent host.
 | Layer 4 protected services | Authenticate origin, issue task grants, label context, broker inference/tools/credentials, reserve effects, fence revocation, retain audit | Explicit, separately protected TCB with bounded held authority |
 | Layer 5 domains | Define goals, Action schemas, admissible effects, plans, invariants, success criteria, human-facing previews, and recovery meaning | Domain correctness and approved publication stay application concerns |
 
+### Layer 4 framework subsystem
+
+Layer 4 should expose **one coherent agent-framework API** backed by several
+replaceable services, not one omnipotent host process. This is how Kay can
+retain Jido's useful application-level composition while making its
+authority and failure boundaries explicit:
+
+| Service | Contract offered to behavior authors | Independent boundary or owner |
+| --- | --- | --- |
+| Definition registry and installer | Validate versioned schemas, routes, Action/Flow target IDs, Plugin facets, and static resource requests before activation | Application owner approves definitions; protected issuer binds a grant to the installed version. No downloaded document or model output can register executable code. |
+| Instance directory and lifecycle | Resolve stable logical IDs to current activation, supervise actors, apply stop/hibernate/thaw/upgrade controls, and report readiness | PID lookup is advisory. A restarted or upgraded instance receives fresh incarnation and current-grant checks; critical stop bypasses its mailbox. |
+| Event ingress, router, and bus | Accept bounded typed observations, select routes, publish/replay with declared ordering and acknowledgement | Protected ingress authenticates transport/producer and labels data. Backpressure covers the producer, mailbox, retained log, and consumer, not only postponed work. |
+| Turn and plan executor | Serialize each instance's Turn; run declared Action/Flow/decision provider under deadlines and concurrency limits; return candidate state and inert proposals | Layer 3 schedules actors. Native/LLM helpers have their own domains. Every pre-commit I/O and model disclosure uses existing protected brokers. |
+| Plugin and input-resource host | Run approved pure reducers, live admission callbacks, sensors, heartbeat, scheduler, and child directives with namespaced state and lifecycle | Extension callbacks are ordinary code, not automatically pure or confined; separate domains are required where the threat profile assumes compromise. |
+| State and outcome coordinator | Keep revisioned checkpoints, pending intents, operation IDs, tombstones, and exact committed/settled/indeterminate states | Storage authority is limited to the instance's records. A CAS result is not a lease; final effect broker receipts remain authoritative for external work. |
+| Topology controller | Expand bounded declarative graphs, activate dependencies, observe readiness, repair a selected target, and coordinate exact-node requests | Node discovery, placement policy, distributed authority, and fencing are separate selected services; graph membership does not grant resources. |
+| Observation interface | Expose safe status, semantic metrics, tracing, error codes, and an independent protected audit link | Trace handlers can fail or drop events; security evidence comes from the protected audit and effect sinks. |
+
+The first user-facing API should make the same behavior definition usable in
+direct evaluation, a live actor, and persisted activation, while stating
+which contracts exist only in the live host. That distinction is central in
+Jido: direct `cmd` does not run live Plugin admission or dispatch, and an
+in-memory Flow execution has no durable queue. Kay must never claim a
+security or recovery guarantee from the direct path that only the protected
+live service supplies. Two tagged Jido guides disagree on whether live
+admission runs before or after pure Plugin preparation; Kay must define and
+test its own order explicitly instead of inheriting an ambiguous callback
+sequence.
+
 An agent host serving mutually distrustful tasks must not share their
 secrets, writable memory, or authority simply because it shares an API. If
 the selected threat profile includes runtime compromise, tasks and protecting
@@ -122,13 +210,16 @@ Jido, one model API, and BEAM bytecode details:
 
 ```text
 Behavior manifest: definition_id + version + input/state schemas
-                 + decision-provider kind + action registry references
+                 + event routes + decision-provider kind
+                 + Action/Flow and Plugin registry references
+                 + declared input, schedule, and topology resources
                  + maximum requested tool/observation profile
                  + declared resource and recovery policy
 
 Turn input:       authenticated ingress reference + task_id + instance_id
                  + incarnation + turn_id + typed observation references
-Turn proposal:    candidate state + proposed action/child/inference requests
+Turn proposal:    candidate state + proposed effect/child/inference requests
+                 + schedule and topology-control requests
                  + causal references + completion claim
 Turn outcome:     accepted state revision + effect operation IDs
                  + per-effect admitted/completed/denied/indeterminate status
@@ -210,7 +301,8 @@ fencing; local registry membership does not establish global ownership.
 
 The [AGT case families](agent-delegation-threat-model-and-assurance.md) remain
 mandatory for any claimed safe delegation profile. The additional framework
-questions below exercise **behavior interoperability and lifecycle**. They
+questions below exercise **behavior interoperability, infrastructure, and
+lifecycle**. They
 are proposed cases, not executed tests or new PoC gates.
 
 | Case | Required observation |
@@ -224,6 +316,13 @@ are proposed cases, not executed tests or new PoC gates.
 | NAB-07 revocation/stop | Revoke during a queued turn or model call; final sink rejects later admission, and independent stop remains responsive |
 | NAB-08 provenance | A retrieved Signal or memory summary cannot supply a grant or trusted human approval; labels survive save/restore |
 | NAB-09 useful service | Compare legitimate completion, false denial, approval burden, latency, inference cost, and resource overhead to a competently confined hosted agent service |
+| NAB-10 definition and registry | DSL, Builder, and stored-plan paths produce the same validated definition; unknown executable IDs, schema drift, and an agent-authored module request fail before activation |
+| NAB-11 ingress and routing | Overlapping routes, forged `source`, duplicate cursors, malicious match predicates, and full producer/mailbox/Bus queues cannot assign new rights or evade bounded admission |
+| NAB-12 Plugin isolation | A faulty or hostile reducer, live admission callback, runtime sensor, or checkpoint converter cannot mutate another owner's state, access another task, or inherit issuer credentials |
+| NAB-13 scheduling and inputs | A repeated occurrence retains one logical ID, shares task budget, and cannot revive work after revocation; missed/offline slots follow the declared skip or catch-up policy |
+| NAB-14 topology and placement | Graph cycles, expansion limits, dependency failure, repair, child adoption, and exact remote placement preserve grant scope, aggregate resources, and fenced ownership |
+| NAB-15 persistence and upgrade | Revision-zero creation, CAS conflict/ambiguity, tombstone, hibernate/thaw, checkpoint migration, and live definition upgrade retain honest state and current authority |
+| NAB-16 observation and control | Runtime telemetry and debug cannot leak protected state; audit and effect receipts remain available when handlers fail; independent operator stop remains responsive under mailbox overload |
 
 The first useful prototype **after** the assumed delegation substrate exists
 should run a deterministic non-LLM agent that watches a typed system event,

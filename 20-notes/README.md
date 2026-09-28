@@ -66,8 +66,9 @@ Source summaries belong in `30-sources`; unresolved workbenches belong in
 ### Documents
 
 - [Native agent behavior framework](native-agent-behavior-framework.md) —
-  proposes a model-neutral Layer 4 host and Layer 5 behavior API, with
-  turn/effect boundaries, recovery semantics, and unexecuted cases.
+  maps Jido v3's full infrastructure into a model-neutral Layer 4 subsystem
+  and Layer 5 behavior API, with protected effects, recovery, and unexecuted
+  component cases.
 - [Safe agent delegation and execution](safe-agent-delegation-and-execution.md) —
   adopts bounded human delegation to potentially compromised agents across
   the five layers, with twelve requirements for authority, memory, tools,
