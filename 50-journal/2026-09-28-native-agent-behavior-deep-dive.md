@@ -73,19 +73,42 @@ privileged or sixth layer has no supported boundary advantage at present.
 
 The [inquiry](../40-inquiries/where-should-native-agent-behavior-live-in-kay-os.md)
 remains open on storage, action registry custody, provider mix, isolation,
-deployment and test thresholds. `NAB-01`–`NAB-09` are proposed behavior and
-lifecycle qualification cases. The prior `AGT-*` security cases are still
+deployment and test thresholds. `NAB-01`–`NAB-16` are proposed behavior,
+infrastructure, and lifecycle qualification cases. The prior `AGT-*`
+security cases are still
 unexecuted; the assumption in the user's question does not provide evidence
 that they passed. The [topic map](../10-maps/native-agent-behavior.md)
 routes readers through the design and evidence.
 
+## Follow-up component audit
+
+The first synthesis overemphasized the trust boundary and Agent Turn loop.
+After the user pointed out that most of Jido's infrastructure was missing,
+this session inventoried the tagged primary documentation for all three
+packages. It retrieved 141 README, guide, and Jido design files at the exact
+release tags, then read the supported-release guides for authoring, Plugins,
+AgentServer and instance lifecycle, Signals, Actions/Flows, persistence,
+input resources, scheduling, topology, child ownership, extension boundaries,
+and observability. The Jido design index identifies its design documents as
+proposals where they differ from the implementation. No package code or
+compiled `.beam` artifact was installed or executed.
+
+The expanded [Jido core](../30-sources/agentjido-2026-jido-v3-beta-1.md),
+[Action](../30-sources/agentjido-2026-jido-action-v3-beta-11.md), and
+[Signal](../30-sources/agentjido-2026-jido-signal-v3-beta-4.md) source notes
+now inventory the framework components. The synthesis maps them to a
+multi-service Layer 4 framework subsystem, Layer 5 definitions and Actions,
+Layer 3 actor execution, and separately protected effect services. It extends
+the proposed framework case registry to `NAB-01`–`NAB-16`; all remain unrun.
+
 ## Verification
 
 `python3 validate_archive.py` passed with 1044 completed documents, 99
-directories, 10889 local links, 406 source notes, and 31 deep-dive manifests.
-All 15 version-tagged Jido README/guide URLs cited by the three package
+directories, 10897 local links, 406 source notes, and 31 deep-dive manifests.
+All 40 version-tagged Jido README/guide URLs cited by the three package
 source notes returned HTTP 200 when checked against the publisher's tagged
-GitHub content.
+GitHub content. The 141 downloaded primary documents were an inventory and
+reading aid, not installed dependencies or Kay execution evidence.
 `git diff --check` passed. The nine pre-existing PoC and phased-plan files
 matched their starting content hashes after the research edit. No Kay agent
 runtime, model, effect broker, or adversarial case was executed.
@@ -94,9 +117,9 @@ runtime, model, effect broker, or adversarial case was executed.
 
 ### Newly introduced sources
 
-- [Jido v3 beta.1](../30-sources/agentjido-2026-jido-v3-beta-1.md) — pinned Agent value, live actor, turn, effects, and beta limits.
-- [Jido Action v3 beta.11](../30-sources/agentjido-2026-jido-action-v3-beta-11.md) — validated Actions, Flow data, trusted registry, and host security duties.
-- [Jido Signal v3 beta.4](../30-sources/agentjido-2026-jido-signal-v3-beta-4.md) — typed event, cursor, replay, and transport-metadata limits.
+- [Jido v3 beta.1](../30-sources/agentjido-2026-jido-v3-beta-1.md) — full core infrastructure, owner boundaries, supported versus deferred scope, and beta limits.
+- [Jido Action v3 beta.11](../30-sources/agentjido-2026-jido-action-v3-beta-11.md) — Action, Flow, Exec, inspection, stored registry, and host security duties.
+- [Jido Signal v3 beta.4](../30-sources/agentjido-2026-jido-signal-v3-beta-4.md) — envelope, Router, Dispatch, Bus, cursor replay, and trust limits.
 - [Jido behavior-first article](../30-sources/agentjido-2026-behavior-first-architecture.md) — practitioner rationale for behavior contracts above OTP actors.
 - [AIOS](../30-sources/mei-et-al-2025-aios.md) — hosted agent service decomposition and resource evaluation boundary.
 - [CoALA](../30-sources/sumers-et-al-2024-cognitive-architectures-language-agents.md) — LLM memory, action, and decision-loop taxonomy.

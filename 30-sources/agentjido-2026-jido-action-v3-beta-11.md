@@ -24,7 +24,8 @@ published 13 September 2026. Read its version-tagged
 [storage](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/flow-storage.md),
 [execution](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/execution.md),
 and [security](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/security.md)
-guides.
+guides. The [inspection guide](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/flow-inspection.md)
+documents inert graph analysis and semantic identity.
 
 ## Research question or contribution
 
@@ -50,6 +51,23 @@ metadata confirms the requested beta.11 release exists.
 - Flow nodes discard Action extras, which matters if an outer runtime uses
   extras as proposed directives. Moving an Action into a Flow can therefore
   change effect delivery unless the host supplies an explicit contract.
+
+## Execution and authoring infrastructure
+
+| Component | Supported role and boundary |
+| --- | --- |
+| [Action and Instruction](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/actions.md) | Named Action modules have input/output schemas and `run/2`; an Instruction packages a target, parameters, context, and metadata. Validation precedes execution but does not authorize it. |
+| [Canonical Flow](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/flows.md) | Steps, Subflows, Choice, Map, Reduce, Iterate, and a terminal Dispatch form a dependency graph. Expressions and reference rules are bounded. A normal Flow yields one explicit output. |
+| [DSL, constructors, Builder, Codec](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/flows.md) | Four authoring routes validate to the same Flow value. The compiled Runic graph is derived execution data, not a durable definition. |
+| [Flow inspection](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/flow-inspection.md) | Structure, executable targets, dependency graph, explanation, and semantic identity can be inspected without running Action work. Graph identity does not snapshot deployed code. |
+| [Trusted stored-flow registry](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/flow-storage.md) | JSON-compatible documents select only host-registered Actions, Flows, schemas, and atoms. The Codec limits structure after JSON decoding; the host still owns request/parser limits, registry versioning, and rights. |
+| [Jido.Exec](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/execution.md) | A local run or owner-bound asynchronous handle executes Actions, Instructions, or Flows with whole-call timeout, bounded Flow concurrency, explicit errors, and cancellation. It offers step/wave inspection with revision-scoped tokens, but no durable queue, rewind, retry, or distributed recovery. |
+| [Telemetry](https://github.com/agentjido/jido_action/blob/v3.0.0-beta.11/guides/execution.md#telemetry-contract) | Action, Flow, node, target, collection, and iteration spans share an execution ID. Handlers can miss terminal events under failure or blocking; telemetry is not an effect receipt. |
+
+Flow graph validation and a trusted Registry are valuable for reviewable
+agent-authored plans. They remain distinct from code attestation, task grant
+issuance, and final-effect mediation. Concurrent Flow work may already have
+performed I/O when another node fails; cancellation cannot undo it.
 
 ## Relevance
 
