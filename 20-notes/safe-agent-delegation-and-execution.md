@@ -39,8 +39,10 @@ Can a human delegate a useful task while every locally mediated effect stays
 inside the authorized object, operation, destination, time, and resource
 envelope even when the entire agent workload is hostile?
 
-An **agent** is a workload that uses model output to choose actions. A
-**task contract** is a protected record of permitted work; prose expressing a
+An **agent** is a workload that selects actions from observations and state;
+the decision procedure may be a model, a symbolic planner, rules, or a
+composition. A **task contract** is a protected record of permitted work;
+prose expressing a
 goal is not itself an executable permission. **Authority containment** limits
 effects. **Information-flow enforcement** limits where protected data can
 travel. **Semantic correctness** concerns whether the work is true, useful,
@@ -111,6 +113,17 @@ or passing tests. The linked assurance document owns the `AGT-*` cases.
 | 5: Applications | Define goals, domain invariants, proposed plans, staged work, and publication semantics | An agent-generated plan, manifest, or success statement cannot authorize its own effects |
 
 This extends the existing [security architecture](authentication-and-authorization-across-the-five-layer-architecture.md).
+
+### Native agent behavior above the protection boundary
+
+The [native agent behavior framework study](native-agent-behavior-framework.md)
+places a reusable, model-neutral agent host and API in Layer 4, with behavior
+definitions and domain success criteria in Layer 5. It reuses ordinary Layer 3
+actors and the Layer 2 protection mechanisms specified here. A host turn,
+event, action schema, or model prediction is a proposal, not a grant; protected
+brokers still authenticate and mediate each effect. This service adds no sixth
+layer or Jido `.beam` dependency and remains unimplemented research.
+
 An agent may contain many BEAM actors. Under a runtime-compromise threat,
 mutually distrustful agents and security brokers require separate kernel
 protection domains. Sharing a runtime or inference service explicitly adds
@@ -328,6 +341,8 @@ feature can remain disabled; it cannot be marketed as protected by this design.
   evidence, cross-layer contracts, and the open questions.
 - [Assurance study](agent-delegation-threat-model-and-assurance.md) — owns the
   adversarial case registry and evidence standard.
+- [Native agent behavior framework](native-agent-behavior-framework.md) —
+  integrates LLM and non-LLM behavior within these authority boundaries.
 - [Research session](../50-journal/2026-09-26-safe-agent-delegation-deep-dive.md)
   — records primary-source reading, provenance, decisions, and checks.
 - [Managed runtime](managed-actor-runtime-layer.md),

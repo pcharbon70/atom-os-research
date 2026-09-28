@@ -98,6 +98,13 @@ identity nor natural-language intent creates authority. Treat the contracts
 and adversarial cases as unverified until evidence exists; this requirement
 does not by itself change existing PoC gates or select an agent implementation.
 
+Native agent behavior research recommends a model-neutral Layer 4 host and
+Layer 5 behavior definitions that consume the safe delegation contract. Follow
+`20-notes/native-agent-behavior-framework.md` for the proposed ownership and
+unexecuted lifecycle cases. Jido v3 is architectural inspiration only; do not
+introduce its `.beam` packages as a Kay OS implementation dependency. This
+research does not add a proof-of-concept gate.
+
 Distinguish clearly among:
 
 - principles inherited from OTP and the BEAM model;

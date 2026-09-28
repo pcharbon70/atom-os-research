@@ -29,6 +29,9 @@ should explain why its links belong together rather than merely list files.
 
 ### Documents
 
+- [Native agent behavior](native-agent-behavior.md) — routes through the
+  proposed Layer 4 host, Layer 5 behavior contract, Jido v3 design evidence,
+  model-neutral decisions, and unexecuted lifecycle cases.
 - [Safe agent delegation](safe-agent-delegation.md) — routes through the
   adopted full-system requirement, primary agent-security research, existing
   capability/service contracts, and unexecuted assurance cases.

@@ -38,6 +38,7 @@ every journal-manifest backlink.
 
 | Research stream | Curated map | Exact deep-dive session manifests |
 | --- | --- | --- |
+| Native agent behavior | [Native agent behavior](../10-maps/native-agent-behavior.md) | [2026-09-28 framework integration](../50-journal/2026-09-28-native-agent-behavior-deep-dive.md) |
 | Safe agent delegation | [Safe agent delegation](../10-maps/safe-agent-delegation.md) | [2026-09-26 architecture and assurance](../50-journal/2026-09-26-safe-agent-delegation-deep-dive.md) |
 | Visual-computing internal services | [Alan Kay, Smalltalk, and visual computing](../10-maps/alan-kay-smalltalk-ui.md) | [2026-09-10 all seven components](../50-journal/2026-09-10-visual-computing-internal-services-deep-dive.md) |
 | OTP-like system-service internal services | [OTP-like system services](../10-maps/otp-like-system-services.md) | [2026-09-10 all thirteen components](../50-journal/2026-09-10-otp-system-services-internal-services-deep-dive.md) |
@@ -87,6 +88,26 @@ not retroactively labeled as introduced by it:
 
 ### Documents
 
+- [Jido v3 beta.1](agentjido-2026-jido-v3-beta-1.md) — pinned state, actor,
+  turn, effect, ownership, and durability contracts.
+- [Jido Action v3 beta.11](agentjido-2026-jido-action-v3-beta-11.md) —
+  validated Actions, declarative Flows, registry, and host security duties.
+- [Jido Signal v3 beta.4](agentjido-2026-jido-signal-v3-beta-4.md) — typed
+  event envelope, replay cursor, delivery, and origin limits.
+- [Jido behavior-first architecture](agentjido-2026-behavior-first-architecture.md) —
+  practitioner account of reusable behavior contracts above OTP actors.
+- [AIOS](mei-et-al-2025-aios.md) — hosted agent-service architecture,
+  scheduling evidence, and host-OS boundary.
+- [CoALA](sumers-et-al-2024-cognitive-architectures-language-agents.md) —
+  cognitive architecture for LLM memory, decision, and action.
+- [ReAct](yao-et-al-2023-react.md) — LLM reasoning and action loop with
+  benchmark and OS-security limits.
+- [AgentSpeak communication semantics](vieira-et-al-2007-speech-act-agent-programming.md) —
+  formal non-LLM agent message and decision semantics.
+- [Temporal dynamic agents article](egger-androulakis-2025-dynamic-ai-agents-temporal.md) —
+  practitioner workflow replay and nondeterministic decision recording.
+- [When the agent becomes the kernel](zhang-et-al-2026-when-agent-becomes-kernel.md) —
+  security systematization of deterministic mediation and semantic residuals.
 - [AgentKernel](zou-et-al-2026-agentkernel.md) — lifecycle security proposal,
   host-kernel dependence, trust assumptions, and pending evaluation.
 - [Landlock](linux-kernel-2026-landlock.md) — official Linux confinement,

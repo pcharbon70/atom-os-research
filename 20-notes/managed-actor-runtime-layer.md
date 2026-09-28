@@ -203,6 +203,13 @@ not proof of correct reasoning or permission to act. Restart creates a new
 incarnation and requires current grant validation; it cannot restore a revoked
 grant from a saved heap, message, configuration, or supervisor child spec.
 
+The proposed [native agent behavior host](native-agent-behavior-framework.md)
+uses these ordinary actors for turn execution and supervision. Its versioned
+event, state, and proposal contract belongs to Layer 4, while concrete
+behaviors belong to Layer 5. Neither an actor PID nor a Jido-style ref is a
+task identity or grant. This feature does not add a BEAM instruction, change
+process-local tracing GC, or make Jido `.beam` an implementation dependency.
+
 ## What is inherited, implemented, and deliberately changed
 
 | Concern | Principle to preserve | Current ERTS evidence | Kay OS placement |

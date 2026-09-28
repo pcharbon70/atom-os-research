@@ -35,6 +35,9 @@ provenance record.
 
 ### Documents
 
+- [2026-09-28 native agent behavior deep dive](2026-09-28-native-agent-behavior-deep-dive.md) —
+  records ten new and three reused primary sources, the layer-placement
+  reasoning, model-neutral contract, and unexecuted qualification cases.
 - [2026-09-26 safe agent delegation](2026-09-26-safe-agent-delegation-deep-dive.md) —
   records the adopted architecture requirement, five new and six reused
   sources, integrated layer contracts, independent review, and documentation

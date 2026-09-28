@@ -35,6 +35,13 @@ and revocation across the five layers. The [assurance study](../20-notes/agent-d
 contains unexecuted adversarial cases; native enforcement and usability still
 require evidence. This is full-system design work, not a change to PoC gates.
 
+The [native agent behavior study](../20-notes/native-agent-behavior-framework.md)
+extends that assumed delegation substrate with a model-neutral Layer 4 host
+and Layer 5 behaviors. The [topic map](native-agent-behavior.md) compares Jido
+v3 design patterns, LLM and symbolic decision models, hosted agent services,
+and protected effect boundaries. It proposes no sixth layer or Jido `.beam`
+dependency; interoperability and containment tests remain unrun.
+
 The [kernel architecture service decompositions](../20-notes/kernel-hardware-and-architecture-components/README.md)
 now cover the internals of all eleven components. The latest research adds
 55 reports across nine components, preserving the existing translation and
@@ -114,6 +121,9 @@ components still need observation before that separate qualification run.
 
 ## Active inquiries
 
+- [Where should native agent behavior live in Kay OS?](../40-inquiries/where-should-native-agent-behavior-live-in-kay-os.md) —
+  tests the Layer 4 host and Layer 5 behavior placement against lifecycle,
+  multi-provider, recovery, and security evidence.
 - [How can Kay OS safely delegate work to agents?](../40-inquiries/how-can-kay-os-safely-delegate-work-to-agents.md) —
   asks which profiles, policy/flow mechanisms, provider boundaries, human
   controls, and comparative evidence can qualify the adopted requirement.
@@ -157,6 +167,9 @@ components still need observation before that separate qualification run.
 
 ## Topic maps
 
+- [Native agent behavior](native-agent-behavior.md) — connects model-neutral
+  agent behavior, Jido v3 concepts, protected effects, and the five-layer
+  placement decision.
 - [Applications and domain services](applications-and-domain-services.md) —
   routes through Layer 5 composition, bounded contexts, durable identities,
   typed protocols, invariant-selected consistency, persistence, workflows,
@@ -194,6 +207,9 @@ components still need observation before that separate qualification run.
 
 ## Recently developed
 
+- [2026-09-28 native agent behavior deep dive](../50-journal/2026-09-28-native-agent-behavior-deep-dive.md) —
+  records ten new and three reused sources, the proposed host contract, and
+  unexecuted integration cases.
 - [2026-09-26 safe agent delegation deep dive](../50-journal/2026-09-26-safe-agent-delegation-deep-dive.md)
   — records five new and six reused sources, the architecture integration,
   independent review, and unexecuted security qualification obligations.
