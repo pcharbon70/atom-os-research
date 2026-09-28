@@ -23,6 +23,8 @@ hosted evidence, and unexecuted native qualification remain distinct.
 - [Threat model and assurance](../20-notes/agent-delegation-threat-model-and-assurance.md)
   — fourteen adversarial case families, profile boundaries, useful-work
   controls, and reproducible evidence requirements; none has run for Kay.
+- [Native agent behavior](native-agent-behavior.md) — applies this authority
+  envelope to a proposed Layer 4 host and Layer 5 LLM/non-LLM behaviors.
 - [Open inquiry](../40-inquiries/how-can-kay-os-safely-delegate-work-to-agents.md)
   — deployment, policy, provider, provenance, human-control, and evaluation
   decisions still requiring evidence.

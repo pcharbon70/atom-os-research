@@ -30,6 +30,9 @@ resolution criteria here. Promote independently useful conclusions to
 
 ### Documents
 
+- [Where should native agent behavior live in Kay OS?](where-should-native-agent-behavior-live-in-kay-os.md) —
+  tracks the first service profile, framework contracts, registry, provider,
+  and qualification choices after safe delegation.
 - [How can Kay OS safely delegate work to agents?](how-can-kay-os-safely-delegate-work-to-agents.md) —
   tracks agent profile, policy, provenance, provider, human-control, and
   comparative qualification decisions under the adopted architectural requirement.

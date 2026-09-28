@@ -483,6 +483,14 @@ not prove that an authorized edit is correct; review, semantic checks, and
 recovery remain application responsibilities under the [agent assurance
 contract](agent-delegation-threat-model-and-assurance.md).
 
+The [native agent behavior framework](native-agent-behavior-framework.md)
+lets Layer 5 define versioned goals, decision logic, Action descriptors,
+domain invariants, and meaningful completion for both LLM and non-LLM agents.
+Its Layer 4 host manages event and turn lifecycle. A behavior's manifest or
+proposed effect cannot authorize itself; publication and other protected
+effects remain subject to task grants and final sink checks. Jido's `.beam`
+packages are research inspiration, not an application dependency.
+
 ### Disposable views and durable outcomes
 
 The durable application model is independent of a window, toolkit, desktop,

@@ -104,6 +104,17 @@ specifies adversarial cases and useful-work comparisons. These are adopted
 requirements and proposed mechanisms with no agent-containment implementation
 evidence yet; they do not change the existing proof-of-concept delivery gates.
 
+### Native agent behavior
+
+The [agent behavior study](20-notes/native-agent-behavior-framework.md) asks
+how LLM and non-LLM agents can run as OS-supported workloads once that safe
+delegation profile is available. It recommends a model-neutral agent host in
+Layer 4 and behavior definitions in Layer 5, reusing the actor runtime and
+existing protected boundaries. The [research map](10-maps/native-agent-behavior.md)
+and [open inquiry](40-inquiries/where-should-native-agent-behavior-live-in-kay-os.md)
+track the evidence and unresolved choices. This is unimplemented full-system
+research; no new layer, Jido `.beam` dependency, or PoC gate is adopted.
+
 Start at the [home map](10-maps/home.md). Repository-wide authoring and
 maintenance conventions are defined in [`AGENTS.md`](AGENTS.md).
 
